@@ -1,0 +1,69 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "d9ea9b1add41c725c0c116c6176703ffff8fcf67",
+  "workshopInputDigest": "01b4b5f3bf3d3a8ee851c6a6ff0736e8da4780a169b8303f9b93f51641a55a74",
+  "results": [
+    {
+      "type": "wildlife-kangaroo-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "f50d60c6fb33ac07ed8b64e9515eb1cd4b513efd792f65835141ec233be62e0f",
+      "modelSha256": "cf46eade1dffb27607857014d13c52b2846dcd3ffc2deab68c6cc9fa69e143c5",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-kangaroo&wildlife3dStage=kangaroo-macropods-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "hop",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.00086212158203125,
+        15.909347595214845
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "hop",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-wallaby-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "e5c160576262e280313525ef1510c9925c53785d549390323dbe7b0d444cca00",
+      "modelSha256": "81eca71fd85fbf799689c993f3181fe4130835d1e39c7bfc13ba4404d8b32db2",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-wallaby&wildlife3dStage=wallaby-macropods-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "hop",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.000942230224609375,
+        11.912873550415048
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "hop",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-pangolin-provisional-v1",
+  "fit": [
+    12.61,
+    9.5,
+    12.47
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "The long thick tail tapers behind the scaled back. The probing action keeps the rear feet planted and the escape holds a low, faster scramble.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

@@ -1,0 +1,35 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "d9ea9b1add41c725c0c116c6176703ffff8fcf67",
+  "workshopInputDigest": "01b4b5f3bf3d3a8ee851c6a6ff0736e8da4780a169b8303f9b93f51641a55a74",
+  "results": [
+    {
+      "type": "wildlife-rabbit-v1",
+      "mode": "default",
+      "manifestFingerprint": "d22f96184bb5f4802c3edaf28a362b2d0991e89ad94ae88e3e9138ac703f0b32",
+      "modelSha256": "22e7dcc6e906a4bea9f421be9ddbd8c477dbba396a48d98ae11504af38145405",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-behavior-rabbit&wildlife3dStage=rabbit-pilot-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "hop",
+        "action",
+        "eat"
+      ],
+      "heightRange": [
+        -0.08680534362790648,
+        9.907102584838869
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "hop",
+          "action",
+          "eat"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-aardvark-provisional-v1",
+  "fit": [
+    12.61,
+    10.88,
+    12.47
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "The narrow ears, arched rump and tubular snout stay readable while the forefeet scrape and the nose probes. Escape uses a separate, longer bound.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

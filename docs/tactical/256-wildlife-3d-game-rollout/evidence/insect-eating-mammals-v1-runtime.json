@@ -1,0 +1,134 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-aardvark-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "aardvark-insect-eating-mammals-v1",
+      "modelSha256": "534cc4765d879916435f0cd442c8647b8eae1bd80705062bab95ae2a7f6e3a43"
+    },
+    {
+      "type": "wildlife-giant-anteater-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "giant-anteater-insect-eating-mammals-v1",
+      "modelSha256": "102233c02b71e8a813a926b6aede1988b128ef70fe96f18eb26e06353c018c83"
+    },
+    {
+      "type": "wildlife-armadillo-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "armadillo-insect-eating-mammals-v1",
+      "modelSha256": "4945ef88f6e7f00483129017f66de74a5a0c7678c8b4e69f03133ea3e22e5079"
+    },
+    {
+      "type": "wildlife-pangolin-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "pangolin-insect-eating-mammals-v1",
+      "modelSha256": "0968a1135f64ae4496268d70b7425978c1b27a33f07e0d881c19e84c7c656a8f"
+    }
+  ],
+  "clipSamples": 448,
+  "testedDepth": false
+}

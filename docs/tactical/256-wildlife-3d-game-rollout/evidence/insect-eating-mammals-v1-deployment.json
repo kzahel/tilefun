@@ -1,0 +1,130 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "78b2a6a289d5acb7533fa4ec77dd45a71413ed08a5791bf57df8562613b79cb5",
+  "results": [
+    {
+      "type": "wildlife-aardvark-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "4f00ecd68990813174528a5f68a495398429bfa4717895cdde87448bb8678c07",
+      "modelSha256": "534cc4765d879916435f0cd442c8647b8eae1bd80705062bab95ae2a7f6e3a43",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-aardvark&wildlife3dStage=aardvark-insect-eating-mammals-v1&wildlife3dReview=aardvark-insect-eating-mammals-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009688529968261749,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-giant-anteater-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "b59f78407013c86e350891dab143fc067f697a399721d13ded5b745d73e7d4d9",
+      "modelSha256": "102233c02b71e8a813a926b6aede1988b128ef70fe96f18eb26e06353c018c83",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-giant-anteater&wildlife3dStage=giant-anteater-insect-eating-mammals-v1&wildlife3dReview=giant-anteater-insect-eating-mammals-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009689064025878944,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-armadillo-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "5aaed48116d2b1c53a659d82d00b9e7869b29044fc33bc565548cf82b020bac7",
+      "modelSha256": "4945ef88f6e7f00483129017f66de74a5a0c7678c8b4e69f03133ea3e22e5079",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-armadillo&wildlife3dStage=armadillo-insect-eating-mammals-v1&wildlife3dReview=armadillo-insect-eating-mammals-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009779930114746094,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-pangolin-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "9018dc95231950c3e19dc3133ef186f0b7640cd0c18e58dafcd44bbb3a314685",
+      "modelSha256": "0968a1135f64ae4496268d70b7425978c1b27a33f07e0d881c19e84c7c656a8f",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-pangolin&wildlife3dStage=pangolin-insect-eating-mammals-v1&wildlife3dReview=pangolin-insect-eating-mammals-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009631252288818422,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

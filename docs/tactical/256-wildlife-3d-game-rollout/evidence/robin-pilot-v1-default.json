@@ -1,0 +1,37 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "d9ea9b1add41c725c0c116c6176703ffff8fcf67",
+  "workshopInputDigest": "01b4b5f3bf3d3a8ee851c6a6ff0736e8da4780a169b8303f9b93f51641a55a74",
+  "results": [
+    {
+      "type": "wildlife-robin-v1",
+      "mode": "default",
+      "manifestFingerprint": "77d1b532492728bab517870f8e4242217e1989943c75f3d5527db141514583bc",
+      "modelSha256": "16f91a4a1decbfbf426d9fae79d5264b240d5bbddd2a796f6874cd40d04ce0b7",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-behavior-robin&wildlife3dStage=robin-pilot-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "hop",
+        "flap",
+        "action",
+        "eat"
+      ],
+      "heightRange": [
+        -0.08530697917948238,
+        61.09328115844726
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "hop",
+          "flap",
+          "action",
+          "eat"
+        ]
+      }
+    }
+  ]
+}

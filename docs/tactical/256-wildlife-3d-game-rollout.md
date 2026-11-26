@@ -107,6 +107,28 @@ runtime scope reconciliation in the execution notes.
 
 ## Delivery log
 
+### Insect-eating mammals, 2026-11-26
+
+The aardvark scrapes with its forefeet and lowers its nose. The giant
+anteater probes with its long snout, and the armadillo and pangolin use
+shorter, lower scrapes. Each has a separate escape stride. All 16 states
+played in Workshop and in reopened game worlds through the exact preview
+links. [Renderer evidence](256-wildlife-3d-game-rollout/evidence/insect-eating-mammals-v1-runtime.json) ·
+[Public preview evidence](256-wildlife-3d-game-rollout/evidence/insect-eating-mammals-v1-deployment.json) ·
+[Workshop review](https://tilefun.graehlarts.com/tilefun/workshop.html#/review/pattern%3Awildlife-3d-aardvark-insect-eating-mammals-v1)
+
+The deployed default game replayed all rabbit, robin and pond fish pilot clips
+after reopening ordinary worlds with greens, seeds and a shallow pond whose
+bank let the player approach close enough to trigger the fish's escape. It also replayed the
+full default cycles for the macropods, cervids, great apes and urban small
+mammals. [Rabbit](256-wildlife-3d-game-rollout/evidence/rabbit-pilot-v1-default.json) ·
+[Robin](256-wildlife-3d-game-rollout/evidence/robin-pilot-v1-default.json) ·
+[Pond fish](256-wildlife-3d-game-rollout/evidence/fish-pilot-v1-default.json) ·
+[Macropods](256-wildlife-3d-game-rollout/evidence/macropods-v1-default.json) ·
+[Cervids](256-wildlife-3d-game-rollout/evidence/cervids-v1-default.json) ·
+[Great apes](256-wildlife-3d-game-rollout/evidence/great-apes-v1-default.json) ·
+[Urban small mammals](256-wildlife-3d-game-rollout/evidence/urban-small-mammals-v1-default.json)
+
 ### Raptors, 2026-11-26
 
 The bald eagle, red-tailed hawk and tawny owl have separate ground steps,

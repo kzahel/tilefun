@@ -3393,5 +3393,97 @@
       "native.png": "1549753d776d6ac013f18b3f766a9746794e8a33773f442a0c8a63239452bc92",
       "walk.png": "e0def539093b6dc0a76cb1e975a0db84a4ba54f20905cdbdf53303ee7923c4e5"
     }
+  },
+  {
+    "id": "aardvark-insect-eating-mammals-v1",
+    "type": "wildlife-aardvark-provisional-v1",
+    "name": "Aardvark",
+    "batch": "wildlife-3d-insect-eating-mammals-v1",
+    "lab": "aardvark",
+    "scale": 12.47,
+    "topDown": {
+      "width": 1.4659182036888532,
+      "height": 0.9558941459502807
+    },
+    "files": {
+      "action.png": "c453021eb60c6037ff505db4410edcf24925cc07eec43ee8ba42d1c44a56d9d6",
+      "appearance.png": "6f50c13329ee3f2897640ddb4422df54ef4b88e3147027ab9faba04942358dd4",
+      "capture-config.json": "e4f75d00488cc0df722aade13cc52180db64673f84e8b56278da1eb0bc7fe980",
+      "comparison.mp4": "b6bb2232132ac91da74b950cb66de362143ef0af1cad16633a6f1fcc8009fb25",
+      "flee.png": "d33c80c129fd8a7c179157b32a1f4ceddad740b16c3a505df44f908e1ce6e246",
+      "model.blend": "4168aa8d7e1b40f2eac652e862310ba58729c8db14a9eb3353933f46ddc06ba8",
+      "model.glb": "534cc4765d879916435f0cd442c8647b8eae1bd80705062bab95ae2a7f6e3a43",
+      "native.png": "cfb87bfeabea5752c20be86e1572eb0bad784f466df6aaa28f41d8c525ec6d50",
+      "walk.png": "a9985d78654d985a8c5236b775253b38df646219171c922d0549494838022a16"
+    }
+  },
+  {
+    "id": "giant-anteater-insect-eating-mammals-v1",
+    "type": "wildlife-giant-anteater-provisional-v1",
+    "name": "Giant anteater",
+    "batch": "wildlife-3d-insect-eating-mammals-v1",
+    "lab": "giant-anteater",
+    "scale": 11.68,
+    "topDown": {
+      "width": 1.4032534246575343,
+      "height": 1.0787671232876712
+    },
+    "files": {
+      "action.png": "0a13fabdefc845d2b27ca533789e3c4d60a83cd567b92f3507fb8eeba55a3a57",
+      "appearance.png": "a422298d95bfba129b08989457b8a075c9eb475edd49675fcb265c04adc2d530",
+      "capture-config.json": "1006158f85153c74b4d17888be2929ac50732fd47425aef6182d2061ef021430",
+      "comparison.mp4": "365a7a4dc3dbfff4afe849c9feb1a7ec12f38faa746371076a0459271879afbb",
+      "flee.png": "de32a440e52a8ba107b05586fb4684b7c5c4b7708965c0ef43be2ddd45770d39",
+      "model.blend": "521d0d2154ea453f05f5e90ed52e9e22af394a93e57073ae5b877f4457196f4a",
+      "model.glb": "102233c02b71e8a813a926b6aede1988b128ef70fe96f18eb26e06353c018c83",
+      "native.png": "629262c4b3bb375dab12e7c88be00666d3afb5864de28ded814b60dc690d375d",
+      "walk.png": "5a2a93a79ccdb508e117fce37d97f4d6a828e7c7b76cf710c01bdba9acf3f7a2"
+    }
+  },
+  {
+    "id": "armadillo-insect-eating-mammals-v1",
+    "type": "wildlife-armadillo-provisional-v1",
+    "name": "Armadillo",
+    "batch": "wildlife-3d-insect-eating-mammals-v1",
+    "lab": "armadillo",
+    "scale": 11.74,
+    "topDown": {
+      "width": 1.120954003407155,
+      "height": 0.8339011925042589
+    },
+    "files": {
+      "action.png": "dc765f47025919b70e5d0882b1630792a7e709ceefd9c7dd1a5fd80a0a14958e",
+      "appearance.png": "24470f516cf1312a265093e47d874f9b5679fe39eaca0dbf0ba806323c29ae21",
+      "capture-config.json": "2b53ab51c09f83c9a08f7646044e94dc20ea019431dacece1eaec836ddc7b8d6",
+      "comparison.mp4": "9141f0942a480923649a1f2ff8758be64b61fefb00056478fbda48d7b7e91bf5",
+      "flee.png": "8a90662f41802370371fdbaac7321eda3b83d605d038ca5a390052484d26bf90",
+      "model.blend": "236bb9687cf3a70eacfe559324768da056ed96c0b70c8dc12dc58c9f134e43e3",
+      "model.glb": "4945ef88f6e7f00483129017f66de74a5a0c7678c8b4e69f03133ea3e22e5079",
+      "native.png": "266268fc018583883b2ad190f18324902fa685503f3eba27df961851111cc710",
+      "walk.png": "72058ec9be1be1158ab54e2fa5862427dfadadba8930fee4d18c7ccce39f2f52"
+    }
+  },
+  {
+    "id": "pangolin-insect-eating-mammals-v1",
+    "type": "wildlife-pangolin-provisional-v1",
+    "name": "Pangolin",
+    "batch": "wildlife-3d-insect-eating-mammals-v1",
+    "lab": "pangolin",
+    "scale": 12.17,
+    "topDown": {
+      "width": 1.122432210353328,
+      "height": 0.9884963023829088
+    },
+    "files": {
+      "action.png": "cc482d7f4989c8fb9667fd5fd7ea387dfa080805e6e5666cf68e818ce58a137b",
+      "appearance.png": "5c1f86ebd498821a789de98610efb6dd6f05e504a7761577a8aa209132eb2b5f",
+      "capture-config.json": "419d2e0806d2ac262b3718121589b0e6d14318af427e78e477d6f0b2c0bdfe63",
+      "comparison.mp4": "92242a1ebabe4cffd36a97ad676558b7f19a4a0ca116f6440fe6a257615d2fec",
+      "flee.png": "1677abd16f8c1bcd706b0d5ba5e17f55add69532da8d03edf41945c635a25a03",
+      "model.blend": "f9f6c42632c14fbc9f495a0e9aaaef5f9ce29cf2edfea6417576472829a984c1",
+      "model.glb": "0968a1135f64ae4496268d70b7425978c1b27a33f07e0d881c19e84c7c656a8f",
+      "native.png": "214b76a69357c6e9b1d490fa284e76ddd3000e5af40730cab139456c6596cf03",
+      "walk.png": "4205cac55807ebb14aff8b77c005000dd19d091d53c9674af0d18568d2fd791c"
+    }
   }
 ]

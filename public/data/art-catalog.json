@@ -9706,6 +9706,46 @@
       "source": "demos/wildlife-3d/secretary-bird-raptors-v1/model.blend"
     },
     {
+      "id": "wildlife-3d-aardvark-insect-eating-mammals-v1",
+      "name": "wildlife 3d aardvark insect eating mammals v1",
+      "image": "demos/wildlife-3d/aardvark-insect-eating-mammals-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "6f50c13329ee3f2897640ddb4422df54ef4b88e3147027ab9faba04942358dd4",
+      "source": "demos/wildlife-3d/aardvark-insect-eating-mammals-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-giant-anteater-insect-eating-mammals-v1",
+      "name": "wildlife 3d giant anteater insect eating mammals v1",
+      "image": "demos/wildlife-3d/giant-anteater-insect-eating-mammals-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "a422298d95bfba129b08989457b8a075c9eb475edd49675fcb265c04adc2d530",
+      "source": "demos/wildlife-3d/giant-anteater-insect-eating-mammals-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-armadillo-insect-eating-mammals-v1",
+      "name": "wildlife 3d armadillo insect eating mammals v1",
+      "image": "demos/wildlife-3d/armadillo-insect-eating-mammals-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "24470f516cf1312a265093e47d874f9b5679fe39eaca0dbf0ba806323c29ae21",
+      "source": "demos/wildlife-3d/armadillo-insect-eating-mammals-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-pangolin-insect-eating-mammals-v1",
+      "name": "wildlife 3d pangolin insect eating mammals v1",
+      "image": "demos/wildlife-3d/pangolin-insect-eating-mammals-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "5c1f86ebd498821a789de98610efb6dd6f05e504a7761577a8aa209132eb2b5f",
+      "source": "demos/wildlife-3d/pangolin-insect-eating-mammals-v1/model.blend"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",

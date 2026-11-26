@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-giant-anteater-provisional-v1",
+  "fit": [
+    12.61,
+    10.88,
+    12.47
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "A low broad plume and longer tapered snout match the side sprite. The planted probe and low gallop have distinct poses.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

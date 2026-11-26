@@ -1,0 +1,69 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+  "workshopInputDigest": "b92049da42c3292e539fe89014dd550bc0f4596ba61328bed7e81782fc8c2835",
+  "results": [
+    {
+      "type": "wildlife-elk-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "4c33b015f264e0cacda0ce8dedfc1d210e5dcb20d2ba517fc7eafbace7587162",
+      "modelSha256": "e1385b3360b7e1490eb470712a0ffbea8e93baf362916d6860b61e6bd0119f45",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-elk&wildlife3dStage=elk-cervids-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009667739868164326,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-moose-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "e0445a7c85093722ae88da7bcd24be5cd8cc3466a047534de48156eec3dd4da5",
+      "modelSha256": "e842b8108f9265d1a5029da22f71e74a6a1e8c3c67251175e44ffc9a57065e2c",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-moose&wildlife3dStage=moose-cervids-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009534912109375074,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

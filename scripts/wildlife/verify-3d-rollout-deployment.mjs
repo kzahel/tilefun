@@ -3,6 +3,7 @@ import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { writeFile } from "node:fs/promises";
 import { chromium } from "playwright";
+import { TerrainId } from "../../src/autotile/TerrainId.ts";
 import { TILE_SIZE } from "../../src/config/constants.ts";
 import { ENTITY_DEFS } from "../../src/entities/EntityDefs.ts";
 import { createDescriptor } from "../../src/generation/GenerationDescriptor.ts";
@@ -122,6 +123,13 @@ try {
       const birdWorkStage = isBirdWorkModelReviewCase(candidate.lab);
       const raptorStage = isRaptorModelReviewCase(candidate.lab);
       const secretaryStage = candidate.lab === "secretary-bird";
+      const pilotForage =
+        candidate.id === "rabbit-pilot-v1"
+          ? { type: forageType("greens"), dx: 40, dy: 12 }
+          : candidate.id === "robin-pilot-v1"
+            ? { type: forageType("seed"), dx: 40, dy: 12 }
+            : undefined;
+      const pilotPond = candidate.id === "fish-pilot-v1";
       const fourStateStage = isFourStateFaunaModelReview(candidate.type, candidate.lab);
       const packStage = isPackMountModelReview(candidate.type, candidate.lab);
       const feeding = wildlifeFeedingReview(candidate.type, candidate.lab);
@@ -270,11 +278,28 @@ try {
       if (fourStateStage && faunaProfile(candidate.type)?.hop)
         assert(poses.maxZ > 2, `No physical hop observed for ${candidate.type}`);
       const game = await verifyGameEntry(page, candidate, preview, {
-        verifyFaunaStates: fourStateStage || packStage || birdWorkStage || raptorStage || !!feeding,
+        verifyFaunaStates:
+          fourStateStage ||
+          packStage ||
+          birdWorkStage ||
+          raptorStage ||
+          !!feeding ||
+          !!pilotForage ||
+          pilotPond,
         catStage,
         dogFetch,
         useStick: secretaryStage,
-        workPlacements: birdWorkStage || raptorStage ? reviewActorPlacements(candidate) : [],
+        workPlacements: pilotForage
+          ? [
+              pilotForage,
+              ...(candidate.id === "robin-pilot-v1"
+                ? [{ type: "prop-oak-tree", dx: 0, dy: -64 }]
+                : []),
+            ]
+          : birdWorkStage || raptorStage
+            ? reviewActorPlacements(candidate)
+            : [],
+        pilotPond,
         packStage,
         approachClips: contactClips,
         states,
@@ -510,6 +535,7 @@ async function verifyGameEntry(page, candidate, preview, options) {
     approachClips,
     states,
     feeding,
+    pilotPond,
   } = options;
   await page.evaluate(() => localStorage.removeItem("tilefun-3d-animals"));
   const generation = createDescriptor("flat", 1);
@@ -522,13 +548,33 @@ async function verifyGameEntry(page, candidate, preview, options) {
   await page.goto(gameUrl.href, { waitUntil: "commit" });
   await page.getByRole("button", { name: "New World", exact: true }).click({ timeout: 45_000 });
   await gameReady(page);
-  await page.evaluate(
-    ({ type, distantPlacement, catStage, workPlacements, feeding }) => {
+  const pondShore = await page.evaluate(
+    ({ type, distantPlacement, catStage, workPlacements, feeding, pond, tileSize, water }) => {
       const game = document.querySelector("#game").__game;
       const position = game.stateView.playerEntity.position;
       game.transport.send({ type: "set-editor-mode", enabled: true });
-      const wx = position.wx + (distantPlacement ? 116 : 20);
+      const wx = position.wx + (pond ? 166 : distantPlacement ? 116 : 20);
       const wy = position.wy + 28;
+      let pondShore;
+      if (pond) {
+        const centerX = Math.floor(wx / tileSize);
+        const centerY = Math.floor(wy / tileSize);
+        pondShore = { wx: centerX * tileSize + 4, wy: (centerY + 0.5) * tileSize, wz: 0 };
+        for (let ty = centerY - 6; ty <= centerY + 6; ty++) {
+          for (let tx = centerX - 6; tx <= centerX + 6; tx++) {
+            // Leave a bank the player can walk along while the fish swims away.
+            if (tx < centerX && Math.abs(ty - centerY) <= 1) continue;
+            game.transport.send({
+              type: "edit-terrain-tile",
+              tx,
+              ty,
+              terrainId: water,
+              paintMode: "positive",
+              bridgeDepth: 0,
+            });
+          }
+        }
+      }
       game.transport.send({ type: "edit-spawn", entityType: type, wx, wy });
       for (const placement of workPlacements)
         game.transport.send({
@@ -546,6 +592,7 @@ async function verifyGameEntry(page, candidate, preview, options) {
         game.transport.send({ type: "edit-spawn", entityType: feeding.resource, ...site });
       }
       game.transport.send({ type: "set-editor-mode", enabled: false });
+      return pondShore;
     },
     {
       type: candidate.type,
@@ -553,6 +600,9 @@ async function verifyGameEntry(page, candidate, preview, options) {
       catStage,
       workPlacements,
       feeding,
+      pond: pilotPond,
+      tileSize: TILE_SIZE,
+      water: TerrainId.ShallowWater,
     },
   );
   const expected = { type: candidate.type, sheetKey: ENTITY_DEFS[candidate.type].sprite.sheetKey };
@@ -598,6 +648,7 @@ async function verifyGameEntry(page, candidate, preview, options) {
       rideClips,
       !!feeding,
       useStick,
+      pondShore,
     );
     if (packStage) statesAfterReload.push(...(await verifyPackMountInGame(page, expected, states)));
     return {
@@ -727,6 +778,7 @@ async function verifyActorStatesInGame(
   rideClips,
   feeding,
   useStick,
+  pondShore,
 ) {
   if (useStick) await selectTool(page, "Stick");
   const passive = clips.flatMap(({ name }, index) => (approachClips.includes(name) ? [] : [index]));
@@ -734,12 +786,24 @@ async function verifyActorStatesInGame(
     ? -1
     : clips.findIndex(({ name }) => name === "action");
   const states = await page.evaluate(
-    async ({ type, sheetKey, passive, action, total, timeout, clearForageType, useStick }) => {
+    async ({
+      type,
+      sheetKey,
+      passive,
+      action,
+      total,
+      timeout,
+      clearForageType,
+      useStick,
+      pondShore,
+    }) => {
       const game = document.querySelector("#game").__game;
       game.playInput.setMovementMode("tap");
       const observed = new Set();
       let nextTarget = 0;
       let clearedForage = false;
+      let nearest = Infinity;
+      const approachStates = new Set();
       const end = performance.now() + timeout;
       try {
         while (performance.now() < end) {
@@ -750,6 +814,12 @@ async function verifyActorStatesInGame(
             if (observed.size === total) break;
             // Wait for the animal's voluntary action before approaching it.
             if (passive.every((index) => observed.has(index))) {
+              const player = game.stateView.playerEntity.position;
+              const dx = actor.position.wx - player.wx;
+              const dy = actor.position.wy - player.wy;
+              const distance = Math.hypot(dx, dy);
+              nearest = Math.min(nearest, distance);
+              approachStates.add(actor.wanderAI?.state);
               if (clearForageType && !clearedForage) {
                 for (const item of game.stateView.entities)
                   if (item.type === clearForageType && item.parentId === undefined)
@@ -765,20 +835,14 @@ async function verifyActorStatesInGame(
                 performance.now() >= nextTarget &&
                 (!clearForageType || (actor.wz ?? 0) < 1)
               ) {
-                game.tapMovement.setTarget({ ...actor.position, wz: 0 });
-                if (useStick) {
-                  const player = game.stateView.playerEntity.position;
-                  const dx = actor.position.wx - player.wx;
-                  const dy = actor.position.wy - player.wy;
-                  const distance = Math.hypot(dx, dy);
-                  if (distance > 0 && distance < 24)
-                    game.transport.send({
-                      type: "use-item",
-                      dirX: dx / distance,
-                      dirY: dy / distance,
-                      force: 0,
-                    });
-                }
+                game.tapMovement.setTarget(pondShore ?? { ...actor.position, wz: 0 });
+                if (useStick && distance > 0 && distance < 24)
+                  game.transport.send({
+                    type: "use-item",
+                    dirX: dx / distance,
+                    dirY: dy / distance,
+                    force: 0,
+                  });
                 nextTarget = performance.now() + 350;
               }
             }
@@ -788,7 +852,11 @@ async function verifyActorStatesInGame(
       } finally {
         game.tapMovement.cancel();
       }
-      return [...observed].sort((a, b) => a - b);
+      return {
+        observed: [...observed].sort((a, b) => a - b),
+        nearest,
+        approachStates: [...approachStates],
+      };
     },
     {
       ...expected,
@@ -797,20 +865,21 @@ async function verifyActorStatesInGame(
       total: clips.length - rideClips.length,
       timeout: expected.type.includes("-predator-")
         ? 130_000
-        : feeding || approachClips.includes("action")
+        : feeding || pondShore || approachClips.includes("action")
           ? 65_000
           : 38_000,
       useStick,
+      pondShore,
       clearForageType:
         faunaProfile(expected.type)?.species === "crow" ? forageType("twig") : undefined,
     },
   );
   assert.deepEqual(
-    states,
+    states.observed,
     clips.flatMap(({ name }, index) => (rideClips.includes(name) ? [] : [index])),
-    `Reopened game states for ${expected.type}: ${states.map((clip) => clips[clip]?.name).join(", ")}`,
+    `Reopened game states for ${expected.type}: ${states.observed.map((clip) => clips[clip]?.name).join(", ")} (nearest approach ${states.nearest}px, ${states.approachStates.join(", ")})`,
   );
-  return states.map((clip) => clips[clip].name);
+  return states.observed.map((clip) => clips[clip].name);
 }
 
 async function verifyPackMountInGame(page, expected, clips) {

@@ -982,6 +982,12 @@
       "toolId": "animal-browser"
     },
     {
+      "id": "wildlife-3d-insect-eating-mammals-v1",
+      "name": "3D wildlife · insect eating mammals v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
       "id": "motion",
       "name": "Furniture movement sets",
       "description": "Default layouts and physics. Custom layouts remain individually reviewable in the tool.",
@@ -62641,7 +62647,175 @@
           "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-secretary-bird-raptors-v1"
         }
       }
+    },
+    {
+      "id": "pattern:wildlife-3d-aardvark-insect-eating-mammals-v1",
+      "batchId": "wildlife-3d-insect-eating-mammals-v1",
+      "kind": "wildlife",
+      "name": "Aardvark",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-aardvark-insect-eating-mammals-v1",
+      "fingerprint": "4f00ecd68990813174528a5f68a495398429bfa4717895cdde87448bb8678c07",
+      "sourceFingerprint": "6f50c13329ee3f2897640ddb4422df54ef4b88e3147027ab9faba04942358dd4",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-aardvark-insect-eating-mammals-v1",
+        "prefabIds": [],
+        "revision": "653a6cafa281b69096d3c212e00354c3408da34620cd60642472838328eb02ae",
+        "renderFingerprint": "4f00ecd68990813174528a5f68a495398429bfa4717895cdde87448bb8678c07",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-aardvark-insect-eating-mammals-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-aardvark-insect-eating-mammals-v1",
+        "fingerprint": "6f50c13329ee3f2897640ddb4422df54ef4b88e3147027ab9faba04942358dd4",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-aardvark-insect-eating-mammals-v1",
+          "prefabIds": [],
+          "revision": "653a6cafa281b69096d3c212e00354c3408da34620cd60642472838328eb02ae",
+          "renderFingerprint": "4f00ecd68990813174528a5f68a495398429bfa4717895cdde87448bb8678c07",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-aardvark-insect-eating-mammals-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-giant-anteater-insect-eating-mammals-v1",
+      "batchId": "wildlife-3d-insect-eating-mammals-v1",
+      "kind": "wildlife",
+      "name": "Giant anteater",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-giant-anteater-insect-eating-mammals-v1",
+      "fingerprint": "b59f78407013c86e350891dab143fc067f697a399721d13ded5b745d73e7d4d9",
+      "sourceFingerprint": "a422298d95bfba129b08989457b8a075c9eb475edd49675fcb265c04adc2d530",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-giant-anteater-insect-eating-mammals-v1",
+        "prefabIds": [],
+        "revision": "9dc32654fb8b1f7db33512010952d82767d1c521bfc27318f1ee5aaa84295dec",
+        "renderFingerprint": "b59f78407013c86e350891dab143fc067f697a399721d13ded5b745d73e7d4d9",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-giant-anteater-insect-eating-mammals-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-giant-anteater-insect-eating-mammals-v1",
+        "fingerprint": "a422298d95bfba129b08989457b8a075c9eb475edd49675fcb265c04adc2d530",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-giant-anteater-insect-eating-mammals-v1",
+          "prefabIds": [],
+          "revision": "9dc32654fb8b1f7db33512010952d82767d1c521bfc27318f1ee5aaa84295dec",
+          "renderFingerprint": "b59f78407013c86e350891dab143fc067f697a399721d13ded5b745d73e7d4d9",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-giant-anteater-insect-eating-mammals-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-armadillo-insect-eating-mammals-v1",
+      "batchId": "wildlife-3d-insect-eating-mammals-v1",
+      "kind": "wildlife",
+      "name": "Armadillo",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-armadillo-insect-eating-mammals-v1",
+      "fingerprint": "5aaed48116d2b1c53a659d82d00b9e7869b29044fc33bc565548cf82b020bac7",
+      "sourceFingerprint": "24470f516cf1312a265093e47d874f9b5679fe39eaca0dbf0ba806323c29ae21",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-armadillo-insect-eating-mammals-v1",
+        "prefabIds": [],
+        "revision": "0450041afe39273ef6bdf4543e7df797b77538888587f68991b72752522762d8",
+        "renderFingerprint": "5aaed48116d2b1c53a659d82d00b9e7869b29044fc33bc565548cf82b020bac7",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-armadillo-insect-eating-mammals-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-armadillo-insect-eating-mammals-v1",
+        "fingerprint": "24470f516cf1312a265093e47d874f9b5679fe39eaca0dbf0ba806323c29ae21",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-armadillo-insect-eating-mammals-v1",
+          "prefabIds": [],
+          "revision": "0450041afe39273ef6bdf4543e7df797b77538888587f68991b72752522762d8",
+          "renderFingerprint": "5aaed48116d2b1c53a659d82d00b9e7869b29044fc33bc565548cf82b020bac7",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-armadillo-insect-eating-mammals-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-pangolin-insect-eating-mammals-v1",
+      "batchId": "wildlife-3d-insect-eating-mammals-v1",
+      "kind": "wildlife",
+      "name": "Pangolin",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-pangolin-insect-eating-mammals-v1",
+      "fingerprint": "9018dc95231950c3e19dc3133ef186f0b7640cd0c18e58dafcd44bbb3a314685",
+      "sourceFingerprint": "5c1f86ebd498821a789de98610efb6dd6f05e504a7761577a8aa209132eb2b5f",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-pangolin-insect-eating-mammals-v1",
+        "prefabIds": [],
+        "revision": "edf2ae74d398fd1e7b6b2321bb623292029cf8f41eaa6f1fe72e1c65f3d1ef14",
+        "renderFingerprint": "9018dc95231950c3e19dc3133ef186f0b7640cd0c18e58dafcd44bbb3a314685",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-pangolin-insect-eating-mammals-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-pangolin-insect-eating-mammals-v1",
+        "fingerprint": "5c1f86ebd498821a789de98610efb6dd6f05e504a7761577a8aa209132eb2b5f",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-pangolin-insect-eating-mammals-v1",
+          "prefabIds": [],
+          "revision": "edf2ae74d398fd1e7b6b2321bb623292029cf8f41eaa6f1fe72e1c65f3d1ef14",
+          "renderFingerprint": "9018dc95231950c3e19dc3133ef186f0b7640cd0c18e58dafcd44bbb3a314685",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-pangolin-insect-eating-mammals-v1"
+        }
+      }
     }
   ],
-  "inputDigest": "b92049da42c3292e539fe89014dd550bc0f4596ba61328bed7e81782fc8c2835"
+  "inputDigest": "78b2a6a289d5acb7533fa4ec77dd45a71413ed08a5791bf57df8562613b79cb5"
 }

@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-armadillo-provisional-v1",
+  "fit": [
+    11.96,
+    8.57,
+    12.47
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "The short steps keep the gray shell level. The planted action lowers the snout and scrapes, and the escape has a compact fast gait.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

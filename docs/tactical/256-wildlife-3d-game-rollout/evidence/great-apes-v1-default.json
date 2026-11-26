@@ -1,0 +1,100 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+  "workshopInputDigest": "b92049da42c3292e539fe89014dd550bc0f4596ba61328bed7e81782fc8c2835",
+  "results": [
+    {
+      "type": "wildlife-chimpanzee-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "a201a4cf1847a5d106004abcda63d0446d627b29c48eb5c13912576266edc230",
+      "modelSha256": "408b1e904402d66a8099b8cea30965c1e7307b68147d884a8f871c73d0b2d528",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-chimpanzee&wildlife3dStage=chimpanzee-great-apes-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009553546905517666,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-gorilla-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "87d418da3d8b94fb2c3d1cf5b7e34913c4bfa8d7b18b8ad289682816efaf7c49",
+      "modelSha256": "30ddb33c7b5a01f1a76d6107e737d63205e908fba97009d6dbecb9edc21736a6",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-gorilla&wildlife3dStage=gorilla-great-apes-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009707489013671918,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-orangutan-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "b636e0b3b72db3ed6a31567aa3c2ec004b0f1a8d7996675bb877fed3ae9b575c",
+      "modelSha256": "2fb188e176e17288b628931fb26c3004fa68878132e0f1a830100ddb585bfacb",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-orangutan&wildlife3dStage=orangutan-great-apes-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009897708892822447,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

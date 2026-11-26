@@ -1501,7 +1501,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "d9ea9b1add41c725c0c116c6176703ffff8fcf67",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-robin-pilot-v1",
+        "sha256": "16f91a4a1decbfbf426d9fae79d5264b240d5bbddd2a796f6874cd40d04ce0b7",
+        "states": ["action", "eat", "flap", "hop", "idle"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/robin-pilot-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-robin-pilot-v1",
         "fingerprint": "77d1b532492728bab517870f8e4242217e1989943c75f3d5527db141514583bc",
@@ -2976,7 +2983,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "d9ea9b1add41c725c0c116c6176703ffff8fcf67",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-rabbit-pilot-v1",
+        "sha256": "22e7dcc6e906a4bea9f421be9ddbd8c477dbba396a48d98ae11504af38145405",
+        "states": ["action", "eat", "hop", "idle"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/rabbit-pilot-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-rabbit-pilot-v1",
         "fingerprint": "d22f96184bb5f4802c3edaf28a362b2d0991e89ad94ae88e3e9138ac703f0b32",
@@ -3629,7 +3643,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-elk-cervids-v1",
+        "sha256": "e1385b3360b7e1490eb470712a0ffbea8e93baf362916d6860b61e6bd0119f45",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/cervids-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-elk-cervids-v1",
         "fingerprint": "4c33b015f264e0cacda0ce8dedfc1d210e5dcb20d2ba517fc7eafbace7587162",
@@ -4082,7 +4103,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-moose-cervids-v1",
+        "sha256": "e842b8108f9265d1a5029da22f71e74a6a1e8c3c67251175e44ffc9a57065e2c",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/cervids-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-moose-cervids-v1",
         "fingerprint": "e0445a7c85093722ae88da7bcd24be5cd8cc3466a047534de48156eec3dd4da5",
@@ -6450,7 +6478,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-fish-pilot-v1",
+        "sha256": "08c8ded2846c84f96f3ff86f056af1d0692041bef9c1c3c94d29c1243f74dd57",
+        "states": ["action", "flee", "idle", "swim"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/fish-pilot-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-fish-pilot-v1",
         "fingerprint": "797a277283b5511793083d085f10db201cc10bf4e7d284dc222419b18429268f",
@@ -7180,7 +7215,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "d9ea9b1add41c725c0c116c6176703ffff8fcf67",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-kangaroo-macropods-v1",
+        "sha256": "cf46eade1dffb27607857014d13c52b2846dcd3ffc2deab68c6cc9fa69e143c5",
+        "states": ["action", "flee", "hop", "idle"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/macropods-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-kangaroo-macropods-v1",
         "fingerprint": "f50d60c6fb33ac07ed8b64e9515eb1cd4b513efd792f65835141ec233be62e0f",
@@ -7383,7 +7425,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "d9ea9b1add41c725c0c116c6176703ffff8fcf67",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-wallaby-macropods-v1",
+        "sha256": "81eca71fd85fbf799689c993f3181fe4130835d1e39c7bfc13ba4404d8b32db2",
+        "states": ["action", "flee", "hop", "idle"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/macropods-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-wallaby-macropods-v1",
         "fingerprint": "e5c160576262e280313525ef1510c9925c53785d549390323dbe7b0d444cca00",
@@ -7478,7 +7527,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-opossum-urban-small-mammals-v1",
+        "sha256": "80e2e1b7603b23bc8b716ed4386ebeff2002d513b54319c901230c23e66b3851",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/urban-small-mammals-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-opossum-urban-small-mammals-v1",
         "fingerprint": "da22ef90a5ddb5cbfbe5cfbbb81c10871796839ed82724edbf92e91c9e7df1fd",
@@ -7944,7 +8000,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-chimpanzee-great-apes-v1",
+        "sha256": "408b1e904402d66a8099b8cea30965c1e7307b68147d884a8f871c73d0b2d528",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/great-apes-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-chimpanzee-great-apes-v1",
         "fingerprint": "a201a4cf1847a5d106004abcda63d0446d627b29c48eb5c13912576266edc230",
@@ -8120,7 +8183,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-orangutan-great-apes-v1",
+        "sha256": "2fb188e176e17288b628931fb26c3004fa68878132e0f1a830100ddb585bfacb",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/great-apes-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-orangutan-great-apes-v1",
         "fingerprint": "b636e0b3b72db3ed6a31567aa3c2ec004b0f1a8d7996675bb877fed3ae9b575c",
@@ -8296,7 +8366,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-gorilla-great-apes-v1",
+        "sha256": "30ddb33c7b5a01f1a76d6107e737d63205e908fba97009d6dbecb9edc21736a6",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/great-apes-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-gorilla-great-apes-v1",
         "fingerprint": "87d418da3d8b94fb2c3d1cf5b7e34913c4bfa8d7b18b8ad289682816efaf7c49",
@@ -8748,9 +8825,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "534cc4765d879916435f0cd442c8647b8eae1bd80705062bab95ae2a7f6e3a43",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/insect-eating-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/aardvark-insect-eating-mammals-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "534cc4765d879916435f0cd442c8647b8eae1bd80705062bab95ae2a7f6e3a43",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/insect-eating-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/aardvark-insect-eating-mammals-v1/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "534cc4765d879916435f0cd442c8647b8eae1bd80705062bab95ae2a7f6e3a43",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/insect-eating-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/aardvark-insect-eating-mammals-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "534cc4765d879916435f0cd442c8647b8eae1bd80705062bab95ae2a7f6e3a43",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/insect-eating-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/aardvark-insect-eating-mammals-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-aardvark-insect-eating-mammals-v1",
+        "fingerprint": "4f00ecd68990813174528a5f68a495398429bfa4717895cdde87448bb8678c07",
+        "model": "public/demos/wildlife-3d/aardvark-insect-eating-mammals-v1/model.glb",
+        "source": "public/demos/wildlife-3d/aardvark-insect-eating-mammals-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/aardvark-insect-eating-mammals-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/insect-eating-mammals-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-armadillo-provisional-v1",
@@ -8768,9 +8879,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "4945ef88f6e7f00483129017f66de74a5a0c7678c8b4e69f03133ea3e22e5079",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/insect-eating-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/armadillo-insect-eating-mammals-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "4945ef88f6e7f00483129017f66de74a5a0c7678c8b4e69f03133ea3e22e5079",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/insect-eating-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/armadillo-insect-eating-mammals-v1/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "4945ef88f6e7f00483129017f66de74a5a0c7678c8b4e69f03133ea3e22e5079",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/insect-eating-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/armadillo-insect-eating-mammals-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "4945ef88f6e7f00483129017f66de74a5a0c7678c8b4e69f03133ea3e22e5079",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/insect-eating-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/armadillo-insect-eating-mammals-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-armadillo-insect-eating-mammals-v1",
+        "fingerprint": "5aaed48116d2b1c53a659d82d00b9e7869b29044fc33bc565548cf82b020bac7",
+        "model": "public/demos/wildlife-3d/armadillo-insect-eating-mammals-v1/model.glb",
+        "source": "public/demos/wildlife-3d/armadillo-insect-eating-mammals-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/armadillo-insect-eating-mammals-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/insect-eating-mammals-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-aye-aye-provisional-v1",
@@ -8973,9 +9118,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "102233c02b71e8a813a926b6aede1988b128ef70fe96f18eb26e06353c018c83",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/insect-eating-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/giant-anteater-insect-eating-mammals-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "102233c02b71e8a813a926b6aede1988b128ef70fe96f18eb26e06353c018c83",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/insect-eating-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/giant-anteater-insect-eating-mammals-v1/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "102233c02b71e8a813a926b6aede1988b128ef70fe96f18eb26e06353c018c83",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/insect-eating-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/giant-anteater-insect-eating-mammals-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "102233c02b71e8a813a926b6aede1988b128ef70fe96f18eb26e06353c018c83",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/insect-eating-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/giant-anteater-insect-eating-mammals-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-giant-anteater-insect-eating-mammals-v1",
+        "fingerprint": "b59f78407013c86e350891dab143fc067f697a399721d13ded5b745d73e7d4d9",
+        "model": "public/demos/wildlife-3d/giant-anteater-insect-eating-mammals-v1/model.glb",
+        "source": "public/demos/wildlife-3d/giant-anteater-insect-eating-mammals-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/giant-anteater-insect-eating-mammals-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/insect-eating-mammals-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-hedgehog-provisional-v1",
@@ -9129,7 +9308,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-mouse-urban-small-mammals-v1",
+        "sha256": "11acc2f4b27a44ac74795ad0b603caeba70acab7bfdb87bab8439b1a01d5a07e",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/urban-small-mammals-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-mouse-urban-small-mammals-v1",
         "fingerprint": "842a00667c47e6f8bae2e4f9b91cbc9d8775789c2c2fbe6661015e377704ef9d",
@@ -9156,9 +9342,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "0968a1135f64ae4496268d70b7425978c1b27a33f07e0d881c19e84c7c656a8f",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/insect-eating-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/pangolin-insect-eating-mammals-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "0968a1135f64ae4496268d70b7425978c1b27a33f07e0d881c19e84c7c656a8f",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/insect-eating-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/pangolin-insect-eating-mammals-v1/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "0968a1135f64ae4496268d70b7425978c1b27a33f07e0d881c19e84c7c656a8f",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/insect-eating-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/pangolin-insect-eating-mammals-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "0968a1135f64ae4496268d70b7425978c1b27a33f07e0d881c19e84c7c656a8f",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/insect-eating-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/pangolin-insect-eating-mammals-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-pangolin-insect-eating-mammals-v1",
+        "fingerprint": "9018dc95231950c3e19dc3133ef186f0b7640cd0c18e58dafcd44bbb3a314685",
+        "model": "public/demos/wildlife-3d/pangolin-insect-eating-mammals-v1/model.glb",
+        "source": "public/demos/wildlife-3d/pangolin-insect-eating-mammals-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/pangolin-insect-eating-mammals-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/insect-eating-mammals-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-porcupine-provisional-v1",
@@ -9248,7 +9468,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-rat-urban-small-mammals-v1",
+        "sha256": "63500da1c280666b48983e14f115ba334cd42c062fd393c7cd7abdec53734db7",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/urban-small-mammals-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-rat-urban-small-mammals-v1",
         "fingerprint": "0b3ed7dd15305604fc60cff72f563685c208b0c584cf7b42b197b2032ac39498",
