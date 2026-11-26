@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-leopard-predator-v1",
+  "fit": [
+    9.9,
+    8.05,
+    11.18
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "reviewContext": "The long tail balances an extended, elastic sprint. Feet plant under a narrow spotted torso.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

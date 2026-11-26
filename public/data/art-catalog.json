@@ -9826,6 +9826,46 @@
       "source": "demos/wildlife-3d/jaguar-wild-cats-v1/model.blend"
     },
     {
+      "id": "wildlife-3d-leopard-big-cats-v1",
+      "name": "wildlife 3d leopard big cats v1",
+      "image": "demos/wildlife-3d/leopard-big-cats-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "47d4d241f2d66442a6f7d3df9a4465d634665b51efc7152581673057a7803bb9",
+      "source": "demos/wildlife-3d/leopard-big-cats-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-lion-big-cats-v1",
+      "name": "wildlife 3d lion big cats v1",
+      "image": "demos/wildlife-3d/lion-big-cats-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "3f58b14b302780b2c6eb06eeb4646c549793ae3dd4ec1ef48af04831f292c703",
+      "source": "demos/wildlife-3d/lion-big-cats-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-tiger-big-cats-v1",
+      "name": "wildlife 3d tiger big cats v1",
+      "image": "demos/wildlife-3d/tiger-big-cats-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "905e117f767880ea2ee5777075a7b22ce698b58f0ece4ec969993ca26b668be7",
+      "source": "demos/wildlife-3d/tiger-big-cats-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-panther-big-cats-v1",
+      "name": "wildlife 3d panther big cats v1",
+      "image": "demos/wildlife-3d/panther-big-cats-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "cfdd0ab1906cdbe3458c97df6fba7f546c26c6638c931d55397751dd161363fc",
+      "source": "demos/wildlife-3d/panther-big-cats-v1/model.blend"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",

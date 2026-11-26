@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-lion-predator-v1",
+  "fit": [
+    13.05,
+    8.59,
+    14.5
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "reviewContext": "A heavy front and layered mane hold steady through the compact pursuit surge.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

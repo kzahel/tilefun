@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-tiger-predator-v1",
+  "fit": [
+    11.7,
+    7.64,
+    14.5
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "reviewContext": "The striped trunk compresses and extends between low, widely spaced forepaw contacts.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-panther-predator-v1",
+  "fit": [
+    11.7,
+    7.32,
+    14.5
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "reviewContext": "The dark coat keeps visible shoulder edges while the long sweep of the tail balances a low chase.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

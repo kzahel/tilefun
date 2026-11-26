@@ -1,0 +1,138 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "fa0663cc6a104c86bb0fe35c2c223d464dae311bd1153d89056d32ee7fb3d00d",
+  "results": [
+    {
+      "type": "wildlife-leopard-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "20858ecb3cee481fa5b03d3c53f46b1f6198b135c76c80e8f2273ecbcfa8a7ca",
+      "modelSha256": "ab8d4df4ac0c76c178a49ec322381252a2aca3d31b9f96e4bf8a956652cd5524",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-leopard&wildlife3dStage=leopard-big-cats-v1&wildlife3dReview=leopard-big-cats-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.000940982818603526,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-lion-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "4dc2ce606231bbc3c52fba24f337589fc508a648f6b6ba6a1eb0947f5837e1ba",
+      "modelSha256": "568535e699f52df264099d3af669f11d7b66aec1ddd4e56618d6f6eea3c99e89",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-lion&wildlife3dStage=lion-big-cats-v1&wildlife3dReview=lion-big-cats-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009287490844726632,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-tiger-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "b8c07b84fc1f5b4da20fc09f5ca65ee37c67016f4b3c369318e14365328811e6",
+      "modelSha256": "239ffc04d4b1b759158dd351f47934b871998b5ef367df21f9840e2f2f17c73c",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-tiger&wildlife3dStage=tiger-big-cats-v1&wildlife3dReview=tiger-big-cats-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009295730590820381,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-panther-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "b8601458c146253c76a32cf62b3f75e10435fe8716eee0f56330eab787b75747",
+      "modelSha256": "8415d0aef39f9cda1c994beed72b918ade2ebcf81dcea5aa45c6cd676898a513",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-panther&wildlife3dStage=panther-big-cats-v1&wildlife3dReview=panther-big-cats-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009201812744140755,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    }
+  ]
+}

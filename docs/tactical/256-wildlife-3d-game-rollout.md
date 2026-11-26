@@ -107,6 +107,20 @@ runtime scope reconciliation in the execution notes.
 
 ## Delivery log
 
+### Leopard, lion, tiger and panther, 2026-11-26
+
+The leopard extends into a longer pursuit. The lion carries its mane
+through a shorter bound, the tiger plants wider forepaws and the panther
+keeps its head lower as it gathers. All 20 states played in Workshop and
+reopened ordinary worlds with the exact review models. [Renderer evidence](256-wildlife-3d-game-rollout/evidence/big-cats-v1-runtime.json) ·
+[Public preview evidence](256-wildlife-3d-game-rollout/evidence/big-cats-v1-deployment.json) ·
+[Workshop review](https://tilefun.graehlarts.com/tilefun/workshop.html#/review/pattern%3Awildlife-3d-leopard-big-cats-v1)
+
+The preceding wild-cat commit's deployment build rejected the Workshop
+manifest after the review recipe moved between files. Both model batches
+are included in the refreshed manifest. The full local production build,
+including the manifest check, passed against the refreshed checkpoint.
+
 ### Bobcat, lynx, cheetah and jaguar, 2026-11-26
 
 The four wild cats have distinct pursuit poses, dark paws and species-specific

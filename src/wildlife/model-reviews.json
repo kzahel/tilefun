@@ -3673,5 +3673,101 @@
       "native.png": "9826ba4068ad470921354a1da4ab1cc519579642b73f334c040649a9c18d2feb",
       "walk.png": "9f781e38463822928bdcc850a53e8dfd3a616e33d857d317a3ea030fff6c6138"
     }
+  },
+  {
+    "id": "leopard-big-cats-v1",
+    "type": "wildlife-leopard-predator-v1",
+    "name": "Leopard",
+    "batch": "wildlife-3d-big-cats-v1",
+    "lab": "leopard",
+    "scale": 10.89,
+    "topDown": {
+      "width": 1,
+      "height": 0.8943985307621671
+    },
+    "files": {
+      "appearance.png": "47d4d241f2d66442a6f7d3df9a4465d634665b51efc7152581673057a7803bb9",
+      "capture-config.json": "471a87a67404dcdc5b095902a2a83eb515c315452cb6cea6d423a1825e069f4a",
+      "chase.png": "7b81255b6ae1df75ad2421c350252a730a465a77e54ad97fc7c7ddfae78b65e8",
+      "comparison.mp4": "6dbba90e1f11cff1fe41449fe34d67afc318750165ddda012cb2b571a80ec759",
+      "display.png": "5c8d31e7d9f5c81f187e8f47012bc0c339a40af552203106cb59f161d57f004d",
+      "feed.png": "35708a9ce1336caea76ebc8a095d762598a60bd66563ca5edf4d6ef99bf0227b",
+      "model.blend": "d3e854e33b3781ab9954edcb60734b663d2d6ec5f6da17fdd470cf39765d002b",
+      "model.glb": "ab8d4df4ac0c76c178a49ec322381252a2aca3d31b9f96e4bf8a956652cd5524",
+      "native.png": "406211194c6eb2809f21030e43f2180e3eea3e0fe1d7669b7a354277b52beb91",
+      "walk.png": "4a9842c0ba3b58a05cff682aceb46cef63438971709ce2a1919d6b4d518379ed"
+    }
+  },
+  {
+    "id": "lion-big-cats-v1",
+    "type": "wildlife-lion-predator-v1",
+    "name": "Lion",
+    "batch": "wildlife-3d-big-cats-v1",
+    "lab": "lion",
+    "scale": 14.36,
+    "topDown": {
+      "width": 1.0605849582172702,
+      "height": 0.6211699164345404
+    },
+    "files": {
+      "appearance.png": "3f58b14b302780b2c6eb06eeb4646c549793ae3dd4ec1ef48af04831f292c703",
+      "capture-config.json": "3b961843ff476d7a331e2f5bd71a1d9fcc472ba2456b63825d078d5c83369f1b",
+      "chase.png": "0e52572f0426ea2975e8d7a032c2170bb879f8053440242f39a8be4a61f3cf61",
+      "comparison.mp4": "55bad51787888fe6adc6e02e13207c285057c73f61a1bd595e8257a06e178b81",
+      "display.png": "77e0fb2f633947f9b1e5f98f497398f985d85fe276cd47dfc030ea5f7c02ad52",
+      "feed.png": "48e359984f1e9bf4c6d9d915434fc64d4177ef833447fafa1240c4c2c091a0ad",
+      "model.blend": "8ab8b7e23c92763f9e1430533bc3a3e4975b7d38083b1ef60b1c811df1b2825b",
+      "model.glb": "568535e699f52df264099d3af669f11d7b66aec1ddd4e56618d6f6eea3c99e89",
+      "native.png": "ac529b002e902ee1d6856b28c89c08cd127db57885d086dc24bdb673fd7ccc99",
+      "walk.png": "3882af133d816172b4089c057447c0a6185c6dd2fea174bc0d0647026b708a00"
+    }
+  },
+  {
+    "id": "tiger-big-cats-v1",
+    "type": "wildlife-tiger-predator-v1",
+    "name": "Wild tiger",
+    "batch": "wildlife-3d-big-cats-v1",
+    "lab": "tiger",
+    "scale": 15.56,
+    "topDown": {
+      "width": 0.6111825192802056,
+      "height": 0.5610539845758354
+    },
+    "files": {
+      "appearance.png": "905e117f767880ea2ee5777075a7b22ce698b58f0ece4ec969993ca26b668be7",
+      "capture-config.json": "fcddaa654b609da79645326020e91ebf0663c37ef1fe7a2ccb609c58d53ce7c2",
+      "chase.png": "d3d5623a89e90c2e4907553af8a46b7411826d8c0195b6b331c3964eb9dd7d34",
+      "comparison.mp4": "6a8207a5a6e605922cfbdafc82293a42f631761dee3db32a37474e52f9cab50c",
+      "display.png": "51151b915c64a9d5ad982d1c833a43689ba5cf19064d705829a7d469caf1bb4c",
+      "feed.png": "d7b7c0d135abad292509568dab94dba389aa51baf8f9575e794d9994479206e2",
+      "model.blend": "28ed15e689d7de02fd7487a9f5f01bcb29c62206db28fb502345f425ab82a3d0",
+      "model.glb": "239ffc04d4b1b759158dd351f47934b871998b5ef367df21f9840e2f2f17c73c",
+      "native.png": "8c0e7fcea62a445a8025ce14cc4762b525419a82a59fd5acbd671b53332a0a02",
+      "walk.png": "e5eeeacad848ba852266ae75fb31784f178c45eb1d6862725a857f9b40d218eb"
+    }
+  },
+  {
+    "id": "panther-big-cats-v1",
+    "type": "wildlife-panther-predator-v1",
+    "name": "Panther",
+    "batch": "wildlife-3d-big-cats-v1",
+    "lab": "panther",
+    "scale": 15.66,
+    "topDown": {
+      "width": 0.80970625798212,
+      "height": 0.565772669220945
+    },
+    "files": {
+      "appearance.png": "cfdd0ab1906cdbe3458c97df6fba7f546c26c6638c931d55397751dd161363fc",
+      "capture-config.json": "8881732f520b89446a4b55f081592ecae1c6be28a3fe746285867ba91403aa0c",
+      "chase.png": "d6c85fba9c23f17a6e3e73c57cc819aea4914795f8b20e367f92bda62daa6d34",
+      "comparison.mp4": "f7dc82a13afe03a42abb0f28a7861b77868874e636d5c9dd450a4e448db33fd8",
+      "display.png": "2304a852b4866a327bfa040f1ef580379dff3e92f2cb918eec3730cbb625cbea",
+      "feed.png": "bb9d632f5fdd18245920e8ef2516304f1fe8299ee485cea610e11e65520a23fe",
+      "model.blend": "a405d53d8327b1ead458d7a4ca8da6740f831bfabca3b7ee842040dc636b9958",
+      "model.glb": "8415d0aef39f9cda1c994beed72b918ade2ebcf81dcea5aa45c6cd676898a513",
+      "native.png": "e6deae7fcd030cfd7c15abce9aa402a0a612c08f7206ebe7addc7861855e3758",
+      "walk.png": "22e64e39627d90e1659f410f648254d560773370bce16738cbb88f2deafac35c"
+    }
   }
 ]

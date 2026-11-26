@@ -1,0 +1,158 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-leopard-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "leopard-big-cats-v1",
+      "modelSha256": "ab8d4df4ac0c76c178a49ec322381252a2aca3d31b9f96e4bf8a956652cd5524"
+    },
+    {
+      "type": "wildlife-lion-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 180
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1200
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 218.1818181818182
+        }
+      ],
+      "candidateId": "lion-big-cats-v1",
+      "modelSha256": "568535e699f52df264099d3af669f11d7b66aec1ddd4e56618d6f6eea3c99e89"
+    },
+    {
+      "type": "wildlife-tiger-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 180
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1200
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 240
+        }
+      ],
+      "candidateId": "tiger-big-cats-v1",
+      "modelSha256": "239ffc04d4b1b759158dd351f47934b871998b5ef367df21f9840e2f2f17c73c"
+    },
+    {
+      "type": "wildlife-panther-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 180
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1200
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 200
+        }
+      ],
+      "candidateId": "panther-big-cats-v1",
+      "modelSha256": "8415d0aef39f9cda1c994beed72b918ade2ebcf81dcea5aa45c6cd676898a513"
+    }
+  ],
+  "clipSamples": 560,
+  "testedDepth": false
+}

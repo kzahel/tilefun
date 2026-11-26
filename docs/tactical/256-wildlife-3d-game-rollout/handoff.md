@@ -65,7 +65,10 @@ revision, URL, runtime hashes and observed default states in the ledger.
 
 The November 26 resume began from base commit `23e99752` and reused the
 archived Blender drafts. Revision `d9ea9b1a` records 113 selected defaults,
-27 animals with exact production evidence, and 624 qualified states. That
-includes the three pilot and pet cat coats and both existing default dog
-models. The golden retriever preview has all four states and awaits exact
-Workshop review. The delivery log and ledger record later batches.
+27 animals with exact production evidence, and 624 qualified states. The
+later big-cat checkpoint covers 158 registered animals and 722 qualified
+states, with 64 animals fully verified as live defaults. The pilot has all
+22 states verified in the production game. All three cat coats and both
+previously selected dogs have full production evidence. The golden retriever
+preview has all four states and awaits exact Workshop review. The delivery
+log and ledger record later batches.
