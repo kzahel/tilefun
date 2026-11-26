@@ -72,6 +72,11 @@ export const FAUNA_TORSO_FITS: Readonly<
   "land-tortoise": [12, 8.5],
   "texas-horned-lizard": [10.5, 6],
   salamander: [6, 5.5],
+  "aye-aye": [7.5, 8.5],
+  kinkajou: [5, 8],
+  koala: [10, 8.5],
+  sloth: [8, 9],
+  newt: [5.5, 6],
 };
 
 export function centeredTorsoCollider(size: number, support: number): ColliderComponent {
