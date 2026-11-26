@@ -1,0 +1,24 @@
+{
+  "runtimeType": "wildlife-ruby-throated-hummingbird-provisional-v1",
+  "version": 3,
+  "fit": [
+    7,
+    7.71,
+    11.33
+  ],
+  "autoFit": true,
+  "portraitCenter": 0.92,
+  "clips": [
+    "idle",
+    "fly",
+    "action",
+    "flee",
+    "sip",
+    "guard"
+  ],
+  "reviewContext": "Final planned candidate. V1's highest-impact note is preserved in the local revision brief. This pass targeted make the feet and limb edges easier to read, give the tail its requested silhouette, strengthen the chest or muzzle patch. Compare this exact candidate against the active sprite and report any remaining quality gap. The first candidate images and completed review remain retained in the adjacent v1 folder.",
+  "model": "model.glb",
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

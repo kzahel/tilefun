@@ -3190,5 +3190,106 @@
       "native.png": "c87fa0179aa0e715871caa863d4b59c9c826e9b152978692acf85b3083a55145",
       "walk.png": "2c94f80f86239e91e545e4daa9849a7d45130bfc333be50f91be3507c669048d"
     }
+  },
+  {
+    "id": "crow-working-and-display-birds-v1",
+    "type": "wildlife-crow-provisional-v1",
+    "name": "Carrion crow",
+    "batch": "wildlife-3d-working-and-display-birds-v1",
+    "lab": "behavior-crow",
+    "scale": 9.18,
+    "topDown": {
+      "width": 0.8823529411764706,
+      "height": 0.7189542483660131
+    },
+    "files": {
+      "action.png": "a0d10268a4f69e6f343fd24f02c4fb7051ae38925e36707b819b6827859ac9e6",
+      "appearance.png": "658d552edb1bc1655df9da217304dfe4a48a027b1b298cdff958daabb08e2967",
+      "build.png": "4085a8969f17520454545eb54e7a317bf026355caaefa74dc57cef0a72a232ad",
+      "capture-config.json": "212c910e4970b9aa545d1f8fec819204e059bd23709d476c5ed293afb7ee0764",
+      "comparison.mp4": "a97afe3e5eb313ab2b5a082bbfa89a70b9921e4f72b707d3b03cd32466c2f62d",
+      "flee.png": "23e07ca23d50f934729ac7da04e4dad668430d81e0ac410aecd28248226c8cf1",
+      "fly.png": "b9f6fad1e601796babb975fde33c2efa002f63f23826ac9d9d5279a99bd9ede2",
+      "model.blend": "2d824f0aa86ba6b42a54d6ebf56c5f1e19cf50cf773d3e422ba4b3fe4282d226",
+      "model.glb": "c34196a83cb84aaf0347aa492e0bc00e1f2458e9b84de362f83813906cbf2bbe",
+      "native.png": "9227441ede2c66f977493a299dfaa1110131c042de2aded1f2aa83749c374467",
+      "pickup.png": "2f25dd84b40c7ffee84c831b3a0f0a839c55b4649d7b83830a8cd1f40f842cd5"
+    }
+  },
+  {
+    "id": "raven-working-and-display-birds-v1",
+    "type": "wildlife-raven-provisional-v1",
+    "name": "Raven",
+    "batch": "wildlife-3d-working-and-display-birds-v1",
+    "lab": "behavior-raven",
+    "scale": 9.82,
+    "topDown": {
+      "width": 0.824847250509165,
+      "height": 0.7331975560081466
+    },
+    "files": {
+      "action.png": "885aec10c64639f29a613fea4c58969a4823989b3fb207db859f8f5ab91f80fd",
+      "appearance.png": "be7c469a2509fdce58a423be5f585ec6f26f344d4a3a4ddc8504c6f78102c164",
+      "bury.png": "4a45ae9e17d5e3eddb577250dd6f19748b33b3965377bba72538a4444a6a3b8a",
+      "capture-config.json": "80919345bef73a2c74f4c211e71b86fdf6ffcae3a11efd9c14a2b275cbe70644",
+      "comparison.mp4": "b69fb7fd0519f59b2755693b59867f8d69285c57749513fb21372f852be5999a",
+      "flee.png": "bc4c8d7079895092ea61dc3263c2402565f8fbb2d914a3c2117e571d5e5a6885",
+      "fly.png": "7fee7b141f3366905c8ebfec49b1d67fa087e0c2e4a6a46464b52c98767c94ad",
+      "model.blend": "14d9cf398b05db12fe0565b09005388f952cc18e144b49c3db62b939d330d2c4",
+      "model.glb": "cc996d398cf49c4966f7b659ab2bc5194677593a8b08bc1450c02bb21829c47e",
+      "native.png": "6b0271912f2aedf7220885c8bf3e0cb5632c528e8eae92d870d235fa1d0b7c01",
+      "pickup.png": "8af4037474241d8f31d94e5bc87283ebab8088a76d67e5ba40922fc96f635c49"
+    }
+  },
+  {
+    "id": "hummingbird-working-and-display-birds-v1",
+    "type": "wildlife-ruby-throated-hummingbird-provisional-v1",
+    "name": "Ruby-throated hummingbird",
+    "batch": "wildlife-3d-working-and-display-birds-v1",
+    "lab": "behavior-hummingbird",
+    "scale": 10.7,
+    "topDown": {
+      "width": 0.7635514018691589,
+      "height": 0.6485981308411216
+    },
+    "files": {
+      "action.png": "b4c96ffc7bbafc814fd45d93ca2b9de230f2023d3ec3ea8bb952dd02a0cc2971",
+      "appearance.png": "a3dfdbac6d777684b5e0cf697580cf174834f1d417577f28e03c39b805bd2029",
+      "capture-config.json": "b758b4e394bef033c44c4848a8dbead9a6eb9a3590c03146f2d889a9d747ef08",
+      "comparison.mp4": "6397e76db30530b623b7a3350298aa3dc2059eff8986468d9cb6831c6365ec5c",
+      "flee.png": "acec64cbff8694385ab89c33dbd1a95bc45e2266f2639154a3cd4fedf2bf0cbf",
+      "fly.png": "a80e04814c088ec51d5c8832092bd84571c1fbf214838b4a579208c1911146da",
+      "guard.png": "d5d49de485afe9fd6a8869f98ef4218fd46d09a8a96425f8799faea7da59ea77",
+      "model.blend": "7fce24e9f777af6c994076fe3b245c02a21f55e77edbc8cfa7ae648bd5d19dfa",
+      "model.glb": "ec41d8cebc2d5ed9357a7ec30f1c8024a4e1471ef685ce3c4550cd77b8acf659",
+      "native.png": "233efa250bc6b1dc1671e72469d665f18a9f849aee6a8eed97e351bb648965d3",
+      "sip.png": "3e070494afcd4981cbd8e9b7ea096f1a86708a155809b6f079abd3ca4e78acd1"
+    }
+  },
+  {
+    "id": "peacock-working-and-display-birds-v1",
+    "type": "wildlife-peacock-provisional-v1",
+    "name": "Peacock",
+    "batch": "wildlife-3d-working-and-display-birds-v1",
+    "lab": "behavior-peacock",
+    "scale": 16.82,
+    "topDown": {
+      "width": 0.7473246135552913,
+      "height": 0.718192627824019
+    },
+    "files": {
+      "action.png": "995a16b3069c7c239f211e9d17016999cdd80b8ad53cb656c8b7aa1feb274ffd",
+      "appearance.png": "36e84eb5f8aa580f0a615d47734a7b884579cb11092ff5944a6596c21191c40f",
+      "capture-config.json": "b784f29e894fc8fe8531aca74ed3ebddf95d8656f52bd10bdd4065aa248c3b5f",
+      "close.png": "a0e1e9d82206c0f1cb66f05034c6039f87e55151408f9592292f7748987b4234",
+      "comparison.mp4": "e2c72a0c09b7e061ef15f6edcf1e7bf15bcbdb6c66b2fffc5b60d6489353e68d",
+      "display.png": "aea7a32aa90d5efd4be642e5cc37a1b82124bdcf1c170c3e99ea816e9eda1506",
+      "flee.png": "a98d27e1100548fd77c5107f0239bf382db46b1d27073d836c9e360a935e1872",
+      "model.blend": "18cab056e670642eefc47cf76d08a4ad42c3eedd52f8d97360376b22e9fc85bd",
+      "model.glb": "8e935e65d86ecf418b83a7b2740369013b7bb24f6f5cb38767dac1d311368a45",
+      "native.png": "d263c4f552d54b0d2e8188cd57f1e77f8d2f9ab0a496ff7f6d5aee54a19efa77",
+      "open.png": "278eda5d4212cf16171a601904a3e576776a494dfc9d8e6eabae40e595548729",
+      "walk.png": "d1b6e524ab5e3bd7846ab0d6e504fce67981febb324b1591b718e29255c80b9a"
+    }
   }
 ]

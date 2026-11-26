@@ -107,6 +107,22 @@ runtime scope reconciliation in the execution notes.
 
 ## Delivery log
 
+### Working and display birds, 2026-11-26
+
+The carrion crow places twigs, the raven scrapes and buries, and the hummingbird
+has separate sipping and guard hovers. The peacock opens seven articulated
+feathers, holds the raised fan and closes it. [The exact preview report](256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-deployment.json)
+records all 25 states in Workshop and in reopened game worlds. The crow's
+game check uses its original nest setup, then clears the remaining twigs and
+tree through the editor to show the ground escape.
+
+The [tuxedo cat](256-wildlife-3d-game-rollout/evidence/tuxedo-cat-v1-default.json),
+[ginger tabby](256-wildlife-3d-game-rollout/evidence/ginger-tabby-v1-default.json)
+and [black cat](256-wildlife-3d-game-rollout/evidence/black-cat-v1-default.json)
+each played all nine states on the production revision, including after a
+saved-world reload. The tester used the ordinary Ball hotbar tool and paced
+its throws so the cat had three opportunities to play and climb.
+
 ### Waders and forest birds, 2026-11-26
 
 The flamingo, great blue heron, marabou stork and shoebill use individual

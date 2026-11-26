@@ -1,0 +1,25 @@
+{
+  "runtimeType": "wildlife-peacock-provisional-v1",
+  "version": 3,
+  "fit": [
+    11.6,
+    8.7,
+    11.6
+  ],
+  "autoFit": true,
+  "portraitCenter": 0.92,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee",
+    "open",
+    "display",
+    "close"
+  ],
+  "reviewContext": "Final planned candidate. V1's highest-impact note is preserved in the local revision brief. This pass targeted raise the upper silhouette above standing contact, open space under the belly, make the feet and limb edges easier to read, give the tail its requested silhouette. Compare this exact candidate against the active sprite and report any remaining quality gap. The first candidate images and completed review remain retained in the adjacent v1 folder.",
+  "model": "model.glb",
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

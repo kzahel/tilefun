@@ -18,15 +18,24 @@ sys.modules["wildlife_build"] = wildlife_build
 spec.loader.exec_module(wildlife_build)
 import bird
 
-SEABIRD_LENGTH = {
+BODY_LENGTH_SCALE = {
     "atlantic-puffin": 1.13,
     "blue-footed-booby": 1.34,
+    "crow": 1.22,
     "great-frigatebird": 1.45,
     "pelican": 1.55,
+    "raven": 1.24,
 }
 SPRITE_SWATCHES = {
     "cassowary": {"casque": (62, "c2ad74")},
+    "peacock": {"eye-gold": (60, "bca76c"), "eye-blue": (62, "477d9b")},
     "wild-turkey": {"wattle": (60, "ad554c"), "fan-edge": (62, "d5bf96")},
+}
+DRAFT_WORK_ACTIONS = {
+    "crow": {"pickup"},
+    "raven": {"pickup", "scratch"},
+    "ruby-throated-hummingbird": {"sip", "display"},
+    "peacock": {"open", "display", "close"},
 }
 
 
@@ -107,6 +116,29 @@ def shape_forest_bird_bill(mesh, species):
             vertex.co.y += .13 * offset
             vertex.co.x *= 1.12
     mesh.data.update()
+
+
+def rig_peacock_fan(mesh, rig):
+    vertices = part_vertices(mesh, "Tail feather fan")
+    assert len(vertices) % 7 == 0
+    size = len(vertices) // 7
+    feathers = [vertices[index:index+size] for index in range(0, len(vertices), size)]
+    for vertex in vertices:
+        vertex.co.y = bird.TAIL.y + 1.24 * (vertex.co.y - bird.TAIL.y)
+    mesh.data.update()
+    bpy.context.view_layer.objects.active = rig
+    bpy.ops.object.mode_set(mode="EDIT")
+    for index, feather in enumerate(feathers):
+        joint = rig.data.edit_bones.new(f"fan.{index}")
+        joint.head = sum((vertex.co for vertex in feather[:8]), Vector()) / 8
+        joint.tail = sum((vertex.co for vertex in feather[-8:]), Vector()) / 8
+        joint.parent = rig.data.edit_bones["tail"]
+    bpy.ops.object.mode_set(mode="OBJECT")
+    tail_group = mesh.vertex_groups["tail"]
+    for index, feather in enumerate(feathers):
+        indices = [vertex.index for vertex in feather]
+        tail_group.remove(indices)
+        mesh.vertex_groups.new(name=f"fan.{index}").add(indices, 1, "REPLACE")
 
 
 def paint_sprite_markings(mesh, species):
@@ -231,6 +263,23 @@ def paint_sprite_markings(mesh, species):
                 color = "wattle"
             elif tail:
                 color = "fan-edge" if point.y < bird.TAIL.y - bird.TAIL_LEN * .48 else "mantle"
+        elif species in {"crow", "raven"}:
+            if part == "Sculpted bill" and face.normal.z < .38:
+                color = "ink"
+            elif wing and point.y < bird.BODY.y - .41:
+                color = "mantle" if face.normal.z > .61 else "ink"
+        elif species == "ruby-throated-hummingbird":
+            if part == "Sculpted bill":
+                color = "ink"
+            elif part == "Neck, face and eye patches" and point.y > bird.HEAD.y + .035 and point.z < bird.HEAD.z - .075:
+                color = "accent"
+        elif species == "peacock":
+            if part == "Species body and plumage" and face.normal.z > .18:
+                color = "breast"
+            elif tail and face.normal.z > .02:
+                feather_end = point.y < bird.TAIL.y - bird.TAIL_LEN * .79
+                if feather_end:
+                    color = "eye-blue" if face.normal.z > .65 else "eye-gold"
         if toes and species in {"dove", "sparrow", "pigeon"}:
             color = "bill"
         if color:
@@ -249,7 +298,7 @@ def main():
     travel = "walk" if species in bird.GROUND_POSES else "fly"
     configure = bird.configure_ground_rollout if travel == "walk" else bird.configure_flight_rollout
     configure(species)
-    rig.scale.y *= SEABIRD_LENGTH.get(species, 1)
+    rig.scale.y *= BODY_LENGTH_SCALE.get(species, 1)
     if species in {"pelican", "blue-footed-booby"}:
         articulate_bill(rig, mesh, species)
     if species == "great-frigatebird":
@@ -260,8 +309,10 @@ def main():
         detail_cassowary(mesh, rig)
     if species in {"great-hornbill", "toucan"}:
         shape_forest_bird_bill(mesh, species)
+    if species == "peacock":
+        rig_peacock_fan(mesh, rig)
     paint_sprite_markings(mesh, species)
-    assert set(bpy.data.actions.keys()) == {"idle", travel, "action"}
+    assert set(bpy.data.actions.keys()) == {"idle", travel, "action"} | DRAFT_WORK_ACTIONS.get(species, set())
     for action in list(bpy.data.actions):
         bpy.data.actions.remove(action)
     wildlife_build.key_actions(rig, bird.DURATIONS, bird.pose)

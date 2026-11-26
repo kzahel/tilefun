@@ -92,6 +92,7 @@ GROUND_ROLLOUT = None
 FLIGHT_POSES = {
     "atlantic-puffin": (.88, 1.0, .42, .23),
     "blue-footed-booby": (.97, 1.0, .52, .16),
+    "crow": (.96, 1.0, .58, .19),
     "dove": (.88, 1.0, .68, .18),
     "great-frigatebird": (1.0, 1.0, -.37, .13),
     "great-hornbill": (.96, 1.0, .51, .13),
@@ -99,6 +100,8 @@ FLIGHT_POSES = {
     "sparrow": (.79, .94, .86, .22),
     "toucan": (.89, 1.0, .51, .17),
     "pigeon": (.94, 1.0, .75, .18),
+    "raven": (.96, 1.0, .53, .18),
+    "ruby-throated-hummingbird": (.92, 1.0, .43, .21),
     "parrot": (.85, .98, .53, .15),
 }
 # Ground birds use a stronger escape stride and an individual neck gesture.
@@ -112,8 +115,15 @@ GROUND_POSES = {
     "kiwi": (.20, .33, .22, .22, .61),
     "marabou-stork": (.54, .77, .72, 1.16, .60),
     "ostrich": (.49, .85, .60, 1.23, .80),
+    "peacock": (.33, .53, .18, .28, .44),
     "shoebill": (.50, .71, .65, .88, .63),
     "wild-turkey": (.42, .61, .10, .045, -.11),
+}
+WORK_ACTIONS = {
+    "crow": {"pickup": 19, "build": 19},
+    "raven": {"pickup": 20, "bury": 30},
+    "ruby-throated-hummingbird": {"sip": 15, "guard": 15},
+    "peacock": {"open": 29, "display": 48, "close": 29},
 }
 
 
@@ -160,6 +170,7 @@ def configure_flight_rollout(variant):
     configure(variant)
     FLIGHT_ROLLOUT = FLIGHT_POSES[variant]
     DURATIONS = {"idle":48,"fly":19,"action":19,"flee":10}
+    DURATIONS.update(WORK_ACTIONS.get(variant, {}))
 
 
 def configure_ground_rollout(variant):
@@ -167,6 +178,7 @@ def configure_ground_rollout(variant):
     configure(variant)
     GROUND_ROLLOUT = GROUND_POSES[variant]
     DURATIONS = {"idle":48,"walk":23 if variant=="kiwi" else 31,"action":19,"flee":12 if variant=="kiwi" else 15}
+    DURATIONS.update(WORK_ACTIONS.get(variant, {}))
 
 
 def joints():
@@ -335,7 +347,9 @@ def pose(rig,rest,clip,t):
     wave=math.tau*t
     escape=FLIGHT_ROLLOUT is not None and clip=="flee"
     running=GROUND_ROLLOUT is not None and clip=="flee"
-    flying,swim,walk=clip=="fly" or escape,clip=="swim",clip=="walk" or running
+    hummingbird = FLIGHT_ROLLOUT is not None and NAME=="Ruby-throated Hummingbird"
+    hovering = hummingbird and clip in ("sip", "guard")
+    flying,swim,walk=clip=="fly" or escape or hovering,clip=="swim",clip=="walk" or running
     head_dip=(math.sin(math.pi*t)**2)*(.80 if clip=="feed" else .73 if clip in ("pickup","sip") else
               .34 if clip=="action" else .29 if clip=="sleep" else 0)
     if HEN_ROLLOUT:
@@ -354,7 +368,15 @@ def pose(rig,rest,clip,t):
         head_dip = FLIGHT_ROLLOUT[2]*peck*(.70+.30*math.cos(2*wave))
     if GROUND_ROLLOUT is not None and clip=="action":
         head_dip = 0
+    if clip in ("build", "bury"):
+        strength = .67 if clip=="build" else 1.02
+        head_dip = strength * math.sin(math.pi*t)**2 * (.77+.23*math.cos(2*wave))
     display = math.sin(math.pi*t)**.75 if clip=="display" else t if clip=="open" else 1-t if clip=="close" else 0
+    if "fan.0" in rest:
+        if clip=="display":
+            display = 1
+        else:
+            display = display**2 * (3-2*display)
     if GROUND_ROLLOUT is not None and NAME=="Wild Turkey" and clip=="action":
         display = math.sin(math.pi*t)**1.25
     trunkq=euler(-.17*head_dip+.045*math.sin(wave)*(walk or flying),
@@ -383,16 +405,37 @@ def pose(rig,rest,clip,t):
             nod = math.sin(2*wave)
             headq = trunkq@euler(.055*nod)
             head_position += V((0,.11+.045*nod,-.12)) if running else V((0,.03*nod,.021*nod))
+    if clip in ("build", "bury"):
+        headq = headq@euler(0, 0, .20*head_dip*math.sin(wave))
+    if hovering:
+        reach = math.sin(math.pi*t)**2
+        if clip=="sip":
+            headq = trunkq@euler(-.29*reach)
+            head_position = body@HEAD+V((0,.14*reach,-.085*reach))
+        else:
+            headq = trunkq@euler(.18*reach, .08*math.sin(wave), .28*math.sin(wave))
+            head_position = body@HEAD+V((0,-.05*reach,.07*reach))
     head=transform(headq,HEAD,head_position)
     result["head"]=head@rest["head"]
     if "jaw" in rest:
         hinge = rest["jaw"].translation
         gape = (math.sin(math.pi*t)**4)*(.34 if NAME=="Pelican" else .26) if clip=="action" else 0
         result["jaw"]=transform(headq@euler(-gape),hinge,head@hinge)@rest["jaw"]
-    tail_pitch=-display*(1.17 if STYLE=="fan" else .28)+.062*math.sin(wave)
+    tail_pitch=-display*(1.37 if "fan.0" in rest else 1.17 if STYLE=="fan" else .28)+.062*math.sin(wave)
     if FLIGHT_ROLLOUT is not None:
         tail_pitch += -.32*head_dip + (.22+.10*math.sin(wave) if escape else 0)
-    result["tail"]=transform(trunkq@euler(tail_pitch),TAIL,body@TAIL)@rest["tail"]
+    if hovering:
+        tail_pitch += -.12 if clip=="sip" else .25*math.sin(math.pi*t)**2
+    tail=transform(trunkq@euler(tail_pitch),TAIL,body@TAIL)
+    result["tail"]=tail@rest["tail"]
+    if "fan.0" in rest:
+        spread = display * (.86 if clip=="close" else 1)
+        for index in range(7):
+            feather = f"fan.{index}"
+            pivot = rest[feather].translation
+            splay = (index-3) * .29 * spread
+            sway = .035 * display * math.sin(wave+index*.64)
+            result[feather] = tail@transform(euler(sway,0,splay),pivot,pivot)@rest[feather]
     for label,(a,b,c) in WINGS.items():
         sign=1 if label=="l" else -1
         wing,tip=f"wing.{label}",f"tip.{label}"
@@ -409,8 +452,11 @@ def pose(rig,rest,clip,t):
             spread = .26+(cruise-.26)*opening
             if escape:
                 spread = .36+(burst-.36)*opening**.57
-            beat = math.sin(wave)
+            beat = math.sin(wave*(4 if hummingbird else 1))
             beat_span = .65 if escape else .50
+            if hovering:
+                spread = .69 if clip=="sip" else .96
+                beat_span = .59
             if NAME=="Great Frigatebird":
                 spread = .29+(.71*opening**(.42 if escape else .65))
                 beat_span *= .84
@@ -435,7 +481,7 @@ def pose(rig,rest,clip,t):
                 forward,lift=stride(t,phase,.341,.191)
         elif flying or swim:
             forward,lift=(-.29,.35) if escape else (-.18,.28)
-        elif clip=="scratch" and label=="l":
+        elif clip in ("scratch", "bury") and label=="l":
             forward,lift=(-.29*math.sin(math.pi*t)**2,.14*math.sin(math.pi*t))
             if HEN_ROLLOUT:
                 rake=(.50-.50*math.cos(wave*2))*math.sin(math.pi*t)

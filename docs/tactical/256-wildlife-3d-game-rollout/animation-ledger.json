@@ -295,9 +295,55 @@
         "pickup": "pickup",
         "build": "pickup"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "c34196a83cb84aaf0347aa492e0bc00e1f2458e9b84de362f83813906cbf2bbe",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/crow-working-and-display-birds-v1/native.png"
+        },
+        "fly": {
+          "action": "fly",
+          "sha256": "c34196a83cb84aaf0347aa492e0bc00e1f2458e9b84de362f83813906cbf2bbe",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/crow-working-and-display-birds-v1/fly.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "c34196a83cb84aaf0347aa492e0bc00e1f2458e9b84de362f83813906cbf2bbe",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/crow-working-and-display-birds-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "c34196a83cb84aaf0347aa492e0bc00e1f2458e9b84de362f83813906cbf2bbe",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/crow-working-and-display-birds-v1/flee.png"
+        },
+        "pickup": {
+          "action": "pickup",
+          "sha256": "c34196a83cb84aaf0347aa492e0bc00e1f2458e9b84de362f83813906cbf2bbe",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/crow-working-and-display-birds-v1/pickup.png"
+        },
+        "build": {
+          "action": "build",
+          "sha256": "c34196a83cb84aaf0347aa492e0bc00e1f2458e9b84de362f83813906cbf2bbe",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/crow-working-and-display-birds-v1/build.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-crow-working-and-display-birds-v1",
+        "fingerprint": "8dc0d4ed0726bd6b4bce870a7a9ed2f6f0f36bb1427e0fbe4fc1684cb09d5367",
+        "model": "public/demos/wildlife-3d/crow-working-and-display-birds-v1/model.glb",
+        "source": "public/demos/wildlife-3d/crow-working-and-display-birds-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/crow-working-and-display-birds-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-cassowary-provisional-v1",
@@ -1032,9 +1078,61 @@
         "display": "display",
         "close": "close"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "8e935e65d86ecf418b83a7b2740369013b7bb24f6f5cb38767dac1d311368a45",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/peacock-working-and-display-birds-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "8e935e65d86ecf418b83a7b2740369013b7bb24f6f5cb38767dac1d311368a45",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/peacock-working-and-display-birds-v1/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "8e935e65d86ecf418b83a7b2740369013b7bb24f6f5cb38767dac1d311368a45",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/peacock-working-and-display-birds-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "8e935e65d86ecf418b83a7b2740369013b7bb24f6f5cb38767dac1d311368a45",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/peacock-working-and-display-birds-v1/flee.png"
+        },
+        "open": {
+          "action": "open",
+          "sha256": "8e935e65d86ecf418b83a7b2740369013b7bb24f6f5cb38767dac1d311368a45",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/peacock-working-and-display-birds-v1/open.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "8e935e65d86ecf418b83a7b2740369013b7bb24f6f5cb38767dac1d311368a45",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/peacock-working-and-display-birds-v1/display.png"
+        },
+        "close": {
+          "action": "close",
+          "sha256": "8e935e65d86ecf418b83a7b2740369013b7bb24f6f5cb38767dac1d311368a45",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/peacock-working-and-display-birds-v1/close.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-peacock-working-and-display-birds-v1",
+        "fingerprint": "54031608a680ab7c6b99337602f97362b5a77c651140d55a7ab7723d35c9eb16",
+        "model": "public/demos/wildlife-3d/peacock-working-and-display-birds-v1/model.glb",
+        "source": "public/demos/wildlife-3d/peacock-working-and-display-birds-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/peacock-working-and-display-birds-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-pelican-provisional-v1",
@@ -1176,9 +1274,55 @@
         "pickup": "pickup",
         "bury": "scratch"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "cc996d398cf49c4966f7b659ab2bc5194677593a8b08bc1450c02bb21829c47e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/raven-working-and-display-birds-v1/native.png"
+        },
+        "fly": {
+          "action": "fly",
+          "sha256": "cc996d398cf49c4966f7b659ab2bc5194677593a8b08bc1450c02bb21829c47e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/raven-working-and-display-birds-v1/fly.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "cc996d398cf49c4966f7b659ab2bc5194677593a8b08bc1450c02bb21829c47e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/raven-working-and-display-birds-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "cc996d398cf49c4966f7b659ab2bc5194677593a8b08bc1450c02bb21829c47e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/raven-working-and-display-birds-v1/flee.png"
+        },
+        "pickup": {
+          "action": "pickup",
+          "sha256": "cc996d398cf49c4966f7b659ab2bc5194677593a8b08bc1450c02bb21829c47e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/raven-working-and-display-birds-v1/pickup.png"
+        },
+        "bury": {
+          "action": "bury",
+          "sha256": "cc996d398cf49c4966f7b659ab2bc5194677593a8b08bc1450c02bb21829c47e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/raven-working-and-display-birds-v1/bury.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-raven-working-and-display-birds-v1",
+        "fingerprint": "66c6669c9b03e101483dd5987de41efa2fd7e45a3caf32d7193b7a22bad88ec3",
+        "model": "public/demos/wildlife-3d/raven-working-and-display-birds-v1/model.glb",
+        "source": "public/demos/wildlife-3d/raven-working-and-display-birds-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/raven-working-and-display-birds-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-hawk-predator-v1",
@@ -1336,9 +1480,55 @@
         "sip": "sip",
         "guard": "display"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "ec41d8cebc2d5ed9357a7ec30f1c8024a4e1471ef685ce3c4550cd77b8acf659",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/hummingbird-working-and-display-birds-v1/native.png"
+        },
+        "fly": {
+          "action": "fly",
+          "sha256": "ec41d8cebc2d5ed9357a7ec30f1c8024a4e1471ef685ce3c4550cd77b8acf659",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/hummingbird-working-and-display-birds-v1/fly.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "ec41d8cebc2d5ed9357a7ec30f1c8024a4e1471ef685ce3c4550cd77b8acf659",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/hummingbird-working-and-display-birds-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "ec41d8cebc2d5ed9357a7ec30f1c8024a4e1471ef685ce3c4550cd77b8acf659",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/hummingbird-working-and-display-birds-v1/flee.png"
+        },
+        "sip": {
+          "action": "sip",
+          "sha256": "ec41d8cebc2d5ed9357a7ec30f1c8024a4e1471ef685ce3c4550cd77b8acf659",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/hummingbird-working-and-display-birds-v1/sip.png"
+        },
+        "guard": {
+          "action": "guard",
+          "sha256": "ec41d8cebc2d5ed9357a7ec30f1c8024a4e1471ef685ce3c4550cd77b8acf659",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/hummingbird-working-and-display-birds-v1/guard.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-hummingbird-working-and-display-birds-v1",
+        "fingerprint": "525a7bb1610096c57cc5f11280acbbfbd2604fe4f3f505177b41f576c526e4a0",
+        "model": "public/demos/wildlife-3d/hummingbird-working-and-display-birds-v1/model.glb",
+        "source": "public/demos/wildlife-3d/hummingbird-working-and-display-birds-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/hummingbird-working-and-display-birds-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/working-and-display-birds-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-secretary-bird-predator-v1",
@@ -1711,7 +1901,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "9b195284b43303011baba5d67972984e8763e31f",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-cat-pilot-v1",
+        "sha256": "b032d2fee20eb5666568fbc4154381670c1d28c8c5402d02ecbc357128f6826b",
+        "states": ["action", "bat", "climb", "flee", "idle", "pounce", "sit", "stalk", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tuxedo-cat-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-cat-pilot-v1",
         "fingerprint": "ec9b3968fdd73ab86bcb190610b8e12753c834353fc976b92945c5960e436178",
@@ -7255,7 +7452,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "9b195284b43303011baba5d67972984e8763e31f",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-cat-black-pets-v1",
+        "sha256": "f94b81425e877e5aa0a7effa59b14f939857e356ac7b94df96efc5c3397199ed",
+        "states": ["action", "bat", "climb", "flee", "idle", "pounce", "sit", "stalk", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/black-cat-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-cat-black-pets-v1",
         "fingerprint": "d102bfc5e671af200bbd990ab695c27e523b2ebf06b7b36060adc9bdae088bbe",

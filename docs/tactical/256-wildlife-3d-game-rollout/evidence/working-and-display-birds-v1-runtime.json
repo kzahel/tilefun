@@ -1,0 +1,188 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-crow-provisional-v1",
+      "clips": 6,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "fly",
+          "action": "fly",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 400
+        },
+        {
+          "state": "pickup",
+          "action": "pickup",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "build",
+          "action": "build",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "crow-working-and-display-birds-v1",
+      "modelSha256": "c34196a83cb84aaf0347aa492e0bc00e1f2458e9b84de362f83813906cbf2bbe"
+    },
+    {
+      "type": "wildlife-raven-provisional-v1",
+      "clips": 6,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "fly",
+          "action": "fly",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 400
+        },
+        {
+          "state": "pickup",
+          "action": "pickup",
+          "frames": 28,
+          "gameDurationMs": 840
+        },
+        {
+          "state": "bury",
+          "action": "bury",
+          "frames": 28,
+          "gameDurationMs": 1260
+        }
+      ],
+      "candidateId": "raven-working-and-display-birds-v1",
+      "modelSha256": "cc996d398cf49c4966f7b659ab2bc5194677593a8b08bc1450c02bb21829c47e"
+    },
+    {
+      "type": "wildlife-ruby-throated-hummingbird-provisional-v1",
+      "clips": 6,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "fly",
+          "action": "fly",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 400
+        },
+        {
+          "state": "sip",
+          "action": "sip",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "guard",
+          "action": "guard",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "hummingbird-working-and-display-birds-v1",
+      "modelSha256": "ec41d8cebc2d5ed9357a7ec30f1c8024a4e1471ef685ce3c4550cd77b8acf659"
+    },
+    {
+      "type": "wildlife-peacock-provisional-v1",
+      "clips": 7,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "open",
+          "action": "open",
+          "frames": 28,
+          "gameDurationMs": 1200
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 2000
+        },
+        {
+          "state": "close",
+          "action": "close",
+          "frames": 28,
+          "gameDurationMs": 1200
+        }
+      ],
+      "candidateId": "peacock-working-and-display-birds-v1",
+      "modelSha256": "8e935e65d86ecf418b83a7b2740369013b7bb24f6f5cb38767dac1d311368a45"
+    }
+  ],
+  "clipSamples": 700,
+  "testedDepth": false
+}

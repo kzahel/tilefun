@@ -1,0 +1,152 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "01b4b5f3bf3d3a8ee851c6a6ff0736e8da4780a169b8303f9b93f51641a55a74",
+  "results": [
+    {
+      "type": "wildlife-crow-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "8dc0d4ed0726bd6b4bce870a7a9ed2f6f0f36bb1427e0fbe4fc1684cb09d5367",
+      "modelSha256": "c34196a83cb84aaf0347aa492e0bc00e1f2458e9b84de362f83813906cbf2bbe",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-crow&wildlife3dStage=crow-working-and-display-birds-v1&wildlife3dReview=crow-working-and-display-birds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee",
+        "pickup",
+        "build"
+      ],
+      "heightRange": [
+        1.7066545066833403,
+        42.76289764404297
+      ],
+      "statesOnApproachOrMount": [
+        "action",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee",
+          "pickup",
+          "build"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-raven-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "66c6669c9b03e101483dd5987de41efa2fd7e45a3caf32d7193b7a22bad88ec3",
+      "modelSha256": "cc996d398cf49c4966f7b659ab2bc5194677593a8b08bc1450c02bb21829c47e",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-raven&wildlife3dStage=raven-working-and-display-birds-v1&wildlife3dReview=raven-working-and-display-birds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee",
+        "pickup",
+        "bury"
+      ],
+      "heightRange": [
+        -0.08481896400453004,
+        23.90887162399292
+      ],
+      "statesOnApproachOrMount": [
+        "action",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee",
+          "pickup",
+          "bury"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-ruby-throated-hummingbird-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "525a7bb1610096c57cc5f11280acbbfbd2604fe4f3f505177b41f576c526e4a0",
+      "modelSha256": "ec41d8cebc2d5ed9357a7ec30f1c8024a4e1471ef685ce3c4550cd77b8acf659",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-hummingbird&wildlife3dStage=hummingbird-working-and-display-birds-v1&wildlife3dReview=hummingbird-working-and-display-birds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee",
+        "sip",
+        "guard"
+      ],
+      "heightRange": [
+        -0.00008678436279296875,
+        9.913060863494874
+      ],
+      "statesOnApproachOrMount": [
+        "action",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee",
+          "sip",
+          "guard"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-peacock-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "54031608a680ab7c6b99337602f97362b5a77c651140d55a7ab7723d35c9eb16",
+      "modelSha256": "8e935e65d86ecf418b83a7b2740369013b7bb24f6f5cb38767dac1d311368a45",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-peacock&wildlife3dStage=peacock-working-and-display-birds-v1&wildlife3dReview=peacock-working-and-display-birds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "open",
+        "display",
+        "close"
+      ],
+      "heightRange": [
+        -0.0009983539581298814,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "action",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "open",
+          "display",
+          "close"
+        ]
+      }
+    }
+  ]
+}

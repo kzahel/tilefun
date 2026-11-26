@@ -8,6 +8,7 @@ import { createPredator, predatorProfile } from "../wildlife/Predator.js";
 import { forestWorkRecipe } from "./ForestWorkRecipe.js";
 import { naturalLandscapeRecipe } from "./NaturalLandscapeRecipe.js";
 import { FLAT_SCENARIO, type ScenarioRecipe } from "./ScenarioRecipe.js";
+import { isWildlifeBehaviorModelReview } from "./WildlifeBehaviorModelReview.js";
 
 const FARM_MODEL_CASES = new Set([
   "behavior-chicken",
@@ -37,14 +38,6 @@ export function isFourStateFaunaModelReview(type: string, caseId: string): boole
 
 export function isPackMountModelReview(type: string, caseId: string): boolean {
   return (caseId === "camel" || caseId === "mule") && faunaProfile(type)?.species === caseId;
-}
-
-export function isCatModelReview(type: string, caseId: string): boolean {
-  const animal = faunaProfile(type);
-  return (
-    (animal?.species === "cat" || animal?.variantOf === "cat") &&
-    caseId === `behavior-${animal.species}`
-  );
 }
 
 /** The editor setup mirrors each animal's existing feeding scenario. */
@@ -95,7 +88,7 @@ export function wildlifeModelReviewRecipe(
 ): ScenarioRecipe | undefined {
   const id = `wildlife-model-review-${type}`;
   if (classicTravel) return classicModelStage(id, type, classicTravel);
-  if (isFarmModelReviewCase(caseId) || isCatModelReview(type, caseId))
+  if (isFarmModelReviewCase(caseId) || isWildlifeBehaviorModelReview(type, caseId))
     return naturalLandscapeRecipe(caseId, "balanced");
   if (wildlifeFeedingReview(type, caseId))
     return type === DEER_TYPE

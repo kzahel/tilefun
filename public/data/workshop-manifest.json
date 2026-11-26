@@ -970,6 +970,12 @@
       "toolId": "animal-browser"
     },
     {
+      "id": "wildlife-3d-working-and-display-birds-v1",
+      "name": "3D wildlife · working and display birds v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
       "id": "motion",
       "name": "Furniture movement sets",
       "description": "Default layouts and physics. Custom layouts remain individually reviewable in the tool.",
@@ -62293,7 +62299,175 @@
           "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-wild-turkey-forest-birds-v1"
         }
       }
+    },
+    {
+      "id": "pattern:wildlife-3d-crow-working-and-display-birds-v1",
+      "batchId": "wildlife-3d-working-and-display-birds-v1",
+      "kind": "wildlife",
+      "name": "Carrion crow",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-crow-working-and-display-birds-v1",
+      "fingerprint": "8dc0d4ed0726bd6b4bce870a7a9ed2f6f0f36bb1427e0fbe4fc1684cb09d5367",
+      "sourceFingerprint": "658d552edb1bc1655df9da217304dfe4a48a027b1b298cdff958daabb08e2967",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-crow-working-and-display-birds-v1",
+        "prefabIds": [],
+        "revision": "38bec869ca013474ae775f4345c13cb511c444fb07ba9a74b973a79e526091af",
+        "renderFingerprint": "8dc0d4ed0726bd6b4bce870a7a9ed2f6f0f36bb1427e0fbe4fc1684cb09d5367",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-crow-working-and-display-birds-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-crow-working-and-display-birds-v1",
+        "fingerprint": "658d552edb1bc1655df9da217304dfe4a48a027b1b298cdff958daabb08e2967",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-crow-working-and-display-birds-v1",
+          "prefabIds": [],
+          "revision": "38bec869ca013474ae775f4345c13cb511c444fb07ba9a74b973a79e526091af",
+          "renderFingerprint": "8dc0d4ed0726bd6b4bce870a7a9ed2f6f0f36bb1427e0fbe4fc1684cb09d5367",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-crow-working-and-display-birds-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-raven-working-and-display-birds-v1",
+      "batchId": "wildlife-3d-working-and-display-birds-v1",
+      "kind": "wildlife",
+      "name": "Raven",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-raven-working-and-display-birds-v1",
+      "fingerprint": "66c6669c9b03e101483dd5987de41efa2fd7e45a3caf32d7193b7a22bad88ec3",
+      "sourceFingerprint": "be7c469a2509fdce58a423be5f585ec6f26f344d4a3a4ddc8504c6f78102c164",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-raven-working-and-display-birds-v1",
+        "prefabIds": [],
+        "revision": "300a7c28d0bb7b22cf7c94d3a5f7bba8947d30c6688f4d9a648a7f66409b0da5",
+        "renderFingerprint": "66c6669c9b03e101483dd5987de41efa2fd7e45a3caf32d7193b7a22bad88ec3",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-raven-working-and-display-birds-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-raven-working-and-display-birds-v1",
+        "fingerprint": "be7c469a2509fdce58a423be5f585ec6f26f344d4a3a4ddc8504c6f78102c164",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-raven-working-and-display-birds-v1",
+          "prefabIds": [],
+          "revision": "300a7c28d0bb7b22cf7c94d3a5f7bba8947d30c6688f4d9a648a7f66409b0da5",
+          "renderFingerprint": "66c6669c9b03e101483dd5987de41efa2fd7e45a3caf32d7193b7a22bad88ec3",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-raven-working-and-display-birds-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-hummingbird-working-and-display-birds-v1",
+      "batchId": "wildlife-3d-working-and-display-birds-v1",
+      "kind": "wildlife",
+      "name": "Ruby-throated hummingbird",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-hummingbird-working-and-display-birds-v1",
+      "fingerprint": "525a7bb1610096c57cc5f11280acbbfbd2604fe4f3f505177b41f576c526e4a0",
+      "sourceFingerprint": "a3dfdbac6d777684b5e0cf697580cf174834f1d417577f28e03c39b805bd2029",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-hummingbird-working-and-display-birds-v1",
+        "prefabIds": [],
+        "revision": "a5af6774d33d0f59c08bcb4e2e20f2cc67846be50a3227fa302a64f389d1759f",
+        "renderFingerprint": "525a7bb1610096c57cc5f11280acbbfbd2604fe4f3f505177b41f576c526e4a0",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-hummingbird-working-and-display-birds-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-hummingbird-working-and-display-birds-v1",
+        "fingerprint": "a3dfdbac6d777684b5e0cf697580cf174834f1d417577f28e03c39b805bd2029",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-hummingbird-working-and-display-birds-v1",
+          "prefabIds": [],
+          "revision": "a5af6774d33d0f59c08bcb4e2e20f2cc67846be50a3227fa302a64f389d1759f",
+          "renderFingerprint": "525a7bb1610096c57cc5f11280acbbfbd2604fe4f3f505177b41f576c526e4a0",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-hummingbird-working-and-display-birds-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-peacock-working-and-display-birds-v1",
+      "batchId": "wildlife-3d-working-and-display-birds-v1",
+      "kind": "wildlife",
+      "name": "Peacock",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-peacock-working-and-display-birds-v1",
+      "fingerprint": "54031608a680ab7c6b99337602f97362b5a77c651140d55a7ab7723d35c9eb16",
+      "sourceFingerprint": "36e84eb5f8aa580f0a615d47734a7b884579cb11092ff5944a6596c21191c40f",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-peacock-working-and-display-birds-v1",
+        "prefabIds": [],
+        "revision": "a90925055d2313eddfebc13f2798c1d2918264bce90bbd3b35f65164ca41fcf2",
+        "renderFingerprint": "54031608a680ab7c6b99337602f97362b5a77c651140d55a7ab7723d35c9eb16",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-peacock-working-and-display-birds-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-peacock-working-and-display-birds-v1",
+        "fingerprint": "36e84eb5f8aa580f0a615d47734a7b884579cb11092ff5944a6596c21191c40f",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-peacock-working-and-display-birds-v1",
+          "prefabIds": [],
+          "revision": "a90925055d2313eddfebc13f2798c1d2918264bce90bbd3b35f65164ca41fcf2",
+          "renderFingerprint": "54031608a680ab7c6b99337602f97362b5a77c651140d55a7ab7723d35c9eb16",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-peacock-working-and-display-birds-v1"
+        }
+      }
     }
   ],
-  "inputDigest": "0b537939b4e2f52987e195cfd4be90647d907838aeadcdfb3ab14eaea22b24fe"
+  "inputDigest": "01b4b5f3bf3d3a8ee851c6a6ff0736e8da4780a169b8303f9b93f51641a55a74"
 }

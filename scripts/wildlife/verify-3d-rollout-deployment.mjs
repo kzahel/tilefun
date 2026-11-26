@@ -7,7 +7,10 @@ import { TILE_SIZE } from "../../src/config/constants.ts";
 import { ENTITY_DEFS } from "../../src/entities/EntityDefs.ts";
 import { createDescriptor } from "../../src/generation/GenerationDescriptor.ts";
 import {
+  isBirdWorkModelReviewCase,
   isCatModelReview,
+} from "../../src/scenarios/WildlifeBehaviorModelReview.ts";
+import {
   isFarmModelReviewCase,
   isFourStateFaunaModelReview,
   isPackMountModelReview,
@@ -16,6 +19,7 @@ import {
 } from "../../src/scenarios/WildlifeModelReviewRecipe.ts";
 import { DEER_TYPE } from "../../src/wildlife/Deer.ts";
 import { faunaProfile } from "../../src/wildlife/Fauna.ts";
+import { forageType } from "../../src/wildlife/ForageResources.ts";
 import { predatorProfile } from "../../src/wildlife/Predator.ts";
 import {
   WILDLIFE_DEFAULT_MODELS,
@@ -114,6 +118,7 @@ try {
       const waterStage = ["deep", "pond", "shore"].includes(habitat);
       const farmStage = !candidate.classicTravel && isFarmModelReviewCase(candidate.lab);
       const catStage = isCatModelReview(candidate.type, candidate.lab);
+      const birdWorkStage = isBirdWorkModelReviewCase(candidate.lab);
       const fourStateStage = isFourStateFaunaModelReview(candidate.type, candidate.lab);
       const packStage = isPackMountModelReview(candidate.type, candidate.lab);
       const feeding = wildlifeFeedingReview(candidate.type, candidate.lab);
@@ -124,21 +129,24 @@ try {
         waterStage ||
         farmStage ||
         catStage ||
+        birdWorkStage ||
         fourStateStage ||
         packStage ||
         feeding ||
         candidate.type === "wildlife-robin-v1";
-      const contactClips = hunterStage
-        ? ["display"]
-        : waterStage
-          ? ["flee", "flee-swim"]
-          : farmStage || packStage
-            ? ["flee", "ride", "ride-sprint"]
-            : doeStage
-              ? ["stamp", "flee"]
-              : fourStateStage || catStage || feeding
-                ? ["flee"]
-                : [];
+      const contactClips = birdWorkStage
+        ? ["action", "flee"]
+        : hunterStage
+          ? ["display"]
+          : waterStage
+            ? ["flee", "flee-swim"]
+            : farmStage || packStage
+              ? ["flee", "ride", "ride-sprint"]
+              : doeStage
+                ? ["stamp", "flee"]
+                : fourStateStage || catStage || feeding
+                  ? ["flee"]
+                  : [];
       const naturalClips = observeAllStates
         ? states.flatMap(({ name }, index) =>
             contactClips.includes(name) || (catStage && name === "action") ? [] : [index],
@@ -206,27 +214,28 @@ try {
           fetch: dogFetch,
           feeding: !!feeding,
           naturalClips,
-          timeout: catStage
-            ? 100_000
-            : feeding || farmStage
-              ? 58_000
-              : naturalClips.length
-                ? 36_000
-                : dogFetch
-                  ? 30_000
-                  : 14_000,
+          timeout:
+            catStage || birdWorkStage
+              ? 100_000
+              : feeding || farmStage
+                ? 58_000
+                : naturalClips.length
+                  ? 36_000
+                  : dogFetch
+                    ? 30_000
+                    : 14_000,
         },
       );
       const switchModels = page.getByRole("checkbox", { name: "3D animals", exact: true });
       const approachStates = doeStage
         ? await verifyDoeApproach(page, candidate, states)
-        : catStage
-          ? await verifyCatLabStartle(page, stage, candidate, states)
+        : catStage || birdWorkStage
+          ? await verifyStartleInFreshStage(page, stage, candidate, states)
           : farmStage || fourStateStage || packStage || feeding
             ? await verifyApproachClips(page, stage, candidate, states)
             : [];
       const landingStates =
-        farmStage || fourStateStage || catStage || packStage || feeding
+        farmStage || fourStateStage || catStage || birdWorkStage || packStage || feeding
           ? []
           : await verifyLandingClips(page, candidate, states);
       for (const clip of [...landingStates, ...approachStates])
@@ -248,9 +257,10 @@ try {
       if (fourStateStage && faunaProfile(candidate.type)?.hop)
         assert(poses.maxZ > 2, `No physical hop observed for ${candidate.type}`);
       const game = await verifyGameEntry(page, candidate, preview, {
-        verifyFaunaStates: fourStateStage || packStage || !!feeding,
+        verifyFaunaStates: fourStateStage || packStage || birdWorkStage || !!feeding,
         catStage,
         dogFetch,
+        workPlacements: birdWorkStage ? birdWorkPlacements(candidate) : [],
         packStage,
         approachClips: contactClips,
         states,
@@ -308,7 +318,7 @@ try {
   await browser.close();
 }
 
-async function verifyCatLabStartle(page, stage, candidate, states) {
+async function verifyStartleInFreshStage(page, stage, candidate, states) {
   await page.getByRole("button", { name: "Reset scene", exact: true }).click();
   const species = faunaProfile(candidate.type).species;
   const { wx, wy } = wildlifeModelReviewRecipe(candidate.type, candidate.lab).actors[0].position;
@@ -336,6 +346,17 @@ async function verifyCatLabStartle(page, stage, candidate, states) {
     ),
   );
   return [action, flee];
+}
+
+function birdWorkPlacements(candidate) {
+  const recipe = wildlifeModelReviewRecipe(candidate.type, candidate.lab);
+  const [bird, ...related] = recipe.actors;
+  const companions = related.map((actor) => ({ type: actor.type, ...actor.position }));
+  return [...(recipe.nativeProps ?? []), ...companions].map(({ type, wx, wy }) => ({
+    type,
+    dx: wx - bird.position.wx,
+    dy: wy - bird.position.wy,
+  }));
 }
 
 async function verifyApproachClips(page, stage, candidate, states) {
@@ -465,8 +486,16 @@ async function waitForAnimalClip(page, expected, timeout) {
 }
 
 async function verifyGameEntry(page, candidate, preview, options) {
-  const { verifyFaunaStates, catStage, dogFetch, packStage, approachClips, states, feeding } =
-    options;
+  const {
+    verifyFaunaStates,
+    catStage,
+    dogFetch,
+    workPlacements,
+    packStage,
+    approachClips,
+    states,
+    feeding,
+  } = options;
   await page.evaluate(() => localStorage.removeItem("tilefun-3d-animals"));
   const generation = createDescriptor("flat", 1);
   const arrival = { x: 4, y: 4, generation };
@@ -479,13 +508,20 @@ async function verifyGameEntry(page, candidate, preview, options) {
   await page.getByRole("button", { name: "New World", exact: true }).click({ timeout: 45_000 });
   await gameReady(page);
   await page.evaluate(
-    ({ type, distantPlacement, catStage, feeding }) => {
+    ({ type, distantPlacement, catStage, workPlacements, feeding }) => {
       const game = document.querySelector("#game").__game;
       const position = game.stateView.playerEntity.position;
       game.transport.send({ type: "set-editor-mode", enabled: true });
       const wx = position.wx + (distantPlacement ? 116 : 20);
       const wy = position.wy + 28;
       game.transport.send({ type: "edit-spawn", entityType: type, wx, wy });
+      for (const placement of workPlacements)
+        game.transport.send({
+          type: "edit-spawn",
+          entityType: placement.type,
+          wx: wx + placement.dx,
+          wy: wy + placement.dy,
+        });
       if (catStage)
         game.transport.send({ type: "edit-spawn", entityType: "prop-oak-tree", wx, wy: wy - 57 });
       if (feeding) {
@@ -500,6 +536,7 @@ async function verifyGameEntry(page, candidate, preview, options) {
       type: candidate.type,
       distantPlacement: verifyFaunaStates || catStage || dogFetch,
       catStage,
+      workPlacements,
       feeding,
     },
   );
@@ -589,6 +626,9 @@ async function verifyPetToyInGame(page, expected, clips, firstToyState) {
       let nextTarget = 0;
       let thrownAt;
       let returned = false;
+      let previousState;
+      let bats = 0;
+      let lastBatAt = 0;
       const end = performance.now() + 120_000;
       try {
         while (performance.now() < end) {
@@ -599,6 +639,13 @@ async function verifyPetToyInGame(page, expected, clips, firstToyState) {
             if (name !== "action" || actor.wanderAI?.state !== "scared") observed.add(name);
             if (observed.size === names.length) break;
             const now = performance.now();
+            if (name === "bat" && previousState !== "bat") {
+              bats++;
+              lastBatAt = now;
+            }
+            previousState = name;
+            const needsAnotherToy =
+              firstToyState === "stalk" && bats < 3 && now - lastBatAt > 12_000;
             if (!observed.has("flee")) {
               if (
                 now >= nextTarget &&
@@ -612,7 +659,7 @@ async function verifyPetToyInGame(page, expected, clips, firstToyState) {
               returned = true;
             } else if (
               thrownAt === undefined ||
-              (!observed.has(firstToyState) && now - thrownAt > 8_000)
+              ((!observed.has(firstToyState) || needsAnotherToy) && now - thrownAt > 10_000)
             ) {
               const ox = origin.wx - player.position.wx;
               const oy = origin.wy - player.position.wy;
@@ -654,13 +701,16 @@ async function verifyPetToyInGame(page, expected, clips, firstToyState) {
 
 async function verifyFaunaStatesInGame(page, expected, clips, approachClips, rideClips, feeding) {
   const passive = clips.flatMap(({ name }, index) => (approachClips.includes(name) ? [] : [index]));
-  const action = clips.findIndex(({ name }) => name === "action");
+  const action = approachClips.includes("action")
+    ? -1
+    : clips.findIndex(({ name }) => name === "action");
   const states = await page.evaluate(
-    async ({ type, sheetKey, passive, action, total, timeout }) => {
+    async ({ type, sheetKey, passive, action, total, timeout, clearForageType }) => {
       const game = document.querySelector("#game").__game;
       game.playInput.setMovementMode("tap");
       const observed = new Set();
       let nextTarget = 0;
+      let clearedForage = false;
       const end = performance.now() + timeout;
       try {
         while (performance.now() < end) {
@@ -671,8 +721,21 @@ async function verifyFaunaStatesInGame(page, expected, clips, approachClips, rid
             if (observed.size === total) break;
             // Wait for the animal's voluntary action before approaching it.
             if (passive.every((index) => observed.has(index))) {
+              if (clearForageType && !clearedForage) {
+                for (const item of game.stateView.entities)
+                  if (item.type === clearForageType && item.parentId === undefined)
+                    game.transport.send({ type: "edit-delete-entity", entityId: item.id });
+                // The crow can remain above the escape path on its nest support.
+                for (const prop of game.stateView.props)
+                  if (prop.type === "prop-oak-tree")
+                    game.transport.send({ type: "edit-delete-prop", propId: prop.id });
+                clearedForage = true;
+              }
               if (actor.wanderAI?.state === "scared") game.tapMovement.cancel();
-              else if (performance.now() >= nextTarget) {
+              else if (
+                performance.now() >= nextTarget &&
+                (!clearForageType || (actor.wz ?? 0) < 1)
+              ) {
                 game.tapMovement.setTarget({ ...actor.position, wz: 0 });
                 nextTarget = performance.now() + 350;
               }
@@ -690,7 +753,9 @@ async function verifyFaunaStatesInGame(page, expected, clips, approachClips, rid
       passive,
       action,
       total: clips.length - rideClips.length,
-      timeout: feeding ? 65_000 : 38_000,
+      timeout: feeding || approachClips.includes("action") ? 65_000 : 38_000,
+      clearForageType:
+        faunaProfile(expected.type)?.species === "crow" ? forageType("twig") : undefined,
     },
   );
   assert.deepEqual(

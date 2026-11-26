@@ -9626,6 +9626,46 @@
       "source": "demos/wildlife-3d/wild-turkey-forest-birds-v1/model.blend"
     },
     {
+      "id": "wildlife-3d-crow-working-and-display-birds-v1",
+      "name": "wildlife 3d crow working and display birds v1",
+      "image": "demos/wildlife-3d/crow-working-and-display-birds-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "658d552edb1bc1655df9da217304dfe4a48a027b1b298cdff958daabb08e2967",
+      "source": "demos/wildlife-3d/crow-working-and-display-birds-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-raven-working-and-display-birds-v1",
+      "name": "wildlife 3d raven working and display birds v1",
+      "image": "demos/wildlife-3d/raven-working-and-display-birds-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "be7c469a2509fdce58a423be5f585ec6f26f344d4a3a4ddc8504c6f78102c164",
+      "source": "demos/wildlife-3d/raven-working-and-display-birds-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-hummingbird-working-and-display-birds-v1",
+      "name": "wildlife 3d hummingbird working and display birds v1",
+      "image": "demos/wildlife-3d/hummingbird-working-and-display-birds-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "a3dfdbac6d777684b5e0cf697580cf174834f1d417577f28e03c39b805bd2029",
+      "source": "demos/wildlife-3d/hummingbird-working-and-display-birds-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-peacock-working-and-display-birds-v1",
+      "name": "wildlife 3d peacock working and display birds v1",
+      "image": "demos/wildlife-3d/peacock-working-and-display-birds-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "36e84eb5f8aa580f0a615d47734a7b884579cb11092ff5944a6596c21191c40f",
+      "source": "demos/wildlife-3d/peacock-working-and-display-birds-v1/model.blend"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",
@@ -12085,7 +12125,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:58"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:51"
         },
         {
           "system": "Gameplay",
@@ -12227,7 +12267,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:56"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:49"
         },
         {
           "system": "Gameplay",
@@ -37363,7 +37403,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:64"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:57"
         },
         {
           "system": "Editor",
@@ -39405,7 +39445,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:58"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:51"
         },
         {
           "system": "Gameplay",
@@ -39551,7 +39591,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:56"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:49"
         },
         {
           "system": "Gameplay",

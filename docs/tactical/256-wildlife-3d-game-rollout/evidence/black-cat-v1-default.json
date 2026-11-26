@@ -1,0 +1,49 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "9b195284b43303011baba5d67972984e8763e31f",
+  "workshopInputDigest": "c0410bca01ff983d9798e57f67b2601094db2404ee827d8ef50c216fcf9a6106",
+  "results": [
+    {
+      "type": "wildlife-cat-black-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "d102bfc5e671af200bbd990ab695c27e523b2ebf06b7b36060adc9bdae088bbe",
+      "modelSha256": "f94b81425e877e5aa0a7effa59b14f939857e356ac7b94df96efc5c3397199ed",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-behavior-cat-black&wildlife3dStage=cat-black-pets-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "stalk",
+        "pounce",
+        "bat",
+        "climb",
+        "sit"
+      ],
+      "heightRange": [
+        -0.07526879500891748,
+        33.9131965637207
+      ],
+      "statesOnApproachOrMount": [
+        "action",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "action",
+          "bat",
+          "climb",
+          "flee",
+          "idle",
+          "pounce",
+          "sit",
+          "stalk",
+          "walk"
+        ]
+      }
+    }
+  ]
+}
