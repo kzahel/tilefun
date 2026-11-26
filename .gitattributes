@@ -187,3 +187,5 @@ scripts/wildlife/register-finishing.mjs -text whitespace=blank-at-eol,blank-at-e
 # Character-study fingerprints include the exact viewer and its upstream Three.js shaders.
 public/demos/classic-player-3d/** -text
 public/demos/classic-player-3d/**/index.html -whitespace
+public/demos/town-people-3d/** -text
+public/demos/town-people-3d/**/index.html -whitespace

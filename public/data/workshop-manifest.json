@@ -247,6 +247,13 @@
       "mode": "adapter"
     },
     {
+      "id": "town-people-3d",
+      "name": "3D town pedestrians",
+      "description": "Inspect three standing town pedestrians and their walking animations beside the source sprites.",
+      "url": "demos/town-people-3d/v1/index.html",
+      "mode": "link"
+    },
+    {
       "id": "classic-player-3d",
       "name": "3D Classic Player",
       "description": "Orbit the standing cream cat and compare its idle and walking poses with the original sprite.",
@@ -262,6 +269,12 @@
     }
   ],
   "batches": [
+    {
+      "id": "town-people-3d",
+      "name": "3D town pedestrians",
+      "description": "Standing character studies from the town pedestrian roster.",
+      "toolId": "town-people-3d"
+    },
     {
       "id": "classic-player-3d",
       "name": "3D Classic Player",
@@ -66018,7 +66031,37 @@
       "url": "/tilefun/demos/classic-player-3d/v1/index.html",
       "sourceFingerprint": "dda41fa03aca9b432c6bc55f23ad1a80c326529256c08d3585ca788a8a89accb",
       "fingerprint": "26ceae4b73b411e9858afa891a316cb1bb1034f9860065b2c4c5b4ebaeb38a4f"
+    },
+    {
+      "id": "projection:town-person4-standing-v1",
+      "batchId": "town-people-3d",
+      "name": "Person 4 · standing pedestrian",
+      "prompt": "Compare the model with its town sprite, then inspect the walk from the side and back.",
+      "kind": "projection",
+      "url": "/tilefun/demos/town-people-3d/v1/index.html?person=4",
+      "sourceFingerprint": "83f8528628ab393174a02919661c5b1b2b9da2a7dedfc0755800060c5d1148c4",
+      "fingerprint": "65886741464cf0590473e069870fa6a0fb2d6bb228ae254b28d4d6076fb5251d"
+    },
+    {
+      "id": "projection:town-person10-standing-v1",
+      "batchId": "town-people-3d",
+      "name": "Person 10 · standing pedestrian",
+      "prompt": "Compare the model with its town sprite, then inspect the walk from the side and back.",
+      "kind": "projection",
+      "url": "/tilefun/demos/town-people-3d/v1/index.html?person=10",
+      "sourceFingerprint": "6e8107b75e284af164d3d47ab6e2c785b43b243ca6697748563b2c3e1705b6cc",
+      "fingerprint": "41f79a061ef67594e28cc85a14f5ea2edaa453d2e946b1044f9b12fb5faf99d9"
+    },
+    {
+      "id": "projection:town-person20-standing-v1",
+      "batchId": "town-people-3d",
+      "name": "Person 20 · standing pedestrian",
+      "prompt": "Compare the model with its town sprite, then inspect the walk from the side and back.",
+      "kind": "projection",
+      "url": "/tilefun/demos/town-people-3d/v1/index.html?person=20",
+      "sourceFingerprint": "53cae7b0cbff02a86afff976d7dc763d655743a344bfe8d511a1ab1d70389947",
+      "fingerprint": "3fa16e7e77803dfef5ac25f25935cafb37efd05f19f3d1ed7e288b30ccdc8d67"
     }
   ],
-  "inputDigest": "12421da4240963dacfa1de32efef73962813449318366739dbbeb2e4d3212af8"
+  "inputDigest": "f786019d22f97f046d83ecb619e0f17a13c4512b9c20972238030fd0c1d108a6"
 }

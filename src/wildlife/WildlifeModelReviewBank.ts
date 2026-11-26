@@ -18,11 +18,17 @@ export interface WildlifeModelReview {
 export const WILDLIFE_MODEL_REVIEWS: readonly WildlifeModelReview[] = reviews;
 
 const reviewsById = new Map(WILDLIFE_MODEL_REVIEWS.map((review) => [review.id, review]));
-export const WILDLIFE_DEFAULT_MODELS = Object.entries(defaultModels).map(([type, id]) => {
+const defaultsByType = new Map<string, WildlifeModelReview>();
+for (const [type, id] of Object.entries(defaultModels)) {
   const review = reviewsById.get(id);
   if (review?.type !== type) throw new Error(`Invalid default wildlife model: ${type} (${id})`);
-  return review;
-});
+  defaultsByType.set(type, review);
+}
+// An existing pin selects the revision. A newly registered species starts in 3D.
+for (const review of WILDLIFE_MODEL_REVIEWS) {
+  if (!defaultsByType.has(review.type)) defaultsByType.set(review.type, review);
+}
+export const WILDLIFE_DEFAULT_MODELS = [...defaultsByType.values()];
 
 export const WILDLIFE_MODEL_REVIEW_PREFIX = "pattern:wildlife-3d-";
 

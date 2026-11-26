@@ -8,6 +8,7 @@ import type { Camera } from "./Camera.js";
 import { interpolatePosition, interpolateWz } from "./EntityInterpolation.js";
 import { appendGrassBladeItems, GrassFrameBuffer, grassOpacity } from "./GrassBladeRenderer.js";
 import type { ParticlePresentation } from "./ParticleSystem.js";
+import type { PedestrianGait } from "./PedestrianGait.js";
 import type { SceneFrame } from "./SceneFrame.js";
 import type { SceneItem, SpriteItem } from "./SceneItem.js";
 import type { ReceiverOptions, SurfaceReceivers } from "./SurfaceReceivers.js";
@@ -130,6 +131,7 @@ export interface WorldSpriteInput {
   readonly grassVehicles?: SpriteItem[] | undefined;
   /** Screen pixels per world pixel: bodies placed on the view's pixel grid. */
   readonly pixelGrid?: number | undefined;
+  readonly pedestrianGait?: PedestrianGait | undefined;
 }
 
 /**
@@ -156,6 +158,7 @@ export function collectWorldSprites(input: WorldSpriteInput): void {
     items: input.items,
     grassVehicles: input.grassVehicles,
     pixelGrid: input.pixelGrid,
+    pedestrianGait: input.pedestrianGait,
   });
 }
 

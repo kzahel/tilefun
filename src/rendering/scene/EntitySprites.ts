@@ -35,12 +35,14 @@ import {
 import { ovalShadow, vehicleShadow } from "../GpuShadowShape.js";
 import { heldItemSprite } from "../HandPose.js";
 import { vehicleMeshRadius, yawOrientation } from "../MeshPresentation.js";
+import type { PedestrianGait } from "../PedestrianGait.js";
 import { onPixelGrid } from "../PixelGrid.js";
 import type { PropDepthIndex } from "../PropDepthIndex.js";
 import { propDepthLookup } from "../PropDepthIndex.js";
 import { depthAboveProps, type PropDepthSurface, propDepthSurfaces } from "../propDepth.js";
 import type { SceneFrame } from "../SceneFrame.js";
 import type { SceneItem, SpriteItem } from "../SceneItem.js";
+import { STANDING_CHARACTER_MODELS } from "../StandingCharacterModels.js";
 import { surfaceShadowZ } from "../SurfacePresentation.js";
 import type { SurfaceReceivers } from "../SurfaceReceivers.js";
 import type { TerrainPresentation } from "../TerrainPresentation.js";
@@ -85,6 +87,7 @@ export interface EntityStage {
   /** Screen pixels per world pixel when a view places every body on its pixel
    * grid (the 3D top-down view, `PixelGrid`); absent keeps sub-pixel positions. */
   readonly pixelGrid?: number | undefined;
+  readonly pedestrianGait?: PedestrianGait | undefined;
 }
 
 /** Lookups built once per collection. Each map keeps the first matching entity
@@ -259,8 +262,14 @@ function collectEntity(pass: EntityPass, e: SpriteEntity): SpriteItem | undefine
   if (e.type === GREENS || e.type === GROWING_PLANT) spriteItem.depthWy = pos.wy + 4;
   if (facingRows(e)) spriteItem.facing = e.sprite.direction;
   const wildlifeAnimation = WILDLIFE_MESHES.get(e.sprite.sheetKey)?.animation;
-  if (e.type === "player" && (!e.playerModel || e.playerModel === "player")) {
-    spriteItem.playerPose = {
+  const standing = STANDING_CHARACTER_MODELS.get(e.sprite.sheetKey);
+  if (standing && e.playerModel !== "player-classic-2d") {
+    const walkPhase =
+      standing.stride &&
+      pass.pedestrianGait?.sample(e.id, shown, poseTime, e.sprite.moving, standing.stride);
+    spriteItem.characterPose = {
+      isPlayer: e.type === "player",
+      walkPhase,
       clip: e.sprite.moving ? 1 : 0,
       direction: e.sprite.direction,
       frameTimeMs: e.sprite.animTimer,

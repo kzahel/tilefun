@@ -24,15 +24,11 @@ explicit sprite setting. Editor previews request their own sheets as needed.
 The owner authorized default models for every animal with a distinct 3D
 action for each gameplay animation. The same committed GLBs serve normal play
 and Workshop. At load, a missing, empty or reused action rejects the model.
-The current bank covers 113 animals and 515 state
-bindings, including both cows, the skinned rabbit, the frog and the mallard.
-The other 106 campaign animals remain on sprites. Farm-only rooster and chick
-forms also use sprites. Workshop reviews are available for feedback.
-
-The default catalog pins those 113 exact model IDs. New playable candidates
-use exact preview links while Workshop reviews are open. Promotion records a
-human decision for the matching candidate fingerprint and state evidence,
-then selects those same GLB bytes for ordinary play.
+The default bank now covers all 219 registered animal types. It pins one model
+revision per type. A newly registered species uses its first gameplay model automatically. [Release evidence](../tactical/256-wildlife-3d-game-rollout.md)
+records the rollout. New gameplay assets use their available 3D model by default.
+The [standing character catalog](../../src/rendering/StandingCharacterModels.ts)
+applies that rule to NPCs and player appearances.
 
 ## Original 3D rabbit experiment (2026-11-18)
 

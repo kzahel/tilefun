@@ -34,6 +34,12 @@ policy to the existing host view. It frames the projected poses of two to four
 local seats using the same scene as solo play, and reports its visible chunk
 range for the party. Split screen retains one view per seat.
 
+Gameplay uses the available 3D model by default for each asset. New standing
+appearances are registered once by sprite identity for NPCs and player skins.
+Explicit sprite choices, including Classic 2D and the animal preference, take
+precedence. Top-down vehicle body images are drawn from the active posed 3D model.
+[Characters](characters.md) covers pedestrian sizing and distance-driven walk cycles.
+
 ## Decision
 
 Owner, 2026-11-14: unify the renderers, accepting that it takes time. WebXR is

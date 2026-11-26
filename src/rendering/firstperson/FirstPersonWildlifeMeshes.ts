@@ -1,9 +1,10 @@
 import * as THREE from "three";
 import { Direction } from "../../entities/Entity.js";
 import type { SpriteItem } from "../SceneItem.js";
+import { STANDING_CHARACTER_MODELS } from "../StandingCharacterModels.js";
 import { WILDLIFE_MESHES, type WildlifeMeshDefinition } from "../WildlifeMeshCatalog.js";
-import { CLASSIC_PLAYER_MESH } from "./ClassicPlayerMesh.js";
 import { SkinnedWildlifeBatch } from "./SkinnedWildlifeBatch.js";
+import { prepareStandingCharacter } from "./StandingCharacterMaterial.js";
 
 const INITIAL_INSTANCE_CAPACITY = 8;
 const CACHED_MODELS = 48;
@@ -200,7 +201,7 @@ class WildlifeMeshBatch {
       this.source = scene;
     } catch (error) {
       this.disposeSkinResources();
-      console.warn(`3D animal could not load: ${this.definition.path}`, error);
+      console.warn(`3D model could not load: ${this.definition.path}`, error);
     } finally {
       this.loading = false;
     }
@@ -235,7 +236,7 @@ class WildlifeMeshBatch {
 export class FirstPersonWildlifeMeshes {
   selected = 0;
   playersDrawn = 0;
-  private playerBatch: WildlifeMeshBatch | undefined;
+
   private readonly batches = new Map<string, WildlifeMeshBatch>();
   private enabled = true;
   private topDown = false;
@@ -253,7 +254,6 @@ export class FirstPersonWildlifeMeshes {
   begin(enabled: boolean, topDown: boolean): void {
     this.enabled = enabled;
     this.topDown = topDown;
-    this.playerBatch?.begin();
     this.playersDrawn = 0;
     this.selected = 0;
     this.count = 0;
@@ -270,37 +270,32 @@ export class FirstPersonWildlifeMeshes {
     if (item.scaleY !== undefined || (item.alpha !== undefined && item.alpha !== 1))
       return "sprite";
 
-    if (item.playerPose) {
-      this.playerBatch ??= new WildlifeMeshBatch(
-        this.root,
-        this.shade,
-        CLASSIC_PLAYER_MESH,
-        this.cast,
-      );
-      if (!this.playerBatch.push(item, this.topDown)) return "sprite";
-      this.playersDrawn++;
-      return "drawn";
-    }
-    if (!this.enabled) return "sprite";
-    const definition = WILDLIFE_MESHES.get(item.sheetKey);
+    const character = item.characterPose && STANDING_CHARACTER_MODELS.get(item.sheetKey);
+    const definition = character ?? (this.enabled ? WILDLIFE_MESHES.get(item.sheetKey) : undefined);
     if (!definition) return "sprite";
-    this.selected++;
+    if (!character) this.selected++;
+    const fallback = character ? "sprite" : "unavailable";
     let batch = this.batches.get(item.sheetKey);
     if (!batch) {
-      if (this.loading >= MAX_MODEL_LOADS) return "unavailable";
-      batch = new WildlifeMeshBatch(this.root, this.shade, definition, this.cast);
+      if (this.loading >= MAX_MODEL_LOADS) return fallback;
+      batch = new WildlifeMeshBatch(
+        this.root,
+        this.shade,
+        character ? { ...character, prepare: prepareStandingCharacter } : definition,
+        this.cast,
+      );
       this.batches.set(item.sheetKey, batch);
       this.loading++;
     }
     batch.lastWantedFrame = this.frame;
-    if (!batch.push(item, this.topDown)) return "unavailable";
+    if (!batch.push(item, this.topDown)) return fallback;
     batch.lastDrawnFrame = this.frame;
-    this.count++;
+    if (item.characterPose?.isPlayer) this.playersDrawn++;
+    if (!character) this.count++;
     return "drawn";
   }
 
   end(): number {
-    this.playerBatch?.end();
     for (const batch of this.batches.values()) batch.end();
     if (this.batches.size > CACHED_MODELS) this.trimCache();
     return this.count;
@@ -323,7 +318,6 @@ export class FirstPersonWildlifeMeshes {
   }
 
   dispose(): void {
-    this.playerBatch?.dispose();
     for (const batch of this.batches.values()) batch.dispose();
     this.batches.clear();
   }

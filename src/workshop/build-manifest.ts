@@ -10,7 +10,11 @@ import {
   buildAuthoredVehicleCandidates,
   buildCarProjectionCandidate,
 } from "./CarProjectionCandidate.js";
-import { buildCharacterCandidates, buildClassicPlayerStudy } from "./CharacterCandidates.js";
+import {
+  buildCharacterCandidates,
+  buildClassicPlayerStudy,
+  buildTownPeopleStudies,
+} from "./CharacterCandidates.js";
 import { DOOR_CASES } from "./DoorCandidates.js";
 import { buildFamilySheetCandidates } from "./FamilySheetCandidates.js";
 import { buildInteriorCandidates, INTERIOR_BATCHES } from "./InteriorCandidates.js";
@@ -126,6 +130,7 @@ try {
     async () => buildVehicleCandidates(await loadVerifiedArtImage(source)),
     () => buildWildlifeModelCandidates(),
     () => buildClassicPlayerStudy(catalog),
+    () => buildTownPeopleStudies(catalog),
   ];
   const candidates: WorkshopCandidate[] = [];
   for (const step of steps) candidates.push(...[await step()].flat());

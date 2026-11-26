@@ -2,6 +2,7 @@ import { CHUNK_SIZE_PX } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import { Camera } from "../rendering/Camera.js";
 import type { FirstPersonLook } from "../rendering/firstperson/FirstPersonCamera.js";
+import { PedestrianGait } from "../rendering/PedestrianGait.js";
 import { beginPlayerPresentation, followPlayer } from "../rendering/PlayerPresentation.js";
 import type { SurfaceFades } from "../rendering/SceneFrame.js";
 import type { RenderRegion } from "../rendering/ViewLayout.js";
@@ -138,6 +139,7 @@ export function fixedCamera(
  * presentation (slab fades).
  */
 export class View {
+  readonly pedestrianGait = new PedestrianGait();
   /** One top-down view for the entire local party. */
   sharedScreen = false;
   region: RenderRegion = { x: 0, y: 0, width: 1, height: 1 };

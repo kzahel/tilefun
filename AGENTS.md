@@ -44,7 +44,8 @@ prediction and rendering remain on the main thread. Read
 
 Renderer work follows [renderer unification](docs/topics/renderer-unification.md).
 The unified 3D scene owns interactive worlds; top-down, first person and XR are
-cameras on it. [253](docs/tactical/253-retire-fixed-world-renderer.md) tracks fixed-world
+cameras on it. Use an asset’s available gameplay 3D model by default, including
+new appearances. Keep explicit sprite choices available. [253](docs/tactical/253-retire-fixed-world-renderer.md) tracks fixed-world
 retirement and qualification. Shared terrain rasters, page atlases, vehicle body
 images and the immutable review raster stay; do not remove them as legacy world
 passes. Update the owning topic when a renderer contract changes.

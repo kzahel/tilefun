@@ -31779,7 +31779,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/build-manifest.ts:105"
+          "source": "src/workshop/build-manifest.ts:109"
         }
       ]
     },
@@ -37235,7 +37235,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/scene/EntitySprites.ts:482"
+          "source": "src/rendering/scene/EntitySprites.ts:491"
         },
         {
           "system": "Gameplay",
@@ -38193,15 +38193,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/scene/EntitySprites.ts:262"
+          "source": "src/rendering/StandingCharacterModels.ts:22"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/scene/EntitySprites.ts:262"
+          "source": "src/rendering/scene/EntitySprites.ts:271"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/scene/EntitySprites.ts:310"
+          "source": "src/rendering/scene/EntitySprites.ts:319"
         },
         {
           "system": "Gameplay",
@@ -38321,11 +38321,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/CharacterCandidates.ts:15"
+          "source": "src/workshop/CharacterCandidates.ts:17"
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/CharacterCandidates.ts:71"
+          "source": "src/workshop/CharacterCandidates.ts:77"
         }
       ]
     },
@@ -38495,7 +38495,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/WildlifeModelReviewBank.ts:43"
+          "source": "src/wildlife/WildlifeModelReviewBank.ts:49"
         }
       ]
     },
@@ -38649,7 +38649,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/WildlifeModelReviewBank.ts:43"
+          "source": "src/wildlife/WildlifeModelReviewBank.ts:49"
         }
       ]
     },

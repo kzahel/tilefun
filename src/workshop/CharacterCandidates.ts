@@ -1,8 +1,10 @@
 import classicPlayerFiles from "../../public/demos/classic-player-3d/v1/review.json";
+import townPeopleFiles from "../../public/demos/town-people-3d/v1/review.json";
 import type { ArtCatalog } from "../art/ArtCatalog.js";
 import { loadVerifiedArtImage, sha256 } from "../art/ArtSource.js";
 import { CHARACTERS, type CharacterDefinition } from "../characters/CharacterCatalog.js";
 import { CharacterTestScene } from "../characters/CharacterTestScene.js";
+import { TOWN_PEDESTRIANS } from "../rendering/StandingCharacterModels.js";
 import { required } from "../shared/required.js";
 import { ENGINE_REVIEW_REVISION } from "./EngineReviewRevision.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
@@ -60,14 +62,18 @@ export async function buildCharacterCandidates(catalog: ArtCatalog) {
   return results;
 }
 
+async function verifyStudyFiles(url: string, files: Readonly<Record<string, string>>) {
+  for (const [name, expected] of Object.entries(files)) {
+    const file = await fetch(url + name);
+    if (!file.ok || (await sha256(new Uint8Array(await file.arrayBuffer()))) !== expected)
+      throw new Error(`Character study evidence missing or changed: ${url}${name}`);
+  }
+}
+
 /** The standing model is an orbitable study with its own identity and review surface. */
 export async function buildClassicPlayerStudy(catalog: ArtCatalog): Promise<WorkshopCandidate> {
   const url = "/tilefun/demos/classic-player-3d/v1/";
-  for (const [name, expected] of Object.entries(classicPlayerFiles)) {
-    const file = await fetch(url + name);
-    if (!file.ok || (await sha256(new Uint8Array(await file.arrayBuffer()))) !== expected)
-      throw new Error(`Classic Player study evidence missing or changed: ${name}`);
-  }
+  await verifyStudyFiles(url, classicPlayerFiles);
   const sourceFingerprint = required(catalog.sheets.find((s) => s.id === "player")).fingerprint;
   return {
     id: "projection:classic-player-standing-v1",
@@ -82,4 +88,31 @@ export async function buildClassicPlayerStudy(catalog: ArtCatalog): Promise<Work
       new TextEncoder().encode(JSON.stringify([sourceFingerprint, classicPlayerFiles])),
     ),
   };
+}
+
+export async function buildTownPeopleStudies(catalog: ArtCatalog): Promise<WorkshopCandidate[]> {
+  const url = "/tilefun/demos/town-people-3d/v1/";
+  await verifyStudyFiles(url, townPeopleFiles);
+  const candidates: WorkshopCandidate[] = [];
+  for (const number of TOWN_PEDESTRIANS) {
+    const id = `person${number}`;
+    const sourceFingerprint = required(catalog.sheets.find((s) => s.id === id)).fingerprint;
+    const evidence = Object.entries(townPeopleFiles).filter(
+      ([name]) => !name.startsWith("person") || name.startsWith(`${id}.`),
+    );
+    candidates.push({
+      id: `projection:town-${id}-standing-v1`,
+      batchId: "town-people-3d",
+      name: `Person ${number} · standing pedestrian`,
+      prompt:
+        "Compare the model with its town sprite, then inspect the walk from the side and back.",
+      kind: "projection",
+      url: `${url}index.html?person=${number}`,
+      sourceFingerprint,
+      fingerprint: await sha256(
+        new TextEncoder().encode(JSON.stringify([sourceFingerprint, evidence])),
+      ),
+    });
+  }
+  return candidates;
 }

@@ -312,6 +312,14 @@ export const WORKSHOP_TOOLS = defineTools([
     mode: "adapter",
   },
   {
+    id: "town-people-3d",
+    name: "3D town pedestrians",
+    description:
+      "Inspect three standing town pedestrians and their walking animations beside the source sprites.",
+    url: "demos/town-people-3d/v1/index.html",
+    mode: "link",
+  },
+  {
     id: "classic-player-3d",
     name: "3D Classic Player",
     description:
@@ -337,6 +345,12 @@ export const workshopToolMetadata = ({
   mode,
 }: WorkshopTool): WorkshopTool => ({ id, name, description, url, mode });
 export const CITY_BATCHES: ReviewBatch[] = [
+  {
+    id: "town-people-3d",
+    name: "3D town pedestrians",
+    description: "Standing character studies from the town pedestrian roster.",
+    toolId: "town-people-3d",
+  },
   {
     id: "classic-player-3d",
     name: "3D Classic Player",

@@ -63,6 +63,11 @@ test("approved NPCs place, save and reload in the Worker; player choice persists
   await openHome(page);
   await page.getByRole("button", { name: "Resume", exact: true }).click();
   await expect.poll(() => drawnPlayers(page)).toBe(0);
+  await choose(page, "Person 4");
+  await openHome(page);
+  await page.getByRole("button", { name: "Resume", exact: true }).click();
+  await expect.poll(() => playerSheet(page)).toBe("person4");
+  await expect.poll(() => drawnPlayers(page)).toBe(1);
   await choose(page, "Trail Explorer");
   await expect.poll(() => playerSheet(page)).toBe("character-person-v1");
   await page.getByTestId("player-model-picker").locator("summary").click();

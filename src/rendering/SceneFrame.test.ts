@@ -53,9 +53,9 @@ it("collects override mesh bodies with complete original sprite fallbacks and un
 });
 
 it("preserves sorted mixed scenes across borrowed frames and releases surface/particle references", () => {
-  vi.spyOn(performance, "now").mockReturnValue(750);
+  // The allocation-only collector uses the zero-time actor pose.
+  vi.spyOn(performance, "now").mockReturnValue(0);
   const frame = new SceneFrame();
-  frame.presentationTime = 0.75;
   const chunk = new Chunk();
   chunk.autotileComputed = true;
   chunk.blendBase.fill(TerrainId.Grass);

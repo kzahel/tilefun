@@ -386,6 +386,7 @@ function drawSeen(
   const effects = particles && viewEffects(source, view, particles, alpha, !!topDown);
   if (grid && effects) particlesOnPixelGrid(effects, grid);
   const items = frame.begin(!!grass?.length);
+  view.pedestrianGait.begin();
   let drawn = false;
   try {
     collectWorldSprites({
@@ -401,6 +402,7 @@ function drawSeen(
       // Top-down rooms have none there: every body takes the plain oval at its feet.
       depthShadows: control.shadows && !(topDown && interior),
       pixelGrid: grid,
+      pedestrianGait: view.pedestrianGait,
     });
     source.overlays?.(items);
     const content: FirstPersonFrame = {

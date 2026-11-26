@@ -1,8 +1,8 @@
 # Character models and Workshop validation
 
 Topic: characters
-Status: six approved characters promoted to Entities; per-profile player model selection implemented.
-Updated: 2026-10-20.
+Status: six approved characters in Entities, per-profile character selection, and default 3D models for the classic player and three town pedestrians.
+Updated: 2026-11-26.
 
 The owner requested investigating live 3D characters on 2026-10-20.
 [160](../tactical/160-live-3d-and-shared-depth-investigation.md) audits actual sources
@@ -31,6 +31,22 @@ the original sprite while loading. Idle uses the presentation clock and Walk sam
 the player’s movement frames, including sprinting. **Menu → Character → Classic 2D**
 persists the original sprite as a separate profile choice. Existing named appearances
 and their network indices retain their meanings.
+
+## Standing town pedestrians (2026-11-26)
+
+The [town pedestrian comparison](https://tilefun.graehlarts.com/tilefun/demos/town-people-3d/v1/index.html)
+shows three of the twenty 16×32 directional appearances used by the city walk graph
+and dense districts. Person 4 has a ribbed rust cap and teal jacket, Person 10 a
+side-swept bob and a flared pale dress, and Person 20 glasses and a blue-and-gold
+backpack. Each [editable model](../../art-source/experiments/town-people/build.py)
+uses its own sprite palette and has independent Idle and Walk actions. Workshop
+registers all three. These same GLBs are the default appearances in ordinary play,
+including walking routes, editor placements and players wearing these outfits. Each
+left/right cycle covers 28 world pixels (1.4 seconds at the normal 20 px/s).
+Playback follows displayed ground travel, so a blocked walker holds its phase and
+a pedestrian waiting at a waypoint plays Idle. The standing character catalog
+selects models independently of the 3D animals preference. All three models and
+their advancing walk phases were observed on generated sidewalks in live regional seed 42.
 
 ## Current slice
 

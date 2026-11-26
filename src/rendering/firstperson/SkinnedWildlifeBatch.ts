@@ -91,7 +91,7 @@ export class SkinnedWildlifeBatch {
       this.scale * (fit?.height ?? 1),
     );
     instance.pivot.position.set(item.wx, item.wy, item.zOffset);
-    const pose = item.playerPose ?? item.wildlifePose;
+    const pose = item.characterPose ?? item.wildlifePose;
     instance.pivot.rotation.z =
       (HEADING[pose?.direction ?? item.facing ?? item.frameRow] ?? 0) +
       (this.definition.forwardYaw ?? 0);
@@ -111,7 +111,8 @@ export class SkinnedWildlifeBatch {
     const spriteDuration = chosen.frameDuration * chosen.count;
     const framePhase = (frame + (pose?.frameTimeMs ?? 0) / chosen.frameDuration) / chosen.count;
     const phase =
-      chosen.count === 1 && chosen.loop
+      (indexed && pose?.clip === 1 ? item.characterPose?.walkPhase : undefined) ??
+      (chosen.count === 1 && chosen.loop
         ? ((pose?.idleTime ?? 0) % duration) / duration
         : elapsed !== undefined
           ? chosen.loop
@@ -119,7 +120,7 @@ export class SkinnedWildlifeBatch {
             : Math.min(1, elapsed / spriteDuration)
           : !chosen.loop && frame >= chosen.count - 1
             ? 1
-            : Math.min(1, framePhase);
+            : Math.min(1, framePhase));
     const mixer = instance.mixer;
     mixer.stopAllAction();
     const action = mixer.clipAction(chosen.clip).reset();

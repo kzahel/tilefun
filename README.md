@@ -205,6 +205,10 @@ regenerate them with `npm run assets:app-icons` when it changes.
 Launcher checks cover both Vite dev serving (used by the live site) and production
 preview; public-asset links let Vite apply the deployment prefix exactly once.
 
+The default player is a 3D cream cat. Choose **Menu → Character → Classic 2D**
+for the original sprite. Town pedestrians 4, 10 and 20 also use their standing
+3D models, including when chosen as player appearances.
+
 ## Wildlife
 
 **Options → 3D animals** defaults to on. Animals with a complete set of 3D

@@ -90,6 +90,7 @@ export async function workshopInputDigest(root = ".", verifyWildlifeModels = fal
     files.push(...candidate.files.map((file) => `public/${file.url}`));
   }
   await walk("public/demos/classic-player-3d/v1", () => true);
+  await walk("public/demos/town-people-3d/v1", () => true);
   files.push(...CHARACTERS.map((c) => `public/${c.image}`));
   files.push(
     "public/data/art-catalog.json",
