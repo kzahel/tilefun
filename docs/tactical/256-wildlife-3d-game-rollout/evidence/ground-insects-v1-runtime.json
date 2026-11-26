@@ -1,0 +1,134 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-ant-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 140
+        },
+        {
+          "state": "crawl",
+          "action": "crawl",
+          "frames": 28,
+          "gameDurationMs": 1120
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 840
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 560
+        }
+      ],
+      "candidateId": "ant-ground-insects-v1",
+      "modelSha256": "f2ee1a4af28d50c02e9f4e636d94fa5bf8e7fa35b93bea18b922994b0c2d8808"
+    },
+    {
+      "type": "wildlife-earwig-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "earwig-ground-insects-v1",
+      "modelSha256": "1e45d8c5676703e6d9728b4c5913b4e0a2ae47532b1f04f9a6abe60632f9904b"
+    },
+    {
+      "type": "wildlife-leaf-insect-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "leaf-insect-ground-insects-v1",
+      "modelSha256": "07301ac9fc171a0b4f2262b6654aea57aaf19e504456828876b7abbc05602c74"
+    },
+    {
+      "type": "wildlife-roly-poly-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "roly-poly-ground-insects-v1",
+      "modelSha256": "95fa1a96f29997b3563f6d265697fd48c728f159b2eb4019b5defa3982c775a3"
+    }
+  ],
+  "clipSamples": 448,
+  "testedDepth": false
+}

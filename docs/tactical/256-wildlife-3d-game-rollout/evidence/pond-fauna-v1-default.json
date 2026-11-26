@@ -1,0 +1,100 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+  "workshopInputDigest": "b92049da42c3292e539fe89014dd550bc0f4596ba61328bed7e81782fc8c2835",
+  "results": [
+    {
+      "type": "wildlife-axolotl-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "c8fd3765083aa4486792641c2870fb97698c6ab3e65bdc23a7e986ced9a85f24",
+      "modelSha256": "5136e9ecbae92c5dc59da53fbd05f25a6a50a2dc627b0ba4f94d36381c8caa34",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-axolotl&wildlife3dStage=axolotl-pond-fauna-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009731578826904346,
+        -0.0001569366455077733
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-hippopotamus-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "40dfd69f07510eee4f21149e5a890baf6df2de93d26bf893201dd9b94b64e62f",
+      "modelSha256": "654fd026ba1525069169003f24b374d7e9ea7d90e00d5f408c02bbf47b6b132c",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-hippopotamus&wildlife3dStage=hippopotamus-pond-fauna-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009744873046875042,
+        -0.00021188354492187504
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-pond-turtle-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "97a37f6002f62b735dfa89e2ced916f0d454df44961ced86fe05561ff6ad6b13",
+      "modelSha256": "9aebcb62d460324c03b7eb7e261689d0659bfab61aec3cfcc10b7c91911db6bb",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-pond-turtle&wildlife3dStage=pond-turtle-pond-fauna-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.000968389511108403,
+        -0.00009661197662353499
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

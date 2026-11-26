@@ -1,0 +1,100 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+  "workshopInputDigest": "b92049da42c3292e539fe89014dd550bc0f4596ba61328bed7e81782fc8c2835",
+  "results": [
+    {
+      "type": "wildlife-jellyfish-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "32eebed247a0fc6bed2755e8f68bb8f591192e868b4ae5ab7445e7d3edea9206",
+      "modelSha256": "6fecdfbea96fed605362c83bbd9fbea8ae090d01946fd83bf6ec279ecb1d71ec",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-jellyfish&wildlife3dStage=jellyfish-soft-bodied-marine-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "pulse",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009659767150878966,
+        -0.0007729816436767568
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "pulse",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-nautilus-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "c3c0538005455f5bcc06879bf85b194a3b5d0d39751f85e8eccd38b1e0406d0e",
+      "modelSha256": "ac35eb1f1d6c071a05190c72b5f08ae009ef769cd668111b2ada759a0a5fced7",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-nautilus&wildlife3dStage=nautilus-soft-bodied-marine-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009787235260009862,
+        -0.000094470977783168
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "swim",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-octopus-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "57e4b85261cf565b5f961c4fec3ab33498f658d595660e92e58c4b0b21189c8d",
+      "modelSha256": "0313c7b45db85beb52d8992c02eb8c799ffb1d7c4d01ccc0da23ba2231df8aa7",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-octopus&wildlife3dStage=octopus-soft-bodied-marine-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "jet",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009688262939453196,
+        -0.0001695194244384768
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "jet",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

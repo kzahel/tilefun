@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-leaf-insect-provisional-v1",
+  "fit": [
+    10.15,
+    7.25,
+    10.15
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "Broad leaf panels sway over twig-like legs. Running pulls the body low and shortens the stance.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

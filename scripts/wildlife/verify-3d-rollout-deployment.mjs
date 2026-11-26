@@ -117,7 +117,8 @@ try {
       const predator = predatorProfile(candidate.type);
       const hunterStage =
         predator?.expansion?.habitat === "deep" || predator?.species === "coconut-crab";
-      const habitat = faunaProfile(candidate.type)?.habitat;
+      const fauna = faunaProfile(candidate.type);
+      const habitat = fauna?.habitat;
       const waterStage = ["deep", "pond", "shore"].includes(habitat);
       const farmStage = !candidate.classicTravel && isFarmModelReviewCase(candidate.lab);
       const catStage = isCatModelReview(candidate.type, candidate.lab);
@@ -131,7 +132,18 @@ try {
           : candidate.id === "robin-pilot-v1"
             ? { type: forageType("seed"), dx: 40, dy: 12 }
             : undefined;
-      const pilotPond = candidate.id === "fish-pilot-v1";
+      const pond =
+        habitat === "pond" || habitat === "deep"
+          ? {
+              water: habitat === "pond" ? TerrainId.ShallowWater : TerrainId.DeepWater,
+              halfWidth: fauna.body[0] / 2,
+              radius: Math.max(
+                6,
+                Math.ceil((fauna.habitat === "deep" ? fauna.radius : 96) / TILE_SIZE),
+              ),
+              alarm: fauna.alarmDistance,
+            }
+          : undefined;
       const fourStateStage = isFourStateFaunaModelReview(candidate.type, candidate.lab);
       const packStage = isPackMountModelReview(candidate.type, candidate.lab);
       const feeding = wildlifeFeedingReview(candidate.type, candidate.lab);
@@ -291,7 +303,7 @@ try {
           felidStage ||
           !!feeding ||
           !!pilotForage ||
-          pilotPond,
+          !!pond,
         catStage,
         dogFetch,
         useStick: secretaryStage || felidStage,
@@ -305,7 +317,7 @@ try {
           : wildlifeWorkStage || raptorStage || felidStage
             ? reviewActorPlacements(candidate)
             : [],
-        pilotPond,
+        pond,
         packStage,
         approachClips: contactClips,
         states,
@@ -541,7 +553,7 @@ async function verifyGameEntry(page, candidate, preview, options) {
     approachClips,
     states,
     feeding,
-    pilotPond,
+    pond,
   } = options;
   await page.evaluate(() => localStorage.removeItem("tilefun-3d-animals"));
   const generation = createDescriptor("flat", 1);
@@ -555,26 +567,32 @@ async function verifyGameEntry(page, candidate, preview, options) {
   await page.getByRole("button", { name: "New World", exact: true }).click({ timeout: 45_000 });
   await gameReady(page);
   const pondShore = await page.evaluate(
-    ({ type, distantPlacement, catStage, workPlacements, feeding, pond, tileSize, water }) => {
+    ({ type, distantPlacement, catStage, workPlacements, feeding, pond, tileSize }) => {
       const game = document.querySelector("#game").__game;
       const position = game.stateView.playerEntity.position;
       game.transport.send({ type: "set-editor-mode", enabled: true });
-      const wx = position.wx + (pond ? 166 : distantPlacement ? 116 : 20);
+      let wx = position.wx + (pond ? 166 : distantPlacement ? 116 : 20);
       const wy = position.wy + 28;
       let pondShore;
       if (pond) {
         const centerX = Math.floor(wx / tileSize);
         const centerY = Math.floor(wy / tileSize);
-        pondShore = { wx: centerX * tileSize + 4, wy: (centerY + 0.5) * tileSize, wz: 0 };
-        for (let ty = centerY - 6; ty <= centerY + 6; ty++) {
-          for (let tx = centerX - 6; tx <= centerX + 6; tx++) {
+        if (pond.halfWidth > 6) wx = Math.max(wx, centerX * tileSize + pond.halfWidth + 4);
+        pondShore = {
+          wx: centerX * tileSize + 4,
+          wy: (centerY + 0.5) * tileSize,
+          wz: 0,
+          alarm: pond.alarm,
+        };
+        for (let ty = centerY - pond.radius; ty <= centerY + pond.radius; ty++) {
+          for (let tx = centerX - 6; tx <= centerX + pond.radius; tx++) {
             // Leave a bank the player can walk along while the fish swims away.
             if (tx < centerX && Math.abs(ty - centerY) <= 1) continue;
             game.transport.send({
               type: "edit-terrain-tile",
               tx,
               ty,
-              terrainId: water,
+              terrainId: pond.water,
               paintMode: "positive",
               bridgeDepth: 0,
             });
@@ -606,9 +624,8 @@ async function verifyGameEntry(page, candidate, preview, options) {
       catStage,
       workPlacements,
       feeding,
-      pond: pilotPond,
+      pond,
       tileSize: TILE_SIZE,
-      water: TerrainId.ShallowWater,
     },
   );
   const expected = { type: candidate.type, sheetKey: ENTITY_DEFS[candidate.type].sprite.sheetKey };
@@ -808,6 +825,8 @@ async function verifyActorStatesInGame(
       const observed = new Set();
       let nextTarget = 0;
       let clearedForage = false;
+      let nextJump = 0;
+      let aimAcrossWaterUntil = 0;
       let nearest = Infinity;
       const approachStates = new Set();
       const end = performance.now() + timeout;
@@ -820,7 +839,8 @@ async function verifyActorStatesInGame(
             if (observed.size === total) break;
             // Wait for the animal's voluntary action before approaching it.
             if (passive.every((index) => observed.has(index))) {
-              const player = game.stateView.playerEntity.position;
+              const playerBody = game.stateView.playerEntity;
+              const player = playerBody.position;
               const dx = actor.position.wx - player.wx;
               const dy = actor.position.wy - player.wy;
               const distance = Math.hypot(dx, dy);
@@ -841,7 +861,28 @@ async function verifyActorStatesInGame(
                 performance.now() >= nextTarget &&
                 (!clearForageType || (actor.wz ?? 0) < 1)
               ) {
-                game.tapMovement.setTarget(pondShore ?? { ...actor.position, wz: 0 });
+                const now = performance.now();
+                if (
+                  pondShore &&
+                  distance > pondShore.alarm &&
+                  Math.hypot(player.wx - pondShore.wx, player.wy - pondShore.wy) < 19 &&
+                  (playerBody.wz ?? 0) < 0.5 &&
+                  now >= nextJump
+                ) {
+                  const input = (type, key, code) =>
+                    window.dispatchEvent(new KeyboardEvent(type, { key, code, bubbles: true }));
+                  input("keydown", "Shift", "ShiftLeft");
+                  input("keydown", " ", "Space");
+                  setTimeout(() => input("keyup", " ", "Space"), 180);
+                  setTimeout(() => input("keyup", "Shift", "ShiftLeft"), 620);
+                  aimAcrossWaterUntil = now + 780;
+                  nextJump = now + 1450;
+                }
+                game.tapMovement.setTarget(
+                  pondShore && now >= aimAcrossWaterUntil
+                    ? pondShore
+                    : { ...actor.position, wz: 0 },
+                );
                 if (useStick && distance > 0 && distance < 24)
                   game.transport.send({
                     type: "use-item",

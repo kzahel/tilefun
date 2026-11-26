@@ -107,6 +107,24 @@ runtime scope reconciliation in the execution notes.
 
 ## Delivery log
 
+### Ground insects, 2026-11-26
+
+The ant, earwig, leaf insect and roly-poly have separate escape gaits. The
+earwig raises its pincers, and the roly-poly ripples seven pairs of feet
+under its shell. All 16 states played in the exact Workshop previews and
+after reopening ordinary game worlds. [Renderer evidence](256-wildlife-3d-game-rollout/evidence/ground-insects-v1-runtime.json) ·
+[Public preview evidence](256-wildlife-3d-game-rollout/evidence/ground-insects-v1-deployment.json) ·
+[Workshop review](https://tilefun.graehlarts.com/tilefun/workshop.html#/review/pattern%3Awildlife-3d-ant-ground-insects-v1)
+
+The production verifier builds a pond through the ordinary terrain editor
+and approaches from its bank. A running jump brings the player within
+startle range of the largest swimmer. Full default playback passed for the
+blue whale, three pond animals, four reef animals, and the jellyfish,
+nautilus and octopus. [Blue whale](256-wildlife-3d-game-rollout/evidence/blue-whale-swimmers-v1-default.json) ·
+[Pond animals](256-wildlife-3d-game-rollout/evidence/pond-fauna-v1-default.json) ·
+[Reef animals](256-wildlife-3d-game-rollout/evidence/reef-fauna-v1-default.json) ·
+[Marine invertebrates](256-wildlife-3d-game-rollout/evidence/soft-bodied-swimmers-v1-default.json)
+
 ### Flying insects and bat, 2026-11-26
 
 The dragonfly and butterfly beat their rear wings independently, and the

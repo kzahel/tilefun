@@ -13,7 +13,7 @@ wildlife_build = module_from_spec(spec)
 sys.modules["wildlife_build"] = wildlife_build
 spec.loader.exec_module(wildlife_build)
 import insect
-from wildlife_build import V, aimed, euler, transform
+from wildlife_build import V, aimed, euler, stride, transform
 
 
 SPRITE_ACCENTS = {
@@ -21,6 +21,10 @@ SPRITE_ACCENTS = {
     "grasshopper": ("29332d", "dbd4aa", "4d6840"),
     "ladybug": ("29332d", "e7dfc7", "b74735"),
     "stag-beetle": ("29332d", "d2bd8b", "745b3f"),
+    "ant": ("1f1c19", "b96e39", "603623"),
+    "earwig": ("151b17", "918058", "675844"),
+    "leaf-insect": ("443a32", "aacb71", "638858"),
+    "roly-poly": ("151b17", "b9a477", "675844"),
 }
 
 
@@ -121,6 +125,47 @@ def fit_hopper(mesh, species):
             p.y = insect.ABDOMEN.y + (p.y - insect.ABDOMEN.y) * 1.16
 
 
+def ground_pose(rig, rest, clip, t):
+    if clip != "flee":
+        return insect.pose(rig, rest, clip, t)
+    wave = math.tau * t
+    plated = insect.STYLE == "plates"
+    raised_forceps = insect.STYLE == "forceps"
+    leaf = insect.STYLE == "leaf"
+    pitch = .052 + .076 * math.sin(wave)
+    q = euler(pitch, (.044 if plated else .082) * math.sin(wave))
+    body = transform(q, insect.BODY, insect.BODY + V((0, .038 * math.sin(wave), -.064)))
+    out = {"body": body @ rest["body"]}
+    hq = q @ euler(.18 if raised_forceps else -.09, 0, .091 * math.cos(wave))
+    head = transform(hq, insect.HEAD, body @ insect.HEAD)
+    out["head"] = head @ rest["head"]
+    aq = q @ euler(-.32 if raised_forceps else .15 if plated else .076 * math.sin(wave),
+                  0, .09 * math.cos(wave))
+    abdomen = transform(aq, insect.ABDOMEN, body @ insect.ABDOMEN)
+    out["abdomen"] = abdomen @ rest["abdomen"]
+    for side, sign in insect.SIDES:
+        name = f"antenna.{side}"
+        a, _ = insect.antenna(side)
+        out[name] = transform(hq @ euler(-.22, 0, sign * .20 * math.sin(wave)), a, head @ a) @ rest[name]
+        name = f"jaw.{side}"
+        if name in rest:
+            a, _ = insect.weapon(side)
+            parent, angle = (abdomen, aq) if raised_forceps else (head, hq)
+            grip = .28 if raised_forceps else .13
+            out[name] = transform(angle @ euler(0, 0, sign * grip), a, parent @ a) @ rest[name]
+        for pair in range(insect.LEG_COUNT):
+            a, mid, end = (insect.point(side, pair, joint) for joint in range(3))
+            phase = (.5 if sign > 0 else 0) + pair * (.18 if plated else .31)
+            stride_length = .112 if plated else .158 if leaf else .229
+            advance, lift = stride((t * 2) % 1, phase, stride_length, .060 if plated else .094)
+            knee = body @ mid + V((0, .44 * advance, .38 * lift))
+            foot = end + V((0, advance, lift))
+            up, down = f"leg.{side}.{pair}.up", f"leg.{side}.{pair}.down"
+            out[up] = aimed(rest[up], body @ a, knee)
+            out[down] = aimed(rest[down], knee, foot)
+    return out
+
+
 def paint_sprite_accents(mesh, species):
     atlas = next(node.image for node in mesh.data.materials[0].node_tree.nodes
                  if node.type == "TEX_IMAGE")
@@ -152,6 +197,17 @@ def paint_sprite_accents(mesh, species):
             shade = 1
         elif species == "ladybug" and part in {"Head", "Thorax"}:
             shade = 0 if upper < .40 else 2
+        elif insect.MOVE in {"walk", "crawl"}:
+            if part == "Distinct abdomen sculpture" and species in {"earwig", "roly-poly"}:
+                band = math.cos(face.center.y * (22 if species == "roly-poly" else 31))
+                shade = 1 if band > .30 and upper > -.04 else 2 if upper > -.35 else 0
+            elif part == "Distinct abdomen sculpture" and species == "leaf-insect":
+                ridge = math.cos(face.center.y * 23 + abs(face.center.x) * 14)
+                shade = 1 if ridge > .3 and upper > .06 else 2
+            elif part == "Distinct abdomen sculpture" and species == "ant":
+                shade = 2 if upper > .49 else 0
+            elif part in {"Thorax", "Head"}:
+                shade = 2 if upper > .15 else 0
         if shade is not None:
             index = palette_start + shade * 2
             uv = ((index % 8 + 1) / 8, (index // 8 + .5) / 8)
@@ -174,7 +230,7 @@ def main():
     for action in list(bpy.data.actions):
         bpy.data.actions.remove(action)
     durations = {**insect.DURATIONS, "flee": 18}
-    pose = hop_pose if insect.MOVE == "hop" else beetle_pose
+    pose = {"hop": hop_pose, "fly": beetle_pose}.get(insect.MOVE, ground_pose)
     wildlife_build.key_actions(rig, durations, pose)
     scene = bpy.context.scene
     scene.render.fps = wildlife_build.FPS

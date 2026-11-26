@@ -4331,7 +4331,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-hippopotamus-pond-fauna-v1",
+        "sha256": "654fd026ba1525069169003f24b374d7e9ea7d90e00d5f408c02bbf47b6b132c",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/pond-fauna-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-hippopotamus-pond-fauna-v1",
         "fingerprint": "40dfd69f07510eee4f21149e5a890baf6df2de93d26bf893201dd9b94b64e62f",
@@ -5301,9 +5308,43 @@
         "action": "action",
         "flee": "crawl"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "f2ee1a4af28d50c02e9f4e636d94fa5bf8e7fa35b93bea18b922994b0c2d8808",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ground-insects-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/ant-ground-insects-v1/native.png"
+        },
+        "crawl": {
+          "action": "crawl",
+          "sha256": "f2ee1a4af28d50c02e9f4e636d94fa5bf8e7fa35b93bea18b922994b0c2d8808",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ground-insects-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/ant-ground-insects-v1/crawl.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "f2ee1a4af28d50c02e9f4e636d94fa5bf8e7fa35b93bea18b922994b0c2d8808",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ground-insects-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/ant-ground-insects-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "f2ee1a4af28d50c02e9f4e636d94fa5bf8e7fa35b93bea18b922994b0c2d8808",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ground-insects-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/ant-ground-insects-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-ant-ground-insects-v1",
+        "fingerprint": "c9b0380aee86917bf8c984f2b47c83e606aab41e88cf8d94b2bf96833d25525e",
+        "model": "public/demos/wildlife-3d/ant-ground-insects-v1/model.glb",
+        "source": "public/demos/wildlife-3d/ant-ground-insects-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/ant-ground-insects-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ground-insects-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-bee-provisional-v1",
@@ -5511,9 +5552,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "1e45d8c5676703e6d9728b4c5913b4e0a2ae47532b1f04f9a6abe60632f9904b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ground-insects-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/earwig-ground-insects-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "1e45d8c5676703e6d9728b4c5913b4e0a2ae47532b1f04f9a6abe60632f9904b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ground-insects-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/earwig-ground-insects-v1/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "1e45d8c5676703e6d9728b4c5913b4e0a2ae47532b1f04f9a6abe60632f9904b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ground-insects-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/earwig-ground-insects-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "1e45d8c5676703e6d9728b4c5913b4e0a2ae47532b1f04f9a6abe60632f9904b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ground-insects-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/earwig-ground-insects-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-earwig-ground-insects-v1",
+        "fingerprint": "b6bcbc01298c5591c97240a03302e9a82c3561c4334fda53f0f59f2dfae0af92",
+        "model": "public/demos/wildlife-3d/earwig-ground-insects-v1/model.glb",
+        "source": "public/demos/wildlife-3d/earwig-ground-insects-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/earwig-ground-insects-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ground-insects-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-snail-provisional-v1",
@@ -5659,9 +5734,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "07301ac9fc171a0b4f2262b6654aea57aaf19e504456828876b7abbc05602c74",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ground-insects-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/leaf-insect-ground-insects-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "07301ac9fc171a0b4f2262b6654aea57aaf19e504456828876b7abbc05602c74",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ground-insects-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/leaf-insect-ground-insects-v1/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "07301ac9fc171a0b4f2262b6654aea57aaf19e504456828876b7abbc05602c74",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ground-insects-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/leaf-insect-ground-insects-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "07301ac9fc171a0b4f2262b6654aea57aaf19e504456828876b7abbc05602c74",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ground-insects-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/leaf-insect-ground-insects-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-leaf-insect-ground-insects-v1",
+        "fingerprint": "b73cda26594c46959969dfab2e78e35df783bf3c6661106ad5ad73cc05353dda",
+        "model": "public/demos/wildlife-3d/leaf-insect-ground-insects-v1/model.glb",
+        "source": "public/demos/wildlife-3d/leaf-insect-ground-insects-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/leaf-insect-ground-insects-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ground-insects-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-millipede-provisional-v1",
@@ -5774,9 +5883,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "95fa1a96f29997b3563f6d265697fd48c728f159b2eb4019b5defa3982c775a3",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ground-insects-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/roly-poly-ground-insects-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "95fa1a96f29997b3563f6d265697fd48c728f159b2eb4019b5defa3982c775a3",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ground-insects-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/roly-poly-ground-insects-v1/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "95fa1a96f29997b3563f6d265697fd48c728f159b2eb4019b5defa3982c775a3",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ground-insects-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/roly-poly-ground-insects-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "95fa1a96f29997b3563f6d265697fd48c728f159b2eb4019b5defa3982c775a3",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ground-insects-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/roly-poly-ground-insects-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-roly-poly-ground-insects-v1",
+        "fingerprint": "7755037d039542e955a6771939823da8c577d15e770b351e974896704697abf1",
+        "model": "public/demos/wildlife-3d/roly-poly-ground-insects-v1/model.glb",
+        "source": "public/demos/wildlife-3d/roly-poly-ground-insects-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/roly-poly-ground-insects-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ground-insects-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-scorpion-predator-v1",
@@ -5978,7 +6121,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-blue-whale-swimmers-v1",
+        "sha256": "474b66b90bcb8c58e5e894dcb5d2b1ad84417f100545909465a9358b58c7bb34",
+        "states": ["action", "flee", "idle", "swim"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/blue-whale-swimmers-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-blue-whale-swimmers-v1",
         "fingerprint": "c2f2dafca5b28ce840a3b7b93013008c9ae2cda7cc2d9db6c2ef119851847b05",
@@ -6635,7 +6785,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-leafy-seadragon-reef-fauna-v1",
+        "sha256": "49c0671c719528206efa93f8b3c91e62c2dc309bff504815faefe4514423c7d8",
+        "states": ["action", "flee", "idle", "swim"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reef-fauna-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-leafy-seadragon-reef-fauna-v1",
         "fingerprint": "f456aadae8c060e7cf14a92bfd7e4dfa4e69f59b266b5fa35e36255c117204ec",
@@ -6804,7 +6961,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-jellyfish-soft-bodied-marine-v1",
+        "sha256": "6fecdfbea96fed605362c83bbd9fbea8ae090d01946fd83bf6ec279ecb1d71ec",
+        "states": ["action", "flee", "idle", "pulse"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/soft-bodied-swimmers-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-jellyfish-soft-bodied-marine-v1",
         "fingerprint": "32eebed247a0fc6bed2755e8f68bb8f591192e868b4ae5ab7445e7d3edea9206",
@@ -6980,7 +7144,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-nautilus-soft-bodied-marine-v1",
+        "sha256": "ac35eb1f1d6c071a05190c72b5f08ae009ef769cd668111b2ada759a0a5fced7",
+        "states": ["action", "flee", "idle", "swim"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/soft-bodied-swimmers-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-nautilus-soft-bodied-marine-v1",
         "fingerprint": "c3c0538005455f5bcc06879bf85b194a3b5d0d39751f85e8eccd38b1e0406d0e",
@@ -7379,7 +7550,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-octopus-soft-bodied-marine-v1",
+        "sha256": "0313c7b45db85beb52d8992c02eb8c799ffb1d7c4d01ccc0da23ba2231df8aa7",
+        "states": ["action", "flee", "idle", "jet"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/soft-bodied-swimmers-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-octopus-soft-bodied-marine-v1",
         "fingerprint": "57e4b85261cf565b5f961c4fec3ab33498f658d595660e92e58c4b0b21189c8d",
@@ -7433,7 +7611,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-sea-turtle-reef-fauna-v1",
+        "sha256": "edbe9922c100622f76be82c2cbc63e1b0baee67748d7b3b0e6753c242cd13da7",
+        "states": ["action", "flee", "idle", "swim"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reef-fauna-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-sea-turtle-reef-fauna-v1",
         "fingerprint": "22f693bd94777937540effd2b15675b8dd57ca82e124adefa6ab87619885f65d",
@@ -7487,7 +7672,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-seahorse-reef-fauna-v1",
+        "sha256": "99a54a6a2d89e8f61c41bbbbe3cb0e0914517bddc09434c8f701ffd8e18307ce",
+        "states": ["action", "flee", "idle", "swim"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reef-fauna-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-seahorse-reef-fauna-v1",
         "fingerprint": "d821fb8af56e39732fce6251d02794307bd565bd3b71d74427d1b94d732dc642",
@@ -7656,7 +7848,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-starfish-reef-fauna-v1",
+        "sha256": "a5cebd7963a79482b4c99609cb874df43c1c945e8dbf417fc20fb46da5fa2f38",
+        "states": ["action", "flee", "idle", "swim"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reef-fauna-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-starfish-reef-fauna-v1",
         "fingerprint": "a844d7ff56613fd244eb164d85a373da9bf38b9b1810eb61076632758e8e4b6b",
@@ -9180,7 +9379,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-axolotl-pond-fauna-v1",
+        "sha256": "5136e9ecbae92c5dc59da53fbd05f25a6a50a2dc627b0ba4f94d36381c8caa34",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/pond-fauna-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-axolotl-pond-fauna-v1",
         "fingerprint": "c8fd3765083aa4486792641c2870fb97698c6ab3e65bdc23a7e986ced9a85f24",
@@ -9490,7 +9696,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-pond-turtle-pond-fauna-v1",
+        "sha256": "9aebcb62d460324c03b7eb7e261689d0659bfab61aec3cfcc10b7c91911db6bb",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/pond-fauna-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-pond-turtle-pond-fauna-v1",
         "fingerprint": "97a37f6002f62b735dfa89e2ced916f0d454df44961ced86fe05561ff6ad6b13",

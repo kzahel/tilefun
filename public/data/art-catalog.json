@@ -9906,6 +9906,46 @@
       "source": "demos/wildlife-3d/bat-flying-insects-and-bat-v1/model.blend"
     },
     {
+      "id": "wildlife-3d-ant-ground-insects-v1",
+      "name": "wildlife 3d ant ground insects v1",
+      "image": "demos/wildlife-3d/ant-ground-insects-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "d9b79ae15b36dfb2712926696d32637a4e9097ca0cad1b36867c39480a07e7bb",
+      "source": "demos/wildlife-3d/ant-ground-insects-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-earwig-ground-insects-v1",
+      "name": "wildlife 3d earwig ground insects v1",
+      "image": "demos/wildlife-3d/earwig-ground-insects-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "398ab0c29aede91846c588339ea07fb17964df3ea84233eabac67f6a52462a5f",
+      "source": "demos/wildlife-3d/earwig-ground-insects-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-leaf-insect-ground-insects-v1",
+      "name": "wildlife 3d leaf insect ground insects v1",
+      "image": "demos/wildlife-3d/leaf-insect-ground-insects-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "32609ad12a15396b6e02b7161e9563dd4a2c9f6474a9765409cdf186b3522a2d",
+      "source": "demos/wildlife-3d/leaf-insect-ground-insects-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-roly-poly-ground-insects-v1",
+      "name": "wildlife 3d roly poly ground insects v1",
+      "image": "demos/wildlife-3d/roly-poly-ground-insects-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "050eae81d19b40411e672214a97135e40e7972d7db010b0c5d8d9f611d600cfb",
+      "source": "demos/wildlife-3d/roly-poly-ground-insects-v1/model.blend"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",

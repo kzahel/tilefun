@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-ant-provisional-v1",
+  "fit": [
+    5.04,
+    5.83,
+    9.52
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "crawl",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "Segmented abdomen, separate antenna sweeps, and a lower fast escape stride.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

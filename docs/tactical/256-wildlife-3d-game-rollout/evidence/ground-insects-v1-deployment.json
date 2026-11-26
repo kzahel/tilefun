@@ -1,0 +1,130 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "936f5b7eaba86801ce8b794ce58988777bd17d7e89fc9be37b8c310a7571211e",
+  "results": [
+    {
+      "type": "wildlife-ant-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "c9b0380aee86917bf8c984f2b47c83e606aab41e88cf8d94b2bf96833d25525e",
+      "modelSha256": "f2ee1a4af28d50c02e9f4e636d94fa5bf8e7fa35b93bea18b922994b0c2d8808",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-ant&wildlife3dStage=ant-ground-insects-v1&wildlife3dReview=ant-ground-insects-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "crawl",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009608614444732696,
+        -1.1920928955078125E-7
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "crawl",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-earwig-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "b6bcbc01298c5591c97240a03302e9a82c3561c4334fda53f0f59f2dfae0af92",
+      "modelSha256": "1e45d8c5676703e6d9728b4c5913b4e0a2ae47532b1f04f9a6abe60632f9904b",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-earwig&wildlife3dStage=earwig-ground-insects-v1&wildlife3dReview=earwig-ground-insects-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009831905364990259,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-leaf-insect-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "b73cda26594c46959969dfab2e78e35df783bf3c6661106ad5ad73cc05353dda",
+      "modelSha256": "07301ac9fc171a0b4f2262b6654aea57aaf19e504456828876b7abbc05602c74",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-leaf-insect&wildlife3dStage=leaf-insect-ground-insects-v1&wildlife3dReview=leaf-insect-ground-insects-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.000983171463012698,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-roly-poly-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "7755037d039542e955a6771939823da8c577d15e770b351e974896704697abf1",
+      "modelSha256": "95fa1a96f29997b3563f6d265697fd48c728f159b2eb4019b5defa3982c775a3",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-roly-poly&wildlife3dStage=roly-poly-ground-insects-v1&wildlife3dReview=roly-poly-ground-insects-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.000995153427124024,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

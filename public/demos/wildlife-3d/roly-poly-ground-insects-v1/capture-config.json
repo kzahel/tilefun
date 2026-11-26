@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-roly-poly-provisional-v1",
+  "fit": [
+    10.15,
+    7.25,
+    10.15
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "Seven pairs of short legs clear the shell while walking. Escape uses a lower, faster ripple and the action curls the shell.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}
