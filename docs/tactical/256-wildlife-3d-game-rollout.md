@@ -1,8 +1,7 @@
 # 256 Wildlife 3D game rollout
 
-Owner requested the full rollout on 2026-11-20. On 2026-11-22 the owner
-authorized ordinary-play activation by animation coverage. The default bank
-now covers 113 animals.
+The owner requested the full rollout on 2026-11-20 and authorized the initial
+113 defaults by animation coverage on 2026-11-22.
 
 [Animation ledger](256-wildlife-3d-game-rollout/animation-ledger.json) ·
 [New-session handoff](256-wildlife-3d-game-rollout/handoff.md) ·
@@ -116,6 +115,11 @@ validator now accepts 3D wildlife review identities through the same
 exact-version path as the sprite reviews. The first release selects the
 remaining 28 birds and the golden retriever. Each release gets its own
 production playback receipt before the next one ships.
+
+Release 1 deployed on `0146d96d` and verified all 135 states for its 29 new
+models in Workshop and after reopening a normal game world. The live default
+bank now has 142 animals and 650 verified states.
+[Release 1 playback](256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json)
 
 ### Complete preview roster, 2026-11-26
 

@@ -58,7 +58,13 @@
           "comparison": "public/demos/wildlife-3d/brown-bear-bears-and-canids-v1/chase.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-brown-bear-bears-and-canids-v1",
+        "fingerprint": "8ca4c90593edcd728362bcf4d5ec88c68395f382aa47738fd5feaa5c127005eb",
+        "sha256": "a8f21b58f4e008b4b90a4ae687d7f8a2c803c8a0803650a48b72c3c87862286f",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:08.661Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-brown-bear-bears-and-canids-v1",
@@ -173,7 +179,13 @@
           "comparison": "public/demos/wildlife-3d/polar-bear-bears-and-canids-v1/chase.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-polar-bear-bears-and-canids-v1",
+        "fingerprint": "87449d81dba56279d78d50519aca3b5842af34b05e8416fa3267de5498330f8e",
+        "sha256": "9f9818f6cd7676bcb5c93a43685e9fba7f2e8ce431b3598d6d0be08be7247668",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:08.712Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-polar-bear-bears-and-canids-v1",
@@ -234,7 +246,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:08.740Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-atlantic-puffin-seabirds-v1",
+        "sha256": "c205fac093284b88cb5c837f6086e888ba0bc193525162ff6f6a03e5516ed828",
+        "states": ["action", "flee", "fly", "idle"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-atlantic-puffin-seabirds-v1",
         "fingerprint": "37000d7892fd82cd226347226f98866bcd30a4e3333e7f6dcb09c29ab0010c4c",
@@ -315,7 +334,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:08.763Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-eagle-raptors-v1",
+        "sha256": "e3c799f71ff7da95b40f7039a36ec67d814268dce6109422c5484abc4560b9a6",
+        "states": ["chase", "display", "feed", "flight", "idle", "sleep", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-eagle-raptors-v1",
         "fingerprint": "6c360c7d0f81ae95c57ef431afd6cc758a7d0e6b3398bddc5309f92dabb26129",
@@ -375,7 +401,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:08.791Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-blue-footed-booby-seabirds-v1",
+        "sha256": "04b4b842703af31cf47cac6e0e3e98deb81fa54169ae02d75c00b5b5871a8241",
+        "states": ["action", "flee", "fly", "idle"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-blue-footed-booby-seabirds-v1",
         "fingerprint": "aab16a8b762d5c7e12649c65e2cdb287e763763d19bb7f73a1fc2a89c16f352d",
@@ -531,7 +564,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:08.813Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-crow-working-and-display-birds-v1",
+        "sha256": "c34196a83cb84aaf0347aa492e0bc00e1f2458e9b84de362f83813906cbf2bbe",
+        "states": ["action", "build", "flee", "fly", "idle", "pickup"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-crow-working-and-display-birds-v1",
         "fingerprint": "8dc0d4ed0726bd6b4bce870a7a9ed2f6f0f36bb1427e0fbe4fc1684cb09d5367",
@@ -591,7 +631,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:08.836Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-cassowary-ratites-v1",
+        "sha256": "561abbfdeaf8cbfec13c7331601c319ad8dfb0f882d642e1a3e5aa0db67d2c59",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-cassowary-ratites-v1",
         "fingerprint": "6b3feeda327f259b05a9a08a25ad85adb5ffb5823b80a8bd86e3271d83bd48f5",
@@ -651,7 +698,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:08.863Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-dove-yard-and-canopy-birds-v1",
+        "sha256": "ee228c4342eefd7fd2519734907663aa69bf8cb7030c810112a7db6d58713af6",
+        "states": ["action", "flee", "fly", "idle"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-dove-yard-and-canopy-birds-v1",
         "fingerprint": "708db28a3036927aec7280258b6526f91390a016012aa4921571b8dc70df3d75",
@@ -711,7 +765,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:08.886Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-emu-ratites-v1",
+        "sha256": "b769d3a6c8bef534604f58fd5ce2aa3775bdcdccbf39216c1172a03f2d57777b",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-emu-ratites-v1",
         "fingerprint": "5f5bff7e3ac911adf87ab2f2e820314f578a0e7994de2e03455870bd376b6fcb",
@@ -771,7 +832,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:08.909Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-flamingo-waders-v1",
+        "sha256": "1bc0f02ae31ee6e3ba6d8fc2b9a7efb0d252ea3fa4524604d3aec8d7d6c509be",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-flamingo-waders-v1",
         "fingerprint": "109f07f21bed78c44b901d48a2587eee191308149708720be26243908d3f9d4d",
@@ -831,7 +899,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:08.934Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-great-blue-heron-waders-v1",
+        "sha256": "204f024c6dc3e565ff20f71221fcb7bbcf65ced1182399626551606aec343f7e",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-great-blue-heron-waders-v1",
         "fingerprint": "4da1d34276429c5782a635eb319417575151774b0d0b0348505217c963d10db7",
@@ -891,7 +966,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:08.957Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-great-frigatebird-seabirds-v1",
+        "sha256": "075884968a21bbd448f3c462459cd5cfc5c4c419c115f9fea1d3cebd54d8ee89",
+        "states": ["action", "flee", "fly", "idle"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-great-frigatebird-seabirds-v1",
         "fingerprint": "aeacdee81995e28a26dc74d3e34ebc9de257187eec420496fb7a5e1aec09a4fb",
@@ -951,7 +1033,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:08.980Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-great-hornbill-forest-birds-v1",
+        "sha256": "22b3b812accb711f3ea3b9152968133be93fe2cbadebfa495d61c5d6e26290da",
+        "states": ["action", "flee", "fly", "idle"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-great-hornbill-forest-birds-v1",
         "fingerprint": "7842fbac95a28de14af741ac0cf75c1951f743582d4ae5dee4c2cb62cfe68b15",
@@ -1011,7 +1100,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.006Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-kakapo-forest-birds-v1",
+        "sha256": "7d6b0cf7cda68f69ded5c37257e6c913980287c5d28b828dc90f151970caf46f",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-kakapo-forest-birds-v1",
         "fingerprint": "944e98bff1396e861f06215ef40cb4c2c1a42e1dccb1661d38ae3f5458c6f4b3",
@@ -1071,7 +1167,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.028Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-kiwi-ratites-v1",
+        "sha256": "01c452f609658e62eb837262274d68d7b96325886bc3f3630f173cbdc4240ad5",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-kiwi-ratites-v1",
         "fingerprint": "0e98243a2c18d99fe637c6f2932c2b2dfc7383c5c235bb2ea5c7e5a320d50c30",
@@ -1204,7 +1307,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.052Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-marabou-stork-waders-v1",
+        "sha256": "0e00495447b0b2778f111eff6662446df881486849c20eaf186439d7c6c985a2",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-marabou-stork-waders-v1",
         "fingerprint": "4cb35308e8e2be52d3e1fa0cc5140208279d7e0287f5c24ee1f95d996f6a3e6b",
@@ -1264,7 +1374,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.079Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-ostrich-ratites-v1",
+        "sha256": "47bb61d03cc5e18f510c33fd79ff85315fe884f9f80939edd4242f433232fda6",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-ostrich-ratites-v1",
         "fingerprint": "0008e12c75dc7b6875bb08ff40f061fe36325793a6f95f70c110f4d176cc7c71",
@@ -1324,7 +1441,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.102Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-parrot-yard-and-canopy-birds-v1",
+        "sha256": "8e44224c210d30a3bb591d17d489b9150615aa9bb2b32bcf810981db613ae4ed",
+        "states": ["action", "flee", "fly", "idle"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-parrot-yard-and-canopy-birds-v1",
         "fingerprint": "5559637571e8eab342a2c3ea4cb5d6572795b32de92e55ed2471aa7e6eadcd9e",
@@ -1405,7 +1529,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.125Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-peacock-working-and-display-birds-v1",
+        "sha256": "8e935e65d86ecf418b83a7b2740369013b7bb24f6f5cb38767dac1d311368a45",
+        "states": ["action", "close", "display", "flee", "idle", "open", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-peacock-working-and-display-birds-v1",
         "fingerprint": "54031608a680ab7c6b99337602f97362b5a77c651140d55a7ab7723d35c9eb16",
@@ -1465,7 +1596,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.151Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-pelican-seabirds-v1",
+        "sha256": "4c60b706d211c39b0f19de4acd10620be706651b4534b392a2637b476bdc6194",
+        "states": ["action", "flee", "fly", "idle"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-pelican-seabirds-v1",
         "fingerprint": "fa500694d0717c48d5dabebfc94a056a5a8b66933de7ca71f1007f74f7db664d",
@@ -1614,7 +1752,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.174Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-raven-working-and-display-birds-v1",
+        "sha256": "cc996d398cf49c4966f7b659ab2bc5194677593a8b08bc1450c02bb21829c47e",
+        "states": ["action", "bury", "flee", "fly", "idle", "pickup"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-raven-working-and-display-birds-v1",
         "fingerprint": "66c6669c9b03e101483dd5987de41efa2fd7e45a3caf32d7193b7a22bad88ec3",
@@ -1695,7 +1840,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.196Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-hawk-raptors-v1",
+        "sha256": "a04b657c3787044e97e40a197d7302745e68789c02875e37d821aca13c18b9e0",
+        "states": ["chase", "display", "feed", "flight", "idle", "sleep", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-hawk-raptors-v1",
         "fingerprint": "90e106306f0549133b669e289c90552246eddb5e1615d4e207bde7bed8fd60ca",
@@ -1823,7 +1975,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.222Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-pigeon-yard-and-canopy-birds-v1",
+        "sha256": "fb844f27cc526fb23cf5dda1f7392e0342c2b9eda9c019efeeb4bf278edc7700",
+        "states": ["action", "flee", "fly", "idle"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-pigeon-yard-and-canopy-birds-v1",
         "fingerprint": "2a9cec73bcaeb449a28dd4a4010b8ffcad21e56b36c45be863e404fcbe737e96",
@@ -1897,7 +2056,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.244Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-hummingbird-working-and-display-birds-v1",
+        "sha256": "ec41d8cebc2d5ed9357a7ec30f1c8024a4e1471ef685ce3c4550cd77b8acf659",
+        "states": ["action", "flee", "fly", "guard", "idle", "sip"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-hummingbird-working-and-display-birds-v1",
         "fingerprint": "525a7bb1610096c57cc5f11280acbbfbd2604fe4f3f505177b41f576c526e4a0",
@@ -1964,7 +2130,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.267Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-secretary-bird-raptors-v1",
+        "sha256": "44ab024e0d7f3416e3935ec0eff49401934bc74be00560da0b89e1e0b38d1308",
+        "states": ["chase", "display", "feed", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-secretary-bird-raptors-v1",
         "fingerprint": "bd7cefb0650924ce007f88b82fdb71bbcbc8621e38a2f17a4f70c399bc485cec",
@@ -2024,7 +2197,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.292Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-shoebill-waders-v1",
+        "sha256": "602d294c17ee193fb01e093ccb76876586e31eca09d282ea171968df941cb42a",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-shoebill-waders-v1",
         "fingerprint": "9f49572c768862a482c41ed2ea8b484c1db8f3536f9ec0532b584e213e5d753b",
@@ -2084,7 +2264,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.314Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-sparrow-yard-and-canopy-birds-v1",
+        "sha256": "2c0115bcb39344b5e748621c413867aa2371b823b883db56dd3d33dbfd795a28",
+        "states": ["action", "flee", "fly", "idle"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-sparrow-yard-and-canopy-birds-v1",
         "fingerprint": "29f8dba36dcc8b69464ecc9b3456771d34a5e827e3acbcd9d8832c4a1ac3eaad",
@@ -2165,7 +2352,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.337Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-owl-raptors-v1",
+        "sha256": "c19e51243eb983af82a4c9a200d9ee02b63a1ce3386a4ea962afd8668d85ba2e",
+        "states": ["chase", "display", "feed", "flight", "idle", "sleep", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-owl-raptors-v1",
         "fingerprint": "560878a32898f9dc16d129c1a566354a4f9e1c4e6548b83c39a5c0ff9854aa76",
@@ -2225,7 +2419,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.362Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-toucan-forest-birds-v1",
+        "sha256": "f9c8ea01461e4294a4a2038e6a09fab70d9da1fa63782a041223eb062bde88f8",
+        "states": ["action", "flee", "fly", "idle"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-toucan-forest-birds-v1",
         "fingerprint": "be83a328f7378b5bf8d7d4f1d190a69a862643c996b8f6f0736889d55f610d29",
@@ -2285,7 +2486,13 @@
           "comparison": "public/demos/wildlife-3d/coyote-bears-and-canids-v1/chase.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-coyote-bears-and-canids-v1",
+        "fingerprint": "11d11e387831316611c9c03ccad3ac9da54e96a5af53ef72a3f35967dbe3dec8",
+        "sha256": "6d027a2749bdfcd89578bb93142659ecea7f0784b9a78ad5a1ffaa19abd6b49d",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.385Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-coyote-bears-and-canids-v1",
@@ -2346,7 +2553,13 @@
           "comparison": "public/demos/wildlife-3d/wolf-bears-and-canids-v1/chase.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-wolf-bears-and-canids-v1",
+        "fingerprint": "1b6f0b97e859c892a935a40132e0c87748338a0afbab79c1c1c3c257db13aff7",
+        "sha256": "03427261d0d74c455ab70a3a698ed3f67a8a91a8adfa7be5fb8f3d94190c0559",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.408Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-wolf-bears-and-canids-v1",
@@ -3671,7 +3884,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.480Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-wild-turkey-forest-birds-v1",
+        "sha256": "cda6faf4882fd2dcd3825a48bad83eed1c3a6b4e650eb482acc6d149d455bbd5",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-wild-turkey-forest-birds-v1",
         "fingerprint": "625bd47cb156c0a767661ae5a03d4d144dab807a4b981a70c1dd6494765ea913",
@@ -3731,7 +3951,13 @@
           "comparison": "public/demos/wildlife-3d/bobcat-wild-cats-v1/chase.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-bobcat-wild-cats-v1",
+        "fingerprint": "bdc4abb803bc8c5cb141618e437a9ac5c4f1a639b907c7b7620801102d88c5f5",
+        "sha256": "98f150894ffd8605aa74abd235f2d48b211bbcf33b938107c272776363c51d24",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.509Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-bobcat-wild-cats-v1",
@@ -3792,7 +4018,13 @@
           "comparison": "public/demos/wildlife-3d/cheetah-wild-cats-v1/chase.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-cheetah-wild-cats-v1",
+        "fingerprint": "370167e4b139bd996ffdb204885817ded4de4ef33793d1f249afc748a798911d",
+        "sha256": "9d3feea6c5ad47e9c0f38a5eec450f55fc0e47d1df1e681103952820ea47c0ae",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.533Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-cheetah-wild-cats-v1",
@@ -3853,7 +4085,13 @@
           "comparison": "public/demos/wildlife-3d/lynx-wild-cats-v1/chase.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-lynx-wild-cats-v1",
+        "fingerprint": "b13f361dfd827724a3150e5912b64e8b8502d98be0a762a52eee8d049bd3ed61",
+        "sha256": "6ee5ef39c25b51603174cc10cca9d29c4bb78208d27424859d4aa46a7838130a",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.560Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-lynx-wild-cats-v1",
@@ -3914,7 +4152,13 @@
           "comparison": "public/demos/wildlife-3d/jaguar-wild-cats-v1/chase.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-jaguar-wild-cats-v1",
+        "fingerprint": "bafd6836747340e22520244e536ce397fc0e40cdbe9d0ce73a64694243940b56",
+        "sha256": "a393a07daf3045b8d3fba098aa50fad1f3f8aca40c7052954430c49489017381",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.589Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-jaguar-wild-cats-v1",
@@ -3975,7 +4219,13 @@
           "comparison": "public/demos/wildlife-3d/leopard-big-cats-v1/chase.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-leopard-big-cats-v1",
+        "fingerprint": "20858ecb3cee481fa5b03d3c53f46b1f6198b135c76c80e8f2273ecbcfa8a7ca",
+        "sha256": "ab8d4df4ac0c76c178a49ec322381252a2aca3d31b9f96e4bf8a956652cd5524",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.612Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-leopard-big-cats-v1",
@@ -4036,7 +4286,13 @@
           "comparison": "public/demos/wildlife-3d/lion-big-cats-v1/chase.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-lion-big-cats-v1",
+        "fingerprint": "4dc2ce606231bbc3c52fba24f337589fc508a648f6b6ba6a1eb0947f5837e1ba",
+        "sha256": "568535e699f52df264099d3af669f11d7b66aec1ddd4e56618d6f6eea3c99e89",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.637Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-lion-big-cats-v1",
@@ -4097,7 +4353,13 @@
           "comparison": "public/demos/wildlife-3d/tiger-big-cats-v1/chase.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-tiger-big-cats-v1",
+        "fingerprint": "b8c07b84fc1f5b4da20fc09f5ca65ee37c67016f4b3c369318e14365328811e6",
+        "sha256": "239ffc04d4b1b759158dd351f47934b871998b5ef367df21f9840e2f2f17c73c",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.663Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-tiger-big-cats-v1",
@@ -4369,7 +4631,13 @@
           "comparison": "public/demos/wildlife-3d/panther-big-cats-v1/chase.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-panther-big-cats-v1",
+        "fingerprint": "b8601458c146253c76a32cf62b3f75e10435fe8716eee0f56330eab787b75747",
+        "sha256": "8415d0aef39f9cda1c994beed72b918ade2ebcf81dcea5aa45c6cd676898a513",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.757Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-panther-big-cats-v1",
@@ -6121,7 +6389,13 @@
           "comparison": "public/demos/wildlife-3d/ant-ground-insects-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-ant-ground-insects-v1",
+        "fingerprint": "c9b0380aee86917bf8c984f2b47c83e606aab41e88cf8d94b2bf96833d25525e",
+        "sha256": "f2ee1a4af28d50c02e9f4e636d94fa5bf8e7fa35b93bea18b922994b0c2d8808",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.828Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-ant-ground-insects-v1",
@@ -6182,7 +6456,13 @@
           "comparison": "public/demos/wildlife-3d/bee-flying-insects-and-bat-v1/sip.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-bee-flying-insects-and-bat-v1",
+        "fingerprint": "af52c815aa5fa23d6d6054737d339fd0a6239e7f18640f7ddf13fcc78bc42f30",
+        "sha256": "5048209ca189ce4400d72087c3a90d4a852e07a3dfefa171f1bd9357c64541ba",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.851Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-bee-flying-insects-and-bat-v1",
@@ -6297,7 +6577,13 @@
           "comparison": "public/demos/wildlife-3d/cricket-hoppers-and-beetles-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-cricket-hoppers-and-beetles-v1",
+        "fingerprint": "f1f2428b502f9b00461a64bb966ebd92a0fa882edf088bc5b379d33ed29454e2",
+        "sha256": "aaf3eb712eedc006e444b7b279a99313436c15e8fbf0a7093d4f3f0f6eef679e",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.900Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-cricket-hoppers-and-beetles-v1",
@@ -6351,7 +6637,13 @@
           "comparison": "public/demos/wildlife-3d/dragonfly-flying-insects-and-bat-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-dragonfly-flying-insects-and-bat-v1",
+        "fingerprint": "7042634d1f6a28e00584ff27d93e870d702e720cfad0cc39f300eb3be9938952",
+        "sha256": "478dcd6312d25c6458cbf74976c9b815d41bd5adff2feffc3ee274ae5dfea17d",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.925Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-dragonfly-flying-insects-and-bat-v1",
@@ -6405,7 +6697,13 @@
           "comparison": "public/demos/wildlife-3d/earwig-ground-insects-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-earwig-ground-insects-v1",
+        "fingerprint": "b6bcbc01298c5591c97240a03302e9a82c3561c4334fda53f0f59f2dfae0af92",
+        "sha256": "1e45d8c5676703e6d9728b4c5913b4e0a2ae47532b1f04f9a6abe60632f9904b",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.947Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-earwig-ground-insects-v1",
@@ -6513,7 +6811,13 @@
           "comparison": "public/demos/wildlife-3d/grasshopper-hoppers-and-beetles-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-grasshopper-hoppers-and-beetles-v1",
+        "fingerprint": "970c562d4fe6e1e93b233d84b9f3ac8db0227c24d20ab4478fb40da7d6281b6b",
+        "sha256": "1f48ac2eb6b3a0470fab2cf8f9ace9cda91dc221a6c96d497a9f6c48c3fc5786",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.995Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-grasshopper-hoppers-and-beetles-v1",
@@ -6567,7 +6871,13 @@
           "comparison": "public/demos/wildlife-3d/ladybug-hoppers-and-beetles-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-ladybug-hoppers-and-beetles-v1",
+        "fingerprint": "0e4e493ab09bdca9e45cb49be273f50bf7b7f04bdc88b7f730fdafdc9e7f3fe0",
+        "sha256": "25f69470649c78c735d6e4ec08e0d078166ef04c5d8c3545f29c215926c2a7fb",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:10.019Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-ladybug-hoppers-and-beetles-v1",
@@ -6621,7 +6931,13 @@
           "comparison": "public/demos/wildlife-3d/leaf-insect-ground-insects-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-leaf-insect-ground-insects-v1",
+        "fingerprint": "b73cda26594c46959969dfab2e78e35df783bf3c6661106ad5ad73cc05353dda",
+        "sha256": "07301ac9fc171a0b4f2262b6654aea57aaf19e504456828876b7abbc05602c74",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:10.042Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-leaf-insect-ground-insects-v1",
@@ -6729,7 +7045,13 @@
           "comparison": "public/demos/wildlife-3d/butterfly-flying-insects-and-bat-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-butterfly-flying-insects-and-bat-v1",
+        "fingerprint": "1db5bd52c54776161400ec6dc66fabd83dc2a1544ba99e149f4a1e962b8c30bc",
+        "sha256": "52cf43b703c408acc173926b969fe522913236bd61186c6112fe26212f2e9406",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:10.095Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-butterfly-flying-insects-and-bat-v1",
@@ -6844,7 +7166,13 @@
           "comparison": "public/demos/wildlife-3d/roly-poly-ground-insects-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-roly-poly-ground-insects-v1",
+        "fingerprint": "7755037d039542e955a6771939823da8c577d15e770b351e974896704697abf1",
+        "sha256": "95fa1a96f29997b3563f6d265697fd48c728f159b2eb4019b5defa3982c775a3",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:10.143Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-roly-poly-ground-insects-v1",
@@ -6959,7 +7287,13 @@
           "comparison": "public/demos/wildlife-3d/stag-beetle-hoppers-and-beetles-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-stag-beetle-hoppers-and-beetles-v1",
+        "fingerprint": "82671ffcc0b569c89f2d4de3562070623a1ea5d4be7c70c9ca014997d4aeef37",
+        "sha256": "f1088ac90d18c088b9b5c9868dd0f97df00109bc093327fd5f1e6c2b6c75831b",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:10.192Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-stag-beetle-hoppers-and-beetles-v1",
@@ -10144,7 +10478,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:10.333Z"
       },
-      "live": null,
+      "live": {
+        "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-golden-retriever-v1",
+        "sha256": "34f47b6923ebe6d84f5428f3d19e2b06af5862833fc4ce8337ebd4d2300bda1b",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-golden-retriever-v1",
         "fingerprint": "7874f9a2b918a7e8da781509ea6c016209b4ccbb50ae69db2a3d3722c602ff9c",
@@ -10889,7 +11230,13 @@
           "comparison": "public/demos/wildlife-3d/chameleon-lizards-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-chameleon-lizards-v1",
+        "fingerprint": "5311bcbc2199d20c80aab733587d213d07db7545703c295670df1424367c0994",
+        "sha256": "aae1b423fc18ca34a6acec35fd8b334176c05a37b61ed8c9068e68490d15e240",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:10.406Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-chameleon-lizards-v1",
@@ -10943,7 +11290,13 @@
           "comparison": "public/demos/wildlife-3d/frilled-neck-lizard-lizards-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-frilled-neck-lizard-lizards-v1",
+        "fingerprint": "aa11f8c499a6db6d4a2ad852b9b6d907cc33b4dbe458d2622fa788c079649c0c",
+        "sha256": "d1f4d5f59cd129d65ef4a63c89c1e3abb9fe28bf6e747bd6eec1ea10cf52dd9d",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:10.430Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-frilled-neck-lizard-lizards-v1",
@@ -11118,7 +11471,13 @@
           "comparison": "public/demos/wildlife-3d/gecko-lizards-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-gecko-lizards-v1",
+        "fingerprint": "265c6d668d45d4ce0f3e68acf92b7756852db7d29d0c3c1042c55b0cb42b9647",
+        "sha256": "da0a4a052c1369350d44f4d075b687f6495b6d33935d554d9492b9c0a945e340",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:10.475Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-gecko-lizards-v1",
@@ -11172,7 +11531,13 @@
           "comparison": "public/demos/wildlife-3d/iguana-lizards-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-iguana-lizards-v1",
+        "fingerprint": "c92a2b50dd4cf9a73b51c03eafef3775b2cd963b7f50667ce3a18fe0c73824d5",
+        "sha256": "fcc5315994b6caeeacfb2bccf943ecf6ffe6111e5753a6a7083aec91cf54c8bf",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:10.505Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-iguana-lizards-v1",
@@ -11341,7 +11706,13 @@
           "comparison": "public/demos/wildlife-3d/land-tortoise-woodland-crawlers-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-land-tortoise-woodland-crawlers-v1",
+        "fingerprint": "fbaf6bcfa4de7c07e0290e2ee3f63a8d92a94f86b529213b004b705acd53fc2f",
+        "sha256": "3f292c42ff19294a90daed66d0bf796507840fcc480bac200da8e3d4c8cd0409",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:10.581Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-land-tortoise-woodland-crawlers-v1",
@@ -11395,7 +11766,13 @@
           "comparison": "public/demos/wildlife-3d/newt-woodland-crawlers-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-newt-woodland-crawlers-v1",
+        "fingerprint": "c2a010edee0ce114ae3d4667eb2ce64964d06c83f64554ec59b96b6b0f8f9a64",
+        "sha256": "44564474b251b9f7a966d9271f34dcfb9d0f99388146779f5d3faaf5de570d3a",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:10.604Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-newt-woodland-crawlers-v1",
@@ -11571,7 +11948,13 @@
           "comparison": "public/demos/wildlife-3d/salamander-woodland-crawlers-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-salamander-woodland-crawlers-v1",
+        "fingerprint": "7683451f7ff37264534ec947a052910727d0f2c2d938d5206e394277d16833ff",
+        "sha256": "43bb60707d5b1ee30002cdd053ba7c78281377aa80c59f0b4d557b851b0267b9",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:10.653Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-salamander-woodland-crawlers-v1",
@@ -11625,7 +12008,13 @@
           "comparison": "public/demos/wildlife-3d/texas-horned-lizard-woodland-crawlers-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-texas-horned-lizard-woodland-crawlers-v1",
+        "fingerprint": "0a774f0ad4af6479d6cfc8899e89c3a2f2cd571dbf3d26dbc667b03de8294541",
+        "sha256": "c3c795a9c0d474c1569ecc9eb2b48c9058deec1fe384d1f3f8f52cf35b10b991",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:10.675Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-texas-horned-lizard-woodland-crawlers-v1",
@@ -11679,7 +12068,13 @@
           "comparison": "public/demos/wildlife-3d/aardvark-insect-eating-mammals-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-aardvark-insect-eating-mammals-v1",
+        "fingerprint": "4f00ecd68990813174528a5f68a495398429bfa4717895cdde87448bb8678c07",
+        "sha256": "534cc4765d879916435f0cd442c8647b8eae1bd80705062bab95ae2a7f6e3a43",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:10.700Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-aardvark-insect-eating-mammals-v1",
@@ -11733,7 +12128,13 @@
           "comparison": "public/demos/wildlife-3d/armadillo-insect-eating-mammals-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-armadillo-insect-eating-mammals-v1",
+        "fingerprint": "5aaed48116d2b1c53a659d82d00b9e7869b29044fc33bc565548cf82b020bac7",
+        "sha256": "4945ef88f6e7f00483129017f66de74a5a0c7678c8b4e69f03133ea3e22e5079",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:10.723Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-armadillo-insect-eating-mammals-v1",
@@ -11841,7 +12242,13 @@
           "comparison": "public/demos/wildlife-3d/bat-flying-insects-and-bat-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-bat-flying-insects-and-bat-v1",
+        "fingerprint": "f738f75de495672abc846246bc5ae084daf00b4d5d21a13947bd04bc2ca5df12",
+        "sha256": "935d508c6eb6a7562ee500cd253da8cd1eb7c9d23323f66c25ed92064758246f",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:10.769Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-bat-flying-insects-and-bat-v1",
@@ -12146,7 +12553,13 @@
           "comparison": "public/demos/wildlife-3d/fossa-small-ground-hunters-v1/chase.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-fossa-small-ground-hunters-v1",
+        "fingerprint": "c069fc21d9f993b919aef3d0e98bf4339316e23dcaba13847a881b046c88167c",
+        "sha256": "0c5d8cbb62b6b1f88e4ffb0a196384db71e080ea819072d6355b01234c5213f5",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:10.862Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-fossa-small-ground-hunters-v1",
@@ -12200,7 +12613,13 @@
           "comparison": "public/demos/wildlife-3d/giant-anteater-insect-eating-mammals-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-giant-anteater-insect-eating-mammals-v1",
+        "fingerprint": "b59f78407013c86e350891dab143fc067f697a399721d13ded5b745d73e7d4d9",
+        "sha256": "102233c02b71e8a813a926b6aede1988b128ef70fe96f18eb26e06353c018c83",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:10.885Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-giant-anteater-insect-eating-mammals-v1",
@@ -12336,7 +12755,13 @@
           "comparison": "public/demos/wildlife-3d/honey-badger-small-ground-hunters-v1/chase.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-honey-badger-small-ground-hunters-v1",
+        "fingerprint": "c2579c703b78eb191e0a3b69f3bfc2cbdf1dc591764051e245d1403c90812808",
+        "sha256": "b6a171f2958cca5565c6f90d1747c432ca3ff16175eff92194639acf2d838ccf",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:10.932Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-honey-badger-small-ground-hunters-v1",
@@ -12533,7 +12958,13 @@
           "comparison": "public/demos/wildlife-3d/mongoose-small-ground-hunters-v1/chase.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-mongoose-small-ground-hunters-v1",
+        "fingerprint": "7cc4bb58e33dd3913053922cee6ee0bb2f6341e79700663ddfc96c5ec0d5329e",
+        "sha256": "c85f83f7a05a8bb804e625a5ca7f29956bf9217ed0a99d675b7884ffe0049662",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:11.002Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-mongoose-small-ground-hunters-v1",
@@ -12648,7 +13079,13 @@
           "comparison": "public/demos/wildlife-3d/pangolin-insect-eating-mammals-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-pangolin-insect-eating-mammals-v1",
+        "fingerprint": "9018dc95231950c3e19dc3133ef186f0b7640cd0c18e58dafcd44bbb3a314685",
+        "sha256": "0968a1135f64ae4496268d70b7425978c1b27a33f07e0d881c19e84c7c656a8f",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:11.025Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-pangolin-insect-eating-mammals-v1",
@@ -13225,7 +13662,13 @@
           "comparison": "public/demos/wildlife-3d/white-nosed-coati-small-ground-hunters-v1/chase.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-white-nosed-coati-small-ground-hunters-v1",
+        "fingerprint": "a86d3bf221db7d92ebd437633039769710c44b86367024bda5bdd00232240c15",
+        "sha256": "41870fa67d72b1825baf7415aa665c951c6f2d34d01ebbeea8402cb502d97ac5",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:11.201Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-white-nosed-coati-small-ground-hunters-v1",

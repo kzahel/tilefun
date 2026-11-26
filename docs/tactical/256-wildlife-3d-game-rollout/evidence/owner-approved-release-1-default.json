@@ -1,0 +1,939 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "0146d96ddd8ccfaba8ec5debdbd49ccbe332a93e",
+  "workshopInputDigest": "29c805d70ef19e8a0452b76cbc4e6469576c532f238e6aa036936c4b42228e11",
+  "results": [
+    {
+      "type": "wildlife-dove-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "708db28a3036927aec7280258b6526f91390a016012aa4921571b8dc70df3d75",
+      "modelSha256": "ee228c4342eefd7fd2519734907663aa69bf8cb7030c810112a7db6d58713af6",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-dove&wildlife3dStage=dove-yard-and-canopy-birds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -9.298324584960938e-05,
+        9.913129661560067
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-sparrow-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "29f8dba36dcc8b69464ecc9b3456771d34a5e827e3acbcd9d8832c4a1ac3eaad",
+      "modelSha256": "2c0115bcb39344b5e748621c413867aa2371b823b883db56dd3d33dbfd795a28",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-sparrow&wildlife3dStage=sparrow-yard-and-canopy-birds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -9.298324584960938e-05,
+        9.913060863494882
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-pigeon-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "2a9cec73bcaeb449a28dd4a4010b8ffcad21e56b36c45be863e404fcbe737e96",
+      "modelSha256": "fb844f27cc526fb23cf5dda1f7392e0342c2b9eda9c019efeeb4bf278edc7700",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-pigeon&wildlife3dStage=pigeon-yard-and-canopy-birds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -9.298324584960938e-05,
+        9.912928955078137
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-parrot-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "5559637571e8eab342a2c3ea4cb5d6572795b32de92e55ed2471aa7e6eadcd9e",
+      "modelSha256": "8e44224c210d30a3bb591d17d489b9150615aa9bb2b32bcf810981db613ae4ed",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-parrot&wildlife3dStage=parrot-yard-and-canopy-birds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -9.250640869140625e-05,
+        9.913129661560069
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-atlantic-puffin-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "37000d7892fd82cd226347226f98866bcd30a4e3333e7f6dcb09c29ab0010c4c",
+      "modelSha256": "c205fac093284b88cb5c837f6086e888ba0bc193525162ff6f6a03e5516ed828",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-atlantic-puffin&wildlife3dStage=atlantic-puffin-seabirds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -9.298324584960938e-05,
+        9.913129661560067
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-blue-footed-booby-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "aab16a8b762d5c7e12649c65e2cdb287e763763d19bb7f73a1fc2a89c16f352d",
+      "modelSha256": "04b4b842703af31cf47cac6e0e3e98deb81fa54169ae02d75c00b5b5871a8241",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-blue-footed-booby&wildlife3dStage=blue-footed-booby-seabirds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -9.298324584960938e-05,
+        9.912795150756844
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-great-frigatebird-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "aeacdee81995e28a26dc74d3e34ebc9de257187eec420496fb7a5e1aec09a4fb",
+      "modelSha256": "075884968a21bbd448f3c462459cd5cfc5c4c419c115f9fea1d3cebd54d8ee89",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-great-frigatebird&wildlife3dStage=great-frigatebird-seabirds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.000942230224609375,
+        11.912953826904307
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-pelican-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "fa500694d0717c48d5dabebfc94a056a5a8b66933de7ca71f1007f74f7db664d",
+      "modelSha256": "4c60b706d211c39b0f19de4acd10620be706651b4534b392a2637b476bdc6194",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-pelican&wildlife3dStage=pelican-seabirds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.000942230224609375,
+        11.91319465637208
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-cassowary-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "6b3feeda327f259b05a9a08a25ad85adb5ffb5823b80a8bd86e3271d83bd48f5",
+      "modelSha256": "561abbfdeaf8cbfec13c7331601c319ad8dfb0f882d642e1a3e5aa0db67d2c59",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-cassowary&wildlife3dStage=cassowary-ratites-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009515151977539236,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-emu-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "5f5bff7e3ac911adf87ab2f2e820314f578a0e7994de2e03455870bd376b6fcb",
+      "modelSha256": "b769d3a6c8bef534604f58fd5ce2aa3775bdcdccbf39216c1172a03f2d57777b",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-emu&wildlife3dStage=emu-ratites-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009746093750000054,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-ostrich-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "0008e12c75dc7b6875bb08ff40f061fe36325793a6f95f70c110f4d176cc7c71",
+      "modelSha256": "47bb61d03cc5e18f510c33fd79ff85315fe884f9f80939edd4242f433232fda6",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-ostrich&wildlife3dStage=ostrich-ratites-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009590187072754128,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-kiwi-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "0e98243a2c18d99fe637c6f2932c2b2dfc7383c5c235bb2ea5c7e5a320d50c30",
+      "modelSha256": "01c452f609658e62eb837262274d68d7b96325886bc3f3630f173cbdc4240ad5",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-kiwi&wildlife3dStage=kiwi-ratites-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009831314086914099,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-flamingo-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "109f07f21bed78c44b901d48a2587eee191308149708720be26243908d3f9d4d",
+      "modelSha256": "1bc0f02ae31ee6e3ba6d8fc2b9a7efb0d252ea3fa4524604d3aec8d7d6c509be",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-flamingo&wildlife3dStage=flamingo-waders-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.000970779418945317,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-great-blue-heron-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "4da1d34276429c5782a635eb319417575151774b0d0b0348505217c963d10db7",
+      "modelSha256": "204f024c6dc3e565ff20f71221fcb7bbcf65ced1182399626551606aec343f7e",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-great-blue-heron&wildlife3dStage=great-blue-heron-waders-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009707183837890666,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-marabou-stork-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "4cb35308e8e2be52d3e1fa0cc5140208279d7e0287f5c24ee1f95d996f6a3e6b",
+      "modelSha256": "0e00495447b0b2778f111eff6662446df881486849c20eaf186439d7c6c985a2",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-marabou-stork&wildlife3dStage=marabou-stork-waders-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009708404541015666,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-shoebill-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "9f49572c768862a482c41ed2ea8b484c1db8f3536f9ec0532b584e213e5d753b",
+      "modelSha256": "602d294c17ee193fb01e093ccb76876586e31eca09d282ea171968df941cb42a",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-shoebill&wildlife3dStage=shoebill-waders-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009707183837890666,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-great-hornbill-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "7842fbac95a28de14af741ac0cf75c1951f743582d4ae5dee4c2cb62cfe68b15",
+      "modelSha256": "22b3b812accb711f3ea3b9152968133be93fe2cbadebfa495d61c5d6e26290da",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-great-hornbill&wildlife3dStage=great-hornbill-forest-birds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.7315767383577734,
+        9.97906317138674
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-toucan-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "be83a328f7378b5bf8d7d4f1d190a69a862643c996b8f6f0736889d55f610d29",
+      "modelSha256": "f9c8ea01461e4294a4a2038e6a09fab70d9da1fa63782a041223eb062bde88f8",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-toucan&wildlife3dStage=toucan-forest-birds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -9.250640869140625e-05,
+        9.913062759399422
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-kakapo-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "944e98bff1396e861f06215ef40cb4c2c1a42e1dccb1661d38ae3f5458c6f4b3",
+      "modelSha256": "7d6b0cf7cda68f69ded5c37257e6c913980287c5d28b828dc90f151970caf46f",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-kakapo&wildlife3dStage=kakapo-forest-birds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009689064025878944,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-wild-turkey-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "625bd47cb156c0a767661ae5a03d4d144dab807a4b981a70c1dd6494765ea913",
+      "modelSha256": "cda6faf4882fd2dcd3825a48bad83eed1c3a6b4e650eb482acc6d149d455bbd5",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-wild-turkey&wildlife3dStage=wild-turkey-forest-birds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009688529968261753,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-crow-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "8dc0d4ed0726bd6b4bce870a7a9ed2f6f0f36bb1427e0fbe4fc1684cb09d5367",
+      "modelSha256": "c34196a83cb84aaf0347aa492e0bc00e1f2458e9b84de362f83813906cbf2bbe",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-behavior-crow&wildlife3dStage=crow-working-and-display-birds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee",
+        "pickup",
+        "build"
+      ],
+      "heightRange": [
+        0,
+        42.76281799316407
+      ],
+      "statesOnApproachOrMount": [
+        "action",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee",
+          "pickup",
+          "build"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-raven-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "66c6669c9b03e101483dd5987de41efa2fd7e45a3caf32d7193b7a22bad88ec3",
+      "modelSha256": "cc996d398cf49c4966f7b659ab2bc5194677593a8b08bc1450c02bb21829c47e",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-behavior-raven&wildlife3dStage=raven-working-and-display-birds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee",
+        "pickup",
+        "bury"
+      ],
+      "heightRange": [
+        -1.5228051500326028,
+        24.023051094055244
+      ],
+      "statesOnApproachOrMount": [
+        "action",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee",
+          "pickup",
+          "bury"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-ruby-throated-hummingbird-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "525a7bb1610096c57cc5f11280acbbfbd2604fe4f3f505177b41f576c526e4a0",
+      "modelSha256": "ec41d8cebc2d5ed9357a7ec30f1c8024a4e1471ef685ce3c4550cd77b8acf659",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-behavior-hummingbird&wildlife3dStage=hummingbird-working-and-display-birds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee",
+        "sip",
+        "guard"
+      ],
+      "heightRange": [
+        -8.678436279296875e-05,
+        9.913127759933472
+      ],
+      "statesOnApproachOrMount": [
+        "action",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee",
+          "sip",
+          "guard"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-peacock-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "54031608a680ab7c6b99337602f97362b5a77c651140d55a7ab7723d35c9eb16",
+      "modelSha256": "8e935e65d86ecf418b83a7b2740369013b7bb24f6f5cb38767dac1d311368a45",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-behavior-peacock&wildlife3dStage=peacock-working-and-display-birds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "open",
+        "display",
+        "close"
+      ],
+      "heightRange": [
+        -0.0009983978271484355,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "action",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "open",
+          "display",
+          "close"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-eagle-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "6c360c7d0f81ae95c57ef431afd6cc758a7d0e6b3398bddc5309f92dabb26129",
+      "modelSha256": "e3c799f71ff7da95b40f7039a36ec67d814268dce6109422c5484abc4560b9a6",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-eagle&wildlife3dStage=eagle-raptors-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase",
+        "sleep",
+        "flight"
+      ],
+      "heightRange": [
+        -0.0009661712646485058,
+        27.91306661987305
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase",
+          "sleep",
+          "flight"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-hawk-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "90e106306f0549133b669e289c90552246eddb5e1615d4e207bde7bed8fd60ca",
+      "modelSha256": "a04b657c3787044e97e40a197d7302745e68789c02875e37d821aca13c18b9e0",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-hawk&wildlife3dStage=hawk-raptors-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase",
+        "sleep",
+        "flight"
+      ],
+      "heightRange": [
+        -0.38901857948353014,
+        27.919869522094736
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase",
+          "sleep",
+          "flight"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-owl-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "560878a32898f9dc16d129c1a566354a4f9e1c4e6548b83c39a5c0ff9854aa76",
+      "modelSha256": "c19e51243eb983af82a4c9a200d9ee02b63a1ce3386a4ea962afd8668d85ba2e",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-owl&wildlife3dStage=owl-raptors-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase",
+        "sleep",
+        "flight"
+      ],
+      "heightRange": [
+        -0.001067382812500039,
+        27.91305554199219
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase",
+          "sleep",
+          "flight"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-secretary-bird-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "bd7cefb0650924ce007f88b82fdb71bbcbc8621e38a2f17a4f70c399bc485cec",
+      "modelSha256": "44ab024e0d7f3416e3935ec0eff49401934bc74be00560da0b89e1e0b38d1308",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-secretary-bird&wildlife3dStage=secretary-bird-raptors-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0011020355224609713,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-dog-golden-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "7874f9a2b918a7e8da781509ea6c016209b4ccbb50ae69db2a3d3722c602ff9c",
+      "modelSha256": "34f47b6923ebe6d84f5428f3d19e2b06af5862833fc4ce8337ebd4d2300bda1b",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-dog-golden&wildlife3dStage=golden-retriever-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.000988006591796875,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}
