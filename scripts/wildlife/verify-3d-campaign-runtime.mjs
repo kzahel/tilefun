@@ -7,6 +7,7 @@ import { build } from "esbuild";
 import { chromium } from "playwright";
 import { createServer } from "vite";
 import {
+  WILDLIFE_DEFAULT_MODELS,
   WILDLIFE_MODEL_REVIEWS,
   wildlifeModelReviewPath,
 } from "../../src/wildlife/WildlifeModelReviewBank.ts";
@@ -17,9 +18,7 @@ const rollout = rolloutArg
   ? WILDLIFE_MODEL_REVIEWS.filter(({ batch }) => batch === rolloutArg.slice("--rollout=".length))
   : undefined;
 assert(!rollout || rollout.length, "No registered rollout candidates in the requested batch");
-const defaults = process.argv.includes("--defaults")
-  ? [...new Map(WILDLIFE_MODEL_REVIEWS.map((review) => [review.type, review])).values()]
-  : undefined;
+const defaults = process.argv.includes("--defaults") ? WILDLIFE_DEFAULT_MODELS : undefined;
 assert(!(rollout && defaults), "Choose --defaults or --rollout");
 const campaign = rollout || defaults ? undefined : await campaignPreview();
 if (campaign) assert.equal(campaign.count, 219);
@@ -184,7 +183,7 @@ async function verifyCampaign(
         idleTime: phase * 2,
       };
       batch.begin(enabled, true);
-      return { handled: batch.push(item), drawn: batch.end() };
+      return { disposition: batch.push(item), drawn: batch.end() };
     }
     const deadline = performance.now() + 5000;
     while (!draw(0, 0).drawn) {
@@ -298,7 +297,7 @@ async function verifyCampaign(
       card.material.dispose();
     }
     const disabled = draw(0, 0, false);
-    if (disabled.handled || disabled.drawn)
+    if (disabled.disposition !== "sprite" || disabled.drawn)
       throw Error(`Disabled mesh blocked the sprite for ${type}`);
     candidates.push({ type, clips: clips.length, ...(review ? { measuredClips } : {}) });
     batch.dispose();

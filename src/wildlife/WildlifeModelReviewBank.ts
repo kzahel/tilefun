@@ -1,4 +1,5 @@
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
+import defaultModels from "./default-models.json" with { type: "json" };
 import reviews from "./model-reviews.json" with { type: "json" };
 
 export interface WildlifeModelReview {
@@ -15,6 +16,13 @@ export interface WildlifeModelReview {
 }
 
 export const WILDLIFE_MODEL_REVIEWS: readonly WildlifeModelReview[] = reviews;
+
+const reviewsById = new Map(WILDLIFE_MODEL_REVIEWS.map((review) => [review.id, review]));
+export const WILDLIFE_DEFAULT_MODELS = Object.entries(defaultModels).map(([type, id]) => {
+  const review = reviewsById.get(id);
+  if (review?.type !== type) throw new Error(`Invalid default wildlife model: ${type} (${id})`);
+  return review;
+});
 
 export const WILDLIFE_MODEL_REVIEW_PREFIX = "pattern:wildlife-3d-";
 

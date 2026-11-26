@@ -28,7 +28,7 @@ import {
 } from "../scenarios/NaturalLandscapeRecipe.js";
 import {
   isFarmModelReviewCase,
-  isGroundFaunaModelReview,
+  isFourStateFaunaModelReview,
   isPackMountModelReview,
   wildlifeFeedingReview,
   wildlifeModelReviewRecipe,
@@ -145,7 +145,7 @@ export default function NaturalLandscapePage() {
     (reviewAnimal &&
     (wildlifeFeedingReview(reviewAnimal.type, caseId) ||
       isPackMountModelReview(reviewAnimal.type, caseId) ||
-      isGroundFaunaModelReview(reviewAnimal.type, caseId))
+      isFourStateFaunaModelReview(reviewAnimal.type, caseId))
       ? reviewAnimal
       : undefined);
   const fauna = FAUNA_PROFILES.find((animal) => animal.species === caseId);

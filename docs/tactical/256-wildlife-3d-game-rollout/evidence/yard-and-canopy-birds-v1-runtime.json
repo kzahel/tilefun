@@ -1,0 +1,134 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-dove-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "fly",
+          "action": "fly",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 400
+        }
+      ],
+      "candidateId": "dove-yard-and-canopy-birds-v1",
+      "modelSha256": "ee228c4342eefd7fd2519734907663aa69bf8cb7030c810112a7db6d58713af6"
+    },
+    {
+      "type": "wildlife-sparrow-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "fly",
+          "action": "fly",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 400
+        }
+      ],
+      "candidateId": "sparrow-yard-and-canopy-birds-v1",
+      "modelSha256": "2c0115bcb39344b5e748621c413867aa2371b823b883db56dd3d33dbfd795a28"
+    },
+    {
+      "type": "wildlife-pigeon-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "fly",
+          "action": "fly",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 400
+        }
+      ],
+      "candidateId": "pigeon-yard-and-canopy-birds-v1",
+      "modelSha256": "fb844f27cc526fb23cf5dda1f7392e0342c2b9eda9c019efeeb4bf278edc7700"
+    },
+    {
+      "type": "wildlife-parrot-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "fly",
+          "action": "fly",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 400
+        }
+      ],
+      "candidateId": "parrot-yard-and-canopy-birds-v1",
+      "modelSha256": "8e44224c210d30a3bb591d17d489b9150615aa9bb2b32bcf810981db613ae4ed"
+    }
+  ],
+  "clipSamples": 448,
+  "testedDepth": false
+}

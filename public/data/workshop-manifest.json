@@ -934,6 +934,12 @@
       "toolId": "animal-browser"
     },
     {
+      "id": "wildlife-3d-yard-and-canopy-birds-v1",
+      "name": "3D wildlife · yard and canopy birds v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
       "id": "motion",
       "name": "Furniture movement sets",
       "description": "Default layouts and physics. Custom layouts remain individually reviewable in the tool.",
@@ -61375,7 +61381,175 @@
           "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-mallard-frogs-and-ducks-v1"
         }
       }
+    },
+    {
+      "id": "pattern:wildlife-3d-dove-yard-and-canopy-birds-v1",
+      "batchId": "wildlife-3d-yard-and-canopy-birds-v1",
+      "kind": "wildlife",
+      "name": "Dove",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-dove-yard-and-canopy-birds-v1",
+      "fingerprint": "708db28a3036927aec7280258b6526f91390a016012aa4921571b8dc70df3d75",
+      "sourceFingerprint": "572b6d2527cd708ffcc44c47fe5a262c89a50b689b07b384ab34575998f5c027",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-dove-yard-and-canopy-birds-v1",
+        "prefabIds": [],
+        "revision": "55d13543afcbe531137de5faf7e1ad1d88723fa46e4f0fd73eeb70ebe6acf89f",
+        "renderFingerprint": "708db28a3036927aec7280258b6526f91390a016012aa4921571b8dc70df3d75",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-dove-yard-and-canopy-birds-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-dove-yard-and-canopy-birds-v1",
+        "fingerprint": "572b6d2527cd708ffcc44c47fe5a262c89a50b689b07b384ab34575998f5c027",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-dove-yard-and-canopy-birds-v1",
+          "prefabIds": [],
+          "revision": "55d13543afcbe531137de5faf7e1ad1d88723fa46e4f0fd73eeb70ebe6acf89f",
+          "renderFingerprint": "708db28a3036927aec7280258b6526f91390a016012aa4921571b8dc70df3d75",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-dove-yard-and-canopy-birds-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-sparrow-yard-and-canopy-birds-v1",
+      "batchId": "wildlife-3d-yard-and-canopy-birds-v1",
+      "kind": "wildlife",
+      "name": "Sparrow",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-sparrow-yard-and-canopy-birds-v1",
+      "fingerprint": "29f8dba36dcc8b69464ecc9b3456771d34a5e827e3acbcd9d8832c4a1ac3eaad",
+      "sourceFingerprint": "f98cc668dc8b83e05d4b4e2a0bb2157ea489bf875dd184d45b7e1d1349fb939d",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-sparrow-yard-and-canopy-birds-v1",
+        "prefabIds": [],
+        "revision": "2a3bb474b1c97b5a9a7cb691dad1c765b7766adfeb938eafa601b41fb7ba924e",
+        "renderFingerprint": "29f8dba36dcc8b69464ecc9b3456771d34a5e827e3acbcd9d8832c4a1ac3eaad",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-sparrow-yard-and-canopy-birds-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-sparrow-yard-and-canopy-birds-v1",
+        "fingerprint": "f98cc668dc8b83e05d4b4e2a0bb2157ea489bf875dd184d45b7e1d1349fb939d",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-sparrow-yard-and-canopy-birds-v1",
+          "prefabIds": [],
+          "revision": "2a3bb474b1c97b5a9a7cb691dad1c765b7766adfeb938eafa601b41fb7ba924e",
+          "renderFingerprint": "29f8dba36dcc8b69464ecc9b3456771d34a5e827e3acbcd9d8832c4a1ac3eaad",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-sparrow-yard-and-canopy-birds-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-pigeon-yard-and-canopy-birds-v1",
+      "batchId": "wildlife-3d-yard-and-canopy-birds-v1",
+      "kind": "wildlife",
+      "name": "Rock pigeon",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-pigeon-yard-and-canopy-birds-v1",
+      "fingerprint": "2a9cec73bcaeb449a28dd4a4010b8ffcad21e56b36c45be863e404fcbe737e96",
+      "sourceFingerprint": "9bf16001a9a0c268f02d6c8e1027a1967055312a80da3bd71c3e9074c372182d",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-pigeon-yard-and-canopy-birds-v1",
+        "prefabIds": [],
+        "revision": "c77076405fda89638948186afa92b0360a40ae15314dc0db1a304044b1c2d1f0",
+        "renderFingerprint": "2a9cec73bcaeb449a28dd4a4010b8ffcad21e56b36c45be863e404fcbe737e96",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-pigeon-yard-and-canopy-birds-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-pigeon-yard-and-canopy-birds-v1",
+        "fingerprint": "9bf16001a9a0c268f02d6c8e1027a1967055312a80da3bd71c3e9074c372182d",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-pigeon-yard-and-canopy-birds-v1",
+          "prefabIds": [],
+          "revision": "c77076405fda89638948186afa92b0360a40ae15314dc0db1a304044b1c2d1f0",
+          "renderFingerprint": "2a9cec73bcaeb449a28dd4a4010b8ffcad21e56b36c45be863e404fcbe737e96",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-pigeon-yard-and-canopy-birds-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-parrot-yard-and-canopy-birds-v1",
+      "batchId": "wildlife-3d-yard-and-canopy-birds-v1",
+      "kind": "wildlife",
+      "name": "Parrot",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-parrot-yard-and-canopy-birds-v1",
+      "fingerprint": "5559637571e8eab342a2c3ea4cb5d6572795b32de92e55ed2471aa7e6eadcd9e",
+      "sourceFingerprint": "c059da51fa161923efe45ce6bdf9786965a0ce43a98484bc0cd45f9b9860f963",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-parrot-yard-and-canopy-birds-v1",
+        "prefabIds": [],
+        "revision": "9e24dba1938bf050fef17b6f6ec657c6f24b76dc1747141922f78673518df239",
+        "renderFingerprint": "5559637571e8eab342a2c3ea4cb5d6572795b32de92e55ed2471aa7e6eadcd9e",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-parrot-yard-and-canopy-birds-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-parrot-yard-and-canopy-birds-v1",
+        "fingerprint": "c059da51fa161923efe45ce6bdf9786965a0ce43a98484bc0cd45f9b9860f963",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-parrot-yard-and-canopy-birds-v1",
+          "prefabIds": [],
+          "revision": "9e24dba1938bf050fef17b6f6ec657c6f24b76dc1747141922f78673518df239",
+          "renderFingerprint": "5559637571e8eab342a2c3ea4cb5d6572795b32de92e55ed2471aa7e6eadcd9e",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-parrot-yard-and-canopy-birds-v1"
+        }
+      }
     }
   ],
-  "inputDigest": "5a000400e2cbd5ca6ad485fc3450e5656d6d4b6f5811977579b624c24039558b"
+  "inputDigest": "98da5306702bda8f1e0937ea33879493183c518f67ff4b89166692bb5e1892e2"
 }

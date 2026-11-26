@@ -5,6 +5,7 @@ import { type AnimationClip, ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { FAUNA_DEFS, faunaType } from "../wildlife/Fauna.js";
 import { RABBIT_CLIPS, RABBIT_TYPE } from "../wildlife/Rabbit.js";
 import {
+  WILDLIFE_DEFAULT_MODELS,
   WILDLIFE_MODEL_REVIEWS,
   wildlifeModelClips,
   wildlifeModelReviewPath,
@@ -61,7 +62,7 @@ const query = new URLSearchParams(globalThis.location?.search);
 const reviewId = query.get("wildlife3dReview");
 const isPreview = ({ id, batch }: { id: string; batch: string }) =>
   id === reviewId || batch === reviewId;
-const selected = new Map(WILDLIFE_MODEL_REVIEWS.map((model) => [model.type, model]));
+const selected = new Map(WILDLIFE_DEFAULT_MODELS.map((model) => [model.type, model]));
 for (const review of WILDLIFE_MODEL_REVIEWS)
   if (isPreview(review)) selected.set(review.type, review);
 

@@ -85,6 +85,15 @@ WINGS = FEET = None
 BODY_RADII = BEAK_LEN = BEAK_STYLE = HEAD_R = STYLE = TAIL_LEN = None
 HEN_ROLLOUT = False
 CLASSIC_BIRD_ROLLOUT = False
+FLIGHT_ROLLOUT = None
+
+# Wing reach in the cruise and escape strokes, peck depth and escape pitch.
+FLIGHT_POSES = {
+    "dove": (.88, 1.0, .68, .18),
+    "sparrow": (.79, .94, .86, .22),
+    "pigeon": (.94, 1.0, .75, .18),
+    "parrot": (.85, .98, .53, .15),
+}
 
 
 def configure(variant):
@@ -123,6 +132,13 @@ def configure_rollout():
     assert NAME=="Buff Hen"
     HEN_ROLLOUT = True
     DURATIONS = {"idle":48,"walk":32,"action":23,"flee":19,"scratch":36,"peck":20,"eat":26}
+
+
+def configure_flight_rollout(variant):
+    global FLIGHT_ROLLOUT, DURATIONS
+    configure(variant)
+    FLIGHT_ROLLOUT = FLIGHT_POSES[variant]
+    DURATIONS = {"idle":48,"fly":19,"action":19,"flee":10}
 
 
 def joints():
@@ -289,7 +305,8 @@ def surface():
 
 def pose(rig,rest,clip,t):
     wave=math.tau*t
-    flying,swim,walk=clip=="fly",clip=="swim",clip=="walk"
+    escape=FLIGHT_ROLLOUT is not None and clip=="flee"
+    flying,swim,walk=clip=="fly" or escape,clip=="swim",clip=="walk"
     head_dip=(math.sin(math.pi*t)**2)*(.80 if clip=="feed" else .73 if clip in ("pickup","sip") else
               .34 if clip=="action" else .29 if clip=="sleep" else 0)
     if HEN_ROLLOUT:
@@ -303,6 +320,9 @@ def pose(rig,rest,clip,t):
             head_dip = .19*dip+.083*math.sin(2*wave)
         elif walk:
             head_dip = .12*math.sin(2*wave)
+    if FLIGHT_ROLLOUT is not None and clip=="action":
+        peck = math.sin(math.pi*t)**2
+        head_dip = FLIGHT_ROLLOUT[2]*peck*(.70+.30*math.cos(2*wave))
     display = math.sin(math.pi*t)**.75 if clip=="display" else t if clip=="open" else 1-t if clip=="close" else 0
     trunkq=euler(-.17*head_dip+.045*math.sin(wave)*(walk or flying),
                  .067*math.sin(wave)*walk,0)
@@ -310,12 +330,17 @@ def pose(rig,rest,clip,t):
              .019*math.sin(wave)+.035*math.sin(wave*2)*walk-.13*swim))
     if CLASSIC_BIRD_ROLLOUT and flying:
         shift.z += .056+.033*math.cos(wave)
+    if FLIGHT_ROLLOUT is not None and flying:
+        trunkq = euler((-.035 if not escape else -FLIGHT_ROLLOUT[3]) + .08*math.sin(wave))
+        shift.z = (.022 if not escape else .043)*math.sin(wave)
     body=transform(trunkq,BODY,BODY+shift)
     result={"body":body@rest["body"]}
     headq=trunkq@euler(-.78*head_dip+.075*display,0,.085*math.sin(wave)*(clip=="idle"))
     head=transform(headq,HEAD,body@HEAD+V((0,.22*head_dip,-(HEAD.z-BODY.z+.28)*head_dip*.66)))
     result["head"]=head@rest["head"]
     tail_pitch=-display*(1.17 if STYLE=="fan" else .28)+.062*math.sin(wave)
+    if FLIGHT_ROLLOUT is not None:
+        tail_pitch += -.32*head_dip + (.22+.10*math.sin(wave) if escape else 0)
     result["tail"]=transform(trunkq@euler(tail_pitch),TAIL,body@TAIL)@rest["tail"]
     for label,(a,b,c) in WINGS.items():
         sign=1 if label=="l" else -1
@@ -326,6 +351,15 @@ def pose(rig,rest,clip,t):
         if CLASSIC_BIRD_ROLLOUT and flying:
             spread=.55 if NAME=="Classic Seagull" else .49
             beat_span=.28
+        if FLIGHT_ROLLOUT is not None and flying:
+            # Fold through the recovery and open both wings at mid-stroke.
+            cruise, burst, _, _ = FLIGHT_ROLLOUT
+            opening = math.sin(math.pi*t)**2
+            spread = .26+(cruise-.26)*opening
+            if escape:
+                spread = .36+(burst-.36)*opening**.57
+            beat = math.sin(wave)
+            beat_span = .65 if escape else .50
         if swim and STYLE=="tuxedo":
             spread=.73
             beat_span=.23
@@ -343,7 +377,7 @@ def pose(rig,rest,clip,t):
             if HEN_ROLLOUT and clip=="flee":
                 forward,lift=stride(t,phase,.341,.191)
         elif flying or swim:
-            forward,lift=(-.18,.28)
+            forward,lift=(-.29,.35) if escape else (-.18,.28)
         elif clip=="scratch" and label=="l":
             forward,lift=(-.29*math.sin(math.pi*t)**2,.14*math.sin(math.pi*t))
             if HEN_ROLLOUT:

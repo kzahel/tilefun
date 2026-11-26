@@ -23,13 +23,13 @@ export function isFarmModelReviewCase(caseId: string): boolean {
   return FARM_MODEL_CASES.has(caseId);
 }
 
-export function isGroundFaunaModelReview(type: string, caseId: string): boolean {
+export function isFourStateFaunaModelReview(type: string, caseId: string): boolean {
   const animal = faunaProfile(type);
   return (
     animal?.species === caseId &&
     !animal.rideSpeed &&
     !["deep", "pond", "shore"].includes(animal.habitat) &&
-    ["idle/walk/action/flee", "idle/hop/action/flee"].includes(
+    ["idle/walk/action/flee", "idle/hop/action/flee", "idle/fly/action/flee"].includes(
       animal.clips.map(({ name }) => name).join("/"),
     )
   );
@@ -82,7 +82,7 @@ export function wildlifeModelReviewRecipe(
       ? forestWorkRecipe("deer")
       : naturalLandscapeRecipe(caseId, "balanced");
   const animal = faunaProfile(type);
-  if (animal && (isGroundFaunaModelReview(type, caseId) || isPackMountModelReview(type, caseId)))
+  if (animal && (isFourStateFaunaModelReview(type, caseId) || isPackMountModelReview(type, caseId)))
     return {
       version: 1,
       id,

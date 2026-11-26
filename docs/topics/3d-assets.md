@@ -16,9 +16,9 @@ view on those links. Opening one leaves the saved preference alone. The
 [mesh catalog](../../src/rendering/WildlifeMeshCatalog.ts) connects sprite
 identities to their models and poses. The shared 3D scene uses replicated
 position, height, facing and clip phase to drive placement and animation.
-With **3D animals** on, each view draws every registered animal model in range.
-Registered animals appear once their model loads and stay hidden if it fails.
-Sprites cover animals without a registered model, flattened remains and the
+With **3D animals** on, each view draws every selected animal model in range.
+Selected animals appear once their model loads and stay hidden if it fails.
+Sprites cover animals outside the selected model catalog, flattened remains and the
 explicit sprite setting. Editor previews request their own sheets as needed.
 
 The owner authorized default models for every animal with a distinct 3D
@@ -28,6 +28,11 @@ The current bank covers 113 animals and 515 state
 bindings, including both cows, the skinned rabbit, the frog and the mallard.
 The other 106 campaign animals remain on sprites. Farm-only rooster and chick
 forms also use sprites. Workshop reviews are available for feedback.
+
+The default catalog pins those 113 exact model IDs. New playable candidates
+use exact preview links while Workshop reviews are open. Promotion records a
+human decision for the matching candidate fingerprint and state evidence,
+then selects those same GLB bytes for ordinary play.
 
 ## Original 3D rabbit experiment (2026-11-18)
 

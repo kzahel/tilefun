@@ -4,6 +4,7 @@ import { readFile, stat } from "node:fs/promises";
 import { ENTITY_PALETTE } from "../../src/editor/EditorPalettes.ts";
 import { ENTITY_DEFS } from "../../src/entities/EntityDefs.ts";
 import {
+  WILDLIFE_DEFAULT_MODELS,
   WILDLIFE_MODEL_REVIEWS,
   wildlifeModelReviewPath,
 } from "../../src/wildlife/WildlifeModelReviewBank.ts";
@@ -86,7 +87,10 @@ for (const review of WILDLIFE_MODEL_REVIEWS) {
 }
 console.log(`${byType.size} runtime animals and ${states} required states`);
 console.log(
-  `${WILDLIFE_MODEL_REVIEWS.length} registered model candidates, ${qualified} qualified state bindings, ${live} animals verified as live defaults`,
+  `${WILDLIFE_MODEL_REVIEWS.length} registered model candidates, ${qualified} qualified state bindings`,
+);
+console.log(
+  `${WILDLIFE_DEFAULT_MODELS.length} default models, ${live} animals verified as live defaults`,
 );
 console.log(
   `${observed} states observed under public gameplay authority, with every state observed for ${observedAll} animals`,

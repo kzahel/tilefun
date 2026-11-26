@@ -267,9 +267,43 @@
         "action": "action",
         "flee": "fly"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "ee228c4342eefd7fd2519734907663aa69bf8cb7030c810112a7db6d58713af6",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/yard-and-canopy-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/dove-yard-and-canopy-birds-v1/native.png"
+        },
+        "fly": {
+          "action": "fly",
+          "sha256": "ee228c4342eefd7fd2519734907663aa69bf8cb7030c810112a7db6d58713af6",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/yard-and-canopy-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/dove-yard-and-canopy-birds-v1/fly.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "ee228c4342eefd7fd2519734907663aa69bf8cb7030c810112a7db6d58713af6",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/yard-and-canopy-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/dove-yard-and-canopy-birds-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "ee228c4342eefd7fd2519734907663aa69bf8cb7030c810112a7db6d58713af6",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/yard-and-canopy-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/dove-yard-and-canopy-birds-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-dove-yard-and-canopy-birds-v1",
+        "fingerprint": "708db28a3036927aec7280258b6526f91390a016012aa4921571b8dc70df3d75",
+        "model": "public/demos/wildlife-3d/dove-yard-and-canopy-birds-v1/model.glb",
+        "source": "public/demos/wildlife-3d/dove-yard-and-canopy-birds-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/dove-yard-and-canopy-birds-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/yard-and-canopy-birds-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-emu-provisional-v1",
@@ -533,9 +567,43 @@
         "action": "action",
         "flee": "fly"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "8e44224c210d30a3bb591d17d489b9150615aa9bb2b32bcf810981db613ae4ed",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/yard-and-canopy-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/parrot-yard-and-canopy-birds-v1/native.png"
+        },
+        "fly": {
+          "action": "fly",
+          "sha256": "8e44224c210d30a3bb591d17d489b9150615aa9bb2b32bcf810981db613ae4ed",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/yard-and-canopy-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/parrot-yard-and-canopy-birds-v1/fly.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "8e44224c210d30a3bb591d17d489b9150615aa9bb2b32bcf810981db613ae4ed",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/yard-and-canopy-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/parrot-yard-and-canopy-birds-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "8e44224c210d30a3bb591d17d489b9150615aa9bb2b32bcf810981db613ae4ed",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/yard-and-canopy-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/parrot-yard-and-canopy-birds-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-parrot-yard-and-canopy-birds-v1",
+        "fingerprint": "5559637571e8eab342a2c3ea4cb5d6572795b32de92e55ed2471aa7e6eadcd9e",
+        "model": "public/demos/wildlife-3d/parrot-yard-and-canopy-birds-v1/model.glb",
+        "source": "public/demos/wildlife-3d/parrot-yard-and-canopy-birds-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/parrot-yard-and-canopy-birds-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/yard-and-canopy-birds-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-peacock-provisional-v1",
@@ -770,9 +838,43 @@
         "action": "action",
         "flee": "fly"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "fb844f27cc526fb23cf5dda1f7392e0342c2b9eda9c019efeeb4bf278edc7700",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/yard-and-canopy-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/pigeon-yard-and-canopy-birds-v1/native.png"
+        },
+        "fly": {
+          "action": "fly",
+          "sha256": "fb844f27cc526fb23cf5dda1f7392e0342c2b9eda9c019efeeb4bf278edc7700",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/yard-and-canopy-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/pigeon-yard-and-canopy-birds-v1/fly.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "fb844f27cc526fb23cf5dda1f7392e0342c2b9eda9c019efeeb4bf278edc7700",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/yard-and-canopy-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/pigeon-yard-and-canopy-birds-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "fb844f27cc526fb23cf5dda1f7392e0342c2b9eda9c019efeeb4bf278edc7700",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/yard-and-canopy-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/pigeon-yard-and-canopy-birds-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-pigeon-yard-and-canopy-birds-v1",
+        "fingerprint": "2a9cec73bcaeb449a28dd4a4010b8ffcad21e56b36c45be863e404fcbe737e96",
+        "model": "public/demos/wildlife-3d/pigeon-yard-and-canopy-birds-v1/model.glb",
+        "source": "public/demos/wildlife-3d/pigeon-yard-and-canopy-birds-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/pigeon-yard-and-canopy-birds-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/yard-and-canopy-birds-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-ruby-throated-hummingbird-provisional-v1",
@@ -853,9 +955,43 @@
         "action": "action",
         "flee": "fly"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "2c0115bcb39344b5e748621c413867aa2371b823b883db56dd3d33dbfd795a28",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/yard-and-canopy-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/sparrow-yard-and-canopy-birds-v1/native.png"
+        },
+        "fly": {
+          "action": "fly",
+          "sha256": "2c0115bcb39344b5e748621c413867aa2371b823b883db56dd3d33dbfd795a28",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/yard-and-canopy-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/sparrow-yard-and-canopy-birds-v1/fly.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "2c0115bcb39344b5e748621c413867aa2371b823b883db56dd3d33dbfd795a28",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/yard-and-canopy-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/sparrow-yard-and-canopy-birds-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "2c0115bcb39344b5e748621c413867aa2371b823b883db56dd3d33dbfd795a28",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/yard-and-canopy-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/sparrow-yard-and-canopy-birds-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-sparrow-yard-and-canopy-birds-v1",
+        "fingerprint": "29f8dba36dcc8b69464ecc9b3456771d34a5e827e3acbcd9d8832c4a1ac3eaad",
+        "model": "public/demos/wildlife-3d/sparrow-yard-and-canopy-birds-v1/model.glb",
+        "source": "public/demos/wildlife-3d/sparrow-yard-and-canopy-birds-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/sparrow-yard-and-canopy-birds-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/yard-and-canopy-birds-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-owl-predator-v1",

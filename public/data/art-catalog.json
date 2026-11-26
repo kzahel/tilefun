@@ -9416,6 +9416,46 @@
       "source": "demos/wildlife-3d/mallard-frogs-and-ducks-v1/model.blend"
     },
     {
+      "id": "wildlife-3d-dove-yard-and-canopy-birds-v1",
+      "name": "wildlife 3d dove yard and canopy birds v1",
+      "image": "demos/wildlife-3d/dove-yard-and-canopy-birds-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "572b6d2527cd708ffcc44c47fe5a262c89a50b689b07b384ab34575998f5c027",
+      "source": "demos/wildlife-3d/dove-yard-and-canopy-birds-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-sparrow-yard-and-canopy-birds-v1",
+      "name": "wildlife 3d sparrow yard and canopy birds v1",
+      "image": "demos/wildlife-3d/sparrow-yard-and-canopy-birds-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "f98cc668dc8b83e05d4b4e2a0bb2157ea489bf875dd184d45b7e1d1349fb939d",
+      "source": "demos/wildlife-3d/sparrow-yard-and-canopy-birds-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-pigeon-yard-and-canopy-birds-v1",
+      "name": "wildlife 3d pigeon yard and canopy birds v1",
+      "image": "demos/wildlife-3d/pigeon-yard-and-canopy-birds-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "9bf16001a9a0c268f02d6c8e1027a1967055312a80da3bd71c3e9074c372182d",
+      "source": "demos/wildlife-3d/pigeon-yard-and-canopy-birds-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-parrot-yard-and-canopy-birds-v1",
+      "name": "wildlife 3d parrot yard and canopy birds v1",
+      "image": "demos/wildlife-3d/parrot-yard-and-canopy-birds-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "c059da51fa161923efe45ce6bdf9786965a0ce43a98484bc0cd45f9b9860f963",
+      "source": "demos/wildlife-3d/parrot-yard-and-canopy-birds-v1/model.blend"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",
@@ -37403,7 +37443,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/WildlifeModelReviewBank.ts:35"
+          "source": "src/wildlife/WildlifeModelReviewBank.ts:43"
         }
       ]
     },
@@ -37557,7 +37597,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/WildlifeModelReviewBank.ts:35"
+          "source": "src/wildlife/WildlifeModelReviewBank.ts:43"
         }
       ]
     },

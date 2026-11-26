@@ -1,0 +1,22 @@
+{
+  "runtimeType": "wildlife-sparrow-provisional-v1",
+  "version": 3,
+  "fit": [
+    9,
+    6.6,
+    11.6
+  ],
+  "autoFit": false,
+  "portraitCenter": 0.92,
+  "clips": [
+    "idle",
+    "fly",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "Archived campaign body and sprite-guided grounded peck, cruising wingbeat and tucked escape stroke.",
+  "model": "model.glb",
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

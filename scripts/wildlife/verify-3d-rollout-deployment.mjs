@@ -6,7 +6,7 @@ import { ENTITY_DEFS } from "../../src/entities/EntityDefs.ts";
 import { createDescriptor } from "../../src/generation/GenerationDescriptor.ts";
 import {
   isFarmModelReviewCase,
-  isGroundFaunaModelReview,
+  isFourStateFaunaModelReview,
   isPackMountModelReview,
   wildlifeFeedingReview,
 } from "../../src/scenarios/WildlifeModelReviewRecipe.ts";
@@ -94,7 +94,7 @@ try {
       const habitat = faunaProfile(candidate.type)?.habitat;
       const waterStage = ["deep", "pond", "shore"].includes(habitat);
       const farmStage = !candidate.classicTravel && isFarmModelReviewCase(candidate.lab);
-      const groundStage = isGroundFaunaModelReview(candidate.type, candidate.lab);
+      const fourStateStage = isFourStateFaunaModelReview(candidate.type, candidate.lab);
       const packStage = isPackMountModelReview(candidate.type, candidate.lab);
       const feeding = wildlifeFeedingReview(candidate.type, candidate.lab);
       const doeStage = candidate.type === DEER_TYPE;
@@ -103,7 +103,7 @@ try {
         hunterStage ||
         waterStage ||
         farmStage ||
-        groundStage ||
+        fourStateStage ||
         packStage ||
         feeding ||
         candidate.type === "wildlife-robin-v1";
@@ -115,7 +115,7 @@ try {
             ? ["flee", "ride", "ride-sprint"]
             : doeStage
               ? ["stamp", "flee"]
-              : groundStage || feeding
+              : fourStateStage || feeding
                 ? ["flee"]
                 : [];
       const naturalClips = observeAllStates
@@ -196,11 +196,11 @@ try {
       const switchModels = page.getByRole("checkbox", { name: "3D animals", exact: true });
       const approachStates = doeStage
         ? await verifyDoeApproach(page, candidate, states)
-        : farmStage || groundStage || packStage || feeding
+        : farmStage || fourStateStage || packStage || feeding
           ? await verifyApproachClips(page, stage, candidate, states)
           : [];
       const landingStates =
-        farmStage || groundStage || packStage || feeding
+        farmStage || fourStateStage || packStage || feeding
           ? []
           : await verifyLandingClips(page, candidate, states);
       for (const clip of [...landingStates, ...approachStates])
@@ -219,10 +219,10 @@ try {
       await switchModels.check();
       await modelCount(true);
       assert(poses.clips.length > 1, `No gameplay clip transition observed for ${candidate.type}`);
-      if (groundStage && faunaProfile(candidate.type)?.hop)
+      if (fourStateStage && faunaProfile(candidate.type)?.hop)
         assert(poses.maxZ > 2, `No physical hop observed for ${candidate.type}`);
       const game = await verifyGameEntry(page, candidate, preview, {
-        verifyGroundStates: groundStage || packStage || !!feeding,
+        verifyFaunaStates: fourStateStage || packStage || !!feeding,
         packStage,
         approachClips: contactClips,
         states,
@@ -397,7 +397,7 @@ async function waitForAnimalClip(page, expected, timeout) {
 }
 
 async function verifyGameEntry(page, candidate, preview, options) {
-  const { verifyGroundStates, packStage, approachClips, states, feeding } = options;
+  const { verifyFaunaStates, packStage, approachClips, states, feeding } = options;
   await page.evaluate(() => localStorage.removeItem("tilefun-3d-animals"));
   const generation = createDescriptor("flat", 1);
   const arrival = { x: 4, y: 4, generation };
@@ -410,11 +410,11 @@ async function verifyGameEntry(page, candidate, preview, options) {
   await page.getByRole("button", { name: "New World", exact: true }).click({ timeout: 45_000 });
   await gameReady(page);
   await page.evaluate(
-    ({ type, verifyGroundStates, feeding }) => {
+    ({ type, verifyFaunaStates, feeding }) => {
       const game = document.querySelector("#game").__game;
       const position = game.stateView.playerEntity.position;
       game.transport.send({ type: "set-editor-mode", enabled: true });
-      const wx = position.wx + (verifyGroundStates ? 116 : 20);
+      const wx = position.wx + (verifyFaunaStates ? 116 : 20);
       const wy = position.wy + 28;
       game.transport.send({ type: "edit-spawn", entityType: type, wx, wy });
       if (feeding) {
@@ -425,7 +425,7 @@ async function verifyGameEntry(page, candidate, preview, options) {
       }
       game.transport.send({ type: "set-editor-mode", enabled: false });
     },
-    { type: candidate.type, verifyGroundStates, feeding },
+    { type: candidate.type, verifyFaunaStates, feeding },
   );
   const expected = { type: candidate.type, sheetKey: ENTITY_DEFS[candidate.type].sprite.sheetKey };
   const animal = ({ type, sheetKey }) => {
@@ -450,9 +450,9 @@ async function verifyGameEntry(page, candidate, preview, options) {
   await gameReady(page);
   await page.waitForFunction(animal, expected, { timeout: 30_000 });
   const result = { createdAndDrawn: true, savedAndDrawnAfterReload: true };
-  if (verifyGroundStates) {
+  if (verifyFaunaStates) {
     const rideClips = packStage ? ["ride", "ride-sprint"] : [];
-    const statesAfterReload = await verifyGroundFaunaInGame(
+    const statesAfterReload = await verifyFaunaStatesInGame(
       page,
       expected,
       states,
@@ -491,7 +491,7 @@ async function verifyGameEntry(page, candidate, preview, options) {
   return { ...result, statesAfterReload };
 }
 
-async function verifyGroundFaunaInGame(page, expected, clips, approachClips, rideClips, feeding) {
+async function verifyFaunaStatesInGame(page, expected, clips, approachClips, rideClips, feeding) {
   const passive = clips.flatMap(({ name }, index) => (approachClips.includes(name) ? [] : [index]));
   const action = clips.findIndex(({ name }) => name === "action");
   const states = await page.evaluate(

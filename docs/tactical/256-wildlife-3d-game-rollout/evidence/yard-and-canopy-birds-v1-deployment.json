@@ -1,0 +1,130 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "38d51050556f7786752e3a18fda56fff9372eab2e3d2bed84fbfe8357affcc32",
+  "results": [
+    {
+      "type": "wildlife-dove-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "708db28a3036927aec7280258b6526f91390a016012aa4921571b8dc70df3d75",
+      "modelSha256": "ee228c4342eefd7fd2519734907663aa69bf8cb7030c810112a7db6d58713af6",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-dove&wildlife3dStage=dove-yard-and-canopy-birds-v1&wildlife3dReview=dove-yard-and-canopy-birds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.00009298324584960938,
+        9.912928955078133
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-sparrow-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "29f8dba36dcc8b69464ecc9b3456771d34a5e827e3acbcd9d8832c4a1ac3eaad",
+      "modelSha256": "2c0115bcb39344b5e748621c413867aa2371b823b883db56dd3d33dbfd795a28",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-sparrow&wildlife3dStage=sparrow-yard-and-canopy-birds-v1&wildlife3dReview=sparrow-yard-and-canopy-birds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.00009298324584960938,
+        9.91312775993348
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-pigeon-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "2a9cec73bcaeb449a28dd4a4010b8ffcad21e56b36c45be863e404fcbe737e96",
+      "modelSha256": "fb844f27cc526fb23cf5dda1f7392e0342c2b9eda9c019efeeb4bf278edc7700",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-pigeon&wildlife3dStage=pigeon-yard-and-canopy-birds-v1&wildlife3dReview=pigeon-yard-and-canopy-birds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.7332093734743395,
+        10.078981571197534
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-parrot-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "5559637571e8eab342a2c3ea4cb5d6572795b32de92e55ed2471aa7e6eadcd9e",
+      "modelSha256": "8e44224c210d30a3bb591d17d489b9150615aa9bb2b32bcf810981db613ae4ed",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-parrot&wildlife3dStage=parrot-yard-and-canopy-birds-v1&wildlife3dReview=parrot-yard-and-canopy-birds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.00009250640869140625,
+        9.913062759399422
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

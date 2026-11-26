@@ -66,11 +66,11 @@ shared game/lab rendering, sprite fallback and performance.
    comparisons and register the model with the existing Workshop tools.
    Check each required action through the shared renderer. Workshop still
    accepts feedback on individual candidates.
-4. **Ship through normal play.** The shared catalog selects the latest
-   registered model for each animal and checks its actions on load. A fresh
+4. **Ship through normal play.** The shared catalog uses the exact candidates
+   selected in `src/wildlife/default-models.json` and checks their actions on load. A fresh
    browser shows eligible models by default. **3D animals** switches the
-   whole view to sprites. In model mode animals with a registered asset
-   appear when it is ready. Animals without a registered asset use sprites.
+   whole view to sprites. In model mode animals with a default asset
+   appear when it is ready. Animals without a default asset use sprites.
    Check existing and newly placed animals, save/reload and replicated play. Reuse the shared
    scene in Workshop. Production builds need the complete asset bank from
    a fresh checkout. Use the repository's [release and CI path](../topics/testing.md#ci-and-deployment)
@@ -106,6 +106,29 @@ runtime scope reconciliation in the execution notes.
   and verify the actual live build before closing the goal.
 
 ## Delivery log
+
+### Yard and canopy birds, 2026-11-26
+
+The dove, sparrow, rock pigeon and parrot reuse their exact archived Blender
+meshes and packed palettes. The updated rigs have four sprite-guided actions
+each. The normal wingbeat folds through recovery. The escape pitches into a
+wider stroke with tucked feet, and the peck keeps both feet planted. Palette
+changes carry over the dove's rust wing edging, sparrow's bill and bib, pigeon
+wingbars and parrot's red trim.
+
+The [renderer report](256-wildlife-3d-game-rollout/evidence/yard-and-canopy-birds-v1-runtime.json)
+records 448 samples across 16 states and the sprite preference. The
+[public preview report](256-wildlife-3d-game-rollout/evidence/yard-and-canopy-birds-v1-deployment.json)
+pins the exact files and records all four states for each bird in Workshop
+and after saving and reopening a normal game world under the preview link.
+The four candidates are [open for Workshop review](https://tilefun.graehlarts.com/tilefun/workshop.html#/review/pattern%3Awildlife-3d-dove-yard-and-canopy-birds-v1).
+
+The default catalog pins all 113 previously enabled model IDs. Future releases
+can select qualified candidates individually through `promote-3d-rollout.mjs`.
+The command requires the exact Workshop approval and includes its fingerprint
+with the ledger's promotion record. The shared renderer rechecked all 515
+enabled states in 14,420 samples. The resume check found no approved 3D
+candidates in the Workshop inbox.
 
 ### Model-only rendering for registered animals
 

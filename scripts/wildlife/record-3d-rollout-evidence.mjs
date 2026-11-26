@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import {
-  isGroundFaunaModelReview,
+  isFourStateFaunaModelReview,
   isPackMountModelReview,
   wildlifeFeedingReview,
 } from "../../src/scenarios/WildlifeModelReviewRecipe.ts";
@@ -58,7 +58,7 @@ for (const model of models) {
     model.classicTravel ||
     wildlifeFeedingReview(model.type, model.lab) ||
     isPackMountModelReview(model.type, model.lab) ||
-    isGroundFaunaModelReview(model.type, model.lab)
+    isFourStateFaunaModelReview(model.type, model.lab)
   )
     assert.deepEqual(
       [...(served.game.statesAfterReload ?? [])].sort(),

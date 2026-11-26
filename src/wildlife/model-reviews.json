@@ -2707,5 +2707,97 @@
       "swim.png": "40e3c987bfad22b494773bf17b015325cc005cd429f1ee7d8b7c4c610beed5b8",
       "waddle.png": "7284da2455fe7083a1d663970a170729b570b2ba1da82767f1a24b29f04215ec"
     }
+  },
+  {
+    "id": "dove-yard-and-canopy-birds-v1",
+    "type": "wildlife-dove-provisional-v1",
+    "name": "Dove",
+    "batch": "wildlife-3d-yard-and-canopy-birds-v1",
+    "lab": "dove",
+    "scale": 11.6,
+    "topDown": {
+      "width": 0.7758620689655172,
+      "height": 0.5689655172413793
+    },
+    "files": {
+      "action.png": "806c45ed2331aa7bea418eaaf2219490d62807af0d1801abe921cd0e939e5f24",
+      "appearance.png": "572b6d2527cd708ffcc44c47fe5a262c89a50b689b07b384ab34575998f5c027",
+      "capture-config.json": "3b5958e5a529aa83b518d608971b05051d8a10b3d9cdbf8c529ce3215e9603fc",
+      "comparison.mp4": "6c03b64a8c2d47ee2d54c64db9fa222bd74f9ce66878595d14747e8fd1d3fe41",
+      "flee.png": "99cfed5d5386ff153581873543f737530f7c7eafb52226a313e617a98849b395",
+      "fly.png": "7ff965530708e52c69953b75ab9111b3c484bbf826fcce260aa055ab2e820549",
+      "model.blend": "0110e4590ff7d176aa599eadbe144408877b02ea70b50f31d385e926b501c9ed",
+      "model.glb": "ee228c4342eefd7fd2519734907663aa69bf8cb7030c810112a7db6d58713af6",
+      "native.png": "e055382ed0fc27a73490145d77f3072c0f3696f8150f497a76bfea2f6126b6ea"
+    }
+  },
+  {
+    "id": "sparrow-yard-and-canopy-birds-v1",
+    "type": "wildlife-sparrow-provisional-v1",
+    "name": "Sparrow",
+    "batch": "wildlife-3d-yard-and-canopy-birds-v1",
+    "lab": "sparrow",
+    "scale": 11.6,
+    "topDown": {
+      "width": 0.7758620689655172,
+      "height": 0.5689655172413793
+    },
+    "files": {
+      "action.png": "20218016d57656c3d0abaa1b5b448fb12c75235ce2950a3cf627cc4e626d6498",
+      "appearance.png": "f98cc668dc8b83e05d4b4e2a0bb2157ea489bf875dd184d45b7e1d1349fb939d",
+      "capture-config.json": "07689dbe89debad017014d188953db7e9505fc4012e55f28dacb8d8592cf7712",
+      "comparison.mp4": "2c10c1102d75c308a1595ee07e98d3b6f61982c8301831521f00b0733f063f55",
+      "flee.png": "f776de0fb7e798156353aa0a0cda8574bab13de09479e8ccef1f548899de3992",
+      "fly.png": "ec177ea936b78841b44b2ac835b1b40adbcfd5ba51dc4ca9e28f8b8ffab544d8",
+      "model.blend": "74fd6655af3fafc09863c3667fd23bfb96e4b0d89c9eddc45a0c96391d7a2af6",
+      "model.glb": "2c0115bcb39344b5e748621c413867aa2371b823b883db56dd3d33dbfd795a28",
+      "native.png": "44e41d1433a6009123fd1c98db236323972d164af60840406b8dd9faa4622f11"
+    }
+  },
+  {
+    "id": "pigeon-yard-and-canopy-birds-v1",
+    "type": "wildlife-pigeon-provisional-v1",
+    "name": "Rock pigeon",
+    "batch": "wildlife-3d-yard-and-canopy-birds-v1",
+    "lab": "pigeon",
+    "scale": 11.6,
+    "topDown": {
+      "width": 0.7758620689655172,
+      "height": 0.5689655172413793
+    },
+    "files": {
+      "action.png": "694dbda124c276aed5f432ed5120c205b96f9efd56d44c9931067ba0e3a77e17",
+      "appearance.png": "9bf16001a9a0c268f02d6c8e1027a1967055312a80da3bd71c3e9074c372182d",
+      "capture-config.json": "dfced02a3d90eaddafce0dfa25b6d80f6f5eab0ef04cefc2c0daed4a63e19cff",
+      "comparison.mp4": "7f3d28328ea950aa8ff7706ca7e29bf2f5bbcf3067e971cb61fc5f419f7a0456",
+      "flee.png": "be6eea32867a01d81beb13bbde732844db62afcef9318ae4d987e42604ab3507",
+      "fly.png": "98eee13526a942419c709fbbf4ec2618aa1dc7d708b81674b65701f38f8c7251",
+      "model.blend": "336f019b06eeb1abe15f4fed99cfa8af5e49896db9f76d85ff4fabd7b9c9d88e",
+      "model.glb": "fb844f27cc526fb23cf5dda1f7392e0342c2b9eda9c019efeeb4bf278edc7700",
+      "native.png": "6d4a32a908d956fd59ebcb1bfefbf1ab1ab4ac8b372a213ad2631850da49210a"
+    }
+  },
+  {
+    "id": "parrot-yard-and-canopy-birds-v1",
+    "type": "wildlife-parrot-provisional-v1",
+    "name": "Parrot",
+    "batch": "wildlife-3d-yard-and-canopy-birds-v1",
+    "lab": "parrot",
+    "scale": 11.6,
+    "topDown": {
+      "width": 0.7758620689655172,
+      "height": 0.5689655172413793
+    },
+    "files": {
+      "action.png": "da09ec2f7fef2fda8f329f91c578c8e3b9b80b19675275456f7a239907e2cc8b",
+      "appearance.png": "c059da51fa161923efe45ce6bdf9786965a0ce43a98484bc0cd45f9b9860f963",
+      "capture-config.json": "a9de8b5f33919b624340a43e51a9e73b0fe676253a81aaf4fb5fd48c3a3d9a33",
+      "comparison.mp4": "7d380983cad73493e74d65fe241146c012f8f927cbf68d3a1c10224ddd84981c",
+      "flee.png": "eb59c95ad5724fe8da771d0085a68863b997d5189f543eb509581b6fd987b7ad",
+      "fly.png": "a9e7183ea2fdfe3af4326f2c4d2bbbd7525e0784c662225ae3ed7a10cb2a1335",
+      "model.blend": "bae0dbb0cf98b01fae8ba954705cf21e703aac394fa5d6ac8db947e515f479fa",
+      "model.glb": "8e44224c210d30a3bb591d17d489b9150615aa9bb2b32bcf810981db613ae4ed",
+      "native.png": "9ede34da260f107b39249484e385bb95791cc808cb765f887a8769b9368346aa"
+    }
   }
 ]
