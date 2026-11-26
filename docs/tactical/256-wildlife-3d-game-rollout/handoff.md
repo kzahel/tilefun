@@ -1,5 +1,10 @@
 # Handoff for the wildlife 3D rollout
 
+Tactical 256 completed on 2026-11-26. The public game at `663f1a85` ships
+all 219 models by default. The animation ledger links their gameplay
+receipts for all 1,023 states. The earlier resume prompt below records
+how the rollout was performed.
+
 Paste the following into a new session started in the Tilefun checkout.
 
 ```text
@@ -68,6 +73,6 @@ archived Blender drafts. All 219 animals have registered exact candidates
 and all 1,023 states have distinct qualified actions and observed gameplay.
 The ledger initially had production evidence for 113 defaults and their 515
 states. The owner then approved all 106 remaining candidates expressly in the
-rollout conversation, and Workshop recorded the exact decisions. Use the
-delivery log and ledger for the promotion batches and verify the remaining
-508 states in the deployed default game.
+rollout conversation, and Workshop recorded the exact decisions. The three
+promotion releases verified the remaining 508 states in the deployed default
+game. The delivery log and ledger link the exact receipts.

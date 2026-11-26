@@ -125,6 +125,14 @@ Release 2 deployed on `5e7fb002` and verified 177 states for another 40
 animals. This brings the live default bank to 182 animals and 827 verified
 states. [Release 2 playback](256-wildlife-3d-game-rollout/evidence/owner-approved-release-2-default.json)
 
+Release 3 deployed on `663f1a85` and verified all 196 states for the last 37
+animals. The final audit matched all 219 served GLB hashes to the selected
+default bank and checked each animal's playback receipt. The shared renderer
+qualified the full bank in 28,644 samples. All 219 animals now ship in 3D by
+default, with production playback recorded for all 1,023 states and the sprite
+preference tested. [Release 3 playback](256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json) ·
+[Production deployment](https://github.com/kzahel/tilefun/actions/runs/45792353922)
+
 ### Complete preview roster, 2026-11-26
 
 The remaining archived models cover the land reptiles, crawling fauna,
@@ -744,6 +752,12 @@ after a median 35 ms cold and 45 ms warm, with zero GLB traffic.
 Both production racetrack lanes passed visible-terrain readiness through
 walk, sprint and reverse. The latest readiness probes found both Pixel
 testbeds unavailable over ADB and the Steam Deck unavailable over SSH.
+
+The final deployment at `663f1a85` also passed the headed desktop crowd
+comparison at 1×, with 24 placed animals across six models from the last
+release. Both lanes missed zero of 600 frame intervals. Frame p95 was
+10.0 ms with models and 9.2 ms with sprites, with GPU p95 of 2.04 ms and
+0.74 ms respectively.
 
 Use `node --import tsx scripts/wildlife/audit-3d-rollout.mjs --drafts` to check
 the inventory, draft hashes and registered action names. Run

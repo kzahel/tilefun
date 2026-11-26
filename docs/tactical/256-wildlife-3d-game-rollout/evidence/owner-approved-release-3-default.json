@@ -1,0 +1,1247 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+  "workshopInputDigest": "40ec6ba7a63f52d24ad8fee7b5d7a930f30c8f3b9f52512a73a2ec6facf12cbe",
+  "results": [
+    {
+      "type": "wildlife-capybara-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "78fe99658588c3b274caa9d3f3e9769145e3b52c83164074d7c0479af9d5ce68",
+      "modelSha256": "e63c4d3209d636ba7ee6ff7fb505c0b56bfd450945a15eaf7f892d959a2fcad4",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-capybara&wildlife3dStage=capybara-forest-mammals-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.000966934204101568,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-panda-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "44304892637025d90eb1af1f393b8ffa01988f2a57831a54af476fc74659318f",
+      "modelSha256": "18af782aa489cddccb153c2c56c14582f777e04ce311400448e8eee1c62e9c4e",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-panda&wildlife3dStage=panda-forest-mammals-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009755420684814509,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-red-panda-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "6e09c39231740d1b07ef692caa1e06d7c4d8003ca26640d7bf4e5385c1079144",
+      "modelSha256": "095adb3f4bec8f01d14288385e4da35a17e34a4b2413535faa913339435f7b83",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-red-panda&wildlife3dStage=red-panda-forest-mammals-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009590873718261909,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-skunk-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "1de1847c33f556d9b2af63e6e611fa0e28f6068830d6b6657875fd544ee21d8d",
+      "modelSha256": "c9a506819796621b46b33ea632101ddde58af90e460ab0e4575b282cbb85dc53",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-skunk&wildlife3dStage=skunk-forest-mammals-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009554080963134887,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-binturong-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "eed98ce26d696ace4196a296f98005f44e0e7a07c29b630216dc34c6a38a6ffc",
+      "modelSha256": "4c7b3be3b45acf2496f840fed7c520f57c77beb60a16f47022ef527af1dbe3c8",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-binturong&wildlife3dStage=binturong-tree-and-scrub-mammals-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009850921630859405,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-echidna-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "ce3761ab671804194c1394599747008b6b2bba08eb458dc2fc66976756437ecf",
+      "modelSha256": "f997619cd875a9ffac40ea835d0b0f9b99953bdaab619151f8979d1d03eef4b6",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-echidna&wildlife3dStage=echidna-tree-and-scrub-mammals-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009831314086914153,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-kinkajou-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "d866c313f2ceb69d0fd053010379ff30a81ab80db7dd8edba44d9defb5a7f25a",
+      "modelSha256": "398d726fbf36834a51005f69ba7db94ef7ff726def8b82be449ca7149ebd2a51",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-kinkajou&wildlife3dStage=kinkajou-tree-and-scrub-mammals-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009697799682617224,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-koala-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "43e96febf74826b419283407a7f320593a6e9010ccab1f876998e7f422330b78",
+      "modelSha256": "a0780b132526b0999130bbbbd40a4919018dc033856fd2a7672a0f4eeb24181c",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-koala&wildlife3dStage=koala-tree-and-scrub-mammals-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009651031494140646,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-griffin-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "dd7445b6a73a922ac189be088ad74d694748ab36e7f070990beea863eba27fe2",
+      "modelSha256": "f717a3c725a922b29a2ec5d0af5883550b269c463433f11c795bfc473aa47419",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-griffin&wildlife3dStage=griffin-den-predators-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase",
+        "sleep",
+        "flight"
+      ],
+      "heightRange": [
+        -0.03212630081175869,
+        40.960802734375
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase",
+          "sleep",
+          "flight"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-small-dragon-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "f306fa693a43193ea263ca4133fac895ff9886955bdb7e3eccf0eb5ae54e49c7",
+      "modelSha256": "e68c35b205eef4ce1754541807cf82bd3d7f170c01544430a73396005dfca43c",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-small-dragon&wildlife3dStage=small-dragon-den-predators-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase",
+        "sleep",
+        "flight"
+      ],
+      "heightRange": [
+        -0.46604486082786356,
+        27.92742837524386
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase",
+          "sleep",
+          "flight"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-t-rex-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "679cafcfb7d87300334167b870a280c192f65d78093808b4b57e8951096771fc",
+      "modelSha256": "eb49d9ceb61573f3d465004af1f0ac0036b268c99302df91ffccd99fc588a69f",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-t-rex&wildlife3dStage=t-rex-den-predators-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase",
+        "sleep"
+      ],
+      "heightRange": [
+        -0.0009567146301269893,
+        0
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase",
+          "sleep"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-giant-spider-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "4b8c94efe1e28a5f1688217c780ddd77582eefcafcad343679bbac63cf14365c",
+      "modelSha256": "7af650470e1353a77b059154bf82dc1df726370472e68ad6c539f6ef126ba101",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-giant-spider&wildlife3dStage=giant-spider-den-predators-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase",
+        "sleep"
+      ],
+      "heightRange": [
+        -0.0009869232177733742,
+        0
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase",
+          "sleep"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-alligator-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "0a4fd96c9f9793c52409a71faf25ed10831b3042ad6fa37568560d0280527d95",
+      "modelSha256": "32558edbce25cdd7ae961e77542b76eb2d7b86aa5b8370bff5f45bef8dad805a",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-alligator&wildlife3dStage=alligator-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009392852783203226,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-crocodile-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "fcfaafbaf240aaffbadb72887b22d62845619200a85b10f1d6301d0edf3ba995",
+      "modelSha256": "3501224c3953e43af70acabef8325755fbd86fe0b7d68347b3a7162c948697d0",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-crocodile&wildlife3dStage=crocodile-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009600143432617289,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-komodo-dragon-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "753f9bb6cb3a34bed7c44cf82ad56a6bac1f8e43a2528b1c37c2d8a8db3daa61",
+      "modelSha256": "c57e2c7b35fa975f3d4dd250713590ea828271e04cc6c071f2d7b37c379db95e",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-komodo-dragon&wildlife3dStage=komodo-dragon-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009477844238281373,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-gaboon-viper-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "481d3c9ec2904a066e455072c4cf78f0204236ae2441123e4290d84466a9efaa",
+      "modelSha256": "ce2a8e21d72f1805be8857e8975809ba0274ed6d028a89f1079e268d3190dd21",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-gaboon-viper&wildlife3dStage=gaboon-viper-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "slither",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009559307098388749,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "slither",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-king-cobra-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "75afb0e8ab6e9445c6c11f09f1f4acd300d89034183e3632c7af8498fc291e5a",
+      "modelSha256": "d2024524963cb7f8be8db4f9c4d7670644025b2ce7ee4d5dff480927e9c82a93",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-king-cobra&wildlife3dStage=king-cobra-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "slither",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009611663818359435,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "slither",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-snail-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "d9e3870da764f03e570893c556f2277015645f8b61416835bdf909530caebb9c",
+      "modelSha256": "68d7d8d2ba911a32bfa7a4b3e5a67b06cae3f2e2cb6f8e5359868bcab82d728d",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-snail&wildlife3dStage=snail-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "crawl",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009789466857910156,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "crawl",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-millipede-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "ad813e89f57dcddf649dda9ce01d768ddf7ae3fe45290180ced198329d4131ac",
+      "modelSha256": "2848d66cb54222336c8ce102dd018b5ecede95cf3ee044f6cd7ee6bf32fbe666",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-millipede&wildlife3dStage=millipede-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009975433349609375,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-worm-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "9a74b82f450caebce4e03d69748ef59b950df54fb46fc49e8cee8f012af3bec2",
+      "modelSha256": "d4d38294ced6fa74c8fa298369a5bdb3501f7c8d71dd62a09c3a9a65ba7370e8",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-worm&wildlife3dStage=worm-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "crawl",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009982466697692884,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "crawl",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-dire-wolf-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "8643563f16b0390f79e8284a2dbaa6dd1f43f28ca9888f6fcfef6c343db6a178",
+      "modelSha256": "4eed795d454cf317527be885ab41e0eeb580db1a530e993c3614070e9716e4d2",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-dire-wolf&wildlife3dStage=dire-wolf-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase",
+        "sleep"
+      ],
+      "heightRange": [
+        -0.0009600124359131182,
+        0
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase",
+          "sleep"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-spotted-hyena-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "dc81b5c25bd61acafe398c8719dc4f0950fa883c28ff7dffdd4acc5bc15afd54",
+      "modelSha256": "89c05faf2ec834d6e09e34d686d2c1a7b381261cf234b0de85bd328f5059c97c",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-spotted-hyena&wildlife3dStage=spotted-hyena-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009314460754394652,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-tasmanian-devil-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "d64c2806bdf791449977c7a792c575b77561de73444a318a2ecdb3ca03212aa3",
+      "modelSha256": "60ab4924423a4eb0b051a3112793bc70a7b2c164e29c3964aa36f0caa7e41f72",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-tasmanian-devil&wildlife3dStage=tasmanian-devil-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009239006042480589,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-aye-aye-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "c1cc835e7ed6dec5af62c9caa6de5e96338b178a6f5615e426c1ceecd11eb243",
+      "modelSha256": "2339bb03d7bfea8b39a973d5630bdaca0b6a1b2375e6821a4aa5e86bb4cbf9e7",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-aye-aye&wildlife3dStage=aye-aye-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009545593261718796,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-sloth-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "53cac90dd0353db48177eb0425eeab41ec4045baaf30662aa7236b766f572867",
+      "modelSha256": "c2c8f8fa8a4c69adb4c13f4e82fbc4096572a7cdda61a8453af8c949208f03ef",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-sloth&wildlife3dStage=sloth-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009964904785156124,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-centipede-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "164656c881a357a9f9a14e8818a4e02f9b681149a2c40e53cc46a6df320f0ec8",
+      "modelSha256": "6b5392683def9390df6704136089cd74769ce43d54d392284556811c33a1ca05",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-centipede&wildlife3dStage=centipede-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009382896423339953,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-praying-mantis-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "6b4d71791adacfb7a8a6fdc88da03f5cfada9a3efdd9425be157d4621883ce5c",
+      "modelSha256": "ed071e90a2ae85dfcdabcdcae3000046be7b70b8e8aa3a90b71dab5b877fa3f7",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-praying-mantis&wildlife3dStage=praying-mantis-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009366912841797001,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-scorpion-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "b7372fd574ac8f091fd2aee9c5190cbe98ab3f05bcfbc58a20e5f6f3f95c8561",
+      "modelSha256": "5d4a8d80ae390e3d8914f438a2981c02be6d2d86545197e523a569e2b48cc9f8",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-scorpion&wildlife3dStage=scorpion-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.000923423767089857,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-spider-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "f621816251331c0d4074f95a5c283dfb400762d3519e98d3c2e11309e89cc0d6",
+      "modelSha256": "465e942d3f06245e6ebb57278a224a7cf39d5b1fc617122aed4a22b7438fe073",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-spider&wildlife3dStage=spider-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009786262512207148,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-fox-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "ffaa888cc709e12d4c4b0ab3f3b6320f6b2d005669eadaf68955f9b64042537b",
+      "modelSha256": "44811ff87cb71f34e0a5f43a3d3cf827ec0cd8c63198d96fa1952404cc69c14b",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-behavior-fox&wildlife3dStage=fox-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "listen",
+        "stalk",
+        "pounce",
+        "eat"
+      ],
+      "heightRange": [
+        -0.0009241104125976562,
+        6.909757215499879
+      ],
+      "statesOnApproachOrMount": [
+        "action",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "listen",
+          "stalk",
+          "pounce",
+          "eat"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-hedgehog-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "97b617eac6d4e35a7e0b8f959b90988f601f6eb51b9d260df5f1efbb1415ef7b",
+      "modelSha256": "8609ae4e7b99420c934154f5be329f14c386a43ef693faa1735c6994a60e6545",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-behavior-hedgehog&wildlife3dStage=hedgehog-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "curl-in",
+        "curled",
+        "uncurl"
+      ],
+      "heightRange": [
+        -0.0010092697143554874,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "curl-in",
+        "curled",
+        "uncurl",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "curl-in",
+          "curled",
+          "uncurl"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-meerkat-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "c6dd3a74bf1d7d4da3168f9a6b6d4969aa124aef04275c570c41d137a19fb5a6",
+      "modelSha256": "5c401191bed380981edc412e4d947e021a42093da3ca357484499cdf1a178f60",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-behavior-meerkat&wildlife3dStage=meerkat-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "scan",
+        "alarm",
+        "rear",
+        "lower"
+      ],
+      "heightRange": [
+        -0.0009827613830566406,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "alarm",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "scan",
+          "alarm",
+          "rear",
+          "lower"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-porcupine-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "c7aa5d559e3e0c15e1c3410b396c6e2af2fd9e6f368154b2660b596687faf916",
+      "modelSha256": "54837c022ea1b71b33640741d6debe55fcaa2fb70dae34e13b9ddd1ff011e6fe",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-behavior-porcupine&wildlife3dStage=porcupine-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "quills",
+        "rattle",
+        "relax"
+      ],
+      "heightRange": [
+        -0.0010661563873291084,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "quills",
+        "rattle",
+        "relax",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "quills",
+          "rattle",
+          "relax"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-raccoon-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "f870da454899a122c044c27f05f76fcd0c465cf19d80ff1b6ad1ce63ea8f1e16",
+      "modelSha256": "217b1b25fc08f4afe198f894031b14481e9de4b40dd99467fdd2712d5c54bc71",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-behavior-raccoon&wildlife3dStage=raccoon-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "pickup",
+        "eat"
+      ],
+      "heightRange": [
+        -0.0009611511230468871,
+        -2.0534515380859436e-05
+      ],
+      "statesOnApproachOrMount": [
+        "action",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "pickup",
+          "eat"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-red-squirrel-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "e80b94a0b15dd4eb6df23df93f62584386b0bc0541f35bd5a2d22d5dd42c9310",
+      "modelSha256": "a78fc7eadc118ca15decec59daafb7ce84fd375a6a657cbe9f7e0b75890018fa",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-behavior-squirrel&wildlife3dStage=red-squirrel-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "bound",
+        "action",
+        "flee",
+        "pickup",
+        "dig",
+        "eat"
+      ],
+      "heightRange": [
+        0,
+        7.102366987227229
+      ],
+      "statesOnApproachOrMount": [
+        "action",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "bound",
+          "action",
+          "flee",
+          "pickup",
+          "dig",
+          "eat"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-beaver-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "de06617d3320b24a358be0e6d7ede68ad78cedb88b73118b92dda65dfbba7e6a",
+      "modelSha256": "7637a074e6f217fa8c6d1927925e6dd8e0075819b15f9f957fbdc2f98c6219d2",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-behavior-beaver&wildlife3dStage=beaver-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "pickup",
+        "build",
+        "settle"
+      ],
+      "heightRange": [
+        -0.0010780258178711324,
+        -9.498596191406238e-07
+      ],
+      "statesOnApproachOrMount": [
+        "action",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "pickup",
+          "build",
+          "settle"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-capuchin-monkey-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "4ae072a42c1e0c0e02c1adb73c565404f59611ddb267294a4ee97f517ae91f8d",
+      "modelSha256": "51f009774a52e36b82eb490d04d3026ad47ed0141b3c14bce6ef7ebe6feda90b",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-behavior-capuchin&wildlife3dStage=capuchin-monkey-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "climb",
+        "pickup",
+        "eat",
+        "sit"
+      ],
+      "heightRange": [
+        -0.000960212707519545,
+        33.9131965637207
+      ],
+      "statesOnApproachOrMount": [
+        "action",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "climb",
+          "pickup",
+          "eat",
+          "sit"
+        ]
+      }
+    }
+  ]
+}

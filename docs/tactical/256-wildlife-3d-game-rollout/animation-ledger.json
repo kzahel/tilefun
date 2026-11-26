@@ -132,7 +132,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:08.686Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-panda-forest-mammals-v1",
+        "sha256": "18af782aa489cddccb153c2c56c14582f777e04ce311400448e8eee1c62e9c4e",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-panda-forest-mammals-v1",
         "fingerprint": "44304892637025d90eb1af1f393b8ffa01988f2a57831a54af476fc74659318f",
@@ -2682,7 +2689,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.433Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-fox-v3",
+        "sha256": "44811ff87cb71f34e0a5f43a3d3cf827ec0cd8c63198d96fa1952404cc69c14b",
+        "states": ["action", "eat", "flee", "idle", "listen", "pounce", "stalk", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-fox-v3",
         "fingerprint": "ffaa888cc709e12d4c4b0ab3f3b6320f6b2d005669eadaf68955f9b64042537b",
@@ -2749,7 +2763,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.455Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-spotted-hyena-v3",
+        "sha256": "89c05faf2ec834d6e09e34d686d2c1a7b381261cf234b0de85bd328f5059c97c",
+        "states": ["chase", "display", "feed", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-spotted-hyena-v3",
         "fingerprint": "dc81b5c25bd61acafe398c8719dc4f0950fa883c28ff7dffdd4acc5bc15afd54",
@@ -4529,7 +4550,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.687Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-dire-wolf-v3",
+        "sha256": "4eed795d454cf317527be885ab41e0eeb580db1a530e993c3614070e9716e4d2",
+        "states": ["chase", "display", "feed", "idle", "sleep", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-dire-wolf-v3",
         "fingerprint": "8643563f16b0390f79e8284a2dbaa6dd1f43f28ca9888f6fcfef6c343db6a178",
@@ -4603,7 +4631,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.710Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-giant-spider-den-predators-v1",
+        "sha256": "7af650470e1353a77b059154bf82dc1df726370472e68ad6c539f6ef126ba101",
+        "states": ["chase", "display", "feed", "idle", "sleep", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-giant-spider-den-predators-v1",
         "fingerprint": "4b8c94efe1e28a5f1688217c780ddd77582eefcafcad343679bbac63cf14365c",
@@ -4684,7 +4719,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.734Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-griffin-den-predators-v1",
+        "sha256": "f717a3c725a922b29a2ec5d0af5883550b269c463433f11c795bfc473aa47419",
+        "states": ["chase", "display", "feed", "flight", "idle", "sleep", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-griffin-den-predators-v1",
         "fingerprint": "dd7445b6a73a922ac189be088ad74d694748ab36e7f070990beea863eba27fe2",
@@ -4839,7 +4881,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.779Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-small-dragon-den-predators-v1",
+        "sha256": "e68c35b205eef4ce1754541807cf82bd3d7f170c01544430a73396005dfca43c",
+        "states": ["chase", "display", "feed", "flight", "idle", "sleep", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-small-dragon-den-predators-v1",
         "fingerprint": "f306fa693a43193ea263ca4133fac895ff9886955bdb7e3eccf0eb5ae54e49c7",
@@ -4913,7 +4962,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.804Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-t-rex-den-predators-v1",
+        "sha256": "eb49d9ceb61573f3d465004af1f0ac0036b268c99302df91ffccd99fc588a69f",
+        "states": ["chase", "display", "feed", "idle", "sleep", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-t-rex-den-predators-v1",
         "fingerprint": "679cafcfb7d87300334167b870a280c192f65d78093808b4b57e8951096771fc",
@@ -6676,7 +6732,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.877Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-centipede-v3",
+        "sha256": "6b5392683def9390df6704136089cd74769ce43d54d392284556811c33a1ca05",
+        "states": ["chase", "display", "feed", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-centipede-v3",
         "fingerprint": "164656c881a357a9f9a14e8818a4e02f9b681149a2c40e53cc46a6df320f0ec8",
@@ -6937,7 +7000,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:09.970Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-snail-v3",
+        "sha256": "68d7d8d2ba911a32bfa7a4b3e5a67b06cae3f2e2cb6f8e5359868bcab82d728d",
+        "states": ["action", "crawl", "flee", "idle"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-snail-v3",
         "fingerprint": "d9e3870da764f03e570893c556f2277015645f8b61416835bdf909530caebb9c",
@@ -7198,7 +7268,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:10.071Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-millipede-v3",
+        "sha256": "2848d66cb54222336c8ce102dd018b5ecede95cf3ee044f6cd7ee6bf32fbe666",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-millipede-v3",
         "fingerprint": "ad813e89f57dcddf649dda9ce01d768ddf7ae3fe45290180ced198329d4131ac",
@@ -7332,7 +7409,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:10.120Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-praying-mantis-v3",
+        "sha256": "ed071e90a2ae85dfcdabcdcae3000046be7b70b8e8aa3a90b71dab5b877fa3f7",
+        "states": ["chase", "display", "feed", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-praying-mantis-v3",
         "fingerprint": "6b4d71791adacfb7a8a6fdc88da03f5cfada9a3efdd9425be157d4621883ce5c",
@@ -7466,7 +7550,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:10.167Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-scorpion-v3",
+        "sha256": "5d4a8d80ae390e3d8914f438a2981c02be6d2d86545197e523a569e2b48cc9f8",
+        "states": ["chase", "display", "feed", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-scorpion-v3",
         "fingerprint": "b7372fd574ac8f091fd2aee9c5190cbe98ab3f05bcfbc58a20e5f6f3f95c8561",
@@ -7600,7 +7691,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:10.215Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-spider-v3",
+        "sha256": "465e942d3f06245e6ebb57278a224a7cf39d5b1fc617122aed4a22b7438fe073",
+        "states": ["chase", "display", "feed", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-spider-v3",
         "fingerprint": "f621816251331c0d4074f95a5c283dfb400762d3519e98d3c2e11309e89cc0d6",
@@ -9989,7 +10087,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:10.238Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-koala-tree-and-scrub-mammals-v1",
+        "sha256": "a0780b132526b0999130bbbbd40a4919018dc033856fd2a7672a0f4eeb24181c",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-koala-tree-and-scrub-mammals-v1",
         "fingerprint": "43e96febf74826b419283407a7f320593a6e9010ccab1f876998e7f422330b78",
@@ -10246,7 +10351,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:10.263Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-echidna-tree-and-scrub-mammals-v1",
+        "sha256": "f997619cd875a9ffac40ea835d0b0f9b99953bdaab619151f8979d1d03eef4b6",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-echidna-tree-and-scrub-mammals-v1",
         "fingerprint": "ce3761ab671804194c1394599747008b6b2bba08eb458dc2fc66976756437ecf",
@@ -10313,7 +10425,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:10.285Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-tasmanian-devil-v3",
+        "sha256": "60ab4924423a4eb0b051a3112793bc70a7b2c164e29c3964aa36f0caa7e41f72",
+        "states": ["chase", "display", "feed", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-tasmanian-devil-v3",
         "fingerprint": "d64c2806bdf791449977c7a792c575b77561de73444a318a2ecdb3ca03212aa3",
@@ -10495,7 +10614,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:10.310Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-worm-v3",
+        "sha256": "d4d38294ced6fa74c8fa298369a5bdb3501f7c8d71dd62a09c3a9a65ba7370e8",
+        "states": ["action", "crawl", "flee", "idle"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-worm-v3",
         "fingerprint": "9a74b82f450caebce4e03d69748ef59b950df54fb46fc49e8cee8f012af3bec2",
@@ -10903,7 +11029,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:10.357Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-capuchin-monkey-v3",
+        "sha256": "51f009774a52e36b82eb490d04d3026ad47ed0141b3c14bce6ef7ebe6feda90b",
+        "states": ["action", "climb", "eat", "flee", "idle", "pickup", "sit", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-capuchin-monkey-v3",
         "fingerprint": "4ae072a42c1e0c0e02c1adb73c565404f59611ddb267294a4ee97f517ae91f8d",
@@ -11397,7 +11530,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:10.382Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-alligator-v3",
+        "sha256": "32558edbce25cdd7ae961e77542b76eb2d7b86aa5b8370bff5f45bef8dad805a",
+        "states": ["chase", "display", "feed", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-alligator-v3",
         "fingerprint": "0a4fd96c9f9793c52409a71faf25ed10831b3042ad6fa37568560d0280527d95",
@@ -11719,7 +11859,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:10.452Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-gaboon-viper-v3",
+        "sha256": "ce2a8e21d72f1805be8857e8975809ba0274ed6d028a89f1079e268d3190dd21",
+        "states": ["chase", "display", "feed", "idle", "slither"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-gaboon-viper-v3",
         "fingerprint": "481d3c9ec2904a066e455072c4cf78f0204236ae2441123e4290d84466a9efaa",
@@ -11913,7 +12060,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:10.529Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-king-cobra-v3",
+        "sha256": "d2024524963cb7f8be8db4f9c4d7670644025b2ce7ee4d5dff480927e9c82a93",
+        "states": ["action", "flee", "idle", "slither"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-king-cobra-v3",
         "fingerprint": "75afb0e8ab6e9445c6c11f09f1f4acd300d89034183e3632c7af8498fc291e5a",
@@ -11980,7 +12134,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:10.555Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-komodo-dragon-v3",
+        "sha256": "c57e2c7b35fa975f3d4dd250713590ea828271e04cc6c071f2d7b37c379db95e",
+        "states": ["chase", "display", "feed", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-komodo-dragon-v3",
         "fingerprint": "753f9bb6cb3a34bed7c44cf82ad56a6bac1f8e43a2528b1c37c2d8a8db3daa61",
@@ -12181,7 +12342,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:10.629Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-crocodile-v3",
+        "sha256": "3501224c3953e43af70acabef8325755fbd86fe0b7d68347b3a7162c948697d0",
+        "states": ["chase", "display", "feed", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-crocodile-v3",
         "fingerprint": "fcfaafbaf240aaffbadb72887b22d62845619200a85b10f1d6301d0edf3ba995",
@@ -12570,7 +12738,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:10.746Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-aye-aye-v3",
+        "sha256": "2339bb03d7bfea8b39a973d5630bdaca0b6a1b2375e6821a4aa5e86bb4cbf9e7",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-aye-aye-v3",
         "fingerprint": "c1cc835e7ed6dec5af62c9caa6de5e96338b178a6f5615e426c1ceecd11eb243",
@@ -12718,7 +12893,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:10.791Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-beaver-v3",
+        "sha256": "7637a074e6f217fa8c6d1927925e6dd8e0075819b15f9f957fbdc2f98c6219d2",
+        "states": ["action", "build", "flee", "idle", "pickup", "settle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-beaver-v3",
         "fingerprint": "de06617d3320b24a358be0e6d7ede68ad78cedb88b73118b92dda65dfbba7e6a",
@@ -12778,7 +12960,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:10.815Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-binturong-tree-and-scrub-mammals-v1",
+        "sha256": "4c7b3be3b45acf2496f840fed7c520f57c77beb60a16f47022ef527af1dbe3c8",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-binturong-tree-and-scrub-mammals-v1",
         "fingerprint": "eed98ce26d696ace4196a296f98005f44e0e7a07c29b630216dc34c6a38a6ffc",
@@ -12838,7 +13027,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:10.838Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-capybara-forest-mammals-v1",
+        "sha256": "e63c4d3209d636ba7ee6ff7fb505c0b56bfd450945a15eaf7f892d959a2fcad4",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-capybara-forest-mammals-v1",
         "fingerprint": "78fe99658588c3b274caa9d3f3e9769145e3b52c83164074d7c0479af9d5ce68",
@@ -13121,7 +13317,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:10.908Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-hedgehog-v3",
+        "sha256": "8609ae4e7b99420c934154f5be329f14c386a43ef693faa1735c6994a60e6545",
+        "states": ["action", "curl-in", "curled", "flee", "idle", "uncurl", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-hedgehog-v3",
         "fingerprint": "97b617eac6d4e35a7e0b8f959b90988f601f6eb51b9d260df5f1efbb1415ef7b",
@@ -13255,7 +13458,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:10.956Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-kinkajou-tree-and-scrub-mammals-v1",
+        "sha256": "398d726fbf36834a51005f69ba7db94ef7ff726def8b82be449ca7149ebd2a51",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-kinkajou-tree-and-scrub-mammals-v1",
         "fingerprint": "d866c313f2ceb69d0fd053010379ff30a81ab80db7dd8edba44d9defb5a7f25a",
@@ -13343,7 +13553,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:10.979Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-meerkat-v3",
+        "sha256": "5c401191bed380981edc412e4d947e021a42093da3ca357484499cdf1a178f60",
+        "states": ["action", "alarm", "flee", "idle", "lower", "rear", "scan", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-meerkat-v3",
         "fingerprint": "c6dd3a74bf1d7d4da3168f9a6b6d4969aa124aef04275c570c41d137a19fb5a6",
@@ -13626,7 +13843,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:11.052Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-porcupine-v3",
+        "sha256": "54837c022ea1b71b33640741d6debe55fcaa2fb70dae34e13b9ddd1ff011e6fe",
+        "states": ["action", "flee", "idle", "quills", "rattle", "relax", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-porcupine-v3",
         "fingerprint": "c7aa5d559e3e0c15e1c3410b396c6e2af2fd9e6f368154b2660b596687faf916",
@@ -13700,7 +13924,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:11.079Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-raccoon-v3",
+        "sha256": "217b1b25fc08f4afe198f894031b14481e9de4b40dd99467fdd2712d5c54bc71",
+        "states": ["action", "eat", "flee", "idle", "pickup", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-raccoon-v3",
         "fingerprint": "f870da454899a122c044c27f05f76fcd0c465cf19d80ff1b6ad1ce63ea8f1e16",
@@ -13821,7 +14052,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:11.105Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-red-panda-forest-mammals-v1",
+        "sha256": "095adb3f4bec8f01d14288385e4da35a17e34a4b2413535faa913339435f7b83",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-red-panda-forest-mammals-v1",
         "fingerprint": "6e09c39231740d1b07ef692caa1e06d7c4d8003ca26640d7bf4e5385c1079144",
@@ -13902,7 +14140,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:11.128Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-red-squirrel-v3",
+        "sha256": "a78fc7eadc118ca15decec59daafb7ce84fd375a6a657cbe9f7e0b75890018fa",
+        "states": ["action", "bound", "dig", "eat", "flee", "idle", "pickup"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-red-squirrel-v3",
         "fingerprint": "e80b94a0b15dd4eb6df23df93f62584386b0bc0541f35bd5a2d22d5dd42c9310",
@@ -14037,7 +14282,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:11.152Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-skunk-forest-mammals-v1",
+        "sha256": "c9a506819796621b46b33ea632101ddde58af90e460ab0e4575b282cbb85dc53",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-skunk-forest-mammals-v1",
         "fingerprint": "1de1847c33f556d9b2af63e6e611fa0e28f6068830d6b6657875fd544ee21d8d",
@@ -14097,7 +14349,14 @@
         "disposition": "approved",
         "reviewedAt": "2026-11-26T08:58:11.177Z"
       },
-      "live": null,
+      "live": {
+        "revision": "663f1a85355e65183a734567cd53aedd1eb97fb8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-sloth-v3",
+        "sha256": "c2c8f8fa8a4c69adb4c13f4e82fbc4096572a7cdda61a8453af8c949208f03ef",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/owner-approved-release-3-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-sloth-v3",
         "fingerprint": "53cac90dd0353db48177eb0425eeab41ec4045baaf30662aa7236b766f572867",
