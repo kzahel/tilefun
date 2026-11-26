@@ -34,11 +34,17 @@ it.each(["donkey", "mule", "camel"] as const)(
         await s.step({ ...idle, dx: 1, jump: true });
       expect(s.player.gameplaySession.mountId).toBe(mount().id);
       expect(s.player.player.parentId).toBe(mount().id);
-      expect(s.player.player.wz).toBeCloseTo(profile.body[2], 1);
+      const support = required(mount().collider?.physicalHeight);
+      expect(s.player.player.wz).toBeCloseTo((mount().wz ?? 0) + support, 1);
       expect(canEat(createPredator("t-rex", 0, 0), mount())).toBe(false);
       await s.step(idle);
+      // A pre-fit save still stores the old offset on a mounted rider.
+      s.player.player.jumpZ = profile.body[2];
+      s.player.player.wz = (mount().wz ?? 0) + profile.body[2];
       await s.reload();
       expect(s.player.gameplaySession.mountId).toBe(mount().id);
+      expect(s.player.player.jumpZ).toBe(support);
+      expect(s.player.player.wz).toBeCloseTo((mount().wz ?? 0) + support, 1);
       const x = mount().position.wx;
       for (let i = 0; i < 30; i++) await s.step({ ...idle, dx: 1 });
       expect(mount().position.wx - x).toBeCloseTo(32, 1);

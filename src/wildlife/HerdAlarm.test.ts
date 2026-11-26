@@ -21,7 +21,11 @@ it("a generated buffalo herd shares a landing alarm once and both recover after 
     await s.reload();
     for (let i = 0; i < 360 && !herd().some((e) => e.sprite?.clip === 0); i++) await s.step(idle);
     const target = required(herd().find((e) => e.wanderAI?.state !== "scared"));
-    await s.command({ kind: "teleport", position: { ...target.position }, z: p.body[2] + 2 });
+    await s.command({
+      kind: "teleport",
+      position: { ...target.position },
+      z: (target.wz ?? 0) + required(target.collider?.physicalHeight) + 2,
+    });
     const alarmed = new Set<number>();
     let recovered = false,
       dismounted = false;

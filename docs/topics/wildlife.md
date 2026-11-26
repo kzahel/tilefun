@@ -12,6 +12,9 @@ after a ledger update. The [historical production snapshot](../archive/wildlife-
 records older draft statuses. The private ledger recovered from Rex and the
 exact evidence archive support historical audits on demand.
 
+The [wildlife contact-fit guide](../wildlife-contact-fit.md) covers tuning and
+checking the simple collision boxes that let a player land on an animal’s back.
+
 Browser-suite repair (2026-11-16): gorilla, seahorse and shark inspection
 coordinates now point at current seed-2026 natural owners. The previous homes
 no longer survived regional placement reservations; the generator and art stay

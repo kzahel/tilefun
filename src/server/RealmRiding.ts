@@ -4,6 +4,8 @@ import type { Entity } from "../entities/Entity.js";
 import type { SavedPlayerData } from "../persistence/SaveManager.js";
 import { setVerticalVelocity, teleportBody } from "../physics/PhysicalEdits.js";
 import { getSurfaceZ } from "../physics/surfaceHeight.js";
+import { faunaProfile } from "../wildlife/Fauna.js";
+import { FAUNA_TORSO_FITS } from "../wildlife/FaunaColliders.js";
 import { setFaunaRidden } from "../wildlife/faunaInteractions.js";
 import { startleWildlife } from "../wildlife/WildlifeSpecies.js";
 import type { PlayerSession } from "./PlayerSession.js";
@@ -87,8 +89,12 @@ export function restoreSavedMount(
     wx: mounted.position.wx + saved.mount.offsetX,
     wy: mounted.position.wy + saved.mount.offsetY,
   };
-  player.wz = saved.mount.wz;
-  player.jumpZ = saved.mount.jumpZ;
+  // A saved rider's offset can predate the mount's fitted support.
+  const profile = faunaProfile(mounted.type);
+  const support =
+    profile && FAUNA_TORSO_FITS[profile.species] ? mounted.collider?.physicalHeight : undefined;
+  player.wz = support === undefined ? saved.mount.wz : (mounted.wz ?? 0) + support;
+  player.jumpZ = support ?? saved.mount.jumpZ;
   session.gameplaySession.mountId = mounted.id;
   if (mounted.wanderAI) mounted.wanderAI.state = "ridden";
   setFaunaRidden(mounted, true);

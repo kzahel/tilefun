@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { getEntityAABB } from "../entities/collision.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { createPlayer } from "../entities/Player.js";
 import { FLAT_SCENARIO, scenarioWalls } from "../scenarios/ScenarioRecipe.js";
@@ -104,9 +105,9 @@ describe("horse riding through the shared Realm", () => {
       expect(s.player.gameplaySession.mountId).toBeNull();
       await jumpOn(s);
       for (let i = 0; i < 90; i++) await s.step({ ...idle, dx: 1, sprinting: true });
-      expect(horse(s).position.wx).toBeLessThanOrEqual(200 - 17 + 0.01);
-      expect(horse(s).position.wx).toBeGreaterThan(150);
-      expect(s.player.player.position).toEqual(horse(s).position);
+      const mount = horse(s);
+      expect(getEntityAABB(mount.position, required(mount.collider)).right).toBeCloseTo(200, 1);
+      expect(s.player.player.position).toEqual(mount.position);
     } finally {
       await s.close();
     }

@@ -893,7 +893,7 @@ export default function NaturalLandscapePage() {
                   // Mounts need a real falling landing, above the automatic step-down range.
                   z:
                     (target.wz ?? 0) +
-                    (faunaProfile(target.type)?.body[2] ?? target.collider?.physicalHeight ?? 24) +
+                    (target.collider?.physicalHeight ?? faunaProfile(target.type)?.body[2] ?? 24) +
                     (faunaProfile(target.type)?.rideSpeed ? 8 : 2),
                 })
                 .catch((e) => setError(String(e)));

@@ -9,6 +9,7 @@ import { CONTINUATION_BIRD_PROFILES } from "./ContinuationBirds.js";
 import { CRUSTACEAN_FAUNA_PROFILES } from "./Crustaceans.js";
 import { DISTINCT_FISH_FAUNA_PROFILES } from "./DistinctFish.js";
 import { standardClips } from "./FaunaClips.js";
+import { faunaCollider } from "./FaunaColliders.js";
 import type { FAUNA_EXPANSION_ROSTER, UPRIGHT_COMPANION_SPECIES } from "./FaunaExpansion.js";
 import { finishedFaunaArt } from "./FinishedArt.js";
 import { FLYING_BIRD_PROFILES } from "./FlyingBirds.js";
@@ -83,6 +84,7 @@ export interface FaunaProfile {
   hop?: { duration: number; push: number; land: number; height: number };
   anchor: readonly [number, number];
   clips: readonly AnimationClip[];
+  /** Base dimensions for habitat, herd spacing, weight and unfitted colliders. */
   body: readonly [number, number, number];
   speed: number;
   rideSpeed?: number;
@@ -321,8 +323,6 @@ const BASE_FAUNA_PROFILES: readonly FaunaProfile[] = [
         loop: true,
       },
     ],
-    // The back is reachable with the default 150px/s jump and 500px/s squared gravity.
-    // The head remains visual; support/collision represents the saddle height.
     body: [34, 14, 18],
     speed: 20,
     rideSpeed: 160,
@@ -1179,14 +1179,7 @@ export function faunaDefinition(p: FaunaProfile) {
             ]
           : p.clips,
     },
-    collider: {
-      offsetX: 0,
-      offsetY: 0,
-      width: p.body[0],
-      height: p.body[1],
-      physicalHeight: p.body[2],
-      solid: true,
-    },
+    collider: faunaCollider(p),
     aquatic: p.habitat === "pond" || p.habitat === "deep",
     amphibious: p.habitat === "shore",
     hasVelocity: true,
