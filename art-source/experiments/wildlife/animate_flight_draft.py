@@ -7,6 +7,7 @@ from pathlib import Path
 import sys
 
 import bpy
+from mathutils import Vector
 
 
 HERE = Path(__file__).resolve().parent
@@ -15,6 +16,57 @@ wildlife_build = module_from_spec(spec)
 sys.modules["wildlife_build"] = wildlife_build
 spec.loader.exec_module(wildlife_build)
 import bird
+
+SEABIRD_LENGTH = {
+    "atlantic-puffin": 1.13,
+    "blue-footed-booby": 1.34,
+    "great-frigatebird": 1.45,
+    "pelican": 1.55,
+}
+
+
+def part_vertices(mesh, name):
+    group = mesh.vertex_groups[f"Part · {name}"].index
+    return [vertex for vertex in mesh.data.vertices if any(g.group == group for g in vertex.groups)]
+
+
+def articulate_bill(rig, mesh, species):
+    bill = part_vertices(mesh, "Sculpted bill")
+    root_y = min(v.co.y for v in bill)
+    tip_y = max(v.co.y for v in bill)
+    root_z = (min(v.co.z for v in bill) + max(v.co.z for v in bill)) / 2
+    bpy.context.view_layer.objects.active = rig
+    bpy.ops.object.mode_set(mode="EDIT")
+    jaw = rig.data.edit_bones.new("jaw")
+    jaw.head = (0, root_y, root_z)
+    jaw.tail = (0, tip_y, root_z)
+    jaw.parent = rig.data.edit_bones["head"]
+    bpy.ops.object.mode_set(mode="OBJECT")
+    jaw_group = mesh.vertex_groups.new(name="jaw")
+    head_group = mesh.vertex_groups["head"]
+    for vertex in bill:
+        progress = (vertex.co.y - root_y) / (tip_y - root_y)
+        seam = root_z + (.042 if species == "pelican" else -.012) - .02 * progress
+        lower = min(1, max(0, (seam - vertex.co.z) / .045))
+        weight = lower * min(1, progress * 5)
+        if weight > 0:
+            jaw_group.add([vertex.index], weight, "REPLACE")
+            head_group.add([vertex.index], 1 - weight, "REPLACE")
+
+
+def fork_frigatebird_tail(mesh):
+    feathers = part_vertices(mesh, "Tail feather fan")
+    assert len(feathers) % 3 == 0
+    count = len(feathers) // 3
+    for index, vertex in enumerate(feathers):
+        offset = vertex.co - bird.TAIL
+        if index // count == 1:
+            vertex.co.y = bird.TAIL.y + offset.y * .56
+        else:
+            sign = 1 if offset.x > 0 else -1
+            spread = (-offset.y / bird.TAIL_LEN) ** 2
+            vertex.co += Vector((sign * .18 * spread, offset.y * .43, 0))
+    mesh.data.update()
 
 
 def paint_sprite_markings(mesh, species):
@@ -60,7 +112,20 @@ def paint_sprite_markings(mesh, species):
                 color = "mantle" if face.normal.z > -.26 else "ink"
             elif (wing or tail) and face.normal.z < .32 and abs(face.normal.x) > .46:
                 color = "accent"
-        if toes and species != "parrot":
+        elif species == "atlantic-puffin" and part == "Sculpted bill":
+            color = "accent" if point.y < bird.HEAD.y + .26 and point.z < bird.HEAD.z else "bill"
+        elif species == "blue-footed-booby" and toes:
+            color = "feet"
+        elif species == "great-frigatebird" and part == "Sculpted bill":
+            color = "bill" if face.normal.z > -.4 else "mantle"
+        elif species == "pelican":
+            if wing and point.y < bird.BODY.y - .31:
+                color = "ink" if face.normal.z < .14 else "accent"
+            elif part == "Sculpted bill" and point.z < bird.HEAD.z - .06:
+                color = "feet" if face.normal.z < -.36 else "bill"
+            elif toes:
+                color = "ink"
+        if toes and species in {"dove", "sparrow", "pigeon"}:
             color = "bill"
         if color:
             uv = swatch(color)
@@ -76,6 +141,11 @@ def main():
     rig, = (ob for ob in bpy.context.scene.objects if ob.type == "ARMATURE")
     mesh, = (ob for ob in bpy.context.scene.objects if ob.type == "MESH")
     bird.configure_flight_rollout(species)
+    rig.scale.y *= SEABIRD_LENGTH.get(species, 1)
+    if species in {"pelican", "blue-footed-booby"}:
+        articulate_bill(rig, mesh, species)
+    if species == "great-frigatebird":
+        fork_frigatebird_tail(mesh)
     paint_sprite_markings(mesh, species)
     assert set(bpy.data.actions.keys()) == {"idle", "fly", "action"}
     for action in list(bpy.data.actions):

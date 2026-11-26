@@ -10,7 +10,7 @@ import type { AnimalWorkSystem, WorkContext } from "./AnimalWorkSystem.js";
 import { type FaunaBehavior, faunaProfile } from "./Fauna.js";
 import { createForageItem, restoreWorkItemPose } from "./ForageResources.js";
 import { restoreFaunaPose, settleFauna } from "./faunaInteractions.js";
-import { type ClimbTree, sameTree, treeClimbPoint } from "./TreeClimbing.js";
+import { advanceTreeClimb, type ClimbTree, catClimbGrip, sameTree } from "./TreeClimbing.js";
 import { faceToward, freshWork, WorkKit } from "./WorkKit.js";
 
 const kindOf = (a: Entity) => {
@@ -95,7 +95,7 @@ export class WoodlandWork {
   private supported(t: AnimalWork, c: WorkContext) {
     const support = t.tree;
     return (
-      support && c.environment.climbTrees?.(support, 64).some((tree) => sameTree(tree, support))
+      support && c.environment.climbTrees?.(support, 64).find((tree) => sameTree(tree, support))
     );
   }
   update(a: Entity, dt: number, c: WorkContext, planning?: AiPlanningScheduler): boolean {
@@ -111,9 +111,13 @@ export class WoodlandWork {
       this.cancel(a);
       return false;
     }
-    if (t.tree && c.ready(t.tree, 64) && !this.supported(t, c)) {
-      this.cancel(a);
-      return false;
+    if (t.tree && c.ready(t.tree, 64)) {
+      const support = this.supported(t, c);
+      if (!support) {
+        this.cancel(a);
+        return false;
+      }
+      if (support.crownEdgeX !== undefined) t.tree.crownEdgeX = support.crownEdgeX;
     }
     if (ai.alarmFrom || ["recover", "startle", "flee"].includes(ai.state)) {
       if (t.tree && t.climbZ !== undefined && (a.wz ?? 0) > t.tree.ground + 1) {
@@ -147,46 +151,15 @@ export class WoodlandWork {
       }
     }
     if (["climb", "descend"].includes(t.state) && t.tree) {
-      const down = t.state === "descend",
-        duration = Math.max(1.5, (t.tree.z - t.tree.ground) / 8),
-        f = Math.min(1, t.elapsed / duration);
-      const normal = treeClimbPoint(t.tree, f, down);
-      const from = t.climbFrom;
-      const point =
-        down && from && from.z < t.tree.z - 0.1
-          ? {
-              wx: from.wx + (t.tree.gripX - from.wx) * f,
-              wy: from.wy + (t.tree.gripY - from.wy) * f,
-              z: from.z + (t.tree.ground - from.z) * f,
-            }
-          : normal;
-      if (
-        !c.environment.canOccupy({ collider: a.collider, wz: point.z }, point) ||
-        c.environment.isWater(point)
-      ) {
-        this.cancel(a);
+      const climb = advanceTreeClimb(a, t, t.tree, kind === "cat", dt, c.environment);
+      if (climb === "blocked" || climb === "stalled") {
+        this.cancel(a, climb === "blocked" ? 3 : 10);
         return false;
-      }
-      if (
-        t.elapsed > duration + 1 &&
-        (Math.abs((a.wz ?? 0) - point.z) > 3 || gap(a.position, point) > 3)
-      ) {
-        // A real canopy/wall can block a prescribed climb. Abandon the task;
-        // never teleport through it or keep an unreachable motor alive forever.
-        this.cancel(a, 10);
-        return false;
-      }
-      t.climbZ = point.z;
-      a.motionIntent ??= { vx: 0, vy: 0 };
-      a.motionIntent.altitude = point.z;
-      if (a.motionIntent) {
-        a.motionIntent.vx = (point.wx - a.position.wx) / Math.max(dt, 0.001);
-        a.motionIntent.vy = (point.wy - a.position.wy) / Math.max(dt, 0.001);
       }
       restoreAnimalWorkPose(a);
-      if (f >= 1 && gap(a.position, point) < 1) {
+      if (climb === "arrived") {
         if (a.motionIntent) a.motionIntent.vx = a.motionIntent.vy = 0;
-        if (down) {
+        if (t.state === "descend") {
           this.cancel(a, 10);
           return false;
         }
@@ -304,7 +277,7 @@ export class WoodlandWork {
     if (planning && !planning.claim(a, false)) return t.state !== "idle";
     if (["seek", "stalk"].includes(t.state)) {
       if (kind === "cat" && t.tree && !t.targetId) {
-        const grip = { wx: t.tree.gripX, wy: t.tree.gripY };
+        const grip = catClimbGrip(t.tree, (a.collider?.width ?? 14) / 2);
         if (gap(a.position, grip) < 1) this.startClimb(a, t.tree);
         else if (!this.work.go(a, grip, t.tree.ground, c, planning)) this.cancel(a);
         return true;

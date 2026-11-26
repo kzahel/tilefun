@@ -89,7 +89,11 @@ FLIGHT_ROLLOUT = None
 
 # Wing reach in the cruise and escape strokes, peck depth and escape pitch.
 FLIGHT_POSES = {
+    "atlantic-puffin": (.88, 1.0, .42, .23),
+    "blue-footed-booby": (.97, 1.0, .52, .16),
     "dove": (.88, 1.0, .68, .18),
+    "great-frigatebird": (1.0, 1.0, -.37, .13),
+    "pelican": (.96, 1.0, .57, .16),
     "sparrow": (.79, .94, .86, .22),
     "pigeon": (.94, 1.0, .75, .18),
     "parrot": (.85, .98, .53, .15),
@@ -338,6 +342,10 @@ def pose(rig,rest,clip,t):
     headq=trunkq@euler(-.78*head_dip+.075*display,0,.085*math.sin(wave)*(clip=="idle"))
     head=transform(headq,HEAD,body@HEAD+V((0,.22*head_dip,-(HEAD.z-BODY.z+.28)*head_dip*.66)))
     result["head"]=head@rest["head"]
+    if "jaw" in rest:
+        hinge = rest["jaw"].translation
+        gape = (math.sin(math.pi*t)**4)*(.34 if NAME=="Pelican" else .26) if clip=="action" else 0
+        result["jaw"]=transform(headq@euler(-gape),hinge,head@hinge)@rest["jaw"]
     tail_pitch=-display*(1.17 if STYLE=="fan" else .28)+.062*math.sin(wave)
     if FLIGHT_ROLLOUT is not None:
         tail_pitch += -.32*head_dip + (.22+.10*math.sin(wave) if escape else 0)
@@ -360,6 +368,9 @@ def pose(rig,rest,clip,t):
                 spread = .36+(burst-.36)*opening**.57
             beat = math.sin(wave)
             beat_span = .65 if escape else .50
+            if NAME=="Great Frigatebird":
+                spread = .29+(.71*opening**(.42 if escape else .65))
+                beat_span *= .84
         if swim and STYLE=="tuxedo":
             spread=.73
             beat_span=.23

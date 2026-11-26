@@ -1,0 +1,130 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "f706605156c2319330151ef963d97e96c222c671367b7ae4d14b3af38475304f",
+  "results": [
+    {
+      "type": "wildlife-atlantic-puffin-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "37000d7892fd82cd226347226f98866bcd30a4e3333e7f6dcb09c29ab0010c4c",
+      "modelSha256": "c205fac093284b88cb5c837f6086e888ba0bc193525162ff6f6a03e5516ed828",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-atlantic-puffin&wildlife3dStage=atlantic-puffin-seabirds-v1&wildlife3dReview=atlantic-puffin-seabirds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.00009298324584960938,
+        9.912928955078133
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-blue-footed-booby-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "aab16a8b762d5c7e12649c65e2cdb287e763763d19bb7f73a1fc2a89c16f352d",
+      "modelSha256": "04b4b842703af31cf47cac6e0e3e98deb81fa54169ae02d75c00b5b5871a8241",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-blue-footed-booby&wildlife3dStage=blue-footed-booby-seabirds-v1&wildlife3dReview=blue-footed-booby-seabirds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.00009298324584960938,
+        9.912928955078135
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-great-frigatebird-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "aeacdee81995e28a26dc74d3e34ebc9de257187eec420496fb7a5e1aec09a4fb",
+      "modelSha256": "075884968a21bbd448f3c462459cd5cfc5c4c419c115f9fea1d3cebd54d8ee89",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-great-frigatebird&wildlife3dStage=great-frigatebird-seabirds-v1&wildlife3dReview=great-frigatebird-seabirds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.000942230224609375,
+        11.912873550415048
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-pelican-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "fa500694d0717c48d5dabebfc94a056a5a8b66933de7ca71f1007f74f7db664d",
+      "modelSha256": "4c60b706d211c39b0f19de4acd10620be706651b4534b392a2637b476bdc6194",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-pelican&wildlife3dStage=pelican-seabirds-v1&wildlife3dReview=pelican-seabirds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.000942230224609375,
+        11.913034103393564
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

@@ -2799,5 +2799,97 @@
       "model.glb": "8e44224c210d30a3bb591d17d489b9150615aa9bb2b32bcf810981db613ae4ed",
       "native.png": "9ede34da260f107b39249484e385bb95791cc808cb765f887a8769b9368346aa"
     }
+  },
+  {
+    "id": "atlantic-puffin-seabirds-v1",
+    "type": "wildlife-atlantic-puffin-provisional-v1",
+    "name": "Atlantic puffin",
+    "batch": "wildlife-3d-seabirds-v1",
+    "lab": "atlantic-puffin",
+    "scale": 11.6,
+    "topDown": {
+      "width": 0.7758620689655172,
+      "height": 0.6112068965517241
+    },
+    "files": {
+      "action.png": "b587bce1bed334237c8f71ddc25b4365d673cd811b24d9216c2b81985734efee",
+      "appearance.png": "ea1d3795c4b602300ec3e429b9f3ef78bfd0c342e870e47f9a87b78f72b3bc11",
+      "capture-config.json": "c623318ba17ad3a1cd02e45bac5399b44a3ab70053f3b6111cc94d9582d36920",
+      "comparison.mp4": "ba1be9956642c72c553fdb75e2b6207e8f14a5393d8bf19ff6ccf50d7555158c",
+      "flee.png": "833b09753eb05a2517a6a88e7b634fed534211d607241a20a372c4731a32cacf",
+      "fly.png": "cf7daf4bb7fafac075e88ad377d702ad81c90a60fe64ac2e9f2123d0eed1b819",
+      "model.blend": "9642520fe83c8876010b9120962490caffa8431d9ce76f89c874e2c84b108f80",
+      "model.glb": "c205fac093284b88cb5c837f6086e888ba0bc193525162ff6f6a03e5516ed828",
+      "native.png": "3b613c7e5c3206eeb3ee4c036ae8b6938c7e4e9a377c2b58f88f93ecec0cd93e"
+    }
+  },
+  {
+    "id": "blue-footed-booby-seabirds-v1",
+    "type": "wildlife-blue-footed-booby-provisional-v1",
+    "name": "Blue-footed booby",
+    "batch": "wildlife-3d-seabirds-v1",
+    "lab": "blue-footed-booby",
+    "scale": 11.6,
+    "topDown": {
+      "width": 0.9482758620689655,
+      "height": 0.5172413793103449
+    },
+    "files": {
+      "action.png": "fefc83cbc9999f8218142eed59e3e4ee5fa24e4d93d55163df45562e01b1c447",
+      "appearance.png": "cf4e5db66cc4c9b2bdfd51176af71d3d6fbc6d587445982dda04efe645067d38",
+      "capture-config.json": "ca900ecd6aa4128d2363ab1b8783b8125ca9db29f96d9f4554624dd05c6e861c",
+      "comparison.mp4": "1b14d82471fd98345c907b6775eb5e0d65eb58b704279f689fe2a01e61ead534",
+      "flee.png": "f09691868a5326d1266cc4cd86ea9c44a800f665601bc71b5423f08ebbab1f0c",
+      "fly.png": "126dbe23810f087762c9a455575f01aa691a4f96275e49910aebade17815480a",
+      "model.blend": "c24adc2cea6a748fb462eeba5c830c95574c71b44d713eaa257fea15d1430d19",
+      "model.glb": "04b4b842703af31cf47cac6e0e3e98deb81fa54169ae02d75c00b5b5871a8241",
+      "native.png": "dbb526189605662694515b3da4d1dae936e3f2e4b53bf0f609754bf3109a9832"
+    }
+  },
+  {
+    "id": "great-frigatebird-seabirds-v1",
+    "type": "wildlife-great-frigatebird-provisional-v1",
+    "name": "Great frigatebird",
+    "batch": "wildlife-3d-seabirds-v1",
+    "lab": "great-frigatebird",
+    "scale": 11.6,
+    "topDown": {
+      "width": 0.9482758620689655,
+      "height": 0.560344827586207
+    },
+    "files": {
+      "action.png": "96845cd4d57d26f66da7efc528dde03a25dddf9a45cb3ce9bec10adb0a3da781",
+      "appearance.png": "6ca917c2acf0c9349f549e6c21747f30d7e01c5e4d67044215789cd94b0e8ba3",
+      "capture-config.json": "bfe7f94a0b310f2749e7a3ed307107eb1ed018a8922fe56e5f3daca9dba137a5",
+      "comparison.mp4": "d7740ddbbb848cc16272215a8d3648423d5afbe78587091c0afd561bc62e28b5",
+      "flee.png": "0d8ea2c8d95fef02a5eec696382fd49e60e198e5332a30b0f8c10882bd0a8494",
+      "fly.png": "ff950cd68c05742aafadbeea554b3984d848c017f9af36c0fed225b316eabe06",
+      "model.blend": "4b3cd7202ec3789fc4085c43b61533c70ba2e2237e1ea977cc348ba7cfb5c6bf",
+      "model.glb": "075884968a21bbd448f3c462459cd5cfc5c4c419c115f9fea1d3cebd54d8ee89",
+      "native.png": "464c6a00f08d7e037ee87469549c2c19bbc030252a0f24a867d41d54a502a0fb"
+    }
+  },
+  {
+    "id": "pelican-seabirds-v1",
+    "type": "wildlife-pelican-provisional-v1",
+    "name": "Pelican",
+    "batch": "wildlife-3d-seabirds-v1",
+    "lab": "pelican",
+    "scale": 11.6,
+    "topDown": {
+      "width": 0.896551724137931,
+      "height": 0.5913793103448276
+    },
+    "files": {
+      "action.png": "3e1879b7a2d7f22c309a8caf18b90d01b35130e9f2c55b1e3b9fd4d902de4c34",
+      "appearance.png": "ba820370d5c56b8a8fabcefccfea78eb05e12831e0376407cf431d47886800ad",
+      "capture-config.json": "12b9a0e1ecea0db79f6b91c2ebad64fe7f809f8da4a13022a12bdb1e41b35015",
+      "comparison.mp4": "62ab66d8d07d6678e022d58bac78470791e913076cbee0b0918eed77f7b65521",
+      "flee.png": "6da93f91c43e79b206bcdcfa4d55432478c20ffc031bb5a56bfdb2a6b6cf59d6",
+      "fly.png": "81fd31887e84388ceac5aacee4c2afa6ae55ba1dac024a8f3288df3ccee2d2ce",
+      "model.blend": "9a8567bd9e033da5c8fbc83af62659d43a61e0a2f1af35a1d2e4dcf0d271016c",
+      "model.glb": "4c60b706d211c39b0f19de4acd10620be706651b4534b392a2637b476bdc6194",
+      "native.png": "2fe3344ae7eb13ae5b622ecee3ce851535a59d661eece144ffcaae73175984e0"
+    }
   }
 ]

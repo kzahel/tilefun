@@ -1,37 +1,57 @@
 import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { writeFile } from "node:fs/promises";
 import { chromium } from "playwright";
+import { TILE_SIZE } from "../../src/config/constants.ts";
 import { ENTITY_DEFS } from "../../src/entities/EntityDefs.ts";
 import { createDescriptor } from "../../src/generation/GenerationDescriptor.ts";
 import {
+  isCatModelReview,
   isFarmModelReviewCase,
   isFourStateFaunaModelReview,
   isPackMountModelReview,
   wildlifeFeedingReview,
+  wildlifeModelReviewRecipe,
 } from "../../src/scenarios/WildlifeModelReviewRecipe.ts";
 import { DEER_TYPE } from "../../src/wildlife/Deer.ts";
 import { faunaProfile } from "../../src/wildlife/Fauna.ts";
 import { predatorProfile } from "../../src/wildlife/Predator.ts";
 import {
+  WILDLIFE_DEFAULT_MODELS,
   WILDLIFE_MODEL_REVIEW_PREFIX,
   WILDLIFE_MODEL_REVIEWS,
   wildlifeModelClips,
   wildlifeModelReviewPath,
 } from "../../src/wildlife/WildlifeModelReviewBank.ts";
 
-const [deployment, batch, reportPath, mode] = process.argv.slice(2);
+const [deployment, batch, reportPath, ...options] = process.argv.slice(2);
 assert(
   deployment && batch && reportPath,
-  "Usage: verify-3d-rollout-deployment.mjs BASE_URL BATCH REPORT [--review]",
+  "Usage: verify-3d-rollout-deployment.mjs BASE_URL BATCH REPORT [--review] [--candidate=ID] [--revision=SHA]",
 );
+const preview = options.includes("--review");
+const only = options.find((option) => option.startsWith("--candidate="))?.slice(12);
+const revision = options.find((option) => option.startsWith("--revision="))?.slice(11);
 const base = new URL(deployment);
-const candidates = WILDLIFE_MODEL_REVIEWS.filter((row) => row.batch === batch);
-assert(candidates.length, `Unknown wildlife batch ${batch}`);
+const candidates = (preview ? WILDLIFE_MODEL_REVIEWS : WILDLIFE_DEFAULT_MODELS).filter(
+  (row) => row.batch === batch && (!only || row.id === only),
+);
+assert(candidates.length, `No selected wildlife models in ${batch}${only ? ` for ${only}` : ""}`);
 const get = (path) => fetch(new URL(path, base), { cache: "no-store" });
 const manifestResponse = await get("data/workshop-manifest.json");
 assert(manifestResponse.ok);
 const manifest = await manifestResponse.json();
+if (revision) {
+  assert(/^[\da-f]{40}$/.test(revision), "Use the full deployed commit hash");
+  const releaseManifest = JSON.parse(
+    execFileSync("git", ["show", `${revision}:public/data/workshop-manifest.json`], {
+      encoding: "utf8",
+      maxBuffer: 3 * 1024 * 1024,
+    }),
+  );
+  assert.equal(manifest.inputDigest, releaseManifest.inputDigest, "Deployment digest differs");
+}
 const results = [];
 const browser = await chromium.launch({ channel: "chromium", args: ["--enable-webgl"] });
 try {
@@ -39,7 +59,6 @@ try {
     const id = WILDLIFE_MODEL_REVIEW_PREFIX + candidate.id;
     const registered = manifest.candidates.find((row) => row.id === id);
     assert(registered?.fingerprint, `${id} missing from the served Workshop manifest`);
-    const preview = mode === "--review";
     const modelPath = wildlifeModelReviewPath(candidate.id, "model.glb");
     const files = Object.entries(candidate.files).map(([file, sha]) => [
       wildlifeModelReviewPath(candidate.id, file),
@@ -94,6 +113,7 @@ try {
       const habitat = faunaProfile(candidate.type)?.habitat;
       const waterStage = ["deep", "pond", "shore"].includes(habitat);
       const farmStage = !candidate.classicTravel && isFarmModelReviewCase(candidate.lab);
+      const catStage = isCatModelReview(candidate.type, candidate.lab);
       const fourStateStage = isFourStateFaunaModelReview(candidate.type, candidate.lab);
       const packStage = isPackMountModelReview(candidate.type, candidate.lab);
       const feeding = wildlifeFeedingReview(candidate.type, candidate.lab);
@@ -103,6 +123,7 @@ try {
         hunterStage ||
         waterStage ||
         farmStage ||
+        catStage ||
         fourStateStage ||
         packStage ||
         feeding ||
@@ -115,11 +136,13 @@ try {
             ? ["flee", "ride", "ride-sprint"]
             : doeStage
               ? ["stamp", "flee"]
-              : fourStateStage || feeding
+              : fourStateStage || catStage || feeding
                 ? ["flee"]
                 : [];
       const naturalClips = observeAllStates
-        ? states.flatMap(({ name }, index) => (contactClips.includes(name) ? [] : [index]))
+        ? states.flatMap(({ name }, index) =>
+            contactClips.includes(name) || (catStage && name === "action") ? [] : [index],
+          )
         : [];
       if (dogFetch)
         await page
@@ -183,8 +206,9 @@ try {
           fetch: dogFetch,
           feeding: !!feeding,
           naturalClips,
-          timeout:
-            feeding || farmStage
+          timeout: catStage
+            ? 100_000
+            : feeding || farmStage
               ? 58_000
               : naturalClips.length
                 ? 36_000
@@ -196,11 +220,13 @@ try {
       const switchModels = page.getByRole("checkbox", { name: "3D animals", exact: true });
       const approachStates = doeStage
         ? await verifyDoeApproach(page, candidate, states)
-        : farmStage || fourStateStage || packStage || feeding
-          ? await verifyApproachClips(page, stage, candidate, states)
-          : [];
+        : catStage
+          ? await verifyCatLabStartle(page, stage, candidate, states)
+          : farmStage || fourStateStage || packStage || feeding
+            ? await verifyApproachClips(page, stage, candidate, states)
+            : [];
       const landingStates =
-        farmStage || fourStateStage || packStage || feeding
+        farmStage || fourStateStage || catStage || packStage || feeding
           ? []
           : await verifyLandingClips(page, candidate, states);
       for (const clip of [...landingStates, ...approachStates])
@@ -223,6 +249,7 @@ try {
         assert(poses.maxZ > 2, `No physical hop observed for ${candidate.type}`);
       const game = await verifyGameEntry(page, candidate, preview, {
         verifyFaunaStates: fourStateStage || packStage || !!feeding,
+        catStage,
         packStage,
         approachClips: contactClips,
         states,
@@ -259,6 +286,7 @@ try {
     `${JSON.stringify(
       {
         deployment: base.href,
+        ...(revision ? { revision } : {}),
         workshopInputDigest: manifest.inputDigest,
         results,
       },
@@ -268,6 +296,36 @@ try {
   );
 } finally {
   await browser.close();
+}
+
+async function verifyCatLabStartle(page, stage, candidate, states) {
+  await page.getByRole("button", { name: "Reset scene", exact: true }).click();
+  const species = faunaProfile(candidate.type).species;
+  const { wx, wy } = wildlifeModelReviewRecipe(candidate.type, candidate.lab).actors[0].position;
+  const approach = page.getByRole("button", { name: `Start near ${candidate.name}`, exact: true });
+  await stage.waitFor();
+  await page.waitForFunction(
+    ({ name, wx, wy }) => {
+      const canvas = document.querySelector("[aria-label='Natural landscape playground']");
+      return (
+        canvas?.dataset.ready === "true" &&
+        JSON.parse(canvas.dataset.faunaPoses ?? "[]").some(
+          (pose) => pose.species === name && Math.abs(pose.x - wx) < 2 && Math.abs(pose.y - wy) < 2,
+        )
+      );
+    },
+    { name: species, wx, wy },
+    { timeout: 15_000 },
+  );
+  const action = states.findIndex(({ name }) => name === "action");
+  const flee = states.findIndex(({ name }) => name === "flee");
+  await approach.click();
+  await Promise.all(
+    [action, flee].map((clip) =>
+      waitForAnimalClip(page, { species, clip, dataset: "faunaPoses", state: "scared" }, 10_000),
+    ),
+  );
+  return [action, flee];
 }
 
 async function verifyApproachClips(page, stage, candidate, states) {
@@ -397,7 +455,7 @@ async function waitForAnimalClip(page, expected, timeout) {
 }
 
 async function verifyGameEntry(page, candidate, preview, options) {
-  const { verifyFaunaStates, packStage, approachClips, states, feeding } = options;
+  const { verifyFaunaStates, catStage, packStage, approachClips, states, feeding } = options;
   await page.evaluate(() => localStorage.removeItem("tilefun-3d-animals"));
   const generation = createDescriptor("flat", 1);
   const arrival = { x: 4, y: 4, generation };
@@ -410,13 +468,15 @@ async function verifyGameEntry(page, candidate, preview, options) {
   await page.getByRole("button", { name: "New World", exact: true }).click({ timeout: 45_000 });
   await gameReady(page);
   await page.evaluate(
-    ({ type, verifyFaunaStates, feeding }) => {
+    ({ type, verifyFaunaStates, catStage, feeding }) => {
       const game = document.querySelector("#game").__game;
       const position = game.stateView.playerEntity.position;
       game.transport.send({ type: "set-editor-mode", enabled: true });
-      const wx = position.wx + (verifyFaunaStates ? 116 : 20);
+      const wx = position.wx + (verifyFaunaStates || catStage ? 116 : 20);
       const wy = position.wy + 28;
       game.transport.send({ type: "edit-spawn", entityType: type, wx, wy });
+      if (catStage)
+        game.transport.send({ type: "edit-spawn", entityType: "prop-oak-tree", wx, wy: wy - 57 });
       if (feeding) {
         const site = { wx: wx + feeding.dx, wy: wy + feeding.dy };
         if (feeding.prop)
@@ -425,7 +485,7 @@ async function verifyGameEntry(page, candidate, preview, options) {
       }
       game.transport.send({ type: "set-editor-mode", enabled: false });
     },
-    { type: candidate.type, verifyFaunaStates, feeding },
+    { type: candidate.type, verifyFaunaStates, catStage, feeding },
   );
   const expected = { type: candidate.type, sheetKey: ENTITY_DEFS[candidate.type].sprite.sheetKey };
   const animal = ({ type, sheetKey }) => {
@@ -450,6 +510,8 @@ async function verifyGameEntry(page, candidate, preview, options) {
   await gameReady(page);
   await page.waitForFunction(animal, expected, { timeout: 30_000 });
   const result = { createdAndDrawn: true, savedAndDrawnAfterReload: true };
+  if (catStage)
+    return { ...result, statesAfterReload: await verifyCatInGame(page, expected, states) };
   if (verifyFaunaStates) {
     const rideClips = packStage ? ["ride", "ride-sprint"] : [];
     const statesAfterReload = await verifyFaunaStatesInGame(
@@ -489,6 +551,76 @@ async function verifyGameEntry(page, candidate, preview, options) {
     `Reopened game did not render both classic states for ${candidate.type}`,
   );
   return { ...result, statesAfterReload };
+}
+
+async function verifyCatInGame(page, expected, clips) {
+  const ball = page.getByRole("button", { name: "Ball", exact: true });
+  if ((await ball.getAttribute("aria-pressed")) !== "true") await ball.click();
+  const states = await page.evaluate(
+    async ({ type, sheetKey, names, returnDistance }) => {
+      const game = document.querySelector("#game").__game;
+      game.playInput.setMovementMode("tap");
+      const origin = { ...game.stateView.playerEntity.position, wz: 0 };
+      const observed = new Set();
+      let nextTarget = 0;
+      let thrownAt;
+      let returned = false;
+      const end = performance.now() + 120_000;
+      try {
+        while (performance.now() < end) {
+          const actor = game.stateView.entities.find((entry) => entry.type === type);
+          const player = game.stateView.playerEntity;
+          if (actor?.sprite && game.firstPerson.wildlifeModelDrawn(sheetKey)) {
+            const name = names[actor.sprite.clip ?? 0];
+            if (name !== "action" || actor.wanderAI?.state !== "scared") observed.add(name);
+            if (observed.size === names.length) break;
+            const now = performance.now();
+            if (!observed.has("flee")) {
+              if (
+                now >= nextTarget &&
+                ["idle", "walk", "action"].every((clip) => observed.has(clip))
+              ) {
+                game.tapMovement.setTarget({ ...actor.position, wz: 0 });
+                nextTarget = now + 350;
+              }
+            } else if (!returned) {
+              game.tapMovement.setTarget(origin);
+              returned = true;
+            } else if (
+              thrownAt === undefined ||
+              (!observed.has("stalk") && now - thrownAt > 8_000)
+            ) {
+              const ox = origin.wx - player.position.wx;
+              const oy = origin.wy - player.position.wy;
+              if (Math.hypot(ox, oy) < returnDistance) {
+                const dx = actor.position.wx - player.position.wx;
+                const dy = actor.position.wy - player.position.wy;
+                const distance = Math.hypot(dx, dy);
+                game.transport.send({
+                  type: "use-item",
+                  dirX: dx / distance,
+                  dirY: dy / distance,
+                  force: 0,
+                });
+                thrownAt = now;
+              }
+            }
+          }
+          await new Promise(requestAnimationFrame);
+        }
+      } finally {
+        game.tapMovement.cancel();
+      }
+      return [...observed];
+    },
+    { ...expected, names: clips.map(({ name }) => name), returnDistance: TILE_SIZE / 2 + 1 },
+  );
+  assert.deepEqual(
+    states.sort(),
+    clips.map(({ name }) => name).sort(),
+    `Reopened cat states for ${expected.type}`,
+  );
+  return states;
 }
 
 async function verifyFaunaStatesInGame(page, expected, clips, approachClips, rideClips, feeding) {

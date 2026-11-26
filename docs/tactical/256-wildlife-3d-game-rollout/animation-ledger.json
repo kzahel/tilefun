@@ -87,9 +87,43 @@
         "action": "action",
         "flee": "fly"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "c205fac093284b88cb5c837f6086e888ba0bc193525162ff6f6a03e5516ed828",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/seabirds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/atlantic-puffin-seabirds-v1/native.png"
+        },
+        "fly": {
+          "action": "fly",
+          "sha256": "c205fac093284b88cb5c837f6086e888ba0bc193525162ff6f6a03e5516ed828",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/seabirds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/atlantic-puffin-seabirds-v1/fly.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "c205fac093284b88cb5c837f6086e888ba0bc193525162ff6f6a03e5516ed828",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/seabirds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/atlantic-puffin-seabirds-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "c205fac093284b88cb5c837f6086e888ba0bc193525162ff6f6a03e5516ed828",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/seabirds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/atlantic-puffin-seabirds-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-atlantic-puffin-seabirds-v1",
+        "fingerprint": "37000d7892fd82cd226347226f98866bcd30a4e3333e7f6dcb09c29ab0010c4c",
+        "model": "public/demos/wildlife-3d/atlantic-puffin-seabirds-v1/model.glb",
+        "source": "public/demos/wildlife-3d/atlantic-puffin-seabirds-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/atlantic-puffin-seabirds-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/seabirds-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-eagle-predator-v1",
@@ -130,9 +164,43 @@
         "action": "action",
         "flee": "fly"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "04b4b842703af31cf47cac6e0e3e98deb81fa54169ae02d75c00b5b5871a8241",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/seabirds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/blue-footed-booby-seabirds-v1/native.png"
+        },
+        "fly": {
+          "action": "fly",
+          "sha256": "04b4b842703af31cf47cac6e0e3e98deb81fa54169ae02d75c00b5b5871a8241",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/seabirds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/blue-footed-booby-seabirds-v1/fly.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "04b4b842703af31cf47cac6e0e3e98deb81fa54169ae02d75c00b5b5871a8241",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/seabirds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/blue-footed-booby-seabirds-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "04b4b842703af31cf47cac6e0e3e98deb81fa54169ae02d75c00b5b5871a8241",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/seabirds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/blue-footed-booby-seabirds-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-blue-footed-booby-seabirds-v1",
+        "fingerprint": "aab16a8b762d5c7e12649c65e2cdb287e763763d19bb7f73a1fc2a89c16f352d",
+        "model": "public/demos/wildlife-3d/blue-footed-booby-seabirds-v1/model.glb",
+        "source": "public/demos/wildlife-3d/blue-footed-booby-seabirds-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/blue-footed-booby-seabirds-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/seabirds-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-chicken-provisional-v1",
@@ -381,9 +449,43 @@
         "action": "action",
         "flee": "fly"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "075884968a21bbd448f3c462459cd5cfc5c4c419c115f9fea1d3cebd54d8ee89",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/seabirds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/great-frigatebird-seabirds-v1/native.png"
+        },
+        "fly": {
+          "action": "fly",
+          "sha256": "075884968a21bbd448f3c462459cd5cfc5c4c419c115f9fea1d3cebd54d8ee89",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/seabirds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/great-frigatebird-seabirds-v1/fly.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "075884968a21bbd448f3c462459cd5cfc5c4c419c115f9fea1d3cebd54d8ee89",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/seabirds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/great-frigatebird-seabirds-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "075884968a21bbd448f3c462459cd5cfc5c4c419c115f9fea1d3cebd54d8ee89",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/seabirds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/great-frigatebird-seabirds-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-great-frigatebird-seabirds-v1",
+        "fingerprint": "aeacdee81995e28a26dc74d3e34ebc9de257187eec420496fb7a5e1aec09a4fb",
+        "model": "public/demos/wildlife-3d/great-frigatebird-seabirds-v1/model.glb",
+        "source": "public/demos/wildlife-3d/great-frigatebird-seabirds-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/great-frigatebird-seabirds-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/seabirds-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-great-hornbill-provisional-v1",
@@ -644,9 +746,43 @@
         "action": "action",
         "flee": "fly"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "4c60b706d211c39b0f19de4acd10620be706651b4534b392a2637b476bdc6194",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/seabirds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/pelican-seabirds-v1/native.png"
+        },
+        "fly": {
+          "action": "fly",
+          "sha256": "4c60b706d211c39b0f19de4acd10620be706651b4534b392a2637b476bdc6194",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/seabirds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/pelican-seabirds-v1/fly.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "4c60b706d211c39b0f19de4acd10620be706651b4534b392a2637b476bdc6194",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/seabirds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/pelican-seabirds-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "4c60b706d211c39b0f19de4acd10620be706651b4534b392a2637b476bdc6194",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/seabirds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/pelican-seabirds-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-pelican-seabirds-v1",
+        "fingerprint": "fa500694d0717c48d5dabebfc94a056a5a8b66933de7ca71f1007f74f7db664d",
+        "model": "public/demos/wildlife-3d/pelican-seabirds-v1/model.glb",
+        "source": "public/demos/wildlife-3d/pelican-seabirds-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/pelican-seabirds-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/seabirds-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-penguin-provisional-v1",
@@ -6839,7 +6975,19 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-dog-shepherd-pets-v1",
+        "sha256": "92bd60e17e0eb1f5207ca90bdd0eafd1d143f19ef9f428c6d6fb4f47d7b58659",
+        "states": [
+          "action",
+          "flee",
+          "idle",
+          "walk"
+        ],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/pointed-ear-shepherd-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-dog-shepherd-pets-v1",
         "fingerprint": "3cb383a08ff2df551a9fe0704d537b64d9707ba72a002a65625dbc8d8cf8a4ef",

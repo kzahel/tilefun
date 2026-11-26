@@ -940,6 +940,12 @@
       "toolId": "animal-browser"
     },
     {
+      "id": "wildlife-3d-seabirds-v1",
+      "name": "3D wildlife · seabirds v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
       "id": "motion",
       "name": "Furniture movement sets",
       "description": "Default layouts and physics. Custom layouts remain individually reviewable in the tool.",
@@ -61549,7 +61555,175 @@
           "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-parrot-yard-and-canopy-birds-v1"
         }
       }
+    },
+    {
+      "id": "pattern:wildlife-3d-atlantic-puffin-seabirds-v1",
+      "batchId": "wildlife-3d-seabirds-v1",
+      "kind": "wildlife",
+      "name": "Atlantic puffin",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-atlantic-puffin-seabirds-v1",
+      "fingerprint": "37000d7892fd82cd226347226f98866bcd30a4e3333e7f6dcb09c29ab0010c4c",
+      "sourceFingerprint": "ea1d3795c4b602300ec3e429b9f3ef78bfd0c342e870e47f9a87b78f72b3bc11",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-atlantic-puffin-seabirds-v1",
+        "prefabIds": [],
+        "revision": "4e8539b0586141e7d616f59fe673b2eaf4d443c16c0561f21d44b342f09e2a41",
+        "renderFingerprint": "37000d7892fd82cd226347226f98866bcd30a4e3333e7f6dcb09c29ab0010c4c",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-atlantic-puffin-seabirds-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-atlantic-puffin-seabirds-v1",
+        "fingerprint": "ea1d3795c4b602300ec3e429b9f3ef78bfd0c342e870e47f9a87b78f72b3bc11",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-atlantic-puffin-seabirds-v1",
+          "prefabIds": [],
+          "revision": "4e8539b0586141e7d616f59fe673b2eaf4d443c16c0561f21d44b342f09e2a41",
+          "renderFingerprint": "37000d7892fd82cd226347226f98866bcd30a4e3333e7f6dcb09c29ab0010c4c",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-atlantic-puffin-seabirds-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-blue-footed-booby-seabirds-v1",
+      "batchId": "wildlife-3d-seabirds-v1",
+      "kind": "wildlife",
+      "name": "Blue-footed booby",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-blue-footed-booby-seabirds-v1",
+      "fingerprint": "aab16a8b762d5c7e12649c65e2cdb287e763763d19bb7f73a1fc2a89c16f352d",
+      "sourceFingerprint": "cf4e5db66cc4c9b2bdfd51176af71d3d6fbc6d587445982dda04efe645067d38",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-blue-footed-booby-seabirds-v1",
+        "prefabIds": [],
+        "revision": "1dcdbd10c17550cd40f8065b763cf1ada081caa947bcde1e2a4d0af230b6a6d8",
+        "renderFingerprint": "aab16a8b762d5c7e12649c65e2cdb287e763763d19bb7f73a1fc2a89c16f352d",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-blue-footed-booby-seabirds-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-blue-footed-booby-seabirds-v1",
+        "fingerprint": "cf4e5db66cc4c9b2bdfd51176af71d3d6fbc6d587445982dda04efe645067d38",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-blue-footed-booby-seabirds-v1",
+          "prefabIds": [],
+          "revision": "1dcdbd10c17550cd40f8065b763cf1ada081caa947bcde1e2a4d0af230b6a6d8",
+          "renderFingerprint": "aab16a8b762d5c7e12649c65e2cdb287e763763d19bb7f73a1fc2a89c16f352d",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-blue-footed-booby-seabirds-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-great-frigatebird-seabirds-v1",
+      "batchId": "wildlife-3d-seabirds-v1",
+      "kind": "wildlife",
+      "name": "Great frigatebird",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-great-frigatebird-seabirds-v1",
+      "fingerprint": "aeacdee81995e28a26dc74d3e34ebc9de257187eec420496fb7a5e1aec09a4fb",
+      "sourceFingerprint": "6ca917c2acf0c9349f549e6c21747f30d7e01c5e4d67044215789cd94b0e8ba3",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-great-frigatebird-seabirds-v1",
+        "prefabIds": [],
+        "revision": "af633a254dd38b76db949ae84e9e02e3f319d79f7ac52623e0a5c3589a5dce30",
+        "renderFingerprint": "aeacdee81995e28a26dc74d3e34ebc9de257187eec420496fb7a5e1aec09a4fb",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-great-frigatebird-seabirds-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-great-frigatebird-seabirds-v1",
+        "fingerprint": "6ca917c2acf0c9349f549e6c21747f30d7e01c5e4d67044215789cd94b0e8ba3",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-great-frigatebird-seabirds-v1",
+          "prefabIds": [],
+          "revision": "af633a254dd38b76db949ae84e9e02e3f319d79f7ac52623e0a5c3589a5dce30",
+          "renderFingerprint": "aeacdee81995e28a26dc74d3e34ebc9de257187eec420496fb7a5e1aec09a4fb",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-great-frigatebird-seabirds-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-pelican-seabirds-v1",
+      "batchId": "wildlife-3d-seabirds-v1",
+      "kind": "wildlife",
+      "name": "Pelican",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-pelican-seabirds-v1",
+      "fingerprint": "fa500694d0717c48d5dabebfc94a056a5a8b66933de7ca71f1007f74f7db664d",
+      "sourceFingerprint": "ba820370d5c56b8a8fabcefccfea78eb05e12831e0376407cf431d47886800ad",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-pelican-seabirds-v1",
+        "prefabIds": [],
+        "revision": "004dd4d9ae158e022cb3044d1a846080373478443201ea4909ee293ea1ce85a2",
+        "renderFingerprint": "fa500694d0717c48d5dabebfc94a056a5a8b66933de7ca71f1007f74f7db664d",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-pelican-seabirds-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-pelican-seabirds-v1",
+        "fingerprint": "ba820370d5c56b8a8fabcefccfea78eb05e12831e0376407cf431d47886800ad",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-pelican-seabirds-v1",
+          "prefabIds": [],
+          "revision": "004dd4d9ae158e022cb3044d1a846080373478443201ea4909ee293ea1ce85a2",
+          "renderFingerprint": "fa500694d0717c48d5dabebfc94a056a5a8b66933de7ca71f1007f74f7db664d",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-pelican-seabirds-v1"
+        }
+      }
     }
   ],
-  "inputDigest": "98da5306702bda8f1e0937ea33879493183c518f67ff4b89166692bb5e1892e2"
+  "inputDigest": "1224f8049b940128dba55c43b22d87861f7804d15ebd319e52392fe1eaebdc22"
 }

@@ -27,6 +27,7 @@ import {
   naturalLandscapeRecipe,
 } from "../scenarios/NaturalLandscapeRecipe.js";
 import {
+  isCatModelReview,
   isFarmModelReviewCase,
   isFourStateFaunaModelReview,
   isPackMountModelReview,
@@ -144,6 +145,7 @@ export default function NaturalLandscapePage() {
     farmAnimal ??
     (reviewAnimal &&
     (wildlifeFeedingReview(reviewAnimal.type, caseId) ||
+      isCatModelReview(reviewAnimal.type, caseId) ||
       isPackMountModelReview(reviewAnimal.type, caseId) ||
       isFourStateFaunaModelReview(reviewAnimal.type, caseId))
       ? reviewAnimal

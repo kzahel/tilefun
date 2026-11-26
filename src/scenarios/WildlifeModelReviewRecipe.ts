@@ -39,6 +39,14 @@ export function isPackMountModelReview(type: string, caseId: string): boolean {
   return (caseId === "camel" || caseId === "mule") && faunaProfile(type)?.species === caseId;
 }
 
+export function isCatModelReview(type: string, caseId: string): boolean {
+  const animal = faunaProfile(type);
+  return (
+    (animal?.species === "cat" || animal?.variantOf === "cat") &&
+    caseId === `behavior-${animal.species}`
+  );
+}
+
 /** The editor setup mirrors each animal's existing feeding scenario. */
 export function wildlifeFeedingReview(type: string, caseId: string) {
   if (type === DEER_TYPE && caseId === "behavior-deer")
@@ -51,6 +59,34 @@ export function wildlifeFeedingReview(type: string, caseId: string) {
   return undefined;
 }
 
+function modelStage(
+  id: string,
+  player: ScenarioRecipe["player"],
+  actors: NonNullable<ScenarioRecipe["actors"]>,
+  terrain?: ScenarioRecipe["terrain"],
+): ScenarioRecipe {
+  return {
+    version: 1,
+    id,
+    generation: FLAT_SCENARIO,
+    player,
+    props: [],
+    actors,
+    ...(terrain ? { terrain } : {}),
+  };
+}
+
+function classicModelStage(id: string, type: string, travel: string): ScenarioRecipe | undefined {
+  const actor = ENTITY_FACTORIES[type]?.(128, 160);
+  if (!actor) return undefined;
+  const terrain: NonNullable<ScenarioRecipe["terrain"]> = [];
+  if (travel === "swim") {
+    for (let ty = 4; ty <= 16; ty++)
+      for (let tx = 3; tx <= 17; tx++) terrain.push({ tx, ty, terrain: TerrainId.ShallowWater });
+  }
+  return modelStage(id, createPlayer(223, 282), [actor], terrain);
+}
+
 /** Known actors in an ordinary Realm for exact habitat and hunt review. */
 export function wildlifeModelReviewRecipe(
   type: string,
@@ -58,53 +94,23 @@ export function wildlifeModelReviewRecipe(
   classicTravel?: string,
 ): ScenarioRecipe | undefined {
   const id = `wildlife-model-review-${type}`;
-  if (classicTravel) {
-    const actor = ENTITY_FACTORIES[type]?.(128, 160);
-    if (!actor) return undefined;
-    const terrain: NonNullable<ScenarioRecipe["terrain"]> = [];
-    if (classicTravel === "swim") {
-      for (let ty = 4; ty <= 16; ty++)
-        for (let tx = 3; tx <= 17; tx++) terrain.push({ tx, ty, terrain: TerrainId.ShallowWater });
-    }
-    return {
-      version: 1,
-      id,
-      generation: FLAT_SCENARIO,
-      player: createPlayer(223, 282),
-      props: [],
-      terrain,
-      actors: [actor],
-    };
-  }
-  if (isFarmModelReviewCase(caseId)) return naturalLandscapeRecipe(caseId, "balanced");
+  if (classicTravel) return classicModelStage(id, type, classicTravel);
+  if (isFarmModelReviewCase(caseId) || isCatModelReview(type, caseId))
+    return naturalLandscapeRecipe(caseId, "balanced");
   if (wildlifeFeedingReview(type, caseId))
     return type === DEER_TYPE
       ? forestWorkRecipe("deer")
       : naturalLandscapeRecipe(caseId, "balanced");
   const animal = faunaProfile(type);
   if (animal && (isFourStateFaunaModelReview(type, caseId) || isPackMountModelReview(type, caseId)))
-    return {
-      version: 1,
-      id,
-      generation: FLAT_SCENARIO,
-      player: createPlayer(240, 350),
-      props: [],
-      actors: [createFauna(animal.species, 240, 176)],
-    };
+    return modelStage(id, createPlayer(240, 350), [createFauna(animal.species, 240, 176)]);
   const hunter = predatorProfile(type);
   if (hunter?.species === "coconut-crab")
-    return {
-      version: 1,
-      id,
-      generation: FLAT_SCENARIO,
-      player: createPlayer(240, 328),
-      props: [],
-      actors: [
-        createPredator(hunter.species, 240, 176),
-        createFauna("cricket", 303, 176),
-        createFauna("worm", 293, 224),
-      ],
-    };
+    return modelStage(id, createPlayer(240, 328), [
+      createPredator(hunter.species, 240, 176),
+      createFauna("cricket", 303, 176),
+      createFauna("worm", 293, 224),
+    ]);
   const pond = animal?.habitat === "pond";
   const actors =
     hunter?.expansion?.habitat === "deep"
@@ -131,13 +137,5 @@ export function wildlifeModelReviewRecipe(
       });
     }
   }
-  return {
-    version: 1,
-    id,
-    generation: FLAT_SCENARIO,
-    player: createPlayer(240, 344),
-    props: [],
-    terrain,
-    actors,
-  };
+  return modelStage(id, createPlayer(240, 344), actors, terrain);
 }

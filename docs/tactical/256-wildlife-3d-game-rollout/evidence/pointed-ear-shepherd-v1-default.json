@@ -1,0 +1,38 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+  "workshopInputDigest": "98da5306702bda8f1e0937ea33879493183c518f67ff4b89166692bb5e1892e2",
+  "results": [
+    {
+      "type": "wildlife-dog-shepherd-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "3cb383a08ff2df551a9fe0704d537b64d9707ba72a002a65625dbc8d8cf8a4ef",
+      "modelSha256": "92bd60e17e0eb1f5207ca90bdd0eafd1d143f19ef9f428c6d6fb4f47d7b58659",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-dog-shepherd&wildlife3dStage=dog-shepherd-pets-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.000988006591796875,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

@@ -107,6 +107,29 @@ runtime scope reconciliation in the execution notes.
 
 ## Delivery log
 
+### Seabirds and cat canopy access, 2026-11-26
+
+The Atlantic puffin, blue-footed booby, great frigatebird and pelican reuse
+their archived draft rigs. The side profiles now match the sprite lengths
+within two native pixels in both facings. The frigatebird has a forked tail.
+The booby opens its bill and the pelican drops its pouch while scooping.
+[Renderer evidence](256-wildlife-3d-game-rollout/evidence/seabirds-v1-runtime.json)
+records 448 samples. The [public preview report](256-wildlife-3d-game-rollout/evidence/seabirds-v1-deployment.json)
+records all 16 states in Workshop and in reopened game worlds. These exact
+models are [open for review](https://tilefun.graehlarts.com/tilefun/workshop.html#/review/pattern%3Awildlife-3d-atlantic-puffin-seabirds-v1).
+
+All three pilot and pet cat coats can reach a native oak crown under the
+shared Realm. Their previous route rose into the canopy collider. They now
+climb beside it, step over the lip and settle on top. The native regression
+checks the third play, climb, actual perch height, save/reload and descent.
+
+The [shepherd report](256-wildlife-3d-game-rollout/evidence/pointed-ear-shepherd-v1-default.json)
+pins the deployed commit, manifest fingerprint and default GLB. All four
+states, including the previously missing flee, played in Workshop and in a
+reopened default game world. The release verifier accepts `--candidate=ID`
+and `--revision=SHA`; `record-3d-default-evidence.mjs REPORT REPORT_NAME`
+adds a ledger `live` entry after all states pass on both paths.
+
 ### Yard and canopy birds, 2026-11-26
 
 The dove, sparrow, rock pigeon and parrot reuse their exact archived Blender

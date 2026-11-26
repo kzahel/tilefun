@@ -112,6 +112,25 @@ it("cat stalks, physically pounces and bats the same toy", async () => {
     await s.close();
   }
 }, 60000);
+it("lets a cat climb outside the live canopy, perch, and descend after reload", async () => {
+  const recipe = woodlandWorkRecipe("cat");
+  const s = await ScenarioSession.create(recipe);
+  try {
+    const cat = required(s.realm.entityManager.entities.find((e) => e.fauna));
+    await until(s, () => cat.animalWork?.state === "perch", 45);
+    expect(cat.animalWork?.played).toBe(3);
+    expect(cat.wz).toBeCloseTo(32, 0);
+    const id = cat.persistentId;
+    await s.reload();
+    const loaded = required(s.realm.entityManager.entities.find((e) => e.persistentId === id));
+    expect(loaded.animalWork?.state).toBe("perch");
+    expect(loaded.wz).toBeCloseTo(32, 0);
+    await until(s, () => !loaded.animalWork?.tree && Math.abs(loaded.wz ?? 0) < 0.1, 18);
+    expect(loaded.motionIntent?.altitude).toBeUndefined();
+  } finally {
+    await s.close();
+  }
+}, 60000);
 it("only admitted growing sources renew, cap their stock and preserve timers through actor records", async () => {
   const s = await ScenarioSession.create(woodlandWorkRecipe("cat"));
   try {

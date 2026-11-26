@@ -1,0 +1,134 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-atlantic-puffin-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "fly",
+          "action": "fly",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 400
+        }
+      ],
+      "candidateId": "atlantic-puffin-seabirds-v1",
+      "modelSha256": "c205fac093284b88cb5c837f6086e888ba0bc193525162ff6f6a03e5516ed828"
+    },
+    {
+      "type": "wildlife-blue-footed-booby-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "fly",
+          "action": "fly",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 400
+        }
+      ],
+      "candidateId": "blue-footed-booby-seabirds-v1",
+      "modelSha256": "04b4b842703af31cf47cac6e0e3e98deb81fa54169ae02d75c00b5b5871a8241"
+    },
+    {
+      "type": "wildlife-great-frigatebird-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "fly",
+          "action": "fly",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 400
+        }
+      ],
+      "candidateId": "great-frigatebird-seabirds-v1",
+      "modelSha256": "075884968a21bbd448f3c462459cd5cfc5c4c419c115f9fea1d3cebd54d8ee89"
+    },
+    {
+      "type": "wildlife-pelican-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "fly",
+          "action": "fly",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 400
+        }
+      ],
+      "candidateId": "pelican-seabirds-v1",
+      "modelSha256": "4c60b706d211c39b0f19de4acd10620be706651b4534b392a2637b476bdc6194"
+    }
+  ],
+  "clipSamples": 448,
+  "testedDepth": false
+}

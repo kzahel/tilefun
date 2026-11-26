@@ -5,6 +5,7 @@ import { ENTITY_PALETTE } from "../../src/editor/EditorPalettes.ts";
 import { ENTITY_DEFS } from "../../src/entities/EntityDefs.ts";
 import {
   WILDLIFE_DEFAULT_MODELS,
+  WILDLIFE_MODEL_REVIEW_PREFIX,
   WILDLIFE_MODEL_REVIEWS,
   wildlifeModelReviewPath,
 } from "../../src/wildlife/WildlifeModelReviewBank.ts";
@@ -29,6 +30,7 @@ let observed = 0;
 let observedAll = 0;
 let live = 0;
 const servedReports = new Map();
+const defaultByType = new Map(WILDLIFE_DEFAULT_MODELS.map((model) => [model.type, model]));
 const drafts = process.argv.includes("--drafts");
 for (const row of ledger.animals) {
   const sprite = ENTITY_DEFS[row.type]?.sprite;
@@ -50,20 +52,26 @@ for (const row of ledger.animals) {
   states += expected.length;
   qualified += Object.keys(row.qualifiedClips).length;
   const servedPath = row.candidatePreview?.servedEvidence;
+  const seen = new Set();
   if (servedPath) {
     if (!servedReports.has(servedPath))
       servedReports.set(servedPath, JSON.parse(await readFile(servedPath, "utf8")).results);
     const served = servedReports.get(servedPath).find(({ type }) => row.type === type);
     assert.equal(served?.manifestFingerprint, row.candidatePreview.fingerprint, row.type);
-    const seen = new Set(served.statesObserved);
-    const count = expected.filter((state) => seen.has(state)).length;
-    observed += count;
-    if (count === expected.length) observedAll++;
+    for (const state of served.statesObserved) seen.add(state);
   }
   if (row.live) {
-    assert(row.live.revision && row.candidatePreview?.candidate, row.type);
+    const model = defaultByType.get(row.type);
+    assert(model && row.live.revision && row.live.url && row.live.evidence, row.type);
+    assert.equal(row.live.candidate, WILDLIFE_MODEL_REVIEW_PREFIX + model.id, row.type);
+    assert.equal(row.live.sha256, model.files["model.glb"], row.type);
+    assert.deepEqual([...row.live.states].sort(), [...expected].sort(), row.type);
+    for (const state of row.live.states) seen.add(state);
     live++;
   }
+  const count = expected.filter((state) => seen.has(state)).length;
+  observed += count;
+  if (count === expected.length) observedAll++;
 }
 assert.equal(
   states,

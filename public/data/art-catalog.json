@@ -9456,6 +9456,46 @@
       "source": "demos/wildlife-3d/parrot-yard-and-canopy-birds-v1/model.blend"
     },
     {
+      "id": "wildlife-3d-atlantic-puffin-seabirds-v1",
+      "name": "wildlife 3d atlantic puffin seabirds v1",
+      "image": "demos/wildlife-3d/atlantic-puffin-seabirds-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "ea1d3795c4b602300ec3e429b9f3ef78bfd0c342e870e47f9a87b78f72b3bc11",
+      "source": "demos/wildlife-3d/atlantic-puffin-seabirds-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-blue-footed-booby-seabirds-v1",
+      "name": "wildlife 3d blue footed booby seabirds v1",
+      "image": "demos/wildlife-3d/blue-footed-booby-seabirds-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "cf4e5db66cc4c9b2bdfd51176af71d3d6fbc6d587445982dda04efe645067d38",
+      "source": "demos/wildlife-3d/blue-footed-booby-seabirds-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-great-frigatebird-seabirds-v1",
+      "name": "wildlife 3d great frigatebird seabirds v1",
+      "image": "demos/wildlife-3d/great-frigatebird-seabirds-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "6ca917c2acf0c9349f549e6c21747f30d7e01c5e4d67044215789cd94b0e8ba3",
+      "source": "demos/wildlife-3d/great-frigatebird-seabirds-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-pelican-seabirds-v1",
+      "name": "wildlife 3d pelican seabirds v1",
+      "image": "demos/wildlife-3d/pelican-seabirds-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "ba820370d5c56b8a8fabcefccfea78eb05e12831e0376407cf431d47886800ad",
+      "source": "demos/wildlife-3d/pelican-seabirds-v1/model.blend"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",
@@ -11915,7 +11955,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:50"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:58"
         },
         {
           "system": "Gameplay",
@@ -11927,7 +11967,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/TreeClimbing.ts:19"
+          "source": "src/wildlife/TreeClimbing.ts:23"
         },
         {
           "system": "Gameplay",
@@ -12057,7 +12097,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:48"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:56"
         },
         {
           "system": "Gameplay",
@@ -12077,7 +12117,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/TreeClimbing.ts:19"
+          "source": "src/wildlife/TreeClimbing.ts:23"
         },
         {
           "system": "Gameplay",
@@ -37192,6 +37232,10 @@
           "source": "src/scenarios/ScenarioSession.ts:189"
         },
         {
+          "system": "Gameplay",
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:64"
+        },
+        {
           "system": "Editor",
           "source": "src/scenes/playAtmosphere.ts:47"
         },
@@ -38401,7 +38445,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/WoodlandWork.ts:403"
+          "source": "src/wildlife/WoodlandWork.ts:376"
         },
         {
           "system": "Gameplay",
@@ -39231,7 +39275,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:50"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:58"
         },
         {
           "system": "Gameplay",
@@ -39243,7 +39287,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/TreeClimbing.ts:19"
+          "source": "src/wildlife/TreeClimbing.ts:23"
         },
         {
           "system": "Gameplay",
@@ -39377,7 +39421,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:48"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:56"
         },
         {
           "system": "Gameplay",
@@ -39397,7 +39441,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/TreeClimbing.ts:19"
+          "source": "src/wildlife/TreeClimbing.ts:23"
         },
         {
           "system": "Gameplay",

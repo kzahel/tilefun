@@ -1,0 +1,22 @@
+{
+  "runtimeType": "wildlife-great-frigatebird-provisional-v1",
+  "version": 3,
+  "fit": [
+    11,
+    6.5,
+    11.6
+  ],
+  "autoFit": false,
+  "portraitCenter": 0.92,
+  "clips": [
+    "idle",
+    "fly",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "Archived species mesh with separate flight and escape strokes and a sprite-guided bill gesture.",
+  "model": "model.glb",
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}
