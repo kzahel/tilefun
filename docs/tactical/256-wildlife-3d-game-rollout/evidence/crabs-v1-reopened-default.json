@@ -1,0 +1,38 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "a7a6399de966ab01d4d65ac773e860371cf830ed",
+  "workshopInputDigest": "fa0663cc6a104c86bb0fe35c2c223d464dae311bd1153d89056d32ee7fb3d00d",
+  "results": [
+    {
+      "type": "wildlife-crab-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "0ce51c2de6228b5ae73a000e2e8da05683083625a03b9e1a439d2233151fb589",
+      "modelSha256": "b021cf89418a0c4de1738928ed396077708b6f91f1a7957530f43f5ea9effbc8",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-crab&wildlife3dStage=crab-crabs-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009717273712158249,
+        -0.00017452239990234375
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "a7a6399de966ab01d4d65ac773e860371cf830ed",
+  "workshopInputDigest": "fa0663cc6a104c86bb0fe35c2c223d464dae311bd1153d89056d32ee7fb3d00d",
+  "results": [
+    {
+      "type": "wildlife-lobster-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "a748a280d41e331fa62204b451dc8b3a3760f325aa70781286f6115956874156",
+      "modelSha256": "5b7cc9ad1c7618a8c4436b8eca6654d353fa86abd053324526ddeeb2025802f0",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-lobster&wildlife3dStage=lobster-marine-arthropods-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009826869964599644,
+        -0.00013296127319332846
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "swim",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-mantis-shrimp-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "41ccebd9d6f9f1bd784e8c01d9ed55cee41ff090d6cd14225e780e93ee75d11a",
+      "modelSha256": "69543c8c81208f90b2cdc730f8722020af96226a448b5882ee78b787127138d7",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-mantis-shrimp&wildlife3dStage=mantis-shrimp-marine-arthropods-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009564437866210981,
+        -0.00009637928009033198
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "swim",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    }
+  ]
+}

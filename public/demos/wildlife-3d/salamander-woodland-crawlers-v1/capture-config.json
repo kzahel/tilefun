@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-salamander-provisional-v1",
+  "fit": [
+    12.47,
+    7.1,
+    12.33
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "A long tail follows the low planted gait. The escape lowers the head and ripples from the shoulders to the tail.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

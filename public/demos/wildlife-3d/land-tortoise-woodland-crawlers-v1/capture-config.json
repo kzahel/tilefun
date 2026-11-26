@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-land-tortoise-provisional-v1",
+  "fit": [
+    12.18,
+    5.11,
+    12.33
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "The head and limbs partly retreat under the shell during action. The escape uses faster short steps beneath a steady shell.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

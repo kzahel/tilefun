@@ -99,7 +99,7 @@ def paint_sprite_palette(mesh, species):
         v = mesh.data.vertices[face.vertices[0]]
         part = next((parts[g.group] for g in v.groups if g.group in parts), "")
         upper = face.normal.z
-        shade = 3 if upper > .73 else 1 if upper < .06 else 2
+        shade = 3 if upper > .73 and species != "texas-horned-lizard" else 1 if upper < .06 else 2
         if all(abs(a - b) < .001 for a, b in zip(uvs[face.loop_start].uv, eye_uv)):
             shade = 0
         elif part.startswith("Raised neck frill"):
@@ -121,7 +121,7 @@ def paint_sprite_palette(mesh, species):
         elif species == "frilled-neck-lizard" and p.y < -reptile.LENGTH:
             shade = 1
         elif species == "newt":
-            shade = 3 if abs(p.x) < .092 and upper > .2 else 2 if upper > .21 else 1
+            shade = 3 if abs(p.x) < .061 and upper > .2 else 2 if upper > .21 else 1
         elif species == "salamander":
             fleck = math.cos(p.y * 22 + abs(p.x) * 12)
             shade = 3 if p.y > -reptile.LENGTH * .75 and fleck > .18 and upper > .18 else 1

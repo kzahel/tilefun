@@ -1,0 +1,40 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "a7a6399de966ab01d4d65ac773e860371cf830ed",
+  "workshopInputDigest": "fa0663cc6a104c86bb0fe35c2c223d464dae311bd1153d89056d32ee7fb3d00d",
+  "results": [
+    {
+      "type": "wildlife-anglerfish-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "c303a30c111698887c46217f7075e50d39574d04bdcb71052bc9414830f2e4b0",
+      "modelSha256": "0d156ddd475cedf9e9d598307f6357837610bc1133bbd243399af2961fb362cc",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-anglerfish&wildlife3dStage=anglerfish-distinct-fish-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009764938354492225,
+        -0.00008882522583006426
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "swim",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    }
+  ]
+}

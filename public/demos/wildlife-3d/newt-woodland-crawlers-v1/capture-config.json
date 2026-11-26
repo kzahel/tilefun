@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-newt-provisional-v1",
+  "fit": [
+    12.47,
+    7.1,
+    12.33
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "Low steps travel beside a narrow body and a finned tail. The escape uses wider side-to-side motion.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

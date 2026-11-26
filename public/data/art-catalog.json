@@ -9986,6 +9986,46 @@
       "source": "demos/wildlife-3d/iguana-lizards-v1/model.blend"
     },
     {
+      "id": "wildlife-3d-newt-woodland-crawlers-v1",
+      "name": "wildlife 3d newt woodland crawlers v1",
+      "image": "demos/wildlife-3d/newt-woodland-crawlers-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "52afe398921062cd6f9cb6fa0573c4d63fb280a8dd3370ce336c38e0a847c2dd",
+      "source": "demos/wildlife-3d/newt-woodland-crawlers-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-salamander-woodland-crawlers-v1",
+      "name": "wildlife 3d salamander woodland crawlers v1",
+      "image": "demos/wildlife-3d/salamander-woodland-crawlers-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "8906e71ca290b46557c1b6f275919b00b6ce5b1c454ba7c352d979037276a08f",
+      "source": "demos/wildlife-3d/salamander-woodland-crawlers-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-texas-horned-lizard-woodland-crawlers-v1",
+      "name": "wildlife 3d texas horned lizard woodland crawlers v1",
+      "image": "demos/wildlife-3d/texas-horned-lizard-woodland-crawlers-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "70cc970f8b7a976e6d3ec0ae560e922a01c30442fb73536ea270302ffe48a8f8",
+      "source": "demos/wildlife-3d/texas-horned-lizard-woodland-crawlers-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-land-tortoise-woodland-crawlers-v1",
+      "name": "wildlife 3d land tortoise woodland crawlers v1",
+      "image": "demos/wildlife-3d/land-tortoise-woodland-crawlers-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "b47735d11ce3e32e4c0a785df92f0f39f8ac918bf41d6a692d854c9d39d69aa9",
+      "source": "demos/wildlife-3d/land-tortoise-woodland-crawlers-v1/model.blend"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",

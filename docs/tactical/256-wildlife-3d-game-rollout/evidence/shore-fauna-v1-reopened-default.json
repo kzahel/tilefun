@@ -1,0 +1,43 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "a7a6399de966ab01d4d65ac773e860371cf830ed",
+  "workshopInputDigest": "fa0663cc6a104c86bb0fe35c2c223d464dae311bd1153d89056d32ee7fb3d00d",
+  "results": [
+    {
+      "type": "wildlife-platypus-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "36d8566149b5920fd96bbce284344c1f083a017f2028e75ad5b4bc3b9ff1b056",
+      "modelSha256": "840c586d0e7f3b2860b9df0f163a16b9d910b80cef25bc4d96358558a20aab2e",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-platypus&wildlife3dStage=platypus-shore-fauna-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "swim",
+        "action",
+        "flee",
+        "flee-swim"
+      ],
+      "heightRange": [
+        -0.0009635877609252965,
+        -0.00010433197021483304
+      ],
+      "statesOnLanding": [
+        "flee",
+        "flee-swim"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "swim",
+          "action",
+          "flee",
+          "flee-swim"
+        ]
+      }
+    }
+  ]
+}

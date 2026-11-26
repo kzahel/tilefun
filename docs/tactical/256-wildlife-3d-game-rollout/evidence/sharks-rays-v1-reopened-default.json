@@ -1,0 +1,40 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "a7a6399de966ab01d4d65ac773e860371cf830ed",
+  "workshopInputDigest": "fa0663cc6a104c86bb0fe35c2c223d464dae311bd1153d89056d32ee7fb3d00d",
+  "results": [
+    {
+      "type": "wildlife-hammerhead-shark-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "67ce5b6c5f11938171445fb638faa9e88c4cfd519813f535073c7c00bdbaea05",
+      "modelSha256": "43bec3cae41ae6442351379adbc3c009338f1117533f2478f13537b07ba301a9",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-hammerhead-shark&wildlife3dStage=hammerhead-sharks-rays-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009545631408691454,
+        -0.00021196746826171838
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "swim",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    }
+  ]
+}

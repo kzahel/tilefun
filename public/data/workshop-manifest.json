@@ -1024,6 +1024,12 @@
       "toolId": "animal-browser"
     },
     {
+      "id": "wildlife-3d-woodland-crawlers-v1",
+      "name": "3D wildlife · woodland crawlers v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
       "id": "motion",
       "name": "Furniture movement sets",
       "description": "Default layouts and physics. Custom layouts remain individually reviewable in the tool.",
@@ -63859,7 +63865,175 @@
           "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-iguana-lizards-v1"
         }
       }
+    },
+    {
+      "id": "pattern:wildlife-3d-newt-woodland-crawlers-v1",
+      "batchId": "wildlife-3d-woodland-crawlers-v1",
+      "kind": "wildlife",
+      "name": "Newt",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-newt-woodland-crawlers-v1",
+      "fingerprint": "c2a010edee0ce114ae3d4667eb2ce64964d06c83f64554ec59b96b6b0f8f9a64",
+      "sourceFingerprint": "52afe398921062cd6f9cb6fa0573c4d63fb280a8dd3370ce336c38e0a847c2dd",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-newt-woodland-crawlers-v1",
+        "prefabIds": [],
+        "revision": "7126acb0b44c2433f242f51e65f575f6865dd192b385cda6a5da5b215aa05f10",
+        "renderFingerprint": "c2a010edee0ce114ae3d4667eb2ce64964d06c83f64554ec59b96b6b0f8f9a64",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-newt-woodland-crawlers-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-newt-woodland-crawlers-v1",
+        "fingerprint": "52afe398921062cd6f9cb6fa0573c4d63fb280a8dd3370ce336c38e0a847c2dd",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-newt-woodland-crawlers-v1",
+          "prefabIds": [],
+          "revision": "7126acb0b44c2433f242f51e65f575f6865dd192b385cda6a5da5b215aa05f10",
+          "renderFingerprint": "c2a010edee0ce114ae3d4667eb2ce64964d06c83f64554ec59b96b6b0f8f9a64",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-newt-woodland-crawlers-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-salamander-woodland-crawlers-v1",
+      "batchId": "wildlife-3d-woodland-crawlers-v1",
+      "kind": "wildlife",
+      "name": "Salamander",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-salamander-woodland-crawlers-v1",
+      "fingerprint": "7683451f7ff37264534ec947a052910727d0f2c2d938d5206e394277d16833ff",
+      "sourceFingerprint": "8906e71ca290b46557c1b6f275919b00b6ce5b1c454ba7c352d979037276a08f",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-salamander-woodland-crawlers-v1",
+        "prefabIds": [],
+        "revision": "afc4df87b4f2fb8e6a73d8ba66f929374684ec73b92a03fe6eac22a5389f8396",
+        "renderFingerprint": "7683451f7ff37264534ec947a052910727d0f2c2d938d5206e394277d16833ff",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-salamander-woodland-crawlers-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-salamander-woodland-crawlers-v1",
+        "fingerprint": "8906e71ca290b46557c1b6f275919b00b6ce5b1c454ba7c352d979037276a08f",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-salamander-woodland-crawlers-v1",
+          "prefabIds": [],
+          "revision": "afc4df87b4f2fb8e6a73d8ba66f929374684ec73b92a03fe6eac22a5389f8396",
+          "renderFingerprint": "7683451f7ff37264534ec947a052910727d0f2c2d938d5206e394277d16833ff",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-salamander-woodland-crawlers-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-texas-horned-lizard-woodland-crawlers-v1",
+      "batchId": "wildlife-3d-woodland-crawlers-v1",
+      "kind": "wildlife",
+      "name": "Texas horned lizard",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-texas-horned-lizard-woodland-crawlers-v1",
+      "fingerprint": "0a774f0ad4af6479d6cfc8899e89c3a2f2cd571dbf3d26dbc667b03de8294541",
+      "sourceFingerprint": "70cc970f8b7a976e6d3ec0ae560e922a01c30442fb73536ea270302ffe48a8f8",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-texas-horned-lizard-woodland-crawlers-v1",
+        "prefabIds": [],
+        "revision": "61eaebf487e81c4b6671377f0878accaeec7de8ae5f3326a22467da3af2b3800",
+        "renderFingerprint": "0a774f0ad4af6479d6cfc8899e89c3a2f2cd571dbf3d26dbc667b03de8294541",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-texas-horned-lizard-woodland-crawlers-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-texas-horned-lizard-woodland-crawlers-v1",
+        "fingerprint": "70cc970f8b7a976e6d3ec0ae560e922a01c30442fb73536ea270302ffe48a8f8",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-texas-horned-lizard-woodland-crawlers-v1",
+          "prefabIds": [],
+          "revision": "61eaebf487e81c4b6671377f0878accaeec7de8ae5f3326a22467da3af2b3800",
+          "renderFingerprint": "0a774f0ad4af6479d6cfc8899e89c3a2f2cd571dbf3d26dbc667b03de8294541",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-texas-horned-lizard-woodland-crawlers-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-land-tortoise-woodland-crawlers-v1",
+      "batchId": "wildlife-3d-woodland-crawlers-v1",
+      "kind": "wildlife",
+      "name": "Land tortoise",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-land-tortoise-woodland-crawlers-v1",
+      "fingerprint": "fbaf6bcfa4de7c07e0290e2ee3f63a8d92a94f86b529213b004b705acd53fc2f",
+      "sourceFingerprint": "b47735d11ce3e32e4c0a785df92f0f39f8ac918bf41d6a692d854c9d39d69aa9",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-land-tortoise-woodland-crawlers-v1",
+        "prefabIds": [],
+        "revision": "cc43e39fcefda01a8d023bfa4e47a31a3412b0f376bad796b0eaa8f89f3ab32e",
+        "renderFingerprint": "fbaf6bcfa4de7c07e0290e2ee3f63a8d92a94f86b529213b004b705acd53fc2f",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-land-tortoise-woodland-crawlers-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-land-tortoise-woodland-crawlers-v1",
+        "fingerprint": "b47735d11ce3e32e4c0a785df92f0f39f8ac918bf41d6a692d854c9d39d69aa9",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-land-tortoise-woodland-crawlers-v1",
+          "prefabIds": [],
+          "revision": "cc43e39fcefda01a8d023bfa4e47a31a3412b0f376bad796b0eaa8f89f3ab32e",
+          "renderFingerprint": "fbaf6bcfa4de7c07e0290e2ee3f63a8d92a94f86b529213b004b705acd53fc2f",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-land-tortoise-woodland-crawlers-v1"
+        }
+      }
     }
   ],
-  "inputDigest": "c79149beb23768803bea02b47529ced2366969ff2a24709d7aef9aad22af1fe1"
+  "inputDigest": "77f7b3cb17c36c9ea9c0b278047e19a328c3dfa1a3ab0dac090e16684015f698"
 }

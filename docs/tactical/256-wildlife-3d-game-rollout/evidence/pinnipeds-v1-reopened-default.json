@@ -1,0 +1,79 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "a7a6399de966ab01d4d65ac773e860371cf830ed",
+  "workshopInputDigest": "fa0663cc6a104c86bb0fe35c2c223d464dae311bd1153d89056d32ee7fb3d00d",
+  "results": [
+    {
+      "type": "wildlife-sea-lion-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "d16e646fd10bf822a2b982ad88f4218361419625a66506bce0806abc5681989a",
+      "modelSha256": "56dc517504dc96dcb7bc551510a017e883086b9a86d9ba1d1c43ed737710059e",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-sea-lion&wildlife3dStage=sea-lion-pinnipeds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "swim",
+        "action",
+        "flee",
+        "flee-swim"
+      ],
+      "heightRange": [
+        -0.0009755020141601653,
+        -0.000042915344238281426
+      ],
+      "statesOnLanding": [
+        "flee",
+        "flee-swim"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "swim",
+          "action",
+          "flee",
+          "flee-swim"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-walrus-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "26db8594a9ed02bb81bea4080711ad832c7e8f0e9c7576d6a473fea88a4c2f8d",
+      "modelSha256": "e1dcca38ad8a850f857447851cb46942e966d56ba3ce44b869edcd7d9f538be8",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-walrus&wildlife3dStage=walrus-pinnipeds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "swim",
+        "action",
+        "flee",
+        "flee-swim"
+      ],
+      "heightRange": [
+        -0.0009850387573242054,
+        -0.00006581497192382754
+      ],
+      "statesOnLanding": [
+        "flee",
+        "flee-swim"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "swim",
+          "action",
+          "flee",
+          "flee-swim"
+        ]
+      }
+    }
+  ]
+}

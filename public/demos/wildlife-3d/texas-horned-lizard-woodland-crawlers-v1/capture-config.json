@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-texas-horned-lizard-provisional-v1",
+  "fit": [
+    12.47,
+    5.13,
+    12.33
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "The broad low body carries sculpted crown horns and planted feet. Escape uses a short, wider-legged scramble.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

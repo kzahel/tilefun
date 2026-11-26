@@ -107,6 +107,21 @@ runtime scope reconciliation in the execution notes.
 
 ## Delivery log
 
+### Woodland crawlers, 2026-11-26
+
+The newt keeps a narrow orange stripe. The salamander lowers its head and
+keeps a dark tail behind its spotted back. The Texas horned lizard raises
+its crown, and the land tortoise reaches forward below the shell. The
+four each have an independent escape gait. All 16 states played in the
+exact previews and in reopened game worlds. [Renderer evidence](256-wildlife-3d-game-rollout/evidence/woodland-crawlers-v1-runtime.json) ·
+[Public preview evidence](256-wildlife-3d-game-rollout/evidence/woodland-crawlers-v1-deployment.json) ·
+[Workshop review](https://tilefun.graehlarts.com/tilefun/workshop.html#/review/pattern%3Awildlife-3d-newt-woodland-crawlers-v1)
+
+Production checks now cover all previously selected swimmers and marine
+hunters, including the remaining seals and shore animals. The rust crab
+also played all four states. For these runs the full reopened-world evidence
+is stored beside each animal's ledger row. [Animation ledger](256-wildlife-3d-game-rollout/animation-ledger.json)
+
 ### Lizards, 2026-11-26
 
 The chameleon reaches forward over planted feet. The frilled-neck lizard
