@@ -281,6 +281,15 @@ try {
     }
     console.log(`Verified served evidence and shared Workshop play for ${candidate.name}.`);
   }
+  if (revision) {
+    const current = await get("data/workshop-manifest.json");
+    assert(current.ok, "Could not confirm the deployed revision after playback");
+    assert.equal(
+      (await current.json()).inputDigest,
+      manifest.inputDigest,
+      "Deployment changed during playback",
+    );
+  }
   await writeFile(
     reportPath,
     `${JSON.stringify(

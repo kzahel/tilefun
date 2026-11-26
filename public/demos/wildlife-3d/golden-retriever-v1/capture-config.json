@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-dog-golden-provisional-v1",
+  "version": 3,
+  "fit": [
+    9.13,
+    7.12,
+    8.77
+  ],
+  "autoFit": true,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "Archived golden-retriever draft with a separate escape bound, longer walking stride and grounded head gesture.",
+  "model": "model.glb",
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

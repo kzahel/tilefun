@@ -1,4 +1,4 @@
-"""Key the four common bird actions on the exact editable campaign draft.
+"""Key four grounded or flying bird actions on the exact editable campaign draft.
 
 Run in Blender with -- SPECIES ARCHIVED_BLEND OUTPUT_DIRECTORY.
 """
@@ -69,6 +69,27 @@ def fork_frigatebird_tail(mesh):
     mesh.data.update()
 
 
+def extend_kiwi_bill(mesh):
+    bill = part_vertices(mesh, "Sculpted bill")
+    root_y = min(vertex.co.y for vertex in bill)
+    for vertex in bill:
+        reach = vertex.co.y - root_y
+        vertex.co.x *= 1.2
+        vertex.co.y += .34 * reach
+        vertex.co.z -= .17 * reach
+    mesh.data.update()
+
+
+def detail_cassowary(mesh, rig):
+    for vertex in part_vertices(mesh, "Crown or crest"):
+        vertex.co.z += .23 * max(0, vertex.co.z - bird.HEAD.z)
+    for side in ("l", "r"):
+        center = rig.data.bones[f"foot.{side}"].head_local.x
+        for vertex in part_vertices(mesh, f"Leg and toes {side}"):
+            vertex.co.x = center + 1.30 * (vertex.co.x - center)
+    mesh.data.update()
+
+
 def paint_sprite_markings(mesh, species):
     """Use the draft's packed palette on the surfaces seen at gameplay zoom."""
     parts = {group.index: group.name.removeprefix("Part · ") for group in mesh.vertex_groups
@@ -77,8 +98,18 @@ def paint_sprite_markings(mesh, species):
     uvs = mesh.data.uv_layers.active.data
 
     def swatch(color):
+        if color == "casque":
+            return (7 / 8, 7.5 / 8)
         index = 2 * palette.index(color)
         return ((index % 8 + 1) / 8, (index // 8 + .5) / 8)
+
+    if species == "cassowary":
+        material = mesh.data.materials[0]
+        atlas = next(node.image for node in material.node_tree.nodes if node.type == "TEX_IMAGE")
+        pixels = list(atlas.pixels)
+        pixels[-8:] = [194 / 255, 173 / 255, 116 / 255, 1] * 2
+        atlas.pixels[:] = pixels
+        atlas.pack()
 
     for face in mesh.data.polygons:
         vertex = mesh.data.vertices[face.vertices[0]]
@@ -125,6 +156,20 @@ def paint_sprite_markings(mesh, species):
                 color = "feet" if face.normal.z < -.36 else "bill"
             elif toes:
                 color = "ink"
+        elif species == "cassowary":
+            if part == "Crown or crest":
+                color = "casque"
+            elif part == "Neck, face and eye patches" and point.z < bird.HEAD.z - .19 and point.y > bird.HEAD.y - .11:
+                color = "accent"
+        elif species == "emu" and part == "Neck, face and eye patches" and point.z < bird.HEAD.z - .16:
+            color = "mask"
+        elif species == "ostrich":
+            if wing or tail:
+                color = "breast" if face.normal.z > -.34 else "light"
+            elif part == "Species body and plumage" and uvs[face.loop_start].uv[:] == swatch("breast"):
+                color = "mantle" if face.normal.z > -.31 else "ink"
+            elif toes or part == "Neck, face and eye patches":
+                color = "mask"
         if toes and species in {"dove", "sparrow", "pigeon"}:
             color = "bill"
         if color:
@@ -140,14 +185,20 @@ def main():
     bpy.ops.wm.open_mainfile(filepath=str(Path(source).resolve()), use_scripts=False)
     rig, = (ob for ob in bpy.context.scene.objects if ob.type == "ARMATURE")
     mesh, = (ob for ob in bpy.context.scene.objects if ob.type == "MESH")
-    bird.configure_flight_rollout(species)
+    travel = "walk" if species in bird.GROUND_POSES else "fly"
+    configure = bird.configure_ground_rollout if travel == "walk" else bird.configure_flight_rollout
+    configure(species)
     rig.scale.y *= SEABIRD_LENGTH.get(species, 1)
     if species in {"pelican", "blue-footed-booby"}:
         articulate_bill(rig, mesh, species)
     if species == "great-frigatebird":
         fork_frigatebird_tail(mesh)
+    if species == "kiwi":
+        extend_kiwi_bill(mesh)
+    if species == "cassowary":
+        detail_cassowary(mesh, rig)
     paint_sprite_markings(mesh, species)
-    assert set(bpy.data.actions.keys()) == {"idle", "fly", "action"}
+    assert set(bpy.data.actions.keys()) == {"idle", travel, "action"}
     for action in list(bpy.data.actions):
         bpy.data.actions.remove(action)
     wildlife_build.key_actions(rig, bird.DURATIONS, bird.pose)

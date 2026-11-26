@@ -1,0 +1,22 @@
+{
+  "runtimeType": "wildlife-emu-provisional-v1",
+  "version": 3,
+  "fit": [
+    10.88,
+    15.89,
+    16.82
+  ],
+  "autoFit": false,
+  "portraitCenter": 0.92,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "Archived campaign bird with alternating footfall, grounded neck gesture and separate high-lift escape stride.",
+  "model": "model.glb",
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

@@ -107,6 +107,26 @@ runtime scope reconciliation in the execution notes.
 
 ## Delivery log
 
+### Flightless birds and golden retriever, 2026-11-26
+
+The cassowary, emu, ostrich and kiwi use distinct walk and escape footfalls.
+The cassowary lunges, the emu and ostrich dip their necks, and the kiwi probes
+with its extended bill. The golden retriever carries a lower tail and uses a
+separate bound when startled. The public preview checks exercised all 20
+states in Workshop and after reopening editor-placed animals in the game.
+[Flightless bird evidence](256-wildlife-3d-game-rollout/evidence/ratites-v1-deployment.json) ·
+[Golden retriever evidence](256-wildlife-3d-game-rollout/evidence/golden-retriever-v1-deployment.json)
+
+The public authoring checkout played all nine states for all three cat coats
+in Workshop and in reopened ordinary worlds. The production repeat is tracked
+separately. The earlier seabird commit failed formatting checks on newly
+generated default evidence. The ledger uses the repository formatter and the
+verifier's default reports use the same formatting exemption as preview reports.
+
+Production checks also verified both default states on the classic fish and
+worms, plus all four default states for the quokka and wombat after save and
+reopen. These nine animals have exact release evidence in the ledger.
+
 ### Seabirds and cat canopy access, 2026-11-26
 
 The Atlantic puffin, blue-footed booby, great frigatebird and pelican reuse

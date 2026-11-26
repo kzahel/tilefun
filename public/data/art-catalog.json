@@ -9496,6 +9496,56 @@
       "source": "demos/wildlife-3d/pelican-seabirds-v1/model.blend"
     },
     {
+      "id": "wildlife-3d-cassowary-ratites-v1",
+      "name": "wildlife 3d cassowary ratites v1",
+      "image": "demos/wildlife-3d/cassowary-ratites-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "149a8d4cab540c87295d9145d1ecf18c364473431bb709630d308690196b8c7c",
+      "source": "demos/wildlife-3d/cassowary-ratites-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-emu-ratites-v1",
+      "name": "wildlife 3d emu ratites v1",
+      "image": "demos/wildlife-3d/emu-ratites-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "f92b2bbf09dcfd66364ecd6749f5d081d6787f40e6dd54b927fda344f97e0a03",
+      "source": "demos/wildlife-3d/emu-ratites-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-ostrich-ratites-v1",
+      "name": "wildlife 3d ostrich ratites v1",
+      "image": "demos/wildlife-3d/ostrich-ratites-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "45041ff28214ac3aec5023162b7c2d88433fbd162e076ba6a9696678b8294fbf",
+      "source": "demos/wildlife-3d/ostrich-ratites-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-kiwi-ratites-v1",
+      "name": "wildlife 3d kiwi ratites v1",
+      "image": "demos/wildlife-3d/kiwi-ratites-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "1668dd6b755a56b71388299bf726cec69ea6f84ad3a8962e8f737f12eb630274",
+      "source": "demos/wildlife-3d/kiwi-ratites-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-golden-retriever-v1",
+      "name": "wildlife 3d golden retriever v1",
+      "image": "demos/wildlife-3d/golden-retriever-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "1927695ad659a38b852b3374bde7de595b17459f77aa5632492d2681969712c0",
+      "source": "demos/wildlife-3d/golden-retriever-v1/model.blend"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",

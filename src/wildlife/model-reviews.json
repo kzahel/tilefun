@@ -2891,5 +2891,120 @@
       "model.glb": "4c60b706d211c39b0f19de4acd10620be706651b4534b392a2637b476bdc6194",
       "native.png": "2fe3344ae7eb13ae5b622ecee3ce851535a59d661eece144ffcaae73175984e0"
     }
+  },
+  {
+    "id": "cassowary-ratites-v1",
+    "type": "wildlife-cassowary-provisional-v1",
+    "name": "Cassowary",
+    "batch": "wildlife-3d-ratites-v1",
+    "lab": "cassowary",
+    "scale": 16.82,
+    "topDown": {
+      "width": 0.739001189060642,
+      "height": 0.9595719381688467
+    },
+    "files": {
+      "action.png": "aa6d1f2b05b8bf4abb3217c690957def8f4c267efbb9386053e2363dbe4322c6",
+      "appearance.png": "149a8d4cab540c87295d9145d1ecf18c364473431bb709630d308690196b8c7c",
+      "capture-config.json": "ebc1df3922bdc915359b3be4ebd9d7a4485595530d4e6a7979b7c04f1ac05e22",
+      "comparison.mp4": "6c9905d9812d6cd2620983c297d55beae4edc1a0075235ac1c414bd3e9fa0e05",
+      "flee.png": "631e81bed7f615358458a7b160784ec79a2e3a1a534d3091f00a8c51eee54b81",
+      "model.blend": "3fdfd028dcf330d2437b0a35e4e2b2bc75f3aa83ce34f55470ca6f8c6b8b25be",
+      "model.glb": "561abbfdeaf8cbfec13c7331601c319ad8dfb0f882d642e1a3e5aa0db67d2c59",
+      "native.png": "333e646937417382aa4898837215af4216e99a620b14cbfe10aacc24994d6677",
+      "walk.png": "8ea29ff606a235aade8275ff12f7160b78578a471dae62d1373acf38efe1a6d8"
+    }
+  },
+  {
+    "id": "emu-ratites-v1",
+    "type": "wildlife-emu-provisional-v1",
+    "name": "Emu",
+    "batch": "wildlife-3d-ratites-v1",
+    "lab": "emu",
+    "scale": 16.82,
+    "topDown": {
+      "width": 0.6468489892984542,
+      "height": 0.9447086801426873
+    },
+    "files": {
+      "action.png": "24f1067d0ac158d24a34683e70d6cdfc1ddce8c97ec29e07ee9206eff5715bc6",
+      "appearance.png": "f92b2bbf09dcfd66364ecd6749f5d081d6787f40e6dd54b927fda344f97e0a03",
+      "capture-config.json": "5b95a037ce3b75a8dfa77bb28baf245296df92d842e107e184580445f79429dc",
+      "comparison.mp4": "f777a1653d84d2b95b483d7a03f32b933e6053eb176cdba595053f250483ba47",
+      "flee.png": "b83c825a219ca05711682eaba569772d440eee0045ae119e9e4209d5fe3af792",
+      "model.blend": "b527567dd26918014fab9e53a5f270bc1721cdb8d25b2168dbe41e90845070bd",
+      "model.glb": "b769d3a6c8bef534604f58fd5ce2aa3775bdcdccbf39216c1172a03f2d57777b",
+      "native.png": "f8292710bbec6e650c61e0e0ad344c7ae51ce512e19379fd9286b3fde3be48a9",
+      "walk.png": "7a3f3530d482302d2fb26573e403e8521b197346613f86357ddd50d9998979bd"
+    }
+  },
+  {
+    "id": "ostrich-ratites-v1",
+    "type": "wildlife-ostrich-provisional-v1",
+    "name": "Ostrich",
+    "batch": "wildlife-3d-ratites-v1",
+    "lab": "ostrich",
+    "scale": 16.82,
+    "topDown": {
+      "width": 0.6367419738406659,
+      "height": 0.9518430439952439
+    },
+    "files": {
+      "action.png": "8d729237f665d39db8ac3f50f795414d626bd3bd857001d29a7d0aeb60b04b70",
+      "appearance.png": "45041ff28214ac3aec5023162b7c2d88433fbd162e076ba6a9696678b8294fbf",
+      "capture-config.json": "f93caf98dd99633e15baa369554983b4016db4669a3648a56fc8b5ad8a40d957",
+      "comparison.mp4": "11e127802a576d2f20adf68972d9d987e01d1c0dd8c47645e606b3dc2ebc2718",
+      "flee.png": "64c5fdfe66ec24a9525f3cb5d06aad3873e620d2f46f7c161df106b2587a0bbd",
+      "model.blend": "61478a5e69582026f6cef68f07236ed36ee5534ae37aaaaf0dc7f93a903a78f9",
+      "model.glb": "47bb61d03cc5e18f510c33fd79ff85315fe884f9f80939edd4242f433232fda6",
+      "native.png": "7557885f39c4b5a9963f9580f7f07b30f3417252c5bee1c9fae3ce95b47634d3",
+      "walk.png": "338d223d2319498b5e501519a68d71ac9c6697a9db09acb1996d225cd91c24c1"
+    }
+  },
+  {
+    "id": "kiwi-ratites-v1",
+    "type": "wildlife-kiwi-provisional-v1",
+    "name": "Kiwi",
+    "batch": "wildlife-3d-ratites-v1",
+    "lab": "kiwi",
+    "scale": 16.82,
+    "topDown": {
+      "width": 0.38525564803804996,
+      "height": 0.5969084423305588
+    },
+    "files": {
+      "action.png": "1c02c14f8eef27a625fd7f552a53a0bf33b61e75a0822c2bdcfa9b62207d3c91",
+      "appearance.png": "1668dd6b755a56b71388299bf726cec69ea6f84ad3a8962e8f737f12eb630274",
+      "capture-config.json": "781607e30845a3aa9c2078453a2afb23a81a81c8b2f0a392977403d9f7f1faa5",
+      "comparison.mp4": "e5928e54c4cea149a56ee5f4484a24521e5ab25d7621aa63c19be5232bc4ac32",
+      "flee.png": "a3f2265aef88513a7ff55626a5502dca100a9b98e740e54e4d90fa24bef5c852",
+      "model.blend": "734ecfe7b8ae076b1f5e09d26deae1c02037dd6fb7258f2cab6c9e5346476fdf",
+      "model.glb": "01c452f609658e62eb837262274d68d7b96325886bc3f3630f173cbdc4240ad5",
+      "native.png": "6176cba33eb61771953b0264e828ccc214a99ee8583b58893b84eff462cdff65",
+      "walk.png": "a1dfee8d882adf4667cabfe110956764af2eb3fd488877046f9eb8da086523aa"
+    }
+  },
+  {
+    "id": "golden-retriever-v1",
+    "type": "wildlife-dog-golden-provisional-v1",
+    "name": "Golden retriever",
+    "batch": "wildlife-3d-golden-retriever-v1",
+    "lab": "dog-golden",
+    "scale": 8.25,
+    "topDown": {
+      "width": 1.0145454545454544,
+      "height": 0.9175757575757576
+    },
+    "files": {
+      "action.png": "45d3c7219128ea77109ac4b04e5af8d3c9a5a141547161eb6b522d6d3f150c22",
+      "appearance.png": "1927695ad659a38b852b3374bde7de595b17459f77aa5632492d2681969712c0",
+      "capture-config.json": "5f74bf8a15d51195ecee21bccb41e6f0caf52f3a27588efff31bd2c20b68cb70",
+      "comparison.mp4": "5a02c3dd26b8ef95dbaba7fc55121e6d1883b60bdccf8d6f0b9d8d3509c1efde",
+      "flee.png": "49bd758e1584434e09a4b97206264628db56212ee6832abec89cf31a0d0bf515",
+      "model.blend": "fa8b9688b46fde4f075f5f07fc092562f5bc5d6c965d7731f44f66a9e0c3d14a",
+      "model.glb": "34f47b6923ebe6d84f5428f3d19e2b06af5862833fc4ce8337ebd4d2300bda1b",
+      "native.png": "b136039f7989d46b25aeba31adef53fd8e1b71119d91a5b779f690ca0f50ca36",
+      "walk.png": "3772df07c932051ffbe759f2c89d7cb7357dbc6aa1826b35a98afab7279fbd64"
+    }
   }
 ]

@@ -1,0 +1,79 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+  "workshopInputDigest": "98da5306702bda8f1e0937ea33879493183c518f67ff4b89166692bb5e1892e2",
+  "results": [
+    {
+      "type": "fish1",
+      "mode": "default",
+      "manifestFingerprint": "862a49135c5741244ba1e2e7170b527bbdc6c031bff5411c92b74c8df6ecae65",
+      "modelSha256": "a5977f042b78d1125c38327fe25d99b107939254bc0728b40e1aaa9503815b56",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-pond&wildlife3dStage=fish1-classic-fish-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim"
+      ],
+      "heightRange": [
+        -0.0008580913543701163,
+        -0.0006927766799926767
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "swim"
+        ]
+      }
+    },
+    {
+      "type": "fish2",
+      "mode": "default",
+      "manifestFingerprint": "70918dedd4675208f825e1861dc7549024b1ccf1a53ee91f5d8461202ec33cad",
+      "modelSha256": "27405586949fd1d74dcabdd2c5c1a74889ce73746654a7aae610d54983f2203d",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-pond&wildlife3dStage=fish2-classic-fish-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim"
+      ],
+      "heightRange": [
+        -0.0008580684661865226,
+        -0.00009626293182373052
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "swim"
+        ]
+      }
+    },
+    {
+      "type": "fish3",
+      "mode": "default",
+      "manifestFingerprint": "39a11e3f30144cbd0fae0e3ef436319b5a32cad3e8ad1ac85dac8205692eb87f",
+      "modelSha256": "37e3575e75431611cca3d831b36a7296124273036402efcfc8aa3b6a15189ccf",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-pond&wildlife3dStage=fish3-classic-fish-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim"
+      ],
+      "heightRange": [
+        -0.0008695125579833977,
+        -0.00013058471679687483
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "swim"
+        ]
+      }
+    }
+  ]
+}

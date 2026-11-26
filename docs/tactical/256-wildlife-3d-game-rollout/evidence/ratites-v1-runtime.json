@@ -1,0 +1,134 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-cassowary-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "cassowary-ratites-v1",
+      "modelSha256": "561abbfdeaf8cbfec13c7331601c319ad8dfb0f882d642e1a3e5aa0db67d2c59"
+    },
+    {
+      "type": "wildlife-emu-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "emu-ratites-v1",
+      "modelSha256": "b769d3a6c8bef534604f58fd5ce2aa3775bdcdccbf39216c1172a03f2d57777b"
+    },
+    {
+      "type": "wildlife-ostrich-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "ostrich-ratites-v1",
+      "modelSha256": "47bb61d03cc5e18f510c33fd79ff85315fe884f9f80939edd4242f433232fda6"
+    },
+    {
+      "type": "wildlife-kiwi-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 480
+        }
+      ],
+      "candidateId": "kiwi-ratites-v1",
+      "modelSha256": "01c452f609658e62eb837262274d68d7b96325886bc3f3630f173cbdc4240ad5"
+    }
+  ],
+  "clipSamples": 448,
+  "testedDepth": false
+}

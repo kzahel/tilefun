@@ -1,0 +1,103 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+  "workshopInputDigest": "98da5306702bda8f1e0937ea33879493183c518f67ff4b89166692bb5e1892e2",
+  "results": [
+    {
+      "type": "worm1",
+      "mode": "default",
+      "manifestFingerprint": "e1ba89de8e24471087a4bdaa6eaf727903a277fde59fee70737aefee098ce0da",
+      "modelSha256": "527fc6f971855dcaccc1d22a3370115d83e63d6b8e0cfd0520bcdbe0aff9f684",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-meadow&wildlife3dStage=worm1-classic-worms-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "crawl"
+      ],
+      "heightRange": [
+        -0.0000012993812561037234,
+        -1.1920928955078125e-7
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "crawl",
+          "idle"
+        ]
+      }
+    },
+    {
+      "type": "worm2",
+      "mode": "default",
+      "manifestFingerprint": "9cbc5e3e4e359845748150e6aaaddf34dcc1b12fc60db38c4d1c15d2191bc95e",
+      "modelSha256": "70c879023ff73d482e0c2a56c8e381780659c7e79f925f44874ddb34943e993f",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-meadow&wildlife3dStage=worm2-classic-worms-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "crawl"
+      ],
+      "heightRange": [
+        -0.0000012969970703126922,
+        -1.1920928955078125e-7
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "crawl",
+          "idle"
+        ]
+      }
+    },
+    {
+      "type": "worm3",
+      "mode": "default",
+      "manifestFingerprint": "66453af99056ad864caf45587c0b2af74d8458cb9ab6d476244466671269c265",
+      "modelSha256": "e56cd1bc969a1e35145c5187fbf0e02ee661679b1692024c7cc7b173485b262a",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-meadow&wildlife3dStage=worm3-classic-worms-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "crawl"
+      ],
+      "heightRange": [
+        -0.000002503395080566565,
+        -1.1920928955078125e-7
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "crawl",
+          "idle"
+        ]
+      }
+    },
+    {
+      "type": "worm4",
+      "mode": "default",
+      "manifestFingerprint": "734cc6541de27d9aa76f75f7fc95ef760ca973736120f01138f10a9540df4a50",
+      "modelSha256": "fe85aac1f5cc2ee2d30b2934fa449673a072217aa59ae13fe7d145f30fa5e3ac",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-meadow&wildlife3dStage=worm4-classic-worms-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "crawl"
+      ],
+      "heightRange": [
+        -0.0000013041496276857224,
+        -1.1920928955078125e-7
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "crawl",
+          "idle"
+        ]
+      }
+    }
+  ]
+}

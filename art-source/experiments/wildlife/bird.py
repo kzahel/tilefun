@@ -86,6 +86,7 @@ BODY_RADII = BEAK_LEN = BEAK_STYLE = HEAD_R = STYLE = TAIL_LEN = None
 HEN_ROLLOUT = False
 CLASSIC_BIRD_ROLLOUT = False
 FLIGHT_ROLLOUT = None
+GROUND_ROLLOUT = None
 
 # Wing reach in the cruise and escape strokes, peck depth and escape pitch.
 FLIGHT_POSES = {
@@ -97,6 +98,14 @@ FLIGHT_POSES = {
     "sparrow": (.79, .94, .86, .22),
     "pigeon": (.94, 1.0, .75, .18),
     "parrot": (.85, .98, .53, .15),
+}
+# Ground birds use a stronger escape stride and an individual neck gesture.
+# Values are normal stride reach, running reach, head reach, drop and pitch.
+GROUND_POSES = {
+    "cassowary": (.37, .58, .72, .71, .46),
+    "emu": (.39, .68, .65, 1.01, .72),
+    "kiwi": (.20, .33, .22, .22, .61),
+    "ostrich": (.49, .85, .60, 1.23, .80),
 }
 
 
@@ -143,6 +152,13 @@ def configure_flight_rollout(variant):
     configure(variant)
     FLIGHT_ROLLOUT = FLIGHT_POSES[variant]
     DURATIONS = {"idle":48,"fly":19,"action":19,"flee":10}
+
+
+def configure_ground_rollout(variant):
+    global GROUND_ROLLOUT, DURATIONS
+    configure(variant)
+    GROUND_ROLLOUT = GROUND_POSES[variant]
+    DURATIONS = {"idle":48,"walk":23 if variant=="kiwi" else 31,"action":19,"flee":12 if variant=="kiwi" else 15}
 
 
 def joints():
@@ -310,7 +326,8 @@ def surface():
 def pose(rig,rest,clip,t):
     wave=math.tau*t
     escape=FLIGHT_ROLLOUT is not None and clip=="flee"
-    flying,swim,walk=clip=="fly" or escape,clip=="swim",clip=="walk"
+    running=GROUND_ROLLOUT is not None and clip=="flee"
+    flying,swim,walk=clip=="fly" or escape,clip=="swim",clip=="walk" or running
     head_dip=(math.sin(math.pi*t)**2)*(.80 if clip=="feed" else .73 if clip in ("pickup","sip") else
               .34 if clip=="action" else .29 if clip=="sleep" else 0)
     if HEN_ROLLOUT:
@@ -327,6 +344,8 @@ def pose(rig,rest,clip,t):
     if FLIGHT_ROLLOUT is not None and clip=="action":
         peck = math.sin(math.pi*t)**2
         head_dip = FLIGHT_ROLLOUT[2]*peck*(.70+.30*math.cos(2*wave))
+    if GROUND_ROLLOUT is not None and clip=="action":
+        head_dip = 0
     display = math.sin(math.pi*t)**.75 if clip=="display" else t if clip=="open" else 1-t if clip=="close" else 0
     trunkq=euler(-.17*head_dip+.045*math.sin(wave)*(walk or flying),
                  .067*math.sin(wave)*walk,0)
@@ -337,10 +356,24 @@ def pose(rig,rest,clip,t):
     if FLIGHT_ROLLOUT is not None and flying:
         trunkq = euler((-.035 if not escape else -FLIGHT_ROLLOUT[3]) + .08*math.sin(wave))
         shift.z = (.022 if not escape else .043)*math.sin(wave)
+    if running:
+        trunkq = euler(-.14 + .055*math.sin(2*wave), .075*math.sin(wave))
+        shift.z += .028 + .047*math.sin(2*wave)
     body=transform(trunkq,BODY,BODY+shift)
     result={"body":body@rest["body"]}
     headq=trunkq@euler(-.78*head_dip+.075*display,0,.085*math.sin(wave)*(clip=="idle"))
-    head=transform(headq,HEAD,body@HEAD+V((0,.22*head_dip,-(HEAD.z-BODY.z+.28)*head_dip*.66)))
+    head_position=body@HEAD+V((0,.22*head_dip,-(HEAD.z-BODY.z+.28)*head_dip*.66))
+    if GROUND_ROLLOUT is not None:
+        _, _, reach, drop, pitch = GROUND_ROLLOUT
+        if clip=="action":
+            gesture = math.sin(math.pi*t)**2
+            headq = trunkq@euler(-pitch*gesture)
+            head_position += V((0, reach*gesture, -drop*gesture))
+        elif walk:
+            nod = math.sin(2*wave)
+            headq = trunkq@euler(.055*nod)
+            head_position += V((0,.11+.045*nod,-.12)) if running else V((0,.03*nod,.021*nod))
+    head=transform(headq,HEAD,head_position)
     result["head"]=head@rest["head"]
     if "jaw" in rest:
         hinge = rest["jaw"].translation
@@ -385,6 +418,9 @@ def pose(rig,rest,clip,t):
         upper,lower,foot=f"leg.{label}",f"lower.{label}",f"foot.{label}"
         if walk:
             forward,lift=stride(t,phase,.22+min(.24,BODY.z*.15),.125+min(.10,BODY.z*.05))
+            if GROUND_ROLLOUT is not None:
+                reach = GROUND_ROLLOUT[1 if running else 0]
+                forward,lift=stride(t,phase,reach,reach*(.49 if running else .42))
             if HEN_ROLLOUT and clip=="flee":
                 forward,lift=stride(t,phase,.341,.191)
         elif flying or swim:

@@ -1,0 +1,69 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+  "workshopInputDigest": "98da5306702bda8f1e0937ea33879493183c518f67ff4b89166692bb5e1892e2",
+  "results": [
+    {
+      "type": "wildlife-quokka-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "7d52f5f323e20af411cfdc15901f12b6c2b080398ede6a1965e892d4fc9e6c66",
+      "modelSha256": "ab5484f6b51e7426cf92ffca015ac62412fa2996ad8e947344843ad9c849b90c",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-quokka&wildlife3dStage=quokka-ground-marsupials-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009688796997070348,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-wombat-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "6cc8028017a00618d4312bfc730b32bd4b2ba68b694beb58a50121756889acaf",
+      "modelSha256": "57d14bbf33184b135393a4afe172f5706b76bc0891f84b34d96421c8c4fbf6e8",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-wombat&wildlife3dStage=wombat-ground-marsupials-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009812774658203179,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "4c9bf5b583ad9453e71d5665ca8d957595741a868650da569413e629e0d64ee7",
+  "results": [
+    {
+      "type": "wildlife-dog-golden-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "7874f9a2b918a7e8da781509ea6c016209b4ccbb50ae69db2a3d3722c602ff9c",
+      "modelSha256": "34f47b6923ebe6d84f5428f3d19e2b06af5862833fc4ce8337ebd4d2300bda1b",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-dog-golden&wildlife3dStage=golden-retriever-v1&wildlife3dReview=golden-retriever-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009917602539062551,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

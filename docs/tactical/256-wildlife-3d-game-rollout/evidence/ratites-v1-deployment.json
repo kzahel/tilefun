@@ -1,0 +1,130 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "4c9bf5b583ad9453e71d5665ca8d957595741a868650da569413e629e0d64ee7",
+  "results": [
+    {
+      "type": "wildlife-cassowary-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "6b3feeda327f259b05a9a08a25ad85adb5ffb5823b80a8bd86e3271d83bd48f5",
+      "modelSha256": "561abbfdeaf8cbfec13c7331601c319ad8dfb0f882d642e1a3e5aa0db67d2c59",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-cassowary&wildlife3dStage=cassowary-ratites-v1&wildlife3dReview=cassowary-ratites-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009514312744140871,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-emu-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "5f5bff7e3ac911adf87ab2f2e820314f578a0e7994de2e03455870bd376b6fcb",
+      "modelSha256": "b769d3a6c8bef534604f58fd5ce2aa3775bdcdccbf39216c1172a03f2d57777b",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-emu&wildlife3dStage=emu-ratites-v1&wildlife3dReview=emu-ratites-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.000974563598632818,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-ostrich-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "0008e12c75dc7b6875bb08ff40f061fe36325793a6f95f70c110f4d176cc7c71",
+      "modelSha256": "47bb61d03cc5e18f510c33fd79ff85315fe884f9f80939edd4242f433232fda6",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-ostrich&wildlife3dStage=ostrich-ratites-v1&wildlife3dReview=ostrich-ratites-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009381637573242405,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-kiwi-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "0e98243a2c18d99fe637c6f2932c2b2dfc7383c5c235bb2ea5c7e5a320d50c30",
+      "modelSha256": "01c452f609658e62eb837262274d68d7b96325886bc3f3630f173cbdc4240ad5",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-kiwi&wildlife3dStage=kiwi-ratites-v1&wildlife3dReview=kiwi-ratites-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009698867797851508,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

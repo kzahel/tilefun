@@ -63,7 +63,7 @@ export function catClimbGrip(tree: ClimbTree, halfWidth: number) {
 }
 
 /** Climb outside the solid canopy, step over its lip, then settle onto it. */
-export function catClimbPoint(tree: ClimbTree, fraction: number, down: boolean, halfWidth: number) {
+function catClimbPoint(tree: ClimbTree, fraction: number, down: boolean, halfWidth: number) {
   const t = down ? 1 - fraction : fraction;
   const grip = catClimbGrip(tree, halfWidth);
   const step = Math.max(0, Math.min(1, (t - 0.72) / 0.22));
@@ -76,7 +76,7 @@ export function catClimbPoint(tree: ClimbTree, fraction: number, down: boolean, 
   };
 }
 /** Continuous vertical grip followed by a short step onto the crown, reversed to descend. */
-export function treeClimbPoint(tree: ClimbTree, fraction: number, down: boolean) {
+function treeClimbPoint(tree: ClimbTree, fraction: number, down: boolean) {
   const t = Math.max(0, Math.min(1, down ? 1 - fraction : fraction));
   const step = Math.max(0, (t - 0.8) / 0.2);
   return {

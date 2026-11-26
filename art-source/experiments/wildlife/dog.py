@@ -250,6 +250,8 @@ def pose(rig, rest, clip, t):
     for i in range(len(TAIL)-1):
         wiggle=(.18+i*.13)*math.sin(wave*(2 if clip in ("idle","action") else 1)-i*.55)
         sweep=.19+.07*math.sin(wave-i*.4) if run else .07*math.sin(wave-i*.4)
+        if ROLLOUT and VARIANT=="golden":
+            sweep += .32
         direction=q@(euler(sweep,0,wiggle*(.45 if run else 1))@(TAIL[i+1]-TAIL[i]))
         result[f"tail{i}"]=aimed(rest[f"tail{i}"],p,p+direction)
         p+=direction

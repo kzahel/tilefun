@@ -946,6 +946,18 @@
       "toolId": "animal-browser"
     },
     {
+      "id": "wildlife-3d-ratites-v1",
+      "name": "3D wildlife · ratites v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
+      "id": "wildlife-3d-golden-retriever-v1",
+      "name": "3D wildlife · golden retriever v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
       "id": "motion",
       "name": "Furniture movement sets",
       "description": "Default layouts and physics. Custom layouts remain individually reviewable in the tool.",
@@ -61723,7 +61735,217 @@
           "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-pelican-seabirds-v1"
         }
       }
+    },
+    {
+      "id": "pattern:wildlife-3d-cassowary-ratites-v1",
+      "batchId": "wildlife-3d-ratites-v1",
+      "kind": "wildlife",
+      "name": "Cassowary",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-cassowary-ratites-v1",
+      "fingerprint": "6b3feeda327f259b05a9a08a25ad85adb5ffb5823b80a8bd86e3271d83bd48f5",
+      "sourceFingerprint": "149a8d4cab540c87295d9145d1ecf18c364473431bb709630d308690196b8c7c",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-cassowary-ratites-v1",
+        "prefabIds": [],
+        "revision": "7f31f962502e156f1369807f50eddb79f95b6f9253b0200cc2483eb3130a1cd4",
+        "renderFingerprint": "6b3feeda327f259b05a9a08a25ad85adb5ffb5823b80a8bd86e3271d83bd48f5",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-cassowary-ratites-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-cassowary-ratites-v1",
+        "fingerprint": "149a8d4cab540c87295d9145d1ecf18c364473431bb709630d308690196b8c7c",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-cassowary-ratites-v1",
+          "prefabIds": [],
+          "revision": "7f31f962502e156f1369807f50eddb79f95b6f9253b0200cc2483eb3130a1cd4",
+          "renderFingerprint": "6b3feeda327f259b05a9a08a25ad85adb5ffb5823b80a8bd86e3271d83bd48f5",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-cassowary-ratites-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-emu-ratites-v1",
+      "batchId": "wildlife-3d-ratites-v1",
+      "kind": "wildlife",
+      "name": "Emu",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-emu-ratites-v1",
+      "fingerprint": "5f5bff7e3ac911adf87ab2f2e820314f578a0e7994de2e03455870bd376b6fcb",
+      "sourceFingerprint": "f92b2bbf09dcfd66364ecd6749f5d081d6787f40e6dd54b927fda344f97e0a03",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-emu-ratites-v1",
+        "prefabIds": [],
+        "revision": "562f0dd64dc89bfe1618ae4aabaf333540650ea8bde77270ed6491a50e55cafc",
+        "renderFingerprint": "5f5bff7e3ac911adf87ab2f2e820314f578a0e7994de2e03455870bd376b6fcb",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-emu-ratites-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-emu-ratites-v1",
+        "fingerprint": "f92b2bbf09dcfd66364ecd6749f5d081d6787f40e6dd54b927fda344f97e0a03",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-emu-ratites-v1",
+          "prefabIds": [],
+          "revision": "562f0dd64dc89bfe1618ae4aabaf333540650ea8bde77270ed6491a50e55cafc",
+          "renderFingerprint": "5f5bff7e3ac911adf87ab2f2e820314f578a0e7994de2e03455870bd376b6fcb",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-emu-ratites-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-ostrich-ratites-v1",
+      "batchId": "wildlife-3d-ratites-v1",
+      "kind": "wildlife",
+      "name": "Ostrich",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-ostrich-ratites-v1",
+      "fingerprint": "0008e12c75dc7b6875bb08ff40f061fe36325793a6f95f70c110f4d176cc7c71",
+      "sourceFingerprint": "45041ff28214ac3aec5023162b7c2d88433fbd162e076ba6a9696678b8294fbf",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-ostrich-ratites-v1",
+        "prefabIds": [],
+        "revision": "85fc7b3da169b9b35a5c3dc55ab08e1bc977d3e0a22e705e8cf15148f49708f6",
+        "renderFingerprint": "0008e12c75dc7b6875bb08ff40f061fe36325793a6f95f70c110f4d176cc7c71",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-ostrich-ratites-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-ostrich-ratites-v1",
+        "fingerprint": "45041ff28214ac3aec5023162b7c2d88433fbd162e076ba6a9696678b8294fbf",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-ostrich-ratites-v1",
+          "prefabIds": [],
+          "revision": "85fc7b3da169b9b35a5c3dc55ab08e1bc977d3e0a22e705e8cf15148f49708f6",
+          "renderFingerprint": "0008e12c75dc7b6875bb08ff40f061fe36325793a6f95f70c110f4d176cc7c71",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-ostrich-ratites-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-kiwi-ratites-v1",
+      "batchId": "wildlife-3d-ratites-v1",
+      "kind": "wildlife",
+      "name": "Kiwi",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-kiwi-ratites-v1",
+      "fingerprint": "0e98243a2c18d99fe637c6f2932c2b2dfc7383c5c235bb2ea5c7e5a320d50c30",
+      "sourceFingerprint": "1668dd6b755a56b71388299bf726cec69ea6f84ad3a8962e8f737f12eb630274",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-kiwi-ratites-v1",
+        "prefabIds": [],
+        "revision": "07155294a00e5e58087d144a501e5d2945e8f28739e7fa942df442b884f32153",
+        "renderFingerprint": "0e98243a2c18d99fe637c6f2932c2b2dfc7383c5c235bb2ea5c7e5a320d50c30",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-kiwi-ratites-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-kiwi-ratites-v1",
+        "fingerprint": "1668dd6b755a56b71388299bf726cec69ea6f84ad3a8962e8f737f12eb630274",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-kiwi-ratites-v1",
+          "prefabIds": [],
+          "revision": "07155294a00e5e58087d144a501e5d2945e8f28739e7fa942df442b884f32153",
+          "renderFingerprint": "0e98243a2c18d99fe637c6f2932c2b2dfc7383c5c235bb2ea5c7e5a320d50c30",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-kiwi-ratites-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-golden-retriever-v1",
+      "batchId": "wildlife-3d-golden-retriever-v1",
+      "kind": "wildlife",
+      "name": "Golden retriever",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-golden-retriever-v1",
+      "fingerprint": "7874f9a2b918a7e8da781509ea6c016209b4ccbb50ae69db2a3d3722c602ff9c",
+      "sourceFingerprint": "1927695ad659a38b852b3374bde7de595b17459f77aa5632492d2681969712c0",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-golden-retriever-v1",
+        "prefabIds": [],
+        "revision": "38e51a4e6588c033e23ea46f01d8ad646bb6d8deb7588a222176b22337c229ce",
+        "renderFingerprint": "7874f9a2b918a7e8da781509ea6c016209b4ccbb50ae69db2a3d3722c602ff9c",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-golden-retriever-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-golden-retriever-v1",
+        "fingerprint": "1927695ad659a38b852b3374bde7de595b17459f77aa5632492d2681969712c0",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-golden-retriever-v1",
+          "prefabIds": [],
+          "revision": "38e51a4e6588c033e23ea46f01d8ad646bb6d8deb7588a222176b22337c229ce",
+          "renderFingerprint": "7874f9a2b918a7e8da781509ea6c016209b4ccbb50ae69db2a3d3722c602ff9c",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-golden-retriever-v1"
+        }
+      }
     }
   ],
-  "inputDigest": "1224f8049b940128dba55c43b22d87861f7804d15ebd319e52392fe1eaebdc22"
+  "inputDigest": "c0410bca01ff983d9798e57f67b2601094db2404ee827d8ef50c216fcf9a6106"
 }

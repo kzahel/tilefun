@@ -315,9 +315,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "561abbfdeaf8cbfec13c7331601c319ad8dfb0f882d642e1a3e5aa0db67d2c59",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ratites-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/cassowary-ratites-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "561abbfdeaf8cbfec13c7331601c319ad8dfb0f882d642e1a3e5aa0db67d2c59",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ratites-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/cassowary-ratites-v1/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "561abbfdeaf8cbfec13c7331601c319ad8dfb0f882d642e1a3e5aa0db67d2c59",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ratites-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/cassowary-ratites-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "561abbfdeaf8cbfec13c7331601c319ad8dfb0f882d642e1a3e5aa0db67d2c59",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ratites-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/cassowary-ratites-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-cassowary-ratites-v1",
+        "fingerprint": "6b3feeda327f259b05a9a08a25ad85adb5ffb5823b80a8bd86e3271d83bd48f5",
+        "model": "public/demos/wildlife-3d/cassowary-ratites-v1/model.glb",
+        "source": "public/demos/wildlife-3d/cassowary-ratites-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/cassowary-ratites-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ratites-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-dove-provisional-v1",
@@ -389,9 +423,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "b769d3a6c8bef534604f58fd5ce2aa3775bdcdccbf39216c1172a03f2d57777b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ratites-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/emu-ratites-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "b769d3a6c8bef534604f58fd5ce2aa3775bdcdccbf39216c1172a03f2d57777b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ratites-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/emu-ratites-v1/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "b769d3a6c8bef534604f58fd5ce2aa3775bdcdccbf39216c1172a03f2d57777b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ratites-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/emu-ratites-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "b769d3a6c8bef534604f58fd5ce2aa3775bdcdccbf39216c1172a03f2d57777b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ratites-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/emu-ratites-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-emu-ratites-v1",
+        "fingerprint": "5f5bff7e3ac911adf87ab2f2e820314f578a0e7994de2e03455870bd376b6fcb",
+        "model": "public/demos/wildlife-3d/emu-ratites-v1/model.glb",
+        "source": "public/demos/wildlife-3d/emu-ratites-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/emu-ratites-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ratites-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-flamingo-provisional-v1",
@@ -543,9 +611,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "01c452f609658e62eb837262274d68d7b96325886bc3f3630f173cbdc4240ad5",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ratites-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/kiwi-ratites-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "01c452f609658e62eb837262274d68d7b96325886bc3f3630f173cbdc4240ad5",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ratites-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/kiwi-ratites-v1/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "01c452f609658e62eb837262274d68d7b96325886bc3f3630f173cbdc4240ad5",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ratites-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/kiwi-ratites-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "01c452f609658e62eb837262274d68d7b96325886bc3f3630f173cbdc4240ad5",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ratites-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/kiwi-ratites-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-kiwi-ratites-v1",
+        "fingerprint": "0e98243a2c18d99fe637c6f2932c2b2dfc7383c5c235bb2ea5c7e5a320d50c30",
+        "model": "public/demos/wildlife-3d/kiwi-ratites-v1/model.glb",
+        "source": "public/demos/wildlife-3d/kiwi-ratites-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/kiwi-ratites-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ratites-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-mallard-v1",
@@ -649,9 +751,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "47bb61d03cc5e18f510c33fd79ff85315fe884f9f80939edd4242f433232fda6",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ratites-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/ostrich-ratites-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "47bb61d03cc5e18f510c33fd79ff85315fe884f9f80939edd4242f433232fda6",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ratites-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/ostrich-ratites-v1/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "47bb61d03cc5e18f510c33fd79ff85315fe884f9f80939edd4242f433232fda6",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ratites-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/ostrich-ratites-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "47bb61d03cc5e18f510c33fd79ff85315fe884f9f80939edd4242f433232fda6",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ratites-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/ostrich-ratites-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-ostrich-ratites-v1",
+        "fingerprint": "0008e12c75dc7b6875bb08ff40f061fe36325793a6f95f70c110f4d176cc7c71",
+        "model": "public/demos/wildlife-3d/ostrich-ratites-v1/model.glb",
+        "source": "public/demos/wildlife-3d/ostrich-ratites-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/ostrich-ratites-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ratites-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-parrot-provisional-v1",
@@ -6500,7 +6636,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-quokka-ground-marsupials-v1",
+        "sha256": "ab5484f6b51e7426cf92ffca015ac62412fa2996ad8e947344843ad9c849b90c",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ground-marsupials-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-quokka-ground-marsupials-v1",
         "fingerprint": "7d52f5f323e20af411cfdc15901f12b6c2b080398ede6a1965e892d4fc9e6c66",
@@ -6703,7 +6846,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-wombat-ground-marsupials-v1",
+        "sha256": "57d14bbf33184b135393a4afe172f5706b76bc0891f84b34d96421c8c4fbf6e8",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ground-marsupials-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-wombat-ground-marsupials-v1",
         "fingerprint": "6cc8028017a00618d4312bfc730b32bd4b2ba68b694beb58a50121756889acaf",
@@ -6928,9 +7078,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "34f47b6923ebe6d84f5428f3d19e2b06af5862833fc4ce8337ebd4d2300bda1b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/golden-retriever-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/golden-retriever-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "34f47b6923ebe6d84f5428f3d19e2b06af5862833fc4ce8337ebd4d2300bda1b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/golden-retriever-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/golden-retriever-v1/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "34f47b6923ebe6d84f5428f3d19e2b06af5862833fc4ce8337ebd4d2300bda1b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/golden-retriever-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/golden-retriever-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "34f47b6923ebe6d84f5428f3d19e2b06af5862833fc4ce8337ebd4d2300bda1b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/golden-retriever-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/golden-retriever-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-golden-retriever-v1",
+        "fingerprint": "7874f9a2b918a7e8da781509ea6c016209b4ccbb50ae69db2a3d3722c602ff9c",
+        "model": "public/demos/wildlife-3d/golden-retriever-v1/model.glb",
+        "source": "public/demos/wildlife-3d/golden-retriever-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/golden-retriever-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/golden-retriever-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-dog-shepherd-provisional-v1",
@@ -6980,12 +7164,7 @@
         "url": "https://kzahel.github.io/tilefun/",
         "candidate": "pattern:wildlife-3d-dog-shepherd-pets-v1",
         "sha256": "92bd60e17e0eb1f5207ca90bdd0eafd1d143f19ef9f428c6d6fb4f47d7b58659",
-        "states": [
-          "action",
-          "flee",
-          "idle",
-          "walk"
-        ],
+        "states": ["action", "flee", "idle", "walk"],
         "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/pointed-ear-shepherd-v1-default.json"
       },
       "candidatePreview": {
@@ -8786,7 +8965,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-fish1-classic-fish-v1",
+        "sha256": "a5977f042b78d1125c38327fe25d99b107939254bc0728b40e1aaa9503815b56",
+        "states": ["idle", "swim"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/classic-fish-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-fish1-classic-fish-v1",
         "fingerprint": "862a49135c5741244ba1e2e7170b527bbdc6c031bff5411c92b74c8df6ecae65",
@@ -8826,7 +9012,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-fish2-classic-fish-v1",
+        "sha256": "27405586949fd1d74dcabdd2c5c1a74889ce73746654a7aae610d54983f2203d",
+        "states": ["idle", "swim"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/classic-fish-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-fish2-classic-fish-v1",
         "fingerprint": "70918dedd4675208f825e1861dc7549024b1ccf1a53ee91f5d8461202ec33cad",
@@ -8866,7 +9059,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-fish3-classic-fish-v1",
+        "sha256": "37e3575e75431611cca3d831b36a7296124273036402efcfc8aa3b6a15189ccf",
+        "states": ["idle", "swim"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/classic-fish-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-fish3-classic-fish-v1",
         "fingerprint": "39a11e3f30144cbd0fae0e3ef436319b5a32cad3e8ad1ac85dac8205692eb87f",
@@ -8906,7 +9106,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-worm1-classic-worms-v1",
+        "sha256": "527fc6f971855dcaccc1d22a3370115d83e63d6b8e0cfd0520bcdbe0aff9f684",
+        "states": ["crawl", "idle"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/classic-worms-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-worm1-classic-worms-v1",
         "fingerprint": "e1ba89de8e24471087a4bdaa6eaf727903a277fde59fee70737aefee098ce0da",
@@ -8946,7 +9153,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-worm2-classic-worms-v1",
+        "sha256": "70c879023ff73d482e0c2a56c8e381780659c7e79f925f44874ddb34943e993f",
+        "states": ["crawl", "idle"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/classic-worms-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-worm2-classic-worms-v1",
         "fingerprint": "9cbc5e3e4e359845748150e6aaaddf34dcc1b12fc60db38c4d1c15d2191bc95e",
@@ -8986,7 +9200,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-worm3-classic-worms-v1",
+        "sha256": "e56cd1bc969a1e35145c5187fbf0e02ee661679b1692024c7cc7b173485b262a",
+        "states": ["crawl", "idle"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/classic-worms-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-worm3-classic-worms-v1",
         "fingerprint": "66453af99056ad864caf45587c0b2af74d8458cb9ab6d476244466671269c265",
@@ -9026,7 +9247,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-worm4-classic-worms-v1",
+        "sha256": "fe85aac1f5cc2ee2d30b2934fa449673a072217aa59ae13fe7d145f30fa5e3ac",
+        "states": ["crawl", "idle"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/classic-worms-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-worm4-classic-worms-v1",
         "fingerprint": "734cc6541de27d9aa76f75f7fc95ef760ca973736120f01138f10a9540df4a50",
