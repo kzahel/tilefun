@@ -26,6 +26,16 @@ export const FAUNA_TORSO_FITS: Readonly<
   "saiga-antelope": [8.5, 15],
   okapi: [9.5, 16],
   warthog: [11, 10.5],
+  "american-bison": [11.5, 14],
+  "musk-ox": [12.5, 12.5],
+  "water-buffalo": [12, 15],
+  wildebeest: [9, 14.5],
+  rhinoceros: [16.5, 16],
+  elk: [10, 20],
+  moose: [12.5, 21.5],
+  capybara: [11.5, 12],
+  "red-panda": [7.5, 7.5],
+  wombat: [10.5, 8.5],
 };
 
 export function faunaCollider({ species, body }: FaunaProfile): ColliderComponent {

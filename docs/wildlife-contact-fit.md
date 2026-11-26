@@ -31,3 +31,19 @@ The checker poses the shipped skinned GLB with Three.js at four phases of each a
 2. Regenerate the after report from the checkout. Compare per-animal height error to both camera measurements, coverage across poses and the size of the usable landing area. Check that a footprint improvement in one facing also holds in the perpendicular facing. Inspect overlays for a small animal, a long animal and the numerical outliers.
 3. Verify real landings and relevant authored gameplay such as jumping onto a mount and reloading it. Read the diff for effects on sibling variants, save restoration, spawning and steering. If an off-edge landing fails, repeat the drop at the same coordinates and height with the animal removed. A terrain failure needs a flat, seam-free fixture. Return concrete animal failures to the worker or correct them before committing the batch.
 4. Record the ten IDs and any exceptions, then start the next worker. Reassess the method when moving to a different anatomy. A rig without recognizable torso weights, a missing travel clip, a swimmer or a hopping animal needs inspection before applying the same measurements.
+
+## Three supervised batches, 2026-11-26
+
+Three fresh Sol 6.2 high sessions ran sequentially through Yep Anywhere v0 with bypass enabled. Each worker fit ten ground animals. The supervisor reran the native geometry and landing checks and inspected the overlay outliers before accepting each batch.
+
+For each animal, height error is the largest absolute difference between the box top and the measured central back across both camera scales and eight sampled idle/walk poses. The table gives the median of those ten errors in world pixels.
+
+| Batch | Species | Median error before | Median error after |
+| --- | --- | ---: | ---: |
+| 1 | Sheep, pasture cow, goat, piglet, elephant, giraffe, donkey, camel, horse, base cat | 8.55 | 2.20 |
+| 2 | Mule, llama, alpaca, zebra, impala, gazelle, springbok, saiga antelope, okapi, warthog | 16.05 | 1.00 |
+| 3 | American bison, musk ox, water buffalo, wildebeest, rhinoceros, elk, moose, capybara, red panda, wombat | 15.95 | 0.80 |
+
+All 30 centered drops settled within 0.02 px of the authored height. Players dropped just clear of either tested edge reached the ground. Every footprint’s 25 interior sample points projected onto the torso in all sampled poses, headings and cameras. Footprint sides span 82–99% of the smaller measured torso width; the base cat has the smallest absolute platform at 4 px. The elephant has the largest residual height difference at 4.3 px because its two cameras draw the back at different heights. The horse kept its existing 18 px saddle.
+
+Batch 1 established that a fitted height must also reach saved riders and the Workshop’s **Hop onto** control. Normal jumps reached the sheep from two directions in the game scenario with the sheep held stationary. Batch 2 exposed an off-edge checker failure that reproduced on bare terrain. Moving the targets to tile centers let the reviewer retain rounded fits and verify sustained support. Batch 3 used that revised prompt and fixture on both heavy herds and smaller mammals. Future batches can reuse this workflow for modeled ground quadrupeds. Human play feedback remains the check on feel.
