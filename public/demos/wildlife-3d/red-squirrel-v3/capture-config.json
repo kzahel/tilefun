@@ -1,0 +1,23 @@
+{
+  "runtimeType": "wildlife-red-squirrel-provisional-v1",
+  "fit": [
+    10.15,
+    10,
+    9.14
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "bound",
+    "action",
+    "flee",
+    "pickup",
+    "dig",
+    "eat"
+  ],
+  "reviewContext": "A springing escape, a ground dig, and actions that grip and eat.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

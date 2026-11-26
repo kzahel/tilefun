@@ -32,6 +32,8 @@ PROFILES = {
     "echidna": (1.05, .20, .14, .06, .26, .083),
     "binturong": (1.12, .17, .09, .08, .36, .11),
     "kinkajou": (1.16, .24, .14, .10, .37, .13),
+    "aye-aye": (1.09, .20, .10, .22, .32, .11),
+    "sloth": (1.02, .11, .13, .16, .19, .065),
 }
 DURATIONS = {"idle": 48, "walk": 32, "action": 24, "flee": 18}
 SPRITE_COLORS = {
@@ -47,6 +49,8 @@ SPRITE_COLORS = {
     "echidna": "1e2826 514c3b 817154 d4c29a",
     "binturong": "1e2826 2e3833 454a43 696d5c b4b198",
     "kinkajou": "1e2826 725d3e b39a5b d1b879 e3d0a0",
+    "aye-aye": "23282a 464241 6b6660 938a7a b3a68e",
+    "sloth": "29271f 5c4d3b 8b7456 ad966f d4c098",
 }
 
 
@@ -66,6 +70,8 @@ def fit_draft(mesh, rig, species):
         "echidna": (.18, -.32, .11, -.104),
         "binturong": (.04, 1.18, .57, -.061),
         "kinkajou": (-.037, .57, .60, -.046),
+        "aye-aye": (.023, .61, 1.21, .017),
+        "sloth": (-.10, -.83, .15, -.046),
     }
     snout, tail, ears, ear_drop = tip_extensions[species]
     head = mesh.vertex_groups["Part · Neck and distinctive head"].index
@@ -205,6 +211,13 @@ def paint_sprite_patterns(mesh, species):
                 shade = 1
             elif head and p.y > hoofed.HEAD.y + .18 and upper < .52:
                 shade = 1
+        elif species == "aye-aye":
+            if leg and p.z < .27:
+                shade = 0 if upper < .30 else 1
+            elif part.startswith("Ear ") and face.normal.y > .25:
+                shade = 1
+        elif species == "sloth" and head and p.y > hoofed.HEAD.y + .07:
+            shade = 1 if abs(p.x) > .097 and p.z > hoofed.HEAD.z + .025 else 4
         index = shade * 2
         uv = ((index % 8 + 1) / 8, (index // 8 + .5) / 8)
         for loop in face.loop_indices:

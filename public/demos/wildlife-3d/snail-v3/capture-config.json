@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-snail-provisional-v1",
+  "fit": [
+    12.33,
+    6.88,
+    11.9
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "crawl",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "Eye stalks dip and extend, and the foot makes a faster ripple during escape.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

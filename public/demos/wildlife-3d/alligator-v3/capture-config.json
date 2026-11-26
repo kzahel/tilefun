@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-alligator-predator-v1",
+  "fit": [
+    12.47,
+    9.86,
+    12.33
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "reviewContext": "A broad low head and distinct bite, threat and pursuit while the tail supports each gait.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

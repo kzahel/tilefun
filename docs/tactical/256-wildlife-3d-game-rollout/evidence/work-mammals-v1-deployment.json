@@ -1,0 +1,158 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "3704e3b5063d8ba342283e126423f83f5f5893e5c24b87e4e1d82bb7af1a6bd0",
+  "results": [
+    {
+      "type": "wildlife-beaver-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "de06617d3320b24a358be0e6d7ede68ad78cedb88b73118b92dda65dfbba7e6a",
+      "modelSha256": "7637a074e6f217fa8c6d1927925e6dd8e0075819b15f9f957fbdc2f98c6219d2",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-beaver&wildlife3dStage=beaver-v3&wildlife3dReview=beaver-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "pickup",
+        "build",
+        "settle"
+      ],
+      "heightRange": [
+        -0.0010780258178711324,
+        -0.0002753982543945311
+      ],
+      "statesOnApproachOrMount": [
+        "action",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "pickup",
+          "build",
+          "settle"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-capuchin-monkey-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "4ae072a42c1e0c0e02c1adb73c565404f59611ddb267294a4ee97f517ae91f8d",
+      "modelSha256": "51f009774a52e36b82eb490d04d3026ad47ed0141b3c14bce6ef7ebe6feda90b",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-capuchin&wildlife3dStage=capuchin-monkey-v3&wildlife3dReview=capuchin-monkey-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "climb",
+        "pickup",
+        "eat",
+        "sit"
+      ],
+      "heightRange": [
+        -0.0009601211547851694,
+        33.9131965637207
+      ],
+      "statesOnApproachOrMount": [
+        "action",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "climb",
+          "pickup",
+          "eat",
+          "sit"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-raccoon-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "f870da454899a122c044c27f05f76fcd0c465cf19d80ff1b6ad1ce63ea8f1e16",
+      "modelSha256": "217b1b25fc08f4afe198f894031b14481e9de4b40dd99467fdd2712d5c54bc71",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-raccoon&wildlife3dStage=raccoon-v3&wildlife3dReview=raccoon-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "pickup",
+        "eat"
+      ],
+      "heightRange": [
+        -0.0009611206054687618,
+        -0.0007815990447998011
+      ],
+      "statesOnApproachOrMount": [
+        "action",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "pickup",
+          "eat"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-red-squirrel-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "e80b94a0b15dd4eb6df23df93f62584386b0bc0541f35bd5a2d22d5dd42c9310",
+      "modelSha256": "a78fc7eadc118ca15decec59daafb7ce84fd375a6a657cbe9f7e0b75890018fa",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-squirrel&wildlife3dStage=red-squirrel-v3&wildlife3dReview=red-squirrel-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "bound",
+        "action",
+        "flee",
+        "pickup",
+        "dig",
+        "eat"
+      ],
+      "heightRange": [
+        -0.5327190170118465,
+        7.182054420468316
+      ],
+      "statesOnApproachOrMount": [
+        "action",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "bound",
+          "action",
+          "flee",
+          "pickup",
+          "dig",
+          "eat"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-scorpion-predator-v1",
+  "fit": [
+    11.6,
+    7.41,
+    11.89
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "reviewContext": "Forward feeding claws, raised threat claws and articulated tail.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

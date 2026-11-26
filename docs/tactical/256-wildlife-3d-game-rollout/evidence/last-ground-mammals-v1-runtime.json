@@ -1,0 +1,126 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-dire-wolf-predator-v1",
+      "clips": 6,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 180
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1200
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 393.75
+        },
+        {
+          "state": "sleep",
+          "action": "sleep",
+          "frames": 28,
+          "gameDurationMs": 1120
+        }
+      ],
+      "candidateId": "dire-wolf-v3",
+      "modelSha256": "4eed795d454cf317527be885ab41e0eeb580db1a530e993c3614070e9716e4d2"
+    },
+    {
+      "type": "wildlife-spotted-hyena-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "spotted-hyena-v3",
+      "modelSha256": "89c05faf2ec834d6e09e34d686d2c1a7b381261cf234b0de85bd328f5059c97c"
+    },
+    {
+      "type": "wildlife-tasmanian-devil-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "tasmanian-devil-v3",
+      "modelSha256": "60ab4924423a4eb0b051a3112793bc70a7b2c164e29c3964aa36f0caa7e41f72"
+    }
+  ],
+  "clipSamples": 448,
+  "testedDepth": false
+}

@@ -1,0 +1,104 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "3704e3b5063d8ba342283e126423f83f5f5893e5c24b87e4e1d82bb7af1a6bd0",
+  "results": [
+    {
+      "type": "wildlife-dire-wolf-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "8643563f16b0390f79e8284a2dbaa6dd1f43f28ca9888f6fcfef6c343db6a178",
+      "modelSha256": "4eed795d454cf317527be885ab41e0eeb580db1a530e993c3614070e9716e4d2",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-dire-wolf&wildlife3dStage=dire-wolf-v3&wildlife3dReview=dire-wolf-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase",
+        "sleep"
+      ],
+      "heightRange": [
+        -0.0009161949157715146,
+        0
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase",
+          "sleep"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-spotted-hyena-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "dc81b5c25bd61acafe398c8719dc4f0950fa883c28ff7dffdd4acc5bc15afd54",
+      "modelSha256": "89c05faf2ec834d6e09e34d686d2c1a7b381261cf234b0de85bd328f5059c97c",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-spotted-hyena&wildlife3dStage=spotted-hyena-v3&wildlife3dReview=spotted-hyena-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009314880371093862,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-tasmanian-devil-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "d64c2806bdf791449977c7a792c575b77561de73444a318a2ecdb3ca03212aa3",
+      "modelSha256": "60ab4924423a4eb0b051a3112793bc70a7b2c164e29c3964aa36f0caa7e41f72",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-tasmanian-devil&wildlife3dStage=tasmanian-devil-v3&wildlife3dReview=tasmanian-devil-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009485054016113438,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    }
+  ]
+}

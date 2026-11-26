@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-king-cobra-provisional-v1",
+  "fit": [
+    11.6,
+    9.72,
+    11.46
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "slither",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "A wide hood rises during the action. The escape uses shorter traveling coils.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

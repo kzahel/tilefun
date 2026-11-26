@@ -2216,9 +2216,67 @@
         "pounce": "pounce",
         "eat": "eat"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "44811ff87cb71f34e0a5f43a3d3cf827ec0cd8c63198d96fa1952404cc69c14b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/fox-v3/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "44811ff87cb71f34e0a5f43a3d3cf827ec0cd8c63198d96fa1952404cc69c14b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/fox-v3/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "44811ff87cb71f34e0a5f43a3d3cf827ec0cd8c63198d96fa1952404cc69c14b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/fox-v3/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "44811ff87cb71f34e0a5f43a3d3cf827ec0cd8c63198d96fa1952404cc69c14b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/fox-v3/flee.png"
+        },
+        "listen": {
+          "action": "listen",
+          "sha256": "44811ff87cb71f34e0a5f43a3d3cf827ec0cd8c63198d96fa1952404cc69c14b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/fox-v3/listen.png"
+        },
+        "stalk": {
+          "action": "stalk",
+          "sha256": "44811ff87cb71f34e0a5f43a3d3cf827ec0cd8c63198d96fa1952404cc69c14b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/fox-v3/stalk.png"
+        },
+        "pounce": {
+          "action": "pounce",
+          "sha256": "44811ff87cb71f34e0a5f43a3d3cf827ec0cd8c63198d96fa1952404cc69c14b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/fox-v3/pounce.png"
+        },
+        "eat": {
+          "action": "eat",
+          "sha256": "44811ff87cb71f34e0a5f43a3d3cf827ec0cd8c63198d96fa1952404cc69c14b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/fox-v3/eat.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-fox-v3",
+        "fingerprint": "ffaa888cc709e12d4c4b0ab3f3b6320f6b2d005669eadaf68955f9b64042537b",
+        "model": "public/demos/wildlife-3d/fox-v3/model.glb",
+        "source": "public/demos/wildlife-3d/fox-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/fox-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-spotted-hyena-predator-v1",
@@ -2237,9 +2295,49 @@
         "display": "display",
         "chase": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "89c05faf2ec834d6e09e34d686d2c1a7b381261cf234b0de85bd328f5059c97c",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/last-ground-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/spotted-hyena-v3/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "89c05faf2ec834d6e09e34d686d2c1a7b381261cf234b0de85bd328f5059c97c",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/last-ground-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/spotted-hyena-v3/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "89c05faf2ec834d6e09e34d686d2c1a7b381261cf234b0de85bd328f5059c97c",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/last-ground-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/spotted-hyena-v3/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "89c05faf2ec834d6e09e34d686d2c1a7b381261cf234b0de85bd328f5059c97c",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/last-ground-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/spotted-hyena-v3/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "89c05faf2ec834d6e09e34d686d2c1a7b381261cf234b0de85bd328f5059c97c",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/last-ground-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/spotted-hyena-v3/chase.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-spotted-hyena-v3",
+        "fingerprint": "dc81b5c25bd61acafe398c8719dc4f0950fa883c28ff7dffdd4acc5bc15afd54",
+        "model": "public/demos/wildlife-3d/spotted-hyena-v3/model.glb",
+        "source": "public/demos/wildlife-3d/spotted-hyena-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/spotted-hyena-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/last-ground-mammals-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-cat-provisional-v1",
@@ -3861,9 +3959,55 @@
         "chase": "walk",
         "sleep": "sleep"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "4eed795d454cf317527be885ab41e0eeb580db1a530e993c3614070e9716e4d2",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/last-ground-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/dire-wolf-v3/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "4eed795d454cf317527be885ab41e0eeb580db1a530e993c3614070e9716e4d2",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/last-ground-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/dire-wolf-v3/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "4eed795d454cf317527be885ab41e0eeb580db1a530e993c3614070e9716e4d2",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/last-ground-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/dire-wolf-v3/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "4eed795d454cf317527be885ab41e0eeb580db1a530e993c3614070e9716e4d2",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/last-ground-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/dire-wolf-v3/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "4eed795d454cf317527be885ab41e0eeb580db1a530e993c3614070e9716e4d2",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/last-ground-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/dire-wolf-v3/chase.png"
+        },
+        "sleep": {
+          "action": "sleep",
+          "sha256": "4eed795d454cf317527be885ab41e0eeb580db1a530e993c3614070e9716e4d2",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/last-ground-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/dire-wolf-v3/sleep.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-dire-wolf-v3",
+        "fingerprint": "8643563f16b0390f79e8284a2dbaa6dd1f43f28ca9888f6fcfef6c343db6a178",
+        "model": "public/demos/wildlife-3d/dire-wolf-v3/model.glb",
+        "source": "public/demos/wildlife-3d/dire-wolf-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/dire-wolf-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/last-ground-mammals-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-giant-spider-predator-v1",
@@ -5899,9 +6043,49 @@
         "display": "display",
         "chase": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "6b5392683def9390df6704136089cd74769ce43d54d392284556811c33a1ca05",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/centipede-v3/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "6b5392683def9390df6704136089cd74769ce43d54d392284556811c33a1ca05",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/centipede-v3/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "6b5392683def9390df6704136089cd74769ce43d54d392284556811c33a1ca05",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/centipede-v3/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "6b5392683def9390df6704136089cd74769ce43d54d392284556811c33a1ca05",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/centipede-v3/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "6b5392683def9390df6704136089cd74769ce43d54d392284556811c33a1ca05",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/centipede-v3/chase.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-centipede-v3",
+        "fingerprint": "164656c881a357a9f9a14e8818a4e02f9b681149a2c40e53cc46a6df320f0ec8",
+        "model": "public/demos/wildlife-3d/centipede-v3/model.glb",
+        "source": "public/demos/wildlife-3d/centipede-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/centipede-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-cricket-provisional-v1",
@@ -6081,9 +6265,43 @@
         "action": "action",
         "flee": "crawl"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "68d7d8d2ba911a32bfa7a4b3e5a67b06cae3f2e2cb6f8e5359868bcab82d728d",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/crawling-ground-fauna-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/snail-v3/native.png"
+        },
+        "crawl": {
+          "action": "crawl",
+          "sha256": "68d7d8d2ba911a32bfa7a4b3e5a67b06cae3f2e2cb6f8e5359868bcab82d728d",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/crawling-ground-fauna-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/snail-v3/crawl.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "68d7d8d2ba911a32bfa7a4b3e5a67b06cae3f2e2cb6f8e5359868bcab82d728d",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/crawling-ground-fauna-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/snail-v3/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "68d7d8d2ba911a32bfa7a4b3e5a67b06cae3f2e2cb6f8e5359868bcab82d728d",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/crawling-ground-fauna-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/snail-v3/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-snail-v3",
+        "fingerprint": "d9e3870da764f03e570893c556f2277015645f8b61416835bdf909530caebb9c",
+        "model": "public/demos/wildlife-3d/snail-v3/model.glb",
+        "source": "public/demos/wildlife-3d/snail-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/snail-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/crawling-ground-fauna-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-grasshopper-provisional-v1",
@@ -6263,9 +6481,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "2848d66cb54222336c8ce102dd018b5ecede95cf3ee044f6cd7ee6bf32fbe666",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/crawling-ground-fauna-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/millipede-v3/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "2848d66cb54222336c8ce102dd018b5ecede95cf3ee044f6cd7ee6bf32fbe666",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/crawling-ground-fauna-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/millipede-v3/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "2848d66cb54222336c8ce102dd018b5ecede95cf3ee044f6cd7ee6bf32fbe666",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/crawling-ground-fauna-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/millipede-v3/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "2848d66cb54222336c8ce102dd018b5ecede95cf3ee044f6cd7ee6bf32fbe666",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/crawling-ground-fauna-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/millipede-v3/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-millipede-v3",
+        "fingerprint": "ad813e89f57dcddf649dda9ce01d768ddf7ae3fe45290180ced198329d4131ac",
+        "model": "public/demos/wildlife-3d/millipede-v3/model.glb",
+        "source": "public/demos/wildlife-3d/millipede-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/millipede-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/crawling-ground-fauna-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-butterfly-provisional-v1",
@@ -6338,9 +6590,49 @@
         "display": "display",
         "chase": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "ed071e90a2ae85dfcdabcdcae3000046be7b70b8e8aa3a90b71dab5b877fa3f7",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/praying-mantis-v3/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "ed071e90a2ae85dfcdabcdcae3000046be7b70b8e8aa3a90b71dab5b877fa3f7",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/praying-mantis-v3/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "ed071e90a2ae85dfcdabcdcae3000046be7b70b8e8aa3a90b71dab5b877fa3f7",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/praying-mantis-v3/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "ed071e90a2ae85dfcdabcdcae3000046be7b70b8e8aa3a90b71dab5b877fa3f7",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/praying-mantis-v3/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "ed071e90a2ae85dfcdabcdcae3000046be7b70b8e8aa3a90b71dab5b877fa3f7",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/praying-mantis-v3/chase.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-praying-mantis-v3",
+        "fingerprint": "6b4d71791adacfb7a8a6fdc88da03f5cfada9a3efdd9425be157d4621883ce5c",
+        "model": "public/demos/wildlife-3d/praying-mantis-v3/model.glb",
+        "source": "public/demos/wildlife-3d/praying-mantis-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/praying-mantis-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-roly-poly-provisional-v1",
@@ -6413,9 +6705,49 @@
         "display": "display",
         "chase": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "5d4a8d80ae390e3d8914f438a2981c02be6d2d86545197e523a569e2b48cc9f8",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/scorpion-v3/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "5d4a8d80ae390e3d8914f438a2981c02be6d2d86545197e523a569e2b48cc9f8",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/scorpion-v3/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "5d4a8d80ae390e3d8914f438a2981c02be6d2d86545197e523a569e2b48cc9f8",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/scorpion-v3/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "5d4a8d80ae390e3d8914f438a2981c02be6d2d86545197e523a569e2b48cc9f8",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/scorpion-v3/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "5d4a8d80ae390e3d8914f438a2981c02be6d2d86545197e523a569e2b48cc9f8",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/scorpion-v3/chase.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-scorpion-v3",
+        "fingerprint": "b7372fd574ac8f091fd2aee9c5190cbe98ab3f05bcfbc58a20e5f6f3f95c8561",
+        "model": "public/demos/wildlife-3d/scorpion-v3/model.glb",
+        "source": "public/demos/wildlife-3d/scorpion-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/scorpion-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-stag-beetle-provisional-v1",
@@ -6488,9 +6820,49 @@
         "display": "display",
         "chase": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "465e942d3f06245e6ebb57278a224a7cf39d5b1fc617122aed4a22b7438fe073",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/spider-v3/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "465e942d3f06245e6ebb57278a224a7cf39d5b1fc617122aed4a22b7438fe073",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/spider-v3/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "465e942d3f06245e6ebb57278a224a7cf39d5b1fc617122aed4a22b7438fe073",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/spider-v3/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "465e942d3f06245e6ebb57278a224a7cf39d5b1fc617122aed4a22b7438fe073",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/spider-v3/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "465e942d3f06245e6ebb57278a224a7cf39d5b1fc617122aed4a22b7438fe073",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/spider-v3/chase.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-spider-v3",
+        "fingerprint": "f621816251331c0d4074f95a5c283dfb400762d3519e98d3c2e11309e89cc0d6",
+        "model": "public/demos/wildlife-3d/spider-v3/model.glb",
+        "source": "public/demos/wildlife-3d/spider-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/spider-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-anglerfish-predator-v1",
@@ -9143,9 +9515,49 @@
         "display": "display",
         "chase": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "60ab4924423a4eb0b051a3112793bc70a7b2c164e29c3964aa36f0caa7e41f72",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/last-ground-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/tasmanian-devil-v3/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "60ab4924423a4eb0b051a3112793bc70a7b2c164e29c3964aa36f0caa7e41f72",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/last-ground-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/tasmanian-devil-v3/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "60ab4924423a4eb0b051a3112793bc70a7b2c164e29c3964aa36f0caa7e41f72",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/last-ground-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/tasmanian-devil-v3/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "60ab4924423a4eb0b051a3112793bc70a7b2c164e29c3964aa36f0caa7e41f72",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/last-ground-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/tasmanian-devil-v3/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "60ab4924423a4eb0b051a3112793bc70a7b2c164e29c3964aa36f0caa7e41f72",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/last-ground-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/tasmanian-devil-v3/chase.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-tasmanian-devil-v3",
+        "fingerprint": "d64c2806bdf791449977c7a792c575b77561de73444a318a2ecdb3ca03212aa3",
+        "model": "public/demos/wildlife-3d/tasmanian-devil-v3/model.glb",
+        "source": "public/demos/wildlife-3d/tasmanian-devil-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/tasmanian-devil-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/last-ground-mammals-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-opossum-provisional-v1",
@@ -9285,9 +9697,43 @@
         "action": "action",
         "flee": "crawl"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "d4d38294ced6fa74c8fa298369a5bdb3501f7c8d71dd62a09c3a9a65ba7370e8",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/crawling-ground-fauna-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/worm-v3/native.png"
+        },
+        "crawl": {
+          "action": "crawl",
+          "sha256": "d4d38294ced6fa74c8fa298369a5bdb3501f7c8d71dd62a09c3a9a65ba7370e8",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/crawling-ground-fauna-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/worm-v3/crawl.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "d4d38294ced6fa74c8fa298369a5bdb3501f7c8d71dd62a09c3a9a65ba7370e8",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/crawling-ground-fauna-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/worm-v3/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "d4d38294ced6fa74c8fa298369a5bdb3501f7c8d71dd62a09c3a9a65ba7370e8",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/crawling-ground-fauna-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/worm-v3/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-worm-v3",
+        "fingerprint": "9a74b82f450caebce4e03d69748ef59b950df54fb46fc49e8cee8f012af3bec2",
+        "model": "public/demos/wildlife-3d/worm-v3/model.glb",
+        "source": "public/demos/wildlife-3d/worm-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/worm-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/crawling-ground-fauna-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-cat-black-provisional-v1",
@@ -9616,9 +10062,67 @@
         "eat": "eat",
         "sit": "sit"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "51f009774a52e36b82eb490d04d3026ad47ed0141b3c14bce6ef7ebe6feda90b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/capuchin-monkey-v3/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "51f009774a52e36b82eb490d04d3026ad47ed0141b3c14bce6ef7ebe6feda90b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/capuchin-monkey-v3/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "51f009774a52e36b82eb490d04d3026ad47ed0141b3c14bce6ef7ebe6feda90b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/capuchin-monkey-v3/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "51f009774a52e36b82eb490d04d3026ad47ed0141b3c14bce6ef7ebe6feda90b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/capuchin-monkey-v3/flee.png"
+        },
+        "climb": {
+          "action": "climb",
+          "sha256": "51f009774a52e36b82eb490d04d3026ad47ed0141b3c14bce6ef7ebe6feda90b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/capuchin-monkey-v3/climb.png"
+        },
+        "pickup": {
+          "action": "pickup",
+          "sha256": "51f009774a52e36b82eb490d04d3026ad47ed0141b3c14bce6ef7ebe6feda90b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/capuchin-monkey-v3/pickup.png"
+        },
+        "eat": {
+          "action": "eat",
+          "sha256": "51f009774a52e36b82eb490d04d3026ad47ed0141b3c14bce6ef7ebe6feda90b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/capuchin-monkey-v3/eat.png"
+        },
+        "sit": {
+          "action": "sit",
+          "sha256": "51f009774a52e36b82eb490d04d3026ad47ed0141b3c14bce6ef7ebe6feda90b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/capuchin-monkey-v3/sit.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-capuchin-monkey-v3",
+        "fingerprint": "4ae072a42c1e0c0e02c1adb73c565404f59611ddb267294a4ee97f517ae91f8d",
+        "model": "public/demos/wildlife-3d/capuchin-monkey-v3/model.glb",
+        "source": "public/demos/wildlife-3d/capuchin-monkey-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/capuchin-monkey-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-chimpanzee-provisional-v1",
@@ -10064,9 +10568,49 @@
         "display": "display",
         "chase": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "32558edbce25cdd7ae961e77542b76eb2d7b86aa5b8370bff5f45bef8dad805a",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/alligator-v3/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "32558edbce25cdd7ae961e77542b76eb2d7b86aa5b8370bff5f45bef8dad805a",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/alligator-v3/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "32558edbce25cdd7ae961e77542b76eb2d7b86aa5b8370bff5f45bef8dad805a",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/alligator-v3/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "32558edbce25cdd7ae961e77542b76eb2d7b86aa5b8370bff5f45bef8dad805a",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/alligator-v3/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "32558edbce25cdd7ae961e77542b76eb2d7b86aa5b8370bff5f45bef8dad805a",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/alligator-v3/chase.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-alligator-v3",
+        "fingerprint": "0a4fd96c9f9793c52409a71faf25ed10831b3042ad6fa37568560d0280527d95",
+        "model": "public/demos/wildlife-3d/alligator-v3/model.glb",
+        "source": "public/demos/wildlife-3d/alligator-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/alligator-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-axolotl-provisional-v1",
@@ -10314,9 +10858,49 @@
         "display": "display",
         "chase": "slither"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "ce2a8e21d72f1805be8857e8975809ba0274ed6d028a89f1079e268d3190dd21",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/gaboon-viper-v3/native.png"
+        },
+        "slither": {
+          "action": "slither",
+          "sha256": "ce2a8e21d72f1805be8857e8975809ba0274ed6d028a89f1079e268d3190dd21",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/gaboon-viper-v3/slither.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "ce2a8e21d72f1805be8857e8975809ba0274ed6d028a89f1079e268d3190dd21",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/gaboon-viper-v3/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "ce2a8e21d72f1805be8857e8975809ba0274ed6d028a89f1079e268d3190dd21",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/gaboon-viper-v3/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "ce2a8e21d72f1805be8857e8975809ba0274ed6d028a89f1079e268d3190dd21",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/gaboon-viper-v3/chase.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-gaboon-viper-v3",
+        "fingerprint": "481d3c9ec2904a066e455072c4cf78f0204236ae2441123e4290d84466a9efaa",
+        "model": "public/demos/wildlife-3d/gaboon-viper-v3/model.glb",
+        "source": "public/demos/wildlife-3d/gaboon-viper-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/gaboon-viper-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-gecko-provisional-v1",
@@ -10442,9 +11026,43 @@
         "action": "action",
         "flee": "slither"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "d2024524963cb7f8be8db4f9c4d7670644025b2ce7ee4d5dff480927e9c82a93",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/crawling-ground-fauna-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/king-cobra-v3/native.png"
+        },
+        "slither": {
+          "action": "slither",
+          "sha256": "d2024524963cb7f8be8db4f9c4d7670644025b2ce7ee4d5dff480927e9c82a93",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/crawling-ground-fauna-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/king-cobra-v3/slither.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "d2024524963cb7f8be8db4f9c4d7670644025b2ce7ee4d5dff480927e9c82a93",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/crawling-ground-fauna-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/king-cobra-v3/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "d2024524963cb7f8be8db4f9c4d7670644025b2ce7ee4d5dff480927e9c82a93",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/crawling-ground-fauna-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/king-cobra-v3/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-king-cobra-v3",
+        "fingerprint": "75afb0e8ab6e9445c6c11f09f1f4acd300d89034183e3632c7af8498fc291e5a",
+        "model": "public/demos/wildlife-3d/king-cobra-v3/model.glb",
+        "source": "public/demos/wildlife-3d/king-cobra-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/king-cobra-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/crawling-ground-fauna-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-komodo-dragon-predator-v1",
@@ -10463,9 +11081,49 @@
         "display": "display",
         "chase": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "c57e2c7b35fa975f3d4dd250713590ea828271e04cc6c071f2d7b37c379db95e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/komodo-dragon-v3/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "c57e2c7b35fa975f3d4dd250713590ea828271e04cc6c071f2d7b37c379db95e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/komodo-dragon-v3/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "c57e2c7b35fa975f3d4dd250713590ea828271e04cc6c071f2d7b37c379db95e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/komodo-dragon-v3/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "c57e2c7b35fa975f3d4dd250713590ea828271e04cc6c071f2d7b37c379db95e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/komodo-dragon-v3/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "c57e2c7b35fa975f3d4dd250713590ea828271e04cc6c071f2d7b37c379db95e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/komodo-dragon-v3/chase.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-komodo-dragon-v3",
+        "fingerprint": "753f9bb6cb3a34bed7c44cf82ad56a6bac1f8e43a2528b1c37c2d8a8db3daa61",
+        "model": "public/demos/wildlife-3d/komodo-dragon-v3/model.glb",
+        "source": "public/demos/wildlife-3d/komodo-dragon-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/komodo-dragon-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-land-tortoise-provisional-v1",
@@ -10592,9 +11250,49 @@
         "display": "display",
         "chase": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "3501224c3953e43af70acabef8325755fbd86fe0b7d68347b3a7162c948697d0",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/crocodile-v3/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "3501224c3953e43af70acabef8325755fbd86fe0b7d68347b3a7162c948697d0",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/crocodile-v3/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "3501224c3953e43af70acabef8325755fbd86fe0b7d68347b3a7162c948697d0",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/crocodile-v3/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "3501224c3953e43af70acabef8325755fbd86fe0b7d68347b3a7162c948697d0",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/crocodile-v3/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "3501224c3953e43af70acabef8325755fbd86fe0b7d68347b3a7162c948697d0",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/crocodile-v3/chase.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-crocodile-v3",
+        "fingerprint": "fcfaafbaf240aaffbadb72887b22d62845619200a85b10f1d6301d0edf3ba995",
+        "model": "public/demos/wildlife-3d/crocodile-v3/model.glb",
+        "source": "public/demos/wildlife-3d/crocodile-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/crocodile-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-pond-turtle-provisional-v1",
@@ -10889,9 +11587,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "2339bb03d7bfea8b39a973d5630bdaca0b6a1b2375e6821a4aa5e86bb4cbf9e7",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/slow-canopy-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/aye-aye-v3/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "2339bb03d7bfea8b39a973d5630bdaca0b6a1b2375e6821a4aa5e86bb4cbf9e7",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/slow-canopy-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/aye-aye-v3/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "2339bb03d7bfea8b39a973d5630bdaca0b6a1b2375e6821a4aa5e86bb4cbf9e7",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/slow-canopy-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/aye-aye-v3/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "2339bb03d7bfea8b39a973d5630bdaca0b6a1b2375e6821a4aa5e86bb4cbf9e7",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/slow-canopy-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/aye-aye-v3/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-aye-aye-v3",
+        "fingerprint": "c1cc835e7ed6dec5af62c9caa6de5e96338b178a6f5615e426c1ceecd11eb243",
+        "model": "public/demos/wildlife-3d/aye-aye-v3/model.glb",
+        "source": "public/demos/wildlife-3d/aye-aye-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/aye-aye-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/slow-canopy-mammals-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-bat-provisional-v1",
@@ -10966,9 +11698,61 @@
         "build": "build",
         "settle": "settle"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "7637a074e6f217fa8c6d1927925e6dd8e0075819b15f9f957fbdc2f98c6219d2",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/beaver-v3/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "7637a074e6f217fa8c6d1927925e6dd8e0075819b15f9f957fbdc2f98c6219d2",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/beaver-v3/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "7637a074e6f217fa8c6d1927925e6dd8e0075819b15f9f957fbdc2f98c6219d2",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/beaver-v3/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "7637a074e6f217fa8c6d1927925e6dd8e0075819b15f9f957fbdc2f98c6219d2",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/beaver-v3/flee.png"
+        },
+        "pickup": {
+          "action": "pickup",
+          "sha256": "7637a074e6f217fa8c6d1927925e6dd8e0075819b15f9f957fbdc2f98c6219d2",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/beaver-v3/pickup.png"
+        },
+        "build": {
+          "action": "build",
+          "sha256": "7637a074e6f217fa8c6d1927925e6dd8e0075819b15f9f957fbdc2f98c6219d2",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/beaver-v3/build.png"
+        },
+        "settle": {
+          "action": "settle",
+          "sha256": "7637a074e6f217fa8c6d1927925e6dd8e0075819b15f9f957fbdc2f98c6219d2",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/beaver-v3/settle.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-beaver-v3",
+        "fingerprint": "de06617d3320b24a358be0e6d7ede68ad78cedb88b73118b92dda65dfbba7e6a",
+        "model": "public/demos/wildlife-3d/beaver-v3/model.glb",
+        "source": "public/demos/wildlife-3d/beaver-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/beaver-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-binturong-provisional-v1",
@@ -11273,9 +12057,61 @@
         "curled": "curled",
         "uncurl": "uncurl"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "8609ae4e7b99420c934154f5be329f14c386a43ef693faa1735c6994a60e6545",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/hedgehog-v3/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "8609ae4e7b99420c934154f5be329f14c386a43ef693faa1735c6994a60e6545",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/hedgehog-v3/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "8609ae4e7b99420c934154f5be329f14c386a43ef693faa1735c6994a60e6545",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/hedgehog-v3/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "8609ae4e7b99420c934154f5be329f14c386a43ef693faa1735c6994a60e6545",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/hedgehog-v3/flee.png"
+        },
+        "curl-in": {
+          "action": "curl-in",
+          "sha256": "8609ae4e7b99420c934154f5be329f14c386a43ef693faa1735c6994a60e6545",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/hedgehog-v3/curl-in.png"
+        },
+        "curled": {
+          "action": "curled",
+          "sha256": "8609ae4e7b99420c934154f5be329f14c386a43ef693faa1735c6994a60e6545",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/hedgehog-v3/curled.png"
+        },
+        "uncurl": {
+          "action": "uncurl",
+          "sha256": "8609ae4e7b99420c934154f5be329f14c386a43ef693faa1735c6994a60e6545",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/hedgehog-v3/uncurl.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-hedgehog-v3",
+        "fingerprint": "97b617eac6d4e35a7e0b8f959b90988f601f6eb51b9d260df5f1efbb1415ef7b",
+        "model": "public/demos/wildlife-3d/hedgehog-v3/model.glb",
+        "source": "public/demos/wildlife-3d/hedgehog-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/hedgehog-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-honey-badger-predator-v1",
@@ -11412,9 +12248,67 @@
         "rear": "rear",
         "lower": "lower"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "5c401191bed380981edc412e4d947e021a42093da3ca357484499cdf1a178f60",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/meerkat-v3/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "5c401191bed380981edc412e4d947e021a42093da3ca357484499cdf1a178f60",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/meerkat-v3/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "5c401191bed380981edc412e4d947e021a42093da3ca357484499cdf1a178f60",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/meerkat-v3/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "5c401191bed380981edc412e4d947e021a42093da3ca357484499cdf1a178f60",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/meerkat-v3/flee.png"
+        },
+        "scan": {
+          "action": "scan",
+          "sha256": "5c401191bed380981edc412e4d947e021a42093da3ca357484499cdf1a178f60",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/meerkat-v3/scan.png"
+        },
+        "alarm": {
+          "action": "alarm",
+          "sha256": "5c401191bed380981edc412e4d947e021a42093da3ca357484499cdf1a178f60",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/meerkat-v3/alarm.png"
+        },
+        "rear": {
+          "action": "rear",
+          "sha256": "5c401191bed380981edc412e4d947e021a42093da3ca357484499cdf1a178f60",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/meerkat-v3/rear.png"
+        },
+        "lower": {
+          "action": "lower",
+          "sha256": "5c401191bed380981edc412e4d947e021a42093da3ca357484499cdf1a178f60",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/meerkat-v3/lower.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-meerkat-v3",
+        "fingerprint": "c6dd3a74bf1d7d4da3168f9a6b6d4969aa124aef04275c570c41d137a19fb5a6",
+        "model": "public/demos/wildlife-3d/meerkat-v3/model.glb",
+        "source": "public/demos/wildlife-3d/meerkat-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/meerkat-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-mongoose-predator-v1",
@@ -11611,9 +12505,61 @@
         "rattle": "rattle",
         "relax": "relax"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "54837c022ea1b71b33640741d6debe55fcaa2fb70dae34e13b9ddd1ff011e6fe",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/porcupine-v3/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "54837c022ea1b71b33640741d6debe55fcaa2fb70dae34e13b9ddd1ff011e6fe",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/porcupine-v3/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "54837c022ea1b71b33640741d6debe55fcaa2fb70dae34e13b9ddd1ff011e6fe",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/porcupine-v3/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "54837c022ea1b71b33640741d6debe55fcaa2fb70dae34e13b9ddd1ff011e6fe",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/porcupine-v3/flee.png"
+        },
+        "quills": {
+          "action": "quills",
+          "sha256": "54837c022ea1b71b33640741d6debe55fcaa2fb70dae34e13b9ddd1ff011e6fe",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/porcupine-v3/quills.png"
+        },
+        "rattle": {
+          "action": "rattle",
+          "sha256": "54837c022ea1b71b33640741d6debe55fcaa2fb70dae34e13b9ddd1ff011e6fe",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/porcupine-v3/rattle.png"
+        },
+        "relax": {
+          "action": "relax",
+          "sha256": "54837c022ea1b71b33640741d6debe55fcaa2fb70dae34e13b9ddd1ff011e6fe",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/porcupine-v3/relax.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-porcupine-v3",
+        "fingerprint": "c7aa5d559e3e0c15e1c3410b396c6e2af2fd9e6f368154b2660b596687faf916",
+        "model": "public/demos/wildlife-3d/porcupine-v3/model.glb",
+        "source": "public/demos/wildlife-3d/porcupine-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/porcupine-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/alerts-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-raccoon-provisional-v1",
@@ -11633,9 +12579,55 @@
         "pickup": "pickup",
         "eat": "eat"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "217b1b25fc08f4afe198f894031b14481e9de4b40dd99467fdd2712d5c54bc71",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/raccoon-v3/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "217b1b25fc08f4afe198f894031b14481e9de4b40dd99467fdd2712d5c54bc71",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/raccoon-v3/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "217b1b25fc08f4afe198f894031b14481e9de4b40dd99467fdd2712d5c54bc71",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/raccoon-v3/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "217b1b25fc08f4afe198f894031b14481e9de4b40dd99467fdd2712d5c54bc71",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/raccoon-v3/flee.png"
+        },
+        "pickup": {
+          "action": "pickup",
+          "sha256": "217b1b25fc08f4afe198f894031b14481e9de4b40dd99467fdd2712d5c54bc71",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/raccoon-v3/pickup.png"
+        },
+        "eat": {
+          "action": "eat",
+          "sha256": "217b1b25fc08f4afe198f894031b14481e9de4b40dd99467fdd2712d5c54bc71",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/raccoon-v3/eat.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-raccoon-v3",
+        "fingerprint": "f870da454899a122c044c27f05f76fcd0c465cf19d80ff1b6ad1ce63ea8f1e16",
+        "model": "public/demos/wildlife-3d/raccoon-v3/model.glb",
+        "source": "public/demos/wildlife-3d/raccoon-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/raccoon-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-rat-provisional-v1",
@@ -11771,9 +12763,61 @@
         "dig": "dig",
         "eat": "eat"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "a78fc7eadc118ca15decec59daafb7ce84fd375a6a657cbe9f7e0b75890018fa",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/red-squirrel-v3/native.png"
+        },
+        "bound": {
+          "action": "bound",
+          "sha256": "a78fc7eadc118ca15decec59daafb7ce84fd375a6a657cbe9f7e0b75890018fa",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/red-squirrel-v3/bound.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "a78fc7eadc118ca15decec59daafb7ce84fd375a6a657cbe9f7e0b75890018fa",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/red-squirrel-v3/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "a78fc7eadc118ca15decec59daafb7ce84fd375a6a657cbe9f7e0b75890018fa",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/red-squirrel-v3/flee.png"
+        },
+        "pickup": {
+          "action": "pickup",
+          "sha256": "a78fc7eadc118ca15decec59daafb7ce84fd375a6a657cbe9f7e0b75890018fa",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/red-squirrel-v3/pickup.png"
+        },
+        "dig": {
+          "action": "dig",
+          "sha256": "a78fc7eadc118ca15decec59daafb7ce84fd375a6a657cbe9f7e0b75890018fa",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/red-squirrel-v3/dig.png"
+        },
+        "eat": {
+          "action": "eat",
+          "sha256": "a78fc7eadc118ca15decec59daafb7ce84fd375a6a657cbe9f7e0b75890018fa",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/red-squirrel-v3/eat.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-red-squirrel-v3",
+        "fingerprint": "e80b94a0b15dd4eb6df23df93f62584386b0bc0541f35bd5a2d22d5dd42c9310",
+        "model": "public/demos/wildlife-3d/red-squirrel-v3/model.glb",
+        "source": "public/demos/wildlife-3d/red-squirrel-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/red-squirrel-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/work-mammals-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-river-otter-provisional-v1",
@@ -11920,9 +12964,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "c2c8f8fa8a4c69adb4c13f4e82fbc4096572a7cdda61a8453af8c949208f03ef",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/slow-canopy-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/sloth-v3/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "c2c8f8fa8a4c69adb4c13f4e82fbc4096572a7cdda61a8453af8c949208f03ef",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/slow-canopy-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/sloth-v3/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "c2c8f8fa8a4c69adb4c13f4e82fbc4096572a7cdda61a8453af8c949208f03ef",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/slow-canopy-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/sloth-v3/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "c2c8f8fa8a4c69adb4c13f4e82fbc4096572a7cdda61a8453af8c949208f03ef",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/slow-canopy-mammals-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/sloth-v3/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-sloth-v3",
+        "fingerprint": "53cac90dd0353db48177eb0425eeab41ec4045baaf30662aa7236b766f572867",
+        "model": "public/demos/wildlife-3d/sloth-v3/model.glb",
+        "source": "public/demos/wildlife-3d/sloth-v3/model.blend",
+        "comparison": "public/demos/wildlife-3d/sloth-v3/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/slow-canopy-mammals-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-white-nosed-coati-predator-v1",

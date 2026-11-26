@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-spotted-hyena-predator-v1",
+  "fit": [
+    14.4,
+    9.43,
+    13.13
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "reviewContext": "Spotted coat, raised shoulders and a quicker pursuit stride.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

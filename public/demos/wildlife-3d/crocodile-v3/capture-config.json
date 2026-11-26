@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-crocodile-predator-v1",
+  "fit": [
+    12.47,
+    10.3,
+    12.33
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "reviewContext": "The long tapered jaw and raised scutes are readable through the stride. Chasing narrows the body and swings the tail farther.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

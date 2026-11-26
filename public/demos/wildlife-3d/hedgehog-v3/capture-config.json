@@ -1,0 +1,23 @@
+{
+  "runtimeType": "wildlife-hedgehog-provisional-v1",
+  "fit": [
+    12.61,
+    8.08,
+    10.21
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee",
+    "curl-in",
+    "curled",
+    "uncurl"
+  ],
+  "reviewContext": "A clear huddle after curling, plus a separate low escape stride.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

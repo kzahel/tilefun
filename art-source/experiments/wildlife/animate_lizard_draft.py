@@ -27,6 +27,9 @@ MOTION = {
     "salamander": (.271, .092, .38, .15, -.081, -.32),
     "texas-horned-lizard": (.231, .107, .24, .044, .091, .20),
     "land-tortoise": (.170, .062, .074, .15, -.062, -.24),
+    "alligator": (.284, .082, .31, .20, -.085, -.26),
+    "crocodile": (.317, .105, .33, .23, -.055, -.23),
+    "komodo-dragon": (.304, .119, .37, .18, -.068, -.28),
 }
 COLORS = {
     "chameleon": "1d251e 47794b 73a65b b7ce76 d6c69a",
@@ -37,8 +40,12 @@ COLORS = {
     "salamander": "1d251e 1d2b2e 303d3b e0be4b d6c69a",
     "texas-horned-lizard": "1d251e 75563a ab8657 e6d571 d6c69a",
     "land-tortoise": "1d251e 4b4b37 82704a b5a36c d6c69a",
+    "alligator": "192523 2d3e38 46564e 6b7965 b7b28b",
+    "crocodile": "182523 3c4e38 657653 8a9565 c8bf8d",
+    "komodo-dragon": "222b28 575b45 817c61 a09a76 c7ba91",
 }
 DURATIONS = {"idle": 48, "walk": 32, "action": 25, "flee": 18}
+HUNTERS = {"alligator", "crocodile", "komodo-dragon"}
 TAIL_FIT = {
     "chameleon": (1.12, 1.22),
     "frilled-neck-lizard": (1.31, 1.0),
@@ -48,6 +55,9 @@ TAIL_FIT = {
     "salamander": (1.20, 1.02),
     "texas-horned-lizard": (1.30, 1.0),
     "land-tortoise": (1.0, 1.0),
+    "alligator": (1.28, .91),
+    "crocodile": (1.39, .93),
+    "komodo-dragon": (1.27, 1.02),
 }
 
 
@@ -136,22 +146,25 @@ def paint_sprite_palette(mesh, species):
 
 def pose(species, rig, rest, clip, t):
     wave = math.tau * t
-    flee = clip == "flee"
+    flee = clip in ("flee", "chase")
     travel = clip == "walk" or flee
-    action = math.sin(math.pi * t)**2 if clip == "action" else 0
+    action = math.sin(math.pi * t)**2 if clip in ("action", "feed") else 0
+    threat = math.sin(math.pi * t)**2 if clip == "display" else 0
     step, height, sway, reach, lift, look = MOTION[species]
-    q = euler(.065 * action - .092 * flee + .038 * math.sin(wave) * travel,
+    q = euler(.065 * action + .17 * threat - .092 * flee + .038 * math.sin(wave) * travel,
               .046 * math.cos(wave) * travel, (.085 if flee else .036) * math.sin(wave))
     pivot = reptile.BODY
     body = transform(q, pivot, pivot + V((.035 * travel * math.sin(wave),
-                                         .045 * action, .024 * math.cos(wave * 2) - .054 * flee)))
+                                         .045 * action, .024 * math.cos(wave * 2) - .054 * flee + .09 * threat)))
     out = {"body": body @ rest["body"]}
-    hq = q @ euler(look * action, 0, .12 * math.sin(wave) * (not travel))
+    hq = q @ euler(look * action + .27 * threat, 0, .12 * math.sin(wave) * (not travel))
     head = reptile.HEAD
     head_transform = transform(hq, head, body @ head + V((0, reach * action, lift * action)))
     out["head"] = head_transform @ rest["head"]
     jaw = reptile.JAW
-    jaw_q = hq @ euler(-(.35 if species == "iguana" else .24) * action)
+    bite = .39 + .20 * math.sin(wave * 2) if clip == "feed" else .35 if species == "iguana" else .24
+    gape = .48 if species == "komodo-dragon" else .83
+    jaw_q = hq @ euler(-bite * action - gape * threat)
     out["jaw"] = transform(jaw_q, jaw, head_transform @ jaw) @ rest["jaw"]
     for name, (hip, _, toe) in reptile.LEGS.items():
         left = name.endswith(".l")
@@ -197,15 +210,18 @@ def main():
     mesh, = (obj for obj in bpy.context.scene.objects if obj.type == "MESH")
     fit_tail_and_frill(mesh, rig, species)
     paint_sprite_palette(mesh, species)
-    assert set(bpy.data.actions.keys()) == {"idle", "walk", "action"}
+    hunters = species in HUNTERS
+    durations = {"idle": 48, "walk": 32, "feed": 25, "display": 34, "chase": 18} if hunters else DURATIONS
+    expected = {"idle", "walk", "feed", "display"} if hunters else {"idle", "walk", "action"}
+    assert set(bpy.data.actions.keys()) == expected
     for action in list(bpy.data.actions):
         bpy.data.actions.remove(action)
-    wildlife_build.key_actions(rig, DURATIONS, partial(pose, species))
+    wildlife_build.key_actions(rig, durations, partial(pose, species))
     scene = bpy.context.scene
     scene.render.fps = wildlife_build.FPS
-    scene.frame_start, scene.frame_end = 1, DURATIONS["idle"] + 1
+    scene.frame_start, scene.frame_end = 1, durations["idle"] + 1
     scene.frame_set(1)
-    scene["Animation clips"] = ", ".join(DURATIONS)
+    scene["Animation clips"] = ", ".join(durations)
     scene["Animation reference"] = f"Tilefun {species} finish-v1 sprite sheet"
     bpy.ops.wm.save_as_mainfile(filepath=str(output / "model.blend"))
     bpy.ops.export_scene.gltf(

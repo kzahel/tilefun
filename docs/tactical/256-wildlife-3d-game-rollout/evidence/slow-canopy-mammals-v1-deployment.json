@@ -1,0 +1,68 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "3704e3b5063d8ba342283e126423f83f5f5893e5c24b87e4e1d82bb7af1a6bd0",
+  "results": [
+    {
+      "type": "wildlife-aye-aye-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "c1cc835e7ed6dec5af62c9caa6de5e96338b178a6f5615e426c1ceecd11eb243",
+      "modelSha256": "2339bb03d7bfea8b39a973d5630bdaca0b6a1b2375e6821a4aa5e86bb4cbf9e7",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-aye-aye&wildlife3dStage=aye-aye-v3&wildlife3dReview=aye-aye-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009545421600341841,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-sloth-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "53cac90dd0353db48177eb0425eeab41ec4045baaf30662aa7236b766f572867",
+      "modelSha256": "c2c8f8fa8a4c69adb4c13f4e82fbc4096572a7cdda61a8453af8c949208f03ef",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-sloth&wildlife3dStage=sloth-v3&wildlife3dReview=sloth-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009926910400390504,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-millipede-provisional-v1",
+  "fit": [
+    11.6,
+    9.72,
+    11.46
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "Alternating feet travel in a faster ripple during escape and slow down during the curled action.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

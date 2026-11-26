@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-gaboon-viper-predator-v1",
+  "fit": [
+    11.2,
+    6.7,
+    11.46
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "slither",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "reviewContext": "A thick patterned coil and wider, quicker motion in pursuit. Feeding and threat use separate movements of the front body.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

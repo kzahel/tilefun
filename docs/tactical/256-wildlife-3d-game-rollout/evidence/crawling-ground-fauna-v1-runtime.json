@@ -1,0 +1,134 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-king-cobra-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 160
+        },
+        {
+          "state": "slither",
+          "action": "slither",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "king-cobra-v3",
+      "modelSha256": "d2024524963cb7f8be8db4f9c4d7670644025b2ce7ee4d5dff480927e9c82a93"
+    },
+    {
+      "type": "wildlife-snail-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "crawl",
+          "action": "crawl",
+          "frames": 28,
+          "gameDurationMs": 1920
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 960
+        }
+      ],
+      "candidateId": "snail-v3",
+      "modelSha256": "68d7d8d2ba911a32bfa7a4b3e5a67b06cae3f2e2cb6f8e5359868bcab82d728d"
+    },
+    {
+      "type": "wildlife-millipede-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "millipede-v3",
+      "modelSha256": "2848d66cb54222336c8ce102dd018b5ecede95cf3ee044f6cd7ee6bf32fbe666"
+    },
+    {
+      "type": "wildlife-worm-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "crawl",
+          "action": "crawl",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "worm-v3",
+      "modelSha256": "d4d38294ced6fa74c8fa298369a5bdb3501f7c8d71dd62a09c3a9a65ba7370e8"
+    }
+  ],
+  "clipSamples": 448,
+  "testedDepth": false
+}

@@ -12,6 +12,7 @@ import {
   isDenHunterModelReviewCase,
   isGroundHunterModelReviewCase,
   isRaptorModelReviewCase,
+  isSpineDefenseModelReviewCase,
   isWildlifeWorkModelReviewCase,
 } from "../../src/scenarios/WildlifeBehaviorModelReview.ts";
 import {
@@ -24,9 +25,9 @@ import {
 import { isPondPilotModel } from "../../src/scenarios/WildlifeWaterModelReview.ts";
 import { DEER_TYPE } from "../../src/wildlife/Deer.ts";
 import { faunaProfile } from "../../src/wildlife/Fauna.ts";
-import { forageType } from "../../src/wildlife/ForageResources.ts";
+import { forageType, sourceType } from "../../src/wildlife/ForageResources.ts";
 import { MALLARD_TYPE } from "../../src/wildlife/Mallard.ts";
-import { predatorProfile } from "../../src/wildlife/Predator.ts";
+import { predatorProfile, predatorType } from "../../src/wildlife/Predator.ts";
 import {
   WILDLIFE_DEFAULT_MODELS,
   WILDLIFE_MODEL_REVIEW_PREFIX,
@@ -129,6 +130,8 @@ try {
       const hen = farmStage && candidate.lab === "behavior-chicken";
       const catStage = isCatModelReview(candidate.type, candidate.lab);
       const wildlifeWorkStage = isWildlifeWorkModelReviewCase(candidate.lab);
+      const spineStage = isSpineDefenseModelReviewCase(candidate.lab);
+      const lookoutStage = candidate.lab === "behavior-meerkat";
       const raptorStage = isRaptorModelReviewCase(candidate.lab);
       const groundHunterStage =
         isGroundHunterModelReviewCase(candidate.lab) ||
@@ -180,19 +183,23 @@ try {
         ? ["flight"]
         : secretaryStage || groundHunterStage
           ? ["display"]
-          : wildlifeWorkStage
-            ? ["action", "flee"]
-            : hunterStage
-              ? ["display"]
-              : waterStage
-                ? ["flee", "flee-swim"]
-                : farmStage || packStage
-                  ? ["flee", "ride", "ride-sprint"]
-                  : doeStage
-                    ? ["stamp", "flee"]
-                    : fourStateStage || catStage || feeding
-                      ? ["flee"]
-                      : [];
+          : spineStage
+            ? states.slice(3).map(({ name }) => name)
+            : lookoutStage
+              ? ["alarm", "flee"]
+              : wildlifeWorkStage
+                ? ["action", "flee"]
+                : hunterStage
+                  ? ["display"]
+                  : waterStage
+                    ? ["flee", "flee-swim"]
+                    : farmStage || packStage
+                      ? ["flee", "ride", "ride-sprint"]
+                      : doeStage
+                        ? ["stamp", "flee"]
+                        : fourStateStage || catStage || feeding
+                          ? ["flee"]
+                          : [];
       const naturalClips = observeAllStates
         ? states.flatMap(({ name }, index) =>
             contactClips.includes(name) || (catStage && name === "action") ? [] : [index],
@@ -277,11 +284,13 @@ try {
       const switchModels = page.getByRole("checkbox", { name: "3D animals", exact: true });
       const approachStates = doeStage
         ? await verifyDoeApproach(page, candidate, states)
-        : catStage || wildlifeWorkStage
-          ? await verifyStartleInFreshStage(page, stage, candidate, states)
-          : (farmStage && !hen) || fourStateStage || packStage || feeding
-            ? await verifyApproachClips(page, stage, candidate, states)
-            : [];
+        : spineStage || lookoutStage
+          ? await verifyDefensiveWorkshopClips(page, candidate, states, spineStage)
+          : catStage || wildlifeWorkStage
+            ? await verifyStartleInFreshStage(page, stage, candidate, states)
+            : (farmStage && !hen) || fourStateStage || packStage || feeding
+              ? await verifyApproachClips(page, stage, candidate, states)
+              : [];
       const landingStates =
         (farmStage && !hen) ||
         fourStateStage ||
@@ -425,14 +434,51 @@ async function verifyStartleInFreshStage(page, stage, candidate, states) {
   return [action, flee];
 }
 
+async function verifyDefensiveWorkshopClips(page, candidate, states, spineStage) {
+  const species = faunaProfile(candidate.type).species;
+  const find = (name) => states.findIndex((state) => state.name === name);
+  const wait = (clip, state) =>
+    waitForAnimalClip(page, { species, clip, dataset: "faunaPoses", state }, 20_000);
+  const flee = find("flee");
+  if (!spineStage) {
+    const alarm = find("alarm");
+    await wait(find("scan"));
+    await page
+      .getByRole("button", { name: "Place tiger nearby", exact: true })
+      .dispatchEvent("click");
+    await Promise.all([wait(alarm), wait(flee)]);
+    return [alarm, flee];
+  }
+  const [enter, hold, lower] = states.slice(4).map(({ name }) => find(name));
+  const approach = page.getByRole("button", { name: `Start near ${candidate.name}`, exact: true });
+  await approach.dispatchEvent("click");
+  await Promise.all([wait(enter), wait(hold)]);
+  await page.getByRole("button", { name: "Step away", exact: true }).dispatchEvent("click");
+  await wait(lower);
+  await wait(find("idle"));
+  await approach.dispatchEvent("click");
+  await wait(flee, "scared");
+  return [enter, hold, lower, flee];
+}
+
 function reviewActorPlacements(candidate) {
   const recipe = wildlifeModelReviewRecipe(candidate.type, candidate.lab);
-  const [bird, ...related] = recipe.actors;
-  const companions = related.map((actor) => ({ type: actor.type, ...actor.position }));
+  const [animal, ...related] = recipe.actors;
+  const companions = related.flatMap((actor) =>
+    actor.workItem?.kind === "cache" ? [] : [{ type: actor.type, ...actor.position }],
+  );
+  if (candidate.lab === "behavior-raccoon")
+    for (const [wx, wy] of [
+      [183, 199],
+      [208, 190],
+      [214, 226],
+      [172, 220],
+    ])
+      companions.push({ type: forageType("nut"), wx, wy });
   return [...(recipe.nativeProps ?? []), ...companions].map(({ type, wx, wy }) => ({
     type,
-    dx: wx - bird.position.wx,
-    dy: wy - bird.position.wy,
+    dx: wx - animal.position.wx,
+    dy: wy - animal.position.wy,
   }));
 }
 
@@ -558,7 +604,7 @@ async function waitForAnimalClip(page, expected, timeout) {
           (pose) =>
             (pose.type ?? pose.species) === species &&
             pose.clip === clip &&
-            pose.state === state &&
+            (state === undefined || pose.state === state) &&
             (state !== "ridden" || Number(canvas.dataset.playerParent) === pose.id),
         )
       );
@@ -839,6 +885,16 @@ async function verifyActorStatesInGame(
   pondShore,
 ) {
   if (useStick) await selectTool(page, "Stick");
+  const species = faunaProfile(expected.type)?.species;
+  const clipIndex = (clip) => clips.findIndex(({ name }) => name === clip);
+  const spine =
+    species === "hedgehog" || species === "porcupine"
+      ? { hold: clips.length - 2, relax: clips.length - 1 }
+      : undefined;
+  const lookout =
+    species === "meerkat"
+      ? { scan: clipIndex("scan"), alarm: clipIndex("alarm"), threat: predatorType("tiger") }
+      : undefined;
   const passive = clips.flatMap(({ name }, index) => (approachClips.includes(name) ? [] : [index]));
   const action = approachClips.includes("action")
     ? -1
@@ -854,10 +910,14 @@ async function verifyActorStatesInGame(
       total,
       timeout,
       clearForageType,
+      clearNestSupport,
       useStick,
       pondShore,
       groundFlee,
       waterFlee,
+      spine,
+      lookout,
+      sideApproach,
     }) => {
       const game = document.querySelector("#game").__game;
       game.playInput.setMovementMode("tap");
@@ -866,6 +926,8 @@ async function verifyActorStatesInGame(
       let clearedForage = false;
       let nextJump = 0;
       let aimAcrossWaterUntil = 0;
+      let introducedPredator = false;
+      let retreatTarget;
       let nearest = Infinity;
       const approachStates = new Set();
       const end = performance.now() + timeout;
@@ -897,14 +959,50 @@ async function verifyActorStatesInGame(
               const distance = Math.hypot(dx, dy);
               nearest = Math.min(nearest, distance);
               approachStates.add(actor.wanderAI?.state);
+              if (lookout && !introducedPredator) {
+                const lookoutAnimal = actors.find(({ sprite }) => sprite.clip === lookout.scan);
+                if (lookoutAnimal) {
+                  game.transport.send({
+                    type: "edit-spawn",
+                    entityType: lookout.threat,
+                    wx: lookoutAnimal.position.wx + 107,
+                    wy: lookoutAnimal.position.wy,
+                  });
+                  introducedPredator = true;
+                }
+              }
+              if (lookout && !observed.has(lookout.alarm)) {
+                await new Promise(requestAnimationFrame);
+                continue;
+              }
+              if (spine && observed.has(spine.hold)) {
+                if (!observed.has(spine.relax)) {
+                  if (!retreatTarget && distance > 0) {
+                    retreatTarget = {
+                      wx: actor.position.wx - (dx * 57) / distance,
+                      wy: actor.position.wy - (dy * 57) / distance,
+                      wz: 0,
+                    };
+                    game.tapMovement.setTarget(retreatTarget);
+                  }
+                  await new Promise(requestAnimationFrame);
+                  continue;
+                }
+                if (actor.sprite.clip === spine.relax) {
+                  game.tapMovement.cancel();
+                  await new Promise(requestAnimationFrame);
+                  continue;
+                }
+              }
               if (clearForageType && !clearedForage) {
                 for (const item of game.stateView.entities)
                   if (item.type === clearForageType && item.parentId === undefined)
                     game.transport.send({ type: "edit-delete-entity", entityId: item.id });
                 // The crow can remain above the escape path on its nest support.
-                for (const prop of game.stateView.props)
-                  if (prop.type === "prop-oak-tree")
-                    game.transport.send({ type: "edit-delete-prop", propId: prop.id });
+                if (clearNestSupport)
+                  for (const prop of game.stateView.props)
+                    if (prop.type === "prop-oak-tree")
+                      game.transport.send({ type: "edit-delete-prop", propId: prop.id });
                 clearedForage = true;
               }
               if (actor.wanderAI?.state === "scared") game.tapMovement.cancel();
@@ -933,7 +1031,9 @@ async function verifyActorStatesInGame(
                 game.tapMovement.setTarget(
                   pondShore && inWater && now >= aimAcrossWaterUntil
                     ? pondShore
-                    : { ...actor.position, wz: 0 },
+                    : sideApproach && Math.abs(dx) >= 6 && !observed.has(groundFlee)
+                      ? { wx: actor.position.wx, wy: actor.position.wy + 30, wz: 0 }
+                      : { ...actor.position, wz: 0 },
                 );
                 if (useStick && distance > 0 && distance < 24)
                   game.transport.send({
@@ -964,15 +1064,23 @@ async function verifyActorStatesInGame(
       total: clips.length - rideClips.length,
       timeout: expected.type.includes("-predator-")
         ? 130_000
-        : feeding || pondShore || approachClips.includes("action")
+        : feeding || pondShore || approachClips.includes("action") || spine || lookout
           ? 65_000
           : 38_000,
       useStick,
       pondShore,
       groundFlee,
       waterFlee,
+      spine,
+      lookout,
+      sideApproach: species === "millipede",
+      clearNestSupport: species === "crow",
       clearForageType:
-        faunaProfile(expected.type)?.species === "crow" ? forageType("twig") : undefined,
+        species === "crow"
+          ? forageType("twig")
+          : species === "capuchin-monkey"
+            ? sourceType("fruit-tree")
+            : undefined,
     },
   );
   assert.deepEqual(

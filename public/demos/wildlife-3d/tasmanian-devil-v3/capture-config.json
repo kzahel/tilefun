@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-tasmanian-devil-predator-v1",
+  "fit": [
+    9.79,
+    9.11,
+    12.47
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "reviewContext": "Short-eared, dark hunter with a white chest mark and low attack stride.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

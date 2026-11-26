@@ -1,0 +1,24 @@
+{
+  "runtimeType": "wildlife-capuchin-monkey-provisional-v1",
+  "fit": [
+    11.14,
+    11.17,
+    12.91
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee",
+    "climb",
+    "pickup",
+    "eat",
+    "sit"
+  ],
+  "reviewContext": "Separate climbing and branch feeding, with a lower escape gait.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

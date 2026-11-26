@@ -23,27 +23,30 @@ async function until(s: ScenarioSession, p: () => boolean, seconds = 80) {
     "Timed out",
   ).toSatisfy(() => p());
 }
-it("a real canopy blocks climbing without teleporting and releases the unreachable task through reload", async () => {
+it("climbs around the oak canopy, resumes after reload and harvests one supported fruit", async () => {
   const s = await ScenarioSession.create(woodlandWorkRecipe("capuchin"));
   try {
     const a = required(s.realm.entityManager.entities.find((e) => e.fauna));
     await until(s, () => a.animalWork?.state === "climb" && (a.wz ?? 0) > 1, 20);
     expect(a.wz).toBeLessThan(24);
     const id = a.persistentId;
-    await until(s, () => a.animalWork?.state === "idle" && !a.animalWork?.tree, 20);
-    expect(a.motionIntent?.altitude).toBeUndefined();
-    const source = required(s.realm.entityManager.entities.find((e) => e.workItem?.growth));
-    expect(source.wz).toBe(32);
-    expect(source.workItem?.units).toBe(3);
-    expect(source.workItem?.claimedBy).toBeUndefined();
     await s.reload();
     const loaded = required(s.realm.entityManager.entities.find((e) => e.persistentId === id));
-    for (let tick = 0; tick < 60; tick++) await s.step(idle);
+    const source = required(s.realm.entityManager.entities.find((e) => e.workItem?.growth));
+    await until(s, () => loaded.animalWork?.state === "pickup", 20);
+    expect(loaded.wz).toBeCloseTo(32, 0);
+    expect(source.workItem?.units).toBe(3);
+    await until(s, () => loaded.animalWork?.state === "eat", 5);
+    expect(source.workItem?.units).toBe(2);
+    await until(s, () => loaded.animalWork?.state === "perch", 5);
+    expect(loaded.animalWork?.eaten).toBe(1);
+    await until(s, () => loaded.animalWork?.state === "idle" && !loaded.animalWork?.tree, 20);
     expect(Math.abs(loaded.wz ?? 0)).toBeLessThan(0.05);
+    expect(source.workItem?.claimedBy).toBeUndefined();
   } finally {
     await s.close();
   }
-});
+}, 60000);
 it("removing the actual tree cancels its crop and climbing support", async () => {
   const s = await ScenarioSession.create(woodlandWorkRecipe("capuchin"));
   try {

@@ -152,13 +152,21 @@ def surface():
 
 def pose(rig,rest,clip,t):
     wave=math.tau*t
-    travel=clip in ("crawl","walk","slither","swim")
+    rapid=clip in ("chase","flee")
+    travel=clip in ("crawl","walk","slither","swim") or rapid
     action=math.sin(math.pi*t)**2 if clip in ("action","feed","display") else 0
     rise=(.43 if STYLE=="hood" else .23 if STYLE in ("diamond","moray") else .118)*action
+    if STYLE in ("diamond","flat-legs"):
+        if clip=="feed":
+            rise=-.058*action
+        elif clip=="display":
+            rise*=1.47
     p=POINTS[0]+V((.042*math.sin(wave),.065*action,rise))
+    if clip=="feed" and STYLE in ("diamond","flat-legs"):
+        p.y+=action*(.19+.071*math.sin(3*wave))
     output={}
     for i,(a,b) in enumerate(zip(POINTS,POINTS[1:])):
-        swing=(.31 if travel else .11)*math.sin(wave-i*.69)
+        swing=(.47 if rapid else .31 if travel else .11)*math.sin(wave-i*(.87 if rapid else .69))
         if STYLE in ("rings","cartoon"):
             swing*=.68
         pitch=-rise*(1.75 if i<2 else .74 if i<4 else .02)
@@ -167,7 +175,8 @@ def pose(rig,rest,clip,t):
             pitch += (.31 if travel else .041)*pulse
             delta = euler(pitch,0,.47*swing)@((b-a)*(1+(.21 if travel else .029)*pulse))
         else:
-            delta=euler(pitch,0,swing)@(b-a)
+            pulse=math.sin(wave-i*.85) if rapid and STYLE=="rings" else 0
+            delta=euler(pitch+.19*pulse,0,swing)@((b-a)*(1+.18*pulse))
         end=p+delta
         key=segment(i)
         output[key]=aimed(rest[key],p,end)
@@ -177,7 +186,7 @@ def pose(rig,rest,clip,t):
             for sign in (-1,1):
                 hip,knee,toe=foot_points(i,sign)
                 phase= (t+i*.082 + (0 if sign==1 else .5))%1
-                advance,lift=stride(phase,0,.124,.052) if travel else (0,0)
+                advance,lift=stride(phase,0,.184 if rapid else .124,.072 if rapid else .052) if travel else (0,0)
                 target=body@toe+V((0,advance,lift))
                 mid=body@knee+V((0,.55*advance,.55*lift))
                 base=f"foot.{i}.{sign}"

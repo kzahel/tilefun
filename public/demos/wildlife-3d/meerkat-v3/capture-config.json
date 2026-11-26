@@ -1,0 +1,24 @@
+{
+  "runtimeType": "wildlife-meerkat-provisional-v1",
+  "fit": [
+    11.6,
+    9.81,
+    12.47
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee",
+    "scan",
+    "alarm",
+    "rear",
+    "lower"
+  ],
+  "reviewContext": "An upright lookout, separate alarm and lowering poses, and a ground sprint.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

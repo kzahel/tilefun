@@ -1,0 +1,218 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-fox-provisional-v1",
+      "clips": 8,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 125
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 1000
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 320
+        },
+        {
+          "state": "listen",
+          "action": "listen",
+          "frames": 28,
+          "gameDurationMs": 1050
+        },
+        {
+          "state": "stalk",
+          "action": "stalk",
+          "frames": 28,
+          "gameDurationMs": 600
+        },
+        {
+          "state": "pounce",
+          "action": "pounce",
+          "frames": 28,
+          "gameDurationMs": 720
+        },
+        {
+          "state": "eat",
+          "action": "eat",
+          "frames": 28,
+          "gameDurationMs": 1600
+        }
+      ],
+      "candidateId": "fox-v3",
+      "modelSha256": "44811ff87cb71f34e0a5f43a3d3cf827ec0cd8c63198d96fa1952404cc69c14b"
+    },
+    {
+      "type": "wildlife-hedgehog-provisional-v1",
+      "clips": 7,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 480
+        },
+        {
+          "state": "curl-in",
+          "action": "curl-in",
+          "frames": 28,
+          "gameDurationMs": 700
+        },
+        {
+          "state": "curled",
+          "action": "curled",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "uncurl",
+          "action": "uncurl",
+          "frames": 28,
+          "gameDurationMs": 700
+        }
+      ],
+      "candidateId": "hedgehog-v3",
+      "modelSha256": "8609ae4e7b99420c934154f5be329f14c386a43ef693faa1735c6994a60e6545"
+    },
+    {
+      "type": "wildlife-meerkat-provisional-v1",
+      "clips": 8,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "scan",
+          "action": "scan",
+          "frames": 28,
+          "gameDurationMs": 1500
+        },
+        {
+          "state": "alarm",
+          "action": "alarm",
+          "frames": 28,
+          "gameDurationMs": 720
+        },
+        {
+          "state": "rear",
+          "action": "rear",
+          "frames": 28,
+          "gameDurationMs": 600
+        },
+        {
+          "state": "lower",
+          "action": "lower",
+          "frames": 28,
+          "gameDurationMs": 600
+        }
+      ],
+      "candidateId": "meerkat-v3",
+      "modelSha256": "5c401191bed380981edc412e4d947e021a42093da3ca357484499cdf1a178f60"
+    },
+    {
+      "type": "wildlife-porcupine-provisional-v1",
+      "clips": 7,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "quills",
+          "action": "quills",
+          "frames": 28,
+          "gameDurationMs": 700
+        },
+        {
+          "state": "rattle",
+          "action": "rattle",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "relax",
+          "action": "relax",
+          "frames": 28,
+          "gameDurationMs": 700
+        }
+      ],
+      "candidateId": "porcupine-v3",
+      "modelSha256": "54837c022ea1b71b33640741d6debe55fcaa2fb70dae34e13b9ddd1ff011e6fe"
+    }
+  ],
+  "clipSamples": 840,
+  "testedDepth": false
+}

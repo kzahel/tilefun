@@ -340,8 +340,9 @@ def pose(rig,rest,clip,t):
     walk,swim=clip=="walk" or chase,clip=="swim"
     spider=STYLE in ("spider","giant")
     pinch=math.sin(math.pi*t)**2 if clip in ("display","action","feed") else 0
-    threat=pinch if spider and clip=="display" else 0
-    feed=pinch if spider and clip=="feed" else 0
+    terrestrial=spider or STYLE=="scorpion"
+    threat=pinch if terrestrial and clip=="display" else 0
+    feed=pinch if terrestrial and clip=="feed" else 0
     q=euler(.054*math.sin(wave)+.21*threat-.16*feed-.09*chase,
             .052*math.sin(wave)*walk,.054*math.sin(wave)*swim)
     body=transform(q,BODY,BODY+V((.034*math.sin(wave)*walk,.029*pinch+.082*feed,
@@ -370,7 +371,8 @@ def pose(rig,rest,clip,t):
             a,b,c=claw(side)
             upper,pincer,lower=f"claw.{side}.u",f"claw.{side}.p",f"claw.{side}.d"
             mid=body@b+V((sign*.108*pinch,.061*pinch,.12*pinch))
-            tip=body@c+V((sign*.14*pinch,.11*pinch,.22*pinch+.031*math.sin(wave)))
+            tip=body@c+V((sign*(.14*pinch+.16*threat-.13*feed),.11*pinch+.18*feed,
+                          .22*pinch+.14*threat-.16*feed+.031*math.sin(wave)))
             out[upper]=aimed(rest[upper],body@a,mid)
             out[pincer]=aimed(rest[pincer],mid,tip)
             lrot=q@euler(.11*pinch,0,-sign*.61*pinch)
@@ -379,7 +381,7 @@ def pose(rig,rest,clip,t):
         p=body@TAIL[0]
         for i,(a,b) in enumerate(zip(TAIL,TAIL[1:])):
             beat=math.sin(wave-i*.57)
-            curl=-.37*pinch if STYLE=="scorpion" else .22*beat*int(swim)
+            curl=-.37*threat+.16*feed+.20*chase if STYLE=="scorpion" else .22*beat*int(swim)
             end=p+q@(euler(curl,0,.062*beat)@(b-a))
             name=f"tail{i}"
             out[name]=aimed(rest[name],p,end)

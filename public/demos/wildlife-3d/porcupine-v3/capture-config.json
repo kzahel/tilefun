@@ -1,0 +1,23 @@
+{
+  "runtimeType": "wildlife-porcupine-provisional-v1",
+  "fit": [
+    10.03,
+    7.64,
+    10.1
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee",
+    "quills",
+    "rattle",
+    "relax"
+  ],
+  "reviewContext": "Quills raise and rattle in their own poses, while the escape uses a ground-bound scramble.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

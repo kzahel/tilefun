@@ -1,0 +1,24 @@
+{
+  "runtimeType": "wildlife-fox-provisional-v1",
+  "fit": [
+    12.61,
+    6.18,
+    12.47
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee",
+    "listen",
+    "stalk",
+    "pounce",
+    "eat"
+  ],
+  "reviewContext": "Quick low escape separate from its measured walk, with distinct listening, stalking, pouncing and eating.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

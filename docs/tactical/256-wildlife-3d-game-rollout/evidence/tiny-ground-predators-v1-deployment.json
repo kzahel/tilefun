@@ -1,0 +1,138 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "3704e3b5063d8ba342283e126423f83f5f5893e5c24b87e4e1d82bb7af1a6bd0",
+  "results": [
+    {
+      "type": "wildlife-centipede-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "164656c881a357a9f9a14e8818a4e02f9b681149a2c40e53cc46a6df320f0ec8",
+      "modelSha256": "6b5392683def9390df6704136089cd74769ce43d54d392284556811c33a1ca05",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-centipede&wildlife3dStage=centipede-v3&wildlife3dReview=centipede-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009380798339843862,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-praying-mantis-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "6b4d71791adacfb7a8a6fdc88da03f5cfada9a3efdd9425be157d4621883ce5c",
+      "modelSha256": "ed071e90a2ae85dfcdabcdcae3000046be7b70b8e8aa3a90b71dab5b877fa3f7",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-praying-mantis&wildlife3dStage=praying-mantis-v3&wildlife3dReview=praying-mantis-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009577980041504001,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-scorpion-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "b7372fd574ac8f091fd2aee9c5190cbe98ab3f05bcfbc58a20e5f6f3f95c8561",
+      "modelSha256": "5d4a8d80ae390e3d8914f438a2981c02be6d2d86545197e523a569e2b48cc9f8",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-scorpion&wildlife3dStage=scorpion-v3&wildlife3dReview=scorpion-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.000923423767089857,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-spider-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "f621816251331c0d4074f95a5c283dfb400762d3519e98d3c2e11309e89cc0d6",
+      "modelSha256": "465e942d3f06245e6ebb57278a224a7cf39d5b1fc617122aed4a22b7438fe073",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-spider&wildlife3dStage=spider-v3&wildlife3dReview=spider-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009388923645019638,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    }
+  ]
+}

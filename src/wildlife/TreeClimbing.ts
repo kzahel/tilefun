@@ -55,7 +55,7 @@ export function canopyLeafPoint(tree: ClimbTree) {
   return { wx: tree.wx + 8, wy: tree.wy - 4 };
 }
 
-export function catClimbGrip(tree: ClimbTree, halfWidth: number) {
+export function canopyClimbGrip(tree: ClimbTree, halfWidth: number) {
   return {
     wx: Math.max(tree.gripX, (tree.crownEdgeX ?? tree.gripX) + halfWidth + 2),
     wy: tree.gripY,
@@ -63,9 +63,9 @@ export function catClimbGrip(tree: ClimbTree, halfWidth: number) {
 }
 
 /** Climb outside the solid canopy, step over its lip, then settle onto it. */
-function catClimbPoint(tree: ClimbTree, fraction: number, down: boolean, halfWidth: number) {
+function canopyClimbPoint(tree: ClimbTree, fraction: number, down: boolean, halfWidth: number) {
   const t = down ? 1 - fraction : fraction;
-  const grip = catClimbGrip(tree, halfWidth);
+  const grip = canopyClimbGrip(tree, halfWidth);
   const step = Math.max(0, Math.min(1, (t - 0.72) / 0.22));
   const lift = Math.min(1, t / 0.72);
   const settle = Math.max(0, (t - 0.94) / 0.06);
@@ -75,22 +75,10 @@ function catClimbPoint(tree: ClimbTree, fraction: number, down: boolean, halfWid
     z: tree.ground + (tree.z + 2 - tree.ground) * lift - 2 * settle,
   };
 }
-/** Continuous vertical grip followed by a short step onto the crown, reversed to descend. */
-function treeClimbPoint(tree: ClimbTree, fraction: number, down: boolean) {
-  const t = Math.max(0, Math.min(1, down ? 1 - fraction : fraction));
-  const step = Math.max(0, (t - 0.8) / 0.2);
-  return {
-    wx: tree.gripX + (tree.wx - tree.gripX) * step,
-    wy: tree.gripY + (tree.wy - tree.gripY) * step,
-    z: tree.ground + (tree.z - tree.ground) * Math.min(1, t / 0.8),
-  };
-}
-
 export function advanceTreeClimb(
   animal: Entity,
   task: AnimalWork,
   tree: ClimbTree,
-  aroundCanopy: boolean,
   dt: number,
   environment: WildlifeEnvironment,
 ): "blocked" | "stalled" | "moving" | "arrived" {
@@ -98,7 +86,7 @@ export function advanceTreeClimb(
   const duration = Math.max(1.5, (tree.z - tree.ground) / 8);
   const fraction = Math.min(1, task.elapsed / duration);
   const halfWidth = (animal.collider?.width ?? 14) / 2;
-  const grip = aroundCanopy ? catClimbGrip(tree, halfWidth) : { wx: tree.gripX, wy: tree.gripY };
+  const grip = canopyClimbGrip(tree, halfWidth);
   const from = task.climbFrom;
   const point =
     down && from && from.z < tree.z - 0.1
@@ -107,9 +95,7 @@ export function advanceTreeClimb(
           wy: from.wy + (grip.wy - from.wy) * fraction,
           z: from.z + (tree.ground - from.z) * fraction,
         }
-      : aroundCanopy
-        ? catClimbPoint(tree, fraction, down, halfWidth)
-        : treeClimbPoint(tree, fraction, down);
+      : canopyClimbPoint(tree, fraction, down, halfWidth);
   if (
     !environment.canOccupy({ collider: animal.collider, wz: point.z }, point) ||
     environment.isWater(point)
@@ -126,7 +112,5 @@ export function advanceTreeClimb(
   const tick = Math.max(dt, 0.001);
   animal.motionIntent.vx = (point.wx - animal.position.wx) / tick;
   animal.motionIntent.vy = (point.wy - animal.position.wy) / tick;
-  return fraction === 1 && distance < 1 && (!aroundCanopy || heightError < 2)
-    ? "arrived"
-    : "moving";
+  return fraction === 1 && distance < 1 && heightError < 2 ? "arrived" : "moving";
 }

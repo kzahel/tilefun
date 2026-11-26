@@ -1,0 +1,158 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-centipede-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 320
+        }
+      ],
+      "candidateId": "centipede-v3",
+      "modelSha256": "6b5392683def9390df6704136089cd74769ce43d54d392284556811c33a1ca05"
+    },
+    {
+      "type": "wildlife-praying-mantis-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 320
+        }
+      ],
+      "candidateId": "praying-mantis-v3",
+      "modelSha256": "ed071e90a2ae85dfcdabcdcae3000046be7b70b8e8aa3a90b71dab5b877fa3f7"
+    },
+    {
+      "type": "wildlife-scorpion-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 320
+        }
+      ],
+      "candidateId": "scorpion-v3",
+      "modelSha256": "5d4a8d80ae390e3d8914f438a2981c02be6d2d86545197e523a569e2b48cc9f8"
+    },
+    {
+      "type": "wildlife-spider-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 320
+        }
+      ],
+      "candidateId": "spider-v3",
+      "modelSha256": "465e942d3f06245e6ebb57278a224a7cf39d5b1fc617122aed4a22b7438fe073"
+    }
+  ],
+  "clipSamples": 560,
+  "testedDepth": false
+}

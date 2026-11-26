@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-spider-predator-v1",
+  "fit": [
+    11.6,
+    7.82,
+    11.89
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "reviewContext": "Eight-legged pursuit, forward feeding and lifted forelegs during display.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

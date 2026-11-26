@@ -1,0 +1,22 @@
+{
+  "runtimeType": "wildlife-raccoon-provisional-v1",
+  "fit": [
+    12.61,
+    9,
+    11.47
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee",
+    "pickup",
+    "eat"
+  ],
+  "reviewContext": "A low scurry and separate pickup and eating poses.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

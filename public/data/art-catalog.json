@@ -10226,6 +10226,256 @@
       "source": "demos/wildlife-3d/giant-spider-den-predators-v1/model.blend"
     },
     {
+      "id": "wildlife-3d-alligator-v3",
+      "name": "wildlife 3d alligator v3",
+      "image": "demos/wildlife-3d/alligator-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "1bdf30cc2ac36cd11e24d5771191217f0294345c1360b6735fa7727b2876813c",
+      "source": "demos/wildlife-3d/alligator-v3/model.blend"
+    },
+    {
+      "id": "wildlife-3d-crocodile-v3",
+      "name": "wildlife 3d crocodile v3",
+      "image": "demos/wildlife-3d/crocodile-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "ad947f6d1747f5e2a2edbc73f689f18a348e1afcfbb18bad321f584824417ea3",
+      "source": "demos/wildlife-3d/crocodile-v3/model.blend"
+    },
+    {
+      "id": "wildlife-3d-komodo-dragon-v3",
+      "name": "wildlife 3d komodo dragon v3",
+      "image": "demos/wildlife-3d/komodo-dragon-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "5a159d2aea9da507c8506d16b16ef53dafca05b497fae426c158cce4d6eec603",
+      "source": "demos/wildlife-3d/komodo-dragon-v3/model.blend"
+    },
+    {
+      "id": "wildlife-3d-gaboon-viper-v3",
+      "name": "wildlife 3d gaboon viper v3",
+      "image": "demos/wildlife-3d/gaboon-viper-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "26e0af3e8b255a61dc4ca38c2a3a52ce71f262127ebb50993671cb8918fbc928",
+      "source": "demos/wildlife-3d/gaboon-viper-v3/model.blend"
+    },
+    {
+      "id": "wildlife-3d-king-cobra-v3",
+      "name": "wildlife 3d king cobra v3",
+      "image": "demos/wildlife-3d/king-cobra-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "6b310f8e2b8e4761f3aa714a726afccde1942612495f8596d28f8ce0b91851f1",
+      "source": "demos/wildlife-3d/king-cobra-v3/model.blend"
+    },
+    {
+      "id": "wildlife-3d-snail-v3",
+      "name": "wildlife 3d snail v3",
+      "image": "demos/wildlife-3d/snail-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "d39e0b3bd9419c3147a3345ba5035e390dfd42d0fa586df2a77d1293069a1e60",
+      "source": "demos/wildlife-3d/snail-v3/model.blend"
+    },
+    {
+      "id": "wildlife-3d-millipede-v3",
+      "name": "wildlife 3d millipede v3",
+      "image": "demos/wildlife-3d/millipede-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "b4e5ef1b44402cfc87284f26750e8947a33d5c781bf4ec8b7cb77876be089716",
+      "source": "demos/wildlife-3d/millipede-v3/model.blend"
+    },
+    {
+      "id": "wildlife-3d-worm-v3",
+      "name": "wildlife 3d worm v3",
+      "image": "demos/wildlife-3d/worm-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "13335db86351b0c9153d9f11a98a625c7c93c29285160bb06a1a5c0d5451f4a6",
+      "source": "demos/wildlife-3d/worm-v3/model.blend"
+    },
+    {
+      "id": "wildlife-3d-dire-wolf-v3",
+      "name": "wildlife 3d dire wolf v3",
+      "image": "demos/wildlife-3d/dire-wolf-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "fdbc5cd6a4f2bf73c3f10b7cd2da042ec35575e04291e7a30d09a67ad9562683",
+      "source": "demos/wildlife-3d/dire-wolf-v3/model.blend"
+    },
+    {
+      "id": "wildlife-3d-spotted-hyena-v3",
+      "name": "wildlife 3d spotted hyena v3",
+      "image": "demos/wildlife-3d/spotted-hyena-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "18c8e20335ccd4a9d7c1f0f1633631df84c0fddc585fb99f0ec2a4ad2c5f38e6",
+      "source": "demos/wildlife-3d/spotted-hyena-v3/model.blend"
+    },
+    {
+      "id": "wildlife-3d-tasmanian-devil-v3",
+      "name": "wildlife 3d tasmanian devil v3",
+      "image": "demos/wildlife-3d/tasmanian-devil-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "8e0bfc7a44f4f4cb7b4bece51cc9f99414b587055d36d966005f3d4276a4f42b",
+      "source": "demos/wildlife-3d/tasmanian-devil-v3/model.blend"
+    },
+    {
+      "id": "wildlife-3d-aye-aye-v3",
+      "name": "wildlife 3d aye aye v3",
+      "image": "demos/wildlife-3d/aye-aye-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "0d8ce41e444f36beda1bc381f28d2bbae4e6b1d8467f6d42c95e8afaea98ec27",
+      "source": "demos/wildlife-3d/aye-aye-v3/model.blend"
+    },
+    {
+      "id": "wildlife-3d-sloth-v3",
+      "name": "wildlife 3d sloth v3",
+      "image": "demos/wildlife-3d/sloth-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "6c5c1b0480a6143a4fc72b90407bb14d6f2bd1488ee75a7a0ac922d88cc2b816",
+      "source": "demos/wildlife-3d/sloth-v3/model.blend"
+    },
+    {
+      "id": "wildlife-3d-centipede-v3",
+      "name": "wildlife 3d centipede v3",
+      "image": "demos/wildlife-3d/centipede-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "d0f225b8a3e132d50fa7010e30625749e733a82a3c78010705d26b37f585be11",
+      "source": "demos/wildlife-3d/centipede-v3/model.blend"
+    },
+    {
+      "id": "wildlife-3d-praying-mantis-v3",
+      "name": "wildlife 3d praying mantis v3",
+      "image": "demos/wildlife-3d/praying-mantis-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "3ca930d219b35839050e5b2a0581b429ebffa4de0c02304d330a1b829df3aea0",
+      "source": "demos/wildlife-3d/praying-mantis-v3/model.blend"
+    },
+    {
+      "id": "wildlife-3d-scorpion-v3",
+      "name": "wildlife 3d scorpion v3",
+      "image": "demos/wildlife-3d/scorpion-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "df256c9fc32b3a79a3f4e628afab179927d91cca09d397545114c708137001e8",
+      "source": "demos/wildlife-3d/scorpion-v3/model.blend"
+    },
+    {
+      "id": "wildlife-3d-spider-v3",
+      "name": "wildlife 3d spider v3",
+      "image": "demos/wildlife-3d/spider-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "9d3b33f0776b7e1b74d569c26fb5698d61e78856077254435e7c1167ef8ad7c4",
+      "source": "demos/wildlife-3d/spider-v3/model.blend"
+    },
+    {
+      "id": "wildlife-3d-fox-v3",
+      "name": "wildlife 3d fox v3",
+      "image": "demos/wildlife-3d/fox-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "9152393da0710aa9dc0cc68def5644c245a3905e59aaa4fcfa62a7f64824e117",
+      "source": "demos/wildlife-3d/fox-v3/model.blend"
+    },
+    {
+      "id": "wildlife-3d-hedgehog-v3",
+      "name": "wildlife 3d hedgehog v3",
+      "image": "demos/wildlife-3d/hedgehog-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "af6dfdccc96f1c0d0dc8eb9638551ad5a9ca7471f23d0c25813ae0b0ba188497",
+      "source": "demos/wildlife-3d/hedgehog-v3/model.blend"
+    },
+    {
+      "id": "wildlife-3d-meerkat-v3",
+      "name": "wildlife 3d meerkat v3",
+      "image": "demos/wildlife-3d/meerkat-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "637e41afa2a9a779681dac2b542624223c9ac0dc22b842c6f9445394e24b9a0f",
+      "source": "demos/wildlife-3d/meerkat-v3/model.blend"
+    },
+    {
+      "id": "wildlife-3d-porcupine-v3",
+      "name": "wildlife 3d porcupine v3",
+      "image": "demos/wildlife-3d/porcupine-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "9b8ca2fd1f78a58dae7093fae1bca382a10799e456df08db6d409b6cb5eea062",
+      "source": "demos/wildlife-3d/porcupine-v3/model.blend"
+    },
+    {
+      "id": "wildlife-3d-raccoon-v3",
+      "name": "wildlife 3d raccoon v3",
+      "image": "demos/wildlife-3d/raccoon-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "8e359f3ea4613b281d54420d4b9ef0909e084b27f5407c0b59cac1c7e0fc6c6a",
+      "source": "demos/wildlife-3d/raccoon-v3/model.blend"
+    },
+    {
+      "id": "wildlife-3d-red-squirrel-v3",
+      "name": "wildlife 3d red squirrel v3",
+      "image": "demos/wildlife-3d/red-squirrel-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "a7c5505a68fbed0135a8f12a09c18099403d9ddf642e3c71ce973c6fc904a424",
+      "source": "demos/wildlife-3d/red-squirrel-v3/model.blend"
+    },
+    {
+      "id": "wildlife-3d-beaver-v3",
+      "name": "wildlife 3d beaver v3",
+      "image": "demos/wildlife-3d/beaver-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "46fcbbd7fb292ee8cfb972d249bfe9d5fcd26ea4408c2164c912aacdf524fd33",
+      "source": "demos/wildlife-3d/beaver-v3/model.blend"
+    },
+    {
+      "id": "wildlife-3d-capuchin-monkey-v3",
+      "name": "wildlife 3d capuchin monkey v3",
+      "image": "demos/wildlife-3d/capuchin-monkey-v3/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "283fe039a6301be803a4c12d2c23da7dc4b2636a71b3ca72c4a87cf91f46dada",
+      "source": "demos/wildlife-3d/capuchin-monkey-v3/model.blend"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",
@@ -12685,7 +12935,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:65"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:66"
         },
         {
           "system": "Gameplay",
@@ -12827,7 +13077,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:63"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:64"
         },
         {
           "system": "Gameplay",
@@ -37963,7 +38213,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:71"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:72"
         },
         {
           "system": "Editor",
@@ -40005,7 +40255,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:65"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:66"
         },
         {
           "system": "Gameplay",
@@ -40151,7 +40401,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:63"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:64"
         },
         {
           "system": "Gameplay",

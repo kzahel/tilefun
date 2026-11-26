@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-praying-mantis-predator-v1",
+  "fit": [
+    10.15,
+    8.7,
+    10.15
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "reviewContext": "Raised grasping forelimbs, a forward feed reach and a distinct pursuit gait.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

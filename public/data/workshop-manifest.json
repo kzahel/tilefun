@@ -1060,6 +1060,48 @@
       "toolId": "animal-browser"
     },
     {
+      "id": "wildlife-3d-reptile-hunters-v1",
+      "name": "3D wildlife · reptile hunters v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
+      "id": "wildlife-3d-crawling-ground-fauna-v1",
+      "name": "3D wildlife · crawling ground fauna v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
+      "id": "wildlife-3d-last-ground-mammals-v1",
+      "name": "3D wildlife · last ground mammals v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
+      "id": "wildlife-3d-slow-canopy-mammals-v1",
+      "name": "3D wildlife · slow canopy mammals v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
+      "id": "wildlife-3d-tiny-ground-predators-v1",
+      "name": "3D wildlife · tiny ground predators v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
+      "id": "wildlife-3d-alerts-v1",
+      "name": "3D wildlife · alerts v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
+      "id": "wildlife-3d-work-mammals-v1",
+      "name": "3D wildlife · work mammals v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
       "id": "motion",
       "name": "Furniture movement sets",
       "description": "Default layouts and physics. Custom layouts remain individually reviewable in the tool.",
@@ -64903,7 +64945,1057 @@
           "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-giant-spider-den-predators-v1"
         }
       }
+    },
+    {
+      "id": "pattern:wildlife-3d-alligator-v3",
+      "batchId": "wildlife-3d-reptile-hunters-v1",
+      "kind": "wildlife",
+      "name": "American alligator",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-alligator-v3",
+      "fingerprint": "0a4fd96c9f9793c52409a71faf25ed10831b3042ad6fa37568560d0280527d95",
+      "sourceFingerprint": "1bdf30cc2ac36cd11e24d5771191217f0294345c1360b6735fa7727b2876813c",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-alligator-v3",
+        "prefabIds": [],
+        "revision": "7d05135a7e700f79f1deb0aa35e4fa7bbc1711c69c6e7250f73bbd43ceef32df",
+        "renderFingerprint": "0a4fd96c9f9793c52409a71faf25ed10831b3042ad6fa37568560d0280527d95",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-alligator-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-alligator-v3",
+        "fingerprint": "1bdf30cc2ac36cd11e24d5771191217f0294345c1360b6735fa7727b2876813c",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-alligator-v3",
+          "prefabIds": [],
+          "revision": "7d05135a7e700f79f1deb0aa35e4fa7bbc1711c69c6e7250f73bbd43ceef32df",
+          "renderFingerprint": "0a4fd96c9f9793c52409a71faf25ed10831b3042ad6fa37568560d0280527d95",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-alligator-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-crocodile-v3",
+      "batchId": "wildlife-3d-reptile-hunters-v1",
+      "kind": "wildlife",
+      "name": "Nile crocodile",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-crocodile-v3",
+      "fingerprint": "fcfaafbaf240aaffbadb72887b22d62845619200a85b10f1d6301d0edf3ba995",
+      "sourceFingerprint": "ad947f6d1747f5e2a2edbc73f689f18a348e1afcfbb18bad321f584824417ea3",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-crocodile-v3",
+        "prefabIds": [],
+        "revision": "8389dd6bb5ae62d9dbfaec689ad4e3a5a8d72c729d0fddb9f245866b3ec89643",
+        "renderFingerprint": "fcfaafbaf240aaffbadb72887b22d62845619200a85b10f1d6301d0edf3ba995",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-crocodile-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-crocodile-v3",
+        "fingerprint": "ad947f6d1747f5e2a2edbc73f689f18a348e1afcfbb18bad321f584824417ea3",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-crocodile-v3",
+          "prefabIds": [],
+          "revision": "8389dd6bb5ae62d9dbfaec689ad4e3a5a8d72c729d0fddb9f245866b3ec89643",
+          "renderFingerprint": "fcfaafbaf240aaffbadb72887b22d62845619200a85b10f1d6301d0edf3ba995",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-crocodile-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-komodo-dragon-v3",
+      "batchId": "wildlife-3d-reptile-hunters-v1",
+      "kind": "wildlife",
+      "name": "Komodo dragon",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-komodo-dragon-v3",
+      "fingerprint": "753f9bb6cb3a34bed7c44cf82ad56a6bac1f8e43a2528b1c37c2d8a8db3daa61",
+      "sourceFingerprint": "5a159d2aea9da507c8506d16b16ef53dafca05b497fae426c158cce4d6eec603",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-komodo-dragon-v3",
+        "prefabIds": [],
+        "revision": "2ea556dd359cb81f66173e1db84b8c6b18df0ff21c24be2a7cc1947444e0e009",
+        "renderFingerprint": "753f9bb6cb3a34bed7c44cf82ad56a6bac1f8e43a2528b1c37c2d8a8db3daa61",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-komodo-dragon-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-komodo-dragon-v3",
+        "fingerprint": "5a159d2aea9da507c8506d16b16ef53dafca05b497fae426c158cce4d6eec603",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-komodo-dragon-v3",
+          "prefabIds": [],
+          "revision": "2ea556dd359cb81f66173e1db84b8c6b18df0ff21c24be2a7cc1947444e0e009",
+          "renderFingerprint": "753f9bb6cb3a34bed7c44cf82ad56a6bac1f8e43a2528b1c37c2d8a8db3daa61",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-komodo-dragon-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-gaboon-viper-v3",
+      "batchId": "wildlife-3d-reptile-hunters-v1",
+      "kind": "wildlife",
+      "name": "Gaboon viper",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-gaboon-viper-v3",
+      "fingerprint": "481d3c9ec2904a066e455072c4cf78f0204236ae2441123e4290d84466a9efaa",
+      "sourceFingerprint": "26e0af3e8b255a61dc4ca38c2a3a52ce71f262127ebb50993671cb8918fbc928",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-gaboon-viper-v3",
+        "prefabIds": [],
+        "revision": "f78bf5d1a8b1a4982eb80891c968171b502025166c9eb2fa252feb2e8cec9bdb",
+        "renderFingerprint": "481d3c9ec2904a066e455072c4cf78f0204236ae2441123e4290d84466a9efaa",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-gaboon-viper-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-gaboon-viper-v3",
+        "fingerprint": "26e0af3e8b255a61dc4ca38c2a3a52ce71f262127ebb50993671cb8918fbc928",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-gaboon-viper-v3",
+          "prefabIds": [],
+          "revision": "f78bf5d1a8b1a4982eb80891c968171b502025166c9eb2fa252feb2e8cec9bdb",
+          "renderFingerprint": "481d3c9ec2904a066e455072c4cf78f0204236ae2441123e4290d84466a9efaa",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-gaboon-viper-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-king-cobra-v3",
+      "batchId": "wildlife-3d-crawling-ground-fauna-v1",
+      "kind": "wildlife",
+      "name": "King cobra",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-king-cobra-v3",
+      "fingerprint": "75afb0e8ab6e9445c6c11f09f1f4acd300d89034183e3632c7af8498fc291e5a",
+      "sourceFingerprint": "6b310f8e2b8e4761f3aa714a726afccde1942612495f8596d28f8ce0b91851f1",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-king-cobra-v3",
+        "prefabIds": [],
+        "revision": "6c035a26df7ed80e13ce6ed7052e89f9f24f128b2c87a204cf9d7a3d85ee8e40",
+        "renderFingerprint": "75afb0e8ab6e9445c6c11f09f1f4acd300d89034183e3632c7af8498fc291e5a",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-king-cobra-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-king-cobra-v3",
+        "fingerprint": "6b310f8e2b8e4761f3aa714a726afccde1942612495f8596d28f8ce0b91851f1",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-king-cobra-v3",
+          "prefabIds": [],
+          "revision": "6c035a26df7ed80e13ce6ed7052e89f9f24f128b2c87a204cf9d7a3d85ee8e40",
+          "renderFingerprint": "75afb0e8ab6e9445c6c11f09f1f4acd300d89034183e3632c7af8498fc291e5a",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-king-cobra-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-snail-v3",
+      "batchId": "wildlife-3d-crawling-ground-fauna-v1",
+      "kind": "wildlife",
+      "name": "Garden snail",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-snail-v3",
+      "fingerprint": "d9e3870da764f03e570893c556f2277015645f8b61416835bdf909530caebb9c",
+      "sourceFingerprint": "d39e0b3bd9419c3147a3345ba5035e390dfd42d0fa586df2a77d1293069a1e60",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-snail-v3",
+        "prefabIds": [],
+        "revision": "83793aa48858c42d18664e5768b5eedf90aecf7fa463b6591e935200d19c9ef0",
+        "renderFingerprint": "d9e3870da764f03e570893c556f2277015645f8b61416835bdf909530caebb9c",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-snail-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-snail-v3",
+        "fingerprint": "d39e0b3bd9419c3147a3345ba5035e390dfd42d0fa586df2a77d1293069a1e60",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-snail-v3",
+          "prefabIds": [],
+          "revision": "83793aa48858c42d18664e5768b5eedf90aecf7fa463b6591e935200d19c9ef0",
+          "renderFingerprint": "d9e3870da764f03e570893c556f2277015645f8b61416835bdf909530caebb9c",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-snail-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-millipede-v3",
+      "batchId": "wildlife-3d-crawling-ground-fauna-v1",
+      "kind": "wildlife",
+      "name": "Millipede",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-millipede-v3",
+      "fingerprint": "ad813e89f57dcddf649dda9ce01d768ddf7ae3fe45290180ced198329d4131ac",
+      "sourceFingerprint": "b4e5ef1b44402cfc87284f26750e8947a33d5c781bf4ec8b7cb77876be089716",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-millipede-v3",
+        "prefabIds": [],
+        "revision": "e289fe215e280ba2dc94c6ebbf2bd34d56c16449a01cc441a3d7a5ff1bd7856b",
+        "renderFingerprint": "ad813e89f57dcddf649dda9ce01d768ddf7ae3fe45290180ced198329d4131ac",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-millipede-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-millipede-v3",
+        "fingerprint": "b4e5ef1b44402cfc87284f26750e8947a33d5c781bf4ec8b7cb77876be089716",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-millipede-v3",
+          "prefabIds": [],
+          "revision": "e289fe215e280ba2dc94c6ebbf2bd34d56c16449a01cc441a3d7a5ff1bd7856b",
+          "renderFingerprint": "ad813e89f57dcddf649dda9ce01d768ddf7ae3fe45290180ced198329d4131ac",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-millipede-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-worm-v3",
+      "batchId": "wildlife-3d-crawling-ground-fauna-v1",
+      "kind": "wildlife",
+      "name": "Earthworm",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-worm-v3",
+      "fingerprint": "9a74b82f450caebce4e03d69748ef59b950df54fb46fc49e8cee8f012af3bec2",
+      "sourceFingerprint": "13335db86351b0c9153d9f11a98a625c7c93c29285160bb06a1a5c0d5451f4a6",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-worm-v3",
+        "prefabIds": [],
+        "revision": "a65389d547d4d2fff2a8bb72876dda704bcb43fafd84a434e151c32ba070962a",
+        "renderFingerprint": "9a74b82f450caebce4e03d69748ef59b950df54fb46fc49e8cee8f012af3bec2",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-worm-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-worm-v3",
+        "fingerprint": "13335db86351b0c9153d9f11a98a625c7c93c29285160bb06a1a5c0d5451f4a6",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-worm-v3",
+          "prefabIds": [],
+          "revision": "a65389d547d4d2fff2a8bb72876dda704bcb43fafd84a434e151c32ba070962a",
+          "renderFingerprint": "9a74b82f450caebce4e03d69748ef59b950df54fb46fc49e8cee8f012af3bec2",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-worm-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-dire-wolf-v3",
+      "batchId": "wildlife-3d-last-ground-mammals-v1",
+      "kind": "wildlife",
+      "name": "Dire wolf",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-dire-wolf-v3",
+      "fingerprint": "8643563f16b0390f79e8284a2dbaa6dd1f43f28ca9888f6fcfef6c343db6a178",
+      "sourceFingerprint": "fdbc5cd6a4f2bf73c3f10b7cd2da042ec35575e04291e7a30d09a67ad9562683",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-dire-wolf-v3",
+        "prefabIds": [],
+        "revision": "a87f3779aae14300347128dffb723691f682b0910a97dafb13e26aa4b868d556",
+        "renderFingerprint": "8643563f16b0390f79e8284a2dbaa6dd1f43f28ca9888f6fcfef6c343db6a178",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-dire-wolf-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-dire-wolf-v3",
+        "fingerprint": "fdbc5cd6a4f2bf73c3f10b7cd2da042ec35575e04291e7a30d09a67ad9562683",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-dire-wolf-v3",
+          "prefabIds": [],
+          "revision": "a87f3779aae14300347128dffb723691f682b0910a97dafb13e26aa4b868d556",
+          "renderFingerprint": "8643563f16b0390f79e8284a2dbaa6dd1f43f28ca9888f6fcfef6c343db6a178",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-dire-wolf-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-spotted-hyena-v3",
+      "batchId": "wildlife-3d-last-ground-mammals-v1",
+      "kind": "wildlife",
+      "name": "Spotted hyena",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-spotted-hyena-v3",
+      "fingerprint": "dc81b5c25bd61acafe398c8719dc4f0950fa883c28ff7dffdd4acc5bc15afd54",
+      "sourceFingerprint": "18c8e20335ccd4a9d7c1f0f1633631df84c0fddc585fb99f0ec2a4ad2c5f38e6",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-spotted-hyena-v3",
+        "prefabIds": [],
+        "revision": "a594d7c152418b0baeeb170ba54dc9d0f34e3b97602ce3d9a1a7ac1a26eb7ec1",
+        "renderFingerprint": "dc81b5c25bd61acafe398c8719dc4f0950fa883c28ff7dffdd4acc5bc15afd54",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-spotted-hyena-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-spotted-hyena-v3",
+        "fingerprint": "18c8e20335ccd4a9d7c1f0f1633631df84c0fddc585fb99f0ec2a4ad2c5f38e6",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-spotted-hyena-v3",
+          "prefabIds": [],
+          "revision": "a594d7c152418b0baeeb170ba54dc9d0f34e3b97602ce3d9a1a7ac1a26eb7ec1",
+          "renderFingerprint": "dc81b5c25bd61acafe398c8719dc4f0950fa883c28ff7dffdd4acc5bc15afd54",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-spotted-hyena-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-tasmanian-devil-v3",
+      "batchId": "wildlife-3d-last-ground-mammals-v1",
+      "kind": "wildlife",
+      "name": "Tasmanian devil",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-tasmanian-devil-v3",
+      "fingerprint": "d64c2806bdf791449977c7a792c575b77561de73444a318a2ecdb3ca03212aa3",
+      "sourceFingerprint": "8e0bfc7a44f4f4cb7b4bece51cc9f99414b587055d36d966005f3d4276a4f42b",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-tasmanian-devil-v3",
+        "prefabIds": [],
+        "revision": "acb6ea20f2fb0503caeaacce64e6a9f2a0938fd4c4ff55cc550ae12606a5b5f6",
+        "renderFingerprint": "d64c2806bdf791449977c7a792c575b77561de73444a318a2ecdb3ca03212aa3",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-tasmanian-devil-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-tasmanian-devil-v3",
+        "fingerprint": "8e0bfc7a44f4f4cb7b4bece51cc9f99414b587055d36d966005f3d4276a4f42b",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-tasmanian-devil-v3",
+          "prefabIds": [],
+          "revision": "acb6ea20f2fb0503caeaacce64e6a9f2a0938fd4c4ff55cc550ae12606a5b5f6",
+          "renderFingerprint": "d64c2806bdf791449977c7a792c575b77561de73444a318a2ecdb3ca03212aa3",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-tasmanian-devil-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-aye-aye-v3",
+      "batchId": "wildlife-3d-slow-canopy-mammals-v1",
+      "kind": "wildlife",
+      "name": "Aye-aye",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-aye-aye-v3",
+      "fingerprint": "c1cc835e7ed6dec5af62c9caa6de5e96338b178a6f5615e426c1ceecd11eb243",
+      "sourceFingerprint": "0d8ce41e444f36beda1bc381f28d2bbae4e6b1d8467f6d42c95e8afaea98ec27",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-aye-aye-v3",
+        "prefabIds": [],
+        "revision": "8c610fd65b50a99da36652b94e0454bdfae6fe3c1b002ccbef39df59665cb1f1",
+        "renderFingerprint": "c1cc835e7ed6dec5af62c9caa6de5e96338b178a6f5615e426c1ceecd11eb243",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-aye-aye-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-aye-aye-v3",
+        "fingerprint": "0d8ce41e444f36beda1bc381f28d2bbae4e6b1d8467f6d42c95e8afaea98ec27",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-aye-aye-v3",
+          "prefabIds": [],
+          "revision": "8c610fd65b50a99da36652b94e0454bdfae6fe3c1b002ccbef39df59665cb1f1",
+          "renderFingerprint": "c1cc835e7ed6dec5af62c9caa6de5e96338b178a6f5615e426c1ceecd11eb243",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-aye-aye-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-sloth-v3",
+      "batchId": "wildlife-3d-slow-canopy-mammals-v1",
+      "kind": "wildlife",
+      "name": "Three-toed sloth",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-sloth-v3",
+      "fingerprint": "53cac90dd0353db48177eb0425eeab41ec4045baaf30662aa7236b766f572867",
+      "sourceFingerprint": "6c5c1b0480a6143a4fc72b90407bb14d6f2bd1488ee75a7a0ac922d88cc2b816",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-sloth-v3",
+        "prefabIds": [],
+        "revision": "337416fce8cf5ed20b61e959885f29edf2f0c169f78ab1599d8d2e335fd05f49",
+        "renderFingerprint": "53cac90dd0353db48177eb0425eeab41ec4045baaf30662aa7236b766f572867",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-sloth-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-sloth-v3",
+        "fingerprint": "6c5c1b0480a6143a4fc72b90407bb14d6f2bd1488ee75a7a0ac922d88cc2b816",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-sloth-v3",
+          "prefabIds": [],
+          "revision": "337416fce8cf5ed20b61e959885f29edf2f0c169f78ab1599d8d2e335fd05f49",
+          "renderFingerprint": "53cac90dd0353db48177eb0425eeab41ec4045baaf30662aa7236b766f572867",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-sloth-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-centipede-v3",
+      "batchId": "wildlife-3d-tiny-ground-predators-v1",
+      "kind": "wildlife",
+      "name": "Centipede",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-centipede-v3",
+      "fingerprint": "164656c881a357a9f9a14e8818a4e02f9b681149a2c40e53cc46a6df320f0ec8",
+      "sourceFingerprint": "d0f225b8a3e132d50fa7010e30625749e733a82a3c78010705d26b37f585be11",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-centipede-v3",
+        "prefabIds": [],
+        "revision": "3a1fc9b2b756f807377d8668b6c2a8fe6003da502bed2e49b096bb008395ed43",
+        "renderFingerprint": "164656c881a357a9f9a14e8818a4e02f9b681149a2c40e53cc46a6df320f0ec8",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-centipede-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-centipede-v3",
+        "fingerprint": "d0f225b8a3e132d50fa7010e30625749e733a82a3c78010705d26b37f585be11",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-centipede-v3",
+          "prefabIds": [],
+          "revision": "3a1fc9b2b756f807377d8668b6c2a8fe6003da502bed2e49b096bb008395ed43",
+          "renderFingerprint": "164656c881a357a9f9a14e8818a4e02f9b681149a2c40e53cc46a6df320f0ec8",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-centipede-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-praying-mantis-v3",
+      "batchId": "wildlife-3d-tiny-ground-predators-v1",
+      "kind": "wildlife",
+      "name": "Praying mantis",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-praying-mantis-v3",
+      "fingerprint": "6b4d71791adacfb7a8a6fdc88da03f5cfada9a3efdd9425be157d4621883ce5c",
+      "sourceFingerprint": "3ca930d219b35839050e5b2a0581b429ebffa4de0c02304d330a1b829df3aea0",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-praying-mantis-v3",
+        "prefabIds": [],
+        "revision": "2bbb832096393d7b26e1bc219a5a78aa225ad7d30f57669d51f57432e887b20d",
+        "renderFingerprint": "6b4d71791adacfb7a8a6fdc88da03f5cfada9a3efdd9425be157d4621883ce5c",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-praying-mantis-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-praying-mantis-v3",
+        "fingerprint": "3ca930d219b35839050e5b2a0581b429ebffa4de0c02304d330a1b829df3aea0",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-praying-mantis-v3",
+          "prefabIds": [],
+          "revision": "2bbb832096393d7b26e1bc219a5a78aa225ad7d30f57669d51f57432e887b20d",
+          "renderFingerprint": "6b4d71791adacfb7a8a6fdc88da03f5cfada9a3efdd9425be157d4621883ce5c",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-praying-mantis-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-scorpion-v3",
+      "batchId": "wildlife-3d-tiny-ground-predators-v1",
+      "kind": "wildlife",
+      "name": "Scorpion",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-scorpion-v3",
+      "fingerprint": "b7372fd574ac8f091fd2aee9c5190cbe98ab3f05bcfbc58a20e5f6f3f95c8561",
+      "sourceFingerprint": "df256c9fc32b3a79a3f4e628afab179927d91cca09d397545114c708137001e8",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-scorpion-v3",
+        "prefabIds": [],
+        "revision": "ebd56165030e44e7bcfa30f4c85609934a1d4419c655554df1d1a1e925e147ea",
+        "renderFingerprint": "b7372fd574ac8f091fd2aee9c5190cbe98ab3f05bcfbc58a20e5f6f3f95c8561",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-scorpion-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-scorpion-v3",
+        "fingerprint": "df256c9fc32b3a79a3f4e628afab179927d91cca09d397545114c708137001e8",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-scorpion-v3",
+          "prefabIds": [],
+          "revision": "ebd56165030e44e7bcfa30f4c85609934a1d4419c655554df1d1a1e925e147ea",
+          "renderFingerprint": "b7372fd574ac8f091fd2aee9c5190cbe98ab3f05bcfbc58a20e5f6f3f95c8561",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-scorpion-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-spider-v3",
+      "batchId": "wildlife-3d-tiny-ground-predators-v1",
+      "kind": "wildlife",
+      "name": "Wolf spider",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-spider-v3",
+      "fingerprint": "f621816251331c0d4074f95a5c283dfb400762d3519e98d3c2e11309e89cc0d6",
+      "sourceFingerprint": "9d3b33f0776b7e1b74d569c26fb5698d61e78856077254435e7c1167ef8ad7c4",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-spider-v3",
+        "prefabIds": [],
+        "revision": "97ef5aa5a311252d4438c1fe51bac267e61210217c0c59cd94f2c76d44f11815",
+        "renderFingerprint": "f621816251331c0d4074f95a5c283dfb400762d3519e98d3c2e11309e89cc0d6",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-spider-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-spider-v3",
+        "fingerprint": "9d3b33f0776b7e1b74d569c26fb5698d61e78856077254435e7c1167ef8ad7c4",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-spider-v3",
+          "prefabIds": [],
+          "revision": "97ef5aa5a311252d4438c1fe51bac267e61210217c0c59cd94f2c76d44f11815",
+          "renderFingerprint": "f621816251331c0d4074f95a5c283dfb400762d3519e98d3c2e11309e89cc0d6",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-spider-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-fox-v3",
+      "batchId": "wildlife-3d-alerts-v1",
+      "kind": "wildlife",
+      "name": "Red fox",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-fox-v3",
+      "fingerprint": "ffaa888cc709e12d4c4b0ab3f3b6320f6b2d005669eadaf68955f9b64042537b",
+      "sourceFingerprint": "9152393da0710aa9dc0cc68def5644c245a3905e59aaa4fcfa62a7f64824e117",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-fox-v3",
+        "prefabIds": [],
+        "revision": "99110db3410a35172b7ac2eac04c0d6035ed598650d87864af639f030ecca0d8",
+        "renderFingerprint": "ffaa888cc709e12d4c4b0ab3f3b6320f6b2d005669eadaf68955f9b64042537b",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-fox-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-fox-v3",
+        "fingerprint": "9152393da0710aa9dc0cc68def5644c245a3905e59aaa4fcfa62a7f64824e117",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-fox-v3",
+          "prefabIds": [],
+          "revision": "99110db3410a35172b7ac2eac04c0d6035ed598650d87864af639f030ecca0d8",
+          "renderFingerprint": "ffaa888cc709e12d4c4b0ab3f3b6320f6b2d005669eadaf68955f9b64042537b",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-fox-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-hedgehog-v3",
+      "batchId": "wildlife-3d-alerts-v1",
+      "kind": "wildlife",
+      "name": "Hedgehog",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-hedgehog-v3",
+      "fingerprint": "97b617eac6d4e35a7e0b8f959b90988f601f6eb51b9d260df5f1efbb1415ef7b",
+      "sourceFingerprint": "af6dfdccc96f1c0d0dc8eb9638551ad5a9ca7471f23d0c25813ae0b0ba188497",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-hedgehog-v3",
+        "prefabIds": [],
+        "revision": "14fa8713f29e4a5ef8441dd0266b9723a80968214498f0a71fe3871b1e29226b",
+        "renderFingerprint": "97b617eac6d4e35a7e0b8f959b90988f601f6eb51b9d260df5f1efbb1415ef7b",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-hedgehog-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-hedgehog-v3",
+        "fingerprint": "af6dfdccc96f1c0d0dc8eb9638551ad5a9ca7471f23d0c25813ae0b0ba188497",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-hedgehog-v3",
+          "prefabIds": [],
+          "revision": "14fa8713f29e4a5ef8441dd0266b9723a80968214498f0a71fe3871b1e29226b",
+          "renderFingerprint": "97b617eac6d4e35a7e0b8f959b90988f601f6eb51b9d260df5f1efbb1415ef7b",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-hedgehog-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-meerkat-v3",
+      "batchId": "wildlife-3d-alerts-v1",
+      "kind": "wildlife",
+      "name": "Meerkat",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-meerkat-v3",
+      "fingerprint": "c6dd3a74bf1d7d4da3168f9a6b6d4969aa124aef04275c570c41d137a19fb5a6",
+      "sourceFingerprint": "637e41afa2a9a779681dac2b542624223c9ac0dc22b842c6f9445394e24b9a0f",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-meerkat-v3",
+        "prefabIds": [],
+        "revision": "1db5a2bac253038539f1b5f8f84acee34cefb63f4d693707e27d719805c00fd3",
+        "renderFingerprint": "c6dd3a74bf1d7d4da3168f9a6b6d4969aa124aef04275c570c41d137a19fb5a6",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-meerkat-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-meerkat-v3",
+        "fingerprint": "637e41afa2a9a779681dac2b542624223c9ac0dc22b842c6f9445394e24b9a0f",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-meerkat-v3",
+          "prefabIds": [],
+          "revision": "1db5a2bac253038539f1b5f8f84acee34cefb63f4d693707e27d719805c00fd3",
+          "renderFingerprint": "c6dd3a74bf1d7d4da3168f9a6b6d4969aa124aef04275c570c41d137a19fb5a6",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-meerkat-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-porcupine-v3",
+      "batchId": "wildlife-3d-alerts-v1",
+      "kind": "wildlife",
+      "name": "Porcupine",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-porcupine-v3",
+      "fingerprint": "c7aa5d559e3e0c15e1c3410b396c6e2af2fd9e6f368154b2660b596687faf916",
+      "sourceFingerprint": "9b8ca2fd1f78a58dae7093fae1bca382a10799e456df08db6d409b6cb5eea062",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-porcupine-v3",
+        "prefabIds": [],
+        "revision": "314f80b34113f5b7557f57cc9843b1f3b2e0446e9a4c2bd2915052025be17f18",
+        "renderFingerprint": "c7aa5d559e3e0c15e1c3410b396c6e2af2fd9e6f368154b2660b596687faf916",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-porcupine-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-porcupine-v3",
+        "fingerprint": "9b8ca2fd1f78a58dae7093fae1bca382a10799e456df08db6d409b6cb5eea062",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-porcupine-v3",
+          "prefabIds": [],
+          "revision": "314f80b34113f5b7557f57cc9843b1f3b2e0446e9a4c2bd2915052025be17f18",
+          "renderFingerprint": "c7aa5d559e3e0c15e1c3410b396c6e2af2fd9e6f368154b2660b596687faf916",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-porcupine-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-raccoon-v3",
+      "batchId": "wildlife-3d-work-mammals-v1",
+      "kind": "wildlife",
+      "name": "Raccoon",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-raccoon-v3",
+      "fingerprint": "f870da454899a122c044c27f05f76fcd0c465cf19d80ff1b6ad1ce63ea8f1e16",
+      "sourceFingerprint": "8e359f3ea4613b281d54420d4b9ef0909e084b27f5407c0b59cac1c7e0fc6c6a",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-raccoon-v3",
+        "prefabIds": [],
+        "revision": "ff2819a101016dae357c9d89908b8e589eeb8c03e948454f5bab13228f85316b",
+        "renderFingerprint": "f870da454899a122c044c27f05f76fcd0c465cf19d80ff1b6ad1ce63ea8f1e16",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-raccoon-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-raccoon-v3",
+        "fingerprint": "8e359f3ea4613b281d54420d4b9ef0909e084b27f5407c0b59cac1c7e0fc6c6a",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-raccoon-v3",
+          "prefabIds": [],
+          "revision": "ff2819a101016dae357c9d89908b8e589eeb8c03e948454f5bab13228f85316b",
+          "renderFingerprint": "f870da454899a122c044c27f05f76fcd0c465cf19d80ff1b6ad1ce63ea8f1e16",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-raccoon-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-red-squirrel-v3",
+      "batchId": "wildlife-3d-work-mammals-v1",
+      "kind": "wildlife",
+      "name": "Red squirrel",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-red-squirrel-v3",
+      "fingerprint": "e80b94a0b15dd4eb6df23df93f62584386b0bc0541f35bd5a2d22d5dd42c9310",
+      "sourceFingerprint": "a7c5505a68fbed0135a8f12a09c18099403d9ddf642e3c71ce973c6fc904a424",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-red-squirrel-v3",
+        "prefabIds": [],
+        "revision": "da3bc25b7e76729666a210e7c75a1499dfe046861244dc7f5ba61de1d3fd8218",
+        "renderFingerprint": "e80b94a0b15dd4eb6df23df93f62584386b0bc0541f35bd5a2d22d5dd42c9310",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-red-squirrel-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-red-squirrel-v3",
+        "fingerprint": "a7c5505a68fbed0135a8f12a09c18099403d9ddf642e3c71ce973c6fc904a424",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-red-squirrel-v3",
+          "prefabIds": [],
+          "revision": "da3bc25b7e76729666a210e7c75a1499dfe046861244dc7f5ba61de1d3fd8218",
+          "renderFingerprint": "e80b94a0b15dd4eb6df23df93f62584386b0bc0541f35bd5a2d22d5dd42c9310",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-red-squirrel-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-beaver-v3",
+      "batchId": "wildlife-3d-work-mammals-v1",
+      "kind": "wildlife",
+      "name": "Beaver",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-beaver-v3",
+      "fingerprint": "de06617d3320b24a358be0e6d7ede68ad78cedb88b73118b92dda65dfbba7e6a",
+      "sourceFingerprint": "46fcbbd7fb292ee8cfb972d249bfe9d5fcd26ea4408c2164c912aacdf524fd33",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-beaver-v3",
+        "prefabIds": [],
+        "revision": "14582ef53f07c5767dba188fc9ff408d222149f3a2f4899d25fe348929b33855",
+        "renderFingerprint": "de06617d3320b24a358be0e6d7ede68ad78cedb88b73118b92dda65dfbba7e6a",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-beaver-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-beaver-v3",
+        "fingerprint": "46fcbbd7fb292ee8cfb972d249bfe9d5fcd26ea4408c2164c912aacdf524fd33",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-beaver-v3",
+          "prefabIds": [],
+          "revision": "14582ef53f07c5767dba188fc9ff408d222149f3a2f4899d25fe348929b33855",
+          "renderFingerprint": "de06617d3320b24a358be0e6d7ede68ad78cedb88b73118b92dda65dfbba7e6a",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-beaver-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-capuchin-monkey-v3",
+      "batchId": "wildlife-3d-work-mammals-v1",
+      "kind": "wildlife",
+      "name": "Capuchin monkey",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-capuchin-monkey-v3",
+      "fingerprint": "4ae072a42c1e0c0e02c1adb73c565404f59611ddb267294a4ee97f517ae91f8d",
+      "sourceFingerprint": "283fe039a6301be803a4c12d2c23da7dc4b2636a71b3ca72c4a87cf91f46dada",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-capuchin-monkey-v3",
+        "prefabIds": [],
+        "revision": "b4f1ee7c883a326c1353752ec817962e9f621302a409eba18933b590577d8bad",
+        "renderFingerprint": "4ae072a42c1e0c0e02c1adb73c565404f59611ddb267294a4ee97f517ae91f8d",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-capuchin-monkey-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-capuchin-monkey-v3",
+        "fingerprint": "283fe039a6301be803a4c12d2c23da7dc4b2636a71b3ca72c4a87cf91f46dada",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-capuchin-monkey-v3",
+          "prefabIds": [],
+          "revision": "b4f1ee7c883a326c1353752ec817962e9f621302a409eba18933b590577d8bad",
+          "renderFingerprint": "4ae072a42c1e0c0e02c1adb73c565404f59611ddb267294a4ee97f517ae91f8d",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-capuchin-monkey-v3"
+        }
+      }
     }
   ],
-  "inputDigest": "96d2d9b693e7b4daba30fb1399f6d7838214499663268951da62c828abd7b47d"
+  "inputDigest": "2a0059f7141968db6fb3182903d12b4995b6c713eab5e479d69d962e42c6ebe0"
 }

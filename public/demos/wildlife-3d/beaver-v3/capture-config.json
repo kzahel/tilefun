@@ -1,0 +1,23 @@
+{
+  "runtimeType": "wildlife-beaver-provisional-v1",
+  "fit": [
+    11.96,
+    8.44,
+    12.47
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee",
+    "pickup",
+    "build",
+    "settle"
+  ],
+  "reviewContext": "A flattened tail, a checked chewing posture, and clear pickup, building, settling and escape.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

@@ -107,6 +107,30 @@ runtime scope reconciliation in the execution notes.
 
 ## Delivery log
 
+### Complete preview roster, 2026-11-26
+
+The remaining archived models cover the land reptiles, crawling fauna,
+canopy foragers, small invertebrate hunters and mammals with alert or work
+behaviors. All 219 animal identities have exact candidates. The ledger records
+1,023 distinct qualified actions and corresponding gameplay observations.
+The capuchin now follows the same clear
+canopy route as the cats and can collect a supported fruit, eat and sit.
+The raccoon check reopens an ordinary world and waits for a squirrel to
+fill a cache before observing the raid. The alert batch records the meerkat's
+lookout alarm and both spiny animals raising and lowering their defenses before
+fleeing. [Alert mammals](256-wildlife-3d-game-rollout/evidence/alerts-v1-deployment.json) ·
+[Woodland work](256-wildlife-3d-game-rollout/evidence/work-mammals-v1-deployment.json) ·
+[Reptile hunters](256-wildlife-3d-game-rollout/evidence/reptile-hunters-v1-deployment.json) ·
+[Tiny ground predators](256-wildlife-3d-game-rollout/evidence/tiny-ground-predators-v1-deployment.json) ·
+[Crawlers](256-wildlife-3d-game-rollout/evidence/crawling-ground-fauna-v1-deployment.json) ·
+[Ground mammals](256-wildlife-3d-game-rollout/evidence/last-ground-mammals-v1-deployment.json) ·
+[Canopy mammals](256-wildlife-3d-game-rollout/evidence/slow-canopy-mammals-v1-deployment.json)
+
+The 113 selected defaults have production playback evidence for all 515 of
+their states. The other 106 animals need exact Workshop approvals and
+ordinary default-game playback after promotion. The November 26 inbox
+had zero approved 3D candidate fingerprints.
+
 ### Den hunters, 2026-11-26
 
 The griffin, small dragon, T. rex and giant spider each have a separate

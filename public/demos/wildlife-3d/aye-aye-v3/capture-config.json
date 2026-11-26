@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-aye-aye-provisional-v1",
+  "fit": [
+    12.61,
+    8,
+    12.47
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "A thin-tailed nocturnal forager with forepaw probing.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

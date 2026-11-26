@@ -173,16 +173,18 @@ def surface():
 
 def pose(rig,rest,clip,t):
     wave=math.tau*t
-    travel=clip in ("crawl","swim","jet","pulse")
+    escape=clip=="flee"
+    travel=clip in ("crawl","swim","jet","pulse") or escape
     action=math.sin(math.pi*t)**2 if clip in ("action","feed","display") else 0
     pulse=(.107 if clip in ("jet","pulse") else .038)*math.sin(wave)
     q=euler(.054*math.sin(wave),.047*math.cos(wave),.072*math.sin(wave)*travel)
-    body=transform(q,BODY,BODY+V((0,.048*action,pulse)))
+    compression=(.5+.5*math.cos(wave)) if escape else 0
+    body=transform(q,BODY,BODY+V((0,.048*action-.061*compression,pulse-.068*compression)))
     out={"body":body@rest["body"]}
     if "head" in rest:
         a=rest["head"].translation
         forward=.094*action if STYLE in ("snail","octopus","horse","dragon") else 0
-        result=body@a+V((0,forward,pulse*.71))
+        result=body@a+V((0,forward-.11*compression,pulse*.71-.073*compression))
         out["head"]=transform(q@euler(-.19*action),a,result)@rest["head"]
     if "tail" in rest:
         a=rest["tail"].translation
@@ -193,7 +195,7 @@ def pose(rig,rest,clip,t):
         for n,(a,b) in enumerate(zip(points,points[1:])):
             k=math.sin(wave+n*.52+i*.59)
             yaw=(.30 if travel else .14)*k
-            pitch=(.45 if clip=="jet" else .25 if travel else .13)*k+.20*action
+            pitch=(.45 if clip=="jet" else .25 if travel else .13)*k+.20*action-.43*compression
             if STYLE=="ray":
                 yaw*=.24
                 pitch*=.64

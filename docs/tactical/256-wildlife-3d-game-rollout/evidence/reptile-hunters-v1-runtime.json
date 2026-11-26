@@ -1,0 +1,158 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-alligator-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 448
+        }
+      ],
+      "candidateId": "alligator-v3",
+      "modelSha256": "32558edbce25cdd7ae961e77542b76eb2d7b86aa5b8370bff5f45bef8dad805a"
+    },
+    {
+      "type": "wildlife-crocodile-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 448
+        }
+      ],
+      "candidateId": "crocodile-v3",
+      "modelSha256": "3501224c3953e43af70acabef8325755fbd86fe0b7d68347b3a7162c948697d0"
+    },
+    {
+      "type": "wildlife-komodo-dragon-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 480
+        }
+      ],
+      "candidateId": "komodo-dragon-v3",
+      "modelSha256": "c57e2c7b35fa975f3d4dd250713590ea828271e04cc6c071f2d7b37c379db95e"
+    },
+    {
+      "type": "wildlife-gaboon-viper-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "slither",
+          "action": "slither",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 320
+        }
+      ],
+      "candidateId": "gaboon-viper-v3",
+      "modelSha256": "ce2a8e21d72f1805be8857e8975809ba0274ed6d028a89f1079e268d3190dd21"
+    }
+  ],
+  "clipSamples": 560,
+  "testedDepth": false
+}

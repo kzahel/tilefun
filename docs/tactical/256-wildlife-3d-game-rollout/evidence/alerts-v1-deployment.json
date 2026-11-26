@@ -1,0 +1,166 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "3704e3b5063d8ba342283e126423f83f5f5893e5c24b87e4e1d82bb7af1a6bd0",
+  "results": [
+    {
+      "type": "wildlife-fox-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "ffaa888cc709e12d4c4b0ab3f3b6320f6b2d005669eadaf68955f9b64042537b",
+      "modelSha256": "44811ff87cb71f34e0a5f43a3d3cf827ec0cd8c63198d96fa1952404cc69c14b",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-fox&wildlife3dStage=fox-v3&wildlife3dReview=fox-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "listen",
+        "stalk",
+        "pounce",
+        "eat"
+      ],
+      "heightRange": [
+        -0.0009241104125976562,
+        6.909772104263307
+      ],
+      "statesOnApproachOrMount": [
+        "action",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "listen",
+          "stalk",
+          "pounce",
+          "eat"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-hedgehog-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "97b617eac6d4e35a7e0b8f959b90988f601f6eb51b9d260df5f1efbb1415ef7b",
+      "modelSha256": "8609ae4e7b99420c934154f5be329f14c386a43ef693faa1735c6994a60e6545",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-hedgehog&wildlife3dStage=hedgehog-v3&wildlife3dReview=hedgehog-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "curl-in",
+        "curled",
+        "uncurl"
+      ],
+      "heightRange": [
+        -0.0009945335388183646,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "curl-in",
+        "curled",
+        "uncurl",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "curl-in",
+          "curled",
+          "uncurl"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-meerkat-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "c6dd3a74bf1d7d4da3168f9a6b6d4969aa124aef04275c570c41d137a19fb5a6",
+      "modelSha256": "5c401191bed380981edc412e4d947e021a42093da3ca357484499cdf1a178f60",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-meerkat&wildlife3dStage=meerkat-v3&wildlife3dReview=meerkat-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "scan",
+        "alarm",
+        "rear",
+        "lower"
+      ],
+      "heightRange": [
+        -0.0009827613830566406,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "alarm",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "scan",
+          "alarm",
+          "rear",
+          "lower"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-porcupine-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "c7aa5d559e3e0c15e1c3410b396c6e2af2fd9e6f368154b2660b596687faf916",
+      "modelSha256": "54837c022ea1b71b33640741d6debe55fcaa2fb70dae34e13b9ddd1ff011e6fe",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-porcupine&wildlife3dStage=porcupine-v3&wildlife3dReview=porcupine-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "quills",
+        "rattle",
+        "relax"
+      ],
+      "heightRange": [
+        -0.0010532560348510806,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "quills",
+        "rattle",
+        "relax",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "quills",
+          "rattle",
+          "relax"
+        ]
+      }
+    }
+  ]
+}

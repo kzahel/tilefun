@@ -26,7 +26,10 @@ import {
   naturalExplorerUrl,
   naturalLandscapeRecipe,
 } from "../scenarios/NaturalLandscapeRecipe.js";
-import { isWildlifeBehaviorModelReview } from "../scenarios/WildlifeBehaviorModelReview.js";
+import {
+  isSpineDefenseModelReviewCase,
+  isWildlifeBehaviorModelReview,
+} from "../scenarios/WildlifeBehaviorModelReview.js";
 import {
   canLandOnReviewAnimal,
   isFarmModelReviewCase,
@@ -51,6 +54,7 @@ import AnimalBrowser from "./AnimalBrowser.js";
 import { ANIMAL_BROWSER_ENTRIES } from "./AnimalBrowserData.js";
 import { naturalCasePresentation, naturalCaseZoom } from "./NaturalCasePresentation.js";
 import { buildNaturalCandidate } from "./NaturalLandscapeCandidate.js";
+import { WildlifeApproachControls } from "./WildlifeApproachControls.js";
 import { useInbox, useManifest } from "./WorkshopQueries.js";
 import { useWorkspace } from "./WorkspaceStore.js";
 
@@ -850,32 +854,16 @@ export default function NaturalLandscapePage() {
           Save / reload scene
         </button>
         {approachAnimal && (
-          <button
-            type="button"
+          <WildlifeApproachControls
+            lab={host}
+            canvas={canvas}
+            animal={approachAnimal}
             disabled={!ready || paused}
-            onClick={() => {
-              const h = host.current;
-              const profile = faunaProfile(approachAnimal.type);
-              if (!h) return;
-              const target = h.client.replica.entities.find(
-                (e) => e.type === approachAnimal.type && (e.wz ?? 0) < 0.5,
-              );
-              if (!target) return;
-              const distance = profile
-                ? Math.min(profile.alarmDistance - 1, profile.body[0] / 2 + 7)
-                : 24;
-              void h
-                .command({
-                  kind: "teleport",
-                  position: { wx: target.position.wx - distance, wy: target.position.wy },
-                  z: 0,
-                })
-                .catch((e) => setError(String(e)));
-              canvas.current?.focus();
-            }}
-          >
-            Start near {approachAnimal.name}
-          </button>
+            retreat={
+              isSpineDefenseModelReviewCase(caseId) ? prepared.recipe?.player.position : undefined
+            }
+            reportError={setError}
+          />
         )}
         {landingTargets.map((animal) => (
           <button

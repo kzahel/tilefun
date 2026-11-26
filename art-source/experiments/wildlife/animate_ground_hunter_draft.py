@@ -26,6 +26,9 @@ COATS = {
     "honey-badger": "222c30 222c30 343e40 343e40 d5d3b9 ded0a8",
     "mongoose": "242c31 63563f 63563f 8f7853 b9a174 ded0a8",
     "white-nosed-coati": "242c31 65513b 65513b a17b4a cfad70 ded0a8",
+    "dire-wolf": "252c32 33383e 515661 697078 8d9493 c2bbae",
+    "spotted-hyena": "28251f 47352b 74563d a78254 c9ad7b d4bf92",
+    "tasmanian-devil": "201f25 29282d 353238 4b464c d9d0b7 d7b39f",
 }
 MOTION = {
     "brown-bear": (.49, .23, .34),
@@ -36,8 +39,12 @@ MOTION = {
     "honey-badger": (.37, .18, .26),
     "mongoose": (.42, .20, .39),
     "white-nosed-coati": (.43, .23, .35),
+    "dire-wolf": (.57, .24, .48),
+    "spotted-hyena": (.46, .26, .36),
+    "tasmanian-devil": (.40, .19, .28),
 }
-SHORT_EARS = {"fossa": .61, "honey-badger": .25, "mongoose": .38, "white-nosed-coati": .40}
+SHORT_EARS = {"fossa": .61, "honey-badger": .25, "mongoose": .38, "white-nosed-coati": .40,
+              "spotted-hyena": .69, "tasmanian-devil": .35}
 DURATIONS = {"idle": 48, "walk": 32, "feed": 26, "display": 30, "chase": 19}
 
 
@@ -90,7 +97,7 @@ def refine_draft(mesh, species):
             p.x *= 1 - min(.24, reach * .36)
         elif part == "Species body and coat" and p.z > hoofed.BODY.z:
             bump = math.exp(-((p.y - .39) / .43)**2)
-            shoulder = -.06 if species == "honey-badger" else .15
+            shoulder = {"honey-badger": -.06, "spotted-hyena": .26, "dire-wolf": .20}.get(species, .15)
             p.z += shoulder * bump * (p.z - hoofed.BODY.z) / hoofed.DEPTH
         elif part == "Tail and tuft" and not bear:
             p.x *= 1.10
@@ -133,6 +140,11 @@ def refine_draft(mesh, species):
         elif not bear and part == "Species body and coat":
             if species == "honey-badger":
                 shade = 4 if upper >= .3 else 1
+            elif species == "spotted-hyena" and upper > -.35:
+                speckle = math.cos(p.y * 45 + math.cos(p.z * 32)) * math.cos(p.z * 43)
+                shade = 1 if speckle > .58 else shade
+            elif species == "tasmanian-devil":
+                shade = 4 if .24 < p.y < .41 and p.z < hoofed.BODY.z + .05 else 1 if upper < .20 else 2
             elif upper < -.37 and species != "fossa":
                 shade = 5
         index = first + 2 * shade
@@ -142,7 +154,7 @@ def refine_draft(mesh, species):
 
 
 def pose(motion, rig, rest, clip, t):
-    if clip == "display":
+    if clip in ("display", "sleep"):
         return hoofed.pose(rig, rest, clip, t)
     grazer_clip = {"feed": "action", "chase": "flee"}.get(clip, clip)
     return hoofed.grazer_pose(rig, rest, grazer_clip, t, motion)
@@ -158,15 +170,20 @@ def main():
     mesh, = (obj for obj in bpy.context.scene.objects if obj.type == "MESH")
     fit_stance(mesh, rig, species)
     refine_draft(mesh, species)
-    assert set(bpy.data.actions.keys()) == {"idle", "walk", "feed", "display"}
+    expected = {"idle", "walk", "feed", "display"}
+    durations = dict(DURATIONS)
+    if species == "dire-wolf":
+        expected.add("sleep")
+        durations["sleep"] = 46
+    assert set(bpy.data.actions.keys()) == expected
     for action in list(bpy.data.actions):
         bpy.data.actions.remove(action)
-    wildlife_build.key_actions(rig, DURATIONS, partial(pose, MOTION[species]))
+    wildlife_build.key_actions(rig, durations, partial(pose, MOTION[species]))
     scene = bpy.context.scene
     scene.render.fps = wildlife_build.FPS
-    scene.frame_start, scene.frame_end = 1, DURATIONS["idle"] + 1
+    scene.frame_start, scene.frame_end = 1, durations["idle"] + 1
     scene.frame_set(1)
-    scene["Animation clips"] = ", ".join(DURATIONS)
+    scene["Animation clips"] = ", ".join(durations)
     scene["Animation reference"] = f"Tilefun {species} active sprite sheet"
     bpy.ops.wm.save_as_mainfile(filepath=str(output / "model.blend"))
     bpy.ops.export_scene.gltf(

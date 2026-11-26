@@ -10,7 +10,7 @@ import type { AnimalWorkSystem, WorkContext } from "./AnimalWorkSystem.js";
 import { type FaunaBehavior, faunaProfile } from "./Fauna.js";
 import { createForageItem, restoreWorkItemPose } from "./ForageResources.js";
 import { restoreFaunaPose, settleFauna } from "./faunaInteractions.js";
-import { advanceTreeClimb, type ClimbTree, catClimbGrip, sameTree } from "./TreeClimbing.js";
+import { advanceTreeClimb, type ClimbTree, canopyClimbGrip, sameTree } from "./TreeClimbing.js";
 import { faceToward, freshWork, WorkKit } from "./WorkKit.js";
 
 const kindOf = (a: Entity) => {
@@ -151,7 +151,7 @@ export class WoodlandWork {
       }
     }
     if (["climb", "descend"].includes(t.state) && t.tree) {
-      const climb = advanceTreeClimb(a, t, t.tree, kind === "cat", dt, c.environment);
+      const climb = advanceTreeClimb(a, t, t.tree, dt, c.environment);
       if (climb === "blocked" || climb === "stalled") {
         this.cancel(a, climb === "blocked" ? 3 : 10);
         return false;
@@ -277,7 +277,7 @@ export class WoodlandWork {
     if (planning && !planning.claim(a, false)) return t.state !== "idle";
     if (["seek", "stalk"].includes(t.state)) {
       if (kind === "cat" && t.tree && !t.targetId) {
-        const grip = catClimbGrip(t.tree, (a.collider?.width ?? 14) / 2);
+        const grip = canopyClimbGrip(t.tree, (a.collider?.width ?? 14) / 2);
         if (gap(a.position, grip) < 1) this.startClimb(a, t.tree);
         else if (!this.work.go(a, grip, t.tree.ground, c, planning)) this.cancel(a);
         return true;
@@ -291,7 +291,7 @@ export class WoodlandWork {
         return false;
       }
       if (kind === "capuchin" && t.tree) {
-        const grip = { wx: t.tree.gripX, wy: t.tree.gripY };
+        const grip = canopyClimbGrip(t.tree, (a.collider?.width ?? 14) / 2);
         if (gap(a.position, grip) < 1) this.startClimb(a, t.tree);
         else if (!this.work.go(a, grip, t.tree.ground, c, planning)) this.cancel(a);
       } else if (kind === "raccoon") {

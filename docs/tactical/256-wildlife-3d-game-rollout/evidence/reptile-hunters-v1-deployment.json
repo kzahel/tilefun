@@ -1,0 +1,138 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "3704e3b5063d8ba342283e126423f83f5f5893e5c24b87e4e1d82bb7af1a6bd0",
+  "results": [
+    {
+      "type": "wildlife-alligator-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "0a4fd96c9f9793c52409a71faf25ed10831b3042ad6fa37568560d0280527d95",
+      "modelSha256": "32558edbce25cdd7ae961e77542b76eb2d7b86aa5b8370bff5f45bef8dad805a",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-alligator&wildlife3dStage=alligator-v3&wildlife3dReview=alligator-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009392433166503999,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-crocodile-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "fcfaafbaf240aaffbadb72887b22d62845619200a85b10f1d6301d0edf3ba995",
+      "modelSha256": "3501224c3953e43af70acabef8325755fbd86fe0b7d68347b3a7162c948697d0",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-crocodile&wildlife3dStage=crocodile-v3&wildlife3dReview=crocodile-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009601402282714953,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-gaboon-viper-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "481d3c9ec2904a066e455072c4cf78f0204236ae2441123e4290d84466a9efaa",
+      "modelSha256": "ce2a8e21d72f1805be8857e8975809ba0274ed6d028a89f1079e268d3190dd21",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-gaboon-viper&wildlife3dStage=gaboon-viper-v3&wildlife3dReview=gaboon-viper-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "slither",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009238548278808662,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "slither",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-komodo-dragon-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "753f9bb6cb3a34bed7c44cf82ad56a6bac1f8e43a2528b1c37c2d8a8db3daa61",
+      "modelSha256": "c57e2c7b35fa975f3d4dd250713590ea828271e04cc6c071f2d7b37c379db95e",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-komodo-dragon&wildlife3dStage=komodo-dragon-v3&wildlife3dReview=komodo-dragon-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009267196655273556,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    }
+  ]
+}

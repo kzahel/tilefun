@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-komodo-dragon-predator-v1",
+  "fit": [
+    12.47,
+    9.76,
+    12.33
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "reviewContext": "A rounded head, dark legs and long tail with separate feeding, warning and pursuit.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

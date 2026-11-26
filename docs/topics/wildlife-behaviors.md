@@ -40,12 +40,13 @@ conservation, renewal, ordinary carrying and cat ground toy play pass their
 retained native checks. Throwing starts outside the player hull and uses the same
 Rapier world for spawn clearance; low throws have the new physical range.
 
-The reset exposed a route that hits the actual canopy collider. A blocked climb
-cancels and releases its claim. [Tactical 256](../tactical/256-wildlife-3d-game-rollout.md)
-restores the cat route by putting the vertical grip outside the crown. Each cat
-coat can step over the lip and settle onto the crown after three plays. Native
-verification covers perching and returning to the ground through a saved-world
-reload. Capuchin climbing remains open.
+The reset exposed a route that hit the actual canopy collider.
+[Tactical 256](../tactical/256-wildlife-3d-game-rollout.md) moves the vertical
+grip outside the crown for both cats and capuchins. The animals rise beside
+the canopy, cross its lip and settle onto its top. Native verification covers
+cats perching after three plays and a capuchin resuming its climb after reload,
+picking one fruit, eating, sitting and descending. A blocked path still
+cancels and releases its claim.
 
 ## What counts
 

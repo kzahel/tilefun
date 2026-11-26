@@ -1,0 +1,206 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-raccoon-provisional-v1",
+      "clips": 6,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "pickup",
+          "action": "pickup",
+          "frames": 28,
+          "gameDurationMs": 1000
+        },
+        {
+          "state": "eat",
+          "action": "eat",
+          "frames": 28,
+          "gameDurationMs": 1800
+        }
+      ],
+      "candidateId": "raccoon-v3",
+      "modelSha256": "217b1b25fc08f4afe198f894031b14481e9de4b40dd99467fdd2712d5c54bc71"
+    },
+    {
+      "type": "wildlife-red-squirrel-provisional-v1",
+      "clips": 7,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "bound",
+          "action": "bound",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 320
+        },
+        {
+          "state": "pickup",
+          "action": "pickup",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "dig",
+          "action": "dig",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "eat",
+          "action": "eat",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "red-squirrel-v3",
+      "modelSha256": "a78fc7eadc118ca15decec59daafb7ce84fd375a6a657cbe9f7e0b75890018fa"
+    },
+    {
+      "type": "wildlife-beaver-provisional-v1",
+      "clips": 7,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "pickup",
+          "action": "pickup",
+          "frames": 28,
+          "gameDurationMs": 1000
+        },
+        {
+          "state": "build",
+          "action": "build",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "settle",
+          "action": "settle",
+          "frames": 28,
+          "gameDurationMs": 1500
+        }
+      ],
+      "candidateId": "beaver-v3",
+      "modelSha256": "7637a074e6f217fa8c6d1927925e6dd8e0075819b15f9f957fbdc2f98c6219d2"
+    },
+    {
+      "type": "wildlife-capuchin-monkey-provisional-v1",
+      "clips": 8,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "climb",
+          "action": "climb",
+          "frames": 28,
+          "gameDurationMs": 1200
+        },
+        {
+          "state": "pickup",
+          "action": "pickup",
+          "frames": 28,
+          "gameDurationMs": 1000
+        },
+        {
+          "state": "eat",
+          "action": "eat",
+          "frames": 28,
+          "gameDurationMs": 1800
+        },
+        {
+          "state": "sit",
+          "action": "sit",
+          "frames": 28,
+          "gameDurationMs": 1200
+        }
+      ],
+      "candidateId": "capuchin-monkey-v3",
+      "modelSha256": "51f009774a52e36b82eb490d04d3026ad47ed0141b3c14bce6ef7ebe6feda90b"
+    }
+  ],
+  "clipSamples": 784,
+  "testedDepth": false
+}

@@ -13,6 +13,7 @@ import {
   isRaptorModelReviewCase,
   isWildlifeBehaviorModelReview,
   raptorModelReviewRecipe,
+  wildlifeWorkModelReviewRecipe,
 } from "./WildlifeBehaviorModelReview.js";
 import { wildlifeWaterModelReviewRecipe } from "./WildlifeWaterModelReview.js";
 
@@ -102,8 +103,8 @@ export function wildlifeModelReviewRecipe(
 ): ScenarioRecipe | undefined {
   const id = `wildlife-model-review-${type}`;
   if (classicTravel) return classicModelStage(id, type, classicTravel);
-  if (isFarmModelReviewCase(caseId) || isWildlifeBehaviorModelReview(type, caseId))
-    return naturalLandscapeRecipe(caseId, "balanced");
+  if (isFarmModelReviewCase(caseId)) return naturalLandscapeRecipe(caseId, "balanced");
+  if (isWildlifeBehaviorModelReview(type, caseId)) return wildlifeWorkModelReviewRecipe(caseId);
   if (isRaptorModelReviewCase(caseId)) return raptorModelReviewRecipe(caseId);
   if (wildlifeFeedingReview(type, caseId))
     return type === DEER_TYPE

@@ -1,0 +1,130 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "3704e3b5063d8ba342283e126423f83f5f5893e5c24b87e4e1d82bb7af1a6bd0",
+  "results": [
+    {
+      "type": "wildlife-king-cobra-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "75afb0e8ab6e9445c6c11f09f1f4acd300d89034183e3632c7af8498fc291e5a",
+      "modelSha256": "d2024524963cb7f8be8db4f9c4d7670644025b2ce7ee4d5dff480927e9c82a93",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-king-cobra&wildlife3dStage=king-cobra-v3&wildlife3dReview=king-cobra-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "slither",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009611663818359439,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "slither",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-millipede-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "ad813e89f57dcddf649dda9ce01d768ddf7ae3fe45290180ced198329d4131ac",
+      "modelSha256": "2848d66cb54222336c8ce102dd018b5ecede95cf3ee044f6cd7ee6bf32fbe666",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-millipede&wildlife3dStage=millipede-v3&wildlife3dReview=millipede-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009975433349609375,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-snail-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "d9e3870da764f03e570893c556f2277015645f8b61416835bdf909530caebb9c",
+      "modelSha256": "68d7d8d2ba911a32bfa7a4b3e5a67b06cae3f2e2cb6f8e5359868bcab82d728d",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-snail&wildlife3dStage=snail-v3&wildlife3dReview=snail-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "crawl",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009789466857910156,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "crawl",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-worm-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "9a74b82f450caebce4e03d69748ef59b950df54fb46fc49e8cee8f012af3bec2",
+      "modelSha256": "d4d38294ced6fa74c8fa298369a5bdb3501f7c8d71dd62a09c3a9a65ba7370e8",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-worm&wildlife3dStage=worm-v3&wildlife3dReview=worm-v3#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "crawl",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009970402717590344,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "crawl",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

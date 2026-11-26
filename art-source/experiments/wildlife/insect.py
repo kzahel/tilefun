@@ -285,13 +285,15 @@ def surface():
 def pose(rig,rest,clip,t):
     wave=math.tau*t
     flying=clip in ("fly","flutter")
-    travel=clip in ("crawl","walk","hop")
+    chase=clip=="chase"
+    travel=clip in ("crawl","walk","hop") or chase
     hop=math.sin(math.pi*t)**2 if clip=="hop" else 0
     probe=math.sin(math.pi*t)**2 if clip in ("sip","action","feed","display") else 0
-    bodyq=euler(.16*hop-.11*probe,.041*math.sin(wave)*(travel or flying),0)
+    threat=probe if STYLE=="mantis" and clip=="display" else 0
+    bodyq=euler(.16*hop-.11*probe+.42*threat-.12*chase,.041*math.sin(wave)*(travel or flying),0)
     body=transform(bodyq,BODY,BODY+V((0,.031*probe,.026*math.sin(wave)+.115*hop+.057*flying)))
     out={"body":body@rest["body"]}
-    hq=bodyq@euler(-.40*probe,0,.13*math.sin(wave)*(clip=="idle"))
+    hq=bodyq@euler(-.40*probe+.49*threat,0,.13*math.sin(wave)*(clip=="idle"))
     head=transform(hq,HEAD,body@HEAD+V((0,.070*probe,-.08*probe)))
     out["head"]=head@rest["head"]
     curl=.63*probe if REVISION==2 and STYLE=="plates" else 0
@@ -311,7 +313,8 @@ def pose(rig,rest,clip,t):
             a,knee,end=(point(side,i,j) for j in range(3))
             up,down=f"leg.{side}.{i}.up",f"leg.{side}.{i}.down"
             if travel:
-                shift,lift=stride(t,(.5 if (sign==1)==(i%2==0) else 0),.145,.083)
+                shift,lift=stride(t,(.5 if (sign==1)==(i%2==0) else 0),
+                                  .245 if chase else .145,.12 if chase else .083)
                 if clip=="hop" and i==2:
                     shift-=(.40 if REVISION==2 else .29)*hop
                     lift+=.105*hop
@@ -319,7 +322,8 @@ def pose(rig,rest,clip,t):
                 shift=-.18 if flying else 0
                 lift=.14 if flying else 0
             if STYLE=="mantis" and i==0:
-                shift,lift=.26*probe,.12*probe
+                shift+=.26*probe-.18*threat
+                lift+=.12*probe+.25*threat+.10*chase
             target=end+V((sign*(-.12 if flying else 0),shift,.052*curl+lift))
             hip=body@a
             k=body@knee+V((sign*(-.055 if flying else 0),.49*shift,.36*lift))
