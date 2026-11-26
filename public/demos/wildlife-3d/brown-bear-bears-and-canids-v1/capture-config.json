@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-brown-bear-predator-v1",
+  "fit": [
+    12.61,
+    10,
+    12.47
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "reviewContext": "A heavy head, longer forequarters and a broad low gait. Pursuit is a faster lope with longer contact and slow head movement.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

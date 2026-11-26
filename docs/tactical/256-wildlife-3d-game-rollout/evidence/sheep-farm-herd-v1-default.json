@@ -1,0 +1,40 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "2c3dee268c73e673fe1e1bd93d7f3b89aa5dbde8",
+  "workshopInputDigest": "c79149beb23768803bea02b47529ced2366969ff2a24709d7aef9aad22af1fe1",
+  "results": [
+    {
+      "type": "wildlife-sheep-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "e9309f39719c8c450444271fbaaa39ce903201d50719d3b48a3d91492d716550",
+      "modelSha256": "069417fcf8b9297e29c4f80ad5bdf2ab8533f8ebbacdbd2a6f23b26c6e444cdf",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-behavior-sheep&wildlife3dStage=sheep-farm-herd-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "bleat"
+      ],
+      "heightRange": [
+        -0.001045940399169923,
+        0.000025743484497070268
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "bleat"
+        ]
+      }
+    }
+  ]
+}

@@ -10026,6 +10026,46 @@
       "source": "demos/wildlife-3d/land-tortoise-woodland-crawlers-v1/model.blend"
     },
     {
+      "id": "wildlife-3d-brown-bear-bears-and-canids-v1",
+      "name": "wildlife 3d brown bear bears and canids v1",
+      "image": "demos/wildlife-3d/brown-bear-bears-and-canids-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "653f566b56ad97fab7d75958efde7f75d0ae759e1f2a85ecca8669f0eb37f9be",
+      "source": "demos/wildlife-3d/brown-bear-bears-and-canids-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-polar-bear-bears-and-canids-v1",
+      "name": "wildlife 3d polar bear bears and canids v1",
+      "image": "demos/wildlife-3d/polar-bear-bears-and-canids-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "35307262f07ed5be58431569e86ccaaea4c8acf300705e349fbd60fad718ff28",
+      "source": "demos/wildlife-3d/polar-bear-bears-and-canids-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-coyote-bears-and-canids-v1",
+      "name": "wildlife 3d coyote bears and canids v1",
+      "image": "demos/wildlife-3d/coyote-bears-and-canids-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "13df6c4cc27db77b80153a1e1e3c48fc513da1c9dde0e3cdc6116eb5524100e9",
+      "source": "demos/wildlife-3d/coyote-bears-and-canids-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-wolf-bears-and-canids-v1",
+      "name": "wildlife 3d wolf bears and canids v1",
+      "image": "demos/wildlife-3d/wolf-bears-and-canids-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "df1d207bd08f7502f10ba337cc1fc18e54679796d9103bc708f6cb8b4db90071",
+      "source": "demos/wildlife-3d/wolf-bears-and-canids-v1/model.blend"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",
@@ -12485,7 +12525,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:56"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:65"
         },
         {
           "system": "Gameplay",
@@ -12627,7 +12667,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:54"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:63"
         },
         {
           "system": "Gameplay",
@@ -37763,7 +37803,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:62"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:71"
         },
         {
           "system": "Editor",
@@ -39805,7 +39845,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:56"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:65"
         },
         {
           "system": "Gameplay",
@@ -39951,7 +39991,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:54"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:63"
         },
         {
           "system": "Gameplay",

@@ -1,0 +1,40 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "a7a6399de966ab01d4d65ac773e860371cf830ed",
+  "workshopInputDigest": "fa0663cc6a104c86bb0fe35c2c223d464dae311bd1153d89056d32ee7fb3d00d",
+  "results": [
+    {
+      "type": "wildlife-coconut-crab-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "d3e33687b6e72a662408281edccd025aa83fc7a02eb1ef6b71f6aa4de645a4d5",
+      "modelSha256": "6d5e96a03502e0a58edc3ffeda04cc75829723e1befb274d53c2d8072e01028e",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-coconut-crab&wildlife3dStage=coconut-crab-crabs-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009650754928588877,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    }
+  ]
+}

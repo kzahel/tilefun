@@ -4138,5 +4138,101 @@
       "native.png": "82440792ef0f08ccdbe9539e29015d621f5428cf0ce00d60e12c62c3b55a5b8a",
       "walk.png": "5dc5715c7debe97494a56f5da3ee02139c6384b754324cc1f9085d065a07b4b5"
     }
+  },
+  {
+    "id": "brown-bear-bears-and-canids-v1",
+    "type": "wildlife-brown-bear-predator-v1",
+    "name": "Brown bear",
+    "batch": "wildlife-3d-bears-and-canids-v1",
+    "lab": "brown-bear",
+    "scale": 13.79,
+    "topDown": {
+      "width": 1.1102248005801307,
+      "height": 0.6961566352429297
+    },
+    "files": {
+      "appearance.png": "653f566b56ad97fab7d75958efde7f75d0ae759e1f2a85ecca8669f0eb37f9be",
+      "capture-config.json": "a86e95dc71b5c314b9413035ae1ec3beadbd2c40308eddbe6bef80dfaa0ae536",
+      "chase.png": "8ceca5ea90a6c4d825b9f15245a72f895a3c12e43c4e524963f8677047edf2c6",
+      "comparison.mp4": "4c7ac0295229f3bf46b4e69ea8b2d48cfa34fc00cdc6ff133c92b3ee06934afd",
+      "display.png": "69f877b829d1074b23f5e95ea889f05190dc45870f8fc5d0c392a6a9723bdeca",
+      "feed.png": "1486a5a709bbf629a5be25800655986c571dfa22124c86fa96343015dfee6b89",
+      "model.blend": "cc15cc611b5c37702235dbf461a91ac0996426df2218d5a12c5a5981127780a2",
+      "model.glb": "a8f21b58f4e008b4b90a4ae687d7f8a2c803c8a0803650a48b72c3c87862286f",
+      "native.png": "1857171ee3bd748a0d5fae6bc105bc49693902fa79e7d6d35474193b8a350b55",
+      "walk.png": "9e1c1b3c6e8fda186c9ed2bcf09b1b38320e962f9686630727736d427c273388"
+    }
+  },
+  {
+    "id": "polar-bear-bears-and-canids-v1",
+    "type": "wildlife-polar-bear-predator-v1",
+    "name": "Polar bear",
+    "batch": "wildlife-3d-bears-and-canids-v1",
+    "lab": "polar-bear",
+    "scale": 12.11,
+    "topDown": {
+      "width": 1.4748142031379026,
+      "height": 0.8018166804293974
+    },
+    "files": {
+      "appearance.png": "35307262f07ed5be58431569e86ccaaea4c8acf300705e349fbd60fad718ff28",
+      "capture-config.json": "c77697b3f8c21faff5d438dea0e9177da43b7adec1d7cac35fd0ceb1a62b6b5a",
+      "chase.png": "abb28b748af69965298e7e02c2b51a02a053f51c026670dca12167b92b2fe882",
+      "comparison.mp4": "a200609f882cf434ae226d3ccb4979ef6d4d817b76c600976f9688009ffea7f9",
+      "display.png": "c0ef59bdc0242ce288e14fb1e3b46f0e83cf358630fb8d1e729eed24fab9434b",
+      "feed.png": "6e5827aa84397d4e799cbd5a93b7cb4c1ee42711543a5315a9fd41f4daf52e8b",
+      "model.blend": "982503c1b6d574e0390024d1320df53455624a2d17381a59f68d439fbcb90242",
+      "model.glb": "9f9818f6cd7676bcb5c93a43685e9fba7f2e8ce431b3598d6d0be08be7247668",
+      "native.png": "a3440cb34b5d3c52a06ff2f85c8b38358ecac078764fbfbf9cf626735861c7ff",
+      "walk.png": "24024563db99cbce15d8f696f8196fb8b8cf73c93ba26b580416d3b5bfe242b7"
+    }
+  },
+  {
+    "id": "coyote-bears-and-canids-v1",
+    "type": "wildlife-coyote-predator-v1",
+    "name": "Coyote",
+    "batch": "wildlife-3d-bears-and-canids-v1",
+    "lab": "coyote",
+    "scale": 10.57,
+    "topDown": {
+      "width": 1.4578997161778617,
+      "height": 0.8836329233680227
+    },
+    "files": {
+      "appearance.png": "13df6c4cc27db77b80153a1e1e3c48fc513da1c9dde0e3cdc6116eb5524100e9",
+      "capture-config.json": "96c9f8de0b0c47acbdff0b41944ffa26e32213acead256d8a30ea5284b8111d5",
+      "chase.png": "3f329b1695e8f781f429a00c4eaf3040e08735a5922125ddc42aa79740f75b99",
+      "comparison.mp4": "4d3d7733161de685d613f0fd238428e5511c0d18a622339e8a7c934c12034d8d",
+      "display.png": "3e3842bba48bc2699d5b3526fdcd4750544f2af603c590a8cfe2b61106df8908",
+      "feed.png": "df0c3231355ca880e0842e00acadcec743a004490363d62cab00a4eea7b7d5e8",
+      "model.blend": "b7040bbdb6373f0314ccc5d5384f1f914d3d973fd3038a2ba0298bdbe418c48a",
+      "model.glb": "6d027a2749bdfcd89578bb93142659ecea7f0784b9a78ad5a1ffaa19abd6b49d",
+      "native.png": "a05ef1811f29ebc841155c48a210a59ee4633dfdc46f1551a9233a234d1c70c5",
+      "walk.png": "9a8399eaacc29ffd4a06f98972f1ab7ecdb1c0f4f6e6c8a749067b22111a0fd0"
+    }
+  },
+  {
+    "id": "wolf-bears-and-canids-v1",
+    "type": "wildlife-wolf-predator-v1",
+    "name": "Grey wolf",
+    "batch": "wildlife-3d-bears-and-canids-v1",
+    "lab": "wolf",
+    "scale": 10.28,
+    "topDown": {
+      "width": 1.2850194552529184,
+      "height": 0.972762645914397
+    },
+    "files": {
+      "appearance.png": "df1d207bd08f7502f10ba337cc1fc18e54679796d9103bc708f6cb8b4db90071",
+      "capture-config.json": "f326489f85eb14386dc36a7a5076321e541cdd61807fd65b9067cfee30b52238",
+      "chase.png": "df148abad77205f58968c2b04a1bcc3f39a4fe7df0dcb1acb52810e7385c2cc6",
+      "comparison.mp4": "5ea1daafde40585ea11bee407ce318c3a8a82471a8f7c9f1d35b25226c716916",
+      "display.png": "2a04166b4a1ac62481c1ddceff6c5cb168450374bba87ed8fa11661cecb563d0",
+      "feed.png": "3e90088e4f487ccc3749a054b91cecb67156aebd5d4b6aead7750398e3260501",
+      "model.blend": "06fb1097245e2aa9d07d4fd65431174cca65c2267df6fc9bba53264fa1a966b7",
+      "model.glb": "03427261d0d74c455ab70a3a698ed3f67a8a91a8adfa7be5fb8f3d94190c0559",
+      "native.png": "eb96353332996e9d5a4288cb85977b814f19af82cf5c71a225f39090bccca20f",
+      "walk.png": "7da66a37417ee6d331b37d32f57168eab88477688968fc3e5b396049b109b57e"
+    }
   }
 ]

@@ -1,0 +1,46 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "2c3dee268c73e673fe1e1bd93d7f3b89aa5dbde8",
+  "workshopInputDigest": "c79149beb23768803bea02b47529ced2366969ff2a24709d7aef9aad22af1fe1",
+  "results": [
+    {
+      "type": "wildlife-goat-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "60cbe81477944204f73156240354d633e7d2e751916faea94ef1d28d217ed122",
+      "modelSha256": "cb9840ce84014add7b4c3722c5204518fe28ef85361e519787869168d4b8647b",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-behavior-goat&wildlife3dStage=goat-farmyard-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "rear",
+        "browse",
+        "lower",
+        "hop"
+      ],
+      "heightRange": [
+        -0.06498782920883044,
+        18.14371615600556
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "rear",
+          "browse",
+          "lower",
+          "hop"
+        ]
+      }
+    }
+  ]
+}

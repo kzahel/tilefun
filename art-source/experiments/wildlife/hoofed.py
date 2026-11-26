@@ -846,8 +846,8 @@ def pose(rig,rest,clip,t):
     return output
 
 
-def grazer_pose(rig, rest, clip, t):
-    depth, reach, bound = GRAZER_MOTION
+def grazer_pose(rig, rest, clip, t, motion=None):
+    depth, reach, bound = GRAZER_MOTION if motion is None else motion
     wave = math.tau*t
     fleeing = clip == "flee"
     mounted = clip in ("ride","ride-sprint")

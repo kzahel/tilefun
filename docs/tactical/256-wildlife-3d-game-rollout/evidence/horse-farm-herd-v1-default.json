@@ -1,0 +1,52 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "2c3dee268c73e673fe1e1bd93d7f3b89aa5dbde8",
+  "workshopInputDigest": "c79149beb23768803bea02b47529ced2366969ff2a24709d7aef9aad22af1fe1",
+  "results": [
+    {
+      "type": "wildlife-horse-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "b5f84f35506980a861ba6bdb74d5efe2e99909eb063d689ca71763ff6a268b6a",
+      "modelSha256": "b9c25c70d4587d1fb624bf73d0726b9b701d9a9eca7094675238ec5aa53538ed",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-behavior-horse&wildlife3dStage=horse-farm-herd-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "lower",
+        "graze",
+        "drink",
+        "raise",
+        "ride",
+        "ride-sprint"
+      ],
+      "heightRange": [
+        -0.0010034046173096208,
+        -0.000257415771484375
+      ],
+      "statesOnApproachOrMount": [
+        "flee",
+        "ride",
+        "ride-sprint"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "lower",
+          "graze",
+          "drink",
+          "raise",
+          "ride",
+          "ride-sprint"
+        ]
+      }
+    }
+  ]
+}

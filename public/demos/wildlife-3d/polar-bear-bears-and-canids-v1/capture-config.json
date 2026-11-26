@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-polar-bear-predator-v1",
+  "fit": [
+    12.61,
+    10.88,
+    12.47
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "reviewContext": "Long neck, low pale trunk, darker pads and narrower head. The front paws reach farther during pursuit.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

@@ -28,6 +28,7 @@ import {
 } from "../scenarios/NaturalLandscapeRecipe.js";
 import { isWildlifeBehaviorModelReview } from "../scenarios/WildlifeBehaviorModelReview.js";
 import {
+  canLandOnReviewAnimal,
   isFarmModelReviewCase,
   isFourStateFaunaModelReview,
   isPackMountModelReview,
@@ -161,7 +162,7 @@ export default function NaturalLandscapePage() {
         ? [{ type: faunaType(fauna.species), label: fauna.label }]
         : reviewAnimal &&
             !reviewAnimal.classicTravel &&
-            (!farmAnimal || faunaProfile(farmAnimal.type)?.rideSpeed)
+            canLandOnReviewAnimal(reviewAnimal.type, caseId)
           ? [{ type: reviewAnimal.type, label: reviewAnimal.name }]
           : (presentation.mounts ?? []);
   const noteKey = `nature-note:${candidate?.id ?? caseId}`;
@@ -508,7 +509,6 @@ export default function NaturalLandscapePage() {
         const lx = Math.floor(pos.wx / 16) - cx * 16,
           ly = Math.floor(pos.wy / 16) - cy * 16;
         c.dataset.groundBlend = String(chunk?.blendBase[ly * 16 + lx] ?? -1);
-
         c.dataset.trees = String(view.props.filter((p) => p.type === "prop-oak-tree").length);
         c.dataset.thicketRows = String(
           view.props.filter((p) => p.type.startsWith("pattern:forest-thicket-v1:")).length,

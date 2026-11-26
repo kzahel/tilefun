@@ -26,9 +26,49 @@
         "display": "display",
         "chase": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "a8f21b58f4e008b4b90a4ae687d7f8a2c803c8a0803650a48b72c3c87862286f",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/brown-bear-bears-and-canids-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "a8f21b58f4e008b4b90a4ae687d7f8a2c803c8a0803650a48b72c3c87862286f",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/brown-bear-bears-and-canids-v1/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "a8f21b58f4e008b4b90a4ae687d7f8a2c803c8a0803650a48b72c3c87862286f",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/brown-bear-bears-and-canids-v1/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "a8f21b58f4e008b4b90a4ae687d7f8a2c803c8a0803650a48b72c3c87862286f",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/brown-bear-bears-and-canids-v1/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "a8f21b58f4e008b4b90a4ae687d7f8a2c803c8a0803650a48b72c3c87862286f",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/brown-bear-bears-and-canids-v1/chase.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-brown-bear-bears-and-canids-v1",
+        "fingerprint": "8ca4c90593edcd728362bcf4d5ec88c68395f382aa47738fd5feaa5c127005eb",
+        "model": "public/demos/wildlife-3d/brown-bear-bears-and-canids-v1/model.glb",
+        "source": "public/demos/wildlife-3d/brown-bear-bears-and-canids-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/brown-bear-bears-and-canids-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-panda-provisional-v1",
@@ -67,9 +107,49 @@
         "display": "display",
         "chase": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "9f9818f6cd7676bcb5c93a43685e9fba7f2e8ce431b3598d6d0be08be7247668",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/polar-bear-bears-and-canids-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "9f9818f6cd7676bcb5c93a43685e9fba7f2e8ce431b3598d6d0be08be7247668",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/polar-bear-bears-and-canids-v1/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "9f9818f6cd7676bcb5c93a43685e9fba7f2e8ce431b3598d6d0be08be7247668",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/polar-bear-bears-and-canids-v1/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "9f9818f6cd7676bcb5c93a43685e9fba7f2e8ce431b3598d6d0be08be7247668",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/polar-bear-bears-and-canids-v1/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "9f9818f6cd7676bcb5c93a43685e9fba7f2e8ce431b3598d6d0be08be7247668",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/polar-bear-bears-and-canids-v1/chase.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-polar-bear-bears-and-canids-v1",
+        "fingerprint": "87449d81dba56279d78d50519aca3b5842af34b05e8416fa3267de5498330f8e",
+        "model": "public/demos/wildlife-3d/polar-bear-bears-and-canids-v1/model.glb",
+        "source": "public/demos/wildlife-3d/polar-bear-bears-and-canids-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/polar-bear-bears-and-canids-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-atlantic-puffin-provisional-v1",
@@ -1963,9 +2043,49 @@
         "display": "display",
         "chase": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "6d027a2749bdfcd89578bb93142659ecea7f0784b9a78ad5a1ffaa19abd6b49d",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/coyote-bears-and-canids-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "6d027a2749bdfcd89578bb93142659ecea7f0784b9a78ad5a1ffaa19abd6b49d",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/coyote-bears-and-canids-v1/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "6d027a2749bdfcd89578bb93142659ecea7f0784b9a78ad5a1ffaa19abd6b49d",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/coyote-bears-and-canids-v1/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "6d027a2749bdfcd89578bb93142659ecea7f0784b9a78ad5a1ffaa19abd6b49d",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/coyote-bears-and-canids-v1/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "6d027a2749bdfcd89578bb93142659ecea7f0784b9a78ad5a1ffaa19abd6b49d",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/coyote-bears-and-canids-v1/chase.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-coyote-bears-and-canids-v1",
+        "fingerprint": "11d11e387831316611c9c03ccad3ac9da54e96a5af53ef72a3f35967dbe3dec8",
+        "model": "public/demos/wildlife-3d/coyote-bears-and-canids-v1/model.glb",
+        "source": "public/demos/wildlife-3d/coyote-bears-and-canids-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/coyote-bears-and-canids-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-wolf-predator-v1",
@@ -1984,9 +2104,49 @@
         "display": "display",
         "chase": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "03427261d0d74c455ab70a3a698ed3f67a8a91a8adfa7be5fb8f3d94190c0559",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/wolf-bears-and-canids-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "03427261d0d74c455ab70a3a698ed3f67a8a91a8adfa7be5fb8f3d94190c0559",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/wolf-bears-and-canids-v1/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "03427261d0d74c455ab70a3a698ed3f67a8a91a8adfa7be5fb8f3d94190c0559",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/wolf-bears-and-canids-v1/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "03427261d0d74c455ab70a3a698ed3f67a8a91a8adfa7be5fb8f3d94190c0559",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/wolf-bears-and-canids-v1/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "03427261d0d74c455ab70a3a698ed3f67a8a91a8adfa7be5fb8f3d94190c0559",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/wolf-bears-and-canids-v1/chase.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-wolf-bears-and-canids-v1",
+        "fingerprint": "1b6f0b97e859c892a935a40132e0c87748338a0afbab79c1c1c3c257db13aff7",
+        "model": "public/demos/wildlife-3d/wolf-bears-and-canids-v1/model.glb",
+        "source": "public/demos/wildlife-3d/wolf-bears-and-canids-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/wolf-bears-and-canids-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-fox-provisional-v1",
@@ -2594,7 +2754,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "2c3dee268c73e673fe1e1bd93d7f3b89aa5dbde8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-goat-farmyard-v1",
+        "sha256": "cb9840ce84014add7b4c3722c5204518fe28ef85361e519787869168d4b8647b",
+        "states": ["action", "browse", "flee", "hop", "idle", "lower", "rear", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/goat-farmyard-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-goat-farmyard-v1",
         "fingerprint": "60cbe81477944204f73156240354d633e7d2e751916faea94ef1d28d217ed122",
@@ -2683,7 +2850,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "2c3dee268c73e673fe1e1bd93d7f3b89aa5dbde8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-donkey-farm-herd-v1",
+        "sha256": "cf51d304773c8f2be5cebf5da056d20566b094d86bdb9fb91ec261ad5ab93541",
+        "states": ["action", "flee", "idle", "lie", "ride", "ride-sprint", "roll", "stand", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/donkey-farm-herd-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-donkey-farm-herd-v1",
         "fingerprint": "4423af0338b2a8a7a415a835a0867129d956e5dd0ca334248cc9aea228c8fca4",
@@ -2779,7 +2953,25 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "2c3dee268c73e673fe1e1bd93d7f3b89aa5dbde8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-horse-farm-herd-v1",
+        "sha256": "b9c25c70d4587d1fb624bf73d0726b9b701d9a9eca7094675238ec5aa53538ed",
+        "states": [
+          "action",
+          "drink",
+          "flee",
+          "graze",
+          "idle",
+          "lower",
+          "raise",
+          "ride",
+          "ride-sprint",
+          "walk"
+        ],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/horse-farm-herd-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-horse-farm-herd-v1",
         "fingerprint": "b5f84f35506980a861ba6bdb74d5efe2e99909eb063d689ca71763ff6a268b6a",
@@ -2875,7 +3067,25 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "2c3dee268c73e673fe1e1bd93d7f3b89aa5dbde8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-cow-farm-herd-v1",
+        "sha256": "f22c6efbfa457dd1c19ee479cae12005e587226ee2069c0851c3766b1e80026d",
+        "states": [
+          "action",
+          "flee",
+          "graze",
+          "idle",
+          "lie",
+          "lower",
+          "raise",
+          "ruminate",
+          "stand",
+          "walk"
+        ],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/cow-farm-herd-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-cow-farm-herd-v1",
         "fingerprint": "82be65e5aa70adfb2726fe823934485403e03efab8f95d9691404f06ee866eb9",
@@ -2957,7 +3167,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "2c3dee268c73e673fe1e1bd93d7f3b89aa5dbde8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-pig-farmyard-v1",
+        "sha256": "8bceabd19e3fa51cb3a7d369b6c73f09de05dc18faf79ed45730d92f924c570b",
+        "states": ["action", "eat", "flee", "idle", "pickup", "root", "sniff", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/pig-farmyard-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-pig-farmyard-v1",
         "fingerprint": "4a08a456fdce605d114ea30d48a7ab5cc7e575207956f13e3b2321f8b72f9492",
@@ -3079,7 +3296,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "2c3dee268c73e673fe1e1bd93d7f3b89aa5dbde8",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-sheep-farm-herd-v1",
+        "sha256": "069417fcf8b9297e29c4f80ad5bdf2ab8533f8ebbacdbd2a6f23b26c6e444cdf",
+        "states": ["action", "bleat", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/sheep-farm-herd-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-sheep-farm-herd-v1",
         "fingerprint": "e9309f39719c8c450444271fbaaa39ce903201d50719d3b48a3d91492d716550",
@@ -6278,7 +6502,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "a7a6399de966ab01d4d65ac773e860371cf830ed",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-coconut-crab-crabs-v1",
+        "sha256": "6d5e96a03502e0a58edc3ffeda04cc75829723e1befb274d53c2d8072e01028e",
+        "states": ["chase", "display", "feed", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/coconut-crab-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-coconut-crab-crabs-v1",
         "fingerprint": "d3e33687b6e72a662408281edccd025aa83fc7a02eb1ef6b71f6aa4de645a4d5",

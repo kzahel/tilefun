@@ -1,0 +1,46 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "2c3dee268c73e673fe1e1bd93d7f3b89aa5dbde8",
+  "workshopInputDigest": "c79149beb23768803bea02b47529ced2366969ff2a24709d7aef9aad22af1fe1",
+  "results": [
+    {
+      "type": "wildlife-piglet-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "4a08a456fdce605d114ea30d48a7ab5cc7e575207956f13e3b2321f8b72f9492",
+      "modelSha256": "8bceabd19e3fa51cb3a7d369b6c73f09de05dc18faf79ed45730d92f924c570b",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-behavior-pig&wildlife3dStage=pig-farmyard-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "sniff",
+        "root",
+        "pickup",
+        "eat"
+      ],
+      "heightRange": [
+        -0.0011112375259412115,
+        -0.000012832641601562469
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "sniff",
+          "root",
+          "pickup",
+          "eat"
+        ]
+      }
+    }
+  ]
+}

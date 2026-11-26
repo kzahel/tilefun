@@ -9,7 +9,7 @@ import { ENTITY_DEFS } from "../../src/entities/EntityDefs.ts";
 import { createDescriptor } from "../../src/generation/GenerationDescriptor.ts";
 import {
   isCatModelReview,
-  isFelidModelReviewCase,
+  isGroundHunterModelReviewCase,
   isRaptorModelReviewCase,
   isWildlifeWorkModelReviewCase,
 } from "../../src/scenarios/WildlifeBehaviorModelReview.ts";
@@ -20,9 +20,11 @@ import {
   wildlifeFeedingReview,
   wildlifeModelReviewRecipe,
 } from "../../src/scenarios/WildlifeModelReviewRecipe.ts";
+import { isPondPilotModel } from "../../src/scenarios/WildlifeWaterModelReview.ts";
 import { DEER_TYPE } from "../../src/wildlife/Deer.ts";
 import { faunaProfile } from "../../src/wildlife/Fauna.ts";
 import { forageType } from "../../src/wildlife/ForageResources.ts";
+import { MALLARD_TYPE } from "../../src/wildlife/Mallard.ts";
 import { predatorProfile } from "../../src/wildlife/Predator.ts";
 import {
   WILDLIFE_DEFAULT_MODELS,
@@ -120,11 +122,15 @@ try {
       const fauna = faunaProfile(candidate.type);
       const habitat = fauna?.habitat;
       const waterStage = ["deep", "pond", "shore"].includes(habitat);
+      const pondPilot = isPondPilotModel(candidate.type);
+      const mallard = candidate.type === MALLARD_TYPE;
       const farmStage = !candidate.classicTravel && isFarmModelReviewCase(candidate.lab);
+      const hen = farmStage && candidate.lab === "behavior-chicken";
       const catStage = isCatModelReview(candidate.type, candidate.lab);
       const wildlifeWorkStage = isWildlifeWorkModelReviewCase(candidate.lab);
       const raptorStage = isRaptorModelReviewCase(candidate.lab);
-      const felidStage = isFelidModelReviewCase(candidate.lab);
+      const groundHunterStage =
+        isGroundHunterModelReviewCase(candidate.lab) || predator?.species === "coconut-crab";
       const secretaryStage = candidate.lab === "secretary-bird";
       const pilotForage =
         candidate.id === "rabbit-pilot-v1"
@@ -146,7 +152,9 @@ try {
             ),
             alarm: marineHunter ? 18 : waterAnimal.alarmDistance,
           }
-        : undefined;
+        : pondPilot
+          ? { water: TerrainId.ShallowWater, shore: true, halfWidth: 5, radius: 6, alarm: 20 }
+          : undefined;
       const fourStateStage = isFourStateFaunaModelReview(candidate.type, candidate.lab);
       const packStage = isPackMountModelReview(candidate.type, candidate.lab);
       const feeding = wildlifeFeedingReview(candidate.type, candidate.lab);
@@ -155,17 +163,19 @@ try {
         candidate.classicTravel ||
         hunterStage ||
         waterStage ||
+        pondPilot ||
         farmStage ||
         catStage ||
         wildlifeWorkStage ||
         raptorStage ||
-        felidStage ||
+        groundHunterStage ||
         fourStateStage ||
         packStage ||
         feeding ||
         candidate.type === "wildlife-robin-v1";
-      const contactClips =
-        secretaryStage || felidStage
+      const contactClips = mallard
+        ? ["flight"]
+        : secretaryStage || groundHunterStage
           ? ["display"]
           : wildlifeWorkStage
             ? ["action", "flee"]
@@ -248,7 +258,7 @@ try {
           feeding: !!feeding,
           naturalClips,
           timeout:
-            raptorStage || felidStage
+            raptorStage || groundHunterStage || pondPilot
               ? 130_000
               : catStage || wildlifeWorkStage
                 ? 100_000
@@ -266,11 +276,11 @@ try {
         ? await verifyDoeApproach(page, candidate, states)
         : catStage || wildlifeWorkStage
           ? await verifyStartleInFreshStage(page, stage, candidate, states)
-          : farmStage || fourStateStage || packStage || feeding
+          : (farmStage && !hen) || fourStateStage || packStage || feeding
             ? await verifyApproachClips(page, stage, candidate, states)
             : [];
       const landingStates =
-        farmStage ||
+        (farmStage && !hen) ||
         fourStateStage ||
         catStage ||
         wildlifeWorkStage ||
@@ -301,15 +311,16 @@ try {
         verifyFaunaStates:
           fourStateStage ||
           packStage ||
+          farmStage ||
           wildlifeWorkStage ||
           raptorStage ||
-          felidStage ||
+          groundHunterStage ||
           !!feeding ||
           !!pilotForage ||
           !!pond,
         catStage,
         dogFetch,
-        useStick: secretaryStage || felidStage || marineHunter,
+        useStick: secretaryStage || groundHunterStage || marineHunter || mallard || hen,
         workPlacements: pilotForage
           ? [
               pilotForage,
@@ -317,11 +328,12 @@ try {
                 ? [{ type: "prop-oak-tree", dx: 0, dy: -64 }]
                 : []),
             ]
-          : wildlifeWorkStage || raptorStage || felidStage || marineHunter
+          : wildlifeWorkStage || raptorStage || groundHunterStage || marineHunter || farmStage
             ? reviewActorPlacements(candidate)
             : [],
         pond,
-        packStage,
+        packStage: packStage || (farmStage && !!fauna?.rideSpeed),
+        farmStage,
         approachClips: contactClips,
         states,
         feeding,
@@ -481,6 +493,12 @@ async function waitForAnimalOnGround(page, species) {
 }
 
 async function verifyLandingClips(page, candidate, states) {
+  if (candidate.type === MALLARD_TYPE) {
+    const button = page.getByRole("button", { name: `Hop onto ${candidate.name}`, exact: true });
+    if (!(await button.count())) return [];
+    const clip = states.findIndex((state) => state.name === "flight");
+    return [await landAndObserve(page, button, clip, "wildlifePoses")];
+  }
   if (candidate.type.includes("-predator-")) {
     const button = page.getByRole("button", { name: `Hop onto ${candidate.name}`, exact: true });
     if (!(await button.count())) return [];
@@ -553,6 +571,7 @@ async function verifyGameEntry(page, candidate, preview, options) {
     useStick,
     workPlacements,
     packStage,
+    farmStage,
     approachClips,
     states,
     feeding,
@@ -680,7 +699,7 @@ async function verifyGameEntry(page, candidate, preview, options) {
       states,
       approachClips,
       rideClips,
-      !!feeding,
+      !!feeding || farmStage,
       useStick,
       pondShore,
     );

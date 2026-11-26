@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-wolf-predator-v1",
+  "fit": [
+    12.61,
+    10,
+    12.04
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "reviewContext": "A strong shoulder, raised ears and a level tail. The pursuit stance moves from gathered feet to a long reaching gait.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

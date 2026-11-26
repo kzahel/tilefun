@@ -9,11 +9,12 @@ import { forestWorkRecipe } from "./ForestWorkRecipe.js";
 import { naturalLandscapeRecipe } from "./NaturalLandscapeRecipe.js";
 import { FLAT_SCENARIO, type ScenarioRecipe } from "./ScenarioRecipe.js";
 import {
-  felidReviewActors,
+  groundHunterReviewActors,
   isRaptorModelReviewCase,
   isWildlifeBehaviorModelReview,
   raptorModelReviewRecipe,
 } from "./WildlifeBehaviorModelReview.js";
+import { wildlifeWaterModelReviewRecipe } from "./WildlifeWaterModelReview.js";
 
 const FARM_MODEL_CASES = new Set([
   "behavior-chicken",
@@ -27,6 +28,14 @@ const FARM_MODEL_CASES = new Set([
 
 export function isFarmModelReviewCase(caseId: string): boolean {
   return FARM_MODEL_CASES.has(caseId);
+}
+
+export function canLandOnReviewAnimal(type: string, caseId: string): boolean {
+  return (
+    !isFarmModelReviewCase(caseId) ||
+    caseId === "behavior-chicken" ||
+    !!faunaProfile(type)?.rideSpeed
+  );
 }
 
 export function isFourStateFaunaModelReview(type: string, caseId: string): boolean {
@@ -103,8 +112,8 @@ export function wildlifeModelReviewRecipe(
   const animal = faunaProfile(type);
   if (animal && (isFourStateFaunaModelReview(type, caseId) || isPackMountModelReview(type, caseId)))
     return modelStage(id, createPlayer(240, 350), [createFauna(animal.species, 240, 176)]);
-  const felids = felidReviewActors(type, caseId);
-  if (felids) return modelStage(id, createPlayer(240, 344), felids);
+  const groundHunters = groundHunterReviewActors(type, caseId);
+  if (groundHunters) return modelStage(id, createPlayer(240, 344), groundHunters);
   const hunter = predatorProfile(type);
   if (hunter?.species === "coconut-crab")
     return modelStage(id, createPlayer(240, 328), [
@@ -112,31 +121,5 @@ export function wildlifeModelReviewRecipe(
       createFauna("cricket", 303, 176),
       createFauna("worm", 293, 224),
     ]);
-  const pond = animal?.habitat === "pond";
-  const actors =
-    hunter?.expansion?.habitat === "deep"
-      ? [
-          createPredator(hunter.species, 240, 176),
-          createFauna("fish", 311, 176),
-          createFauna("fish", 294, 226),
-        ]
-      : animal && (animal.habitat === "deep" || pond)
-        ? [createFauna(animal.species, 240, 176)]
-        : animal?.habitat === "shore"
-          ? [createFauna(animal.species, 214, 328), createFauna(animal.species, 265, 292)]
-          : undefined;
-  if (!actors) return undefined;
-  const terrain: NonNullable<ScenarioRecipe["terrain"]> = [];
-  for (let ty = 2; ty <= 20; ty++) {
-    for (let tx = 2; tx <= 28; tx++) {
-      const shore = ty === 2 || ty === 20 || tx === 2 || tx === 28;
-      const shallows = pond || (animal?.habitat === "shore" && ty >= 18);
-      terrain.push({
-        tx,
-        ty,
-        terrain: shore ? TerrainId.Sand : shallows ? TerrainId.ShallowWater : TerrainId.DeepWater,
-      });
-    }
-  }
-  return modelStage(id, createPlayer(240, 344), actors, terrain);
+  return wildlifeWaterModelReviewRecipe(id, type);
 }

@@ -107,6 +107,23 @@ runtime scope reconciliation in the execution notes.
 
 ## Delivery log
 
+### Bears and canids, 2026-11-26
+
+The brown and polar bear have longer planted legs and heavier front
+quarters. The coyote and wolf have pointed ears, dark feet and low tails.
+Each has separate walk, feeding, display and pursuit motions. All 20
+states played with the exact previews in Workshop and in reopened game
+worlds. [Renderer evidence](256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-runtime.json) ·
+[Public preview evidence](256-wildlife-3d-game-rollout/evidence/bears-and-canids-v1-deployment.json) ·
+[Workshop review](https://tilefun.graehlarts.com/tilefun/workshop.html#/review/pattern%3Awildlife-3d-brown-bear-bears-and-canids-v1)
+
+The deployed game now has full state evidence for 110 of the 113 selected
+models. Six farm animals and the coconut crab passed. The hen needs contact
+to flee, so the exact Workshop stage now offers the same landing test as
+other wildlife. The frog and mallard stages contain both a bank and shallow
+water. All three passed on the public development checkout and are ready
+for the production repeat. [Animation ledger](256-wildlife-3d-game-rollout/animation-ledger.json)
+
 ### Woodland crawlers, 2026-11-26
 
 The newt keeps a narrow orange stripe. The salamander lowers its head and

@@ -1030,6 +1030,12 @@
       "toolId": "animal-browser"
     },
     {
+      "id": "wildlife-3d-bears-and-canids-v1",
+      "name": "3D wildlife · bears and canids v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
       "id": "motion",
       "name": "Furniture movement sets",
       "description": "Default layouts and physics. Custom layouts remain individually reviewable in the tool.",
@@ -64033,7 +64039,175 @@
           "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-land-tortoise-woodland-crawlers-v1"
         }
       }
+    },
+    {
+      "id": "pattern:wildlife-3d-brown-bear-bears-and-canids-v1",
+      "batchId": "wildlife-3d-bears-and-canids-v1",
+      "kind": "wildlife",
+      "name": "Brown bear",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-brown-bear-bears-and-canids-v1",
+      "fingerprint": "8ca4c90593edcd728362bcf4d5ec88c68395f382aa47738fd5feaa5c127005eb",
+      "sourceFingerprint": "653f566b56ad97fab7d75958efde7f75d0ae759e1f2a85ecca8669f0eb37f9be",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-brown-bear-bears-and-canids-v1",
+        "prefabIds": [],
+        "revision": "d10231000bb4c6a7d1722b00670d620d59d226e8bd612bedca9e82936af44dbb",
+        "renderFingerprint": "8ca4c90593edcd728362bcf4d5ec88c68395f382aa47738fd5feaa5c127005eb",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-brown-bear-bears-and-canids-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-brown-bear-bears-and-canids-v1",
+        "fingerprint": "653f566b56ad97fab7d75958efde7f75d0ae759e1f2a85ecca8669f0eb37f9be",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-brown-bear-bears-and-canids-v1",
+          "prefabIds": [],
+          "revision": "d10231000bb4c6a7d1722b00670d620d59d226e8bd612bedca9e82936af44dbb",
+          "renderFingerprint": "8ca4c90593edcd728362bcf4d5ec88c68395f382aa47738fd5feaa5c127005eb",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-brown-bear-bears-and-canids-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-polar-bear-bears-and-canids-v1",
+      "batchId": "wildlife-3d-bears-and-canids-v1",
+      "kind": "wildlife",
+      "name": "Polar bear",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-polar-bear-bears-and-canids-v1",
+      "fingerprint": "87449d81dba56279d78d50519aca3b5842af34b05e8416fa3267de5498330f8e",
+      "sourceFingerprint": "35307262f07ed5be58431569e86ccaaea4c8acf300705e349fbd60fad718ff28",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-polar-bear-bears-and-canids-v1",
+        "prefabIds": [],
+        "revision": "1daca2edc24400bd39aec08dc52d3ba7a2af579de4b98e13a59161e6ab21f240",
+        "renderFingerprint": "87449d81dba56279d78d50519aca3b5842af34b05e8416fa3267de5498330f8e",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-polar-bear-bears-and-canids-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-polar-bear-bears-and-canids-v1",
+        "fingerprint": "35307262f07ed5be58431569e86ccaaea4c8acf300705e349fbd60fad718ff28",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-polar-bear-bears-and-canids-v1",
+          "prefabIds": [],
+          "revision": "1daca2edc24400bd39aec08dc52d3ba7a2af579de4b98e13a59161e6ab21f240",
+          "renderFingerprint": "87449d81dba56279d78d50519aca3b5842af34b05e8416fa3267de5498330f8e",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-polar-bear-bears-and-canids-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-coyote-bears-and-canids-v1",
+      "batchId": "wildlife-3d-bears-and-canids-v1",
+      "kind": "wildlife",
+      "name": "Coyote",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-coyote-bears-and-canids-v1",
+      "fingerprint": "11d11e387831316611c9c03ccad3ac9da54e96a5af53ef72a3f35967dbe3dec8",
+      "sourceFingerprint": "13df6c4cc27db77b80153a1e1e3c48fc513da1c9dde0e3cdc6116eb5524100e9",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-coyote-bears-and-canids-v1",
+        "prefabIds": [],
+        "revision": "421ba91818e9fe4c09987d332abda8d98729fa137fe2b3bfa08d370e194ecfee",
+        "renderFingerprint": "11d11e387831316611c9c03ccad3ac9da54e96a5af53ef72a3f35967dbe3dec8",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-coyote-bears-and-canids-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-coyote-bears-and-canids-v1",
+        "fingerprint": "13df6c4cc27db77b80153a1e1e3c48fc513da1c9dde0e3cdc6116eb5524100e9",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-coyote-bears-and-canids-v1",
+          "prefabIds": [],
+          "revision": "421ba91818e9fe4c09987d332abda8d98729fa137fe2b3bfa08d370e194ecfee",
+          "renderFingerprint": "11d11e387831316611c9c03ccad3ac9da54e96a5af53ef72a3f35967dbe3dec8",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-coyote-bears-and-canids-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-wolf-bears-and-canids-v1",
+      "batchId": "wildlife-3d-bears-and-canids-v1",
+      "kind": "wildlife",
+      "name": "Grey wolf",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-wolf-bears-and-canids-v1",
+      "fingerprint": "1b6f0b97e859c892a935a40132e0c87748338a0afbab79c1c1c3c257db13aff7",
+      "sourceFingerprint": "df1d207bd08f7502f10ba337cc1fc18e54679796d9103bc708f6cb8b4db90071",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-wolf-bears-and-canids-v1",
+        "prefabIds": [],
+        "revision": "a17df0d664f33b7489d0b3c14f5adb5b235a65ec2b8b9b29e002434146a4532d",
+        "renderFingerprint": "1b6f0b97e859c892a935a40132e0c87748338a0afbab79c1c1c3c257db13aff7",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-wolf-bears-and-canids-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-wolf-bears-and-canids-v1",
+        "fingerprint": "df1d207bd08f7502f10ba337cc1fc18e54679796d9103bc708f6cb8b4db90071",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-wolf-bears-and-canids-v1",
+          "prefabIds": [],
+          "revision": "a17df0d664f33b7489d0b3c14f5adb5b235a65ec2b8b9b29e002434146a4532d",
+          "renderFingerprint": "1b6f0b97e859c892a935a40132e0c87748338a0afbab79c1c1c3c257db13aff7",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-wolf-bears-and-canids-v1"
+        }
+      }
     }
   ],
-  "inputDigest": "77f7b3cb17c36c9ea9c0b278047e19a328c3dfa1a3ab0dac090e16684015f698"
+  "inputDigest": "2aba7e526f97ed5fdd54ed08773cdd3a4a2059acd4d4f7ad019f58946d08893a"
 }

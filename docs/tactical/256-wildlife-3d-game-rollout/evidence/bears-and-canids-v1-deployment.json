@@ -1,0 +1,138 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "9eaf541d4c85c472b60e6294dd58ccb9827bc2900b512af4855f08ddfe49692b",
+  "results": [
+    {
+      "type": "wildlife-brown-bear-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "8ca4c90593edcd728362bcf4d5ec88c68395f382aa47738fd5feaa5c127005eb",
+      "modelSha256": "a8f21b58f4e008b4b90a4ae687d7f8a2c803c8a0803650a48b72c3c87862286f",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-brown-bear&wildlife3dStage=brown-bear-bears-and-canids-v1&wildlife3dReview=brown-bear-bears-and-canids-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009448966979980552,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-polar-bear-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "87449d81dba56279d78d50519aca3b5842af34b05e8416fa3267de5498330f8e",
+      "modelSha256": "9f9818f6cd7676bcb5c93a43685e9fba7f2e8ce431b3598d6d0be08be7247668",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-polar-bear&wildlife3dStage=polar-bear-bears-and-canids-v1&wildlife3dReview=polar-bear-bears-and-canids-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009287109375000107,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-coyote-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "11d11e387831316611c9c03ccad3ac9da54e96a5af53ef72a3f35967dbe3dec8",
+      "modelSha256": "6d027a2749bdfcd89578bb93142659ecea7f0784b9a78ad5a1ffaa19abd6b49d",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-coyote&wildlife3dStage=coyote-bears-and-canids-v1&wildlife3dReview=coyote-bears-and-canids-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009448509216308685,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-wolf-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "1b6f0b97e859c892a935a40132e0c87748338a0afbab79c1c1c3c257db13aff7",
+      "modelSha256": "03427261d0d74c455ab70a3a698ed3f67a8a91a8adfa7be5fb8f3d94190c0559",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-wolf&wildlife3dStage=wolf-bears-and-canids-v1&wildlife3dReview=wolf-bears-and-canids-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009208831787109481,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    }
+  ]
+}

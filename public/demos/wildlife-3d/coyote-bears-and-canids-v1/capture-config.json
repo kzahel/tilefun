@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-coyote-predator-v1",
+  "fit": [
+    12.61,
+    10.15,
+    12.21
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "reviewContext": "Narrow body with pointed ears and a low tail. The faster pursuit lengthens the stride and raises the heel sooner.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

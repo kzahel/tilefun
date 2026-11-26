@@ -18,13 +18,15 @@ export function isRaptorModelReviewCase(caseId: string): boolean {
   return /^(?:eagle|hawk|owl|secretary-bird)$/.test(caseId);
 }
 
-export function isFelidModelReviewCase(caseId: string): boolean {
-  return /^(?:bobcat|lynx|cheetah|jaguar|leopard|lion|tiger|panther)$/.test(caseId);
+export function isGroundHunterModelReviewCase(caseId: string): boolean {
+  return /^(?:bobcat|lynx|cheetah|jaguar|leopard|lion|tiger|panther|brown-bear|polar-bear|coyote|wolf)$/.test(
+    caseId,
+  );
 }
 
-export function felidReviewActors(type: string, caseId: string) {
+export function groundHunterReviewActors(type: string, caseId: string) {
   const hunter = predatorProfile(type);
-  if (hunter?.species !== caseId || !isFelidModelReviewCase(caseId)) return undefined;
+  if (hunter?.species !== caseId || !isGroundHunterModelReviewCase(caseId)) return undefined;
   return [createPredator(hunter.species, 240, 176), createRabbit(293, 176), createRabbit(286, 225)];
 }
 

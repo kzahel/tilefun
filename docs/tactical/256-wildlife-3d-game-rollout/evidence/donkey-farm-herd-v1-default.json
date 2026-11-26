@@ -1,0 +1,50 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "2c3dee268c73e673fe1e1bd93d7f3b89aa5dbde8",
+  "workshopInputDigest": "c79149beb23768803bea02b47529ced2366969ff2a24709d7aef9aad22af1fe1",
+  "results": [
+    {
+      "type": "wildlife-donkey-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "4423af0338b2a8a7a415a835a0867129d956e5dd0ca334248cc9aea228c8fca4",
+      "modelSha256": "cf51d304773c8f2be5cebf5da056d20566b094d86bdb9fb91ec261ad5ab93541",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-behavior-donkey&wildlife3dStage=donkey-farm-herd-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "lie",
+        "roll",
+        "stand",
+        "ride",
+        "ride-sprint"
+      ],
+      "heightRange": [
+        -0.001060781478881543,
+        -0.0003554630279541006
+      ],
+      "statesOnApproachOrMount": [
+        "flee",
+        "ride",
+        "ride-sprint"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "lie",
+          "roll",
+          "stand",
+          "ride",
+          "ride-sprint"
+        ]
+      }
+    }
+  ]
+}
