@@ -54,6 +54,7 @@ export const FAUNA_TORSO_FITS: Readonly<
   meerkat: [7.5, 9],
   beaver: [11, 8.5],
   panda: [14, 14],
+  fox: [7.5, 9],
 };
 
 export function centeredTorsoCollider(size: number, support: number): ColliderComponent {

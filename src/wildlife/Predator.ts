@@ -101,6 +101,15 @@ export const PREDATOR_TORSO_FITS: Readonly<
   tiger: [8.5, 14.5],
   "brown-bear": [15, 15.5],
   "polar-bear": [12, 15.5],
+  coyote: [6, 13],
+  "dire-wolf": [13, 20.5],
+  wolf: [7, 14],
+  "spotted-hyena": [9, 15.5],
+  fossa: [7.5, 10],
+  "honey-badger": [7, 8],
+  mongoose: [5, 9.5],
+  "tasmanian-devil": [9, 10],
+  "white-nosed-coati": [5, 9.5],
 };
 
 function predatorCollider({ species, body }: PredatorProfile) {

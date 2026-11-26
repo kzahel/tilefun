@@ -237,7 +237,8 @@ export function naturalLandscapeRecipe(
       id === "wolf-pack"
         ? [...pack, createDeer(128, 64), createRabbit(140, 100)]
         : [
-            createPredator("t-rex", 64, 64),
+            // Leave room for the pounce before the wolf runs beyond the territory.
+            createPredator("t-rex", 72, 64),
             createPredator("dire-wolf", 112, 64),
             createDeer(176, 64),
             createRabbit(160, 120),
