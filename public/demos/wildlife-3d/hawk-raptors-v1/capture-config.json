@@ -1,0 +1,25 @@
+{
+  "runtimeType": "wildlife-hawk-predator-v1",
+  "version": 3,
+  "fit": [
+    11.6,
+    8.31,
+    11.6
+  ],
+  "autoFit": true,
+  "portraitCenter": 0.92,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase",
+    "sleep",
+    "flight"
+  ],
+  "reviewContext": "Final planned candidate. V1's highest-impact note is preserved in the local revision brief. This pass targeted lower the whole silhouette, make the feet and limb edges easier to read, give the tail its requested silhouette. Compare this exact candidate against the active sprite and report any remaining quality gap. The first candidate images and completed review remain retained in the adjacent v1 folder.",
+  "model": "model.glb",
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

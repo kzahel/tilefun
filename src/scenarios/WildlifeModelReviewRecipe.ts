@@ -8,7 +8,10 @@ import { createPredator, predatorProfile } from "../wildlife/Predator.js";
 import { forestWorkRecipe } from "./ForestWorkRecipe.js";
 import { naturalLandscapeRecipe } from "./NaturalLandscapeRecipe.js";
 import { FLAT_SCENARIO, type ScenarioRecipe } from "./ScenarioRecipe.js";
-import { isWildlifeBehaviorModelReview } from "./WildlifeBehaviorModelReview.js";
+import {
+  isRaptorModelReviewCase,
+  isWildlifeBehaviorModelReview,
+} from "./WildlifeBehaviorModelReview.js";
 
 const FARM_MODEL_CASES = new Set([
   "behavior-chicken",
@@ -90,6 +93,11 @@ export function wildlifeModelReviewRecipe(
   if (classicTravel) return classicModelStage(id, type, classicTravel);
   if (isFarmModelReviewCase(caseId) || isWildlifeBehaviorModelReview(type, caseId))
     return naturalLandscapeRecipe(caseId, "balanced");
+  if (isRaptorModelReviewCase(caseId)) {
+    const scene = naturalLandscapeRecipe(caseId, "balanced");
+    for (const actor of scene.actors ?? []) delete actor.naturalSpawnId;
+    return { ...scene, nativeProps: [] };
+  }
   if (wildlifeFeedingReview(type, caseId))
     return type === DEER_TYPE
       ? forestWorkRecipe("deer")

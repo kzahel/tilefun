@@ -107,6 +107,17 @@ runtime scope reconciliation in the execution notes.
 
 ## Delivery log
 
+### Raptors, 2026-11-26
+
+The bald eagle, red-tailed hawk and tawny owl have separate ground steps,
+feeding, threat, sleep, cruise and pursuit clips. The secretary bird raises
+its crest and stamps with one foot during the threat display. Without a perch,
+an aerial hunter now naps on the ground and resumes patrol after the hunt
+cooldown. The exact checks observed all 26 states in Workshop and after
+saving and reopening ordinary game worlds. [Renderer evidence](256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json) ·
+[Public preview evidence](256-wildlife-3d-game-rollout/evidence/raptors-v1-deployment.json) ·
+[Workshop review](https://tilefun.graehlarts.com/tilefun/workshop.html#/review/pattern%3Awildlife-3d-eagle-raptors-v1)
+
 ### Working and display birds, 2026-11-26
 
 The carrion crow places twigs, the raven scrapes and buries, and the hummingbird

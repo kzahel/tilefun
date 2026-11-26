@@ -976,6 +976,12 @@
       "toolId": "animal-browser"
     },
     {
+      "id": "wildlife-3d-raptors-v1",
+      "name": "3D wildlife · raptors v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
       "id": "motion",
       "name": "Furniture movement sets",
       "description": "Default layouts and physics. Custom layouts remain individually reviewable in the tool.",
@@ -62467,7 +62473,175 @@
           "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-peacock-working-and-display-birds-v1"
         }
       }
+    },
+    {
+      "id": "pattern:wildlife-3d-eagle-raptors-v1",
+      "batchId": "wildlife-3d-raptors-v1",
+      "kind": "wildlife",
+      "name": "Bald eagle",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-eagle-raptors-v1",
+      "fingerprint": "6c360c7d0f81ae95c57ef431afd6cc758a7d0e6b3398bddc5309f92dabb26129",
+      "sourceFingerprint": "b7096965ce8b1bdf00fb254e4066ce256a71ce582118359604d206d09c7ada36",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-eagle-raptors-v1",
+        "prefabIds": [],
+        "revision": "2692291f92bdc9e92b520c309f5b552b8e1791323df27e345323f85c97ea8d38",
+        "renderFingerprint": "6c360c7d0f81ae95c57ef431afd6cc758a7d0e6b3398bddc5309f92dabb26129",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-eagle-raptors-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-eagle-raptors-v1",
+        "fingerprint": "b7096965ce8b1bdf00fb254e4066ce256a71ce582118359604d206d09c7ada36",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-eagle-raptors-v1",
+          "prefabIds": [],
+          "revision": "2692291f92bdc9e92b520c309f5b552b8e1791323df27e345323f85c97ea8d38",
+          "renderFingerprint": "6c360c7d0f81ae95c57ef431afd6cc758a7d0e6b3398bddc5309f92dabb26129",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-eagle-raptors-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-hawk-raptors-v1",
+      "batchId": "wildlife-3d-raptors-v1",
+      "kind": "wildlife",
+      "name": "Red-tailed hawk",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-hawk-raptors-v1",
+      "fingerprint": "90e106306f0549133b669e289c90552246eddb5e1615d4e207bde7bed8fd60ca",
+      "sourceFingerprint": "93f6a4568fb4a19ee75237300d74c8563adebaf89faf7c8141b0dfce7c7937a7",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-hawk-raptors-v1",
+        "prefabIds": [],
+        "revision": "54b286c8c11747d618290e3da840b3580034636f228685ffd23db492dc48b85e",
+        "renderFingerprint": "90e106306f0549133b669e289c90552246eddb5e1615d4e207bde7bed8fd60ca",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-hawk-raptors-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-hawk-raptors-v1",
+        "fingerprint": "93f6a4568fb4a19ee75237300d74c8563adebaf89faf7c8141b0dfce7c7937a7",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-hawk-raptors-v1",
+          "prefabIds": [],
+          "revision": "54b286c8c11747d618290e3da840b3580034636f228685ffd23db492dc48b85e",
+          "renderFingerprint": "90e106306f0549133b669e289c90552246eddb5e1615d4e207bde7bed8fd60ca",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-hawk-raptors-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-owl-raptors-v1",
+      "batchId": "wildlife-3d-raptors-v1",
+      "kind": "wildlife",
+      "name": "Tawny owl",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-owl-raptors-v1",
+      "fingerprint": "560878a32898f9dc16d129c1a566354a4f9e1c4e6548b83c39a5c0ff9854aa76",
+      "sourceFingerprint": "49cdfe26beb65fb92642c44df37d6aeea9504144bf24ea46244cdacd0a1d70c4",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-owl-raptors-v1",
+        "prefabIds": [],
+        "revision": "1c2dd7591c2f7de40b2cf49bea540eb6ec1c3595c6f33790c22f4429fe912430",
+        "renderFingerprint": "560878a32898f9dc16d129c1a566354a4f9e1c4e6548b83c39a5c0ff9854aa76",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-owl-raptors-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-owl-raptors-v1",
+        "fingerprint": "49cdfe26beb65fb92642c44df37d6aeea9504144bf24ea46244cdacd0a1d70c4",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-owl-raptors-v1",
+          "prefabIds": [],
+          "revision": "1c2dd7591c2f7de40b2cf49bea540eb6ec1c3595c6f33790c22f4429fe912430",
+          "renderFingerprint": "560878a32898f9dc16d129c1a566354a4f9e1c4e6548b83c39a5c0ff9854aa76",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-owl-raptors-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-secretary-bird-raptors-v1",
+      "batchId": "wildlife-3d-raptors-v1",
+      "kind": "wildlife",
+      "name": "Secretary bird",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-secretary-bird-raptors-v1",
+      "fingerprint": "bd7cefb0650924ce007f88b82fdb71bbcbc8621e38a2f17a4f70c399bc485cec",
+      "sourceFingerprint": "0e5f628407fb33ca904920ed57e84f7d1a51e54e4a089b327f9f5a8bba48b463",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-secretary-bird-raptors-v1",
+        "prefabIds": [],
+        "revision": "31b6e9acaba8a3ab4cfd8d16f84a3ac8f2cc7ad22c8967d4247cef42e39cab0e",
+        "renderFingerprint": "bd7cefb0650924ce007f88b82fdb71bbcbc8621e38a2f17a4f70c399bc485cec",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-secretary-bird-raptors-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-secretary-bird-raptors-v1",
+        "fingerprint": "0e5f628407fb33ca904920ed57e84f7d1a51e54e4a089b327f9f5a8bba48b463",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-secretary-bird-raptors-v1",
+          "prefabIds": [],
+          "revision": "31b6e9acaba8a3ab4cfd8d16f84a3ac8f2cc7ad22c8967d4247cef42e39cab0e",
+          "renderFingerprint": "bd7cefb0650924ce007f88b82fdb71bbcbc8621e38a2f17a4f70c399bc485cec",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-secretary-bird-raptors-v1"
+        }
+      }
     }
   ],
-  "inputDigest": "01b4b5f3bf3d3a8ee851c6a6ff0736e8da4780a169b8303f9b93f51641a55a74"
+  "inputDigest": "b92049da42c3292e539fe89014dd550bc0f4596ba61328bed7e81782fc8c2835"
 }

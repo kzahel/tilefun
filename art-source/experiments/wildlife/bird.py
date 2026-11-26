@@ -87,6 +87,7 @@ HEN_ROLLOUT = False
 CLASSIC_BIRD_ROLLOUT = False
 FLIGHT_ROLLOUT = None
 GROUND_ROLLOUT = None
+RAPTOR_ROLLOUT = None
 
 # Wing reach in the cruise and escape strokes, peck depth and escape pitch.
 FLIGHT_POSES = {
@@ -124,6 +125,12 @@ WORK_ACTIONS = {
     "raven": {"pickup": 20, "bury": 30},
     "ruby-throated-hummingbird": {"sip": 15, "guard": 15},
     "peacock": {"open": 29, "display": 48, "close": 29},
+}
+RAPTOR_GAITS = {
+    "eagle": (.32, .52),
+    "hawk": (.29, .48),
+    "owl": (.24, .39),
+    "secretary-bird": (.46, .85),
 }
 
 
@@ -179,6 +186,16 @@ def configure_ground_rollout(variant):
     GROUND_ROLLOUT = GROUND_POSES[variant]
     DURATIONS = {"idle":48,"walk":23 if variant=="kiwi" else 31,"action":19,"flee":12 if variant=="kiwi" else 15}
     DURATIONS.update(WORK_ACTIONS.get(variant, {}))
+
+
+def configure_raptor_rollout(variant):
+    global RAPTOR_ROLLOUT, DURATIONS
+    configure(variant)
+    RAPTOR_ROLLOUT = RAPTOR_GAITS[variant]
+    chase_frames = {"owl": 8, "secretary-bird": 15}.get(variant, 10)
+    DURATIONS = {"idle":48,"walk":31,"feed":19,"display":19,"chase":chase_frames}
+    if variant != "secretary-bird":
+        DURATIONS.update(sleep=19,flight=19)
 
 
 def joints():
@@ -346,10 +363,10 @@ def surface():
 def pose(rig,rest,clip,t):
     wave=math.tau*t
     escape=FLIGHT_ROLLOUT is not None and clip=="flee"
-    running=GROUND_ROLLOUT is not None and clip=="flee"
+    running=(GROUND_ROLLOUT is not None and clip=="flee") or (RAPTOR_ROLLOUT is not None and clip=="chase")
     hummingbird = FLIGHT_ROLLOUT is not None and NAME=="Ruby-throated Hummingbird"
     hovering = hummingbird and clip in ("sip", "guard")
-    flying,swim,walk=clip=="fly" or escape or hovering,clip=="swim",clip=="walk" or running
+    flying,swim,walk=clip in ("fly", "flight") or escape or hovering,clip=="swim",clip=="walk" or running
     head_dip=(math.sin(math.pi*t)**2)*(.80 if clip=="feed" else .73 if clip in ("pickup","sip") else
               .34 if clip=="action" else .29 if clip=="sleep" else 0)
     if HEN_ROLLOUT:
@@ -391,6 +408,12 @@ def pose(rig,rest,clip,t):
     if running:
         trunkq = euler(-.14 + .055*math.sin(2*wave), .075*math.sin(wave))
         shift.z += .028 + .047*math.sin(2*wave)
+    if RAPTOR_ROLLOUT is not None:
+        if clip=="flight":
+            trunkq = euler(-.12 + .076*math.sin(wave))
+            shift.z = .055*math.sin(wave)
+        elif clip=="sleep":
+            shift.z = -.11 + .012*math.sin(wave)
     body=transform(trunkq,BODY,BODY+shift)
     result={"body":body@rest["body"]}
     headq=trunkq@euler(-.78*head_dip+.075*display,0,.085*math.sin(wave)*(clip=="idle"))
@@ -415,6 +438,9 @@ def pose(rig,rest,clip,t):
         else:
             headq = trunkq@euler(.18*reach, .08*math.sin(wave), .28*math.sin(wave))
             head_position = body@HEAD+V((0,-.05*reach,.07*reach))
+    if RAPTOR_ROLLOUT is not None and clip=="sleep":
+        headq = trunkq@euler(-.29, .12, -.43)
+        head_position = body@HEAD+V((0,-.081,-.093))
     head=transform(headq,HEAD,head_position)
     result["head"]=head@rest["head"]
     if "jaw" in rest:
@@ -460,6 +486,9 @@ def pose(rig,rest,clip,t):
             if NAME=="Great Frigatebird":
                 spread = .29+(.71*opening**(.42 if escape else .65))
                 beat_span *= .84
+        if RAPTOR_ROLLOUT is not None:
+            spread = .73 + .24*math.sin(math.pi*t)**2 if flying else .78*display
+            beat = .65*math.sin(wave) + .35*math.sin(2*wave)
         if swim and STYLE=="tuxedo":
             spread=.73
             beat_span=.23
@@ -477,6 +506,9 @@ def pose(rig,rest,clip,t):
             if GROUND_ROLLOUT is not None:
                 reach = GROUND_ROLLOUT[1 if running else 0]
                 forward,lift=stride(t,phase,reach,reach*(.49 if running else .42))
+            if RAPTOR_ROLLOUT is not None:
+                reach = RAPTOR_ROLLOUT[1 if running else 0]
+                forward,lift=stride(t,phase,reach,reach*(.50 if running else .43))
             if HEN_ROLLOUT and clip=="flee":
                 forward,lift=stride(t,phase,.341,.191)
         elif flying or swim:

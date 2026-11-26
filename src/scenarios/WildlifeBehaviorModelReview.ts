@@ -11,6 +11,10 @@ export function isBirdWorkModelReviewCase(caseId: string): boolean {
   return /^behavior-(?:crow|raven|hummingbird|peacock)$/.test(caseId);
 }
 
+export function isRaptorModelReviewCase(caseId: string): boolean {
+  return /^(?:eagle|hawk|owl|secretary-bird)$/.test(caseId);
+}
+
 export function isWildlifeBehaviorModelReview(type: string, caseId: string): boolean {
   return isCatModelReview(type, caseId) || isBirdWorkModelReviewCase(caseId);
 }

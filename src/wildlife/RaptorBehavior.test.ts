@@ -11,6 +11,35 @@ import { createRabbit } from "./Rabbit.js";
 
 const idle = { dx: 0, dy: 0, sprinting: false, jump: false };
 const open = { canOccupy: () => true, isWater: () => false, surfaceZ: () => 0 };
+
+it("returns to ground rest and patrol after a real hawk hunt without a perch", async () => {
+  const hawk = createPredator("hawk", 64, 64);
+  const session = await ScenarioSession.create({
+    version: 1,
+    id: "raptor-ground-rest",
+    generation: FLAT_SCENARIO,
+    player: createPlayer(64, 192),
+    props: [],
+    actors: [hawk, createRabbit(128, 64)],
+  });
+  try {
+    const bird = required(
+      session.realm.entityManager.entities.find((entity) => entity.type === hawk.type),
+    );
+    const clips = new Set<number>();
+    for (let tick = 0; tick < 4500 && !(clips.has(1) && clips.has(5)); tick++) {
+      await session.step(idle);
+      if (!bird.predator?.meals) continue;
+      clips.add(bird.sprite?.clip ?? 0);
+      if (bird.sprite?.clip === 5) expect(bird.wz).toBeCloseTo(0, 0);
+    }
+    expect(clips.has(5)).toBe(true);
+    expect(clips.has(1)).toBe(true);
+  } finally {
+    await session.close();
+  }
+}, 30_000);
+
 describe.each(["owl", "eagle", "hawk"] as const)("%s shared aerial hunting", (species) => {
   it.each([
     "contact",

@@ -280,6 +280,17 @@ def paint_sprite_markings(mesh, species):
                 feather_end = point.y < bird.TAIL.y - bird.TAIL_LEN * .79
                 if feather_end:
                     color = "eye-blue" if face.normal.z > .65 else "eye-gold"
+        elif species in {"eagle", "hawk", "owl", "secretary-bird"}:
+            if species == "secretary-bird" and (wing or part == "Crown or crest"):
+                color = "ink"
+            elif species == "secretary-bird" and part.startswith("Leg and toes "):
+                color = "mantle"
+            elif part == "Sculpted bill" and face.normal.z < -.39:
+                color = "feet"
+            elif tail and species == "eagle":
+                color = "accent" if face.normal.z > -.27 else "mask"
+            elif tail and species == "hawk":
+                color = "accent" if face.normal.z > -.32 else "mantle"
         if toes and species in {"dove", "sparrow", "pigeon"}:
             color = "bill"
         if color:
@@ -295,9 +306,16 @@ def main():
     bpy.ops.wm.open_mainfile(filepath=str(Path(source).resolve()), use_scripts=False)
     rig, = (ob for ob in bpy.context.scene.objects if ob.type == "ARMATURE")
     mesh, = (ob for ob in bpy.context.scene.objects if ob.type == "MESH")
-    travel = "walk" if species in bird.GROUND_POSES else "fly"
-    configure = bird.configure_ground_rollout if travel == "walk" else bird.configure_flight_rollout
-    configure(species)
+    if species in bird.RAPTOR_GAITS:
+        bird.configure_raptor_rollout(species)
+        draft_actions = {"idle", "walk", "feed", "display"}
+        if species != "secretary-bird":
+            draft_actions.update({"sleep", "fly"})
+    else:
+        travel = "walk" if species in bird.GROUND_POSES else "fly"
+        configure = bird.configure_ground_rollout if travel == "walk" else bird.configure_flight_rollout
+        configure(species)
+        draft_actions = {"idle", travel, "action"} | DRAFT_WORK_ACTIONS.get(species, set())
     rig.scale.y *= BODY_LENGTH_SCALE.get(species, 1)
     if species in {"pelican", "blue-footed-booby"}:
         articulate_bill(rig, mesh, species)
@@ -312,7 +330,7 @@ def main():
     if species == "peacock":
         rig_peacock_fan(mesh, rig)
     paint_sprite_markings(mesh, species)
-    assert set(bpy.data.actions.keys()) == {"idle", travel, "action"} | DRAFT_WORK_ACTIONS.get(species, set())
+    assert set(bpy.data.actions.keys()) == draft_actions
     for action in list(bpy.data.actions):
         bpy.data.actions.remove(action)
     wildlife_build.key_actions(rig, bird.DURATIONS, bird.pose)

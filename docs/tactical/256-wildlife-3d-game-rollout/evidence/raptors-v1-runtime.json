@@ -1,0 +1,194 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-eagle-predator-v1",
+      "clips": 7,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 426.66666666666663
+        },
+        {
+          "state": "sleep",
+          "action": "sleep",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flight",
+          "action": "flight",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "eagle-raptors-v1",
+      "modelSha256": "e3c799f71ff7da95b40f7039a36ec67d814268dce6109422c5484abc4560b9a6"
+    },
+    {
+      "type": "wildlife-hawk-predator-v1",
+      "clips": 7,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 426.66666666666663
+        },
+        {
+          "state": "sleep",
+          "action": "sleep",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flight",
+          "action": "flight",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "hawk-raptors-v1",
+      "modelSha256": "a04b657c3787044e97e40a197d7302745e68789c02875e37d821aca13c18b9e0"
+    },
+    {
+      "type": "wildlife-owl-predator-v1",
+      "clips": 7,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 320
+        },
+        {
+          "state": "sleep",
+          "action": "sleep",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flight",
+          "action": "flight",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "owl-raptors-v1",
+      "modelSha256": "c19e51243eb983af82a4c9a200d9ee02b63a1ce3386a4ea962afd8668d85ba2e"
+    },
+    {
+      "type": "wildlife-secretary-bird-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "secretary-bird-raptors-v1",
+      "modelSha256": "44ab024e0d7f3416e3935ec0eff49401934bc74be00560da0b89e1e0b38d1308"
+    }
+  ],
+  "clipSamples": 728,
+  "testedDepth": false
+}

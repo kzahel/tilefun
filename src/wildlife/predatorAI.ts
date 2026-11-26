@@ -4,9 +4,11 @@ import type { EntityManager } from "../entities/EntityManager.js";
 import { lcgNext } from "../shared/Determinism.js";
 import { gap } from "../shared/gap.js";
 import { required } from "../shared/required.js";
-import { predatorFlightZ, restorePredatorPose } from "./PredatorMotion.js";
+import { restorePredatorPose } from "./PredatorMotion.js";
+import { clearPredatorFlight, clearPredatorPath, nearestPredatorPerch } from "./PredatorPaths.js";
 
 export { predatorHabitatAllows } from "./PredatorHabitat.js";
+export { clearPredatorFlight } from "./PredatorPaths.js";
 
 import { directionFromVelocity } from "../entities/wanderAI.js";
 import { durableId } from "../persistence/ActorRecords.js";
@@ -17,7 +19,6 @@ import { startleFauna } from "./faunaInteractions.js";
 import { startleFrog } from "./frogInteractions.js";
 import { startleMallard } from "./mallardInteractions.js";
 import { predatorProfile } from "./Predator.js";
-import { predatorHabitatAllows } from "./PredatorHabitat.js";
 import { startleRabbit } from "./rabbitInteractions.js";
 import { startleRobin } from "./robinInteractions.js";
 import type { WildlifeEnvironment } from "./WildlifeEnvironment.js";
@@ -98,49 +99,6 @@ function raptorOnPrey(hunter: Entity, prey: Entity): boolean {
     bodyGap(hunter, prey) === 0
   );
 }
-function clearPath(
-  e: Entity,
-  to: PositionComponent,
-  env: WildlifeEnvironment,
-  planning?: AiPlanningScheduler,
-): boolean {
-  const steps = Math.max(1, Math.ceil(gap(e.position, to) / 4));
-  if (steps > 48 || (planning && !planning.path(e, steps))) return false;
-  for (let i = 1; i <= steps; i++) {
-    const p = {
-      wx: e.position.wx + ((to.wx - e.position.wx) * i) / steps,
-      wy: e.position.wy + ((to.wy - e.position.wy) * i) / steps,
-    };
-    if (
-      !predatorHabitatAllows(e, p, env) ||
-      !env.canOccupy(e, p) ||
-      Math.abs((env.surfaceZ?.(p) ?? 0) - (e.wz ?? 0)) > 4
-    )
-      return false;
-  }
-  return true;
-}
-/** Finite, loaded, dry corridor. Height-aware occupancy retains ordinary prop collision. */
-export function clearPredatorFlight(
-  e: Entity,
-  to: PositionComponent,
-  endZ: number,
-  env: WildlifeEnvironment,
-  planning?: AiPlanningScheduler,
-): boolean {
-  const steps = Math.max(1, Math.ceil(gap(e.position, to) / 4));
-  if (steps > 48 || (planning && !planning.path(e, steps))) return false;
-  for (let i = 1; i <= steps; i++) {
-    const t = i / steps,
-      p = {
-        wx: e.position.wx + (to.wx - e.position.wx) * t,
-        wy: e.position.wy + (to.wy - e.position.wy) * t,
-      };
-    const probe = { collider: e.collider, wz: predatorFlightZ(e.wz ?? 0, endZ, t, 28) };
-    if (env.isWater(p) || !env.canOccupy(probe, p)) return false;
-  }
-  return true;
-}
 function launchPredatorFlight(
   e: Entity,
   to: PositionComponent,
@@ -161,6 +119,20 @@ function launchPredatorFlight(
   };
   enter(e, "flight", 0);
 }
+function movePredatorToward(e: Entity, target: PositionComponent, speedLimit: number, dt: number) {
+  const dx = target.wx - e.position.wx;
+  const dy = target.wy - e.position.wy;
+  const distance = Math.hypot(dx, dy);
+  if (distance <= 0.1) return;
+  const speed = Math.min(speedLimit, distance / dt);
+  const intent = required(e.motionIntent);
+  intent.vx = (dx / distance) * speed;
+  intent.vy = (dy / distance) * speed;
+  const sprite = required(e.sprite);
+  sprite.frameRow = sprite.direction = directionFromVelocity(dx, dy);
+  required(e.predator).facing = sprite.direction;
+}
+
 /** All decisions use admitted logical dt and the Realm's bounded planning budget. */
 export function updatePredatorAI(
   e: Entity,
@@ -224,21 +196,9 @@ export function updatePredatorAI(
         dy = e.position.wy - ai.alarmFrom.wy,
         d = Math.hypot(dx, dy) || 1;
       const point = { wx: e.position.wx + (dx / d) * 72, wy: e.position.wy + (dy / d) * 72 };
-      if (clearPath(e, point, env, planning)) ai.aim = point;
+      if (clearPredatorPath(e, point, env, planning)) ai.aim = point;
     }
-    if (ai.aim) {
-      const dx = ai.aim.wx - e.position.wx,
-        dy = ai.aim.wy - e.position.wy,
-        d = Math.hypot(dx, dy);
-      const speed = Math.min(profile.chaseSpeed, d / dt);
-      if (d > 0.1) {
-        v.vx = (dx / d) * speed;
-        v.vy = (dy / d) * speed;
-        e.sprite.direction = directionFromVelocity(dx, dy);
-        e.sprite.frameRow = e.sprite.direction;
-        ai.facing = e.sprite.direction;
-      }
-    }
+    if (ai.aim) movePredatorToward(e, ai.aim, profile.chaseSpeed, dt);
     restorePredatorPose(e);
     return;
   }
@@ -347,7 +307,7 @@ export function updatePredatorAI(
             canEat(e, shared) &&
             gap(e.position, shared.position) < (fierce?.sense ?? 160) &&
             gap(shared.position, ai.home) < ai.radius &&
-            clearPath(e, shared.position, env, planning)
+            clearPredatorPath(e, shared.position, env, planning)
           )
             packTarget = shared;
         }
@@ -357,7 +317,7 @@ export function updatePredatorAI(
           gap(a.position, ai.home) < ai.radius &&
           (fierce?.kind === "griffin" || fierce?.kind === "raptor"
             ? clearPredatorFlight(e, a.position, env.surfaceZ?.(a.position) ?? 0, env, planning)
-            : clearPath(e, a.position, env, planning))
+            : clearPredatorPath(e, a.position, env, planning))
         ) {
           nearest = a;
           best = d;
@@ -401,24 +361,26 @@ export function updatePredatorAI(
         side = ai.packRole % 2 ? 1 : -1;
       target = { wx: target.wx - (dy / d) * 12 * side, wy: target.wy + (dx / d) * 12 * side };
     }
+    const perch =
+      target || ai.targetId
+        ? undefined
+        : nearestPredatorPerch(fierce?.kind, ai.home, ai.radius, env);
     if (target) {
-      if (clearPath(e, target, env, planning)) ai.aim = { ...target };
+      if (clearPredatorPath(e, target, env, planning)) ai.aim = { ...target };
       else {
         ai.cooldown = 3;
         enter(e, "rest", 1);
       }
-    } else if (!ai.targetId && (fierce?.kind === "griffin" || fierce?.kind === "raptor")) {
-      const perches = env.predatorPerches?.(ai.home, ai.radius) ?? [];
-      const perch = perches
-        .filter((p) => gap(p, ai.home) < ai.radius)
-        .sort((a, b) => gap(a, ai.home) - gap(b, ai.home))[0];
+    } else if (!ai.targetId && (perch || fierce?.kind === "griffin")) {
       if (perch && gap(e.position, perch) < 5 && Math.abs((e.wz ?? 0) - perch.z) < 3)
         enter(e, "perch", 2);
       else if (perch && clearPredatorFlight(e, perch, perch.z, env, planning))
         launchPredatorFlight(e, perch, perch.z, false);
       else enter(e, "rest", 2);
+    } else if (!ai.targetId && fierce?.kind === "raptor" && ai.cooldown > 0) {
+      enter(e, "sleep", 2.5);
     } else if (!ai.targetId && (fierce?.kind === "dragon" || fierce?.kind === "spider")) {
-      if (gap(e.position, ai.home) > 5 && clearPath(e, ai.home, env, planning)) {
+      if (gap(e.position, ai.home) > 5 && clearPredatorPath(e, ai.home, env, planning)) {
         if (ai.state !== "patrol") enter(e, "patrol", 0.3);
         ai.aim = { ...ai.home };
       } else {
@@ -438,7 +400,7 @@ export function updatePredatorAI(
       if (
         (!planning || planning.candidate(e)) &&
         !players.some((p) => gap(p, point) < 24) &&
-        clearPath(e, point, env, planning)
+        clearPredatorPath(e, point, env, planning)
       ) {
         enter(e, "patrol", 0.3);
         ai.aim = point;
@@ -446,20 +408,9 @@ export function updatePredatorAI(
     }
   }
   if (ai.aim) {
-    const dx = ai.aim.wx - e.position.wx,
-      dy = ai.aim.wy - e.position.wy,
-      d = Math.hypot(dx, dy);
-    const speed = Math.min(
-      ai.state === "chase" || ai.state === "pounce" ? profile.chaseSpeed : profile.speed,
-      d / dt,
-    );
-    if (d > 0.1) {
-      v.vx = (dx / d) * speed;
-      v.vy = (dy / d) * speed;
-      e.sprite.direction = directionFromVelocity(dx, dy);
-      e.sprite.frameRow = e.sprite.direction;
-      ai.facing = e.sprite.direction;
-    }
+    const speed =
+      ai.state === "chase" || ai.state === "pounce" ? profile.chaseSpeed : profile.speed;
+    movePredatorToward(e, ai.aim, speed, dt);
   }
   restorePredatorPose(e);
 }
@@ -484,7 +435,7 @@ export function consumeWildlifePrey(
   )
     return false;
   const approach = raptorOnPrey(hunter, prey) ? { ...hunter, wz: prey.wz ?? 0 } : hunter;
-  if (bodyGap(hunter, prey) > 3 || !clearPath(approach, prey.position, env)) return false;
+  if (bodyGap(hunter, prey) > 3 || !clearPredatorPath(approach, prey.position, env)) return false;
   const naturalSpawnId = prey.naturalSpawnId ?? prey.proceduralId;
   if (
     naturalSpawnId &&

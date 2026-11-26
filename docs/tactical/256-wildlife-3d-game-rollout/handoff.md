@@ -30,12 +30,13 @@ compatible. Continue from the completed playable pilot and registered batches.
 Run the inventory audit and check the current Workshop inbox and notes first.
 
 Preserve 255's asset evidence, unresolved findings and reviewer queue as
-history. Register and qualify the new assets through Tilefun's shared model
-catalog. Normal gameplay enables registered models with distinct actions for
-all current sprite states. Exercise the existing sprite preference and fallback.
-Record the exact
-production evidence and any genuine blocker in the ledger. Close the goal
-after verifying the deployed game and every roster entry and animation state.
+history. Register and qualify new assets through Tilefun's shared model
+catalog. Keep new candidates available in exact Workshop previews until
+the matching fingerprint is approved. Use promote-3d-rollout.mjs to select
+the approved file for default play. Exercise the sprite preference and
+fallback. Record the exact production evidence and any genuine blocker in
+the ledger. Close the goal after verifying the deployed game and every
+roster entry and animation state.
 ```
 
 The draft archive is `data/wildlife-3d-campaign/tilefun-animals.zip` in
@@ -57,7 +58,14 @@ npm run art:notes
 The [tactical delivery log](../256-wildlife-3d-game-rollout.md#delivery-log)
 identifies completed and pending batches. Preserve their immutable files and
 review fingerprints. The published review checkout is
-`https://tilefun.graehlarts.com/tilefun/`. Normal play and exact previews
-share the committed GLBs. Run the renderer's `--defaults` check and verify a
-fresh ordinary game entry on the shipped revision. Record the revision, URL,
-runtime hashes, and observed default states in the ledger.
+`https://tilefun.graehlarts.com/tilefun/`. The CI deployment publishes to
+`https://kzahel.github.io/tilefun/`. Run the renderer's `--defaults` check
+and verify a fresh ordinary game entry on the shipped revision. Record the
+revision, URL, runtime hashes and observed default states in the ledger.
+
+The November 26 resume began from base commit `23e99752` and reused the
+archived Blender drafts. Revision `d9ea9b1a` records 113 selected defaults,
+27 animals with exact production evidence, and 624 qualified states. That
+includes the three pilot and pet cat coats and both existing default dog
+models. The golden retriever preview has all four states and awaits exact
+Workshop review. The delivery log and ledger record later batches.

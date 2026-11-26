@@ -9666,6 +9666,46 @@
       "source": "demos/wildlife-3d/peacock-working-and-display-birds-v1/model.blend"
     },
     {
+      "id": "wildlife-3d-eagle-raptors-v1",
+      "name": "wildlife 3d eagle raptors v1",
+      "image": "demos/wildlife-3d/eagle-raptors-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "b7096965ce8b1bdf00fb254e4066ce256a71ce582118359604d206d09c7ada36",
+      "source": "demos/wildlife-3d/eagle-raptors-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-hawk-raptors-v1",
+      "name": "wildlife 3d hawk raptors v1",
+      "image": "demos/wildlife-3d/hawk-raptors-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "93f6a4568fb4a19ee75237300d74c8563adebaf89faf7c8141b0dfce7c7937a7",
+      "source": "demos/wildlife-3d/hawk-raptors-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-owl-raptors-v1",
+      "name": "wildlife 3d owl raptors v1",
+      "image": "demos/wildlife-3d/owl-raptors-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "49cdfe26beb65fb92642c44df37d6aeea9504144bf24ea46244cdacd0a1d70c4",
+      "source": "demos/wildlife-3d/owl-raptors-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-secretary-bird-raptors-v1",
+      "name": "wildlife 3d secretary bird raptors v1",
+      "image": "demos/wildlife-3d/secretary-bird-raptors-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "0e5f628407fb33ca904920ed57e84f7d1a51e54e4a089b327f9f5a8bba48b463",
+      "source": "demos/wildlife-3d/secretary-bird-raptors-v1/model.blend"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",
@@ -12125,7 +12165,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:51"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:54"
         },
         {
           "system": "Gameplay",
@@ -12267,7 +12307,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:49"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:52"
         },
         {
           "system": "Gameplay",
@@ -37403,7 +37443,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:57"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:60"
         },
         {
           "system": "Editor",
@@ -39445,7 +39485,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:51"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:54"
         },
         {
           "system": "Gameplay",
@@ -39591,7 +39631,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:49"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:52"
         },
         {
           "system": "Gameplay",

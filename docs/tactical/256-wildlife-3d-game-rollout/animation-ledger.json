@@ -144,9 +144,61 @@
         "sleep": "sleep",
         "flight": "fly"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "e3c799f71ff7da95b40f7039a36ec67d814268dce6109422c5484abc4560b9a6",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/eagle-raptors-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "e3c799f71ff7da95b40f7039a36ec67d814268dce6109422c5484abc4560b9a6",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/eagle-raptors-v1/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "e3c799f71ff7da95b40f7039a36ec67d814268dce6109422c5484abc4560b9a6",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/eagle-raptors-v1/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "e3c799f71ff7da95b40f7039a36ec67d814268dce6109422c5484abc4560b9a6",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/eagle-raptors-v1/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "e3c799f71ff7da95b40f7039a36ec67d814268dce6109422c5484abc4560b9a6",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/eagle-raptors-v1/chase.png"
+        },
+        "sleep": {
+          "action": "sleep",
+          "sha256": "e3c799f71ff7da95b40f7039a36ec67d814268dce6109422c5484abc4560b9a6",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/eagle-raptors-v1/sleep.png"
+        },
+        "flight": {
+          "action": "flight",
+          "sha256": "e3c799f71ff7da95b40f7039a36ec67d814268dce6109422c5484abc4560b9a6",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/eagle-raptors-v1/flight.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-eagle-raptors-v1",
+        "fingerprint": "6c360c7d0f81ae95c57ef431afd6cc758a7d0e6b3398bddc5309f92dabb26129",
+        "model": "public/demos/wildlife-3d/eagle-raptors-v1/model.glb",
+        "source": "public/demos/wildlife-3d/eagle-raptors-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/eagle-raptors-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-blue-footed-booby-provisional-v1",
@@ -1343,9 +1395,61 @@
         "sleep": "sleep",
         "flight": "fly"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "a04b657c3787044e97e40a197d7302745e68789c02875e37d821aca13c18b9e0",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/hawk-raptors-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "a04b657c3787044e97e40a197d7302745e68789c02875e37d821aca13c18b9e0",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/hawk-raptors-v1/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "a04b657c3787044e97e40a197d7302745e68789c02875e37d821aca13c18b9e0",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/hawk-raptors-v1/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "a04b657c3787044e97e40a197d7302745e68789c02875e37d821aca13c18b9e0",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/hawk-raptors-v1/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "a04b657c3787044e97e40a197d7302745e68789c02875e37d821aca13c18b9e0",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/hawk-raptors-v1/chase.png"
+        },
+        "sleep": {
+          "action": "sleep",
+          "sha256": "a04b657c3787044e97e40a197d7302745e68789c02875e37d821aca13c18b9e0",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/hawk-raptors-v1/sleep.png"
+        },
+        "flight": {
+          "action": "flight",
+          "sha256": "a04b657c3787044e97e40a197d7302745e68789c02875e37d821aca13c18b9e0",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/hawk-raptors-v1/flight.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-hawk-raptors-v1",
+        "fingerprint": "90e106306f0549133b669e289c90552246eddb5e1615d4e207bde7bed8fd60ca",
+        "model": "public/demos/wildlife-3d/hawk-raptors-v1/model.glb",
+        "source": "public/demos/wildlife-3d/hawk-raptors-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/hawk-raptors-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-robin-v1",
@@ -1547,9 +1651,49 @@
         "display": "display",
         "chase": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "44ab024e0d7f3416e3935ec0eff49401934bc74be00560da0b89e1e0b38d1308",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/secretary-bird-raptors-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "44ab024e0d7f3416e3935ec0eff49401934bc74be00560da0b89e1e0b38d1308",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/secretary-bird-raptors-v1/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "44ab024e0d7f3416e3935ec0eff49401934bc74be00560da0b89e1e0b38d1308",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/secretary-bird-raptors-v1/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "44ab024e0d7f3416e3935ec0eff49401934bc74be00560da0b89e1e0b38d1308",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/secretary-bird-raptors-v1/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "44ab024e0d7f3416e3935ec0eff49401934bc74be00560da0b89e1e0b38d1308",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/secretary-bird-raptors-v1/chase.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-secretary-bird-raptors-v1",
+        "fingerprint": "bd7cefb0650924ce007f88b82fdb71bbcbc8621e38a2f17a4f70c399bc485cec",
+        "model": "public/demos/wildlife-3d/secretary-bird-raptors-v1/model.glb",
+        "source": "public/demos/wildlife-3d/secretary-bird-raptors-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/secretary-bird-raptors-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-shoebill-provisional-v1",
@@ -1678,9 +1822,61 @@
         "sleep": "sleep",
         "flight": "fly"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "c19e51243eb983af82a4c9a200d9ee02b63a1ce3386a4ea962afd8668d85ba2e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/owl-raptors-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "c19e51243eb983af82a4c9a200d9ee02b63a1ce3386a4ea962afd8668d85ba2e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/owl-raptors-v1/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "c19e51243eb983af82a4c9a200d9ee02b63a1ce3386a4ea962afd8668d85ba2e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/owl-raptors-v1/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "c19e51243eb983af82a4c9a200d9ee02b63a1ce3386a4ea962afd8668d85ba2e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/owl-raptors-v1/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "c19e51243eb983af82a4c9a200d9ee02b63a1ce3386a4ea962afd8668d85ba2e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/owl-raptors-v1/chase.png"
+        },
+        "sleep": {
+          "action": "sleep",
+          "sha256": "c19e51243eb983af82a4c9a200d9ee02b63a1ce3386a4ea962afd8668d85ba2e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/owl-raptors-v1/sleep.png"
+        },
+        "flight": {
+          "action": "flight",
+          "sha256": "c19e51243eb983af82a4c9a200d9ee02b63a1ce3386a4ea962afd8668d85ba2e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/owl-raptors-v1/flight.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-owl-raptors-v1",
+        "fingerprint": "560878a32898f9dc16d129c1a566354a4f9e1c4e6548b83c39a5c0ff9854aa76",
+        "model": "public/demos/wildlife-3d/owl-raptors-v1/model.glb",
+        "source": "public/demos/wildlife-3d/owl-raptors-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/owl-raptors-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/raptors-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-toucan-provisional-v1",

@@ -9,6 +9,7 @@ import { createDescriptor } from "../../src/generation/GenerationDescriptor.ts";
 import {
   isBirdWorkModelReviewCase,
   isCatModelReview,
+  isRaptorModelReviewCase,
 } from "../../src/scenarios/WildlifeBehaviorModelReview.ts";
 import {
   isFarmModelReviewCase,
@@ -119,6 +120,8 @@ try {
       const farmStage = !candidate.classicTravel && isFarmModelReviewCase(candidate.lab);
       const catStage = isCatModelReview(candidate.type, candidate.lab);
       const birdWorkStage = isBirdWorkModelReviewCase(candidate.lab);
+      const raptorStage = isRaptorModelReviewCase(candidate.lab);
+      const secretaryStage = candidate.lab === "secretary-bird";
       const fourStateStage = isFourStateFaunaModelReview(candidate.type, candidate.lab);
       const packStage = isPackMountModelReview(candidate.type, candidate.lab);
       const feeding = wildlifeFeedingReview(candidate.type, candidate.lab);
@@ -130,23 +133,26 @@ try {
         farmStage ||
         catStage ||
         birdWorkStage ||
+        raptorStage ||
         fourStateStage ||
         packStage ||
         feeding ||
         candidate.type === "wildlife-robin-v1";
-      const contactClips = birdWorkStage
-        ? ["action", "flee"]
-        : hunterStage
-          ? ["display"]
-          : waterStage
-            ? ["flee", "flee-swim"]
-            : farmStage || packStage
-              ? ["flee", "ride", "ride-sprint"]
-              : doeStage
-                ? ["stamp", "flee"]
-                : fourStateStage || catStage || feeding
-                  ? ["flee"]
-                  : [];
+      const contactClips = secretaryStage
+        ? ["display"]
+        : birdWorkStage
+          ? ["action", "flee"]
+          : hunterStage
+            ? ["display"]
+            : waterStage
+              ? ["flee", "flee-swim"]
+              : farmStage || packStage
+                ? ["flee", "ride", "ride-sprint"]
+                : doeStage
+                  ? ["stamp", "flee"]
+                  : fourStateStage || catStage || feeding
+                    ? ["flee"]
+                    : [];
       const naturalClips = observeAllStates
         ? states.flatMap(({ name }, index) =>
             contactClips.includes(name) || (catStage && name === "action") ? [] : [index],
@@ -214,8 +220,9 @@ try {
           fetch: dogFetch,
           feeding: !!feeding,
           naturalClips,
-          timeout:
-            catStage || birdWorkStage
+          timeout: raptorStage
+            ? 130_000
+            : catStage || birdWorkStage
               ? 100_000
               : feeding || farmStage
                 ? 58_000
@@ -235,7 +242,13 @@ try {
             ? await verifyApproachClips(page, stage, candidate, states)
             : [];
       const landingStates =
-        farmStage || fourStateStage || catStage || birdWorkStage || packStage || feeding
+        farmStage ||
+        fourStateStage ||
+        catStage ||
+        birdWorkStage ||
+        (raptorStage && !secretaryStage) ||
+        packStage ||
+        feeding
           ? []
           : await verifyLandingClips(page, candidate, states);
       for (const clip of [...landingStates, ...approachStates])
@@ -257,10 +270,11 @@ try {
       if (fourStateStage && faunaProfile(candidate.type)?.hop)
         assert(poses.maxZ > 2, `No physical hop observed for ${candidate.type}`);
       const game = await verifyGameEntry(page, candidate, preview, {
-        verifyFaunaStates: fourStateStage || packStage || birdWorkStage || !!feeding,
+        verifyFaunaStates: fourStateStage || packStage || birdWorkStage || raptorStage || !!feeding,
         catStage,
         dogFetch,
-        workPlacements: birdWorkStage ? birdWorkPlacements(candidate) : [],
+        useStick: secretaryStage,
+        workPlacements: birdWorkStage || raptorStage ? reviewActorPlacements(candidate) : [],
         packStage,
         approachClips: contactClips,
         states,
@@ -348,7 +362,7 @@ async function verifyStartleInFreshStage(page, stage, candidate, states) {
   return [action, flee];
 }
 
-function birdWorkPlacements(candidate) {
+function reviewActorPlacements(candidate) {
   const recipe = wildlifeModelReviewRecipe(candidate.type, candidate.lab);
   const [bird, ...related] = recipe.actors;
   const companions = related.map((actor) => ({ type: actor.type, ...actor.position }));
@@ -490,6 +504,7 @@ async function verifyGameEntry(page, candidate, preview, options) {
     verifyFaunaStates,
     catStage,
     dogFetch,
+    useStick,
     workPlacements,
     packStage,
     approachClips,
@@ -575,13 +590,14 @@ async function verifyGameEntry(page, candidate, preview, options) {
     };
   if (verifyFaunaStates) {
     const rideClips = packStage ? ["ride", "ride-sprint"] : [];
-    const statesAfterReload = await verifyFaunaStatesInGame(
+    const statesAfterReload = await verifyActorStatesInGame(
       page,
       expected,
       states,
       approachClips,
       rideClips,
       !!feeding,
+      useStick,
     );
     if (packStage) statesAfterReload.push(...(await verifyPackMountInGame(page, expected, states)));
     return {
@@ -614,9 +630,13 @@ async function verifyGameEntry(page, candidate, preview, options) {
   return { ...result, statesAfterReload };
 }
 
+async function selectTool(page, name) {
+  const tool = page.getByRole("button", { name, exact: true });
+  if ((await tool.getAttribute("aria-pressed")) !== "true") await tool.click();
+}
+
 async function verifyPetToyInGame(page, expected, clips, firstToyState) {
-  const ball = page.getByRole("button", { name: "Ball", exact: true });
-  if ((await ball.getAttribute("aria-pressed")) !== "true") await ball.click();
+  await selectTool(page, "Ball");
   const states = await page.evaluate(
     async ({ type, sheetKey, names, returnDistance, firstToyState }) => {
       const game = document.querySelector("#game").__game;
@@ -699,13 +719,22 @@ async function verifyPetToyInGame(page, expected, clips, firstToyState) {
   return states;
 }
 
-async function verifyFaunaStatesInGame(page, expected, clips, approachClips, rideClips, feeding) {
+async function verifyActorStatesInGame(
+  page,
+  expected,
+  clips,
+  approachClips,
+  rideClips,
+  feeding,
+  useStick,
+) {
+  if (useStick) await selectTool(page, "Stick");
   const passive = clips.flatMap(({ name }, index) => (approachClips.includes(name) ? [] : [index]));
   const action = approachClips.includes("action")
     ? -1
     : clips.findIndex(({ name }) => name === "action");
   const states = await page.evaluate(
-    async ({ type, sheetKey, passive, action, total, timeout, clearForageType }) => {
+    async ({ type, sheetKey, passive, action, total, timeout, clearForageType, useStick }) => {
       const game = document.querySelector("#game").__game;
       game.playInput.setMovementMode("tap");
       const observed = new Set();
@@ -737,6 +766,19 @@ async function verifyFaunaStatesInGame(page, expected, clips, approachClips, rid
                 (!clearForageType || (actor.wz ?? 0) < 1)
               ) {
                 game.tapMovement.setTarget({ ...actor.position, wz: 0 });
+                if (useStick) {
+                  const player = game.stateView.playerEntity.position;
+                  const dx = actor.position.wx - player.wx;
+                  const dy = actor.position.wy - player.wy;
+                  const distance = Math.hypot(dx, dy);
+                  if (distance > 0 && distance < 24)
+                    game.transport.send({
+                      type: "use-item",
+                      dirX: dx / distance,
+                      dirY: dy / distance,
+                      force: 0,
+                    });
+                }
                 nextTarget = performance.now() + 350;
               }
             }
@@ -753,7 +795,12 @@ async function verifyFaunaStatesInGame(page, expected, clips, approachClips, rid
       passive,
       action,
       total: clips.length - rideClips.length,
-      timeout: feeding || approachClips.includes("action") ? 65_000 : 38_000,
+      timeout: expected.type.includes("-predator-")
+        ? 130_000
+        : feeding || approachClips.includes("action")
+          ? 65_000
+          : 38_000,
+      useStick,
       clearForageType:
         faunaProfile(expected.type)?.species === "crow" ? forageType("twig") : undefined,
     },

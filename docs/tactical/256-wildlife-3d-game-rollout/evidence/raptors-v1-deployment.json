@@ -1,0 +1,141 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "b92049da42c3292e539fe89014dd550bc0f4596ba61328bed7e81782fc8c2835",
+  "results": [
+    {
+      "type": "wildlife-eagle-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "6c360c7d0f81ae95c57ef431afd6cc758a7d0e6b3398bddc5309f92dabb26129",
+      "modelSha256": "e3c799f71ff7da95b40f7039a36ec67d814268dce6109422c5484abc4560b9a6",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-eagle&wildlife3dStage=eagle-raptors-v1&wildlife3dReview=eagle-raptors-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase",
+        "sleep",
+        "flight"
+      ],
+      "heightRange": [
+        -0.0009662780761719384,
+        27.913075561523442
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase",
+          "sleep",
+          "flight"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-hawk-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "90e106306f0549133b669e289c90552246eddb5e1615d4e207bde7bed8fd60ca",
+      "modelSha256": "a04b657c3787044e97e40a197d7302745e68789c02875e37d821aca13c18b9e0",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-hawk&wildlife3dStage=hawk-raptors-v1&wildlife3dReview=hawk-raptors-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase",
+        "sleep",
+        "flight"
+      ],
+      "heightRange": [
+        -0.0009696464538574413,
+        27.913102386474613
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase",
+          "sleep",
+          "flight"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-owl-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "560878a32898f9dc16d129c1a566354a4f9e1c4e6548b83c39a5c0ff9854aa76",
+      "modelSha256": "c19e51243eb983af82a4c9a200d9ee02b63a1ce3386a4ea962afd8668d85ba2e",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-owl&wildlife3dStage=owl-raptors-v1&wildlife3dReview=owl-raptors-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase",
+        "sleep",
+        "flight"
+      ],
+      "heightRange": [
+        -0.0010673828125000407,
+        27.91305554199219
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase",
+          "sleep",
+          "flight"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-secretary-bird-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "bd7cefb0650924ce007f88b82fdb71bbcbc8621e38a2f17a4f70c399bc485cec",
+      "modelSha256": "44ab024e0d7f3416e3935ec0eff49401934bc74be00560da0b89e1e0b38d1308",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-secretary-bird&wildlife3dStage=secretary-bird-raptors-v1&wildlife3dReview=secretary-bird-raptors-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.001101829528808628,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    }
+  ]
+}

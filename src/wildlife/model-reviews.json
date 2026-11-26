@@ -3291,5 +3291,107 @@
       "open.png": "278eda5d4212cf16171a601904a3e576776a494dfc9d8e6eabae40e595548729",
       "walk.png": "d1b6e524ab5e3bd7846ab0d6e504fce67981febb324b1591b718e29255c80b9a"
     }
+  },
+  {
+    "id": "eagle-raptors-v1",
+    "type": "wildlife-eagle-predator-v1",
+    "name": "Bald eagle",
+    "batch": "wildlife-3d-raptors-v1",
+    "lab": "eagle",
+    "scale": 16.82,
+    "topDown": {
+      "width": 0.5743162901307967,
+      "height": 0.6551724137931034
+    },
+    "files": {
+      "appearance.png": "b7096965ce8b1bdf00fb254e4066ce256a71ce582118359604d206d09c7ada36",
+      "capture-config.json": "ae667d9b9db85ea5e9058f26ef5652162487dd59d770daadd17123d5a581feba",
+      "chase.png": "ede01207d75eec56f92f96f00da6d2e41c3b07e94d7b6ecf7312a42a98e5ce37",
+      "comparison.mp4": "a116cec52634436bf5e0003ff15491764dfad2ec3b96e48d04b7920c74b51049",
+      "display.png": "abde52ddaf018f795468361515b54f7efabd1102b073920fadfc1bdd1ceae741",
+      "feed.png": "d4015684856816fec6df31a36c75935b00b855d428783ec14a92d5cdeec839ba",
+      "flight.png": "129f6f40d3edee5a7987a79066256c133af1112cd3dece38f3dc86c6e53b326c",
+      "model.blend": "f02a41c279ef4f42cf261d141efe3a7103b846c325ef0e8cb421264a97c02ee5",
+      "model.glb": "e3c799f71ff7da95b40f7039a36ec67d814268dce6109422c5484abc4560b9a6",
+      "native.png": "fa929123f44ea09a6ca9a24e0b3fb37c34dbb3479ce3919f6d0871c258362ee5",
+      "sleep.png": "a96229f6607378f2da2796be23e7b0409dee341651626cb683bfdd1bdcec547e",
+      "walk.png": "de1bc1ea654649c55023c557539e99a833755153146100fe53a561701aae96cf"
+    }
+  },
+  {
+    "id": "hawk-raptors-v1",
+    "type": "wildlife-hawk-predator-v1",
+    "name": "Red-tailed hawk",
+    "batch": "wildlife-3d-raptors-v1",
+    "lab": "hawk",
+    "scale": 16.82,
+    "topDown": {
+      "width": 0.7473246135552913,
+      "height": 0.5927467300832343
+    },
+    "files": {
+      "appearance.png": "93f6a4568fb4a19ee75237300d74c8563adebaf89faf7c8141b0dfce7c7937a7",
+      "capture-config.json": "9b745c27fd25cd52b920b75f5be4741228bc3b86284ba98a6b49493bceaac64e",
+      "chase.png": "394d58679a999a5c6964003cd93ae12c95d6bdb309c896a8bb79e293b1ecbd84",
+      "comparison.mp4": "4821030419b5a42bf1a443ce6d6d3f9ce0f2cf7f9a521ff057b389116ba1f35d",
+      "display.png": "43e14bb6ceedae47c531c51a3721517148b0435b355a23093eed05b2672e0dc0",
+      "feed.png": "66395ff4989bbba4acd28f7a26cca3196e7848bd21356223cd5ad8f54e780297",
+      "flight.png": "76c9fc547c9dbe9c57900337c8124fedd55b4c295a7800c2c7eabb4e78ee7b58",
+      "model.blend": "9c8b6ecf5790aef059573a649d05c74b14a831d2586755e1ed564fc1b9a51608",
+      "model.glb": "a04b657c3787044e97e40a197d7302745e68789c02875e37d821aca13c18b9e0",
+      "native.png": "69cb3f007e9cec8fc55ddedb5e23c9a7d11f5b5f56f8e2535e13531215e022ef",
+      "sleep.png": "4c2b613162a400507ff4cc2585ca081e7c4d9deb5f8ef5df2973dbaf72fa62d3",
+      "walk.png": "0b90f9a3bcacf584996d35f141782a98b3ddb62c61d8a95c62f9d8bc7f3adb63"
+    }
+  },
+  {
+    "id": "owl-raptors-v1",
+    "type": "wildlife-owl-predator-v1",
+    "name": "Tawny owl",
+    "batch": "wildlife-3d-raptors-v1",
+    "lab": "owl",
+    "scale": 16.82,
+    "topDown": {
+      "width": 0.6700356718192627,
+      "height": 0.6551724137931034
+    },
+    "files": {
+      "appearance.png": "49cdfe26beb65fb92642c44df37d6aeea9504144bf24ea46244cdacd0a1d70c4",
+      "capture-config.json": "0a826630226cf3431b22c89ab7ab977361a08fa930a2b935e551905b6a934207",
+      "chase.png": "debf39b0810cfdfd51717ace3fda3f47b51af06fc7d5f89d9185970edef67c69",
+      "comparison.mp4": "3809db40ee949882e468c6cbfe4ad4510627625f47100b8c507ca24ea3cfc87b",
+      "display.png": "57b291f0b7c5615f3a1a6b9edb0f5e4c60a58ec42152c706b8ce1ae0dec062e1",
+      "feed.png": "bfa3bd7ab8665d9c8e2067c0895f2b16fe57235c0e816a337a1eefa3c44bb5f0",
+      "flight.png": "43a7a7797fdc383c21899a83f5b49967957809508ce89a3a8828b596d9ac39cf",
+      "model.blend": "80b1c725ed1842df0080a9e2647e10af2417aca388a30ff571ce9bca9c017ff7",
+      "model.glb": "c19e51243eb983af82a4c9a200d9ee02b63a1ce3386a4ea962afd8668d85ba2e",
+      "native.png": "f534d7ab1dba2e508aabd71af063c34b8ffa08810c12b65ad7dc564946018c4f",
+      "sleep.png": "af41ca407a738c2332ee7f3fd2b3da9c2773105e3c0a15ece924b860d80eb12d",
+      "walk.png": "4b269fe563a77e9af0885eb532e94655ce8390abb6ab0f0504e597db3210722d"
+    }
+  },
+  {
+    "id": "secretary-bird-raptors-v1",
+    "type": "wildlife-secretary-bird-predator-v1",
+    "name": "Secretary bird",
+    "batch": "wildlife-3d-raptors-v1",
+    "lab": "secretary-bird",
+    "scale": 16.82,
+    "topDown": {
+      "width": 0.5992865636147443,
+      "height": 0.7497027348394768
+    },
+    "files": {
+      "appearance.png": "0e5f628407fb33ca904920ed57e84f7d1a51e54e4a089b327f9f5a8bba48b463",
+      "capture-config.json": "1a239d8b77199621eed6dbaacae24ae2482b8661f20bf55861f818790aad634c",
+      "chase.png": "aca64e15e60406710aa8d035c3dcd3aa8672434d7f8a2224c815e0ce46ac43b1",
+      "comparison.mp4": "29f4f7a820bd4a49afc52ed2fb81d6218834cd676794f63471bc7ab28ab73a5c",
+      "display.png": "da55567792d59852ef514648312139c9bc7388d487c622d74f0f08e18019d908",
+      "feed.png": "f20ccd7edc7f34717b57e0f497f81a070718b4d0655c00cbf64cfd2d98d8ad04",
+      "model.blend": "fb19e26a2d7278e4c0e58bd56d4c505486f1bb84a9ee2a8cc9a2b5b64d236b8a",
+      "model.glb": "44ab024e0d7f3416e3935ec0eff49401934bc74be00560da0b89e1e0b38d1308",
+      "native.png": "1549753d776d6ac013f18b3f766a9746794e8a33773f442a0c8a63239452bc92",
+      "walk.png": "e0def539093b6dc0a76cb1e975a0db84a4ba54f20905cdbdf53303ee7923c4e5"
+    }
   }
 ]

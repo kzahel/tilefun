@@ -242,6 +242,9 @@ instead of falling back to idle. Native fixture props retain production type
 identity, enabling shared perch AI; custom fixture geometry remains anonymous.
 Raptor landings publish their actual support height. Contact from above requires
 real landed support/XY overlap and retains the airborne-prey meal guard.
+After a hunt, a raptor without a usable perch sleeps on the ground and
+resumes its ground patrol after the cooldown. A usable perch still takes
+priority. The shared game and Workshop paths use the same transitions.
 Validation: **4,544 unit passes**, five known Windows failures, ten skipped;
 388 focused hunting/source/audio checks; 27 real browser cases including 552
 four-facing previews; four byte-identical banks and 3,872 exact source crops.
