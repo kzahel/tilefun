@@ -121,6 +121,10 @@ models in Workshop and after reopening a normal game world. The live default
 bank now has 142 animals and 650 verified states.
 [Release 1 playback](256-wildlife-3d-game-rollout/evidence/owner-approved-release-1-default.json)
 
+Release 2 deployed on `5e7fb002` and verified 177 states for another 40
+animals. This brings the live default bank to 182 animals and 827 verified
+states. [Release 2 playback](256-wildlife-3d-game-rollout/evidence/owner-approved-release-2-default.json)
+
 ### Complete preview roster, 2026-11-26
 
 The remaining archived models cover the land reptiles, crawling fauna,
