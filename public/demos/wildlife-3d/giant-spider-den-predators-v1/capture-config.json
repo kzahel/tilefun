@@ -1,0 +1,22 @@
+{
+  "runtimeType": "wildlife-giant-spider-predator-v1",
+  "fit": [
+    11.6,
+    9.28,
+    11.89
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase",
+    "sleep"
+  ],
+  "reviewContext": "A separate fast ripple runs along eight legs. Feeding and display move the front pair independently, and sleep lowers the body.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

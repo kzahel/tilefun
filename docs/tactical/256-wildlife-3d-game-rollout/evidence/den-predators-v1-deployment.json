@@ -1,0 +1,147 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "96d2d9b693e7b4daba30fb1399f6d7838214499663268951da62c828abd7b47d",
+  "results": [
+    {
+      "type": "wildlife-griffin-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "dd7445b6a73a922ac189be088ad74d694748ab36e7f070990beea863eba27fe2",
+      "modelSha256": "f717a3c725a922b29a2ec5d0af5883550b269c463433f11c795bfc473aa47419",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-griffin&wildlife3dStage=griffin-den-predators-v1&wildlife3dReview=griffin-den-predators-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase",
+        "sleep",
+        "flight"
+      ],
+      "heightRange": [
+        -0.032036075592032136,
+        40.96081184387207
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase",
+          "sleep",
+          "flight"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-small-dragon-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "f306fa693a43193ea263ca4133fac895ff9886955bdb7e3eccf0eb5ae54e49c7",
+      "modelSha256": "e68c35b205eef4ce1754541807cf82bd3d7f170c01544430a73396005dfca43c",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-small-dragon&wildlife3dStage=small-dragon-den-predators-v1&wildlife3dReview=small-dragon-den-predators-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase",
+        "sleep",
+        "flight"
+      ],
+      "heightRange": [
+        -0.4647063464996737,
+        27.927389938354207
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase",
+          "sleep",
+          "flight"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-t-rex-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "679cafcfb7d87300334167b870a280c192f65d78093808b4b57e8951096771fc",
+      "modelSha256": "eb49d9ceb61573f3d465004af1f0ac0036b268c99302df91ffccd99fc588a69f",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-t-rex&wildlife3dStage=t-rex-den-predators-v1&wildlife3dReview=t-rex-den-predators-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase",
+        "sleep"
+      ],
+      "heightRange": [
+        -0.0009243927001949526,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase",
+          "sleep"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-giant-spider-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "4b8c94efe1e28a5f1688217c780ddd77582eefcafcad343679bbac63cf14365c",
+      "modelSha256": "7af650470e1353a77b059154bf82dc1df726370472e68ad6c539f6ef126ba101",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-giant-spider&wildlife3dStage=giant-spider-den-predators-v1&wildlife3dReview=giant-spider-den-predators-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase",
+        "sleep"
+      ],
+      "heightRange": [
+        -0.0009907455444335303,
+        0.000003637313839298319
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase",
+          "sleep"
+        ]
+      }
+    }
+  ]
+}

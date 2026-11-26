@@ -3883,9 +3883,55 @@
         "chase": "walk",
         "sleep": "sleep"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "7af650470e1353a77b059154bf82dc1df726370472e68ad6c539f6ef126ba101",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/giant-spider-den-predators-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "7af650470e1353a77b059154bf82dc1df726370472e68ad6c539f6ef126ba101",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/giant-spider-den-predators-v1/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "7af650470e1353a77b059154bf82dc1df726370472e68ad6c539f6ef126ba101",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/giant-spider-den-predators-v1/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "7af650470e1353a77b059154bf82dc1df726370472e68ad6c539f6ef126ba101",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/giant-spider-den-predators-v1/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "7af650470e1353a77b059154bf82dc1df726370472e68ad6c539f6ef126ba101",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/giant-spider-den-predators-v1/chase.png"
+        },
+        "sleep": {
+          "action": "sleep",
+          "sha256": "7af650470e1353a77b059154bf82dc1df726370472e68ad6c539f6ef126ba101",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/giant-spider-den-predators-v1/sleep.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-giant-spider-den-predators-v1",
+        "fingerprint": "4b8c94efe1e28a5f1688217c780ddd77582eefcafcad343679bbac63cf14365c",
+        "model": "public/demos/wildlife-3d/giant-spider-den-predators-v1/model.glb",
+        "source": "public/demos/wildlife-3d/giant-spider-den-predators-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/giant-spider-den-predators-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-griffin-predator-v1",
@@ -3906,9 +3952,61 @@
         "sleep": "sleep",
         "flight": "fly"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "f717a3c725a922b29a2ec5d0af5883550b269c463433f11c795bfc473aa47419",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/griffin-den-predators-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "f717a3c725a922b29a2ec5d0af5883550b269c463433f11c795bfc473aa47419",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/griffin-den-predators-v1/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "f717a3c725a922b29a2ec5d0af5883550b269c463433f11c795bfc473aa47419",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/griffin-den-predators-v1/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "f717a3c725a922b29a2ec5d0af5883550b269c463433f11c795bfc473aa47419",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/griffin-den-predators-v1/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "f717a3c725a922b29a2ec5d0af5883550b269c463433f11c795bfc473aa47419",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/griffin-den-predators-v1/chase.png"
+        },
+        "sleep": {
+          "action": "sleep",
+          "sha256": "f717a3c725a922b29a2ec5d0af5883550b269c463433f11c795bfc473aa47419",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/griffin-den-predators-v1/sleep.png"
+        },
+        "flight": {
+          "action": "flight",
+          "sha256": "f717a3c725a922b29a2ec5d0af5883550b269c463433f11c795bfc473aa47419",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/griffin-den-predators-v1/flight.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-griffin-den-predators-v1",
+        "fingerprint": "dd7445b6a73a922ac189be088ad74d694748ab36e7f070990beea863eba27fe2",
+        "model": "public/demos/wildlife-3d/griffin-den-predators-v1/model.glb",
+        "source": "public/demos/wildlife-3d/griffin-den-predators-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/griffin-den-predators-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-panther-predator-v1",
@@ -3990,9 +4088,61 @@
         "sleep": "sleep",
         "flight": "fly"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "e68c35b205eef4ce1754541807cf82bd3d7f170c01544430a73396005dfca43c",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/small-dragon-den-predators-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "e68c35b205eef4ce1754541807cf82bd3d7f170c01544430a73396005dfca43c",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/small-dragon-den-predators-v1/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "e68c35b205eef4ce1754541807cf82bd3d7f170c01544430a73396005dfca43c",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/small-dragon-den-predators-v1/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "e68c35b205eef4ce1754541807cf82bd3d7f170c01544430a73396005dfca43c",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/small-dragon-den-predators-v1/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "e68c35b205eef4ce1754541807cf82bd3d7f170c01544430a73396005dfca43c",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/small-dragon-den-predators-v1/chase.png"
+        },
+        "sleep": {
+          "action": "sleep",
+          "sha256": "e68c35b205eef4ce1754541807cf82bd3d7f170c01544430a73396005dfca43c",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/small-dragon-den-predators-v1/sleep.png"
+        },
+        "flight": {
+          "action": "flight",
+          "sha256": "e68c35b205eef4ce1754541807cf82bd3d7f170c01544430a73396005dfca43c",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/small-dragon-den-predators-v1/flight.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-small-dragon-den-predators-v1",
+        "fingerprint": "f306fa693a43193ea263ca4133fac895ff9886955bdb7e3eccf0eb5ae54e49c7",
+        "model": "public/demos/wildlife-3d/small-dragon-den-predators-v1/model.glb",
+        "source": "public/demos/wildlife-3d/small-dragon-den-predators-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/small-dragon-den-predators-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-t-rex-predator-v1",
@@ -4012,9 +4162,55 @@
         "chase": "walk",
         "sleep": "sleep"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "eb49d9ceb61573f3d465004af1f0ac0036b268c99302df91ffccd99fc588a69f",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/t-rex-den-predators-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "eb49d9ceb61573f3d465004af1f0ac0036b268c99302df91ffccd99fc588a69f",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/t-rex-den-predators-v1/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "eb49d9ceb61573f3d465004af1f0ac0036b268c99302df91ffccd99fc588a69f",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/t-rex-den-predators-v1/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "eb49d9ceb61573f3d465004af1f0ac0036b268c99302df91ffccd99fc588a69f",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/t-rex-den-predators-v1/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "eb49d9ceb61573f3d465004af1f0ac0036b268c99302df91ffccd99fc588a69f",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/t-rex-den-predators-v1/chase.png"
+        },
+        "sleep": {
+          "action": "sleep",
+          "sha256": "eb49d9ceb61573f3d465004af1f0ac0036b268c99302df91ffccd99fc588a69f",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/t-rex-den-predators-v1/sleep.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-t-rex-den-predators-v1",
+        "fingerprint": "679cafcfb7d87300334167b870a280c192f65d78093808b4b57e8951096771fc",
+        "model": "public/demos/wildlife-3d/t-rex-den-predators-v1/model.glb",
+        "source": "public/demos/wildlife-3d/t-rex-den-predators-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/t-rex-den-predators-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/den-predators-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-american-bison-provisional-v1",

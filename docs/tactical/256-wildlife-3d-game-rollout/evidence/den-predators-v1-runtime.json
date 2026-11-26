@@ -1,0 +1,194 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-griffin-predator-v1",
+      "clips": 7,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 180
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1200
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 315
+        },
+        {
+          "state": "sleep",
+          "action": "sleep",
+          "frames": 28,
+          "gameDurationMs": 1120
+        },
+        {
+          "state": "flight",
+          "action": "flight",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "griffin-den-predators-v1",
+      "modelSha256": "f717a3c725a922b29a2ec5d0af5883550b269c463433f11c795bfc473aa47419"
+    },
+    {
+      "type": "wildlife-small-dragon-predator-v1",
+      "clips": 7,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 180
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1200
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 362.0689655172414
+        },
+        {
+          "state": "sleep",
+          "action": "sleep",
+          "frames": 28,
+          "gameDurationMs": 1120
+        },
+        {
+          "state": "flight",
+          "action": "flight",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "small-dragon-den-predators-v1",
+      "modelSha256": "e68c35b205eef4ce1754541807cf82bd3d7f170c01544430a73396005dfca43c"
+    },
+    {
+      "type": "wildlife-t-rex-predator-v1",
+      "clips": 6,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 180
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1200
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 490.90909090909093
+        },
+        {
+          "state": "sleep",
+          "action": "sleep",
+          "frames": 28,
+          "gameDurationMs": 1120
+        }
+      ],
+      "candidateId": "t-rex-den-predators-v1",
+      "modelSha256": "eb49d9ceb61573f3d465004af1f0ac0036b268c99302df91ffccd99fc588a69f"
+    },
+    {
+      "type": "wildlife-giant-spider-predator-v1",
+      "clips": 6,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 180
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1200
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 291.6666666666667
+        },
+        {
+          "state": "sleep",
+          "action": "sleep",
+          "frames": 28,
+          "gameDurationMs": 1120
+        }
+      ],
+      "candidateId": "giant-spider-den-predators-v1",
+      "modelSha256": "7af650470e1353a77b059154bf82dc1df726370472e68ad6c539f6ef126ba101"
+    }
+  ],
+  "clipSamples": 728,
+  "testedDepth": false
+}

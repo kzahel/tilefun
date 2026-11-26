@@ -336,18 +336,26 @@ def pose(rig,rest,clip,t):
     if ROLLOUT:
         return rollout_pose(rest,clip,t)
     wave=math.tau*t
-    walk,swim=clip=="walk",clip=="swim"
+    chase=clip=="chase"
+    walk,swim=clip=="walk" or chase,clip=="swim"
+    spider=STYLE in ("spider","giant")
     pinch=math.sin(math.pi*t)**2 if clip in ("display","action","feed") else 0
-    q=euler(.054*math.sin(wave),.052*math.sin(wave)*int(walk),.054*math.sin(wave)*int(swim))
-    body=transform(q,BODY,BODY+V((.034*math.sin(wave)*int(walk),.029*pinch,
-                                .035*math.cos(wave)-(H*.29 if clip=="sleep" else 0))))
+    threat=pinch if spider and clip=="display" else 0
+    feed=pinch if spider and clip=="feed" else 0
+    q=euler(.054*math.sin(wave)+.21*threat-.16*feed-.09*chase,
+            .052*math.sin(wave)*walk,.054*math.sin(wave)*swim)
+    body=transform(q,BODY,BODY+V((.034*math.sin(wave)*walk,.029*pinch+.082*feed,
+                                .035*math.cos(wave)+.082*threat-(H*.29 if clip=="sleep" else 0))))
     out={"body":body@rest["body"]}
     for side,sign in SIDES:
         for i in range(LEGS):
             a,b,c=leg(side,i)
             u,d=f"leg.{side}.{i}.u",f"leg.{side}.{i}.d"
-            phase=i*.25+(0 if sign>0 else .5)
-            advance,lift=stride(t,phase,.159,.086) if walk else (0,0)
+            phase=i*(.20 if chase else .25)+(0 if sign>0 else .5)
+            advance,lift=stride(t,phase,.253 if chase else .159,.108 if chase else .086) if walk else (0,0)
+            if spider and i==0:
+                advance+=.18*feed+.14*threat
+                lift+=.065*feed+.19*threat
             if swim:
                 advance=.15*math.sin(wave+phase*math.tau)
                 lift=.11+.079*math.cos(wave+phase*math.tau)

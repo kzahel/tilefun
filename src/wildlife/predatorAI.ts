@@ -5,7 +5,13 @@ import { lcgNext } from "../shared/Determinism.js";
 import { gap } from "../shared/gap.js";
 import { required } from "../shared/required.js";
 import { restorePredatorPose } from "./PredatorMotion.js";
-import { clearPredatorFlight, clearPredatorPath, nearestPredatorPerch } from "./PredatorPaths.js";
+import {
+  clearPredatorFlight,
+  clearPredatorPath,
+  dragonReturnLanding,
+  griffinPerchApproach,
+  nearestPredatorPerch,
+} from "./PredatorPaths.js";
 
 export { predatorHabitatAllows } from "./PredatorHabitat.js";
 export { clearPredatorFlight } from "./PredatorPaths.js";
@@ -29,6 +35,7 @@ const random = (e: Entity) => {
   ai.randomState = lcgNext(ai.randomState);
   return ai.randomState / 4294967296;
 };
+const POST_MEAL_NAP = new Set(["rex", "wolf"]);
 function enter(e: Entity, state: NonNullable<Entity["predator"]>["state"], timer: number) {
   e.motionIntent ??= { vx: 0, vy: 0 };
   const ai = required(e.predator);
@@ -133,6 +140,33 @@ function movePredatorToward(e: Entity, target: PositionComponent, speedLimit: nu
   required(e.predator).facing = sprite.direction;
 }
 
+function returnToPredatorPerch(
+  e: Entity,
+  griffin: boolean,
+  perch: NonNullable<ReturnType<typeof nearestPredatorPerch>>,
+  env: WildlifeEnvironment,
+  planning?: AiPlanningScheduler,
+): void {
+  const ai = required(e.predator);
+  const approach = griffin && griffinPerchApproach(e, perch, env, planning);
+  if (approach) {
+    if (ai.state !== "patrol") enter(e, "patrol", 0.3);
+    ai.aim = approach;
+  } else if (gap(e.position, perch) < 5 && Math.abs((e.wz ?? 0) - perch.z) < 3)
+    enter(e, "perch", 2);
+  else if (clearPredatorFlight(e, perch, perch.z, env, planning))
+    launchPredatorFlight(e, perch, perch.z, false);
+  else enter(e, "rest", 2);
+}
+
+function finishPredatorPause(e: Entity, kind: string | undefined): void {
+  const ai = required(e.predator);
+  if (ai.timer > 0) return;
+  delete ai.alarmFrom;
+  if (ai.state === "feed" && POST_MEAL_NAP.has(kind ?? "")) enter(e, "sleep", 2.5);
+  else enter(e, "rest", 1 + random(e) * 2);
+}
+
 /** All decisions use admitted logical dt and the Realm's bounded planning budget. */
 export function updatePredatorAI(
   e: Entity,
@@ -208,10 +242,7 @@ export function updatePredatorAI(
     ai.state === "sleep" ||
     (ai.state === "rest" && ai.timer > 0)
   ) {
-    if (ai.timer <= 0) {
-      delete ai.alarmFrom;
-      enter(e, "rest", 1 + random(e) * 2);
-    }
+    finishPredatorPause(e, fierce?.kind);
     restorePredatorPose(e);
     return;
   }
@@ -371,16 +402,14 @@ export function updatePredatorAI(
         ai.cooldown = 3;
         enter(e, "rest", 1);
       }
-    } else if (!ai.targetId && (perch || fierce?.kind === "griffin")) {
-      if (perch && gap(e.position, perch) < 5 && Math.abs((e.wz ?? 0) - perch.z) < 3)
-        enter(e, "perch", 2);
-      else if (perch && clearPredatorFlight(e, perch, perch.z, env, planning))
-        launchPredatorFlight(e, perch, perch.z, false);
-      else enter(e, "rest", 2);
+    } else if (!ai.targetId && perch) {
+      returnToPredatorPerch(e, fierce?.kind === "griffin", perch, env, planning);
     } else if (!ai.targetId && fierce?.kind === "raptor" && ai.cooldown > 0) {
       enter(e, "sleep", 2.5);
     } else if (!ai.targetId && (fierce?.kind === "dragon" || fierce?.kind === "spider")) {
-      if (gap(e.position, ai.home) > 5 && clearPredatorPath(e, ai.home, env, planning)) {
+      const landing = fierce.kind === "dragon" && dragonReturnLanding(e, ai.home, env, planning);
+      if (landing) launchPredatorFlight(e, landing.point, landing.z, false);
+      else if (gap(e.position, ai.home) > 5 && clearPredatorPath(e, ai.home, env, planning)) {
         if (ai.state !== "patrol") enter(e, "patrol", 0.3);
         ai.aim = { ...ai.home };
       } else {

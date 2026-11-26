@@ -1,3 +1,4 @@
+import { createDeer } from "../wildlife/Deer.js";
 import { faunaProfile } from "../wildlife/Fauna.js";
 import { createPredator, predatorProfile } from "../wildlife/Predator.js";
 import { createRabbit } from "../wildlife/Rabbit.js";
@@ -41,9 +42,16 @@ export function isGroundHunterModelReviewCase(caseId: string): boolean {
   return GROUND_HUNTERS_WITH_RABBIT_PREY.has(caseId);
 }
 
+export function isDenHunterModelReviewCase(caseId: string): boolean {
+  return /^(?:griffin|small-dragon|t-rex|giant-spider|dire-wolf)$/.test(caseId);
+}
+
 export function groundHunterReviewActors(type: string, caseId: string) {
   const hunter = predatorProfile(type);
-  if (hunter?.species !== caseId || !isGroundHunterModelReviewCase(caseId)) return undefined;
+  if (hunter?.species !== caseId) return undefined;
+  if (isDenHunterModelReviewCase(caseId) && caseId !== "giant-spider")
+    return [createPredator(hunter.species, 240, 176), createDeer(347, 176), createRabbit(335, 233)];
+  if (!isGroundHunterModelReviewCase(caseId) && caseId !== "giant-spider") return undefined;
   return [createPredator(hunter.species, 240, 176), createRabbit(293, 176), createRabbit(286, 225)];
 }
 

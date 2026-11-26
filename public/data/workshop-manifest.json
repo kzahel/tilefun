@@ -1054,6 +1054,12 @@
       "toolId": "animal-browser"
     },
     {
+      "id": "wildlife-3d-den-predators-v1",
+      "name": "3D wildlife · den predators v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
       "id": "motion",
       "name": "Furniture movement sets",
       "description": "Default layouts and physics. Custom layouts remain individually reviewable in the tool.",
@@ -64729,7 +64735,175 @@
           "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-koala-tree-and-scrub-mammals-v1"
         }
       }
+    },
+    {
+      "id": "pattern:wildlife-3d-griffin-den-predators-v1",
+      "batchId": "wildlife-3d-den-predators-v1",
+      "kind": "wildlife",
+      "name": "Griffin",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-griffin-den-predators-v1",
+      "fingerprint": "dd7445b6a73a922ac189be088ad74d694748ab36e7f070990beea863eba27fe2",
+      "sourceFingerprint": "edfa15b4fb0775291e40beef465b38cb8fb2668e9a2c7732ee018a151b859a31",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-griffin-den-predators-v1",
+        "prefabIds": [],
+        "revision": "bcacada73c0082b049a955ed7c4f43ee1d3425ccd6d4f753e881a2f36d72e6a9",
+        "renderFingerprint": "dd7445b6a73a922ac189be088ad74d694748ab36e7f070990beea863eba27fe2",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-griffin-den-predators-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-griffin-den-predators-v1",
+        "fingerprint": "edfa15b4fb0775291e40beef465b38cb8fb2668e9a2c7732ee018a151b859a31",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-griffin-den-predators-v1",
+          "prefabIds": [],
+          "revision": "bcacada73c0082b049a955ed7c4f43ee1d3425ccd6d4f753e881a2f36d72e6a9",
+          "renderFingerprint": "dd7445b6a73a922ac189be088ad74d694748ab36e7f070990beea863eba27fe2",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-griffin-den-predators-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-small-dragon-den-predators-v1",
+      "batchId": "wildlife-3d-den-predators-v1",
+      "kind": "wildlife",
+      "name": "Small dragon",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-small-dragon-den-predators-v1",
+      "fingerprint": "f306fa693a43193ea263ca4133fac895ff9886955bdb7e3eccf0eb5ae54e49c7",
+      "sourceFingerprint": "64b54d2d63a1a80c36690fe535d4a5f6cc3b86302201cad8ddd9094080c1d8a7",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-small-dragon-den-predators-v1",
+        "prefabIds": [],
+        "revision": "f0252a6ace7c3adc6eee18e152a970af2d3a4535bc8d5dfaadab42dcf8d7091f",
+        "renderFingerprint": "f306fa693a43193ea263ca4133fac895ff9886955bdb7e3eccf0eb5ae54e49c7",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-small-dragon-den-predators-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-small-dragon-den-predators-v1",
+        "fingerprint": "64b54d2d63a1a80c36690fe535d4a5f6cc3b86302201cad8ddd9094080c1d8a7",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-small-dragon-den-predators-v1",
+          "prefabIds": [],
+          "revision": "f0252a6ace7c3adc6eee18e152a970af2d3a4535bc8d5dfaadab42dcf8d7091f",
+          "renderFingerprint": "f306fa693a43193ea263ca4133fac895ff9886955bdb7e3eccf0eb5ae54e49c7",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-small-dragon-den-predators-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-t-rex-den-predators-v1",
+      "batchId": "wildlife-3d-den-predators-v1",
+      "kind": "wildlife",
+      "name": "T. rex",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-t-rex-den-predators-v1",
+      "fingerprint": "679cafcfb7d87300334167b870a280c192f65d78093808b4b57e8951096771fc",
+      "sourceFingerprint": "1368e6bb40886233e32f8cb36a4b41233daa3bf66eccdd7f61ca8f4edb070e7a",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-t-rex-den-predators-v1",
+        "prefabIds": [],
+        "revision": "64a90435f1a4fe087ca5aea031b66279f3ec6dcd57218d55f4fa522a42887217",
+        "renderFingerprint": "679cafcfb7d87300334167b870a280c192f65d78093808b4b57e8951096771fc",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-t-rex-den-predators-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-t-rex-den-predators-v1",
+        "fingerprint": "1368e6bb40886233e32f8cb36a4b41233daa3bf66eccdd7f61ca8f4edb070e7a",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-t-rex-den-predators-v1",
+          "prefabIds": [],
+          "revision": "64a90435f1a4fe087ca5aea031b66279f3ec6dcd57218d55f4fa522a42887217",
+          "renderFingerprint": "679cafcfb7d87300334167b870a280c192f65d78093808b4b57e8951096771fc",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-t-rex-den-predators-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-giant-spider-den-predators-v1",
+      "batchId": "wildlife-3d-den-predators-v1",
+      "kind": "wildlife",
+      "name": "Giant spider",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-giant-spider-den-predators-v1",
+      "fingerprint": "4b8c94efe1e28a5f1688217c780ddd77582eefcafcad343679bbac63cf14365c",
+      "sourceFingerprint": "217db4392ca7a93d0515c04ad247ea92bfe693a68add62ffecb7ace2b518ab29",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-giant-spider-den-predators-v1",
+        "prefabIds": [],
+        "revision": "6a9fb5cad394b13cbbbddd535cb3d47ff215cf9e9d72ba5efe98838aa920e0dd",
+        "renderFingerprint": "4b8c94efe1e28a5f1688217c780ddd77582eefcafcad343679bbac63cf14365c",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-giant-spider-den-predators-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-giant-spider-den-predators-v1",
+        "fingerprint": "217db4392ca7a93d0515c04ad247ea92bfe693a68add62ffecb7ace2b518ab29",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-giant-spider-den-predators-v1",
+          "prefabIds": [],
+          "revision": "6a9fb5cad394b13cbbbddd535cb3d47ff215cf9e9d72ba5efe98838aa920e0dd",
+          "renderFingerprint": "4b8c94efe1e28a5f1688217c780ddd77582eefcafcad343679bbac63cf14365c",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-giant-spider-den-predators-v1"
+        }
+      }
     }
   ],
-  "inputDigest": "c5b1f2539f999fb91981bf3f0a680f524233cb192a8a646d66ee010f1e48817c"
+  "inputDigest": "96d2d9b693e7b4daba30fb1399f6d7838214499663268951da62c828abd7b47d"
 }

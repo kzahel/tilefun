@@ -1,0 +1,22 @@
+{
+  "runtimeType": "wildlife-t-rex-predator-v1",
+  "fit": [
+    24.75,
+    13.66,
+    20.94
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase",
+    "sleep"
+  ],
+  "reviewContext": "Heavy alternating hind-leg steps support a shorter forelimb gesture. Pursuit leans forward while a slower display opens the jaw.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

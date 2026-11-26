@@ -1,46 +1,9 @@
 import type { Entity } from "../entities/Entity.js";
-import { setSpriteClip, setSpriteClipElapsed } from "../entities/spriteAnimation.js";
 import { directionFromVelocity } from "../entities/wanderAI.js";
 import { predatorProfile } from "./Predator.js";
+import { restorePredatorPose } from "./PredatorPose.js";
 
-export function restorePredatorPose(e: Entity): void {
-  const ai = e.predator;
-  if (!ai || !e.sprite) return;
-  if (ai.facing !== undefined) e.sprite.frameRow = e.sprite.direction = ai.facing;
-  const profile = predatorProfile(e.type),
-    fierce = profile?.fierce;
-  const chasePounce = !!(fierce || profile?.art);
-  const moving = ["patrol", "stalk", "chase", "pounce", "evade", "flight"].includes(ai.state);
-  e.sprite.moving = moving;
-  if (e.wanderAI)
-    e.wanderAI.state =
-      ai.state === "scared"
-        ? "scared"
-        : ai.state === "chase" || ai.state === "pounce"
-          ? "chasing"
-          : moving
-            ? "walking"
-            : "idle";
-  setSpriteClip(
-    e,
-    ai.flight
-      ? 6
-      : (ai.state === "sleep" || ai.state === "ambush") && fierce
-        ? 5
-        : ai.state === "feed"
-          ? 2
-          : ai.state === "display" ||
-              ai.state === "scared" ||
-              (ai.state === "pounce" && !chasePounce)
-            ? 3
-            : ai.state === "chase" || ai.state === "evade" || (ai.state === "pounce" && chasePounce)
-              ? 4
-              : moving
-                ? 1
-                : 0,
-  );
-  setSpriteClipElapsed(e, Math.round((ai.flight?.elapsed ?? ai.elapsed) * 1000));
-}
+export { restorePredatorPose } from "./PredatorPose.js";
 export function predatorFlightZ(start: number, end: number, t: number, lift: number): number {
   return start + (end - start) * t + Math.sin(Math.PI * t) * lift;
 }

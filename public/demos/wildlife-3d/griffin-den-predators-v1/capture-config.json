@@ -1,0 +1,23 @@
+{
+  "runtimeType": "wildlife-griffin-predator-v1",
+  "fit": [
+    12.76,
+    10.15,
+    12.61
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase",
+    "sleep",
+    "flight"
+  ],
+  "reviewContext": "The folded wings separate walking and ground display from flight. Pursuit is a longer reaching gait and sleep lowers the head.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

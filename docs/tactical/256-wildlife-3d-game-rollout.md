@@ -107,6 +107,16 @@ runtime scope reconciliation in the execution notes.
 
 ## Delivery log
 
+### Den hunters, 2026-11-26
+
+The griffin, small dragon, T. rex and giant spider each have a separate
+pursuit action. The dragon glides partway home after a distant hunt, then
+walks the final stretch. The griffin walks before its return flight and
+can nap on its ordinary perch. T. rex briefly sleeps after a meal. All 26
+states played in Workshop and in reopened ordinary worlds. [Renderer evidence](256-wildlife-3d-game-rollout/evidence/den-predators-v1-runtime.json) ·
+[Public preview evidence](256-wildlife-3d-game-rollout/evidence/den-predators-v1-deployment.json) ·
+[Workshop review](https://tilefun.graehlarts.com/tilefun/workshop.html#/review/pattern%3Awildlife-3d-griffin-den-predators-v1)
+
 ### All current defaults verified, 2026-11-26
 
 The hen, frog and mallard passed the production repeat on `fc248ea0`.

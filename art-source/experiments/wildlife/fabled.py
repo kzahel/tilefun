@@ -183,23 +183,26 @@ def surface():
 
 def pose(rig,rest,clip,t):
     wave=math.tau*t
-    walk=clip=="walk"
+    chase=clip=="chase"
+    walk=clip=="walk" or chase
     fly=clip=="fly"
+    sleep=clip=="sleep"
     mouth=math.sin(math.pi*t)**2 if clip in ("feed","display","action") else 0
-    q=euler((.08 if clip=="display" else -.17)*mouth+.047*math.sin(wave)*walk,0,
-             .034*math.sin(wave))
-    body=transform(q,BODY,BODY+V((0,.062*mouth,.042*math.sin(wave)-(.14 if clip=="sleep" else 0))))
+    q=euler((.08 if clip=="display" else -.17)*mouth+.047*math.sin(wave)*walk-.10*chase,0,
+             (.084 if chase else .034)*math.sin(wave))
+    stride_bob=.05*math.sin(wave*2)*chase
+    body=transform(q,BODY,BODY+V((0,.062*mouth,.042*math.sin(wave)+stride_bob-.14*sleep)))
     out={"body":body@rest["body"]}
     pitch=(-.70 if clip=="feed" else .39) if STYLE=="rex" else (-.35 if clip=="feed" else .18)
     dip=(-.45 if clip=="feed" else .22)*mouth if STYLE=="rex" else 0
-    hq=q@euler(pitch*mouth,0,.068*math.sin(wave))
-    h=transform(hq,HEAD,body@HEAD+V((0,.17*mouth if STYLE=="rex" else 0,dip)))
+    hq=q@euler(pitch*mouth-.24*sleep+.047*chase,0,.068*math.sin(wave))
+    h=transform(hq,HEAD,body@HEAD+V((0,.17*mouth if STYLE=="rex" else 0,dip-.092*sleep)))
     out["head"]=h@rest["head"]
     out["jaw"]=transform(hq@euler((-.79 if STYLE=="rex" else -.51)*mouth),JAW,h@JAW)@rest["jaw"]
     for side,(a,b,c) in WINGS.items():
         sign=1 if side=="l" else -1
         upper,tip=f"wing.{side}",f"tip.{side}"
-        spread=1 if fly else .85*mouth if clip=="display" else .48 if STYLE=="bat" else .16
+        spread=1 if fly else .85*mouth if clip=="display" else .48 if STYLE=="bat" else .27 if chase else .16
         beat=(.61 if fly else .30)*math.cos(wave)
         d1=V((sign*.50,-.68,.12)).normalized().lerp(V((sign*.93,-.10,beat)).normalized(),spread).normalized()
         d2=V((sign*.31,-.78,.07)).normalized().lerp(V((sign*.87,-.30,beat*.82)).normalized(),spread).normalized()
@@ -209,8 +212,9 @@ def pose(rig,rest,clip,t):
         out[tip]=aimed(rest[tip],body@mid,body@end)
     for name,(a,b,c) in FEET.items():
         fore=name.startswith("front")
-        phase=(.27 if fore else 0)+(.5 if name.endswith(".r") else 0)
-        advance,lift=stride(t,phase,.46,.20) if walk and STYLE=="rex" else stride(t,phase,.27,.137) if walk else (0,0)
+        phase=(.27 if fore else 0)+(.45 if chase and name.endswith(".r") else .5 if name.endswith(".r") else 0)
+        reach,lift_max=(.67,.25) if STYLE=="rex" and chase else (.46,.20) if STYLE=="rex" else (.41,.178) if chase else (.27,.137)
+        advance,lift=stride(t,phase,reach,lift_max) if walk else (0,0)
         if fly:
             advance-=.17
             lift+=.24
@@ -226,7 +230,7 @@ def pose(rig,rest,clip,t):
     p=body@TAIL[0]
     for i,(a,b) in enumerate(zip(TAIL,TAIL[1:])):
         delta=q@(euler(.09*math.sin(wave-i*.73),0,
-                       (.26 if walk or fly else .095)*math.sin(wave-i*.69))@(b-a))
+                       (.39 if chase else .26 if walk or fly else .095)*math.sin(wave-i*.69))@(b-a))
         out[f"tail{i}"]=aimed(rest[f"tail{i}"],p,p+delta)
         p+=delta
     return out

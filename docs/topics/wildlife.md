@@ -884,6 +884,13 @@ without becoming prey. Hoards are ordinary editor props, created once per owner;
 deleting one remains durable. Its 196-pose body and separate accessory recipe
 have a portable pending review and exact replay.
 
+After a distant hunt the small dragon can glide toward its hoard when the
+shared flight path is open, land short, and walk the final stretch. The
+griffin can take a short run-up before its return flight and show its nap on
+the same perch support. T. rex and dire wolf take a short post-meal nap.
+These transitions give the registered walk, flight and sleep clips ordinary
+gameplay triggers. [256](../tactical/256-wildlife-3d-game-rollout.md)
+
 Dire wolves spawn in stable three-member packs, howl, share valid prey and flank.
 Natural replacements preserve pack membership. Griffins add collision-owned
 swoops, durable rock perches, tree/rock return, mid-flight reload and landing on

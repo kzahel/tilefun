@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import {
+  isDenHunterModelReviewCase,
   isGroundHunterModelReviewCase,
   isRaptorModelReviewCase,
   isWildlifeWorkModelReviewCase,
@@ -63,6 +64,7 @@ for (const model of models) {
     model.classicTravel ||
     isWildlifeWorkModelReviewCase(model.lab) ||
     isGroundHunterModelReviewCase(model.lab) ||
+    isDenHunterModelReviewCase(model.lab) ||
     isRaptorModelReviewCase(model.lab) ||
     wildlifeFeedingReview(model.type, model.lab) ||
     isPackMountModelReview(model.type, model.lab) ||

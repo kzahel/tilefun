@@ -9,6 +9,7 @@ import { ENTITY_DEFS } from "../../src/entities/EntityDefs.ts";
 import { createDescriptor } from "../../src/generation/GenerationDescriptor.ts";
 import {
   isCatModelReview,
+  isDenHunterModelReviewCase,
   isGroundHunterModelReviewCase,
   isRaptorModelReviewCase,
   isWildlifeWorkModelReviewCase,
@@ -130,7 +131,9 @@ try {
       const wildlifeWorkStage = isWildlifeWorkModelReviewCase(candidate.lab);
       const raptorStage = isRaptorModelReviewCase(candidate.lab);
       const groundHunterStage =
-        isGroundHunterModelReviewCase(candidate.lab) || predator?.species === "coconut-crab";
+        isGroundHunterModelReviewCase(candidate.lab) ||
+        isDenHunterModelReviewCase(candidate.lab) ||
+        predator?.species === "coconut-crab";
       const secretaryStage = candidate.lab === "secretary-bird";
       const pilotForage =
         candidate.id === "rabbit-pilot-v1"
@@ -285,6 +288,8 @@ try {
         catStage ||
         wildlifeWorkStage ||
         (raptorStage && !secretaryStage) ||
+        (isDenHunterModelReviewCase(candidate.lab) &&
+          poses.clips.includes(states.findIndex(({ name }) => name === "display"))) ||
         packStage ||
         feeding
           ? []

@@ -1,0 +1,23 @@
+{
+  "runtimeType": "wildlife-small-dragon-predator-v1",
+  "fit": [
+    12.76,
+    10.15,
+    12.61
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase",
+    "sleep",
+    "flight"
+  ],
+  "reviewContext": "The wings open during display and twist through separate flight and pursuit poses. The sleep pose lowers the body and curls the tail.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

@@ -3,6 +3,7 @@ import { createPlayer } from "../entities/Player.js";
 import { createProp } from "../entities/PropFactories.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { wildlifeModelReviewRecipe } from "../scenarios/WildlifeModelReviewRecipe.js";
 import { required } from "../shared/required.js";
 import { createDeer } from "./Deer.js";
 import { createPredator } from "./Predator.js";
@@ -10,6 +11,26 @@ import { clearPredatorFlight, startlePredator } from "./predatorAI.js";
 
 const idle = { dx: 0, dy: 0, sprinting: false, jump: false };
 const open = { canOccupy: () => true, isWater: () => false, surfaceZ: () => 0 };
+
+it.each(["small-dragon", "griffin"])(
+  "uses ground and flight poses after a %s hunt",
+  async (kind) => {
+    const type = `wildlife-${kind}-predator-v1`;
+    const session = await ScenarioSession.create(required(wildlifeModelReviewRecipe(type, kind)));
+    try {
+      const clips = new Set<number>();
+      for (let i = 0; i < 3_500 && clips.size < 7; i++) {
+        await session.step(idle);
+        const actor = required(session.realm.entityManager.entities.find((e) => e.type === type));
+        clips.add(required(actor.sprite?.clip));
+      }
+      expect([...clips].sort()).toEqual([0, 1, 2, 3, 4, 5, 6]);
+    } finally {
+      await session.close();
+    }
+  },
+);
+
 it("rejects water, blocked aerial approaches and paths beyond the bounded corridor", () => {
   const griffin = createPredator("griffin", 0, 0);
   griffin.wz = 24;

@@ -10186,6 +10186,46 @@
       "source": "demos/wildlife-3d/koala-tree-and-scrub-mammals-v1/model.blend"
     },
     {
+      "id": "wildlife-3d-griffin-den-predators-v1",
+      "name": "wildlife 3d griffin den predators v1",
+      "image": "demos/wildlife-3d/griffin-den-predators-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "edfa15b4fb0775291e40beef465b38cb8fb2668e9a2c7732ee018a151b859a31",
+      "source": "demos/wildlife-3d/griffin-den-predators-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-small-dragon-den-predators-v1",
+      "name": "wildlife 3d small dragon den predators v1",
+      "image": "demos/wildlife-3d/small-dragon-den-predators-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "64b54d2d63a1a80c36690fe535d4a5f6cc3b86302201cad8ddd9094080c1d8a7",
+      "source": "demos/wildlife-3d/small-dragon-den-predators-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-t-rex-den-predators-v1",
+      "name": "wildlife 3d t rex den predators v1",
+      "image": "demos/wildlife-3d/t-rex-den-predators-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "1368e6bb40886233e32f8cb36a4b41233daa3bf66eccdd7f61ca8f4edb070e7a",
+      "source": "demos/wildlife-3d/t-rex-den-predators-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-giant-spider-den-predators-v1",
+      "name": "wildlife 3d giant spider den predators v1",
+      "image": "demos/wildlife-3d/giant-spider-den-predators-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "217db4392ca7a93d0515c04ad247ea92bfe693a68add62ffecb7ace2b518ab29",
+      "source": "demos/wildlife-3d/giant-spider-den-predators-v1/model.blend"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",

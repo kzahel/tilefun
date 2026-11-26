@@ -4514,5 +4514,107 @@
       "native.png": "a74ff03c183dbb3263b56acc3eb460000091967a60e7a8152ed67c7b0eb1d05b",
       "walk.png": "a0f04f9026f059162a6c991b54fae2684cc9287d47652cadb19d4b8f5720e410"
     }
+  },
+  {
+    "id": "griffin-den-predators-v1",
+    "type": "wildlife-griffin-predator-v1",
+    "name": "Griffin",
+    "batch": "wildlife-3d-den-predators-v1",
+    "lab": "griffin",
+    "scale": 18.28,
+    "topDown": {
+      "width": 0.9814004376367615,
+      "height": 0.7035010940919036
+    },
+    "files": {
+      "appearance.png": "edfa15b4fb0775291e40beef465b38cb8fb2668e9a2c7732ee018a151b859a31",
+      "capture-config.json": "54c5b585336d9a1ad2277c5f525fe1097417f203af43c456b8df4817c54703d2",
+      "chase.png": "a92eded7bced9863049abfb2a5372d2da693e22c973c54f5a8e84d9b891f80ff",
+      "comparison.mp4": "1e3eb184a0563c46d2d69a0a0c792214c6c6c52142e62103ea9ac9eb717a051e",
+      "display.png": "c7ca1ce1e0e39431ad9cb95ea7d4613852d02eec86e400a5a303eef46caee2bc",
+      "feed.png": "162e814f89792185553c76ce18ca631bb80e89181fe5288bd1d2a0393db73f20",
+      "flight.png": "81fa8232e8d282a199a612376c1ba381dd09d772d739d423c70b418fba4a1955",
+      "model.blend": "b12754afef67e096aa03818d31ad47200e7f7dcc3a0a25b140830849db76d4c2",
+      "model.glb": "f717a3c725a922b29a2ec5d0af5883550b269c463433f11c795bfc473aa47419",
+      "native.png": "7b32b0b2850c935e0312fc87f0c40fcac9467b0dd9976f14bccbddd8946d77de",
+      "sleep.png": "d420eb539c9f4fc0381cfe2b5ca2135704973875eeb159a5a41fa7a71a57f882",
+      "walk.png": "fbf926fcc0ea3f06f1b5e0c311b50d912d51469c17df0e1e2e258f44878f1ef7"
+    }
+  },
+  {
+    "id": "small-dragon-den-predators-v1",
+    "type": "wildlife-small-dragon-predator-v1",
+    "name": "Small dragon",
+    "batch": "wildlife-3d-den-predators-v1",
+    "lab": "small-dragon",
+    "scale": 18.28,
+    "topDown": {
+      "width": 1.012035010940919,
+      "height": 0.7773522975929978
+    },
+    "files": {
+      "appearance.png": "64b54d2d63a1a80c36690fe535d4a5f6cc3b86302201cad8ddd9094080c1d8a7",
+      "capture-config.json": "a3d641446df1395e81e5fb3aa135379a395949bd3ed04e928ffbc8d723ae128e",
+      "chase.png": "6cf195355304d185628b88549b02f9734a0fee14aba4a459c4beb19c73999c07",
+      "comparison.mp4": "de8701d4dcf52028953899ac0ef2421fcd28ff59cf2b513274adcb2f191acae4",
+      "display.png": "3ee260cbcd7480d1c603ae513ef57053efaab42603bd5264a669dec397e01561",
+      "feed.png": "12921c7eed1d0dd88f1808bf4fee671d9965823abc4e5b5e21e814960e9554f7",
+      "flight.png": "438044a574bce73cfd248ec6821dbb7a7e13e18fe724e4058b32d9f11fdec01b",
+      "model.blend": "6febc279ea1cd4c8d3ccc8cd17efacc0286b9024b7ce7255f9388728e402b5d0",
+      "model.glb": "e68c35b205eef4ce1754541807cf82bd3d7f170c01544430a73396005dfca43c",
+      "native.png": "3e47d6362b56d9efcae174cc544659f9bde6ef46c906134fb4e25d8c56ce8040",
+      "sleep.png": "78005de15f4f47af57ae94868e455d2b83444837155d169b3dae14e1e1f074c5",
+      "walk.png": "f3972c7d33450508ca58cf98eac04056e3bb6b4e1b3b81dcce4ba3f4cbf38d18"
+    }
+  },
+  {
+    "id": "t-rex-den-predators-v1",
+    "type": "wildlife-t-rex-predator-v1",
+    "name": "T. rex",
+    "batch": "wildlife-3d-den-predators-v1",
+    "lab": "t-rex",
+    "scale": 20.94,
+    "topDown": {
+      "width": 1.1399235912129895,
+      "height": 0.6275071633237822
+    },
+    "files": {
+      "appearance.png": "1368e6bb40886233e32f8cb36a4b41233daa3bf66eccdd7f61ca8f4edb070e7a",
+      "capture-config.json": "432f77f6bb897091c1a5f47e4f6e7736997d2f49d69d56f21d1c505e98f51556",
+      "chase.png": "d7959a5e2f3dbce1aa1a0f136c0a22cc943e1593174a26704d8157e837765750",
+      "comparison.mp4": "d62f79cd8ddcb97a27a7bc57420e0c639c6f4c47dae7cbe7255841877b5caf02",
+      "display.png": "69e5734bd7be8785a9795f82a1f5b9f9dc101dfe1ba594dbca66841f38edf244",
+      "feed.png": "0a76cba1ca2d991405c807cbbb4abdd7664fa7849b34b702c62c876fc33b9717",
+      "model.blend": "bd71464666a21ef9fc9be38dc38bc64dd7fcd96fc727654a3172c2d6b7a66639",
+      "model.glb": "eb49d9ceb61573f3d465004af1f0ac0036b268c99302df91ffccd99fc588a69f",
+      "native.png": "ed07ea8e01a9797cb62644442485b4842862aa594c3c371c2ef941d2c005b07c",
+      "sleep.png": "b73cb6ef59c387e0b37dca152f2b6f81e4c7b2ab91d99b97ff066b01d7cec802",
+      "walk.png": "9acb85265769ce2bdac6e4650ec3e677707a6cb92412bc3d560a28b6c9a52d60"
+    }
+  },
+  {
+    "id": "giant-spider-den-predators-v1",
+    "type": "wildlife-giant-spider-predator-v1",
+    "name": "Giant spider",
+    "batch": "wildlife-3d-den-predators-v1",
+    "lab": "giant-spider",
+    "scale": 17.24,
+    "topDown": {
+      "width": 0.9756380510440836,
+      "height": 0.5887470997679816
+    },
+    "files": {
+      "appearance.png": "217db4392ca7a93d0515c04ad247ea92bfe693a68add62ffecb7ace2b518ab29",
+      "capture-config.json": "07c0a0822369c2d0ae8e6544e9da464b53d9a00fbf52d236fbab1195cae5f536",
+      "chase.png": "8b67c9f91bae6f87efe131fd302a449990527fcb7afe7aa0fc7b2b84ef43643b",
+      "comparison.mp4": "011508e4f00acf7024aea184727f540cc520cb0807597331ff2eb9a7d9144690",
+      "display.png": "83cd0b815f59bd390ef4400910d63ae433a5c6fe2968725216907a6dc685d51f",
+      "feed.png": "b5f562568ce3b982824f633ad3668f96f2c213990a84f44a070f49e87b10a04d",
+      "model.blend": "4a221d2d620da1ea2af38f02d232668a71e84f4ee9e1ce9f714040c7d3df7417",
+      "model.glb": "7af650470e1353a77b059154bf82dc1df726370472e68ad6c539f6ef126ba101",
+      "native.png": "6cb209d36ac89187afdfdf359b155aee539cc262467578c0dc96939deb812fa3",
+      "sleep.png": "95f7b825c27729c1178e309ed36eb742b3de99f3cec56c6ed404d8a839f7985d",
+      "walk.png": "ac90fe7e8f46d67523155e9293756d249b2774df2ffbbb1574778fa54eb07dc6"
+    }
   }
 ]

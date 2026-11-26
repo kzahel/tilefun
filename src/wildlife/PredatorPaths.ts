@@ -60,3 +60,42 @@ export function nearestPredatorPerch(
     ?.filter((perch) => gap(perch, home) < radius)
     .sort((a, b) => gap(a, home) - gap(b, home))[0];
 }
+
+/** A resting griffin takes a short run-up before returning to its perch. */
+export function griffinPerchApproach(
+  hunter: Entity,
+  perch: PositionComponent,
+  env: WildlifeEnvironment,
+  planning?: AiPlanningScheduler,
+): PositionComponent | undefined {
+  const ai = hunter.predator;
+  if (!ai?.cooldown || (hunter.wz ?? 0) > 4) return undefined;
+  if (ai.state === "patrol" && ai.elapsed >= 1) return undefined;
+  const distance = gap(hunter.position, perch);
+  if (distance <= 54) return undefined;
+  const ratio = 14 / distance;
+  const point = {
+    wx: hunter.position.wx + (perch.wx - hunter.position.wx) * ratio,
+    wy: hunter.position.wy + (perch.wy - hunter.position.wy) * ratio,
+  };
+  return clearPredatorPath(hunter, point, env, planning) ? point : undefined;
+}
+
+/** A dragon lands short of its hoard and walks the last stretch. */
+export function dragonReturnLanding(
+  hunter: Entity,
+  home: PositionComponent,
+  env: WildlifeEnvironment,
+  planning?: AiPlanningScheduler,
+) {
+  const distance = gap(hunter.position, home);
+  if (!hunter.predator?.cooldown || distance < 64) return undefined;
+  const ratio = 32 / distance;
+  const point = {
+    wx: home.wx + (hunter.position.wx - home.wx) * ratio,
+    wy: home.wy + (hunter.position.wy - home.wy) * ratio,
+  };
+  const z = env.surfaceZ?.(point) ?? 0;
+  if (clearPredatorFlight(hunter, point, z, env, planning)) return { point, z };
+  return undefined;
+}
