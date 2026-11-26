@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { Direction } from "../../entities/Entity.js";
 import type { SpriteItem } from "../SceneItem.js";
 import { WILDLIFE_MESHES, type WildlifeMeshDefinition } from "../WildlifeMeshCatalog.js";
+import { CLASSIC_PLAYER_MESH } from "./ClassicPlayerMesh.js";
 import { SkinnedWildlifeBatch } from "./SkinnedWildlifeBatch.js";
 
 const INITIAL_INSTANCE_CAPACITY = 8;
@@ -128,6 +129,7 @@ class WildlifeMeshBatch {
       const { scene, animations } = await new GLTFLoader().loadAsync(
         `${import.meta.env.BASE_URL}${this.definition.path}`,
       );
+      this.definition.prepare?.(scene);
       const bounds = new THREE.Box3().setFromObject(scene);
       const height = bounds.max.y - bounds.min.y;
       if (this.definition.animation) {
@@ -232,6 +234,8 @@ class WildlifeMeshBatch {
 
 export class FirstPersonWildlifeMeshes {
   selected = 0;
+  playersDrawn = 0;
+  private playerBatch: WildlifeMeshBatch | undefined;
   private readonly batches = new Map<string, WildlifeMeshBatch>();
   private enabled = true;
   private topDown = false;
@@ -249,6 +253,8 @@ export class FirstPersonWildlifeMeshes {
   begin(enabled: boolean, topDown: boolean): void {
     this.enabled = enabled;
     this.topDown = topDown;
+    this.playerBatch?.begin();
+    this.playersDrawn = 0;
     this.selected = 0;
     this.count = 0;
     this.frame++;
@@ -261,13 +267,21 @@ export class FirstPersonWildlifeMeshes {
 
   /** Reserve the model path even if the asset is still loading or failed to load. */
   push(item: SpriteItem): "drawn" | "unavailable" | "sprite" {
-    if (
-      !this.enabled ||
-      item.scaleY !== undefined ||
-      (item.alpha !== undefined && item.alpha !== 1)
-    )
+    if (item.scaleY !== undefined || (item.alpha !== undefined && item.alpha !== 1))
       return "sprite";
 
+    if (item.playerPose) {
+      this.playerBatch ??= new WildlifeMeshBatch(
+        this.root,
+        this.shade,
+        CLASSIC_PLAYER_MESH,
+        this.cast,
+      );
+      if (!this.playerBatch.push(item, this.topDown)) return "sprite";
+      this.playersDrawn++;
+      return "drawn";
+    }
+    if (!this.enabled) return "sprite";
     const definition = WILDLIFE_MESHES.get(item.sheetKey);
     if (!definition) return "sprite";
     this.selected++;
@@ -286,6 +300,7 @@ export class FirstPersonWildlifeMeshes {
   }
 
   end(): number {
+    this.playerBatch?.end();
     for (const batch of this.batches.values()) batch.end();
     if (this.batches.size > CACHED_MODELS) this.trimCache();
     return this.count;
@@ -308,6 +323,7 @@ export class FirstPersonWildlifeMeshes {
   }
 
   dispose(): void {
+    this.playerBatch?.dispose();
     for (const batch of this.batches.values()) batch.dispose();
     this.batches.clear();
   }

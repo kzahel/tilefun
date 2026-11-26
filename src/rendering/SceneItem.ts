@@ -72,6 +72,8 @@ export interface SpriteItem {
     readonly idleTime: number;
     readonly direction: Direction;
   };
+  /** Only the default standing cat uses this pose. Classic 2D shares its fallback sheet. */
+  playerPose?: NonNullable<SpriteItem["wildlifePose"]>;
   /** Facing of a four-direction sheet (players, turning wanderers) whose current row
    * is that facing. Views that see the actor from other sides (first person, 229)
    * reselect the row; the fixed view ignores it. Absent for every other sprite. */

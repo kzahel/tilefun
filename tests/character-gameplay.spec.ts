@@ -3,9 +3,10 @@ import { PROMOTED_CHARACTERS } from "../src/characters/PromotedCharacters.js";
 import type { Entity } from "../src/entities/Entity.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import type { ClientMessage } from "../src/shared/protocol.js";
-import { openCreate } from "./helpers/gameMenu.js";
+import { openHome } from "./helpers/gameMenu.js";
 
 type GameHarness = {
+  firstPerson: { viewStats?: { playerMeshes: number } };
   stateView: { playerEntity: Entity; entities: Entity[] };
   transport: { send(m: ClientMessage): void };
   netEmulatedTransport: {
@@ -19,6 +20,12 @@ const playerSheet = (page: Page) =>
     () =>
       (document.querySelector("#game") as unknown as { __game: GameHarness }).__game.stateView
         .playerEntity.sprite?.sheetKey,
+  );
+const drawnPlayers = (page: Page) =>
+  page.evaluate(
+    () =>
+      (document.querySelector("#game") as unknown as { __game: GameHarness }).__game.firstPerson
+        .viewStats?.playerMeshes,
   );
 async function choose(page: Page, name: string) {
   const picker = page.getByTestId("player-model-picker");
@@ -48,11 +55,19 @@ test("approved NPCs place, save and reload in the Worker; player choice persists
     `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(createDescriptor("flat", 422)))}`,
   );
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+  await page.getByRole("button", { name: "New World", exact: true }).click();
+  await expect(page.getByTestId("world-menu")).toBeHidden();
+  await expect(page.locator("#game")).toHaveAttribute("data-generator", "flat");
+  await expect.poll(() => drawnPlayers(page)).toBe(1);
+  await choose(page, "Classic 2D");
+  await openHome(page);
+  await page.getByRole("button", { name: "Resume", exact: true }).click();
+  await expect.poll(() => drawnPlayers(page)).toBe(0);
   await choose(page, "Trail Explorer");
   await expect.poll(() => playerSheet(page)).toBe("character-person-v1");
   await page.getByTestId("player-model-picker").locator("summary").click();
-  await openCreate(page);
-  await page.getByRole("button", { name: "New World", exact: true }).click();
+  await openHome(page);
+  await page.getByRole("button", { name: "Resume", exact: true }).click();
   await expect(page.getByTestId("world-menu")).toBeHidden();
   await expect(page.locator("#game")).toHaveAttribute("data-generator", "flat");
   await page.getByTestId("main-menu-toggle").click();
@@ -107,7 +122,10 @@ test("approved NPCs place, save and reload in the Worker; player choice persists
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await expect.poll(() => playerSheet(page)).toBe("character-person-v1");
   await expect.poll(npcTypes).toEqual(expected);
-  await choose(page, "Classic Player");
+  await choose(page, "Classic Player (3D)");
+  await openHome(page);
+  await page.getByRole("button", { name: "Resume", exact: true }).click();
+  await expect.poll(() => drawnPlayers(page)).toBe(1);
   await expect.poll(() => playerSheet(page)).toBe("player");
   await page.screenshot({ path: "/tmp/tilefun-player-model-picker.png" });
 });

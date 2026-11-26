@@ -312,6 +312,14 @@ export const WORKSHOP_TOOLS = defineTools([
     mode: "adapter",
   },
   {
+    id: "classic-player-3d",
+    name: "3D Classic Player",
+    description:
+      "Orbit the standing cream cat and compare its idle and walking poses with the original sprite.",
+    url: "demos/classic-player-3d/v1/index.html",
+    mode: "link",
+  },
+  {
     id: "characters",
     name: "Pixel characters",
     description: "Inspect the animated character roster and native pixel sizes.",
@@ -329,6 +337,12 @@ export const workshopToolMetadata = ({
   mode,
 }: WorkshopTool): WorkshopTool => ({ id, name, description, url, mode });
 export const CITY_BATCHES: ReviewBatch[] = [
+  {
+    id: "classic-player-3d",
+    name: "3D Classic Player",
+    description: "Standing player model, angle sheet and turntable.",
+    toolId: "classic-player-3d",
+  },
   {
     id: "physics-prototype",
     name: "3D physics backend experiment",

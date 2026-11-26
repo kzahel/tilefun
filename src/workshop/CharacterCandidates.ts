@@ -1,3 +1,4 @@
+import classicPlayerFiles from "../../public/demos/classic-player-3d/v1/review.json";
 import type { ArtCatalog } from "../art/ArtCatalog.js";
 import { loadVerifiedArtImage, sha256 } from "../art/ArtSource.js";
 import { CHARACTERS, type CharacterDefinition } from "../characters/CharacterCatalog.js";
@@ -57,4 +58,28 @@ export async function buildCharacterCandidates(catalog: ArtCatalog) {
   for (const def of CHARACTERS)
     results.push((await buildCharacterCandidate(def, catalog)).candidate);
   return results;
+}
+
+/** The standing model is an orbitable study with its own identity and review surface. */
+export async function buildClassicPlayerStudy(catalog: ArtCatalog): Promise<WorkshopCandidate> {
+  const url = "/tilefun/demos/classic-player-3d/v1/";
+  for (const [name, expected] of Object.entries(classicPlayerFiles)) {
+    const file = await fetch(url + name);
+    if (!file.ok || (await sha256(new Uint8Array(await file.arrayBuffer()))) !== expected)
+      throw new Error(`Classic Player study evidence missing or changed: ${name}`);
+  }
+  const sourceFingerprint = required(catalog.sheets.find((s) => s.id === "player")).fingerprint;
+  return {
+    id: "projection:classic-player-standing-v1",
+    batchId: "classic-player-3d",
+    name: "Classic Player · standing cat",
+    prompt:
+      "Compare the ears, cheeks, collar and paws with the original sprite. Orbit the model and switch between Idle and Walk.",
+    kind: "projection",
+    url: `${url}index.html`,
+    sourceFingerprint,
+    fingerprint: await sha256(
+      new TextEncoder().encode(JSON.stringify([sourceFingerprint, classicPlayerFiles])),
+    ),
+  };
 }

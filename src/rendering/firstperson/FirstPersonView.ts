@@ -184,6 +184,7 @@ export class FirstPersonView {
     /** Moving actor cards written this frame. */
     billboards: 0,
     wildlifeMeshes: 0,
+    playerMeshes: 0,
     wildlifeModelsSelected: 0,
     /** Standing prop cards in the merged static meshes. */
     cards: 0,
@@ -789,6 +790,7 @@ export class FirstPersonView {
     this.shadowCards.end();
     this.stats.dynamicCards = this.shadowCards.count;
     this.stats.wildlifeMeshes = this.wildlife.end();
+    this.stats.playerMeshes = this.wildlife.playersDrawn;
     this.stats.wildlifeModelsSelected = this.wildlife.selected;
     // The nearest mesh bodies cast into the dynamic map; each keeps as much of
     // its contact shadow as the map's fade leaves out, and the rest all of it.

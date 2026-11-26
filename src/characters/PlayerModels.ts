@@ -4,13 +4,18 @@ import { PROMOTED_CHARACTERS } from "./PromotedCharacters.js";
 
 /** Append only: array indices are the compact wire identities for appearances. */
 export const PLAYER_MODELS = [
-  { id: "player", name: "Classic Player" },
+  { id: "player", name: "Classic Player (3D)" },
   ...Array.from({ length: 20 }, (_, i) => ({ id: `person${i + 1}`, name: `Person ${i + 1}` })),
   ...PROMOTED_CHARACTERS.filter((c) => c.playerEligible).map((c) => ({
     id: c.sheetKey,
     name: c.name,
   })),
+  { id: "player-classic-2d", name: "Classic 2D" },
 ] as const;
+
+export function playerModelSprite(id: string) {
+  return ENTITY_DEFS[id === "player-classic-2d" ? "player" : id]?.sprite;
+}
 
 export function isPlayerModel(id: unknown): id is string {
   return typeof id === "string" && PLAYER_MODELS.some((model) => model.id === id);
@@ -23,7 +28,7 @@ export function normalizePlayerModel(id: unknown): string {
 export function applyPlayerModel(entity: Entity, value: unknown): void {
   if (entity.type !== "player" || !entity.sprite) return;
   const id = normalizePlayerModel(value);
-  const def = ENTITY_DEFS[id]?.sprite;
+  const def = playerModelSprite(id);
   if (!def) return;
   const changed = (entity.playerModel ?? "player") !== id;
   if (id === "player") delete entity.playerModel;

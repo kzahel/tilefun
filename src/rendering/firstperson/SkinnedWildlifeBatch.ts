@@ -91,11 +91,13 @@ export class SkinnedWildlifeBatch {
       this.scale * (fit?.height ?? 1),
     );
     instance.pivot.position.set(item.wx, item.wy, item.zOffset);
+    const pose = item.playerPose ?? item.wildlifePose;
     instance.pivot.rotation.z =
-      HEADING[item.wildlifePose?.direction ?? item.facing ?? item.frameRow] ?? 0;
+      (HEADING[pose?.direction ?? item.facing ?? item.frameRow] ?? 0) +
+      (this.definition.forwardYaw ?? 0);
     instance.pivot.visible = true;
 
-    const indexed = this.samples[item.wildlifePose?.clip ?? -1];
+    const indexed = this.samples[pose?.clip ?? -1];
     const chosen =
       indexed ??
       this.samples.find(
@@ -105,13 +107,12 @@ export class SkinnedWildlifeBatch {
     if (!chosen) return;
     const duration = chosen.clip.duration;
     const frame = Math.max(0, item.frameCol - chosen.start);
-    const elapsed = item.wildlifePose?.elapsedMs;
+    const elapsed = pose?.elapsedMs;
     const spriteDuration = chosen.frameDuration * chosen.count;
-    const framePhase =
-      (frame + (item.wildlifePose?.frameTimeMs ?? 0) / chosen.frameDuration) / chosen.count;
+    const framePhase = (frame + (pose?.frameTimeMs ?? 0) / chosen.frameDuration) / chosen.count;
     const phase =
       chosen.count === 1 && chosen.loop
-        ? ((item.wildlifePose?.idleTime ?? 0) % duration) / duration
+        ? ((pose?.idleTime ?? 0) % duration) / duration
         : elapsed !== undefined
           ? chosen.loop
             ? (elapsed % spriteDuration) / spriteDuration

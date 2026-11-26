@@ -1,6 +1,9 @@
 import type { Spritesheet } from "../assets/Spritesheet.js";
-import { normalizePlayerModel, PLAYER_MODELS } from "../characters/PlayerModels.js";
-import { ENTITY_DEFS } from "../entities/EntityDefs.js";
+import {
+  normalizePlayerModel,
+  PLAYER_MODELS,
+  playerModelSprite,
+} from "../characters/PlayerModels.js";
 
 /** A menu-local picker; previews stop when the menu or disclosure closes. */
 export class PlayerModelPicker {
@@ -26,7 +29,8 @@ export class PlayerModelPicker {
     this.status.setAttribute("role", "status");
     this.status.style.cssText = "font-size:12px;margin:4px 0;";
     this.element.append(this.summary, this.grid, this.status);
-    for (const model of PLAYER_MODELS) {
+    // Show both Classic forms together without changing their wire indices.
+    for (const model of [...PLAYER_MODELS].sort((a, b) => priority(a.id) - priority(b.id))) {
       const button = document.createElement("button");
       button.type = "button";
       button.setAttribute("aria-label", model.name);
@@ -39,7 +43,16 @@ export class PlayerModelPicker {
       canvas.setAttribute("aria-hidden", "true");
       const label = document.createElement("span");
       label.textContent = model.name;
-      button.append(canvas, label);
+      if (model.id === "player") {
+        const image = document.createElement("img");
+        image.src = `${import.meta.env.BASE_URL}assets/sprites/classic-player-3d-preview.png`;
+        image.alt = "";
+        image.width = image.height = 64;
+        image.style.cssText = "display:block;margin:auto;border-radius:6px";
+        button.append(image, label);
+      } else {
+        button.append(canvas, label);
+      }
       button.addEventListener("click", () => {
         void this.choose(model.id);
       });
@@ -63,7 +76,7 @@ export class PlayerModelPicker {
     this.element.remove();
   }
   private setSelected(id: string): void {
-    this.summary.textContent = `Character: ${PLAYER_MODELS.find((m) => m.id === id)?.name ?? "Classic Player"}`;
+    this.summary.textContent = `Character: ${PLAYER_MODELS.find((m) => m.id === id)?.name ?? PLAYER_MODELS[0].name}`;
     for (const card of this.cards) {
       card.button.setAttribute("aria-pressed", String(card.id === id));
       card.button.style.borderColor = card.id === id ? "#8cf" : "#526477";
@@ -95,7 +108,8 @@ export class PlayerModelPicker {
   }
   private draw(time: number): void {
     for (const { id, canvas } of this.cards) {
-      const sprite = ENTITY_DEFS[id]?.sprite;
+      if (id === "player") continue;
+      const sprite = playerModelSprite(id);
       const sheet = sprite && this.sheets.get(sprite.sheetKey);
       const ctx = canvas.getContext("2d");
       if (!sprite || !sheet || !ctx) continue;
@@ -113,4 +127,8 @@ export class PlayerModelPicker {
       );
     }
   }
+}
+
+function priority(id: string) {
+  return id === "player" ? 0 : id === "player-classic-2d" ? 1 : 2;
 }

@@ -1,5 +1,5 @@
 import { isBoat } from "../../boats/Boat.js";
-import { ELEVATION_PX, TILE_SIZE } from "../../config/constants.js";
+import { ELEVATION_PX, PLAYER_FRAME_DURATION, TILE_SIZE } from "../../config/constants.js";
 import { getEntityAABB } from "../../entities/collision.js";
 import {
   Direction,
@@ -259,6 +259,16 @@ function collectEntity(pass: EntityPass, e: SpriteEntity): SpriteItem | undefine
   if (e.type === GREENS || e.type === GROWING_PLANT) spriteItem.depthWy = pos.wy + 4;
   if (facingRows(e)) spriteItem.facing = e.sprite.direction;
   const wildlifeAnimation = WILDLIFE_MESHES.get(e.sprite.sheetKey)?.animation;
+  if (e.type === "player" && (!e.playerModel || e.playerModel === "player")) {
+    spriteItem.playerPose = {
+      clip: e.sprite.moving ? 1 : 0,
+      direction: e.sprite.direction,
+      frameTimeMs: e.sprite.animTimer,
+      elapsedMs:
+        (e.sprite.frameCol + e.sprite.animTimer / e.sprite.frameDuration) * PLAYER_FRAME_DURATION,
+      idleTime: poseTime + e.id * 0.0625,
+    };
+  }
   if (wildlifeAnimation) {
     const { animTimer, clip, clipElapsedMs } = e.sprite;
     const direction =

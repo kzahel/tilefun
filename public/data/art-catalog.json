@@ -37235,7 +37235,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/scene/EntitySprites.ts:472"
+          "source": "src/rendering/scene/EntitySprites.ts:482"
         },
         {
           "system": "Gameplay",
@@ -38085,7 +38085,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/characters/PlayerModels.ts:19"
+          "source": "src/characters/PlayerModels.ts:17"
         },
         {
           "system": "Gameplay",
@@ -38093,11 +38093,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/characters/PlayerModels.ts:28"
+          "source": "src/characters/PlayerModels.ts:29"
         },
         {
           "system": "Gameplay",
-          "source": "src/characters/PlayerModels.ts:29"
+          "source": "src/characters/PlayerModels.ts:33"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/characters/PlayerModels.ts:34"
         },
         {
           "system": "Gameplay",
@@ -38189,7 +38193,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/scene/EntitySprites.ts:300"
+          "source": "src/rendering/scene/EntitySprites.ts:262"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/scene/EntitySprites.ts:262"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/scene/EntitySprites.ts:310"
         },
         {
           "system": "Gameplay",
@@ -38289,7 +38301,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/ui/PlayerModelPicker.ts:50"
+          "source": "src/ui/PlayerModelPicker.ts:46"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/ui/PlayerModelPicker.ts:63"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/ui/PlayerModelPicker.ts:111"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/ui/PlayerModelPicker.ts:133"
         },
         {
           "system": "Gameplay",
@@ -38297,7 +38321,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/CharacterCandidates.ts:14"
+          "source": "src/workshop/CharacterCandidates.ts:15"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/workshop/CharacterCandidates.ts:71"
         }
       ]
     },
@@ -38549,11 +38577,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:44"
+          "source": "src/wildlife/Fauna.ts:45"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:246"
+          "source": "src/wildlife/Fauna.ts:248"
         },
         {
           "system": "Gameplay",
@@ -40981,7 +41009,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/FirstPersonView.ts:472"
+          "source": "src/rendering/firstperson/FirstPersonView.ts:473"
         },
         {
           "system": "Editor",

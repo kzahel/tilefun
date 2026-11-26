@@ -75,10 +75,12 @@ describe("player appearance", () => {
       const copy = deserializeEntity(
         required(wire({ entityBaselines: [after] }).entityBaselines?.[0]),
       );
+      expect(copy.playerModel).toBe(p.playerModel);
       expect(copy.sprite).toEqual(p.sprite);
       expect(copy.collider).toEqual(collider);
       const delta = required(diffEntitySnapshots(before, after));
       applyEntityDelta(replica, required(wire({ entityDeltas: [delta] }).entityDeltas?.[0]));
+      expect(replica.playerModel).toBe(p.playerModel);
       expect(replica.sprite).toEqual(p.sprite);
       applyPlayerModel(p, "player");
       const reset = diffEntitySnapshots(after, serializeEntity(p));

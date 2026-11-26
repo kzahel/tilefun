@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 
-import type { Euler } from "three";
+import type { Euler, Group } from "three";
 import { type AnimationClip, ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { FAUNA_DEFS, faunaType } from "../wildlife/Fauna.js";
 import { RABBIT_CLIPS, RABBIT_TYPE } from "../wildlife/Rabbit.js";
@@ -15,6 +15,8 @@ export interface WildlifeMeshDefinition {
   /** Self-contained GLB with feet on local ground and forward along glTF −Z. */
   readonly path: string;
   readonly height: number;
+  readonly forwardYaw?: number;
+  readonly prepare?: (scene: Group) => void;
   /** Authored fit maps Blender units directly to game pixels. */
   readonly unitScale?: number;
   /** Asset-local width and height registration for the oblique gameplay view. */

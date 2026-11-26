@@ -14,6 +14,24 @@ from animated standing-player coverage. Existing approved art/gameplay is unchan
 next compare native sprite, shared-depth billboard and one properly prepared live
 mesh under the same fixed camera and presentation clock.
 
+## Standing Classic Player study (2026-11-26)
+
+The [3D preview](https://tilefun.graehlarts.com/tilefun/demos/classic-player-3d/v1/index.html)
+shows the default Sprout Lands cat standing, blinking and walking. The
+[angle sheet](../../public/demos/classic-player-3d/v1/angle-sheet.jpg) compares it with
+the front, profile and rear cells of the active 16×16 player sheet. Its cream coat,
+lavender forelock, violet eyes and collar, blush cheeks and yellow tag follow those
+cells. Head depth, the tied collar and the bipedal gait are interpretations.
+The [Blender builder](../../art-source/experiments/classic-player/build.py) exports one
+skinned mesh with a nearest-sampled palette texture and two animation clips.
+Workshop lists the exact model and evidence under **3D Classic Player**.
+The owner selected this model as the default player on 2026-11-26. The shared scene
+draws it for local and remote players, independently of the wildlife switch, and uses
+the original sprite while loading. Idle uses the presentation clock and Walk samples
+the player’s movement frames, including sprinting. **Menu → Character → Classic 2D**
+persists the original sprite as a separate profile choice. Existing named appearances
+and their network indices retain their meanings.
+
 ## Current slice
 
 [Workshop → Character lab](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/character-lab)
