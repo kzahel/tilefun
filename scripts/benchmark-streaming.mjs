@@ -6,6 +6,7 @@ import os from "node:os";
 import path from "node:path";
 import react from "@vitejs/plugin-react";
 import { chromium } from "playwright-core";
+import { tsImport } from "tsx/esm/api";
 import { createServer } from "vite";
 import { readAndroidThermals, waitForAndroidCool } from "./android-thermal-gate.mjs";
 import { disableImageDimensionCache } from "./streaming-dimension-control.mjs";
@@ -168,6 +169,24 @@ const report = {
 };
 try {
   await mkdir(output, { recursive: true });
+  // A deployed build has no Vite source URLs. Derive fixtures from the benchmark checkout.
+  const [{ createDescriptor }, { RacetrackSource }, { regionalWorld }, { ZOOM_PRESETS }] =
+    await Promise.all([
+      tsImport("../src/generation/GenerationDescriptor.ts", import.meta.url),
+      tsImport("../src/generation/regional/RacetrackPlanner.ts", import.meta.url),
+      tsImport("../src/generation/regional/WorldDescriptor.ts", import.meta.url),
+      tsImport("../src/rendering/PresentationSettings.ts", import.meta.url),
+    ]);
+  const generation = createDescriptor("regional", 2026);
+  let [x, y] = arrivalTile ?? [300, 519];
+  if (scene === "racetrack") {
+    const track = new RacetrackSource(regionalWorld(2026)).owner(0, 0);
+    if (!track) throw Error("Missing generated racetrack");
+    // Clear northern infield lane beside the ordinary vehicle depot.
+    x = track.center.x - 27;
+    y = track.center.y - 11;
+  }
+  const arrival = { x, y, generation };
   let origin = process.env.TILEFUN_DEV_URL;
   if (!origin) {
     server = await createServer({
@@ -237,30 +256,8 @@ try {
     const thermalsBefore = androidCli
       ? await waitForAndroidCool(androidCli, maxBatteryC, cooldownSeconds, cooldownAbort.signal)
       : undefined;
-    const arrival = await page.evaluate(
-      async ({ version, scene, arrivalTile }) => {
-        const { createDescriptor } = await import(
-          "/tilefun/src/generation/GenerationDescriptor.ts"
-        );
-        const generation = createDescriptor("regional", 2026);
-        if (version !== "current" && version !== generation.version)
-          throw Error("Retired generator: use --versions=current");
-        if (scene === "racetrack") {
-          const { RacetrackSource } = await import(
-            "/tilefun/src/generation/regional/RacetrackPlanner.ts"
-          );
-          const { regionalWorld } = await import(
-            "/tilefun/src/generation/regional/WorldDescriptor.ts"
-          );
-          const track = new RacetrackSource(regionalWorld(2026)).owner(0, 0);
-          if (!track) throw Error("Missing generated racetrack");
-          // Clear northern infield lane beside the ordinary vehicle depot.
-          return { x: track.center.x - 27, y: track.center.y - 11, generation };
-        }
-        return { x: arrivalTile?.[0] ?? 300, y: arrivalTile?.[1] ?? 519, generation };
-      },
-      { version, scene, arrivalTile },
-    );
+    if (version !== "current" && version !== arrival.generation.version)
+      throw Error("Retired generator: use --versions=current");
     const gameUrl = new URL(`${origin}/`);
     gameUrl.searchParams.set("nogamepad", "");
     if (instrumentation) gameUrl.searchParams.set("perf", "");
@@ -797,10 +794,7 @@ try {
       if (zoomSettled) samples.push(await sample("zoom-settled", 180));
       await page.screenshot({ path: path.join(output, `${version}-zoom.png`) });
       if (zoomSweep) {
-        const presets = await page.evaluate(async () => {
-          const { ZOOM_PRESETS } = await import("/tilefun/src/rendering/PresentationSettings.ts");
-          return ["2", "1", "0", "3"].map((key) => ZOOM_PRESETS.find((p) => p.key === key));
-        });
+        const presets = ["2", "1", "0", "3"].map((key) => ZOOM_PRESETS.find((p) => p.key === key));
         for (const preset of presets) {
           if (touch)
             await page.evaluate(

@@ -1,0 +1,304 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "72e39a2bc479412e55b6a71c4996e595044a1591",
+  "workshopInputDigest": "2a0059f7141968db6fb3182903d12b4995b6c713eab5e479d69d962e42c6ebe0",
+  "warmCrowd": {
+    "scope": "Headed Chromium on Apple M4 Pro at 120 Hz. Seed 2026 woodland at 1\u00d7, with 24 editor-placed animals alongside the native population. Both lanes reported 99 replicated animals of the six measured types out of 162 entities. A replicated animal need not be visible.",
+    "device": {
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "devicePixelRatio": 1
+      },
+      "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+      "gpuTimer": true
+    },
+    "types": [
+      "wildlife-rabbit-v1",
+      "wildlife-cat-ginger-provisional-v1",
+      "wildlife-dog-shepherd-provisional-v1",
+      "wildlife-deer-v1",
+      "wildlife-robin-v1",
+      "wildlife-chicken-provisional-v1"
+    ],
+    "lanes": {
+      "models": {
+        "entities": 162,
+        "frames": 600,
+        "missed": 0,
+        "frameMs": {
+          "p50": 8.3,
+          "p95": 9.3,
+          "max": 9.4
+        },
+        "renderMs": {
+          "p50": 1.3,
+          "p95": 1.6,
+          "max": 1.8
+        },
+        "gpuMs": {
+          "p50": 2.03,
+          "p95": 2.24,
+          "max": 2.37,
+          "samples": 600,
+          "disjoint": 0
+        },
+        "drawCallsPerFrame": 88.1
+      },
+      "sprites": {
+        "entities": 162,
+        "frames": 600,
+        "missed": 0,
+        "frameMs": {
+          "p50": 8.3,
+          "p95": 9.2,
+          "max": 9.4
+        },
+        "renderMs": {
+          "p50": 0.8,
+          "p95": 1,
+          "max": 1.8
+        },
+        "gpuMs": {
+          "p50": 0.65,
+          "p95": 1.25,
+          "max": 1.45,
+          "samples": 600,
+          "disjoint": 0
+        },
+        "drawCallsPerFrame": 7
+      }
+    }
+  },
+  "coldAndWarmLoading": {
+    "scope": "Headless bundled Chromium with hardware WebGL on the same desktop. An ordinary flat world in a new browser context per lane and trial. Warm uses a fresh page navigation with the same context's HTTP cache. Time starts at the editor spawn command and stops when all six are replicated and, in the model lane, their meshes are drawn.",
+    "browser": "156.0.8078.4",
+    "types": [
+      "wildlife-rabbit-v1",
+      "wildlife-cat-ginger-provisional-v1",
+      "wildlife-dog-shepherd-provisional-v1",
+      "wildlife-deer-v1",
+      "wildlife-robin-v1",
+      "wildlife-chicken-provisional-v1"
+    ],
+    "samples": [
+      {
+        "trial": 1,
+        "lane": "models",
+        "warmth": "cold",
+        "elapsedMs": 224,
+        "frameP95Ms": 16.8,
+        "glbCount": 6,
+        "glbTransferBytes": 454277,
+        "glbDecodedBytes": 2532988
+      },
+      {
+        "trial": 1,
+        "lane": "models",
+        "warmth": "warm",
+        "elapsedMs": 40,
+        "frameP95Ms": 16.8,
+        "glbCount": 6,
+        "glbTransferBytes": 0,
+        "glbDecodedBytes": 2532988
+      },
+      {
+        "trial": 1,
+        "lane": "sprites",
+        "warmth": "cold",
+        "elapsedMs": 37,
+        "frameP95Ms": 16.8,
+        "glbCount": 0,
+        "glbTransferBytes": 0,
+        "glbDecodedBytes": 0
+      },
+      {
+        "trial": 1,
+        "lane": "sprites",
+        "warmth": "warm",
+        "elapsedMs": 35,
+        "frameP95Ms": 16.7,
+        "glbCount": 0,
+        "glbTransferBytes": 0,
+        "glbDecodedBytes": 0
+      },
+      {
+        "trial": 2,
+        "lane": "sprites",
+        "warmth": "cold",
+        "elapsedMs": 30,
+        "frameP95Ms": 16.7,
+        "glbCount": 0,
+        "glbTransferBytes": 0,
+        "glbDecodedBytes": 0
+      },
+      {
+        "trial": 2,
+        "lane": "sprites",
+        "warmth": "warm",
+        "elapsedMs": 45,
+        "frameP95Ms": 16.8,
+        "glbCount": 0,
+        "glbTransferBytes": 0,
+        "glbDecodedBytes": 0
+      },
+      {
+        "trial": 2,
+        "lane": "models",
+        "warmth": "cold",
+        "elapsedMs": 82,
+        "frameP95Ms": 16.7,
+        "glbCount": 6,
+        "glbTransferBytes": 454277,
+        "glbDecodedBytes": 2532988
+      },
+      {
+        "trial": 2,
+        "lane": "models",
+        "warmth": "warm",
+        "elapsedMs": 41,
+        "frameP95Ms": 16.8,
+        "glbCount": 6,
+        "glbTransferBytes": 0,
+        "glbDecodedBytes": 2532988
+      },
+      {
+        "trial": 3,
+        "lane": "models",
+        "warmth": "cold",
+        "elapsedMs": 167,
+        "frameP95Ms": 16.7,
+        "glbCount": 6,
+        "glbTransferBytes": 454277,
+        "glbDecodedBytes": 2532988
+      },
+      {
+        "trial": 3,
+        "lane": "models",
+        "warmth": "warm",
+        "elapsedMs": 34,
+        "frameP95Ms": 16.7,
+        "glbCount": 6,
+        "glbTransferBytes": 0,
+        "glbDecodedBytes": 2532988
+      },
+      {
+        "trial": 3,
+        "lane": "sprites",
+        "warmth": "cold",
+        "elapsedMs": 35,
+        "frameP95Ms": 16.7,
+        "glbCount": 0,
+        "glbTransferBytes": 0,
+        "glbDecodedBytes": 0
+      },
+      {
+        "trial": 3,
+        "lane": "sprites",
+        "warmth": "warm",
+        "elapsedMs": 52,
+        "frameP95Ms": 16.8,
+        "glbCount": 0,
+        "glbTransferBytes": 0,
+        "glbDecodedBytes": 0
+      }
+    ]
+  },
+  "traversal": {
+    "scope": "Production racetrack infield. Headless bundled Chromium and the same walk, sprint and reverse input in both lanes. The runner derives the fixture from the checkout whose deployment it is exercising.",
+    "lanes": {
+      "models": [
+        {
+          "phase": "cold",
+          "frameP95Ms": 16.7,
+          "xDisplacementPx": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0
+        },
+        {
+          "phase": "standing",
+          "frameP95Ms": 16.7,
+          "xDisplacementPx": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0
+        },
+        {
+          "phase": "walk",
+          "frameP95Ms": 16.7,
+          "xDisplacementPx": -194.1,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0
+        },
+        {
+          "phase": "sprint",
+          "frameP95Ms": 16.8,
+          "xDisplacementPx": -643.1,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0
+        },
+        {
+          "phase": "reverse",
+          "frameP95Ms": 16.8,
+          "xDisplacementPx": 618.0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0
+        },
+        {
+          "phase": "zoom-out",
+          "frameP95Ms": 16.7,
+          "xDisplacementPx": -2.1,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0
+        }
+      ],
+      "sprites": [
+        {
+          "phase": "cold",
+          "frameP95Ms": 16.7,
+          "xDisplacementPx": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0
+        },
+        {
+          "phase": "standing",
+          "frameP95Ms": 16.8,
+          "xDisplacementPx": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0
+        },
+        {
+          "phase": "walk",
+          "frameP95Ms": 16.8,
+          "xDisplacementPx": -194.1,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0
+        },
+        {
+          "phase": "sprint",
+          "frameP95Ms": 16.7,
+          "xDisplacementPx": -643.1,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0
+        },
+        {
+          "phase": "reverse",
+          "frameP95Ms": 16.7,
+          "xDisplacementPx": 616.8,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0
+        },
+        {
+          "phase": "zoom-out",
+          "frameP95Ms": 16.8,
+          "xDisplacementPx": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0
+        }
+      ]
+    }
+  },
+  "physicalDevices": {
+    "Android": "Both configured Pixel testbeds were unavailable over ADB.",
+    "SteamDeck": "The configured testbed failed its SSH readiness check."
+  }
+}

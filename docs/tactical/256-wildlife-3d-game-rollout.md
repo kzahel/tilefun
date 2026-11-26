@@ -714,6 +714,19 @@ At the shore and pond checkpoint, the configured Android testbeds were
 disconnected. The Steam Deck was reachable, but its graphical session failed
 the testbed check.
 
+The [desktop production report](256-wildlife-3d-game-rollout/evidence/release-72e39a2b-desktop.json)
+pins revision `72e39a2b`. In the mixed woodland run, 24 placed animals joined
+the native population. Both headed lanes missed zero of 600 intervals, with
+frame p95 of 9.3 ms for models and 9.2 ms for sprites. GPU p95 was 2.24 ms
+and 1.25 ms, respectively. In three separate headless loading trials, the
+six meshes first drew after a median 167 ms from placement in a cold context
+and 40 ms with a warm HTTP cache. The six GLBs transferred 454,277 bytes
+cold and zero bytes warm. In the sprite lane the six actors replicated
+after a median 35 ms cold and 45 ms warm, with zero GLB traffic.
+Both production racetrack lanes passed visible-terrain readiness through
+walk, sprint and reverse. The latest readiness probes found both Pixel
+testbeds unavailable over ADB and the Steam Deck unavailable over SSH.
+
 Use `node --import tsx scripts/wildlife/audit-3d-rollout.mjs --drafts` to check
 the inventory, draft hashes and registered action names. Run
 `verify-3d-campaign-runtime.mjs --rollout=BATCH REPORT` for render samples and
