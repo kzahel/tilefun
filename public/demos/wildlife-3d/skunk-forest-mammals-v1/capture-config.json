@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-skunk-provisional-v1",
+  "fit": [
+    10.15,
+    10.88,
+    11.32
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "The raised stripe-tipped tail is distinct from the planted head movement and escape gait.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

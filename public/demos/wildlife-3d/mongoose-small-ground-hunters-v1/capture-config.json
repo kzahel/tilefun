@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-mongoose-predator-v1",
+  "fit": [
+    10.15,
+    9.38,
+    10.84
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "reviewContext": "Slender trunk, narrow muzzle, and a raised tail. It uses a low fast pose when chasing.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

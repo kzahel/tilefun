@@ -18,10 +18,27 @@ export function isRaptorModelReviewCase(caseId: string): boolean {
   return /^(?:eagle|hawk|owl|secretary-bird)$/.test(caseId);
 }
 
+const GROUND_HUNTERS_WITH_RABBIT_PREY = new Set([
+  "bobcat",
+  "lynx",
+  "cheetah",
+  "jaguar",
+  "leopard",
+  "lion",
+  "tiger",
+  "panther",
+  "brown-bear",
+  "polar-bear",
+  "coyote",
+  "wolf",
+  "fossa",
+  "honey-badger",
+  "mongoose",
+  "white-nosed-coati",
+]);
+
 export function isGroundHunterModelReviewCase(caseId: string): boolean {
-  return /^(?:bobcat|lynx|cheetah|jaguar|leopard|lion|tiger|panther|brown-bear|polar-bear|coyote|wolf)$/.test(
-    caseId,
-  );
+  return GROUND_HUNTERS_WITH_RABBIT_PREY.has(caseId);
 }
 
 export function groundHunterReviewActors(type: string, caseId: string) {

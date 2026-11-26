@@ -107,6 +107,16 @@ runtime scope reconciliation in the execution notes.
 
 ## Delivery log
 
+### Small hunters and woodland mammals, 2026-11-26
+
+Fossa, honey badger, mongoose and white-nosed coati use independent chase
+motions. Panda, capybara, red panda and skunk have separate foraging and
+escape poses. The koala, echidna, binturong and kinkajou complete the third
+batch, with separate short, low escape steps. All 52 states played in
+Workshop and in reopened game worlds with the exact models. [Small hunters](256-wildlife-3d-game-rollout/evidence/small-ground-hunters-v1-deployment.json) ·
+[Forest mammals](256-wildlife-3d-game-rollout/evidence/forest-mammals-v1-deployment.json) ·
+[Tree and scrub mammals](256-wildlife-3d-game-rollout/evidence/tree-and-scrub-mammals-v1-deployment.json)
+
 ### Bears and canids, 2026-11-26
 
 The brown and polar bear have longer planted legs and heavier front

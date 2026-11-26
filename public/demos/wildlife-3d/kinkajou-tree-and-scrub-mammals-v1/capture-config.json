@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-kinkajou-provisional-v1",
+  "fit": [
+    12.61,
+    9.5,
+    10.84
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "Broad eyes and a narrow long tail. The head searches ahead of the feet and the escape lengthens the rear reach.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

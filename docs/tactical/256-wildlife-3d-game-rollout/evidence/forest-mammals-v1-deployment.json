@@ -1,0 +1,130 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "c5b1f2539f999fb91981bf3f0a680f524233cb192a8a646d66ee010f1e48817c",
+  "results": [
+    {
+      "type": "wildlife-capybara-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "78fe99658588c3b274caa9d3f3e9769145e3b52c83164074d7c0479af9d5ce68",
+      "modelSha256": "e63c4d3209d636ba7ee6ff7fb505c0b56bfd450945a15eaf7f892d959a2fcad4",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-capybara&wildlife3dStage=capybara-forest-mammals-v1&wildlife3dReview=capybara-forest-mammals-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009670028686523487,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-panda-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "44304892637025d90eb1af1f393b8ffa01988f2a57831a54af476fc74659318f",
+      "modelSha256": "18af782aa489cddccb153c2c56c14582f777e04ce311400448e8eee1c62e9c4e",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-panda&wildlife3dStage=panda-forest-mammals-v1&wildlife3dReview=panda-forest-mammals-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009755020141601627,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-red-panda-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "6e09c39231740d1b07ef692caa1e06d7c4d8003ca26640d7bf4e5385c1079144",
+      "modelSha256": "095adb3f4bec8f01d14288385e4da35a17e34a4b2413535faa913339435f7b83",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-red-panda&wildlife3dStage=red-panda-forest-mammals-v1&wildlife3dReview=red-panda-forest-mammals-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009591560363769736,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-skunk-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "1de1847c33f556d9b2af63e6e611fa0e28f6068830d6b6657875fd544ee21d8d",
+      "modelSha256": "c9a506819796621b46b33ea632101ddde58af90e460ab0e4575b282cbb85dc53",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-skunk&wildlife3dStage=skunk-forest-mammals-v1&wildlife3dReview=skunk-forest-mammals-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009554328918457161,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "c5b1f2539f999fb91981bf3f0a680f524233cb192a8a646d66ee010f1e48817c",
+  "results": [
+    {
+      "type": "wildlife-binturong-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "eed98ce26d696ace4196a296f98005f44e0e7a07c29b630216dc34c6a38a6ffc",
+      "modelSha256": "4c7b3be3b45acf2496f840fed7c520f57c77beb60a16f47022ef527af1dbe3c8",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-binturong&wildlife3dStage=binturong-tree-and-scrub-mammals-v1&wildlife3dReview=binturong-tree-and-scrub-mammals-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009850845336914092,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-echidna-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "ce3761ab671804194c1394599747008b6b2bba08eb458dc2fc66976756437ecf",
+      "modelSha256": "f997619cd875a9ffac40ea835d0b0f9b99953bdaab619151f8979d1d03eef4b6",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-echidna&wildlife3dStage=echidna-tree-and-scrub-mammals-v1&wildlife3dReview=echidna-tree-and-scrub-mammals-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009831314086914148,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-kinkajou-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "d866c313f2ceb69d0fd053010379ff30a81ab80db7dd8edba44d9defb5a7f25a",
+      "modelSha256": "398d726fbf36834a51005f69ba7db94ef7ff726def8b82be449ca7149ebd2a51",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-kinkajou&wildlife3dStage=kinkajou-tree-and-scrub-mammals-v1&wildlife3dReview=kinkajou-tree-and-scrub-mammals-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009698066711425822,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-koala-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "43e96febf74826b419283407a7f320593a6e9010ccab1f876998e7f422330b78",
+      "modelSha256": "a0780b132526b0999130bbbbd40a4919018dc033856fd2a7672a0f4eeb24181c",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-koala&wildlife3dStage=koala-tree-and-scrub-mammals-v1&wildlife3dReview=koala-tree-and-scrub-mammals-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009650573730468769,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

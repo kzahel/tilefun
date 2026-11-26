@@ -64,11 +64,10 @@ and verify a fresh ordinary game entry on the shipped revision. Record the
 revision, URL, runtime hashes and observed default states in the ledger.
 
 The November 26 resume began from base commit `23e99752` and reused the
-archived Blender drafts. Revision `d9ea9b1a` records 113 selected defaults,
-27 animals with exact production evidence, and 624 qualified states. The
-later big-cat checkpoint covers 158 registered animals and 722 qualified
-states, with 64 animals fully verified as live defaults. The pilot has all
-22 states verified in the production game. All three cat coats and both
-previously selected dogs have full production evidence. The golden retriever
-preview has all four states and awaits exact Workshop review. The delivery
-log and ledger record later batches.
+archived Blender drafts. The small-hunter and woodland-mammal checkpoint
+has 190 registered animals and 859 qualified states. There are 113 selected
+defaults. The ledger has full production evidence for 110, including all
+22 pilot states, the three cat coats and both selected dogs. The hen, frog,
+and mallard passed on the public development checkout and are due for the
+production repeat. The golden retriever and later model batches await
+exact Workshop review. The delivery log and ledger record later evidence.

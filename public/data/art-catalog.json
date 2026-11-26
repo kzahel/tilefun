@@ -10066,6 +10066,126 @@
       "source": "demos/wildlife-3d/wolf-bears-and-canids-v1/model.blend"
     },
     {
+      "id": "wildlife-3d-fossa-small-ground-hunters-v1",
+      "name": "wildlife 3d fossa small ground hunters v1",
+      "image": "demos/wildlife-3d/fossa-small-ground-hunters-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "3f8578f1de70d7997b8a30e3b269dad6e897292ec42feac655cb4fb50bbc25a2",
+      "source": "demos/wildlife-3d/fossa-small-ground-hunters-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-honey-badger-small-ground-hunters-v1",
+      "name": "wildlife 3d honey badger small ground hunters v1",
+      "image": "demos/wildlife-3d/honey-badger-small-ground-hunters-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "2df18ae55903eca587fe1f64214b83c43a0345a9f398b3b402b699ee9c8f3cc9",
+      "source": "demos/wildlife-3d/honey-badger-small-ground-hunters-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-mongoose-small-ground-hunters-v1",
+      "name": "wildlife 3d mongoose small ground hunters v1",
+      "image": "demos/wildlife-3d/mongoose-small-ground-hunters-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "3df95c17603120c0152027166c96c3d2ee920d7553b92b8b3e6c385143635868",
+      "source": "demos/wildlife-3d/mongoose-small-ground-hunters-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-white-nosed-coati-small-ground-hunters-v1",
+      "name": "wildlife 3d white nosed coati small ground hunters v1",
+      "image": "demos/wildlife-3d/white-nosed-coati-small-ground-hunters-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "ae3e3fcc0f352656f41458bf867e6caf992ecc012d48edece56c70bf8571b387",
+      "source": "demos/wildlife-3d/white-nosed-coati-small-ground-hunters-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-capybara-forest-mammals-v1",
+      "name": "wildlife 3d capybara forest mammals v1",
+      "image": "demos/wildlife-3d/capybara-forest-mammals-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "05149196398ef2ada84abc15e5c3fd19dfcba10a6e4c5ebe7c93d7946be1d286",
+      "source": "demos/wildlife-3d/capybara-forest-mammals-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-panda-forest-mammals-v1",
+      "name": "wildlife 3d panda forest mammals v1",
+      "image": "demos/wildlife-3d/panda-forest-mammals-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "b8587e3b09df6b8682739a600ac87b1b7324aad4894a454045b1c5c35741659a",
+      "source": "demos/wildlife-3d/panda-forest-mammals-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-red-panda-forest-mammals-v1",
+      "name": "wildlife 3d red panda forest mammals v1",
+      "image": "demos/wildlife-3d/red-panda-forest-mammals-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "a7e2f8bf5607616f16fc949bb0eb05d7f31c9b700a787465f9f1861ee2635957",
+      "source": "demos/wildlife-3d/red-panda-forest-mammals-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-skunk-forest-mammals-v1",
+      "name": "wildlife 3d skunk forest mammals v1",
+      "image": "demos/wildlife-3d/skunk-forest-mammals-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "fca99ca7002c9e146fcf514fc7bdb026f73a8ae3a8d13e5cbf84fe36f5f44864",
+      "source": "demos/wildlife-3d/skunk-forest-mammals-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-binturong-tree-and-scrub-mammals-v1",
+      "name": "wildlife 3d binturong tree and scrub mammals v1",
+      "image": "demos/wildlife-3d/binturong-tree-and-scrub-mammals-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "1d6d4f9187972b555c640a2bff08813b73640b120e368427f5ee0c941e3c3a4f",
+      "source": "demos/wildlife-3d/binturong-tree-and-scrub-mammals-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-echidna-tree-and-scrub-mammals-v1",
+      "name": "wildlife 3d echidna tree and scrub mammals v1",
+      "image": "demos/wildlife-3d/echidna-tree-and-scrub-mammals-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "5c538704603bc4cdd401dbb694eb57fb01c969d067c52e9ed7d10ebf04e5ba50",
+      "source": "demos/wildlife-3d/echidna-tree-and-scrub-mammals-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-kinkajou-tree-and-scrub-mammals-v1",
+      "name": "wildlife 3d kinkajou tree and scrub mammals v1",
+      "image": "demos/wildlife-3d/kinkajou-tree-and-scrub-mammals-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "df0e0a670e40ab2924f48175bc59451192d5d8671d695395f990a00b7ac19abd",
+      "source": "demos/wildlife-3d/kinkajou-tree-and-scrub-mammals-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-koala-tree-and-scrub-mammals-v1",
+      "name": "wildlife 3d koala tree and scrub mammals v1",
+      "image": "demos/wildlife-3d/koala-tree-and-scrub-mammals-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "c19fdff6e2001c2b4cfeee7e227494e040beaf8c1d1fd39661c8a77e567655e7",
+      "source": "demos/wildlife-3d/koala-tree-and-scrub-mammals-v1/model.blend"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",

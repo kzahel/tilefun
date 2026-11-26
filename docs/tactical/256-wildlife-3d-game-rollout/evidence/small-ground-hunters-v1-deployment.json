@@ -1,0 +1,138 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "c5b1f2539f999fb91981bf3f0a680f524233cb192a8a646d66ee010f1e48817c",
+  "results": [
+    {
+      "type": "wildlife-fossa-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "c069fc21d9f993b919aef3d0e98bf4339316e23dcaba13847a881b046c88167c",
+      "modelSha256": "0c5d8cbb62b6b1f88e4ffb0a196384db71e080ea819072d6355b01234c5213f5",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-fossa&wildlife3dStage=fossa-small-ground-hunters-v1&wildlife3dReview=fossa-small-ground-hunters-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009333953857421981,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-honey-badger-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "c2579c703b78eb191e0a3b69f3bfc2cbdf1dc591764051e245d1403c90812808",
+      "modelSha256": "b6a171f2958cca5565c6f90d1747c432ca3ff16175eff92194639acf2d838ccf",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-honey-badger&wildlife3dStage=honey-badger-small-ground-hunters-v1&wildlife3dReview=honey-badger-small-ground-hunters-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009610519409179827,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-mongoose-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "7cc4bb58e33dd3913053922cee6ee0bb2f6341e79700663ddfc96c5ec0d5329e",
+      "modelSha256": "c85f83f7a05a8bb804e625a5ca7f29956bf9217ed0a99d675b7884ffe0049662",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-mongoose&wildlife3dStage=mongoose-small-ground-hunters-v1&wildlife3dReview=mongoose-small-ground-hunters-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009497451782226646,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-white-nosed-coati-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "a86d3bf221db7d92ebd437633039769710c44b86367024bda5bdd00232240c15",
+      "modelSha256": "41870fa67d72b1825baf7415aa665c951c6f2d34d01ebbeea8402cb502d97ac5",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-white-nosed-coati&wildlife3dStage=white-nosed-coati-small-ground-hunters-v1&wildlife3dReview=white-nosed-coati-small-ground-hunters-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009582748413086038,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    }
+  ]
+}

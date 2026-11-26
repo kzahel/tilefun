@@ -1,0 +1,134 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-capybara-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "capybara-forest-mammals-v1",
+      "modelSha256": "e63c4d3209d636ba7ee6ff7fb505c0b56bfd450945a15eaf7f892d959a2fcad4"
+    },
+    {
+      "type": "wildlife-panda-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "panda-forest-mammals-v1",
+      "modelSha256": "18af782aa489cddccb153c2c56c14582f777e04ce311400448e8eee1c62e9c4e"
+    },
+    {
+      "type": "wildlife-red-panda-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "red-panda-forest-mammals-v1",
+      "modelSha256": "095adb3f4bec8f01d14288385e4da35a17e34a4b2413535faa913339435f7b83"
+    },
+    {
+      "type": "wildlife-skunk-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "skunk-forest-mammals-v1",
+      "modelSha256": "c9a506819796621b46b33ea632101ddde58af90e460ab0e4575b282cbb85dc53"
+    }
+  ],
+  "clipSamples": 448,
+  "testedDepth": false
+}

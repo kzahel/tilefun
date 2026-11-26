@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-echidna-provisional-v1",
+  "fit": [
+    12.61,
+    9.11,
+    9.89
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "A broad quill coat over planted feet, with a separate probe and a short escape stride.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

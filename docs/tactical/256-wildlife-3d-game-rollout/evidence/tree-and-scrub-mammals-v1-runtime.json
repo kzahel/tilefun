@@ -1,0 +1,134 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-binturong-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "binturong-tree-and-scrub-mammals-v1",
+      "modelSha256": "4c7b3be3b45acf2496f840fed7c520f57c77beb60a16f47022ef527af1dbe3c8"
+    },
+    {
+      "type": "wildlife-echidna-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "echidna-tree-and-scrub-mammals-v1",
+      "modelSha256": "f997619cd875a9ffac40ea835d0b0f9b99953bdaab619151f8979d1d03eef4b6"
+    },
+    {
+      "type": "wildlife-kinkajou-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "kinkajou-tree-and-scrub-mammals-v1",
+      "modelSha256": "398d726fbf36834a51005f69ba7db94ef7ff726def8b82be449ca7149ebd2a51"
+    },
+    {
+      "type": "wildlife-koala-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "koala-tree-and-scrub-mammals-v1",
+      "modelSha256": "a0780b132526b0999130bbbbd40a4919018dc033856fd2a7672a0f4eeb24181c"
+    }
+  ],
+  "clipSamples": 448,
+  "testedDepth": false
+}

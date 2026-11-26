@@ -133,7 +133,7 @@ def refine_draft(mesh, species):
         elif not bear and part == "Species body and coat":
             if species == "honey-badger":
                 shade = 4 if upper >= .3 else 1
-            elif upper < -.37:
+            elif upper < -.37 and species != "fossa":
                 shade = 5
         index = first + 2 * shade
         uv = ((index % 8 + 1) / 8, (index // 8 + .5) / 8)

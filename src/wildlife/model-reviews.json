@@ -4234,5 +4234,285 @@
       "native.png": "eb96353332996e9d5a4288cb85977b814f19af82cf5c71a225f39090bccca20f",
       "walk.png": "7da66a37417ee6d331b37d32f57168eab88477688968fc3e5b396049b109b57e"
     }
+  },
+  {
+    "id": "fossa-small-ground-hunters-v1",
+    "type": "wildlife-fossa-predator-v1",
+    "name": "Fossa",
+    "batch": "wildlife-3d-small-ground-hunters-v1",
+    "lab": "fossa",
+    "scale": 10.73,
+    "topDown": {
+      "width": 1.292637465051258,
+      "height": 0.8303821062441752
+    },
+    "files": {
+      "appearance.png": "3f8578f1de70d7997b8a30e3b269dad6e897292ec42feac655cb4fb50bbc25a2",
+      "capture-config.json": "d130df9621f57a08585ec19f13106894ffda11dce5b59c95e0e35a6bf4041587",
+      "chase.png": "7e33c4a2be14cc513c72fa96a36edfb4c927b2f81aa33e220ac9afb8a5464eb1",
+      "comparison.mp4": "c479d8d922ce2c4eaecd71d8a5e1a3807771a5b64311482e4e00948b0467df84",
+      "display.png": "bb4a4cc32c3f0dedc4a0a2e650bb671a14ab17d81ae2d8c4c9fb6c9cdb745b98",
+      "feed.png": "1f34895dd8f3da8a66916f20812753b87ecb33be774a85e829d41ae73065a2a6",
+      "model.blend": "9b56db44ee28f0a4dc292c3cac7ff7baa74fca1429daa418b321cebd467c8d3a",
+      "model.glb": "0c5d8cbb62b6b1f88e4ffb0a196384db71e080ea819072d6355b01234c5213f5",
+      "native.png": "9f42462f836d1b9ae27f8a8f53bbec1a1bdfb299f97fb148e111428ab1448ceb",
+      "walk.png": "2062b8970a8c262ba75dc617c6bb58d3e290bd8851adb4962ae540247e8941ba"
+    }
+  },
+  {
+    "id": "honey-badger-small-ground-hunters-v1",
+    "type": "wildlife-honey-badger-predator-v1",
+    "name": "Honey badger",
+    "batch": "wildlife-3d-small-ground-hunters-v1",
+    "lab": "honey-badger",
+    "scale": 9.6,
+    "topDown": {
+      "width": 1.4447916666666667,
+      "height": 1.0041666666666669
+    },
+    "files": {
+      "appearance.png": "2df18ae55903eca587fe1f64214b83c43a0345a9f398b3b402b699ee9c8f3cc9",
+      "capture-config.json": "f4d160a9b2147bac469ff7ca20cc80fd2cb69c87593c416323d8c90c2ee7daf7",
+      "chase.png": "50d59347b2a11c3bd82c345dedfd5129cacfb11902f89647180ed71c721f15b5",
+      "comparison.mp4": "fd22390ae1b29f5a4cfe4773556d48a4aebd6c7026dde3fe0565db15c57ad246",
+      "display.png": "afcc27de5938a76f819d7f3f8107b345897d7736828d52a798541757dd39912a",
+      "feed.png": "f9ef49251f4438a2c022fb9925582df221efee9ce537ee7cad6b34e70b95f03b",
+      "model.blend": "6891d764e3f364cd7ea21483fc9c7cd6ff90d27f75da58ba89eee0691a46cb0c",
+      "model.glb": "b6a171f2958cca5565c6f90d1747c432ca3ff16175eff92194639acf2d838ccf",
+      "native.png": "e695ff187e498cc0d909dcad7dd5aa255e70ad1a74ac2f31c8d84a48c894d681",
+      "walk.png": "0969d0fbdf92257e37686daa0225f1a62c96599c4b5d891278a6d6e648cb6050"
+    }
+  },
+  {
+    "id": "mongoose-small-ground-hunters-v1",
+    "type": "wildlife-mongoose-predator-v1",
+    "name": "Mongoose",
+    "batch": "wildlife-3d-small-ground-hunters-v1",
+    "lab": "mongoose",
+    "scale": 9.25,
+    "topDown": {
+      "width": 1.28,
+      "height": 1.0140540540540541
+    },
+    "files": {
+      "appearance.png": "3df95c17603120c0152027166c96c3d2ee920d7553b92b8b3e6c385143635868",
+      "capture-config.json": "b154e501b63a52301a31b5af49f59e0695a7037a436085484c80bfdc9622db43",
+      "chase.png": "647021c61898d6c96719a9da76afe05d0e3ae4bce0a8085a9fec3427b1f90274",
+      "comparison.mp4": "938aff86abfdf07c3f14ab235c6d93236726050018cb6683cf7bc3a422b68e40",
+      "display.png": "7b8c2f5c5486896952dce2a73cb371fb66c4072e0eed5700a0fd7fdff04243e8",
+      "feed.png": "367bb9e5780e1a6e4248b7c503de1bae450d601ebb983415e7b12bfdbaa24911",
+      "model.blend": "afa3345956838343944ae15613b2279f6d8c10419bdc27809b68fb12f28891c2",
+      "model.glb": "c85f83f7a05a8bb804e625a5ca7f29956bf9217ed0a99d675b7884ffe0049662",
+      "native.png": "cc11b842e7c888a50d66a0564f3ddbfc7820367d6131aef60980260af90ff26e",
+      "walk.png": "f0313de2bccf8ac74dbd17207102df004035a0f66378c4e7ed6f5a3dceaf537a"
+    }
+  },
+  {
+    "id": "white-nosed-coati-small-ground-hunters-v1",
+    "type": "wildlife-white-nosed-coati-predator-v1",
+    "name": "White-nosed coati",
+    "batch": "wildlife-3d-small-ground-hunters-v1",
+    "lab": "white-nosed-coati",
+    "scale": 8,
+    "topDown": {
+      "width": 1.41875,
+      "height": 1.49625
+    },
+    "files": {
+      "appearance.png": "ae3e3fcc0f352656f41458bf867e6caf992ecc012d48edece56c70bf8571b387",
+      "capture-config.json": "9242411acc15a190a523dad0e5537f23849cea89914f64da670c35b9445b4d30",
+      "chase.png": "de4b82ae67a9e141d736e650c17c87e2e6e0cf14312274b6670f5667cd10b670",
+      "comparison.mp4": "a9875c068bde9312c5e1f6862f49ad1072f9af50965b6e4fc92ac3dc7bbe44b8",
+      "display.png": "afcd6c727a645b463116b6509f8e961429e132d8dc7fdcf3c0e195fc7c718f91",
+      "feed.png": "a3e1953c5127e551e2a0ae424efde2127dcd10f957296d4b3df9f74ddcc83440",
+      "model.blend": "2a52f0a2108933036fc988335f49c94c7b75c9ef1621cbb3446d8abc702c2cb5",
+      "model.glb": "41870fa67d72b1825baf7415aa665c951c6f2d34d01ebbeea8402cb502d97ac5",
+      "native.png": "6ad8a7181863f432be74812dbcb162c2978472a146564b31ba34bc4c460189de",
+      "walk.png": "9d93f2d2b914401dbc664ddef62cd98843298f940cbfd50ff085c98b310ec41b"
+    }
+  },
+  {
+    "id": "capybara-forest-mammals-v1",
+    "type": "wildlife-capybara-provisional-v1",
+    "name": "Capybara",
+    "batch": "wildlife-3d-forest-mammals-v1",
+    "lab": "capybara",
+    "scale": 15.07,
+    "topDown": {
+      "width": 0.9064366290643663,
+      "height": 0.9674850696748507
+    },
+    "files": {
+      "action.png": "a731aea68815d4b3262b8bb46164b0f09b7160179d116e507598f2d72fa57ede",
+      "appearance.png": "05149196398ef2ada84abc15e5c3fd19dfcba10a6e4c5ebe7c93d7946be1d286",
+      "capture-config.json": "310e53242a2bb15b23040208e735fa818bcd808d877a02b4fe4f944983cf9ca1",
+      "comparison.mp4": "3adbfd629d634d6d81c6a89bf06a97c1529072bd8a0fa793cd09962770fcc1d1",
+      "flee.png": "6fe9d1241d95f9c2713d6c503cc818978904745b3599cd54bf2fcfcd38d92330",
+      "model.blend": "cf048a2fb26d59b181db08525ae917a49da68a170aeb5f394d5d3cb91aab409c",
+      "model.glb": "e63c4d3209d636ba7ee6ff7fb505c0b56bfd450945a15eaf7f892d959a2fcad4",
+      "native.png": "c84edc676b039d115d983ce321a8ea8d14c8b89584073f6861709327a8e7cd2a",
+      "walk.png": "490eb37cd7c04d3cf7b8d6a3e2b8abd3fa19f883fce793b43362119d3bcb8430"
+    }
+  },
+  {
+    "id": "panda-forest-mammals-v1",
+    "type": "wildlife-panda-provisional-v1",
+    "name": "Panda",
+    "batch": "wildlife-3d-forest-mammals-v1",
+    "lab": "panda",
+    "scale": 15.33,
+    "topDown": {
+      "width": 0.7710371819960862,
+      "height": 0.761252446183953
+    },
+    "files": {
+      "action.png": "ff37e7ed322caefb17a6378a70bc474f6e01ed6acbe4ea78bd2090b9589588ec",
+      "appearance.png": "b8587e3b09df6b8682739a600ac87b1b7324aad4894a454045b1c5c35741659a",
+      "capture-config.json": "d5d0f840f8f45a0d4c9ed2121380660a2675bace4e6afa59fb5333e46531cae7",
+      "comparison.mp4": "5b67e8086070929cf34db2d43af2e1dd60cd454e02fd3a3046195bffb75dbc2c",
+      "flee.png": "2e7ab371833e2d22a24f41e35420308960aae9c751d617731e53657f5b46d205",
+      "model.blend": "1fc32834928760e94f757a84ba253b6c8d3b329e7aefae352a10c4d9f7255298",
+      "model.glb": "18af782aa489cddccb153c2c56c14582f777e04ce311400448e8eee1c62e9c4e",
+      "native.png": "650245c19a24563211ff4f2f87c4c8077977d0efe3d7b499c8bb6aa22fbbe159",
+      "walk.png": "cb0e4d3e92038ededbec2d6a6c18e575c6ce5f4cc91689edc700b9de36cfb513"
+    }
+  },
+  {
+    "id": "red-panda-forest-mammals-v1",
+    "type": "wildlife-red-panda-provisional-v1",
+    "name": "Red panda",
+    "batch": "wildlife-3d-forest-mammals-v1",
+    "lab": "red-panda",
+    "scale": 8.99,
+    "topDown": {
+      "width": 1.46384872080089,
+      "height": 1.0467185761957731
+    },
+    "files": {
+      "action.png": "b22ed78b8762cf61d2437f6fb5cad36afabb3919e8d4f2e2d60cdebcabbc430f",
+      "appearance.png": "a7e2f8bf5607616f16fc949bb0eb05d7f31c9b700a787465f9f1861ee2635957",
+      "capture-config.json": "5280a4e72a9d8892aa7bf7eae412cb642894e59054eb1e314c9335fac498d254",
+      "comparison.mp4": "9642b7c5eeb2156c9f42b02719a29e8e3f58c7eafd2f47efb711a0e3e608ef4c",
+      "flee.png": "d61e8d3dd14522b44b9c0a1fad481102023be5fd38a0ab0dc225d6b1e69f7abb",
+      "model.blend": "27c2c09bd9860a0c234fbc6891a1301a5e8c1a554392a40ec200008a397a0248",
+      "model.glb": "095adb3f4bec8f01d14288385e4da35a17e34a4b2413535faa913339435f7b83",
+      "native.png": "b29cf85f82b11ff57cedfdca432467ff2dc7807de2a5a4a4083ca8c6e109f048",
+      "walk.png": "9e33a86a94b3506a5fe8af0fc728dc6c28f5e905a3014bd4e54aba344fab6eff"
+    }
+  },
+  {
+    "id": "skunk-forest-mammals-v1",
+    "type": "wildlife-skunk-provisional-v1",
+    "name": "Skunk",
+    "batch": "wildlife-3d-forest-mammals-v1",
+    "lab": "skunk",
+    "scale": 10.48,
+    "topDown": {
+      "width": 0.8473282442748092,
+      "height": 1.0381679389312977
+    },
+    "files": {
+      "action.png": "f85de80a7cd45cc873081c006122eb5686dbdc5c59ae0f9f9d9df57e4fd24a4b",
+      "appearance.png": "fca99ca7002c9e146fcf514fc7bdb026f73a8ae3a8d13e5cbf84fe36f5f44864",
+      "capture-config.json": "9270dd4a918743c13e5f96a4da5823860952d712db954260c8bf941ce34a3d4c",
+      "comparison.mp4": "19936562bd2fc9c82b5acda53e7ae0b859eb34deee6fa6a865e20bc5e2069c13",
+      "flee.png": "689751bfeb1261ee90a6b8f728108cf8dd9b8e60119bab3ec71a9efdaa0235e3",
+      "model.blend": "57e24471db791e6693a72c727e8bb67ca6d5932409f5cf5cb96e4bd8deb2659b",
+      "model.glb": "c9a506819796621b46b33ea632101ddde58af90e460ab0e4575b282cbb85dc53",
+      "native.png": "b9461e6c00271a878cc29be2bda6349e6f650c82374a1f610904d66b4c69efb8",
+      "walk.png": "3c8c841dae582ee5d55f56c2c0cc3a2b30549a1c06f5a9cfb1dd9e4186d871ec"
+    }
+  },
+  {
+    "id": "binturong-tree-and-scrub-mammals-v1",
+    "type": "wildlife-binturong-provisional-v1",
+    "name": "Binturong",
+    "batch": "wildlife-3d-tree-and-scrub-mammals-v1",
+    "lab": "binturong",
+    "scale": 11.25,
+    "topDown": {
+      "width": 1.0631111111111111,
+      "height": 1.1528888888888889
+    },
+    "files": {
+      "action.png": "2c6457c3e291a08c8eda8589878f6b7544d5494696a416514dc25823add2e16b",
+      "appearance.png": "1d6d4f9187972b555c640a2bff08813b73640b120e368427f5ee0c941e3c3a4f",
+      "capture-config.json": "a2496ff0ad4894699bf75342340f8ae6cddc2eaf71082a1f64007bf6408d2012",
+      "comparison.mp4": "f6472324bc01ea4c33be6434d6afbe392dd4bc1bd04a9bfa80704c22d8ecd927",
+      "flee.png": "2c4243567da1d2c8643b7ba4e01ef4905e25d6f6ba51a64ea23e03e464542861",
+      "model.blend": "ee854df7626506e9f712582e813f1a6ac74b9110e67aecb6ae4c02ee2a399222",
+      "model.glb": "4c7b3be3b45acf2496f840fed7c520f57c77beb60a16f47022ef527af1dbe3c8",
+      "native.png": "2d5e507c460d55723fb37d002d0394dea7bf21f764605eaaa36cdd0098800b76",
+      "walk.png": "a4314e882f6348ddd70d1286ee0c431a7ee625a34264f3bed31a85d550b31f03"
+    }
+  },
+  {
+    "id": "echidna-tree-and-scrub-mammals-v1",
+    "type": "wildlife-echidna-provisional-v1",
+    "name": "Short-beaked echidna",
+    "batch": "wildlife-3d-tree-and-scrub-mammals-v1",
+    "lab": "echidna",
+    "scale": 9.68,
+    "topDown": {
+      "width": 1.6993801652892562,
+      "height": 0.9411157024793388
+    },
+    "files": {
+      "action.png": "b976a367be9c7b44cd603d006247dc6f323e964248d94850366b4650f44275cf",
+      "appearance.png": "5c538704603bc4cdd401dbb694eb57fb01c969d067c52e9ed7d10ebf04e5ba50",
+      "capture-config.json": "6f6e3251c0cdb29f594c80d7d3ebfc1c02898e58a41a33807ebfb52eac7dad2f",
+      "comparison.mp4": "1347b7e2efa036dbde6e96b64b382b461d19e9abd5454d0bb59a153ce2c574e1",
+      "flee.png": "35f5dfb8ce649a5e263f61fac57139b5ca069d78cf3049773fca547d1520d3b7",
+      "model.blend": "5e0a20a9d4f3fd6e6a474d1e1518d49eeded05292a8784877ff4f59b867f56b8",
+      "model.glb": "f997619cd875a9ffac40ea835d0b0f9b99953bdaab619151f8979d1d03eef4b6",
+      "native.png": "07ae2b47a1923d02fe08c398f995c2764c7638132af70b6e3ca19e8987381b90",
+      "walk.png": "8a8d1a52ae395be75c074ac63fca81b1d5edb97b4b38b2fc332c2df029bb5845"
+    }
+  },
+  {
+    "id": "kinkajou-tree-and-scrub-mammals-v1",
+    "type": "wildlife-kinkajou-provisional-v1",
+    "name": "Kinkajou",
+    "batch": "wildlife-3d-tree-and-scrub-mammals-v1",
+    "lab": "kinkajou",
+    "scale": 7.8,
+    "topDown": {
+      "width": 1.8192307692307692,
+      "height": 1.3615384615384614
+    },
+    "files": {
+      "action.png": "e70cce67ac7e3ca174bfb2f8cd0219b918d7300c0c0d3f8fd7a22db74027521e",
+      "appearance.png": "df0e0a670e40ab2924f48175bc59451192d5d8671d695395f990a00b7ac19abd",
+      "capture-config.json": "c234ac8b4a0503b63d871e652c2666e40e7ad9c195c8af1eb855977ffa7f2ff5",
+      "comparison.mp4": "fdfb4ab60ed9475ff3275ac14ff2aa4af1995c07f369dc4d307cefce5c957805",
+      "flee.png": "b7057d89a030e3b03a6bd85b97966ad4a9c6a0c9e24cc21c3229c9467d33e9ff",
+      "model.blend": "adee38f044d48d4db9dfd14b12206d81b1815ed750d0e416fd4f9ab9580e23b2",
+      "model.glb": "398d726fbf36834a51005f69ba7db94ef7ff726def8b82be449ca7149ebd2a51",
+      "native.png": "78a6350fc220b152b05680b27e30e1e7b0770ab5d3719c84ef234ec67e12f012",
+      "walk.png": "01199521265c882149a42479dee78a4a42b48fa496be571d9a981602e927b8e8"
+    }
+  },
+  {
+    "id": "koala-tree-and-scrub-mammals-v1",
+    "type": "wildlife-koala-provisional-v1",
+    "name": "Koala",
+    "batch": "wildlife-3d-tree-and-scrub-mammals-v1",
+    "lab": "koala",
+    "scale": 11.99,
+    "topDown": {
+      "width": 1.097581317764804,
+      "height": 0.6346955796497081
+    },
+    "files": {
+      "action.png": "33db662c3dd34817cdb0c62fa0d1501b7d01f78b9d6911391bb44ff69ba8a8fc",
+      "appearance.png": "c19fdff6e2001c2b4cfeee7e227494e040beaf8c1d1fd39661c8a77e567655e7",
+      "capture-config.json": "d780546d296d096a4f8c53678a9c22dfedbf4390acdc7cf70a22daf9633d517e",
+      "comparison.mp4": "827eac164ee02d5139bc78bf95e8b973fc6ded5732a8f55c1afd18875da32a07",
+      "flee.png": "d06f92ca0db3bb80f2e69f063ae7f1913cff2026f715e034b7210e2712b7e3f6",
+      "model.blend": "e265ac9b874d4c10c27617f06437a7189b2c1bcd5a28d7a76b06b541bcb20ffd",
+      "model.glb": "a0780b132526b0999130bbbbd40a4919018dc033856fd2a7672a0f4eeb24181c",
+      "native.png": "a74ff03c183dbb3263b56acc3eb460000091967a60e7a8152ed67c7b0eb1d05b",
+      "walk.png": "a0f04f9026f059162a6c991b54fae2684cc9287d47652cadb19d4b8f5720e410"
+    }
   }
 ]

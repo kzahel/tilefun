@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-honey-badger-predator-v1",
+  "fit": [
+    12.61,
+    9.64,
+    10.75
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "reviewContext": "Low body with a pale dorsal mantle and dark paws. Short reaching front steps drive pursuit.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

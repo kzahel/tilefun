@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-capybara-provisional-v1",
+  "fit": [
+    12.61,
+    10.78,
+    12.47
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "A blunt head and heavy barrel stay low while the nose dips. The escape has longer contact through the rear feet.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

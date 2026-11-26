@@ -1,0 +1,158 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-fossa-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 512
+        }
+      ],
+      "candidateId": "fossa-small-ground-hunters-v1",
+      "modelSha256": "0c5d8cbb62b6b1f88e4ffb0a196384db71e080ea819072d6355b01234c5213f5"
+    },
+    {
+      "type": "wildlife-honey-badger-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 384
+        }
+      ],
+      "candidateId": "honey-badger-small-ground-hunters-v1",
+      "modelSha256": "b6a171f2958cca5565c6f90d1747c432ca3ff16175eff92194639acf2d838ccf"
+    },
+    {
+      "type": "wildlife-mongoose-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 448
+        }
+      ],
+      "candidateId": "mongoose-small-ground-hunters-v1",
+      "modelSha256": "c85f83f7a05a8bb804e625a5ca7f29956bf9217ed0a99d675b7884ffe0049662"
+    },
+    {
+      "type": "wildlife-white-nosed-coati-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 448
+        }
+      ],
+      "candidateId": "white-nosed-coati-small-ground-hunters-v1",
+      "modelSha256": "41870fa67d72b1825baf7415aa665c951c6f2d34d01ebbeea8402cb502d97ac5"
+    }
+  ],
+  "clipSamples": 560,
+  "testedDepth": false
+}

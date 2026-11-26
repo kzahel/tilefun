@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-binturong-provisional-v1",
+  "fit": [
+    11.96,
+    10.15,
+    12.47
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "A thick dark tail and long body use low measured strides. A separate escape has a closer, quicker footfall.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

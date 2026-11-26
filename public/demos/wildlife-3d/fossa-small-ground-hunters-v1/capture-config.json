@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-fossa-predator-v1",
+  "fit": [
+    12.61,
+    8.91,
+    12.47
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "reviewContext": "Slender low profile with a long tail. Pursuit gathers the rear feet and keeps the gaze level.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-red-panda-provisional-v1",
+  "fit": [
+    11.96,
+    8.91,
+    12.29
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "A ringed low tail and pale muzzle balance a lower, quicker escape gait.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

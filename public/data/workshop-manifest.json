@@ -1036,6 +1036,24 @@
       "toolId": "animal-browser"
     },
     {
+      "id": "wildlife-3d-small-ground-hunters-v1",
+      "name": "3D wildlife · small ground hunters v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
+      "id": "wildlife-3d-forest-mammals-v1",
+      "name": "3D wildlife · forest mammals v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
+      "id": "wildlife-3d-tree-and-scrub-mammals-v1",
+      "name": "3D wildlife · tree and scrub mammals v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
       "id": "motion",
       "name": "Furniture movement sets",
       "description": "Default layouts and physics. Custom layouts remain individually reviewable in the tool.",
@@ -64207,7 +64225,511 @@
           "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-wolf-bears-and-canids-v1"
         }
       }
+    },
+    {
+      "id": "pattern:wildlife-3d-fossa-small-ground-hunters-v1",
+      "batchId": "wildlife-3d-small-ground-hunters-v1",
+      "kind": "wildlife",
+      "name": "Fossa",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-fossa-small-ground-hunters-v1",
+      "fingerprint": "c069fc21d9f993b919aef3d0e98bf4339316e23dcaba13847a881b046c88167c",
+      "sourceFingerprint": "3f8578f1de70d7997b8a30e3b269dad6e897292ec42feac655cb4fb50bbc25a2",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-fossa-small-ground-hunters-v1",
+        "prefabIds": [],
+        "revision": "88e838dbb711647c8054d29b2efeabf50bbc2d6dbf0cff85570c9b89f7ea0cf0",
+        "renderFingerprint": "c069fc21d9f993b919aef3d0e98bf4339316e23dcaba13847a881b046c88167c",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-fossa-small-ground-hunters-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-fossa-small-ground-hunters-v1",
+        "fingerprint": "3f8578f1de70d7997b8a30e3b269dad6e897292ec42feac655cb4fb50bbc25a2",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-fossa-small-ground-hunters-v1",
+          "prefabIds": [],
+          "revision": "88e838dbb711647c8054d29b2efeabf50bbc2d6dbf0cff85570c9b89f7ea0cf0",
+          "renderFingerprint": "c069fc21d9f993b919aef3d0e98bf4339316e23dcaba13847a881b046c88167c",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-fossa-small-ground-hunters-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-honey-badger-small-ground-hunters-v1",
+      "batchId": "wildlife-3d-small-ground-hunters-v1",
+      "kind": "wildlife",
+      "name": "Honey badger",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-honey-badger-small-ground-hunters-v1",
+      "fingerprint": "c2579c703b78eb191e0a3b69f3bfc2cbdf1dc591764051e245d1403c90812808",
+      "sourceFingerprint": "2df18ae55903eca587fe1f64214b83c43a0345a9f398b3b402b699ee9c8f3cc9",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-honey-badger-small-ground-hunters-v1",
+        "prefabIds": [],
+        "revision": "c0fae699b020d4693ef52530b9a54887dc54941ac1c47f8d9398b0918112ea87",
+        "renderFingerprint": "c2579c703b78eb191e0a3b69f3bfc2cbdf1dc591764051e245d1403c90812808",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-honey-badger-small-ground-hunters-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-honey-badger-small-ground-hunters-v1",
+        "fingerprint": "2df18ae55903eca587fe1f64214b83c43a0345a9f398b3b402b699ee9c8f3cc9",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-honey-badger-small-ground-hunters-v1",
+          "prefabIds": [],
+          "revision": "c0fae699b020d4693ef52530b9a54887dc54941ac1c47f8d9398b0918112ea87",
+          "renderFingerprint": "c2579c703b78eb191e0a3b69f3bfc2cbdf1dc591764051e245d1403c90812808",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-honey-badger-small-ground-hunters-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-mongoose-small-ground-hunters-v1",
+      "batchId": "wildlife-3d-small-ground-hunters-v1",
+      "kind": "wildlife",
+      "name": "Mongoose",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-mongoose-small-ground-hunters-v1",
+      "fingerprint": "7cc4bb58e33dd3913053922cee6ee0bb2f6341e79700663ddfc96c5ec0d5329e",
+      "sourceFingerprint": "3df95c17603120c0152027166c96c3d2ee920d7553b92b8b3e6c385143635868",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-mongoose-small-ground-hunters-v1",
+        "prefabIds": [],
+        "revision": "cc7eba465978dd7e5721e595ef03ae0f80e84c67a6a27f3337db15d6635d566e",
+        "renderFingerprint": "7cc4bb58e33dd3913053922cee6ee0bb2f6341e79700663ddfc96c5ec0d5329e",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-mongoose-small-ground-hunters-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-mongoose-small-ground-hunters-v1",
+        "fingerprint": "3df95c17603120c0152027166c96c3d2ee920d7553b92b8b3e6c385143635868",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-mongoose-small-ground-hunters-v1",
+          "prefabIds": [],
+          "revision": "cc7eba465978dd7e5721e595ef03ae0f80e84c67a6a27f3337db15d6635d566e",
+          "renderFingerprint": "7cc4bb58e33dd3913053922cee6ee0bb2f6341e79700663ddfc96c5ec0d5329e",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-mongoose-small-ground-hunters-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-white-nosed-coati-small-ground-hunters-v1",
+      "batchId": "wildlife-3d-small-ground-hunters-v1",
+      "kind": "wildlife",
+      "name": "White-nosed coati",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-white-nosed-coati-small-ground-hunters-v1",
+      "fingerprint": "a86d3bf221db7d92ebd437633039769710c44b86367024bda5bdd00232240c15",
+      "sourceFingerprint": "ae3e3fcc0f352656f41458bf867e6caf992ecc012d48edece56c70bf8571b387",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-white-nosed-coati-small-ground-hunters-v1",
+        "prefabIds": [],
+        "revision": "c466c3dc063c17072432f2ff7c7a0053bb5bf37de7af59c49f3c80006eef3bb8",
+        "renderFingerprint": "a86d3bf221db7d92ebd437633039769710c44b86367024bda5bdd00232240c15",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-white-nosed-coati-small-ground-hunters-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-white-nosed-coati-small-ground-hunters-v1",
+        "fingerprint": "ae3e3fcc0f352656f41458bf867e6caf992ecc012d48edece56c70bf8571b387",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-white-nosed-coati-small-ground-hunters-v1",
+          "prefabIds": [],
+          "revision": "c466c3dc063c17072432f2ff7c7a0053bb5bf37de7af59c49f3c80006eef3bb8",
+          "renderFingerprint": "a86d3bf221db7d92ebd437633039769710c44b86367024bda5bdd00232240c15",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-white-nosed-coati-small-ground-hunters-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-capybara-forest-mammals-v1",
+      "batchId": "wildlife-3d-forest-mammals-v1",
+      "kind": "wildlife",
+      "name": "Capybara",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-capybara-forest-mammals-v1",
+      "fingerprint": "78fe99658588c3b274caa9d3f3e9769145e3b52c83164074d7c0479af9d5ce68",
+      "sourceFingerprint": "05149196398ef2ada84abc15e5c3fd19dfcba10a6e4c5ebe7c93d7946be1d286",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-capybara-forest-mammals-v1",
+        "prefabIds": [],
+        "revision": "9b03f63786eacedc1bdb2d46e1a5397dbb79d00d3cfe6a4407edfb91cd05c5df",
+        "renderFingerprint": "78fe99658588c3b274caa9d3f3e9769145e3b52c83164074d7c0479af9d5ce68",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-capybara-forest-mammals-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-capybara-forest-mammals-v1",
+        "fingerprint": "05149196398ef2ada84abc15e5c3fd19dfcba10a6e4c5ebe7c93d7946be1d286",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-capybara-forest-mammals-v1",
+          "prefabIds": [],
+          "revision": "9b03f63786eacedc1bdb2d46e1a5397dbb79d00d3cfe6a4407edfb91cd05c5df",
+          "renderFingerprint": "78fe99658588c3b274caa9d3f3e9769145e3b52c83164074d7c0479af9d5ce68",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-capybara-forest-mammals-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-panda-forest-mammals-v1",
+      "batchId": "wildlife-3d-forest-mammals-v1",
+      "kind": "wildlife",
+      "name": "Panda",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-panda-forest-mammals-v1",
+      "fingerprint": "44304892637025d90eb1af1f393b8ffa01988f2a57831a54af476fc74659318f",
+      "sourceFingerprint": "b8587e3b09df6b8682739a600ac87b1b7324aad4894a454045b1c5c35741659a",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-panda-forest-mammals-v1",
+        "prefabIds": [],
+        "revision": "cd76466b472dba9740e759f5eeaf9736815c1b9eb284a6c1dc840c576fb9ba0e",
+        "renderFingerprint": "44304892637025d90eb1af1f393b8ffa01988f2a57831a54af476fc74659318f",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-panda-forest-mammals-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-panda-forest-mammals-v1",
+        "fingerprint": "b8587e3b09df6b8682739a600ac87b1b7324aad4894a454045b1c5c35741659a",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-panda-forest-mammals-v1",
+          "prefabIds": [],
+          "revision": "cd76466b472dba9740e759f5eeaf9736815c1b9eb284a6c1dc840c576fb9ba0e",
+          "renderFingerprint": "44304892637025d90eb1af1f393b8ffa01988f2a57831a54af476fc74659318f",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-panda-forest-mammals-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-red-panda-forest-mammals-v1",
+      "batchId": "wildlife-3d-forest-mammals-v1",
+      "kind": "wildlife",
+      "name": "Red panda",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-red-panda-forest-mammals-v1",
+      "fingerprint": "6e09c39231740d1b07ef692caa1e06d7c4d8003ca26640d7bf4e5385c1079144",
+      "sourceFingerprint": "a7e2f8bf5607616f16fc949bb0eb05d7f31c9b700a787465f9f1861ee2635957",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-red-panda-forest-mammals-v1",
+        "prefabIds": [],
+        "revision": "46e0ff442bac4d6cf8c0f0cf8c9edf5ee3e608981a3f6feaaf47dd9667018386",
+        "renderFingerprint": "6e09c39231740d1b07ef692caa1e06d7c4d8003ca26640d7bf4e5385c1079144",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-red-panda-forest-mammals-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-red-panda-forest-mammals-v1",
+        "fingerprint": "a7e2f8bf5607616f16fc949bb0eb05d7f31c9b700a787465f9f1861ee2635957",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-red-panda-forest-mammals-v1",
+          "prefabIds": [],
+          "revision": "46e0ff442bac4d6cf8c0f0cf8c9edf5ee3e608981a3f6feaaf47dd9667018386",
+          "renderFingerprint": "6e09c39231740d1b07ef692caa1e06d7c4d8003ca26640d7bf4e5385c1079144",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-red-panda-forest-mammals-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-skunk-forest-mammals-v1",
+      "batchId": "wildlife-3d-forest-mammals-v1",
+      "kind": "wildlife",
+      "name": "Skunk",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-skunk-forest-mammals-v1",
+      "fingerprint": "1de1847c33f556d9b2af63e6e611fa0e28f6068830d6b6657875fd544ee21d8d",
+      "sourceFingerprint": "fca99ca7002c9e146fcf514fc7bdb026f73a8ae3a8d13e5cbf84fe36f5f44864",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-skunk-forest-mammals-v1",
+        "prefabIds": [],
+        "revision": "ca0cfd0859c32c4a8847e01cf51db9e810563c46f36c30ede3215e0c209c5a4c",
+        "renderFingerprint": "1de1847c33f556d9b2af63e6e611fa0e28f6068830d6b6657875fd544ee21d8d",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-skunk-forest-mammals-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-skunk-forest-mammals-v1",
+        "fingerprint": "fca99ca7002c9e146fcf514fc7bdb026f73a8ae3a8d13e5cbf84fe36f5f44864",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-skunk-forest-mammals-v1",
+          "prefabIds": [],
+          "revision": "ca0cfd0859c32c4a8847e01cf51db9e810563c46f36c30ede3215e0c209c5a4c",
+          "renderFingerprint": "1de1847c33f556d9b2af63e6e611fa0e28f6068830d6b6657875fd544ee21d8d",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-skunk-forest-mammals-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-binturong-tree-and-scrub-mammals-v1",
+      "batchId": "wildlife-3d-tree-and-scrub-mammals-v1",
+      "kind": "wildlife",
+      "name": "Binturong",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-binturong-tree-and-scrub-mammals-v1",
+      "fingerprint": "eed98ce26d696ace4196a296f98005f44e0e7a07c29b630216dc34c6a38a6ffc",
+      "sourceFingerprint": "1d6d4f9187972b555c640a2bff08813b73640b120e368427f5ee0c941e3c3a4f",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-binturong-tree-and-scrub-mammals-v1",
+        "prefabIds": [],
+        "revision": "ade043a065e7b3bc308316b1436c56107ea342170335988c26abb0ea016b9301",
+        "renderFingerprint": "eed98ce26d696ace4196a296f98005f44e0e7a07c29b630216dc34c6a38a6ffc",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-binturong-tree-and-scrub-mammals-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-binturong-tree-and-scrub-mammals-v1",
+        "fingerprint": "1d6d4f9187972b555c640a2bff08813b73640b120e368427f5ee0c941e3c3a4f",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-binturong-tree-and-scrub-mammals-v1",
+          "prefabIds": [],
+          "revision": "ade043a065e7b3bc308316b1436c56107ea342170335988c26abb0ea016b9301",
+          "renderFingerprint": "eed98ce26d696ace4196a296f98005f44e0e7a07c29b630216dc34c6a38a6ffc",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-binturong-tree-and-scrub-mammals-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-echidna-tree-and-scrub-mammals-v1",
+      "batchId": "wildlife-3d-tree-and-scrub-mammals-v1",
+      "kind": "wildlife",
+      "name": "Short-beaked echidna",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-echidna-tree-and-scrub-mammals-v1",
+      "fingerprint": "ce3761ab671804194c1394599747008b6b2bba08eb458dc2fc66976756437ecf",
+      "sourceFingerprint": "5c538704603bc4cdd401dbb694eb57fb01c969d067c52e9ed7d10ebf04e5ba50",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-echidna-tree-and-scrub-mammals-v1",
+        "prefabIds": [],
+        "revision": "d1e076cf491b9c38461ee996f7f44611823431a4c06acbf80742b146021d73d5",
+        "renderFingerprint": "ce3761ab671804194c1394599747008b6b2bba08eb458dc2fc66976756437ecf",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-echidna-tree-and-scrub-mammals-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-echidna-tree-and-scrub-mammals-v1",
+        "fingerprint": "5c538704603bc4cdd401dbb694eb57fb01c969d067c52e9ed7d10ebf04e5ba50",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-echidna-tree-and-scrub-mammals-v1",
+          "prefabIds": [],
+          "revision": "d1e076cf491b9c38461ee996f7f44611823431a4c06acbf80742b146021d73d5",
+          "renderFingerprint": "ce3761ab671804194c1394599747008b6b2bba08eb458dc2fc66976756437ecf",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-echidna-tree-and-scrub-mammals-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-kinkajou-tree-and-scrub-mammals-v1",
+      "batchId": "wildlife-3d-tree-and-scrub-mammals-v1",
+      "kind": "wildlife",
+      "name": "Kinkajou",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-kinkajou-tree-and-scrub-mammals-v1",
+      "fingerprint": "d866c313f2ceb69d0fd053010379ff30a81ab80db7dd8edba44d9defb5a7f25a",
+      "sourceFingerprint": "df0e0a670e40ab2924f48175bc59451192d5d8671d695395f990a00b7ac19abd",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-kinkajou-tree-and-scrub-mammals-v1",
+        "prefabIds": [],
+        "revision": "419b1a276002ce0594bd09954dbb3c78505027e79e352e411f8122bc09daaac9",
+        "renderFingerprint": "d866c313f2ceb69d0fd053010379ff30a81ab80db7dd8edba44d9defb5a7f25a",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-kinkajou-tree-and-scrub-mammals-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-kinkajou-tree-and-scrub-mammals-v1",
+        "fingerprint": "df0e0a670e40ab2924f48175bc59451192d5d8671d695395f990a00b7ac19abd",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-kinkajou-tree-and-scrub-mammals-v1",
+          "prefabIds": [],
+          "revision": "419b1a276002ce0594bd09954dbb3c78505027e79e352e411f8122bc09daaac9",
+          "renderFingerprint": "d866c313f2ceb69d0fd053010379ff30a81ab80db7dd8edba44d9defb5a7f25a",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-kinkajou-tree-and-scrub-mammals-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-koala-tree-and-scrub-mammals-v1",
+      "batchId": "wildlife-3d-tree-and-scrub-mammals-v1",
+      "kind": "wildlife",
+      "name": "Koala",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-koala-tree-and-scrub-mammals-v1",
+      "fingerprint": "43e96febf74826b419283407a7f320593a6e9010ccab1f876998e7f422330b78",
+      "sourceFingerprint": "c19fdff6e2001c2b4cfeee7e227494e040beaf8c1d1fd39661c8a77e567655e7",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-koala-tree-and-scrub-mammals-v1",
+        "prefabIds": [],
+        "revision": "e3f449f72e3459d7af2f4b803753226df1bb4ae05145a44b5c2502b339a08e3c",
+        "renderFingerprint": "43e96febf74826b419283407a7f320593a6e9010ccab1f876998e7f422330b78",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-koala-tree-and-scrub-mammals-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-koala-tree-and-scrub-mammals-v1",
+        "fingerprint": "c19fdff6e2001c2b4cfeee7e227494e040beaf8c1d1fd39661c8a77e567655e7",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-koala-tree-and-scrub-mammals-v1",
+          "prefabIds": [],
+          "revision": "e3f449f72e3459d7af2f4b803753226df1bb4ae05145a44b5c2502b339a08e3c",
+          "renderFingerprint": "43e96febf74826b419283407a7f320593a6e9010ccab1f876998e7f422330b78",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-koala-tree-and-scrub-mammals-v1"
+        }
+      }
     }
   ],
-  "inputDigest": "2aba7e526f97ed5fdd54ed08773cdd3a4a2059acd4d4f7ad019f58946d08893a"
+  "inputDigest": "c5b1f2539f999fb91981bf3f0a680f524233cb192a8a646d66ee010f1e48817c"
 }
