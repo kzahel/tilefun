@@ -421,9 +421,10 @@ function sceneDigest(variant: {
 // Omitting that field reproduces the pre-fit digests exactly.
 // 261 preserves the solved bus quaternion in the frameless fallback and marks it physical.
 // 256 adds model poses for animals whose complete animation sets now draw by default.
+// Promoting the fox adds its wildlifePose field. Omitting that field reproduces both prior digests.
 it.each([
-  [{ frame: false, grass: false, garage: false, time: 0 }, "4689ea7f2a000f24"],
-  [{ frame: true, grass: true, garage: false, time: 0.05, zoom: 3 / 8 }, "a8698b5ee80ef39c"],
+  [{ frame: false, grass: false, garage: false, time: 0 }, "8c5880b49da19575"],
+  [{ frame: true, grass: true, garage: false, time: 0.05, zoom: 3 / 8 }, "71fbfa10a2b7c8c7"],
 ] as const)("collects a byte-identical characterization scene %o", (variant, digest) => {
   const result = sceneDigest(variant);
   expect(result.digest).toBe(digest);
