@@ -117,6 +117,12 @@ function bodyGap(a: Entity, b: Entity, bounds = huntBounds): number {
     Math.max(x.top - y.bottom, y.top - x.bottom, 0),
   );
 }
+
+function withinHuntReach(hunter: Entity, prey: Entity, reach: number): boolean {
+  // Fitted bodies can touch outside the original hunting footprints.
+  return bodyGap(hunter, prey) <= reach || bodyGap(hunter, prey, physicalBounds) === 0;
+}
+
 /** Detect actual support contact after a raptor lands on prey. The meal resolver
  * separately retains airborne-prey protection before allowing a catch. */
 function raptorOnPrey(hunter: Entity, prey: Entity): boolean {
@@ -317,7 +323,7 @@ export function updatePredatorAI(
     if (ai.state === "stalk" && (d < 52 || ai.elapsed > 2)) enter(e, "chase", 0);
     if (
       ai.state === "chase" &&
-      bodyGap(e, prey) <= 4 &&
+      withinHuntReach(e, prey, 4) &&
       (raptorOnPrey(e, prey) || !prey.rabbit || !["startle", "hop"].includes(prey.rabbit.state))
     )
       enter(e, "pounce", 0);
@@ -488,7 +494,8 @@ export function consumeWildlifePrey(
   )
     return false;
   const approach = raptorOnPrey(hunter, prey) ? { ...hunter, wz: prey.wz ?? 0 } : hunter;
-  if (bodyGap(hunter, prey) > 3 || !clearPredatorPath(approach, prey.position, env)) return false;
+  if (!withinHuntReach(hunter, prey, 3) || !clearPredatorPath(approach, prey.position, env))
+    return false;
   const naturalSpawnId = prey.naturalSpawnId ?? prey.proceduralId;
   if (
     naturalSpawnId &&
