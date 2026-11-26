@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-gecko-provisional-v1",
+  "fit": [
+    12.47,
+    7.57,
+    12.33
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "Wide toe pads land separately on alternating sides. Escape lowers the shoulders and uses taller foot lift.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

@@ -1,0 +1,40 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+  "workshopInputDigest": "b92049da42c3292e539fe89014dd550bc0f4596ba61328bed7e81782fc8c2835",
+  "results": [
+    {
+      "type": "wildlife-dolphin-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "491d3e66328f757d78b482d27a56e8838fe50b54058bfb418c6437d458ce36a8",
+      "modelSha256": "1fbccd09dd091fd679abfe195e2c369ad5144623aacc23f583f3f3eb6b5518f0",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-dolphin&wildlife3dStage=dolphin-marine-hunters-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009276962280273478,
+        -0.00015455245971679612
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "swim",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "c79149beb23768803bea02b47529ced2366969ff2a24709d7aef9aad22af1fe1",
+  "results": [
+    {
+      "type": "wildlife-chameleon-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "5311bcbc2199d20c80aab733587d213d07db7545703c295670df1424367c0994",
+      "modelSha256": "aae1b423fc18ca34a6acec35fd8b334176c05a37b61ed8c9068e68490d15e240",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-chameleon&wildlife3dStage=chameleon-lizards-v1&wildlife3dReview=chameleon-lizards-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.000980348587036135,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-gecko-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "265c6d668d45d4ce0f3e68acf92b7756852db7d29d0c3c1042c55b0cb42b9647",
+      "modelSha256": "da0a4a052c1369350d44f4d075b687f6495b6d33935d554d9492b9c0a945e340",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-gecko&wildlife3dStage=gecko-lizards-v1&wildlife3dReview=gecko-lizards-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009730873107910234,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-frilled-neck-lizard-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "aa11f8c499a6db6d4a2ad852b9b6d907cc33b4dbe458d2622fa788c079649c0c",
+      "modelSha256": "d1f4d5f59cd129d65ef4a63c89c1e3abb9fe28bf6e747bd6eec1ea10cf52dd9d",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-frilled-neck-lizard&wildlife3dStage=frilled-neck-lizard-lizards-v1&wildlife3dReview=frilled-neck-lizard-lizards-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009841251373291064,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-iguana-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "c92a2b50dd4cf9a73b51c03eafef3775b2cd963b7f50667ce3a18fe0c73824d5",
+      "modelSha256": "fcc5315994b6caeeacfb2bccf943ecf6ffe6111e5753a6a7083aec91cf54c8bf",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-iguana&wildlife3dStage=iguana-lizards-v1&wildlife3dReview=iguana-lizards-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009763736724853618,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

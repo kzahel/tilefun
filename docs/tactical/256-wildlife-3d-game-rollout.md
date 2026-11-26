@@ -107,6 +107,23 @@ runtime scope reconciliation in the execution notes.
 
 ## Delivery log
 
+### Lizards, 2026-11-26
+
+The chameleon reaches forward over planted feet. The frilled-neck lizard
+opens both halves of its collar. The gecko raises its head over splayed
+feet, and the iguana lifts its head with the crest visible. Each has a
+separate escape motion. All 16 states played in Workshop and in reopened
+ordinary worlds with the exact previews. [Renderer evidence](256-wildlife-3d-game-rollout/evidence/lizards-v1-runtime.json) ·
+[Public preview evidence](256-wildlife-3d-game-rollout/evidence/lizards-v1-deployment.json) ·
+[Workshop review](https://tilefun.graehlarts.com/tilefun/workshop.html#/review/pattern%3Awildlife-3d-chameleon-lizards-v1)
+
+Production evidence adds the dugong, humpback whale, manatee, manta ray,
+whale shark, horseshoe crab, shrimp, sunfish and pufferfish. The cuttlefish,
+dolphin and shark also chased, fed and displayed in reopened default
+worlds. Their ponds contain ordinary prey, and the player provoked a
+display with the Stick tool. The harbor seal, penguin and river otter
+played both land and water escape states. [Production evidence directory](256-wildlife-3d-game-rollout/evidence/)
+
 ### Ground insects, 2026-11-26
 
 The ant, earwig, leaf insect and roly-poly have separate escape gaits. The

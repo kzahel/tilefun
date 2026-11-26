@@ -1,0 +1,100 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+  "workshopInputDigest": "b92049da42c3292e539fe89014dd550bc0f4596ba61328bed7e81782fc8c2835",
+  "results": [
+    {
+      "type": "wildlife-dugong-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "eb153b13d6cb1f98b0be05d1c2a046543ca96dfe0699f2f26fea3b19bd96564a",
+      "modelSha256": "251a807a872245fbecd0d6abeaa2178660c024f99a97e1680af642ec14a56e58",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-dugong&wildlife3dStage=dugong-swimmers-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009640960693359431,
+        -0.00016967582702636752
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "swim",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-humpback-whale-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "1f5a8396e9a8eacf8ab2eaaac10d7efc542f05a6f4b9cfe1a24772ea7001e972",
+      "modelSha256": "04898b83e81946b648a0ddb738a7ed32666ddfc62fb65885512e4fae8d42bd7d",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-humpback-whale&wildlife3dStage=humpback-whale-swimmers-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009765491485595732,
+        -0.00030431556701660163
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "swim",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-manatee-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "ec0fa643be13e994b741c6bc3671e13c7d09e224e7211a5ec68b1f6f01c20c1c",
+      "modelSha256": "1c09428c31efc2ed32c55905cae8aacd37e5f7d54ce2ca4a2ba8311604b04adc",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-manatee&wildlife3dStage=manatee-swimmers-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009668884277343876,
+        -0.0001306533813476561
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "swim",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

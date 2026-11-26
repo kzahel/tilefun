@@ -1,0 +1,40 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+  "workshopInputDigest": "b92049da42c3292e539fe89014dd550bc0f4596ba61328bed7e81782fc8c2835",
+  "results": [
+    {
+      "type": "wildlife-shark-predator-v1",
+      "mode": "default",
+      "manifestFingerprint": "dcd6996ae154ed3141f686f835ff7b6681b88406e074927b9683488b2ec64054",
+      "modelSha256": "ab7d40b6cbef17f378139693dcd65c4043d14cc484af7069c00a810ca7c2b493",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-shark&wildlife3dStage=shark-sharks-rays-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009362564086914147,
+        -0.0002574920654296871
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "swim",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    }
+  ]
+}

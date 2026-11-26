@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-frilled-neck-lizard-provisional-v1",
+  "fit": [
+    12.47,
+    7.57,
+    12.33
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "The two frill halves open, hold and close while the feet stay planted. Escape holds the frill back.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

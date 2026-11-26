@@ -1297,7 +1297,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-penguin-shore-fauna-v1",
+        "sha256": "970300d16bafe8a6902d63f411f376fe4731ebda3ce78c416f50feef0e2e035b",
+        "states": ["action", "flee", "flee-swim", "idle", "swim", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/penguin-shore-fauna-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-penguin-shore-fauna-v1",
         "fingerprint": "4b3729e05dce863221d9209e5737608695017747908e5ce47de6e6da09f7a186",
@@ -6318,7 +6325,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-cuttlefish-soft-bodied-marine-v1",
+        "sha256": "74a76131ffa11f01a822dabe3607a7a7cf8f69d395468750aa02c3e04cf7ac55",
+        "states": ["chase", "display", "feed", "idle", "swim"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/cuttlefish-soft-bodied-marine-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-cuttlefish-soft-bodied-marine-v1",
         "fingerprint": "599523b6a43cbe8ceae12915b126ef4e3e20dcb2da205bc0a07da43d5e0542f8",
@@ -6379,7 +6393,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-dolphin-marine-hunters-v1",
+        "sha256": "1fbccd09dd091fd679abfe195e2c369ad5144623aacc23f583f3f3eb6b5518f0",
+        "states": ["chase", "display", "feed", "idle", "swim"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/dolphin-marine-hunters-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-dolphin-marine-hunters-v1",
         "fingerprint": "491d3e66328f757d78b482d27a56e8838fe50b54058bfb418c6437d458ce36a8",
@@ -6433,7 +6454,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-dugong-swimmers-v1",
+        "sha256": "251a807a872245fbecd0d6abeaa2178660c024f99a97e1680af642ec14a56e58",
+        "states": ["action", "flee", "idle", "swim"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/swimmers-swimmers-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-dugong-swimmers-v1",
         "fingerprint": "eb153b13d6cb1f98b0be05d1c2a046543ca96dfe0699f2f26fea3b19bd96564a",
@@ -6623,7 +6651,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-harbor-seal-pinnipeds-v1",
+        "sha256": "5c638fda0d89af511a8af6698a8dd46d6245d88e8c648396ed2a59073473a1d3",
+        "states": ["action", "flee", "flee-swim", "haul", "idle", "swim"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/harbor-seal-pinnipeds-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-harbor-seal-pinnipeds-v1",
         "fingerprint": "afce29b4094209d20b38164994b2575834751a97f57d59b731b768ef23c5d514",
@@ -6677,7 +6712,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-horseshoe-crab-marine-arthropods-v1",
+        "sha256": "32836178efc1301adafe86f19b3290d515cbcc1d0031473d5c963159a552accb",
+        "states": ["action", "flee", "idle", "swim"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/marine-arthropods-swimmers-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-horseshoe-crab-marine-arthropods-v1",
         "fingerprint": "1b50d8f23285973eda681caedb1145a6cfaba7d1a7defadaba0df92be6232299",
@@ -6731,7 +6773,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-humpback-whale-swimmers-v1",
+        "sha256": "04898b83e81946b648a0ddb738a7ed32666ddfc62fb65885512e4fae8d42bd7d",
+        "states": ["action", "flee", "idle", "swim"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/swimmers-swimmers-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-humpback-whale-swimmers-v1",
         "fingerprint": "1f5a8396e9a8eacf8ab2eaaac10d7efc542f05a6f4b9cfe1a24772ea7001e972",
@@ -6907,7 +6956,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-manta-ray-sharks-rays-v1",
+        "sha256": "20f7ee7f13f8f65c04ce4e5a319080b95d7c154c76551071732f3739a3a632d1",
+        "states": ["action", "flee", "idle", "swim"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/sharks-rays-swimmers-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-manta-ray-sharks-rays-v1",
         "fingerprint": "ede929680cebe45c3b99b6f5633f898f8e2108cac99a621c53226664858d6ece",
@@ -7205,7 +7261,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-ocean-sunfish-distinct-fish-v1",
+        "sha256": "4ffcf2a85e7dd23f00afa98b78bfc105d60af4a72598192eb0901c2eaa428bbd",
+        "states": ["action", "flee", "idle", "swim"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/distinct-fish-swimmers-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-ocean-sunfish-distinct-fish-v1",
         "fingerprint": "d28d01c228231c9ede171f5f3750792502b7ccc2fac7ac7e8cd7a0af23d32838",
@@ -7442,7 +7505,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-pufferfish-distinct-fish-v1",
+        "sha256": "3c57535bf225986ff4a0a1e637deffa567099d141ce6c382edf9b862f20c79a8",
+        "states": ["action", "flee", "idle", "swim"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/distinct-fish-swimmers-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-pufferfish-distinct-fish-v1",
         "fingerprint": "5a4e956c2e007056b6818531eb4233490246abd92a54fe24d6c7e8a4f0b5ccaf",
@@ -7740,7 +7810,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-shark-sharks-rays-v1",
+        "sha256": "ab7d40b6cbef17f378139693dcd65c4043d14cc484af7069c00a810ca7c2b493",
+        "states": ["chase", "display", "feed", "idle", "swim"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/shark-sharks-rays-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-shark-sharks-rays-v1",
         "fingerprint": "dcd6996ae154ed3141f686f835ff7b6681b88406e074927b9683488b2ec64054",
@@ -7794,7 +7871,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-shrimp-marine-arthropods-v1",
+        "sha256": "1507c375a04ed4d440ea854ca36e34d133703ab1d676328db127b43b6279b005",
+        "states": ["action", "flee", "idle", "swim"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/marine-arthropods-swimmers-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-shrimp-marine-arthropods-v1",
         "fingerprint": "64ce01779484b6b5a652f98d35b58f94de6971802a2b0828394dc9077af47e75",
@@ -8038,7 +8122,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-manatee-swimmers-v1",
+        "sha256": "1c09428c31efc2ed32c55905cae8aacd37e5f7d54ce2ca4a2ba8311604b04adc",
+        "states": ["action", "flee", "idle", "swim"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/swimmers-swimmers-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-manatee-swimmers-v1",
         "fingerprint": "ec0fa643be13e994b741c6bc3671e13c7d09e224e7211a5ec68b1f6f01c20c1c",
@@ -8092,7 +8183,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-whale-shark-sharks-rays-v1",
+        "sha256": "b85cc3821d352a867f67f682ade751dcd3b798096dc904ad86dcedcbf7e08aac",
+        "states": ["action", "flee", "idle", "swim"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/sharks-rays-swimmers-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-whale-shark-sharks-rays-v1",
         "fingerprint": "1276292bebd7707a163b0836e0e3bc65f65750bd381038a278fd59ecf23d943b",
@@ -9413,9 +9511,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "aae1b423fc18ca34a6acec35fd8b334176c05a37b61ed8c9068e68490d15e240",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/lizards-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/chameleon-lizards-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "aae1b423fc18ca34a6acec35fd8b334176c05a37b61ed8c9068e68490d15e240",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/lizards-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/chameleon-lizards-v1/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "aae1b423fc18ca34a6acec35fd8b334176c05a37b61ed8c9068e68490d15e240",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/lizards-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/chameleon-lizards-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "aae1b423fc18ca34a6acec35fd8b334176c05a37b61ed8c9068e68490d15e240",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/lizards-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/chameleon-lizards-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-chameleon-lizards-v1",
+        "fingerprint": "5311bcbc2199d20c80aab733587d213d07db7545703c295670df1424367c0994",
+        "model": "public/demos/wildlife-3d/chameleon-lizards-v1/model.glb",
+        "source": "public/demos/wildlife-3d/chameleon-lizards-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/chameleon-lizards-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/lizards-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-frilled-neck-lizard-provisional-v1",
@@ -9433,9 +9565,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "d1f4d5f59cd129d65ef4a63c89c1e3abb9fe28bf6e747bd6eec1ea10cf52dd9d",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/lizards-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/frilled-neck-lizard-lizards-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "d1f4d5f59cd129d65ef4a63c89c1e3abb9fe28bf6e747bd6eec1ea10cf52dd9d",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/lizards-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/frilled-neck-lizard-lizards-v1/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "d1f4d5f59cd129d65ef4a63c89c1e3abb9fe28bf6e747bd6eec1ea10cf52dd9d",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/lizards-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/frilled-neck-lizard-lizards-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "d1f4d5f59cd129d65ef4a63c89c1e3abb9fe28bf6e747bd6eec1ea10cf52dd9d",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/lizards-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/frilled-neck-lizard-lizards-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-frilled-neck-lizard-lizards-v1",
+        "fingerprint": "aa11f8c499a6db6d4a2ad852b9b6d907cc33b4dbe458d2622fa788c079649c0c",
+        "model": "public/demos/wildlife-3d/frilled-neck-lizard-lizards-v1/model.glb",
+        "source": "public/demos/wildlife-3d/frilled-neck-lizard-lizards-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/frilled-neck-lizard-lizards-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/lizards-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-frog-v1",
@@ -9527,9 +9693,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "da0a4a052c1369350d44f4d075b687f6495b6d33935d554d9492b9c0a945e340",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/lizards-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/gecko-lizards-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "da0a4a052c1369350d44f4d075b687f6495b6d33935d554d9492b9c0a945e340",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/lizards-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/gecko-lizards-v1/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "da0a4a052c1369350d44f4d075b687f6495b6d33935d554d9492b9c0a945e340",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/lizards-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/gecko-lizards-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "da0a4a052c1369350d44f4d075b687f6495b6d33935d554d9492b9c0a945e340",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/lizards-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/gecko-lizards-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-gecko-lizards-v1",
+        "fingerprint": "265c6d668d45d4ce0f3e68acf92b7756852db7d29d0c3c1042c55b0cb42b9647",
+        "model": "public/demos/wildlife-3d/gecko-lizards-v1/model.glb",
+        "source": "public/demos/wildlife-3d/gecko-lizards-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/gecko-lizards-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/lizards-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-iguana-provisional-v1",
@@ -9547,9 +9747,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "fcc5315994b6caeeacfb2bccf943ecf6ffe6111e5753a6a7083aec91cf54c8bf",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/lizards-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/iguana-lizards-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "fcc5315994b6caeeacfb2bccf943ecf6ffe6111e5753a6a7083aec91cf54c8bf",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/lizards-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/iguana-lizards-v1/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "fcc5315994b6caeeacfb2bccf943ecf6ffe6111e5753a6a7083aec91cf54c8bf",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/lizards-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/iguana-lizards-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "fcc5315994b6caeeacfb2bccf943ecf6ffe6111e5753a6a7083aec91cf54c8bf",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/lizards-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/iguana-lizards-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-iguana-lizards-v1",
+        "fingerprint": "c92a2b50dd4cf9a73b51c03eafef3775b2cd963b7f50667ce3a18fe0c73824d5",
+        "model": "public/demos/wildlife-3d/iguana-lizards-v1/model.glb",
+        "source": "public/demos/wildlife-3d/iguana-lizards-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/iguana-lizards-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/lizards-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-king-cobra-provisional-v1",
@@ -10565,7 +10799,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-river-otter-shore-fauna-v1",
+        "sha256": "dabaa5d99b08604284e3f02fa29c65998ac2abd1c81729696a49daa64300518c",
+        "states": ["action", "flee", "flee-swim", "idle", "swim", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/river-otter-shore-fauna-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-river-otter-shore-fauna-v1",
         "fingerprint": "065ad012e36b0597c243b9f296a04d11f62616029724b896179893e56b2bec99",

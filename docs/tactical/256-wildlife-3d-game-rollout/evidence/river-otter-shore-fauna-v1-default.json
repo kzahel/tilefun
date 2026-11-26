@@ -1,0 +1,43 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+  "workshopInputDigest": "b92049da42c3292e539fe89014dd550bc0f4596ba61328bed7e81782fc8c2835",
+  "results": [
+    {
+      "type": "wildlife-river-otter-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "065ad012e36b0597c243b9f296a04d11f62616029724b896179893e56b2bec99",
+      "modelSha256": "dabaa5d99b08604284e3f02fa29c65998ac2abd1c81729696a49daa64300518c",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-river-otter&wildlife3dStage=river-otter-shore-fauna-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "swim",
+        "action",
+        "flee",
+        "flee-swim"
+      ],
+      "heightRange": [
+        -0.0009949760437011784,
+        -0.00008203124999999954
+      ],
+      "statesOnLanding": [
+        "flee",
+        "flee-swim"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "swim",
+          "action",
+          "flee",
+          "flee-swim"
+        ]
+      }
+    }
+  ]
+}

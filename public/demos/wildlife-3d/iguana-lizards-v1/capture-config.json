@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-iguana-provisional-v1",
+  "fit": [
+    12.47,
+    8.43,
+    12.33
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "The long tail and spine crest sway through separate walking and escape curves. The action lifts and lowers the head.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

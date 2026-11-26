@@ -3954,5 +3954,97 @@
       "native.png": "8ffdd345000a2c9c28b004e90c0ec4e20201a585e8b30926cc436282b9cd5a27",
       "walk.png": "f00d845d6f1a4a75eac950c6d34086fe4a4708407375358e7c5b7c4105e27756"
     }
+  },
+  {
+    "id": "chameleon-lizards-v1",
+    "type": "wildlife-chameleon-provisional-v1",
+    "name": "Chameleon",
+    "batch": "wildlife-3d-lizards-v1",
+    "lab": "chameleon",
+    "scale": 13.75,
+    "topDown": {
+      "width": 0.9636363636363636,
+      "height": 0.5752727272727273
+    },
+    "files": {
+      "action.png": "6d2f7699f255794c06933899de561d2c4366399f0a1a4aa52b250092019c115e",
+      "appearance.png": "85cc2f92fa3625389bd458111afbe6ca6a85a31e48ed2de03caa67880238cec0",
+      "capture-config.json": "6c0f367ceb658d937d3ee0fd47bf8a744b5c9737c449baa2100e289079cb6b82",
+      "comparison.mp4": "528a03910f91818ec83400e3ce8b5eeac036b3f058ff9763a78ebc783408ae88",
+      "flee.png": "3070117a3c9764dd4cd63128320134acbf93ef9a0f316f57dbb50e32b201c6d6",
+      "model.blend": "b7b9303f7e807dbefd0ddc8759b28fa5363403d86a8e594a0c8eda281c9d2ef2",
+      "model.glb": "aae1b423fc18ca34a6acec35fd8b334176c05a37b61ed8c9068e68490d15e240",
+      "native.png": "2cab8267a1613418d2048dd9db911d109e2874233e5649a1325cda17ffeda79f",
+      "walk.png": "b0b1a24758a9a4ac8d27b412b96925891e88b8d4b42d4d9229703a95e78b940f"
+    }
+  },
+  {
+    "id": "frilled-neck-lizard-lizards-v1",
+    "type": "wildlife-frilled-neck-lizard-provisional-v1",
+    "name": "Frilled-neck lizard",
+    "batch": "wildlife-3d-lizards-v1",
+    "lab": "frilled-neck-lizard",
+    "scale": 13.25,
+    "topDown": {
+      "width": 1.1426415094339624,
+      "height": 0.5079245283018868
+    },
+    "files": {
+      "action.png": "9e0fa406c39fa61c18727d691c50609d0179bef52cb6fe4a27c517bec72b03d4",
+      "appearance.png": "6cd83fae6ba6c73ce26bc00a6388bacf0a50c6c0f48ba4eca46700864524b741",
+      "capture-config.json": "ffe4a3bdf07a871c8e728dd0ecdd46c20d1a468f254171046160f1e153e341e7",
+      "comparison.mp4": "d4f95ba5a1752ae7a7910edc4a74dca563403d75c4d0cd9c37f32d8e12779231",
+      "flee.png": "a6fb3b9020db0850de6c6535e68f4c9cb8268962c234751ced40b949d03bb2cc",
+      "model.blend": "e989ae25b8a674eda77e0472d7176be4af435830bb505edabfd70c058d4f7587",
+      "model.glb": "d1f4d5f59cd129d65ef4a63c89c1e3abb9fe28bf6e747bd6eec1ea10cf52dd9d",
+      "native.png": "ca38f4a74eec8901acd95a52eedfc21a72164aa946c5d4e3ab7a9dd933ff614b",
+      "walk.png": "f3ef88853424c3400683500613b6dcb8594e6d33cdf7779eddd2f856efcc3212"
+    }
+  },
+  {
+    "id": "gecko-lizards-v1",
+    "type": "wildlife-gecko-provisional-v1",
+    "name": "Gecko",
+    "batch": "wildlife-3d-lizards-v1",
+    "lab": "gecko",
+    "scale": 15.21,
+    "topDown": {
+      "width": 0.9953977646285338,
+      "height": 0.46811308349769887
+    },
+    "files": {
+      "action.png": "4f3cef0befb53f0e012302f5ce351942343e02411cc64638ec1e53ffdb7aaa8b",
+      "appearance.png": "8e41d65c6e323027698869eb8e40578dc2b1540287932f05ac7628c3cfaa44e9",
+      "capture-config.json": "34992ad61d30d017f8e4748f8d666f5c017f551f731ecadf0b1f0c36ffef7031",
+      "comparison.mp4": "8e4d01e44b840405f7d323f19981b528957d224361b8f5585ca40d90666379e8",
+      "flee.png": "d67364c58da3604655c010421607e0c391f985d1c86f2eb89c3490835f6e78de",
+      "model.blend": "68a0215dfe2492018bd122103d855a88a3b5100062d6a90323f2861653e89d3d",
+      "model.glb": "da0a4a052c1369350d44f4d075b687f6495b6d33935d554d9492b9c0a945e340",
+      "native.png": "0f2023ea596c5143877e4bd9e3ff38eacc1968e041aa131e677b1606b5834b3b",
+      "walk.png": "1cd878f75de8e1ce2983b6b1d5ef2c308f6774094c30ed5526f0622d38329c91"
+    }
+  },
+  {
+    "id": "iguana-lizards-v1",
+    "type": "wildlife-iguana-provisional-v1",
+    "name": "Iguana",
+    "batch": "wildlife-3d-lizards-v1",
+    "lab": "iguana",
+    "scale": 13.87,
+    "topDown": {
+      "width": 1.0915645277577506,
+      "height": 0.6416726748377795
+    },
+    "files": {
+      "action.png": "ed6564488359848a749e0951a42da6e770f559132e058b3fabf39937e3bb345c",
+      "appearance.png": "e163f484806686b8d79666792ccb183e66d1bf352df41acbc4c99dd514e9ed32",
+      "capture-config.json": "405f754c7f5c594f14a619f57a9b7d6a3e07ca8db85059a9c48d843bb67a3870",
+      "comparison.mp4": "328deb88d72ccb7ea323ba7077d743450446e452629ba44d4bb078f638a3ac12",
+      "flee.png": "961cb18c564a5816a1b766773592fa2e1ed177810207eb2a06fa5844a642dd34",
+      "model.blend": "92a28c1f899a57aa984c8901554d1f783996a10f0b8e028f12a802f6aec6f67b",
+      "model.glb": "fcc5315994b6caeeacfb2bccf943ecf6ffe6111e5753a6a7083aec91cf54c8bf",
+      "native.png": "2a7b683a0865a6da27101660c6f2e7a3a1cf03a43ec34d9bc39f6425fa951620",
+      "walk.png": "a30bf2d326bda5fb4be71669a56062a0175c0b5835665651822668675687ba4a"
+    }
   }
 ]

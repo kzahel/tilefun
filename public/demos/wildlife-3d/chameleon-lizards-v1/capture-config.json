@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-chameleon-provisional-v1",
+  "fit": [
+    12.47,
+    7.49,
+    12.33
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "Its curled tail counterbalances short, deliberate steps and a different quick escape. The head turns over planted feet.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

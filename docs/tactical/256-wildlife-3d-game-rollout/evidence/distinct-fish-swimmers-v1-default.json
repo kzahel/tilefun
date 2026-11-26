@@ -1,0 +1,69 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+  "workshopInputDigest": "b92049da42c3292e539fe89014dd550bc0f4596ba61328bed7e81782fc8c2835",
+  "results": [
+    {
+      "type": "wildlife-ocean-sunfish-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "d28d01c228231c9ede171f5f3750792502b7ccc2fac7ac7e8cd7a0af23d32838",
+      "modelSha256": "4ffcf2a85e7dd23f00afa98b78bfc105d60af4a72598192eb0901c2eaa428bbd",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-ocean-sunfish&wildlife3dStage=ocean-sunfish-distinct-fish-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009687728881836012,
+        -0.00013058471679687483
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "swim",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-pufferfish-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "5a4e956c2e007056b6818531eb4233490246abd92a54fe24d6c7e8a4f0b5ccaf",
+      "modelSha256": "3c57535bf225986ff4a0a1e637deffa567099d141ce6c382edf9b862f20c79a8",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-pufferfish&wildlife3dStage=pufferfish-distinct-fish-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009549674987793039,
+        -0.0000672817230224609
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "swim",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

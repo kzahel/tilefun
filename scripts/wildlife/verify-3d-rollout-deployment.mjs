@@ -115,8 +115,8 @@ try {
       const states = wildlifeModelClips(candidate.type, candidate.classicTravel);
       assert(states?.length, `Missing gameplay clips for ${candidate.type}`);
       const predator = predatorProfile(candidate.type);
-      const hunterStage =
-        predator?.expansion?.habitat === "deep" || predator?.species === "coconut-crab";
+      const marineHunter = predator?.expansion?.habitat === "deep";
+      const hunterStage = marineHunter || predator?.species === "coconut-crab";
       const fauna = faunaProfile(candidate.type);
       const habitat = fauna?.habitat;
       const waterStage = ["deep", "pond", "shore"].includes(habitat);
@@ -132,18 +132,21 @@ try {
           : candidate.id === "robin-pilot-v1"
             ? { type: forageType("seed"), dx: 40, dy: 12 }
             : undefined;
-      const pond =
-        habitat === "pond" || habitat === "deep"
-          ? {
-              water: habitat === "pond" ? TerrainId.ShallowWater : TerrainId.DeepWater,
-              halfWidth: fauna.body[0] / 2,
-              radius: Math.max(
-                6,
-                Math.ceil((fauna.habitat === "deep" ? fauna.radius : 96) / TILE_SIZE),
-              ),
-              alarm: fauna.alarmDistance,
-            }
-          : undefined;
+      const waterAnimal = waterStage ? fauna : undefined;
+      const pondAnimal = marineHunter ? predator : waterAnimal;
+      const pond = pondAnimal
+        ? {
+            water:
+              habitat === "deep" || marineHunter ? TerrainId.DeepWater : TerrainId.ShallowWater,
+            shore: habitat === "shore",
+            halfWidth: pondAnimal.body[0] / 2,
+            radius: Math.max(
+              6,
+              Math.ceil((predator?.expansion?.radius ?? waterAnimal?.radius ?? 96) / TILE_SIZE),
+            ),
+            alarm: marineHunter ? 18 : waterAnimal.alarmDistance,
+          }
+        : undefined;
       const fourStateStage = isFourStateFaunaModelReview(candidate.type, candidate.lab);
       const packStage = isPackMountModelReview(candidate.type, candidate.lab);
       const feeding = wildlifeFeedingReview(candidate.type, candidate.lab);
@@ -306,7 +309,7 @@ try {
           !!pond,
         catStage,
         dogFetch,
-        useStick: secretaryStage || felidStage,
+        useStick: secretaryStage || felidStage || marineHunter,
         workPlacements: pilotForage
           ? [
               pilotForage,
@@ -314,7 +317,7 @@ try {
                 ? [{ type: "prop-oak-tree", dx: 0, dy: -64 }]
                 : []),
             ]
-          : wildlifeWorkStage || raptorStage || felidStage
+          : wildlifeWorkStage || raptorStage || felidStage || marineHunter
             ? reviewActorPlacements(candidate)
             : [],
         pond,
@@ -583,6 +586,7 @@ async function verifyGameEntry(page, candidate, preview, options) {
           wy: (centerY + 0.5) * tileSize,
           wz: 0,
           alarm: pond.alarm,
+          shore: pond.shore,
         };
         for (let ty = centerY - pond.radius; ty <= centerY + pond.radius; ty++) {
           for (let tx = centerX - 6; tx <= centerX + pond.radius; tx++) {
@@ -598,6 +602,13 @@ async function verifyGameEntry(page, candidate, preview, options) {
             });
           }
         }
+        if (pond.shore)
+          game.transport.send({
+            type: "edit-spawn",
+            entityType: type,
+            wx: centerX * tileSize - 49,
+            wy: pondShore.wy,
+          });
       }
       game.transport.send({ type: "edit-spawn", entityType: type, wx, wy });
       for (const placement of workPlacements)
@@ -808,6 +819,8 @@ async function verifyActorStatesInGame(
   const action = approachClips.includes("action")
     ? -1
     : clips.findIndex(({ name }) => name === "action");
+  const groundFlee = clips.findIndex(({ name }) => name === "flee");
+  const waterFlee = clips.findIndex(({ name }) => name === "flee-swim");
   const states = await page.evaluate(
     async ({
       type,
@@ -819,6 +832,8 @@ async function verifyActorStatesInGame(
       clearForageType,
       useStick,
       pondShore,
+      groundFlee,
+      waterFlee,
     }) => {
       const game = document.querySelector("#game").__game;
       game.playInput.setMovementMode("tap");
@@ -832,13 +847,25 @@ async function verifyActorStatesInGame(
       const end = performance.now() + timeout;
       try {
         while (performance.now() < end) {
-          const actor = game.stateView.entities.find((entry) => entry.type === type);
-          if (actor?.sprite && game.firstPerson.wildlifeModelDrawn(sheetKey)) {
-            const { clip = 0 } = actor.sprite;
-            if (clip !== action || actor.wanderAI?.state !== "scared") observed.add(clip);
+          const actors = game.stateView.entities.filter(
+            (entry) => entry.type === type && entry.sprite,
+          );
+          if (actors.length && game.firstPerson.wildlifeModelDrawn(sheetKey)) {
+            for (const actor of actors) {
+              const { clip = 0 } = actor.sprite;
+              if (clip !== action || actor.wanderAI?.state !== "scared") observed.add(clip);
+            }
             if (observed.size === total) break;
             // Wait for the animal's voluntary action before approaching it.
             if (passive.every((index) => observed.has(index))) {
+              const inWater = !pondShore?.shore || observed.has(groundFlee);
+              const actor = pondShore?.shore
+                ? actors.find((entry) => !!entry.noShadow === inWater)
+                : actors[0];
+              if (!actor || (pondShore?.shore && inWater && observed.has(waterFlee))) {
+                await new Promise(requestAnimationFrame);
+                continue;
+              }
               const playerBody = game.stateView.playerEntity;
               const player = playerBody.position;
               const dx = actor.position.wx - player.wx;
@@ -864,6 +891,7 @@ async function verifyActorStatesInGame(
                 const now = performance.now();
                 if (
                   pondShore &&
+                  inWater &&
                   distance > pondShore.alarm &&
                   Math.hypot(player.wx - pondShore.wx, player.wy - pondShore.wy) < 19 &&
                   (playerBody.wz ?? 0) < 0.5 &&
@@ -879,7 +907,7 @@ async function verifyActorStatesInGame(
                   nextJump = now + 1450;
                 }
                 game.tapMovement.setTarget(
-                  pondShore && now >= aimAcrossWaterUntil
+                  pondShore && inWater && now >= aimAcrossWaterUntil
                     ? pondShore
                     : { ...actor.position, wz: 0 },
                 );
@@ -917,6 +945,8 @@ async function verifyActorStatesInGame(
           : 38_000,
       useStick,
       pondShore,
+      groundFlee,
+      waterFlee,
       clearForageType:
         faunaProfile(expected.type)?.species === "crow" ? forageType("twig") : undefined,
     },

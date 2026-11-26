@@ -9946,6 +9946,46 @@
       "source": "demos/wildlife-3d/roly-poly-ground-insects-v1/model.blend"
     },
     {
+      "id": "wildlife-3d-chameleon-lizards-v1",
+      "name": "wildlife 3d chameleon lizards v1",
+      "image": "demos/wildlife-3d/chameleon-lizards-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "85cc2f92fa3625389bd458111afbe6ca6a85a31e48ed2de03caa67880238cec0",
+      "source": "demos/wildlife-3d/chameleon-lizards-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-frilled-neck-lizard-lizards-v1",
+      "name": "wildlife 3d frilled neck lizard lizards v1",
+      "image": "demos/wildlife-3d/frilled-neck-lizard-lizards-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "6cd83fae6ba6c73ce26bc00a6388bacf0a50c6c0f48ba4eca46700864524b741",
+      "source": "demos/wildlife-3d/frilled-neck-lizard-lizards-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-gecko-lizards-v1",
+      "name": "wildlife 3d gecko lizards v1",
+      "image": "demos/wildlife-3d/gecko-lizards-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "8e41d65c6e323027698869eb8e40578dc2b1540287932f05ac7628c3cfaa44e9",
+      "source": "demos/wildlife-3d/gecko-lizards-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-iguana-lizards-v1",
+      "name": "wildlife 3d iguana lizards v1",
+      "image": "demos/wildlife-3d/iguana-lizards-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "e163f484806686b8d79666792ccb183e66d1bf352df41acbc4c99dd514e9ed32",
+      "source": "demos/wildlife-3d/iguana-lizards-v1/model.blend"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",

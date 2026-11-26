@@ -1,0 +1,69 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+  "workshopInputDigest": "b92049da42c3292e539fe89014dd550bc0f4596ba61328bed7e81782fc8c2835",
+  "results": [
+    {
+      "type": "wildlife-manta-ray-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "ede929680cebe45c3b99b6f5633f898f8e2108cac99a621c53226664858d6ece",
+      "modelSha256": "20f7ee7f13f8f65c04ce4e5a319080b95d7c154c76551071732f3739a3a632d1",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-manta-ray&wildlife3dStage=manta-ray-sharks-rays-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009270544052124298,
+        -0.00013079071044921903
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "swim",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-whale-shark-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "1276292bebd7707a163b0836e0e3bc65f65750bd381038a278fd59ecf23d943b",
+      "modelSha256": "b85cc3821d352a867f67f682ade751dcd3b798096dc904ad86dcedcbf7e08aac",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-whale-shark&wildlife3dStage=whale-shark-sharks-rays-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009687728881836004,
+        -0.00009620285034179684
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "swim",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

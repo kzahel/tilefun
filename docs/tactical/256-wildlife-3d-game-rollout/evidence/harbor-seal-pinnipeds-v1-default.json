@@ -1,0 +1,43 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+  "workshopInputDigest": "b92049da42c3292e539fe89014dd550bc0f4596ba61328bed7e81782fc8c2835",
+  "results": [
+    {
+      "type": "wildlife-harbor-seal-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "afce29b4094209d20b38164994b2575834751a97f57d59b731b768ef23c5d514",
+      "modelSha256": "5c638fda0d89af511a8af6698a8dd46d6245d88e8c648396ed2a59073473a1d3",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-harbor-seal&wildlife3dStage=harbor-seal-pinnipeds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "haul",
+        "swim",
+        "action",
+        "flee",
+        "flee-swim"
+      ],
+      "heightRange": [
+        -0.0009438171386718846,
+        -0.00009614372253417917
+      ],
+      "statesOnLanding": [
+        "flee",
+        "flee-swim"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "haul",
+          "swim",
+          "action",
+          "flee",
+          "flee-swim"
+        ]
+      }
+    }
+  ]
+}

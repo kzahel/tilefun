@@ -1,0 +1,134 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-chameleon-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 480
+        }
+      ],
+      "candidateId": "chameleon-lizards-v1",
+      "modelSha256": "aae1b423fc18ca34a6acec35fd8b334176c05a37b61ed8c9068e68490d15e240"
+    },
+    {
+      "type": "wildlife-frilled-neck-lizard-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 480
+        }
+      ],
+      "candidateId": "frilled-neck-lizard-lizards-v1",
+      "modelSha256": "d1f4d5f59cd129d65ef4a63c89c1e3abb9fe28bf6e747bd6eec1ea10cf52dd9d"
+    },
+    {
+      "type": "wildlife-gecko-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 480
+        }
+      ],
+      "candidateId": "gecko-lizards-v1",
+      "modelSha256": "da0a4a052c1369350d44f4d075b687f6495b6d33935d554d9492b9c0a945e340"
+    },
+    {
+      "type": "wildlife-iguana-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 480
+        }
+      ],
+      "candidateId": "iguana-lizards-v1",
+      "modelSha256": "fcc5315994b6caeeacfb2bccf943ecf6ffe6111e5753a6a7083aec91cf54c8bf"
+    }
+  ],
+  "clipSamples": 448,
+  "testedDepth": false
+}
