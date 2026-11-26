@@ -477,9 +477,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "1bc0f02ae31ee6e3ba6d8fc2b9a7efb0d252ea3fa4524604d3aec8d7d6c509be",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/waders-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/flamingo-waders-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "1bc0f02ae31ee6e3ba6d8fc2b9a7efb0d252ea3fa4524604d3aec8d7d6c509be",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/waders-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/flamingo-waders-v1/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "1bc0f02ae31ee6e3ba6d8fc2b9a7efb0d252ea3fa4524604d3aec8d7d6c509be",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/waders-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/flamingo-waders-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "1bc0f02ae31ee6e3ba6d8fc2b9a7efb0d252ea3fa4524604d3aec8d7d6c509be",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/waders-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/flamingo-waders-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-flamingo-waders-v1",
+        "fingerprint": "109f07f21bed78c44b901d48a2587eee191308149708720be26243908d3f9d4d",
+        "model": "public/demos/wildlife-3d/flamingo-waders-v1/model.glb",
+        "source": "public/demos/wildlife-3d/flamingo-waders-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/flamingo-waders-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/waders-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-great-blue-heron-provisional-v1",
@@ -497,9 +531,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "204f024c6dc3e565ff20f71221fcb7bbcf65ced1182399626551606aec343f7e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/waders-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/great-blue-heron-waders-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "204f024c6dc3e565ff20f71221fcb7bbcf65ced1182399626551606aec343f7e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/waders-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/great-blue-heron-waders-v1/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "204f024c6dc3e565ff20f71221fcb7bbcf65ced1182399626551606aec343f7e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/waders-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/great-blue-heron-waders-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "204f024c6dc3e565ff20f71221fcb7bbcf65ced1182399626551606aec343f7e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/waders-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/great-blue-heron-waders-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-great-blue-heron-waders-v1",
+        "fingerprint": "4da1d34276429c5782a635eb319417575151774b0d0b0348505217c963d10db7",
+        "model": "public/demos/wildlife-3d/great-blue-heron-waders-v1/model.glb",
+        "source": "public/demos/wildlife-3d/great-blue-heron-waders-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/great-blue-heron-waders-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/waders-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-great-frigatebird-provisional-v1",
@@ -571,9 +639,43 @@
         "action": "action",
         "flee": "fly"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "22b3b812accb711f3ea3b9152968133be93fe2cbadebfa495d61c5d6e26290da",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/forest-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/great-hornbill-forest-birds-v1/native.png"
+        },
+        "fly": {
+          "action": "fly",
+          "sha256": "22b3b812accb711f3ea3b9152968133be93fe2cbadebfa495d61c5d6e26290da",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/forest-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/great-hornbill-forest-birds-v1/fly.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "22b3b812accb711f3ea3b9152968133be93fe2cbadebfa495d61c5d6e26290da",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/forest-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/great-hornbill-forest-birds-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "22b3b812accb711f3ea3b9152968133be93fe2cbadebfa495d61c5d6e26290da",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/forest-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/great-hornbill-forest-birds-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-great-hornbill-forest-birds-v1",
+        "fingerprint": "7842fbac95a28de14af741ac0cf75c1951f743582d4ae5dee4c2cb62cfe68b15",
+        "model": "public/demos/wildlife-3d/great-hornbill-forest-birds-v1/model.glb",
+        "source": "public/demos/wildlife-3d/great-hornbill-forest-birds-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/great-hornbill-forest-birds-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/forest-birds-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-kakapo-provisional-v1",
@@ -591,9 +693,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "7d6b0cf7cda68f69ded5c37257e6c913980287c5d28b828dc90f151970caf46f",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/forest-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/kakapo-forest-birds-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "7d6b0cf7cda68f69ded5c37257e6c913980287c5d28b828dc90f151970caf46f",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/forest-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/kakapo-forest-birds-v1/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "7d6b0cf7cda68f69ded5c37257e6c913980287c5d28b828dc90f151970caf46f",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/forest-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/kakapo-forest-birds-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "7d6b0cf7cda68f69ded5c37257e6c913980287c5d28b828dc90f151970caf46f",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/forest-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/kakapo-forest-birds-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-kakapo-forest-birds-v1",
+        "fingerprint": "944e98bff1396e861f06215ef40cb4c2c1a42e1dccb1661d38ae3f5458c6f4b3",
+        "model": "public/demos/wildlife-3d/kakapo-forest-birds-v1/model.glb",
+        "source": "public/demos/wildlife-3d/kakapo-forest-birds-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/kakapo-forest-birds-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/forest-birds-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-kiwi-provisional-v1",
@@ -731,9 +867,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "0e00495447b0b2778f111eff6662446df881486849c20eaf186439d7c6c985a2",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/waders-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/marabou-stork-waders-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "0e00495447b0b2778f111eff6662446df881486849c20eaf186439d7c6c985a2",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/waders-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/marabou-stork-waders-v1/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "0e00495447b0b2778f111eff6662446df881486849c20eaf186439d7c6c985a2",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/waders-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/marabou-stork-waders-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "0e00495447b0b2778f111eff6662446df881486849c20eaf186439d7c6c985a2",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/waders-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/marabou-stork-waders-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-marabou-stork-waders-v1",
+        "fingerprint": "4cb35308e8e2be52d3e1fa0cc5140208279d7e0287f5c24ee1f95d996f6a3e6b",
+        "model": "public/demos/wildlife-3d/marabou-stork-waders-v1/model.glb",
+        "source": "public/demos/wildlife-3d/marabou-stork-waders-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/marabou-stork-waders-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/waders-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-ostrich-provisional-v1",
@@ -1207,9 +1377,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "602d294c17ee193fb01e093ccb76876586e31eca09d282ea171968df941cb42a",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/waders-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/shoebill-waders-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "602d294c17ee193fb01e093ccb76876586e31eca09d282ea171968df941cb42a",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/waders-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/shoebill-waders-v1/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "602d294c17ee193fb01e093ccb76876586e31eca09d282ea171968df941cb42a",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/waders-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/shoebill-waders-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "602d294c17ee193fb01e093ccb76876586e31eca09d282ea171968df941cb42a",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/waders-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/shoebill-waders-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-shoebill-waders-v1",
+        "fingerprint": "9f49572c768862a482c41ed2ea8b484c1db8f3536f9ec0532b584e213e5d753b",
+        "model": "public/demos/wildlife-3d/shoebill-waders-v1/model.glb",
+        "source": "public/demos/wildlife-3d/shoebill-waders-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/shoebill-waders-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/waders-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-sparrow-provisional-v1",
@@ -1304,9 +1508,43 @@
         "action": "action",
         "flee": "fly"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "f9c8ea01461e4294a4a2038e6a09fab70d9da1fa63782a041223eb062bde88f8",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/forest-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/toucan-forest-birds-v1/native.png"
+        },
+        "fly": {
+          "action": "fly",
+          "sha256": "f9c8ea01461e4294a4a2038e6a09fab70d9da1fa63782a041223eb062bde88f8",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/forest-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/toucan-forest-birds-v1/fly.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "f9c8ea01461e4294a4a2038e6a09fab70d9da1fa63782a041223eb062bde88f8",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/forest-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/toucan-forest-birds-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "f9c8ea01461e4294a4a2038e6a09fab70d9da1fa63782a041223eb062bde88f8",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/forest-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/toucan-forest-birds-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-toucan-forest-birds-v1",
+        "fingerprint": "be83a328f7378b5bf8d7d4f1d190a69a862643c996b8f6f0736889d55f610d29",
+        "model": "public/demos/wildlife-3d/toucan-forest-birds-v1/model.glb",
+        "source": "public/demos/wildlife-3d/toucan-forest-birds-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/toucan-forest-birds-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/forest-birds-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-coyote-predator-v1",
@@ -1541,7 +1779,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-dog-pets-v1",
+        "sha256": "742283f7ef50b1ae301697bd4c8015672b683f1f89b619b87a8616020bc25604",
+        "states": ["action", "flee", "idle", "pickup", "release", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/dog-fetch-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-dog-pets-v1",
         "fingerprint": "a6dba18418e734975b9ad750c91a5b0c5d7d3978bd691b5141862895918fe14c",
@@ -1595,7 +1840,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-guinea-pig-pet-rodents-v1",
+        "sha256": "36a0be887a95f46acc010890ee85c8939e948fa92045741683d2881f56e943e3",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/pet-rodents-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-guinea-pig-pet-rodents-v1",
         "fingerprint": "26868f1bcb162ff50a82fcdf4277afbf1a6b4ad194e1aa031e6a797d18f249ad",
@@ -1649,7 +1901,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-hamster-pet-rodents-v1",
+        "sha256": "d8a51d8efcb1849e47a04f7d4b732c9f004c1f3cc4cc63b1e50e7f2bb3bbfff3",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/pet-rodents-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-hamster-pet-rodents-v1",
         "fingerprint": "cdbcdcd6c3c001a76ff31015dccc9e48f6126a022444d4e4a2cdd7342c665d4b",
@@ -2412,9 +2671,43 @@
         "action": "action",
         "flee": "walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "cda6faf4882fd2dcd3825a48bad83eed1c3a6b4e650eb482acc6d149d455bbd5",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/forest-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/wild-turkey-forest-birds-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "cda6faf4882fd2dcd3825a48bad83eed1c3a6b4e650eb482acc6d149d455bbd5",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/forest-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/wild-turkey-forest-birds-v1/walk.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "cda6faf4882fd2dcd3825a48bad83eed1c3a6b4e650eb482acc6d149d455bbd5",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/forest-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/wild-turkey-forest-birds-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "cda6faf4882fd2dcd3825a48bad83eed1c3a6b4e650eb482acc6d149d455bbd5",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/forest-birds-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/wild-turkey-forest-birds-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-wild-turkey-forest-birds-v1",
+        "fingerprint": "625bd47cb156c0a767661ae5a03d4d144dab807a4b981a70c1dd6494765ea913",
+        "model": "public/demos/wildlife-3d/wild-turkey-forest-birds-v1/model.glb",
+        "source": "public/demos/wildlife-3d/wild-turkey-forest-birds-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/wild-turkey-forest-birds-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/forest-birds-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-bobcat-predator-v1",
@@ -7051,7 +7344,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "9b195284b43303011baba5d67972984e8763e31f",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-cat-ginger-pets-v1",
+        "sha256": "5f1891b420a02ba1f38ded6828cedf622e70acfdb96c048935ffed7a323a99a0",
+        "states": ["action", "bat", "climb", "flee", "idle", "pounce", "sit", "stalk", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/ginger-tabby-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-cat-ginger-pets-v1",
         "fingerprint": "92aa6affdfe26783787675cb4265e165f95b800c7cde52d648bc2ceb1d130758",
@@ -7298,7 +7598,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-japanese-macaque-forest-primates-v1",
+        "sha256": "12dcb40bbb8164aaaf93dccca9c1f780f830f9c2e197080dddc74d1b7bcd1986",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/forest-primates-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-japanese-macaque-forest-primates-v1",
         "fingerprint": "f65ff9bb5a4f8369e06bd289eb471b666be3f9ba5115561c61f36e223793cc8e",
@@ -7352,7 +7659,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-mandrill-forest-primates-v1",
+        "sha256": "9420db3044ec997eb727f2bba53ec620f58f9f4c232414bc04ad128497fe8a60",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/forest-primates-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-mandrill-forest-primates-v1",
         "fingerprint": "76382c02a1205a63478cc98d231d86bd0a68b2d9ff0505f69b7ad7971551f6b4",
@@ -7460,7 +7774,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-proboscis-monkey-forest-primates-v1",
+        "sha256": "3e3c5e60f22b50f5202282df546c018d47b0677958e59f58283271eb07b51725",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/forest-primates-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-proboscis-monkey-forest-primates-v1",
         "fingerprint": "4125856908125e809ab64f8b592268796c6118f8029d0cc0e6ccc59f35a81881",
@@ -7514,7 +7835,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-ring-tailed-lemur-forest-primates-v1",
+        "sha256": "4c8d825fdcde83d25cf66a03c4ad4ae02e2b45d1cc8d2cba20fc3fb68cfa382e",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/forest-primates-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-ring-tailed-lemur-forest-primates-v1",
         "fingerprint": "47bc6d318ba605bd03ed4fb23bd7c60d6b0cbbe39a8b0a63c527fd7cc6c507f6",
@@ -8190,7 +8518,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-chinchilla-pet-rodents-v1",
+        "sha256": "55b0166898265282f99e9318c1f8ac4d6b4710c9e7853d95d85c376f5f9ffe81",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/pet-rodents-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-chinchilla-pet-rodents-v1",
         "fingerprint": "07b4bc2d6cc8001ed214682ea454c490cfe891d3c431e9b8614f00977bce80af",
@@ -8725,7 +9060,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-chicken-classic-yard-v1",
+        "sha256": "c5d84a8fcfbe4e3f8166a0e504cea7fb57e3d873afde2b1cbed0b1a6620606eb",
+        "states": ["idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/classic-yard-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-chicken-classic-yard-v1",
         "fingerprint": "8c16d7a3d068c6b2800ca0f430bf1e363eda9a50e6c9756c508264826e2df1a9",
@@ -8765,7 +9107,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-cow-classic-yard-v1",
+        "sha256": "b83b63c1df5642b2bbeff97405e4de6cb3d61e04dae91da2fdbe5ffddb2ce214",
+        "states": ["idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/classic-yard-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-cow-classic-yard-v1",
         "fingerprint": "0041ac188b571c95ae67f271d645b4f7ae26600ccbc8096b6e06426a2223a1e8",
@@ -8805,7 +9154,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-pigeon-classic-yard-v1",
+        "sha256": "469d795229456e6d2cff1a807a4f276272a578201d990ab5bfa9c875feefa9af",
+        "states": ["idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/classic-yard-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-pigeon-classic-yard-v1",
         "fingerprint": "cce2247811c88d905bc11afcf3c54c2da2090b2421ba8844610bc1300517530a",
@@ -8845,7 +9201,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-pigeon2-classic-yard-v1",
+        "sha256": "15b45835fc3c13182e20fea6f41f6b816d00a6658021cda9239194f90cb87f2f",
+        "states": ["idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/classic-yard-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-pigeon2-classic-yard-v1",
         "fingerprint": "9964155bfcf2390d733e4de43c7358329d75878570586360dca6a29d5b48985f",
@@ -8885,7 +9248,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-crow-classic-fliers-v1",
+        "sha256": "a3957572d136a522dcafc6273a98b092fcdafe5cba9878b42c59c2aad56be296",
+        "states": ["fly", "idle"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/classic-fliers-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-crow-classic-fliers-v1",
         "fingerprint": "be56a8a89084a6919e19400396c8da90db0b137ecbc5c8305add418815845a0f",
@@ -8925,7 +9295,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-seagull-classic-fliers-v1",
+        "sha256": "2073119644673da5c617edd4cf4a65f1dad3a9f0567efc3ed9faa5eba13b9b31",
+        "states": ["fly", "idle"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/classic-fliers-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-seagull-classic-fliers-v1",
         "fingerprint": "eed4c38350219d36e9397aab29fe2530c4aacfbc133cd2b7808120d3df170bb4",

@@ -1,0 +1,131 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+  "workshopInputDigest": "98da5306702bda8f1e0937ea33879493183c518f67ff4b89166692bb5e1892e2",
+  "results": [
+    {
+      "type": "wildlife-japanese-macaque-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "f65ff9bb5a4f8369e06bd289eb471b666be3f9ba5115561c61f36e223793cc8e",
+      "modelSha256": "12dcb40bbb8164aaaf93dccca9c1f780f830f9c2e197080dddc74d1b7bcd1986",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-japanese-macaque&wildlife3dStage=japanese-macaque-forest-primates-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009688529968261756,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-mandrill-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "76382c02a1205a63478cc98d231d86bd0a68b2d9ff0505f69b7ad7971551f6b4",
+      "modelSha256": "9420db3044ec997eb727f2bba53ec620f58f9f4c232414bc04ad128497fe8a60",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-mandrill&wildlife3dStage=mandrill-forest-primates-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009421653747558727,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-proboscis-monkey-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "4125856908125e809ab64f8b592268796c6118f8029d0cc0e6ccc59f35a81881",
+      "modelSha256": "3e3c5e60f22b50f5202282df546c018d47b0677958e59f58283271eb07b51725",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-proboscis-monkey&wildlife3dStage=proboscis-monkey-forest-primates-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009687728881835976,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-ring-tailed-lemur-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "47bc6d318ba605bd03ed4fb23bd7c60d6b0cbbe39a8b0a63c527fd7cc6c507f6",
+      "modelSha256": "4c8d825fdcde83d25cf66a03c4ad4ae02e2b45d1cc8d2cba20fc3fb68cfa382e",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-ring-tailed-lemur&wildlife3dStage=ring-tailed-lemur-forest-primates-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009687728881835976,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

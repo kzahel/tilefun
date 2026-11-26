@@ -1,0 +1,55 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+  "workshopInputDigest": "98da5306702bda8f1e0937ea33879493183c518f67ff4b89166692bb5e1892e2",
+  "results": [
+    {
+      "type": "crow",
+      "mode": "default",
+      "manifestFingerprint": "be56a8a89084a6919e19400396c8da90db0b137ecbc5c8305add418815845a0f",
+      "modelSha256": "a3957572d136a522dcafc6273a98b092fcdafe5cba9878b42c59c2aad56be296",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-robins&wildlife3dStage=crow-classic-fliers-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly"
+      ],
+      "heightRange": [
+        -0.0000014219284057619675,
+        0
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "fly",
+          "idle"
+        ]
+      }
+    },
+    {
+      "type": "seagull",
+      "mode": "default",
+      "manifestFingerprint": "eed4c38350219d36e9397aab29fe2530c4aacfbc133cd2b7808120d3df170bb4",
+      "modelSha256": "2073119644673da5c617edd4cf4a65f1dad3a9f0567efc3ed9faa5eba13b9b31",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-robins&wildlife3dStage=seagull-classic-fliers-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly"
+      ],
+      "heightRange": [
+        0,
+        0
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "fly",
+          "idle"
+        ]
+      }
+    }
+  ]
+}

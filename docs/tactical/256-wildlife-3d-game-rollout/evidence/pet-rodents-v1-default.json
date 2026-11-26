@@ -1,0 +1,100 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+  "workshopInputDigest": "98da5306702bda8f1e0937ea33879493183c518f67ff4b89166692bb5e1892e2",
+  "results": [
+    {
+      "type": "wildlife-chinchilla-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "07b4bc2d6cc8001ed214682ea454c490cfe891d3c431e9b8614f00977bce80af",
+      "modelSha256": "55b0166898265282f99e9318c1f8ac4d6b4710c9e7853d95d85c376f5f9ffe81",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-chinchilla&wildlife3dStage=chinchilla-pet-rodents-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009698066711425819,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-guinea-pig-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "26868f1bcb162ff50a82fcdf4277afbf1a6b4ad194e1aa031e6a797d18f249ad",
+      "modelSha256": "36a0be887a95f46acc010890ee85c8939e948fa92045741683d2881f56e943e3",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-guinea-pig&wildlife3dStage=guinea-pig-pet-rodents-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009698066711425819,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-hamster-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "cdbcdcd6c3c001a76ff31015dccc9e48f6126a022444d4e4a2cdd7342c665d4b",
+      "modelSha256": "d8a51d8efcb1849e47a04f7d4b732c9f004c1f3cc4cc63b1e50e7f2bb3bbfff3",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-hamster&wildlife3dStage=hamster-pet-rodents-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.000983158111572269,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

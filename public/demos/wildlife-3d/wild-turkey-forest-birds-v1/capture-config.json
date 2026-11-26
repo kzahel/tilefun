@@ -1,0 +1,22 @@
+{
+  "runtimeType": "wildlife-wild-turkey-provisional-v1",
+  "version": 3,
+  "fit": [
+    9.2,
+    10.63,
+    13.05
+  ],
+  "autoFit": true,
+  "portraitCenter": 1.07,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "Archived forest bird with species-matched bill and coat paint, separate ordinary travel and escape strokes, and a dedicated feeding gesture.",
+  "model": "model.glb",
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

@@ -1,0 +1,22 @@
+{
+  "runtimeType": "wildlife-shoebill-provisional-v1",
+  "version": 3,
+  "fit": [
+    11.27,
+    14.25,
+    15.29
+  ],
+  "autoFit": false,
+  "portraitCenter": 0.92,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "Archived wader draft with planted footfalls, a longer escape stride and an individual bill reach.",
+  "model": "model.glb",
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

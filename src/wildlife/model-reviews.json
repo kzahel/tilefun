@@ -3006,5 +3006,189 @@
       "native.png": "b136039f7989d46b25aeba31adef53fd8e1b71119d91a5b779f690ca0f50ca36",
       "walk.png": "3772df07c932051ffbe759f2c89d7cb7357dbc6aa1826b35a98afab7279fbd64"
     }
+  },
+  {
+    "id": "flamingo-waders-v1",
+    "type": "wildlife-flamingo-provisional-v1",
+    "name": "Flamingo",
+    "batch": "wildlife-3d-waders-v1",
+    "lab": "flamingo",
+    "scale": 16.82,
+    "topDown": {
+      "width": 0.5992865636147443,
+      "height": 0.9221165279429251
+    },
+    "files": {
+      "action.png": "3d1c7ddb00ed668e33d475505a124c33505f74eab24cdbd3d5850c7b818fd257",
+      "appearance.png": "c8ed9ebe2a79a24a6ecdf429886edc6bd2aa99a293ebe4615b51fd39eb60fec5",
+      "capture-config.json": "bec0b165fed39a4ad84806c405a47d79fb6ec5fbd6246b73fb1def53fe27eab5",
+      "comparison.mp4": "fed461e35b85673e0afd0adbd49cf0514cdad4661bd9bb7b8ec12f726c985c5e",
+      "flee.png": "b76506445a5f73d5df5c8904aa3f47a735d514eee983c0881092fffbf8604366",
+      "model.blend": "ea1a4299021a283c35dcdf42757e927163c9327c357b5a86c448efa9a1e3cbd1",
+      "model.glb": "1bc0f02ae31ee6e3ba6d8fc2b9a7efb0d252ea3fa4524604d3aec8d7d6c509be",
+      "native.png": "d0aa288251999a8eed00198bdc350817d65eaba5291b23f335e38f61a0b21af8",
+      "walk.png": "046b321ec28d51bafa78e51ba85956b8828e12fa7d44f88476d7ae2426f92bf1"
+    }
+  },
+  {
+    "id": "great-blue-heron-waders-v1",
+    "type": "wildlife-great-blue-heron-provisional-v1",
+    "name": "Great blue heron",
+    "batch": "wildlife-3d-waders-v1",
+    "lab": "great-blue-heron",
+    "scale": 16.82,
+    "topDown": {
+      "width": 0.5992865636147443,
+      "height": 0.9447086801426873
+    },
+    "files": {
+      "action.png": "fae52f663680fe328407304054923c0fd663c771a9b0b91606df39e395790f5d",
+      "appearance.png": "61b201990a9bd57025d12ade5efa43e4fbba5390eea2a77b27a8af3b85162243",
+      "capture-config.json": "d663dcf9590243204f0838842f5874a46d8cebd7015f0d739ef4a19c22857915",
+      "comparison.mp4": "1beaba6de00bd9323d61735c1d3ea68cb40fdab891dca69d243ab7ef7015ab5b",
+      "flee.png": "815022b1cc1a18a088de8f33133ff7337c7afea5cf2290660afd1f51671d1062",
+      "model.blend": "ef2c8116a1540c5f004ac296228b3597e4422ecb48a27773bd80987280a02903",
+      "model.glb": "204f024c6dc3e565ff20f71221fcb7bbcf65ced1182399626551606aec343f7e",
+      "native.png": "42157b0a25288337b4f924d1941763590894143e1866cf7f56b8c9b15cfc0e34",
+      "walk.png": "768fff8d99fc9fed336b02d482fbafb36c933c8ce62d6e89f9dc8f29b50bde27"
+    }
+  },
+  {
+    "id": "marabou-stork-waders-v1",
+    "type": "wildlife-marabou-stork-provisional-v1",
+    "name": "Marabou stork",
+    "batch": "wildlife-3d-waders-v1",
+    "lab": "marabou-stork",
+    "scale": 16.82,
+    "topDown": {
+      "width": 0.5743162901307967,
+      "height": 0.8697978596908442
+    },
+    "files": {
+      "action.png": "8f83ac4e49f4b72ca1d67e99a664eebbef7a9ba074c8925cd2f826ad71e8aff3",
+      "appearance.png": "97251be778d1ba7b3f38dc9f68be5611c263382975890f0bcefa690f56984db8",
+      "capture-config.json": "679fbae75fe686f7abe7f5dd86d8767094101b94604c299af8b0146bfad3a86b",
+      "comparison.mp4": "d56e757201c353d3e5eaf68d45087d61408b3ffb780b5f17881b8aac20f59352",
+      "flee.png": "0414852b587a85df1bd01c6005a0ee5f7360cacde3de5abe0f97a553882f2843",
+      "model.blend": "fb44a31fdaa68df656dd9535090628c806333588b1ca2cca263eba4b0ef11295",
+      "model.glb": "0e00495447b0b2778f111eff6662446df881486849c20eaf186439d7c6c985a2",
+      "native.png": "6238b20b98dbbe3153fcdfe3eb8392cd4878b8b6eafbf73415b8052d21cfb5fb",
+      "walk.png": "4f7fda723ace3bf85eb76bd793945132d92854738b65127bb155edf2d50c1589"
+    }
+  },
+  {
+    "id": "shoebill-waders-v1",
+    "type": "wildlife-shoebill-provisional-v1",
+    "name": "Shoebill",
+    "batch": "wildlife-3d-waders-v1",
+    "lab": "shoebill",
+    "scale": 15.29,
+    "topDown": {
+      "width": 0.737083060824068,
+      "height": 0.9319816873773709
+    },
+    "files": {
+      "action.png": "6305499c89c9be9c0dc51bfea440e2c5356156aff64c5230b8ebe831dfdd5aad",
+      "appearance.png": "e7eefe87a6548c8a1c79152202658179a4b0a02fda21c9de016e9fbf3e5e1d32",
+      "capture-config.json": "a130c2b66ab5dbf87c447b18d4556ce210de2bf4794ae38b9801d1e437318fee",
+      "comparison.mp4": "c00392f1c739ce2a2fd06dc5ac6b98aacd7f6423ec779bcbc4b3eb10e8e9f795",
+      "flee.png": "38f01f4fc1a021345ee5afe2c39b1f75bb7bccb4277a01dfdaec88b7e748daee",
+      "model.blend": "1d2e1df38b86728c34fbae3f22a229630e9dc08e1c28f4739159d8c7d7208d83",
+      "model.glb": "602d294c17ee193fb01e093ccb76876586e31eca09d282ea171968df941cb42a",
+      "native.png": "7e37e6284b54523b38ef31629634d1c7aa89109b411028f0f128da1946c051e8",
+      "walk.png": "1ab85a20e6398d47a800f77fae45fff08d8e81611570b117b8b4d38e131d41e3"
+    }
+  },
+  {
+    "id": "great-hornbill-forest-birds-v1",
+    "type": "wildlife-great-hornbill-provisional-v1",
+    "name": "Great hornbill",
+    "batch": "wildlife-3d-forest-birds-v1",
+    "lab": "great-hornbill",
+    "scale": 12.65,
+    "topDown": {
+      "width": 0.6403162055335968,
+      "height": 0.5217391304347826
+    },
+    "files": {
+      "action.png": "a6666b4a066cf1d526dc098e063d6bb2a3ad6db1537981f7bd07d0d72cfa3480",
+      "appearance.png": "f101e2befde59af3ba942c473222f5d6aafe521a64ce40aa9b2b878970c999fa",
+      "capture-config.json": "8c9286db8319834bc0946e0e57c8667686f58df58b4deafbb09749962daeaa48",
+      "comparison.mp4": "dbac04480e6a0015747a9ebcb464458dd8f887363969e2d8009e74ec6dd210a4",
+      "flee.png": "5c7f45eb4b6f51b213f535ba81eff2ecd169156aff4e018227e445c9a8cd6be4",
+      "fly.png": "cb76593772877c11956305d6f887c41ab0c2da32db64943708edd22419813154",
+      "model.blend": "9c38ef03ec4c48bdfeeb9047ec208701064a4d0a2ac13545d4e19f500bef7120",
+      "model.glb": "22b3b812accb711f3ea3b9152968133be93fe2cbadebfa495d61c5d6e26290da",
+      "native.png": "e8fffbac4b8c46299ef6a50afb7735154e40cc2311f78e8abaa836740a378678"
+    }
+  },
+  {
+    "id": "toucan-forest-birds-v1",
+    "type": "wildlife-toucan-provisional-v1",
+    "name": "Toucan",
+    "batch": "wildlife-3d-forest-birds-v1",
+    "lab": "toucan",
+    "scale": 11.6,
+    "topDown": {
+      "width": 0.6982758620689655,
+      "height": 0.6258620689655172
+    },
+    "files": {
+      "action.png": "9e8a5a41c5c80ea7a101bba19961c59c4a4c7b8804ff9f5f75b672f5ddcd837d",
+      "appearance.png": "ad908b615843bc37641f4b9c156d4c672402bd90fad6f1b82911a97a9f2cfa67",
+      "capture-config.json": "74b1aeb47bc12b725b5ab2476e09b557e944db9cc3b2e3896e4b5dc60bb9b4a4",
+      "comparison.mp4": "d67273f65407ffaf79462db2d05e030f2581dafb31191cdadf827ee10c17c128",
+      "flee.png": "4e84907e3357a52f65052bc5b4ef655cbd15f94132144da9d721689772f1491f",
+      "fly.png": "298e877668519de98689cf3d4f74f529c64af3065e42a44cdb485bed01f92d86",
+      "model.blend": "17d44b3a0780f1b57aea384170cd59032452fc00eb998093ae297abadf765bfe",
+      "model.glb": "f9c8ea01461e4294a4a2038e6a09fab70d9da1fa63782a041223eb062bde88f8",
+      "native.png": "9e039be1ebadaea674f95ffb992c14ef4cdb300ba14a29f7c71cf7e94933f98a"
+    }
+  },
+  {
+    "id": "kakapo-forest-birds-v1",
+    "type": "wildlife-kakapo-provisional-v1",
+    "name": "Kakapo",
+    "batch": "wildlife-3d-forest-birds-v1",
+    "lab": "kakapo",
+    "scale": 15.23,
+    "topDown": {
+      "width": 0.6342744583059751,
+      "height": 0.6506894287590282
+    },
+    "files": {
+      "action.png": "8835ad2c4ecdf87b4f153db11fab950f5077dc989da632be0605f2e81730dc4a",
+      "appearance.png": "6fe2b2386f33ef3897dcceefd9d523fb4268fef623e691bcfde66a00c3a4c0c1",
+      "capture-config.json": "d8b31b8e951e466d87b64fd8a4b10f27125d7a1adc823d4d1055a816a146768b",
+      "comparison.mp4": "5160c2515275c6dc6abf9074288c3d64ac834c05a3c11fc55bf546bf8c75a8d1",
+      "flee.png": "9b02c63b6b39395096b4eba6df25e90b97f58d37db3683a80435895d6c5f6006",
+      "model.blend": "ba3e96a9d1f0505ab7f448731b69abc25f87a02cc501894bf8119315453ff32b",
+      "model.glb": "7d6b0cf7cda68f69ded5c37257e6c913980287c5d28b828dc90f151970caf46f",
+      "native.png": "2db1a7064e964b43af88ff0610547f95f31d2ee5d362a4812008dee9656046ba",
+      "walk.png": "c395e8e2983df430de61b82de5a1eb7f29137e796b7157bc1fcd2ff644181273"
+    }
+  },
+  {
+    "id": "wild-turkey-forest-birds-v1",
+    "type": "wildlife-wild-turkey-provisional-v1",
+    "name": "Wild turkey",
+    "batch": "wildlife-3d-forest-birds-v1",
+    "lab": "wild-turkey",
+    "scale": 15.77,
+    "topDown": {
+      "width": 0.6322130627774255,
+      "height": 0.6740646797717185
+    },
+    "files": {
+      "action.png": "d6a29b3d58790109a009895b716e1a228f71ee0f5261ede16f7a6b4fb74f974b",
+      "appearance.png": "390951914acff051791bc662f80c00c49bb2c6aee2a890b80fe3cbf936afab95",
+      "capture-config.json": "7ce308c6e163041e01652ec0f0fb2baeb08df7a7b89b6e55f2b908ab74830557",
+      "comparison.mp4": "4de4d81275a9312bc42fabce707250dbe9d03ff0da3c54b8d012029fd1230855",
+      "flee.png": "f6cf6046d46e44f97494af9860b417287fd9558b360e048129925fcd9e369efb",
+      "model.blend": "c973b6bbfce474592bf62001151e527d9a99f87fdaac7ebd994105c0af9c2d88",
+      "model.glb": "cda6faf4882fd2dcd3825a48bad83eed1c3a6b4e650eb482acc6d149d455bbd5",
+      "native.png": "c87fa0179aa0e715871caa863d4b59c9c826e9b152978692acf85b3083a55145",
+      "walk.png": "2c94f80f86239e91e545e4daa9849a7d45130bfc333be50f91be3507c669048d"
+    }
   }
 ]

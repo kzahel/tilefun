@@ -107,6 +107,20 @@ runtime scope reconciliation in the execution notes.
 
 ## Delivery log
 
+### Waders and forest birds, 2026-11-26
+
+The flamingo, great blue heron, marabou stork and shoebill use individual
+neck and bill motions with planted feet. The great hornbill and toucan have
+distinct bill profiles and separate cruise and escape wingbeats. The kakapo
+uses a low ground gait, and the wild turkey raises its tail fan while holding
+its red head upright. The public exact preview runs captured all 32 states
+in Workshop and in ordinary saved worlds. [Waders](256-wildlife-3d-game-rollout/evidence/waders-v1-deployment.json) ·
+[Forest birds](256-wildlife-3d-game-rollout/evidence/forest-birds-v1-deployment.json)
+
+Production evidence also covers the classic yard and fliers, pet rodents,
+forest primates and tricolor dog. The dog fetched and released the ball in an
+ordinary reopened world with the default model. [Dog evidence](256-wildlife-3d-game-rollout/evidence/dog-fetch-v1-default.json)
+
 ### Flightless birds and golden retriever, 2026-11-26
 
 The cassowary, emu, ostrich and kiwi use distinct walk and escape footfalls.

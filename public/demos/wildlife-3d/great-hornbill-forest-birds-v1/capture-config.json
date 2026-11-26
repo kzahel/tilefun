@@ -1,0 +1,22 @@
+{
+  "runtimeType": "wildlife-great-hornbill-provisional-v1",
+  "version": 3,
+  "fit": [
+    9,
+    6,
+    11.6
+  ],
+  "autoFit": true,
+  "portraitCenter": 0.92,
+  "clips": [
+    "idle",
+    "fly",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "Archived forest bird with species-matched bill and coat paint, separate ordinary travel and escape strokes, and a dedicated feeding gesture.",
+  "model": "model.glb",
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

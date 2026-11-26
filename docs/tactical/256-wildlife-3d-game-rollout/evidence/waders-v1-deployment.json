@@ -1,0 +1,130 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "0b537939b4e2f52987e195cfd4be90647d907838aeadcdfb3ab14eaea22b24fe",
+  "results": [
+    {
+      "type": "wildlife-flamingo-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "109f07f21bed78c44b901d48a2587eee191308149708720be26243908d3f9d4d",
+      "modelSha256": "1bc0f02ae31ee6e3ba6d8fc2b9a7efb0d252ea3fa4524604d3aec8d7d6c509be",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-flamingo&wildlife3dStage=flamingo-waders-v1&wildlife3dReview=flamingo-waders-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009706878662109413,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-great-blue-heron-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "4da1d34276429c5782a635eb319417575151774b0d0b0348505217c963d10db7",
+      "modelSha256": "204f024c6dc3e565ff20f71221fcb7bbcf65ced1182399626551606aec343f7e",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-great-blue-heron&wildlife3dStage=great-blue-heron-waders-v1&wildlife3dReview=great-blue-heron-waders-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009707489013671922,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-marabou-stork-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "4cb35308e8e2be52d3e1fa0cc5140208279d7e0287f5c24ee1f95d996f6a3e6b",
+      "modelSha256": "0e00495447b0b2778f111eff6662446df881486849c20eaf186439d7c6c985a2",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-marabou-stork&wildlife3dStage=marabou-stork-waders-v1&wildlife3dReview=marabou-stork-waders-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.000970748901367191,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-shoebill-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "9f49572c768862a482c41ed2ea8b484c1db8f3536f9ec0532b584e213e5d753b",
+      "modelSha256": "602d294c17ee193fb01e093ccb76876586e31eca09d282ea171968df941cb42a",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-shoebill&wildlife3dStage=shoebill-waders-v1&wildlife3dReview=shoebill-waders-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009706573486328166,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

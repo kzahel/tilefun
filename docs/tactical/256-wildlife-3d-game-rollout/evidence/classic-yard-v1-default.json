@@ -1,0 +1,103 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "bc5dc10a7f6d765645fb7d1b6f5743d82b190291",
+  "workshopInputDigest": "98da5306702bda8f1e0937ea33879493183c518f67ff4b89166692bb5e1892e2",
+  "results": [
+    {
+      "type": "chicken",
+      "mode": "default",
+      "manifestFingerprint": "8c16d7a3d068c6b2800ca0f430bf1e363eda9a50e6c9756c508264826e2df1a9",
+      "modelSha256": "c5d84a8fcfbe4e3f8166a0e504cea7fb57e3d873afde2b1cbed0b1a6620606eb",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-meadow&wildlife3dStage=chicken-classic-yard-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk"
+      ],
+      "heightRange": [
+        0,
+        0
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk"
+        ]
+      }
+    },
+    {
+      "type": "cow",
+      "mode": "default",
+      "manifestFingerprint": "0041ac188b571c95ae67f271d645b4f7ae26600ccbc8096b6e06426a2223a1e8",
+      "modelSha256": "b83b63c1df5642b2bbeff97405e4de6cb3d61e04dae91da2fdbe5ffddb2ce214",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-meadow&wildlife3dStage=cow-classic-yard-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk"
+      ],
+      "heightRange": [
+        0,
+        0
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk"
+        ]
+      }
+    },
+    {
+      "type": "pigeon",
+      "mode": "default",
+      "manifestFingerprint": "cce2247811c88d905bc11afcf3c54c2da2090b2421ba8844610bc1300517530a",
+      "modelSha256": "469d795229456e6d2cff1a807a4f276272a578201d990ab5bfa9c875feefa9af",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-meadow&wildlife3dStage=pigeon-classic-yard-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk"
+      ],
+      "heightRange": [
+        -0.0000014247894287111668,
+        0
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk"
+        ]
+      }
+    },
+    {
+      "type": "pigeon2",
+      "mode": "default",
+      "manifestFingerprint": "9964155bfcf2390d733e4de43c7358329d75878570586360dca6a29d5b48985f",
+      "modelSha256": "15b45835fc3c13182e20fea6f41f6b816d00a6658021cda9239194f90cb87f2f",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-meadow&wildlife3dStage=pigeon2-classic-yard-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk"
+      ],
+      "heightRange": [
+        -0.0000014219284057619293,
+        0
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk"
+        ]
+      }
+    }
+  ]
+}

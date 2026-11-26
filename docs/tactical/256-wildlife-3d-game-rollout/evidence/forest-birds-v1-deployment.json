@@ -1,0 +1,130 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "0b537939b4e2f52987e195cfd4be90647d907838aeadcdfb3ab14eaea22b24fe",
+  "results": [
+    {
+      "type": "wildlife-great-hornbill-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "7842fbac95a28de14af741ac0cf75c1951f743582d4ae5dee4c2cb62cfe68b15",
+      "modelSha256": "22b3b812accb711f3ea3b9152968133be93fe2cbadebfa495d61c5d6e26290da",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-great-hornbill&wildlife3dStage=great-hornbill-forest-birds-v1&wildlife3dReview=great-hornbill-forest-birds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.00009250640869140625,
+        9.912862052917488
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-toucan-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "be83a328f7378b5bf8d7d4f1d190a69a862643c996b8f6f0736889d55f610d29",
+      "modelSha256": "f9c8ea01461e4294a4a2038e6a09fab70d9da1fa63782a041223eb062bde88f8",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-toucan&wildlife3dStage=toucan-forest-birds-v1&wildlife3dReview=toucan-forest-birds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.7381091709139902,
+        9.97926340866091
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-kakapo-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "944e98bff1396e861f06215ef40cb4c2c1a42e1dccb1661d38ae3f5458c6f4b3",
+      "modelSha256": "7d6b0cf7cda68f69ded5c37257e6c913980287c5d28b828dc90f151970caf46f",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-kakapo&wildlife3dStage=kakapo-forest-birds-v1&wildlife3dReview=kakapo-forest-birds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009822044372558632,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-wild-turkey-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "625bd47cb156c0a767661ae5a03d4d144dab807a4b981a70c1dd6494765ea913",
+      "modelSha256": "cda6faf4882fd2dcd3825a48bad83eed1c3a6b4e650eb482acc6d149d455bbd5",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-wild-turkey&wildlife3dStage=wild-turkey-forest-birds-v1&wildlife3dReview=wild-turkey-forest-birds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009687995910644573,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

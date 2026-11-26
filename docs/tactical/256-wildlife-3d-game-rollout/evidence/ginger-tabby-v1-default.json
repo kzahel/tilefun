@@ -1,0 +1,49 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "9b195284b43303011baba5d67972984e8763e31f",
+  "workshopInputDigest": "c0410bca01ff983d9798e57f67b2601094db2404ee827d8ef50c216fcf9a6106",
+  "results": [
+    {
+      "type": "wildlife-cat-ginger-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "92aa6affdfe26783787675cb4265e165f95b800c7cde52d648bc2ceb1d130758",
+      "modelSha256": "5f1891b420a02ba1f38ded6828cedf622e70acfdb96c048935ffed7a323a99a0",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-behavior-cat-ginger&wildlife3dStage=cat-ginger-pets-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "stalk",
+        "pounce",
+        "bat",
+        "climb",
+        "sit"
+      ],
+      "heightRange": [
+        -0.07401428031459523,
+        33.9131965637207
+      ],
+      "statesOnApproachOrMount": [
+        "action",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "action",
+          "bat",
+          "climb",
+          "flee",
+          "idle",
+          "pounce",
+          "sit",
+          "stalk",
+          "walk"
+        ]
+      }
+    }
+  ]
+}

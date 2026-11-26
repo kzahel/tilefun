@@ -3,6 +3,7 @@
 Run in Blender with -- SPECIES ARCHIVED_BLEND OUTPUT_DIRECTORY.
 """
 from importlib.util import module_from_spec, spec_from_file_location
+import math
 from pathlib import Path
 import sys
 
@@ -22,6 +23,10 @@ SEABIRD_LENGTH = {
     "blue-footed-booby": 1.34,
     "great-frigatebird": 1.45,
     "pelican": 1.55,
+}
+SPRITE_SWATCHES = {
+    "cassowary": {"casque": (62, "c2ad74")},
+    "wild-turkey": {"wattle": (60, "ad554c"), "fan-edge": (62, "d5bf96")},
 }
 
 
@@ -90,24 +95,39 @@ def detail_cassowary(mesh, rig):
     mesh.data.update()
 
 
+def shape_forest_bird_bill(mesh, species):
+    bill = part_vertices(mesh, "Sculpted bill")
+    root_y = min(vertex.co.y for vertex in bill)
+    span = max(vertex.co.y for vertex in bill) - root_y
+    for vertex in bill:
+        offset = vertex.co.y - root_y
+        if species == "great-hornbill" and vertex.co.z > bird.HEAD.z - .04:
+            vertex.co.z += .15 * math.sin(math.pi * offset / span)**2
+        if species == "toucan":
+            vertex.co.y += .13 * offset
+            vertex.co.x *= 1.12
+    mesh.data.update()
+
+
 def paint_sprite_markings(mesh, species):
     """Use the draft's packed palette on the surfaces seen at gameplay zoom."""
     parts = {group.index: group.name.removeprefix("Part · ") for group in mesh.vertex_groups
              if group.name.startswith("Part · ")}
     palette = tuple(bird.PALETTE)
     uvs = mesh.data.uv_layers.active.data
+    extra = SPRITE_SWATCHES.get(species, {})
 
     def swatch(color):
-        if color == "casque":
-            return (7 / 8, 7.5 / 8)
-        index = 2 * palette.index(color)
+        index = extra[color][0] if color in extra else 2 * palette.index(color)
         return ((index % 8 + 1) / 8, (index // 8 + .5) / 8)
 
-    if species == "cassowary":
+    if extra:
         material = mesh.data.materials[0]
         atlas = next(node.image for node in material.node_tree.nodes if node.type == "TEX_IMAGE")
         pixels = list(atlas.pixels)
-        pixels[-8:] = [194 / 255, 173 / 255, 116 / 255, 1] * 2
+        for index, value in extra.values():
+            rgb = [int(value[i:i+2], 16) / 255 for i in (0, 2, 4)]
+            pixels[index*4:index*4+8] = [*rgb, 1] * 2
         atlas.pixels[:] = pixels
         atlas.pack()
 
@@ -170,6 +190,47 @@ def paint_sprite_markings(mesh, species):
                 color = "mantle" if face.normal.z > -.31 else "ink"
             elif toes or part == "Neck, face and eye patches":
                 color = "mask"
+        elif species == "flamingo":
+            if wing and point.y < bird.BODY.y - .41:
+                color = "ink"
+            elif part == "Species body and plumage" and face.normal.z > -.16:
+                color = "mantle" if face.normal.x < -.48 else "light"
+        elif species == "great-blue-heron":
+            if part == "Crown or crest" or (part == "Neck, face and eye patches" and point.z > bird.HEAD.z + .04):
+                color = "accent"
+            elif part == "Sculpted bill" and face.normal.z > -.28:
+                color = "bill"
+        elif species == "marabou-stork":
+            if part == "Neck, face and eye patches" and point.z > bird.HEAD.z - .18:
+                color = "mask" if face.normal.z > -.49 else "accent"
+            elif part.startswith("Leg and toes "):
+                color = "mask"
+        elif species == "shoebill" and part == "Sculpted bill":
+            color = "bill" if face.normal.z > -.43 else "feet"
+        elif species == "great-hornbill":
+            if part == "Sculpted bill" and point.z > bird.HEAD.z + .095:
+                color = "accent"
+            elif part == "Neck, face and eye patches" and point.y > bird.HEAD.y + .06:
+                color = "ink"
+            elif tail:
+                color = "ink" if point.y < bird.TAIL.y - bird.TAIL_LEN * .49 else "breast"
+        elif species == "toucan":
+            if part == "Sculpted bill":
+                color = "ink" if point.y > bird.HEAD.y + bird.BEAK_LEN * 1.04 else "accent"
+            elif part == "Species body and plumage" and point.y < bird.BODY.y + .14:
+                color = "mantle" if face.normal.z > .57 else "ink"
+        elif species == "kakapo":
+            if part == "Species body and plumage":
+                color = "light" if face.normal.z > .34 else "mantle"
+            elif wing and face.normal.z > -.25:
+                color = "accent" if face.normal.z < .32 else "mantle"
+            elif toes:
+                color = "ink"
+        elif species == "wild-turkey":
+            if part == "Neck, face and eye patches" and point.y > bird.HEAD.y - .12:
+                color = "wattle"
+            elif tail:
+                color = "fan-edge" if point.y < bird.TAIL.y - bird.TAIL_LEN * .48 else "mantle"
         if toes and species in {"dove", "sparrow", "pigeon"}:
             color = "bill"
         if color:
@@ -197,6 +258,8 @@ def main():
         extend_kiwi_bill(mesh)
     if species == "cassowary":
         detail_cassowary(mesh, rig)
+    if species in {"great-hornbill", "toucan"}:
+        shape_forest_bird_bill(mesh, species)
     paint_sprite_markings(mesh, species)
     assert set(bpy.data.actions.keys()) == {"idle", travel, "action"}
     for action in list(bpy.data.actions):

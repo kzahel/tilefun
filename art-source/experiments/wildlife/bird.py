@@ -94,8 +94,10 @@ FLIGHT_POSES = {
     "blue-footed-booby": (.97, 1.0, .52, .16),
     "dove": (.88, 1.0, .68, .18),
     "great-frigatebird": (1.0, 1.0, -.37, .13),
+    "great-hornbill": (.96, 1.0, .51, .13),
     "pelican": (.96, 1.0, .57, .16),
     "sparrow": (.79, .94, .86, .22),
+    "toucan": (.89, 1.0, .51, .17),
     "pigeon": (.94, 1.0, .75, .18),
     "parrot": (.85, .98, .53, .15),
 }
@@ -104,8 +106,14 @@ FLIGHT_POSES = {
 GROUND_POSES = {
     "cassowary": (.37, .58, .72, .71, .46),
     "emu": (.39, .68, .65, 1.01, .72),
+    "flamingo": (.46, .72, .76, 1.37, .86),
+    "great-blue-heron": (.43, .63, .81, 1.01, .43),
+    "kakapo": (.25, .36, .21, .25, .51),
     "kiwi": (.20, .33, .22, .22, .61),
+    "marabou-stork": (.54, .77, .72, 1.16, .60),
     "ostrich": (.49, .85, .60, 1.23, .80),
+    "shoebill": (.50, .71, .65, .88, .63),
+    "wild-turkey": (.42, .61, .10, .045, -.11),
 }
 
 
@@ -347,6 +355,8 @@ def pose(rig,rest,clip,t):
     if GROUND_ROLLOUT is not None and clip=="action":
         head_dip = 0
     display = math.sin(math.pi*t)**.75 if clip=="display" else t if clip=="open" else 1-t if clip=="close" else 0
+    if GROUND_ROLLOUT is not None and NAME=="Wild Turkey" and clip=="action":
+        display = math.sin(math.pi*t)**1.25
     trunkq=euler(-.17*head_dip+.045*math.sin(wave)*(walk or flying),
                  .067*math.sin(wave)*walk,0)
     shift=V((.027*math.sin(wave)*walk,.042*head_dip,

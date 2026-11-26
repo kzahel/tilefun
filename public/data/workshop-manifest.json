@@ -958,6 +958,18 @@
       "toolId": "animal-browser"
     },
     {
+      "id": "wildlife-3d-waders-v1",
+      "name": "3D wildlife · waders v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
+      "id": "wildlife-3d-forest-birds-v1",
+      "name": "3D wildlife · forest birds v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
       "id": "motion",
       "name": "Furniture movement sets",
       "description": "Default layouts and physics. Custom layouts remain individually reviewable in the tool.",
@@ -61945,7 +61957,343 @@
           "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-golden-retriever-v1"
         }
       }
+    },
+    {
+      "id": "pattern:wildlife-3d-flamingo-waders-v1",
+      "batchId": "wildlife-3d-waders-v1",
+      "kind": "wildlife",
+      "name": "Flamingo",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-flamingo-waders-v1",
+      "fingerprint": "109f07f21bed78c44b901d48a2587eee191308149708720be26243908d3f9d4d",
+      "sourceFingerprint": "c8ed9ebe2a79a24a6ecdf429886edc6bd2aa99a293ebe4615b51fd39eb60fec5",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-flamingo-waders-v1",
+        "prefabIds": [],
+        "revision": "175fe903f06ec6a7889407ffd64104b27c032b862355369e3f59197f67b7894d",
+        "renderFingerprint": "109f07f21bed78c44b901d48a2587eee191308149708720be26243908d3f9d4d",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-flamingo-waders-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-flamingo-waders-v1",
+        "fingerprint": "c8ed9ebe2a79a24a6ecdf429886edc6bd2aa99a293ebe4615b51fd39eb60fec5",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-flamingo-waders-v1",
+          "prefabIds": [],
+          "revision": "175fe903f06ec6a7889407ffd64104b27c032b862355369e3f59197f67b7894d",
+          "renderFingerprint": "109f07f21bed78c44b901d48a2587eee191308149708720be26243908d3f9d4d",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-flamingo-waders-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-great-blue-heron-waders-v1",
+      "batchId": "wildlife-3d-waders-v1",
+      "kind": "wildlife",
+      "name": "Great blue heron",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-great-blue-heron-waders-v1",
+      "fingerprint": "4da1d34276429c5782a635eb319417575151774b0d0b0348505217c963d10db7",
+      "sourceFingerprint": "61b201990a9bd57025d12ade5efa43e4fbba5390eea2a77b27a8af3b85162243",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-great-blue-heron-waders-v1",
+        "prefabIds": [],
+        "revision": "61d59cb2963ec5cdaa55ca419d82dddb2659bd92e66089e20110152434328ac9",
+        "renderFingerprint": "4da1d34276429c5782a635eb319417575151774b0d0b0348505217c963d10db7",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-great-blue-heron-waders-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-great-blue-heron-waders-v1",
+        "fingerprint": "61b201990a9bd57025d12ade5efa43e4fbba5390eea2a77b27a8af3b85162243",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-great-blue-heron-waders-v1",
+          "prefabIds": [],
+          "revision": "61d59cb2963ec5cdaa55ca419d82dddb2659bd92e66089e20110152434328ac9",
+          "renderFingerprint": "4da1d34276429c5782a635eb319417575151774b0d0b0348505217c963d10db7",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-great-blue-heron-waders-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-marabou-stork-waders-v1",
+      "batchId": "wildlife-3d-waders-v1",
+      "kind": "wildlife",
+      "name": "Marabou stork",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-marabou-stork-waders-v1",
+      "fingerprint": "4cb35308e8e2be52d3e1fa0cc5140208279d7e0287f5c24ee1f95d996f6a3e6b",
+      "sourceFingerprint": "97251be778d1ba7b3f38dc9f68be5611c263382975890f0bcefa690f56984db8",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-marabou-stork-waders-v1",
+        "prefabIds": [],
+        "revision": "d4ff1c069d90eba47ed6e64c325ee378c5f05ba4daa2ba26e632fe8b4be5c683",
+        "renderFingerprint": "4cb35308e8e2be52d3e1fa0cc5140208279d7e0287f5c24ee1f95d996f6a3e6b",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-marabou-stork-waders-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-marabou-stork-waders-v1",
+        "fingerprint": "97251be778d1ba7b3f38dc9f68be5611c263382975890f0bcefa690f56984db8",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-marabou-stork-waders-v1",
+          "prefabIds": [],
+          "revision": "d4ff1c069d90eba47ed6e64c325ee378c5f05ba4daa2ba26e632fe8b4be5c683",
+          "renderFingerprint": "4cb35308e8e2be52d3e1fa0cc5140208279d7e0287f5c24ee1f95d996f6a3e6b",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-marabou-stork-waders-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-shoebill-waders-v1",
+      "batchId": "wildlife-3d-waders-v1",
+      "kind": "wildlife",
+      "name": "Shoebill",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-shoebill-waders-v1",
+      "fingerprint": "9f49572c768862a482c41ed2ea8b484c1db8f3536f9ec0532b584e213e5d753b",
+      "sourceFingerprint": "e7eefe87a6548c8a1c79152202658179a4b0a02fda21c9de016e9fbf3e5e1d32",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-shoebill-waders-v1",
+        "prefabIds": [],
+        "revision": "b62798e66678cd9cd771c2a7a5b7919a166494cf9c9dd0a527956849b9deef4f",
+        "renderFingerprint": "9f49572c768862a482c41ed2ea8b484c1db8f3536f9ec0532b584e213e5d753b",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-shoebill-waders-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-shoebill-waders-v1",
+        "fingerprint": "e7eefe87a6548c8a1c79152202658179a4b0a02fda21c9de016e9fbf3e5e1d32",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-shoebill-waders-v1",
+          "prefabIds": [],
+          "revision": "b62798e66678cd9cd771c2a7a5b7919a166494cf9c9dd0a527956849b9deef4f",
+          "renderFingerprint": "9f49572c768862a482c41ed2ea8b484c1db8f3536f9ec0532b584e213e5d753b",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-shoebill-waders-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-great-hornbill-forest-birds-v1",
+      "batchId": "wildlife-3d-forest-birds-v1",
+      "kind": "wildlife",
+      "name": "Great hornbill",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-great-hornbill-forest-birds-v1",
+      "fingerprint": "7842fbac95a28de14af741ac0cf75c1951f743582d4ae5dee4c2cb62cfe68b15",
+      "sourceFingerprint": "f101e2befde59af3ba942c473222f5d6aafe521a64ce40aa9b2b878970c999fa",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-great-hornbill-forest-birds-v1",
+        "prefabIds": [],
+        "revision": "f5ff87fc686100c9815de69b13742c3d4558254d0c513fb1493fb6dac030993a",
+        "renderFingerprint": "7842fbac95a28de14af741ac0cf75c1951f743582d4ae5dee4c2cb62cfe68b15",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-great-hornbill-forest-birds-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-great-hornbill-forest-birds-v1",
+        "fingerprint": "f101e2befde59af3ba942c473222f5d6aafe521a64ce40aa9b2b878970c999fa",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-great-hornbill-forest-birds-v1",
+          "prefabIds": [],
+          "revision": "f5ff87fc686100c9815de69b13742c3d4558254d0c513fb1493fb6dac030993a",
+          "renderFingerprint": "7842fbac95a28de14af741ac0cf75c1951f743582d4ae5dee4c2cb62cfe68b15",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-great-hornbill-forest-birds-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-toucan-forest-birds-v1",
+      "batchId": "wildlife-3d-forest-birds-v1",
+      "kind": "wildlife",
+      "name": "Toucan",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-toucan-forest-birds-v1",
+      "fingerprint": "be83a328f7378b5bf8d7d4f1d190a69a862643c996b8f6f0736889d55f610d29",
+      "sourceFingerprint": "ad908b615843bc37641f4b9c156d4c672402bd90fad6f1b82911a97a9f2cfa67",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-toucan-forest-birds-v1",
+        "prefabIds": [],
+        "revision": "182d259476bb66c7c2704081dc8d3b0bcc1b703a8e08991f4290a551e09824e3",
+        "renderFingerprint": "be83a328f7378b5bf8d7d4f1d190a69a862643c996b8f6f0736889d55f610d29",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-toucan-forest-birds-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-toucan-forest-birds-v1",
+        "fingerprint": "ad908b615843bc37641f4b9c156d4c672402bd90fad6f1b82911a97a9f2cfa67",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-toucan-forest-birds-v1",
+          "prefabIds": [],
+          "revision": "182d259476bb66c7c2704081dc8d3b0bcc1b703a8e08991f4290a551e09824e3",
+          "renderFingerprint": "be83a328f7378b5bf8d7d4f1d190a69a862643c996b8f6f0736889d55f610d29",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-toucan-forest-birds-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-kakapo-forest-birds-v1",
+      "batchId": "wildlife-3d-forest-birds-v1",
+      "kind": "wildlife",
+      "name": "Kakapo",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-kakapo-forest-birds-v1",
+      "fingerprint": "944e98bff1396e861f06215ef40cb4c2c1a42e1dccb1661d38ae3f5458c6f4b3",
+      "sourceFingerprint": "6fe2b2386f33ef3897dcceefd9d523fb4268fef623e691bcfde66a00c3a4c0c1",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-kakapo-forest-birds-v1",
+        "prefabIds": [],
+        "revision": "8a4287711944087d2d221d9bdd91a901c8d325d7834c6d0428c8a67c1bd8b693",
+        "renderFingerprint": "944e98bff1396e861f06215ef40cb4c2c1a42e1dccb1661d38ae3f5458c6f4b3",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-kakapo-forest-birds-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-kakapo-forest-birds-v1",
+        "fingerprint": "6fe2b2386f33ef3897dcceefd9d523fb4268fef623e691bcfde66a00c3a4c0c1",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-kakapo-forest-birds-v1",
+          "prefabIds": [],
+          "revision": "8a4287711944087d2d221d9bdd91a901c8d325d7834c6d0428c8a67c1bd8b693",
+          "renderFingerprint": "944e98bff1396e861f06215ef40cb4c2c1a42e1dccb1661d38ae3f5458c6f4b3",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-kakapo-forest-birds-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-wild-turkey-forest-birds-v1",
+      "batchId": "wildlife-3d-forest-birds-v1",
+      "kind": "wildlife",
+      "name": "Wild turkey",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-wild-turkey-forest-birds-v1",
+      "fingerprint": "625bd47cb156c0a767661ae5a03d4d144dab807a4b981a70c1dd6494765ea913",
+      "sourceFingerprint": "390951914acff051791bc662f80c00c49bb2c6aee2a890b80fe3cbf936afab95",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-wild-turkey-forest-birds-v1",
+        "prefabIds": [],
+        "revision": "1831d1af5288134749fd10b83fefe3b7ab73b6fe4926568e8c8ac4ed31e68713",
+        "renderFingerprint": "625bd47cb156c0a767661ae5a03d4d144dab807a4b981a70c1dd6494765ea913",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-wild-turkey-forest-birds-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-wild-turkey-forest-birds-v1",
+        "fingerprint": "390951914acff051791bc662f80c00c49bb2c6aee2a890b80fe3cbf936afab95",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-wild-turkey-forest-birds-v1",
+          "prefabIds": [],
+          "revision": "1831d1af5288134749fd10b83fefe3b7ab73b6fe4926568e8c8ac4ed31e68713",
+          "renderFingerprint": "625bd47cb156c0a767661ae5a03d4d144dab807a4b981a70c1dd6494765ea913",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-wild-turkey-forest-birds-v1"
+        }
+      }
     }
   ],
-  "inputDigest": "c0410bca01ff983d9798e57f67b2601094db2404ee827d8ef50c216fcf9a6106"
+  "inputDigest": "0b537939b4e2f52987e195cfd4be90647d907838aeadcdfb3ab14eaea22b24fe"
 }

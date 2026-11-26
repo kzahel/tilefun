@@ -250,6 +250,7 @@ try {
       const game = await verifyGameEntry(page, candidate, preview, {
         verifyFaunaStates: fourStateStage || packStage || !!feeding,
         catStage,
+        dogFetch,
         packStage,
         approachClips: contactClips,
         states,
@@ -464,7 +465,8 @@ async function waitForAnimalClip(page, expected, timeout) {
 }
 
 async function verifyGameEntry(page, candidate, preview, options) {
-  const { verifyFaunaStates, catStage, packStage, approachClips, states, feeding } = options;
+  const { verifyFaunaStates, catStage, dogFetch, packStage, approachClips, states, feeding } =
+    options;
   await page.evaluate(() => localStorage.removeItem("tilefun-3d-animals"));
   const generation = createDescriptor("flat", 1);
   const arrival = { x: 4, y: 4, generation };
@@ -477,11 +479,11 @@ async function verifyGameEntry(page, candidate, preview, options) {
   await page.getByRole("button", { name: "New World", exact: true }).click({ timeout: 45_000 });
   await gameReady(page);
   await page.evaluate(
-    ({ type, verifyFaunaStates, catStage, feeding }) => {
+    ({ type, distantPlacement, catStage, feeding }) => {
       const game = document.querySelector("#game").__game;
       const position = game.stateView.playerEntity.position;
       game.transport.send({ type: "set-editor-mode", enabled: true });
-      const wx = position.wx + (verifyFaunaStates || catStage ? 116 : 20);
+      const wx = position.wx + (distantPlacement ? 116 : 20);
       const wy = position.wy + 28;
       game.transport.send({ type: "edit-spawn", entityType: type, wx, wy });
       if (catStage)
@@ -494,7 +496,12 @@ async function verifyGameEntry(page, candidate, preview, options) {
       }
       game.transport.send({ type: "set-editor-mode", enabled: false });
     },
-    { type: candidate.type, verifyFaunaStates, catStage, feeding },
+    {
+      type: candidate.type,
+      distantPlacement: verifyFaunaStates || catStage || dogFetch,
+      catStage,
+      feeding,
+    },
   );
   const expected = { type: candidate.type, sheetKey: ENTITY_DEFS[candidate.type].sprite.sheetKey };
   const animal = ({ type, sheetKey }) => {
@@ -519,8 +526,16 @@ async function verifyGameEntry(page, candidate, preview, options) {
   await gameReady(page);
   await page.waitForFunction(animal, expected, { timeout: 30_000 });
   const result = { createdAndDrawn: true, savedAndDrawnAfterReload: true };
-  if (catStage)
-    return { ...result, statesAfterReload: await verifyCatInGame(page, expected, states) };
+  if (catStage || dogFetch)
+    return {
+      ...result,
+      statesAfterReload: await verifyPetToyInGame(
+        page,
+        expected,
+        states,
+        catStage ? "stalk" : "pickup",
+      ),
+    };
   if (verifyFaunaStates) {
     const rideClips = packStage ? ["ride", "ride-sprint"] : [];
     const statesAfterReload = await verifyFaunaStatesInGame(
@@ -562,11 +577,11 @@ async function verifyGameEntry(page, candidate, preview, options) {
   return { ...result, statesAfterReload };
 }
 
-async function verifyCatInGame(page, expected, clips) {
+async function verifyPetToyInGame(page, expected, clips, firstToyState) {
   const ball = page.getByRole("button", { name: "Ball", exact: true });
   if ((await ball.getAttribute("aria-pressed")) !== "true") await ball.click();
   const states = await page.evaluate(
-    async ({ type, sheetKey, names, returnDistance }) => {
+    async ({ type, sheetKey, names, returnDistance, firstToyState }) => {
       const game = document.querySelector("#game").__game;
       game.playInput.setMovementMode("tap");
       const origin = { ...game.stateView.playerEntity.position, wz: 0 };
@@ -597,7 +612,7 @@ async function verifyCatInGame(page, expected, clips) {
               returned = true;
             } else if (
               thrownAt === undefined ||
-              (!observed.has("stalk") && now - thrownAt > 8_000)
+              (!observed.has(firstToyState) && now - thrownAt > 8_000)
             ) {
               const ox = origin.wx - player.position.wx;
               const oy = origin.wy - player.position.wy;
@@ -622,12 +637,17 @@ async function verifyCatInGame(page, expected, clips) {
       }
       return [...observed];
     },
-    { ...expected, names: clips.map(({ name }) => name), returnDistance: TILE_SIZE / 2 + 1 },
+    {
+      ...expected,
+      names: clips.map(({ name }) => name),
+      returnDistance: TILE_SIZE / 2 + 1,
+      firstToyState,
+    },
   );
   assert.deepEqual(
     states.sort(),
     clips.map(({ name }) => name).sort(),
-    `Reopened cat states for ${expected.type}`,
+    `Reopened pet states for ${expected.type}`,
   );
   return states;
 }

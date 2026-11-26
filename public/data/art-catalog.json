@@ -9546,6 +9546,86 @@
       "source": "demos/wildlife-3d/golden-retriever-v1/model.blend"
     },
     {
+      "id": "wildlife-3d-flamingo-waders-v1",
+      "name": "wildlife 3d flamingo waders v1",
+      "image": "demos/wildlife-3d/flamingo-waders-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "c8ed9ebe2a79a24a6ecdf429886edc6bd2aa99a293ebe4615b51fd39eb60fec5",
+      "source": "demos/wildlife-3d/flamingo-waders-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-great-blue-heron-waders-v1",
+      "name": "wildlife 3d great blue heron waders v1",
+      "image": "demos/wildlife-3d/great-blue-heron-waders-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "61b201990a9bd57025d12ade5efa43e4fbba5390eea2a77b27a8af3b85162243",
+      "source": "demos/wildlife-3d/great-blue-heron-waders-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-marabou-stork-waders-v1",
+      "name": "wildlife 3d marabou stork waders v1",
+      "image": "demos/wildlife-3d/marabou-stork-waders-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "97251be778d1ba7b3f38dc9f68be5611c263382975890f0bcefa690f56984db8",
+      "source": "demos/wildlife-3d/marabou-stork-waders-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-shoebill-waders-v1",
+      "name": "wildlife 3d shoebill waders v1",
+      "image": "demos/wildlife-3d/shoebill-waders-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "e7eefe87a6548c8a1c79152202658179a4b0a02fda21c9de016e9fbf3e5e1d32",
+      "source": "demos/wildlife-3d/shoebill-waders-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-great-hornbill-forest-birds-v1",
+      "name": "wildlife 3d great hornbill forest birds v1",
+      "image": "demos/wildlife-3d/great-hornbill-forest-birds-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "f101e2befde59af3ba942c473222f5d6aafe521a64ce40aa9b2b878970c999fa",
+      "source": "demos/wildlife-3d/great-hornbill-forest-birds-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-toucan-forest-birds-v1",
+      "name": "wildlife 3d toucan forest birds v1",
+      "image": "demos/wildlife-3d/toucan-forest-birds-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "ad908b615843bc37641f4b9c156d4c672402bd90fad6f1b82911a97a9f2cfa67",
+      "source": "demos/wildlife-3d/toucan-forest-birds-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-kakapo-forest-birds-v1",
+      "name": "wildlife 3d kakapo forest birds v1",
+      "image": "demos/wildlife-3d/kakapo-forest-birds-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "6fe2b2386f33ef3897dcceefd9d523fb4268fef623e691bcfde66a00c3a4c0c1",
+      "source": "demos/wildlife-3d/kakapo-forest-birds-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-wild-turkey-forest-birds-v1",
+      "name": "wildlife 3d wild turkey forest birds v1",
+      "image": "demos/wildlife-3d/wild-turkey-forest-birds-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "390951914acff051791bc662f80c00c49bb2c6aee2a890b80fe3cbf936afab95",
+      "source": "demos/wildlife-3d/wild-turkey-forest-birds-v1/model.blend"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",
