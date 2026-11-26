@@ -15,6 +15,7 @@ import { isSmallAnimal, roadkillDefinition, roadkillType } from "../wildlife/Roa
 import { ROBIN_DEF, ROBIN_TYPE } from "../wildlife/Robin.js";
 import { CONSTRUCTION_CARGO } from "./ConstructionCargo.js";
 import { CONSTRUCTION_RUBBLE, CONSTRUCTION_RUBBLE_DEF } from "./ConstructionRubble.js";
+import { CLASSIC_COW_COLLIDER } from "./Cow.js";
 import type { ColliderComponent, Direction } from "./Entity.js";
 
 // ---- Static definition types ----
@@ -263,13 +264,7 @@ export const ENTITY_DEFS: Record<string, EntityDef> = {
       frameDuration: 250,
       drawOffsetY: 3,
     },
-    collider: {
-      offsetX: 0,
-      offsetY: 0,
-      width: 22,
-      height: 10,
-      physicalHeight: 10,
-    },
+    collider: CLASSIC_COW_COLLIDER,
     wanderAI: {
       idleMin: 2.0,
       idleMax: 5.0,

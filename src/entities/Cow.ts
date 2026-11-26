@@ -1,9 +1,17 @@
-import { Direction, type Entity } from "./Entity.js";
+import { type ColliderComponent, Direction, type Entity } from "./Entity.js";
 
 const COW_SPRITE_SIZE = 32;
 const COW_SPEED = 12;
 const COW_FRAME_DURATION = 250;
 const COW_FRAME_COUNT = 3;
+
+export const CLASSIC_COW_COLLIDER = {
+  offsetX: 0,
+  offsetY: 5,
+  width: 10,
+  height: 10,
+  physicalHeight: 9,
+} satisfies ColliderComponent;
 
 /** Create a cow NPC at the given world position. */
 export function createCow(wx: number, wy: number): Entity {
@@ -25,13 +33,7 @@ export function createCow(wx: number, wy: number): Entity {
       spriteHeight: COW_SPRITE_SIZE,
       drawOffsetY: 3,
     },
-    collider: {
-      offsetX: 0,
-      offsetY: 0,
-      width: 22,
-      height: 10,
-      physicalHeight: 10,
-    },
+    collider: { ...CLASSIC_COW_COLLIDER },
     wanderAI: {
       state: "idle",
       timer: 3.0,

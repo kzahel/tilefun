@@ -43,7 +43,7 @@ export const DEER_DEF = {
     drawOffsetY: 12,
     clips: DEER_CLIPS,
   },
-  collider: { offsetX: 0, offsetY: 0, width: 20, height: 10, physicalHeight: 24, solid: true },
+  collider: { offsetX: 0, offsetY: 4.5, width: 9, height: 9, physicalHeight: 16.5, solid: true },
   hasVelocity: true,
   weight: 45,
   wanderAI: { idleMin: 2, idleMax: 5, walkMin: 1, walkMax: 3, speed: 18, directional: true },

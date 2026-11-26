@@ -29,6 +29,9 @@ interface PlayerStepOutcome {
  */
 const MOUNT_MARGIN = 4;
 
+// Classic cows have always allowed mounting after a jump that lands nearby.
+const CLASSIC_COW_MOUNT_FOOTPRINT = { offsetX: 0, offsetY: 0, width: 22, height: 10 };
+
 /** Dismount the player from their current mount (or vehicle seat). */
 export function dismountPlayer(
   realm: Pick<Realm, "vehicles" | "entityManager">,
@@ -92,7 +95,9 @@ export function restoreSavedMount(
   // A saved rider's offset can predate the mount's fitted support.
   const profile = faunaProfile(mounted.type);
   const support =
-    profile && FAUNA_TORSO_FITS[profile.species] ? mounted.collider?.physicalHeight : undefined;
+    mounted.type === "cow" || (profile && FAUNA_TORSO_FITS[profile.species])
+      ? mounted.collider?.physicalHeight
+      : undefined;
   player.wz = support === undefined ? saved.mount.wz : (mounted.wz ?? 0) + support;
   player.jumpZ = support ?? saved.mount.jumpZ;
   session.gameplaySession.mountId = mounted.id;
@@ -196,7 +201,9 @@ function tryMountOnLanding(realm: RidingRealm, session: PlayerSession, contactId
       entity.id !== skipId && // just dismounted — don't re-mount
       canMount(entity, contactId) &&
       !!entity.collider &&
-      aabbsOverlap(expandedBox, getEntityAABB(entity.position, entity.collider)),
+      (aabbsOverlap(expandedBox, getEntityAABB(entity.position, entity.collider)) ||
+        (entity.type === "cow" &&
+          aabbsOverlap(expandedBox, getEntityAABB(entity.position, CLASSIC_COW_MOUNT_FOOTPRINT)))),
   );
   if (mount) mountOn(session, mount);
 }

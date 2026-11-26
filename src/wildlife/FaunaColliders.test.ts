@@ -1,4 +1,5 @@
 import { expect, it } from "vitest";
+import { createCow } from "../entities/Cow.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { decodeActor, encodeActor } from "../persistence/ActorRecords.js";
 import { required } from "../shared/required.js";
@@ -29,24 +30,34 @@ it("restores an old sheep at the fitted support height and replicates it with it
   });
 });
 
-it("keeps the classic cow, cat coat variants and upright giraffe on their own colliders", () => {
-  expect(ENTITY_DEFS.cow?.collider).toEqual({
+it("fits the classic cow and cat coats and keeps the upright giraffe's original collider", () => {
+  const classicCow = {
     offsetX: 0,
-    offsetY: 0,
-    width: 22,
+    offsetY: 5,
+    width: 10,
     height: 10,
-    physicalHeight: 10,
-  });
-  for (const species of ["cat-black", "cat-ginger", "giraffe-upright"] as const) {
-    const animal = createFauna(species, 64, 64);
-    const [width, height, physicalHeight] = required(faunaProfile(animal.type)).body;
-    expect(animal.collider).toEqual({
+    physicalHeight: 9,
+  };
+  expect(ENTITY_DEFS.cow?.collider).toEqual(classicCow);
+  expect(createCow(64, 64)).toMatchObject({ collider: classicCow, weight: 500 });
+  for (const species of ["cat-black", "cat-ginger"] as const) {
+    expect(createFauna(species, 64, 64).collider).toEqual({
       offsetX: 0,
-      offsetY: 0,
-      width,
-      height,
-      physicalHeight,
+      offsetY: 2.25,
+      width: 4.5,
+      height: 4.5,
+      physicalHeight: 7,
       solid: true,
     });
   }
+  const giraffe = createFauna("giraffe-upright", 64, 64);
+  const [width, height, physicalHeight] = required(faunaProfile(giraffe.type)).body;
+  expect(giraffe.collider).toEqual({
+    offsetX: 0,
+    offsetY: 0,
+    width,
+    height,
+    physicalHeight,
+    solid: true,
+  });
 });

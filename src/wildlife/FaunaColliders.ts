@@ -36,6 +36,14 @@ export const FAUNA_TORSO_FITS: Readonly<
   capybara: [11.5, 12],
   "red-panda": [7.5, 7.5],
   wombat: [10.5, 8.5],
+  "cat-black": [4.5, 7],
+  "cat-ginger": [4.5, 7],
+  dog: [6, 7.5],
+  "dog-golden": [6, 8],
+  "dog-shepherd": [7, 8.5],
+  "gemsbok-oryx": [8.5, 17],
+  gerenuk: [7, 18],
+  "malayan-tapir": [15, 17],
 };
 
 export function faunaCollider({ species, body }: FaunaProfile): ColliderComponent {

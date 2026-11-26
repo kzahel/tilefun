@@ -208,12 +208,13 @@ it.each([true, false])(
       actors: [deer],
     });
     try {
-      for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < 18 && s.player.player.jumpVZ !== undefined; i++) {
         if (input) await s.step(idle);
         else s.tick();
       }
       const animal = required(s.realm.entityManager.entities.find((e) => e.type === DEER_TYPE));
       expect(s.player.player.jumpVZ).toBeUndefined();
+      expect(s.realm.physicsScene?.bodyState(s.player.player.id)?.supportId).toBe(animal.id);
       expect(animal.wanderAI?.state).toBe("scared");
       for (let i = 0; i < 40; i++) await s.step(idle);
       expect(animal.deer?.state).toBe("flee");
