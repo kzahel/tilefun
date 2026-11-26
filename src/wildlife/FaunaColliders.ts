@@ -65,6 +65,13 @@ export const FAUNA_TORSO_FITS: Readonly<
   skunk: [6, 7.5],
   quokka: [6.5, 7.5],
   binturong: [10, 11],
+  chameleon: [9, 9],
+  "frilled-neck-lizard": [7, 6.5],
+  gecko: [8, 7],
+  iguana: [8.5, 7.5],
+  "land-tortoise": [12, 8.5],
+  "texas-horned-lizard": [10.5, 6],
+  salamander: [6, 5.5],
 };
 
 export function centeredTorsoCollider(size: number, support: number): ColliderComponent {

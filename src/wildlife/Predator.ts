@@ -110,6 +110,9 @@ export const PREDATOR_TORSO_FITS: Readonly<
   mongoose: [5, 9.5],
   "tasmanian-devil": [9, 10],
   "white-nosed-coati": [5, 9.5],
+  alligator: [14, 8.5],
+  crocodile: [12, 9],
+  "komodo-dragon": [10, 10],
 };
 
 function predatorCollider({ species, body }: PredatorProfile) {
