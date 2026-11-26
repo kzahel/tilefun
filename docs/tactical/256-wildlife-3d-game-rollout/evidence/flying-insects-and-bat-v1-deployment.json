@@ -1,0 +1,133 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "b159808bdefc3c764fc40017961bcde7fb352587a976396df1b931b6c5ef0f90",
+  "results": [
+    {
+      "type": "wildlife-bee-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "af52c815aa5fa23d6d6054737d339fd0a6239e7f18640f7ddf13fcc78bc42f30",
+      "modelSha256": "5048209ca189ce4400d72087c3a90d4a852e07a3dfefa171f1bd9357c64541ba",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-bee&wildlife3dStage=bee-flying-insects-and-bat-v1&wildlife3dReview=bee-flying-insects-and-bat-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee",
+        "sip"
+      ],
+      "heightRange": [
+        -0.5980336456298421,
+        5.956605667114257
+      ],
+      "statesOnApproachOrMount": [
+        "action",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee",
+          "sip"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-dragonfly-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "7042634d1f6a28e00584ff27d93e870d702e720cfad0cc39f300eb3be9938952",
+      "modelSha256": "478dcd6312d25c6458cbf74976c9b815d41bd5adff2feffc3ee274ae5dfea17d",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-dragonfly&wildlife3dStage=dragonfly-flying-insects-and-bat-v1&wildlife3dReview=dragonfly-flying-insects-and-bat-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.08120352935812225,
+        9.911202049255383
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-butterfly-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "1db5bd52c54776161400ec6dc66fabd83dc2a1544ba99e149f4a1e962b8c30bc",
+      "modelSha256": "52cf43b703c408acc173926b969fe522913236bd61186c6112fe26212f2e9406",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-butterfly&wildlife3dStage=butterfly-flying-insects-and-bat-v1&wildlife3dReview=butterfly-flying-insects-and-bat-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "flutter",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.08232436752335803,
+        5.911705486297615
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "flutter",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-bat-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "f738f75de495672abc846246bc5ae084daf00b4d5d21a13947bd04bc2ca5df12",
+      "modelSha256": "935d508c6eb6a7562ee500cd253da8cd1eb7c9d23323f66c25ed92064758246f",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-bat&wildlife3dStage=bat-flying-insects-and-bat-v1&wildlife3dReview=bat-flying-insects-and-bat-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.00010394573211670052,
+        7.9131946563720765
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

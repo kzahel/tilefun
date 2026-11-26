@@ -1,0 +1,140 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-bee-provisional-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "fly",
+          "action": "fly",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 320
+        },
+        {
+          "state": "sip",
+          "action": "sip",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "bee-flying-insects-and-bat-v1",
+      "modelSha256": "5048209ca189ce4400d72087c3a90d4a852e07a3dfefa171f1bd9357c64541ba"
+    },
+    {
+      "type": "wildlife-dragonfly-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "fly",
+          "action": "fly",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 320
+        }
+      ],
+      "candidateId": "dragonfly-flying-insects-and-bat-v1",
+      "modelSha256": "478dcd6312d25c6458cbf74976c9b815d41bd5adff2feffc3ee274ae5dfea17d"
+    },
+    {
+      "type": "wildlife-butterfly-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "flutter",
+          "action": "flutter",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 320
+        }
+      ],
+      "candidateId": "butterfly-flying-insects-and-bat-v1",
+      "modelSha256": "52cf43b703c408acc173926b969fe522913236bd61186c6112fe26212f2e9406"
+    },
+    {
+      "type": "wildlife-bat-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "fly",
+          "action": "fly",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 400
+        }
+      ],
+      "candidateId": "bat-flying-insects-and-bat-v1",
+      "modelSha256": "935d508c6eb6a7562ee500cd253da8cd1eb7c9d23323f66c25ed92064758246f"
+    }
+  ],
+  "clipSamples": 476,
+  "testedDepth": false
+}

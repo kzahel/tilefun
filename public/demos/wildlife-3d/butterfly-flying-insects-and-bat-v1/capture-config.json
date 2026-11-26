@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-butterfly-provisional-v1",
+  "fit": [
+    6.3,
+    5.4,
+    5.04
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "flutter",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "The orange wing panels open and close on a slower rhythm. The escape banks sharply and pulses faster.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

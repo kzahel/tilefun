@@ -2,9 +2,9 @@ import assert from "node:assert/strict";
 import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import {
-  isBirdWorkModelReviewCase,
   isFelidModelReviewCase,
   isRaptorModelReviewCase,
+  isWildlifeWorkModelReviewCase,
 } from "../../src/scenarios/WildlifeBehaviorModelReview.ts";
 import {
   isFourStateFaunaModelReview,
@@ -61,7 +61,7 @@ for (const model of models) {
   assert.deepEqual(samples.measuredClips.map((sample) => sample.state).sort(), required.sort(), id);
   if (
     model.classicTravel ||
-    isBirdWorkModelReviewCase(model.lab) ||
+    isWildlifeWorkModelReviewCase(model.lab) ||
     isFelidModelReviewCase(model.lab) ||
     isRaptorModelReviewCase(model.lab) ||
     wildlifeFeedingReview(model.type, model.lab) ||

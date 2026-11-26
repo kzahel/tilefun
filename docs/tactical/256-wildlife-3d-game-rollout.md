@@ -107,6 +107,16 @@ runtime scope reconciliation in the execution notes.
 
 ## Delivery log
 
+### Flying insects and bat, 2026-11-26
+
+The dragonfly and butterfly beat their rear wings independently, and the
+bat folds its membrane wings around its body. The bee lowers its legs and
+head toward the flower while its wings keep beating. All four have a
+distinct escape. The exact candidate previews played all 17 states in
+Workshop and in reopened game worlds. [Renderer evidence](256-wildlife-3d-game-rollout/evidence/flying-insects-and-bat-v1-runtime.json) ·
+[Public preview evidence](256-wildlife-3d-game-rollout/evidence/flying-insects-and-bat-v1-deployment.json) ·
+[Workshop review](https://tilefun.graehlarts.com/tilefun/workshop.html#/review/pattern%3Awildlife-3d-bee-flying-insects-and-bat-v1)
+
 ### Leopard, lion, tiger and panther, 2026-11-26
 
 The leopard extends into a longer pursuit. The lion carries its mane

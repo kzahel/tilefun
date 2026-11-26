@@ -5322,9 +5322,49 @@
         "flee": "fly",
         "sip": "sip"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "5048209ca189ce4400d72087c3a90d4a852e07a3dfefa171f1bd9357c64541ba",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/flying-insects-and-bat-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/bee-flying-insects-and-bat-v1/native.png"
+        },
+        "fly": {
+          "action": "fly",
+          "sha256": "5048209ca189ce4400d72087c3a90d4a852e07a3dfefa171f1bd9357c64541ba",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/flying-insects-and-bat-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/bee-flying-insects-and-bat-v1/fly.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "5048209ca189ce4400d72087c3a90d4a852e07a3dfefa171f1bd9357c64541ba",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/flying-insects-and-bat-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/bee-flying-insects-and-bat-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "5048209ca189ce4400d72087c3a90d4a852e07a3dfefa171f1bd9357c64541ba",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/flying-insects-and-bat-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/bee-flying-insects-and-bat-v1/flee.png"
+        },
+        "sip": {
+          "action": "sip",
+          "sha256": "5048209ca189ce4400d72087c3a90d4a852e07a3dfefa171f1bd9357c64541ba",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/flying-insects-and-bat-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/bee-flying-insects-and-bat-v1/sip.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-bee-flying-insects-and-bat-v1",
+        "fingerprint": "af52c815aa5fa23d6d6054737d339fd0a6239e7f18640f7ddf13fcc78bc42f30",
+        "model": "public/demos/wildlife-3d/bee-flying-insects-and-bat-v1/model.glb",
+        "source": "public/demos/wildlife-3d/bee-flying-insects-and-bat-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/bee-flying-insects-and-bat-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/flying-insects-and-bat-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-centipede-predator-v1",
@@ -5417,9 +5457,43 @@
         "action": "action",
         "flee": "fly"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "478dcd6312d25c6458cbf74976c9b815d41bd5adff2feffc3ee274ae5dfea17d",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/flying-insects-and-bat-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/dragonfly-flying-insects-and-bat-v1/native.png"
+        },
+        "fly": {
+          "action": "fly",
+          "sha256": "478dcd6312d25c6458cbf74976c9b815d41bd5adff2feffc3ee274ae5dfea17d",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/flying-insects-and-bat-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/dragonfly-flying-insects-and-bat-v1/fly.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "478dcd6312d25c6458cbf74976c9b815d41bd5adff2feffc3ee274ae5dfea17d",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/flying-insects-and-bat-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/dragonfly-flying-insects-and-bat-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "478dcd6312d25c6458cbf74976c9b815d41bd5adff2feffc3ee274ae5dfea17d",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/flying-insects-and-bat-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/dragonfly-flying-insects-and-bat-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-dragonfly-flying-insects-and-bat-v1",
+        "fingerprint": "7042634d1f6a28e00584ff27d93e870d702e720cfad0cc39f300eb3be9938952",
+        "model": "public/demos/wildlife-3d/dragonfly-flying-insects-and-bat-v1/model.glb",
+        "source": "public/demos/wildlife-3d/dragonfly-flying-insects-and-bat-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/dragonfly-flying-insects-and-bat-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/flying-insects-and-bat-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-earwig-provisional-v1",
@@ -5625,9 +5699,43 @@
         "action": "action",
         "flee": "flutter"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "52cf43b703c408acc173926b969fe522913236bd61186c6112fe26212f2e9406",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/flying-insects-and-bat-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/butterfly-flying-insects-and-bat-v1/native.png"
+        },
+        "flutter": {
+          "action": "flutter",
+          "sha256": "52cf43b703c408acc173926b969fe522913236bd61186c6112fe26212f2e9406",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/flying-insects-and-bat-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/butterfly-flying-insects-and-bat-v1/flutter.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "52cf43b703c408acc173926b969fe522913236bd61186c6112fe26212f2e9406",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/flying-insects-and-bat-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/butterfly-flying-insects-and-bat-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "52cf43b703c408acc173926b969fe522913236bd61186c6112fe26212f2e9406",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/flying-insects-and-bat-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/butterfly-flying-insects-and-bat-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-butterfly-flying-insects-and-bat-v1",
+        "fingerprint": "1db5bd52c54776161400ec6dc66fabd83dc2a1544ba99e149f4a1e962b8c30bc",
+        "model": "public/demos/wildlife-3d/butterfly-flying-insects-and-bat-v1/model.glb",
+        "source": "public/demos/wildlife-3d/butterfly-flying-insects-and-bat-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/butterfly-flying-insects-and-bat-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/flying-insects-and-bat-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-praying-mantis-predator-v1",
@@ -9577,9 +9685,43 @@
         "action": "action",
         "flee": "fly"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "935d508c6eb6a7562ee500cd253da8cd1eb7c9d23323f66c25ed92064758246f",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/flying-insects-and-bat-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/bat-flying-insects-and-bat-v1/native.png"
+        },
+        "fly": {
+          "action": "fly",
+          "sha256": "935d508c6eb6a7562ee500cd253da8cd1eb7c9d23323f66c25ed92064758246f",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/flying-insects-and-bat-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/bat-flying-insects-and-bat-v1/fly.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "935d508c6eb6a7562ee500cd253da8cd1eb7c9d23323f66c25ed92064758246f",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/flying-insects-and-bat-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/bat-flying-insects-and-bat-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "935d508c6eb6a7562ee500cd253da8cd1eb7c9d23323f66c25ed92064758246f",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/flying-insects-and-bat-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/bat-flying-insects-and-bat-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-bat-flying-insects-and-bat-v1",
+        "fingerprint": "f738f75de495672abc846246bc5ae084daf00b4d5d21a13947bd04bc2ca5df12",
+        "model": "public/demos/wildlife-3d/bat-flying-insects-and-bat-v1/model.glb",
+        "source": "public/demos/wildlife-3d/bat-flying-insects-and-bat-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/bat-flying-insects-and-bat-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/flying-insects-and-bat-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-beaver-provisional-v1",

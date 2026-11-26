@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-bee-provisional-v1",
+  "fit": [
+    9.63,
+    4.55,
+    7.5
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "fly",
+    "action",
+    "flee",
+    "sip"
+  ],
+  "reviewContext": "A yellow abdomen, independent wingbeat and a flower sip with the legs lowered. The escape banks and climbs.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

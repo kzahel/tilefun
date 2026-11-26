@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-bat-provisional-v1",
+  "fit": [
+    6.34,
+    6.07,
+    12.61
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "fly",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "Membrane wings fold around the wrists on recovery. The escape tucks the feet and adds a separate high-amplitude stroke.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

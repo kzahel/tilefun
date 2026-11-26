@@ -1006,6 +1006,12 @@
       "toolId": "animal-browser"
     },
     {
+      "id": "wildlife-3d-flying-insects-and-bat-v1",
+      "name": "3D wildlife · flying insects and bat v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
       "id": "motion",
       "name": "Furniture movement sets",
       "description": "Default layouts and physics. Custom layouts remain individually reviewable in the tool.",
@@ -63337,7 +63343,175 @@
           "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-panther-big-cats-v1"
         }
       }
+    },
+    {
+      "id": "pattern:wildlife-3d-bee-flying-insects-and-bat-v1",
+      "batchId": "wildlife-3d-flying-insects-and-bat-v1",
+      "kind": "wildlife",
+      "name": "Bee",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-bee-flying-insects-and-bat-v1",
+      "fingerprint": "af52c815aa5fa23d6d6054737d339fd0a6239e7f18640f7ddf13fcc78bc42f30",
+      "sourceFingerprint": "97ba456022fa7932449c01b2d29c4759e6624a337897c6be9d6a4e6c0ddf41f3",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-bee-flying-insects-and-bat-v1",
+        "prefabIds": [],
+        "revision": "8752e07729809857cc022bbb8dd881304bbe21a7ae8ceac02d1e5b96387abc0f",
+        "renderFingerprint": "af52c815aa5fa23d6d6054737d339fd0a6239e7f18640f7ddf13fcc78bc42f30",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-bee-flying-insects-and-bat-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-bee-flying-insects-and-bat-v1",
+        "fingerprint": "97ba456022fa7932449c01b2d29c4759e6624a337897c6be9d6a4e6c0ddf41f3",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-bee-flying-insects-and-bat-v1",
+          "prefabIds": [],
+          "revision": "8752e07729809857cc022bbb8dd881304bbe21a7ae8ceac02d1e5b96387abc0f",
+          "renderFingerprint": "af52c815aa5fa23d6d6054737d339fd0a6239e7f18640f7ddf13fcc78bc42f30",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-bee-flying-insects-and-bat-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-dragonfly-flying-insects-and-bat-v1",
+      "batchId": "wildlife-3d-flying-insects-and-bat-v1",
+      "kind": "wildlife",
+      "name": "Dragonfly",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-dragonfly-flying-insects-and-bat-v1",
+      "fingerprint": "7042634d1f6a28e00584ff27d93e870d702e720cfad0cc39f300eb3be9938952",
+      "sourceFingerprint": "1462d2e968015f8ff0c76b5c52b67f800525426ba65fe0ee7934efff60adb3e1",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-dragonfly-flying-insects-and-bat-v1",
+        "prefabIds": [],
+        "revision": "c3e84b9eed4b77a380db2ccb7eed3f96e48d7932ec0931ab863ce6e1c666a135",
+        "renderFingerprint": "7042634d1f6a28e00584ff27d93e870d702e720cfad0cc39f300eb3be9938952",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-dragonfly-flying-insects-and-bat-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-dragonfly-flying-insects-and-bat-v1",
+        "fingerprint": "1462d2e968015f8ff0c76b5c52b67f800525426ba65fe0ee7934efff60adb3e1",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-dragonfly-flying-insects-and-bat-v1",
+          "prefabIds": [],
+          "revision": "c3e84b9eed4b77a380db2ccb7eed3f96e48d7932ec0931ab863ce6e1c666a135",
+          "renderFingerprint": "7042634d1f6a28e00584ff27d93e870d702e720cfad0cc39f300eb3be9938952",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-dragonfly-flying-insects-and-bat-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-butterfly-flying-insects-and-bat-v1",
+      "batchId": "wildlife-3d-flying-insects-and-bat-v1",
+      "kind": "wildlife",
+      "name": "Orange butterfly",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-butterfly-flying-insects-and-bat-v1",
+      "fingerprint": "1db5bd52c54776161400ec6dc66fabd83dc2a1544ba99e149f4a1e962b8c30bc",
+      "sourceFingerprint": "e440b86745464cd6fd6bf0fe67c0881d423a8bfa9ec8a8944993884983c1eb43",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-butterfly-flying-insects-and-bat-v1",
+        "prefabIds": [],
+        "revision": "c3d3ba38b50d6923e93b8ba7c1cf5248d564d7ab7fae8dc7cd162a1c8f150f15",
+        "renderFingerprint": "1db5bd52c54776161400ec6dc66fabd83dc2a1544ba99e149f4a1e962b8c30bc",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-butterfly-flying-insects-and-bat-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-butterfly-flying-insects-and-bat-v1",
+        "fingerprint": "e440b86745464cd6fd6bf0fe67c0881d423a8bfa9ec8a8944993884983c1eb43",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-butterfly-flying-insects-and-bat-v1",
+          "prefabIds": [],
+          "revision": "c3d3ba38b50d6923e93b8ba7c1cf5248d564d7ab7fae8dc7cd162a1c8f150f15",
+          "renderFingerprint": "1db5bd52c54776161400ec6dc66fabd83dc2a1544ba99e149f4a1e962b8c30bc",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-butterfly-flying-insects-and-bat-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-bat-flying-insects-and-bat-v1",
+      "batchId": "wildlife-3d-flying-insects-and-bat-v1",
+      "kind": "wildlife",
+      "name": "Bat",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-bat-flying-insects-and-bat-v1",
+      "fingerprint": "f738f75de495672abc846246bc5ae084daf00b4d5d21a13947bd04bc2ca5df12",
+      "sourceFingerprint": "2537b045eb7896d602644069ca782730c6c6c8f8869645de69e7df8a05d1c4e3",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-bat-flying-insects-and-bat-v1",
+        "prefabIds": [],
+        "revision": "e80b90c4462af8109d47503555df61ad487a17765bf282b39fd1dff09db809ea",
+        "renderFingerprint": "f738f75de495672abc846246bc5ae084daf00b4d5d21a13947bd04bc2ca5df12",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-bat-flying-insects-and-bat-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-bat-flying-insects-and-bat-v1",
+        "fingerprint": "2537b045eb7896d602644069ca782730c6c6c8f8869645de69e7df8a05d1c4e3",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-bat-flying-insects-and-bat-v1",
+          "prefabIds": [],
+          "revision": "e80b90c4462af8109d47503555df61ad487a17765bf282b39fd1dff09db809ea",
+          "renderFingerprint": "f738f75de495672abc846246bc5ae084daf00b4d5d21a13947bd04bc2ca5df12",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-bat-flying-insects-and-bat-v1"
+        }
+      }
     }
   ],
-  "inputDigest": "fa0663cc6a104c86bb0fe35c2c223d464dae311bd1153d89056d32ee7fb3d00d"
+  "inputDigest": "b159808bdefc3c764fc40017961bcde7fb352587a976396df1b931b6c5ef0f90"
 }

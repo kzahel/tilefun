@@ -35,7 +35,7 @@ export function isFourStateFaunaModelReview(type: string, caseId: string): boole
     animal?.species === caseId &&
     !animal.rideSpeed &&
     !["deep", "pond", "shore"].includes(animal.habitat) &&
-    ["idle/walk/action/flee", "idle/hop/action/flee", "idle/fly/action/flee"].includes(
+    /^idle\/(?:walk|hop|fly|flutter|crawl|slither)\/action\/flee$/.test(
       animal.clips.map(({ name }) => name).join("/"),
     )
   );

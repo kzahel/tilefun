@@ -10,8 +10,8 @@ export function isCatModelReview(type: string, caseId: string): boolean {
   );
 }
 
-export function isBirdWorkModelReviewCase(caseId: string): boolean {
-  return /^behavior-(?:crow|raven|hummingbird|peacock)$/.test(caseId);
+export function isWildlifeWorkModelReviewCase(caseId: string): boolean {
+  return /^behavior-(?:crow|raven|hummingbird|peacock|bee)$/.test(caseId);
 }
 
 export function isRaptorModelReviewCase(caseId: string): boolean {
@@ -35,5 +35,5 @@ export function raptorModelReviewRecipe(caseId: string) {
 }
 
 export function isWildlifeBehaviorModelReview(type: string, caseId: string): boolean {
-  return isCatModelReview(type, caseId) || isBirdWorkModelReviewCase(caseId);
+  return isCatModelReview(type, caseId) || isWildlifeWorkModelReviewCase(caseId);
 }

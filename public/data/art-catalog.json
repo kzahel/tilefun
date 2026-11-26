@@ -9866,6 +9866,46 @@
       "source": "demos/wildlife-3d/panther-big-cats-v1/model.blend"
     },
     {
+      "id": "wildlife-3d-bee-flying-insects-and-bat-v1",
+      "name": "wildlife 3d bee flying insects and bat v1",
+      "image": "demos/wildlife-3d/bee-flying-insects-and-bat-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "97ba456022fa7932449c01b2d29c4759e6624a337897c6be9d6a4e6c0ddf41f3",
+      "source": "demos/wildlife-3d/bee-flying-insects-and-bat-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-dragonfly-flying-insects-and-bat-v1",
+      "name": "wildlife 3d dragonfly flying insects and bat v1",
+      "image": "demos/wildlife-3d/dragonfly-flying-insects-and-bat-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "1462d2e968015f8ff0c76b5c52b67f800525426ba65fe0ee7934efff60adb3e1",
+      "source": "demos/wildlife-3d/dragonfly-flying-insects-and-bat-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-butterfly-flying-insects-and-bat-v1",
+      "name": "wildlife 3d butterfly flying insects and bat v1",
+      "image": "demos/wildlife-3d/butterfly-flying-insects-and-bat-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "e440b86745464cd6fd6bf0fe67c0881d423a8bfa9ec8a8944993884983c1eb43",
+      "source": "demos/wildlife-3d/butterfly-flying-insects-and-bat-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-bat-flying-insects-and-bat-v1",
+      "name": "wildlife 3d bat flying insects and bat v1",
+      "image": "demos/wildlife-3d/bat-flying-insects-and-bat-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "2537b045eb7896d602644069ca782730c6c6c8f8869645de69e7df8a05d1c4e3",
+      "source": "demos/wildlife-3d/bat-flying-insects-and-bat-v1/model.blend"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",

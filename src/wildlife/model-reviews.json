@@ -3769,5 +3769,98 @@
       "native.png": "e6deae7fcd030cfd7c15abce9aa402a0a612c08f7206ebe7addc7861855e3758",
       "walk.png": "22e64e39627d90e1659f410f648254d560773370bce16738cbb88f2deafac35c"
     }
+  },
+  {
+    "id": "bee-flying-insects-and-bat-v1",
+    "type": "wildlife-bee-provisional-v1",
+    "name": "Bee",
+    "batch": "wildlife-3d-flying-insects-and-bat-v1",
+    "lab": "behavior-bee",
+    "scale": 8.65,
+    "topDown": {
+      "width": 1.2242774566473988,
+      "height": 0.43815028901734104
+    },
+    "files": {
+      "action.png": "3e812abdafb3837ac046b8c008a333d36a761ab7898a43297298473747f74f9f",
+      "appearance.png": "97ba456022fa7932449c01b2d29c4759e6624a337897c6be9d6a4e6c0ddf41f3",
+      "capture-config.json": "eb798d20c4c2557919bb0cfe3e4c29c9cb1225f6b0a4927cac967cb94c88c844",
+      "comparison.mp4": "119998a0dd095790d964b2e7c7663a5b625ccf3484abaf5e8c767482b856f3fb",
+      "flee.png": "94390829969a44e88ac1e0178c411aae106c889fed6f595dd4a3965aa658cadf",
+      "fly.png": "c2d38c496939d7b0cb463ce744aa4c238e78228666a0b5b3147aaf4c6e1a651b",
+      "model.blend": "ffe44f49bded6ea73714398422c78c41f241e89bbe4f0ef2fce3d06e3a733c49",
+      "model.glb": "5048209ca189ce4400d72087c3a90d4a852e07a3dfefa171f1bd9357c64541ba",
+      "native.png": "7dc46bacbace7c9df3a861c13173e0251529e98283487a41ce13b04e16ba7a4e",
+      "sip.png": "deba28a1b5bf9813e351e1e6fc1861f1f9f1f7b54d31ad819f6efde7622ccbff"
+    }
+  },
+  {
+    "id": "dragonfly-flying-insects-and-bat-v1",
+    "type": "wildlife-dragonfly-provisional-v1",
+    "name": "Dragonfly",
+    "batch": "wildlife-3d-flying-insects-and-bat-v1",
+    "lab": "dragonfly",
+    "scale": 9.17,
+    "topDown": {
+      "width": 1.4394765539803707,
+      "height": 0.39912758996728465
+    },
+    "files": {
+      "action.png": "925f9a7ac251373cae4d67dba4930fd3d79eceb9f6e7c1f7ff6bfa04a2e6755a",
+      "appearance.png": "1462d2e968015f8ff0c76b5c52b67f800525426ba65fe0ee7934efff60adb3e1",
+      "capture-config.json": "20114e60859117f6a56159fafd059bf9c75909033c507edac39d3e24803b3392",
+      "comparison.mp4": "315928105597832dbee8e7d4b05b3fef4eea6b00c50f5035b5a2fbf3bfc8f5cd",
+      "flee.png": "04a3b69e0004bfb4559d9c8250ed9c17d9fbd32f54b24adfc0796daad01e8901",
+      "fly.png": "a1055a860829ca4247c1d8179217d78b158794a8802335669ab2cd8e0f50b138",
+      "model.blend": "7128734e856ca7054d72869169d180c7d35aa0c47981b49d470ca78d38fe00f3",
+      "model.glb": "478dcd6312d25c6458cbf74976c9b815d41bd5adff2feffc3ee274ae5dfea17d",
+      "native.png": "c1769328536b42170a1e40db99d8d05f405c9b3dfd545a05d0ce2b229a32516c"
+    }
+  },
+  {
+    "id": "butterfly-flying-insects-and-bat-v1",
+    "type": "wildlife-butterfly-provisional-v1",
+    "name": "Orange butterfly",
+    "batch": "wildlife-3d-flying-insects-and-bat-v1",
+    "lab": "butterfly",
+    "scale": 5.93,
+    "topDown": {
+      "width": 1.1956155143338956,
+      "height": 0.8195615514333896
+    },
+    "files": {
+      "action.png": "6a2c1fa8e8c3d9c298aa3b15ec102dc406bd673f7b7271208edaaf8c105a374f",
+      "appearance.png": "e440b86745464cd6fd6bf0fe67c0881d423a8bfa9ec8a8944993884983c1eb43",
+      "capture-config.json": "bb9bc0692793cc501791f9d67f455a543b2e2281081e47bca6c1969c55b38afa",
+      "comparison.mp4": "dc1ff0c0df3a668e407669500d92e2843fbe44d4362bf6971dbcea18e013051d",
+      "flee.png": "8a983f595141266b768b297831352b51913fc442ffcc6234bf078ce6e40be670",
+      "flutter.png": "03571f619d9b8cfe4cfcbad62d6f0272ce4d53e7deb0b908d0a62b9beb722f8b",
+      "model.blend": "2392d6ec01a866d2fe651f29de3c0d9b508438c91cc4a6680bbacd7a09f648ca",
+      "model.glb": "52cf43b703c408acc173926b969fe522913236bd61186c6112fe26212f2e9406",
+      "native.png": "afecade8191f1415edd9b09b0e3bd7bc28eb6203380d54ba393c3aba0a19c3a9"
+    }
+  },
+  {
+    "id": "bat-flying-insects-and-bat-v1",
+    "type": "wildlife-bat-provisional-v1",
+    "name": "Bat",
+    "batch": "wildlife-3d-flying-insects-and-bat-v1",
+    "lab": "bat",
+    "scale": 13.31,
+    "topDown": {
+      "width": 0.3425995492111194,
+      "height": 0.49436513899323814
+    },
+    "files": {
+      "action.png": "270e80d912b3aa4473fa7f2aadeae0506dfe674ee4ec04dc7b625cbf5652e053",
+      "appearance.png": "2537b045eb7896d602644069ca782730c6c6c8f8869645de69e7df8a05d1c4e3",
+      "capture-config.json": "ab4898d580375fb16f368e2b1f5e5cfbfb832c5e0565eb9b3c816e99ac55fcd9",
+      "comparison.mp4": "910419ab5f9c96bd02daa0646a88863526e101f5ec7154c4cb5656901cc85271",
+      "flee.png": "f4604f25c6339400017e7151f53fb3f4ad140d86f83964771577c578e46696be",
+      "fly.png": "7f59076299f2e81326fed0264c40c1faf840fb662f3712b330f172cfceaf7142",
+      "model.blend": "00d72cae86ce3c935db8a91e4e48eb5a5c023bf5b22359b9cbfe29bf4bc37ae3",
+      "model.glb": "935d508c6eb6a7562ee500cd253da8cd1eb7c9d23323f66c25ed92064758246f",
+      "native.png": "c1f82c4d7c8bbec2939f94166212cef1a92c2bd71d8ec62f845840247b9fa75c"
+    }
   }
 ]

@@ -8,10 +8,10 @@ import { TILE_SIZE } from "../../src/config/constants.ts";
 import { ENTITY_DEFS } from "../../src/entities/EntityDefs.ts";
 import { createDescriptor } from "../../src/generation/GenerationDescriptor.ts";
 import {
-  isBirdWorkModelReviewCase,
   isCatModelReview,
   isFelidModelReviewCase,
   isRaptorModelReviewCase,
+  isWildlifeWorkModelReviewCase,
 } from "../../src/scenarios/WildlifeBehaviorModelReview.ts";
 import {
   isFarmModelReviewCase,
@@ -121,7 +121,7 @@ try {
       const waterStage = ["deep", "pond", "shore"].includes(habitat);
       const farmStage = !candidate.classicTravel && isFarmModelReviewCase(candidate.lab);
       const catStage = isCatModelReview(candidate.type, candidate.lab);
-      const birdWorkStage = isBirdWorkModelReviewCase(candidate.lab);
+      const wildlifeWorkStage = isWildlifeWorkModelReviewCase(candidate.lab);
       const raptorStage = isRaptorModelReviewCase(candidate.lab);
       const felidStage = isFelidModelReviewCase(candidate.lab);
       const secretaryStage = candidate.lab === "secretary-bird";
@@ -142,7 +142,7 @@ try {
         waterStage ||
         farmStage ||
         catStage ||
-        birdWorkStage ||
+        wildlifeWorkStage ||
         raptorStage ||
         felidStage ||
         fourStateStage ||
@@ -152,7 +152,7 @@ try {
       const contactClips =
         secretaryStage || felidStage
           ? ["display"]
-          : birdWorkStage
+          : wildlifeWorkStage
             ? ["action", "flee"]
             : hunterStage
               ? ["display"]
@@ -235,7 +235,7 @@ try {
           timeout:
             raptorStage || felidStage
               ? 130_000
-              : catStage || birdWorkStage
+              : catStage || wildlifeWorkStage
                 ? 100_000
                 : feeding || farmStage
                   ? 58_000
@@ -249,7 +249,7 @@ try {
       const switchModels = page.getByRole("checkbox", { name: "3D animals", exact: true });
       const approachStates = doeStage
         ? await verifyDoeApproach(page, candidate, states)
-        : catStage || birdWorkStage
+        : catStage || wildlifeWorkStage
           ? await verifyStartleInFreshStage(page, stage, candidate, states)
           : farmStage || fourStateStage || packStage || feeding
             ? await verifyApproachClips(page, stage, candidate, states)
@@ -258,7 +258,7 @@ try {
         farmStage ||
         fourStateStage ||
         catStage ||
-        birdWorkStage ||
+        wildlifeWorkStage ||
         (raptorStage && !secretaryStage) ||
         packStage ||
         feeding
@@ -286,7 +286,7 @@ try {
         verifyFaunaStates:
           fourStateStage ||
           packStage ||
-          birdWorkStage ||
+          wildlifeWorkStage ||
           raptorStage ||
           felidStage ||
           !!feeding ||
@@ -302,7 +302,7 @@ try {
                 ? [{ type: "prop-oak-tree", dx: 0, dy: -64 }]
                 : []),
             ]
-          : birdWorkStage || raptorStage || felidStage
+          : wildlifeWorkStage || raptorStage || felidStage
             ? reviewActorPlacements(candidate)
             : [],
         pilotPond,

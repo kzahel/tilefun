@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-dragonfly-provisional-v1",
+  "fit": [
+    10.15,
+    5.08,
+    9.17
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "fly",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "Four wing surfaces beat around a narrow, extended abdomen. A quicker tilted escape is separate from ordinary flight.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}
