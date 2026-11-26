@@ -10,6 +10,7 @@ import { createDescriptor } from "../../src/generation/GenerationDescriptor.ts";
 import {
   isBirdWorkModelReviewCase,
   isCatModelReview,
+  isFelidModelReviewCase,
   isRaptorModelReviewCase,
 } from "../../src/scenarios/WildlifeBehaviorModelReview.ts";
 import {
@@ -122,6 +123,7 @@ try {
       const catStage = isCatModelReview(candidate.type, candidate.lab);
       const birdWorkStage = isBirdWorkModelReviewCase(candidate.lab);
       const raptorStage = isRaptorModelReviewCase(candidate.lab);
+      const felidStage = isFelidModelReviewCase(candidate.lab);
       const secretaryStage = candidate.lab === "secretary-bird";
       const pilotForage =
         candidate.id === "rabbit-pilot-v1"
@@ -142,25 +144,27 @@ try {
         catStage ||
         birdWorkStage ||
         raptorStage ||
+        felidStage ||
         fourStateStage ||
         packStage ||
         feeding ||
         candidate.type === "wildlife-robin-v1";
-      const contactClips = secretaryStage
-        ? ["display"]
-        : birdWorkStage
-          ? ["action", "flee"]
-          : hunterStage
-            ? ["display"]
-            : waterStage
-              ? ["flee", "flee-swim"]
-              : farmStage || packStage
-                ? ["flee", "ride", "ride-sprint"]
-                : doeStage
-                  ? ["stamp", "flee"]
-                  : fourStateStage || catStage || feeding
-                    ? ["flee"]
-                    : [];
+      const contactClips =
+        secretaryStage || felidStage
+          ? ["display"]
+          : birdWorkStage
+            ? ["action", "flee"]
+            : hunterStage
+              ? ["display"]
+              : waterStage
+                ? ["flee", "flee-swim"]
+                : farmStage || packStage
+                  ? ["flee", "ride", "ride-sprint"]
+                  : doeStage
+                    ? ["stamp", "flee"]
+                    : fourStateStage || catStage || feeding
+                      ? ["flee"]
+                      : [];
       const naturalClips = observeAllStates
         ? states.flatMap(({ name }, index) =>
             contactClips.includes(name) || (catStage && name === "action") ? [] : [index],
@@ -228,17 +232,18 @@ try {
           fetch: dogFetch,
           feeding: !!feeding,
           naturalClips,
-          timeout: raptorStage
-            ? 130_000
-            : catStage || birdWorkStage
-              ? 100_000
-              : feeding || farmStage
-                ? 58_000
-                : naturalClips.length
-                  ? 36_000
-                  : dogFetch
-                    ? 30_000
-                    : 14_000,
+          timeout:
+            raptorStage || felidStage
+              ? 130_000
+              : catStage || birdWorkStage
+                ? 100_000
+                : feeding || farmStage
+                  ? 58_000
+                  : naturalClips.length
+                    ? 36_000
+                    : dogFetch
+                      ? 30_000
+                      : 14_000,
         },
       );
       const switchModels = page.getByRole("checkbox", { name: "3D animals", exact: true });
@@ -283,12 +288,13 @@ try {
           packStage ||
           birdWorkStage ||
           raptorStage ||
+          felidStage ||
           !!feeding ||
           !!pilotForage ||
           pilotPond,
         catStage,
         dogFetch,
-        useStick: secretaryStage,
+        useStick: secretaryStage || felidStage,
         workPlacements: pilotForage
           ? [
               pilotForage,
@@ -296,7 +302,7 @@ try {
                 ? [{ type: "prop-oak-tree", dx: 0, dy: -64 }]
                 : []),
             ]
-          : birdWorkStage || raptorStage
+          : birdWorkStage || raptorStage || felidStage
             ? reviewActorPlacements(candidate)
             : [],
         pilotPond,

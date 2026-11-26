@@ -1,0 +1,138 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "78d1bce0909dac7579bd3d686d80293a31142ddae92206e13f85aafa124f7dd4",
+  "results": [
+    {
+      "type": "wildlife-bobcat-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "bdc4abb803bc8c5cb141618e437a9ac5c4f1a639b907c7b7620801102d88c5f5",
+      "modelSha256": "98f150894ffd8605aa74abd235f2d48b211bbcf33b938107c272776363c51d24",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-bobcat&wildlife3dStage=bobcat-wild-cats-v1&wildlife3dReview=bobcat-wild-cats-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009372940063476675,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-lynx-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "b13f361dfd827724a3150e5912b64e8b8502d98be0a762a52eee8d049bd3ed61",
+      "modelSha256": "6ee5ef39c25b51603174cc10cca9d29c4bb78208d27424859d4aa46a7838130a",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-lynx&wildlife3dStage=lynx-wild-cats-v1&wildlife3dReview=lynx-wild-cats-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009582328796386839,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-cheetah-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "370167e4b139bd996ffdb204885817ded4de4ef33793d1f249afc748a798911d",
+      "modelSha256": "9d3feea6c5ad47e9c0f38a5eec450f55fc0e47d1df1e681103952820ea47c0ae",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-cheetah&wildlife3dStage=cheetah-wild-cats-v1&wildlife3dReview=cheetah-wild-cats-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.000909633636474622,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-jaguar-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "bafd6836747340e22520244e536ce397fc0e40cdbe9d0ce73a64694243940b56",
+      "modelSha256": "a393a07daf3045b8d3fba098aa50fad1f3f8aca40c7052954430c49489017381",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-jaguar&wildlife3dStage=jaguar-wild-cats-v1&wildlife3dReview=jaguar-wild-cats-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009201698303222737,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "feed",
+          "display",
+          "chase"
+        ]
+      }
+    }
+  ]
+}

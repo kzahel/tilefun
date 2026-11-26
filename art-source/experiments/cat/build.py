@@ -530,7 +530,7 @@ FLEE_HIND = [
 ]
 
 
-def pose_cat(rig, clip, t, previous):
+def pose_cat(rig, clip, t, previous, tail_slope=0):
     rest = {bone.name: bone.matrix_local for bone in rig.data.bones}
     phase = t * TAU
     sway, rise, lean, pitch, head_pitch = 0, 0, 0, 0, 0
@@ -650,7 +650,7 @@ def pose_cat(rig, clip, t, previous):
             swish *= .43
         elif clip == "Action" and ROLLOUT:
             swish += (.10 + .09 * i) * math.sin(phase * 2 - i * .45) * math.sin(math.pi * t)
-        direction = body_q @ (euler(lift, 0, swish) @ (TAIL[i + 1] - TAIL[i]))
+        direction = body_q @ (euler(lift + tail_slope, 0, swish) @ (TAIL[i + 1] - TAIL[i]))
         end = next_point + direction
         matrices[name] = aimed(rest[name], next_point, end)
         next_point = end

@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-lynx-predator-v1",
+  "fit": [
+    9.9,
+    8.75,
+    10.6
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "reviewContext": "Even landings under tall legs and black ear tufts.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

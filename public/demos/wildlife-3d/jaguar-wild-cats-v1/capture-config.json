@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-jaguar-predator-v1",
+  "fit": [
+    11.7,
+    8,
+    12
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "reviewContext": "A loaded, low pursuit with wider forepaw contact and shorter extension.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

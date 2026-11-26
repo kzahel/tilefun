@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-cheetah-predator-v1",
+  "fit": [
+    8.1,
+    9.33,
+    11.82
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "reviewContext": "A suspended gallop with long recovery, a level gaze, and the tail tracking each stride.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

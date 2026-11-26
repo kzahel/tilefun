@@ -1,0 +1,69 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+  "workshopInputDigest": "b92049da42c3292e539fe89014dd550bc0f4596ba61328bed7e81782fc8c2835",
+  "results": [
+    {
+      "type": "wildlife-elephant-upright-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "bdc65ab17b0b0d9956f1daebd83bb51ab456df346a557346fa063fa76a57d938",
+      "modelSha256": "3ecae9181dd0625f21460e5833ac8f87f397dc3e21fbf22a10943421f2a844f2",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-elephant-upright&wildlife3dStage=elephant-upright-upright-herbivores-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009860076904296918,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-giraffe-upright-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "b5dfb4b3ff3dc68a1d5efdf656072e9f477ce3500dc073a57fcdad5937117045",
+      "modelSha256": "47800c6f8439c105fdf74495c4b8186c695020521b6f4c381250320d406c526a",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-giraffe-upright&wildlife3dStage=giraffe-upright-upright-herbivores-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009725341796875173,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

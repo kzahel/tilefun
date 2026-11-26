@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-bobcat-predator-v1",
+  "fit": [
+    9,
+    8.05,
+    11
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "walk",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "reviewContext": "Short, compact bounds and the pale bobtail.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

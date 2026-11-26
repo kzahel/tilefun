@@ -994,6 +994,12 @@
       "toolId": "animal-browser"
     },
     {
+      "id": "wildlife-3d-wild-cats-v1",
+      "name": "3D wildlife · wild cats v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
       "id": "motion",
       "name": "Furniture movement sets",
       "description": "Default layouts and physics. Custom layouts remain individually reviewable in the tool.",
@@ -62989,7 +62995,175 @@
           "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-stag-beetle-hoppers-and-beetles-v1"
         }
       }
+    },
+    {
+      "id": "pattern:wildlife-3d-bobcat-wild-cats-v1",
+      "batchId": "wildlife-3d-wild-cats-v1",
+      "kind": "wildlife",
+      "name": "Bobcat",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-bobcat-wild-cats-v1",
+      "fingerprint": "bdc4abb803bc8c5cb141618e437a9ac5c4f1a639b907c7b7620801102d88c5f5",
+      "sourceFingerprint": "80bb4c8066d6ce2cd212f74f0977a1856ae06907c9c6caee77b1ce6355613d80",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-bobcat-wild-cats-v1",
+        "prefabIds": [],
+        "revision": "0611579023b1ddf948f73efdd96109e6b94994e504adb303723d2fc91fee2b22",
+        "renderFingerprint": "bdc4abb803bc8c5cb141618e437a9ac5c4f1a639b907c7b7620801102d88c5f5",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-bobcat-wild-cats-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-bobcat-wild-cats-v1",
+        "fingerprint": "80bb4c8066d6ce2cd212f74f0977a1856ae06907c9c6caee77b1ce6355613d80",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-bobcat-wild-cats-v1",
+          "prefabIds": [],
+          "revision": "0611579023b1ddf948f73efdd96109e6b94994e504adb303723d2fc91fee2b22",
+          "renderFingerprint": "bdc4abb803bc8c5cb141618e437a9ac5c4f1a639b907c7b7620801102d88c5f5",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-bobcat-wild-cats-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-lynx-wild-cats-v1",
+      "batchId": "wildlife-3d-wild-cats-v1",
+      "kind": "wildlife",
+      "name": "Eurasian lynx",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-lynx-wild-cats-v1",
+      "fingerprint": "b13f361dfd827724a3150e5912b64e8b8502d98be0a762a52eee8d049bd3ed61",
+      "sourceFingerprint": "2116546fc764ae2e030e5398a829f08cd48b1f5f7774034e59a87b6602e0c400",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-lynx-wild-cats-v1",
+        "prefabIds": [],
+        "revision": "9d355e5e4b5b5b4b3567d568afdd37fcc41f36a59cec64e2c153a9a7e0763abe",
+        "renderFingerprint": "b13f361dfd827724a3150e5912b64e8b8502d98be0a762a52eee8d049bd3ed61",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-lynx-wild-cats-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-lynx-wild-cats-v1",
+        "fingerprint": "2116546fc764ae2e030e5398a829f08cd48b1f5f7774034e59a87b6602e0c400",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-lynx-wild-cats-v1",
+          "prefabIds": [],
+          "revision": "9d355e5e4b5b5b4b3567d568afdd37fcc41f36a59cec64e2c153a9a7e0763abe",
+          "renderFingerprint": "b13f361dfd827724a3150e5912b64e8b8502d98be0a762a52eee8d049bd3ed61",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-lynx-wild-cats-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-cheetah-wild-cats-v1",
+      "batchId": "wildlife-3d-wild-cats-v1",
+      "kind": "wildlife",
+      "name": "Cheetah",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-cheetah-wild-cats-v1",
+      "fingerprint": "370167e4b139bd996ffdb204885817ded4de4ef33793d1f249afc748a798911d",
+      "sourceFingerprint": "3bfa961e7f2fbe982fe4d2a37044ceac53f07cf2bccce061dae5c79c292ab491",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-cheetah-wild-cats-v1",
+        "prefabIds": [],
+        "revision": "cc746b76564e7e81c6379abc01e017191c391a3cf9cc60381c886069807d1a72",
+        "renderFingerprint": "370167e4b139bd996ffdb204885817ded4de4ef33793d1f249afc748a798911d",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-cheetah-wild-cats-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-cheetah-wild-cats-v1",
+        "fingerprint": "3bfa961e7f2fbe982fe4d2a37044ceac53f07cf2bccce061dae5c79c292ab491",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-cheetah-wild-cats-v1",
+          "prefabIds": [],
+          "revision": "cc746b76564e7e81c6379abc01e017191c391a3cf9cc60381c886069807d1a72",
+          "renderFingerprint": "370167e4b139bd996ffdb204885817ded4de4ef33793d1f249afc748a798911d",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-cheetah-wild-cats-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-jaguar-wild-cats-v1",
+      "batchId": "wildlife-3d-wild-cats-v1",
+      "kind": "wildlife",
+      "name": "Jaguar",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-jaguar-wild-cats-v1",
+      "fingerprint": "bafd6836747340e22520244e536ce397fc0e40cdbe9d0ce73a64694243940b56",
+      "sourceFingerprint": "e3e04a701156f96fde1682d23264b01e1a9a8cdf2fca32d0d72cd00e3678d19d",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-jaguar-wild-cats-v1",
+        "prefabIds": [],
+        "revision": "c752aa3ecccd69b1e9e36cc5a5811d2d4ce2d1fe14561f40ec5bfb4ab1dfcd39",
+        "renderFingerprint": "bafd6836747340e22520244e536ce397fc0e40cdbe9d0ce73a64694243940b56",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-jaguar-wild-cats-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-jaguar-wild-cats-v1",
+        "fingerprint": "e3e04a701156f96fde1682d23264b01e1a9a8cdf2fca32d0d72cd00e3678d19d",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-jaguar-wild-cats-v1",
+          "prefabIds": [],
+          "revision": "c752aa3ecccd69b1e9e36cc5a5811d2d4ce2d1fe14561f40ec5bfb4ab1dfcd39",
+          "renderFingerprint": "bafd6836747340e22520244e536ce397fc0e40cdbe9d0ce73a64694243940b56",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-jaguar-wild-cats-v1"
+        }
+      }
     }
   ],
-  "inputDigest": "7418475fb8c76fd8ead6af42b759f378875df6bf359ca583131913e1c128844d"
+  "inputDigest": "78d1bce0909dac7579bd3d686d80293a31142ddae92206e13f85aafa124f7dd4"
 }

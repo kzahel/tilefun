@@ -9,8 +9,10 @@ import { forestWorkRecipe } from "./ForestWorkRecipe.js";
 import { naturalLandscapeRecipe } from "./NaturalLandscapeRecipe.js";
 import { FLAT_SCENARIO, type ScenarioRecipe } from "./ScenarioRecipe.js";
 import {
+  felidReviewActors,
   isRaptorModelReviewCase,
   isWildlifeBehaviorModelReview,
+  raptorModelReviewRecipe,
 } from "./WildlifeBehaviorModelReview.js";
 
 const FARM_MODEL_CASES = new Set([
@@ -93,11 +95,7 @@ export function wildlifeModelReviewRecipe(
   if (classicTravel) return classicModelStage(id, type, classicTravel);
   if (isFarmModelReviewCase(caseId) || isWildlifeBehaviorModelReview(type, caseId))
     return naturalLandscapeRecipe(caseId, "balanced");
-  if (isRaptorModelReviewCase(caseId)) {
-    const scene = naturalLandscapeRecipe(caseId, "balanced");
-    for (const actor of scene.actors ?? []) delete actor.naturalSpawnId;
-    return { ...scene, nativeProps: [] };
-  }
+  if (isRaptorModelReviewCase(caseId)) return raptorModelReviewRecipe(caseId);
   if (wildlifeFeedingReview(type, caseId))
     return type === DEER_TYPE
       ? forestWorkRecipe("deer")
@@ -105,6 +103,8 @@ export function wildlifeModelReviewRecipe(
   const animal = faunaProfile(type);
   if (animal && (isFourStateFaunaModelReview(type, caseId) || isPackMountModelReview(type, caseId)))
     return modelStage(id, createPlayer(240, 350), [createFauna(animal.species, 240, 176)]);
+  const felids = felidReviewActors(type, caseId);
+  if (felids) return modelStage(id, createPlayer(240, 344), felids);
   const hunter = predatorProfile(type);
   if (hunter?.species === "coconut-crab")
     return modelStage(id, createPlayer(240, 328), [

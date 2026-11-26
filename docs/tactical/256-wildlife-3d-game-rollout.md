@@ -107,6 +107,23 @@ runtime scope reconciliation in the execution notes.
 
 ## Delivery log
 
+### Bobcat, lynx, cheetah and jaguar, 2026-11-26
+
+The four wild cats have distinct pursuit poses, dark paws and species-specific
+ear, tail and coat profiles. The cheetah makes a longer extension than the
+jaguar. The shared review scene uses ordinary rabbits for chase and feeding.
+The deployed preview played all 20 states in Workshop and in reopened game
+worlds. [Renderer evidence](256-wildlife-3d-game-rollout/evidence/wild-cats-v1-runtime.json) ·
+[Public preview evidence](256-wildlife-3d-game-rollout/evidence/wild-cats-v1-deployment.json) ·
+[Workshop review](https://tilefun.graehlarts.com/tilefun/workshop.html#/review/pattern%3Awildlife-3d-bobcat-wild-cats-v1)
+
+The default game also replayed all states for the woodland browsers, both
+upright variants, the elephant and giraffe, and the camel and mule.
+[Woodland browsers](256-wildlife-3d-game-rollout/evidence/woodland-browsers-v1-default.json) ·
+[Upright variants](256-wildlife-3d-game-rollout/evidence/upright-herbivores-v1-default.json) ·
+[Elephant and giraffe](256-wildlife-3d-game-rollout/evidence/canopy-and-fruit-v1-default.json) ·
+[Pack mounts](256-wildlife-3d-game-rollout/evidence/pack-mounts-v1-default.json)
+
 ### Hoppers and beetles, 2026-11-26
 
 The cricket and grasshopper load their bent hind legs before kicking. Their

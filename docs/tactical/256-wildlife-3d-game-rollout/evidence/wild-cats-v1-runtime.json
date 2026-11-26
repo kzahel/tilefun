@@ -1,0 +1,158 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-bobcat-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "bobcat-wild-cats-v1",
+      "modelSha256": "98f150894ffd8605aa74abd235f2d48b211bbcf33b938107c272776363c51d24"
+    },
+    {
+      "type": "wildlife-lynx-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "lynx-wild-cats-v1",
+      "modelSha256": "6ee5ef39c25b51603174cc10cca9d29c4bb78208d27424859d4aa46a7838130a"
+    },
+    {
+      "type": "wildlife-cheetah-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 480
+        }
+      ],
+      "candidateId": "cheetah-wild-cats-v1",
+      "modelSha256": "9d3feea6c5ad47e9c0f38a5eec450f55fc0e47d1df1e681103952820ea47c0ae"
+    },
+    {
+      "type": "wildlife-jaguar-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "jaguar-wild-cats-v1",
+      "modelSha256": "a393a07daf3045b8d3fba098aa50fad1f3f8aca40c7052954430c49489017381"
+    }
+  ],
+  "clipSamples": 560,
+  "testedDepth": false
+}

@@ -9786,6 +9786,46 @@
       "source": "demos/wildlife-3d/stag-beetle-hoppers-and-beetles-v1/model.blend"
     },
     {
+      "id": "wildlife-3d-bobcat-wild-cats-v1",
+      "name": "wildlife 3d bobcat wild cats v1",
+      "image": "demos/wildlife-3d/bobcat-wild-cats-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "80bb4c8066d6ce2cd212f74f0977a1856ae06907c9c6caee77b1ce6355613d80",
+      "source": "demos/wildlife-3d/bobcat-wild-cats-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-lynx-wild-cats-v1",
+      "name": "wildlife 3d lynx wild cats v1",
+      "image": "demos/wildlife-3d/lynx-wild-cats-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "2116546fc764ae2e030e5398a829f08cd48b1f5f7774034e59a87b6602e0c400",
+      "source": "demos/wildlife-3d/lynx-wild-cats-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-cheetah-wild-cats-v1",
+      "name": "wildlife 3d cheetah wild cats v1",
+      "image": "demos/wildlife-3d/cheetah-wild-cats-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "3bfa961e7f2fbe982fe4d2a37044ceac53f07cf2bccce061dae5c79c292ab491",
+      "source": "demos/wildlife-3d/cheetah-wild-cats-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-jaguar-wild-cats-v1",
+      "name": "wildlife 3d jaguar wild cats v1",
+      "image": "demos/wildlife-3d/jaguar-wild-cats-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "e3e04a701156f96fde1682d23264b01e1a9a8cdf2fca32d0d72cd00e3678d19d",
+      "source": "demos/wildlife-3d/jaguar-wild-cats-v1/model.blend"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",
@@ -12245,7 +12285,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:54"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:56"
         },
         {
           "system": "Gameplay",
@@ -12387,7 +12427,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:52"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:54"
         },
         {
           "system": "Gameplay",
@@ -37523,7 +37563,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:60"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:62"
         },
         {
           "system": "Editor",
@@ -39565,7 +39605,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:54"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:56"
         },
         {
           "system": "Gameplay",
@@ -39711,7 +39751,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:52"
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:54"
         },
         {
           "system": "Gameplay",

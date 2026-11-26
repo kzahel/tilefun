@@ -1,0 +1,81 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+  "workshopInputDigest": "b92049da42c3292e539fe89014dd550bc0f4596ba61328bed7e81782fc8c2835",
+  "results": [
+    {
+      "type": "wildlife-camel-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "0b5e55f294c5814b18de5b9471cd857787298492052af3512b5da7e1b4b452db",
+      "modelSha256": "77209b5e268a45cf9c9f43ee45432b57dac7409251bb66b69c4a0b39708a11c7",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-camel&wildlife3dStage=camel-pack-mounts-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "ride",
+        "ride-sprint"
+      ],
+      "heightRange": [
+        -0.0009822578430175816,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee",
+        "ride",
+        "ride-sprint"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "ride",
+          "ride-sprint"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-mule-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "dc5bed9953cda1ce42b991499cbbf9db019dca77cc6f72312dcc1b9329532ecd",
+      "modelSha256": "b958ad8e21b84510775f62acd70aa87bdc2c7a6714d15d956ba34321f683bdb1",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-mule&wildlife3dStage=mule-pack-mounts-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "ride",
+        "ride-sprint"
+      ],
+      "heightRange": [
+        -0.0009678878784179755,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee",
+        "ride",
+        "ride-sprint"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "ride",
+          "ride-sprint"
+        ]
+      }
+    }
+  ]
+}

@@ -2437,7 +2437,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-mule-pack-mounts-v1",
+        "sha256": "b958ad8e21b84510775f62acd70aa87bdc2c7a6714d15d956ba34321f683bdb1",
+        "states": ["action", "flee", "idle", "ride", "ride-sprint", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/pack-mounts-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-mule-pack-mounts-v1",
         "fingerprint": "dc5bed9953cda1ce42b991499cbbf9db019dca77cc6f72312dcc1b9329532ecd",
@@ -3147,9 +3154,49 @@
         "display": "Display",
         "chase": "Walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "98f150894ffd8605aa74abd235f2d48b211bbcf33b938107c272776363c51d24",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/wild-cats-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/bobcat-wild-cats-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "98f150894ffd8605aa74abd235f2d48b211bbcf33b938107c272776363c51d24",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/wild-cats-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/bobcat-wild-cats-v1/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "98f150894ffd8605aa74abd235f2d48b211bbcf33b938107c272776363c51d24",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/wild-cats-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/bobcat-wild-cats-v1/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "98f150894ffd8605aa74abd235f2d48b211bbcf33b938107c272776363c51d24",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/wild-cats-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/bobcat-wild-cats-v1/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "98f150894ffd8605aa74abd235f2d48b211bbcf33b938107c272776363c51d24",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/wild-cats-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/bobcat-wild-cats-v1/chase.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-bobcat-wild-cats-v1",
+        "fingerprint": "bdc4abb803bc8c5cb141618e437a9ac5c4f1a639b907c7b7620801102d88c5f5",
+        "model": "public/demos/wildlife-3d/bobcat-wild-cats-v1/model.glb",
+        "source": "public/demos/wildlife-3d/bobcat-wild-cats-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/bobcat-wild-cats-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/wild-cats-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-cheetah-predator-v1",
@@ -3168,9 +3215,49 @@
         "display": "Display",
         "chase": "Walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "9d3feea6c5ad47e9c0f38a5eec450f55fc0e47d1df1e681103952820ea47c0ae",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/wild-cats-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/cheetah-wild-cats-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "9d3feea6c5ad47e9c0f38a5eec450f55fc0e47d1df1e681103952820ea47c0ae",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/wild-cats-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/cheetah-wild-cats-v1/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "9d3feea6c5ad47e9c0f38a5eec450f55fc0e47d1df1e681103952820ea47c0ae",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/wild-cats-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/cheetah-wild-cats-v1/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "9d3feea6c5ad47e9c0f38a5eec450f55fc0e47d1df1e681103952820ea47c0ae",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/wild-cats-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/cheetah-wild-cats-v1/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "9d3feea6c5ad47e9c0f38a5eec450f55fc0e47d1df1e681103952820ea47c0ae",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/wild-cats-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/cheetah-wild-cats-v1/chase.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-cheetah-wild-cats-v1",
+        "fingerprint": "370167e4b139bd996ffdb204885817ded4de4ef33793d1f249afc748a798911d",
+        "model": "public/demos/wildlife-3d/cheetah-wild-cats-v1/model.glb",
+        "source": "public/demos/wildlife-3d/cheetah-wild-cats-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/cheetah-wild-cats-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/wild-cats-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-lynx-predator-v1",
@@ -3189,9 +3276,49 @@
         "display": "Display",
         "chase": "Walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "6ee5ef39c25b51603174cc10cca9d29c4bb78208d27424859d4aa46a7838130a",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/wild-cats-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/lynx-wild-cats-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "6ee5ef39c25b51603174cc10cca9d29c4bb78208d27424859d4aa46a7838130a",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/wild-cats-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/lynx-wild-cats-v1/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "6ee5ef39c25b51603174cc10cca9d29c4bb78208d27424859d4aa46a7838130a",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/wild-cats-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/lynx-wild-cats-v1/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "6ee5ef39c25b51603174cc10cca9d29c4bb78208d27424859d4aa46a7838130a",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/wild-cats-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/lynx-wild-cats-v1/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "6ee5ef39c25b51603174cc10cca9d29c4bb78208d27424859d4aa46a7838130a",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/wild-cats-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/lynx-wild-cats-v1/chase.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-lynx-wild-cats-v1",
+        "fingerprint": "b13f361dfd827724a3150e5912b64e8b8502d98be0a762a52eee8d049bd3ed61",
+        "model": "public/demos/wildlife-3d/lynx-wild-cats-v1/model.glb",
+        "source": "public/demos/wildlife-3d/lynx-wild-cats-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/lynx-wild-cats-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/wild-cats-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-jaguar-predator-v1",
@@ -3210,9 +3337,49 @@
         "display": "Display",
         "chase": "Walk"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "a393a07daf3045b8d3fba098aa50fad1f3f8aca40c7052954430c49489017381",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/wild-cats-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/jaguar-wild-cats-v1/native.png"
+        },
+        "walk": {
+          "action": "walk",
+          "sha256": "a393a07daf3045b8d3fba098aa50fad1f3f8aca40c7052954430c49489017381",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/wild-cats-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/jaguar-wild-cats-v1/walk.png"
+        },
+        "feed": {
+          "action": "feed",
+          "sha256": "a393a07daf3045b8d3fba098aa50fad1f3f8aca40c7052954430c49489017381",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/wild-cats-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/jaguar-wild-cats-v1/feed.png"
+        },
+        "display": {
+          "action": "display",
+          "sha256": "a393a07daf3045b8d3fba098aa50fad1f3f8aca40c7052954430c49489017381",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/wild-cats-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/jaguar-wild-cats-v1/display.png"
+        },
+        "chase": {
+          "action": "chase",
+          "sha256": "a393a07daf3045b8d3fba098aa50fad1f3f8aca40c7052954430c49489017381",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/wild-cats-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/jaguar-wild-cats-v1/chase.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-jaguar-wild-cats-v1",
+        "fingerprint": "bafd6836747340e22520244e536ce397fc0e40cdbe9d0ce73a64694243940b56",
+        "model": "public/demos/wildlife-3d/jaguar-wild-cats-v1/model.glb",
+        "source": "public/demos/wildlife-3d/jaguar-wild-cats-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/jaguar-wild-cats-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/wild-cats-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-leopard-predator-v1",
@@ -3528,7 +3695,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-camel-pack-mounts-v1",
+        "sha256": "77209b5e268a45cf9c9f43ee45432b57dac7409251bb66b69c4a0b39708a11c7",
+        "states": ["action", "flee", "idle", "ride", "ride-sprint", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/pack-mounts-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-camel-pack-mounts-v1",
         "fingerprint": "0b5e55f294c5814b18de5b9471cd857787298492052af3512b5da7e1b4b452db",
@@ -3610,7 +3784,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-elephant-canopy-and-fruit-v1",
+        "sha256": "cf70da0c4c71aae8026bf91997ec3c259edb5cb1419c3cab1918dd69fd53c7a1",
+        "states": ["action", "curl", "eat", "flee", "idle", "reach", "shake", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/canopy-and-fruit-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-elephant-canopy-and-fruit-v1",
         "fingerprint": "c01171b37f91839a3f27eb0175901803632465169e612199b0b4a905f9977719",
@@ -3929,7 +4110,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-giraffe-canopy-and-fruit-v1",
+        "sha256": "7f2324138d34a47b4e76186087df2839b33c58aca291f2a666f982c3f7b0c6cb",
+        "states": ["action", "browse", "flee", "idle", "lower", "reach", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/canopy-and-fruit-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-giraffe-canopy-and-fruit-v1",
         "fingerprint": "4debab0e87047c8b0c60794e29d4e1e349be894ccd9c3cdb611b481b3e17b0eb",
@@ -4098,7 +4286,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-malayan-tapir-woodland-browsers-v1",
+        "sha256": "54d6f41657a1edf81a09ae89524ea07b5730f6d225ba76fe6ad18d79424dc7e3",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/woodland-browsers-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-malayan-tapir-woodland-browsers-v1",
         "fingerprint": "e26b3e0cf3389ed38f2ec1925b912fd1b360e6ed1b6e3635a11f02d235c18987",
@@ -4274,7 +4469,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-okapi-woodland-browsers-v1",
+        "sha256": "aefbdc5b397679cb9fffa9cfdbfb3ac5c7c29020948b5a95fd2052cd655976a4",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/woodland-browsers-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-okapi-woodland-browsers-v1",
         "fingerprint": "3bcc4ab6de9fa3939d5583bfa49fa7533dcf623714aee22043fac4b862d25a00",
@@ -4450,7 +4652,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-elephant-upright-upright-herbivores-v1",
+        "sha256": "3ecae9181dd0625f21460e5833ac8f87f397dc3e21fbf22a10943421f2a844f2",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/upright-herbivores-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-elephant-upright-upright-herbivores-v1",
         "fingerprint": "bdc65ab17b0b0d9956f1daebd83bb51ab456df346a557346fa063fa76a57d938",
@@ -4504,7 +4713,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-giraffe-upright-upright-herbivores-v1",
+        "sha256": "47800c6f8439c105fdf74495c4b8186c695020521b6f4c381250320d406c526a",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/upright-herbivores-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-giraffe-upright-upright-herbivores-v1",
         "fingerprint": "b5dfb4b3ff3dc68a1d5efdf656072e9f477ce3500dc073a57fcdad5937117045",
@@ -4769,7 +4985,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-deer-woodland-browsers-v1",
+        "sha256": "79acb931a4656556579d52bcb670852027d51ba70a4bda8ace4a41cb743da92c",
+        "states": ["action", "browse", "flee", "idle", "lower", "raise", "stamp", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/woodland-browsers-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-deer-woodland-browsers-v1",
         "fingerprint": "c4616fc715c88310c26ac56f014a9ee55078e5bff6b6e03ea15ae1ccd8db2fce",
