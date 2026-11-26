@@ -44,6 +44,16 @@ export const FAUNA_TORSO_FITS: Readonly<
   "gemsbok-oryx": [8.5, 17],
   gerenuk: [7, 18],
   "malayan-tapir": [15, 17],
+  aardvark: [7.5, 11],
+  armadillo: [9.5, 7.5],
+  "giant-anteater": [8.5, 11],
+  echidna: [8.5, 6.5],
+  pangolin: [10.5, 9.5],
+  hedgehog: [8, 6],
+  porcupine: [7, 7],
+  meerkat: [7.5, 9],
+  beaver: [11, 8.5],
+  panda: [14, 14],
 };
 
 export function centeredTorsoCollider(size: number, support: number): ColliderComponent {
