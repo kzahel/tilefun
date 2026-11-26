@@ -4,6 +4,8 @@ A ground animal supports the player on one flat-topped, axis-aligned cuboid. Cen
 
 ![Sheep before and after the centered 10 px torso fit](wildlife-contact-fit/sheep.png)
 
+[View the before-and-after gallery for all 30 animals](wildlife-contact-fit/gallery.html).
+
 ## Run a batch
 
 Choose about ten exact entity type IDs from [the default models](../src/wildlife/default-models.json). Name the IDs explicitly because classic, provisional and coat variants can have different models or gameplay. Save a baseline outside the checkout before editing.
