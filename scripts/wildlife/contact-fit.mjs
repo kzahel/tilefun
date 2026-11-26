@@ -178,6 +178,9 @@ for (const type of types) {
   const model = WILDLIFE_DEFAULT_MODELS.find((m) => m.type === type);
   const collider = ENTITY_DEFS[type]?.collider;
   if (!model || !collider) throw Error(`Unknown modeled entity: ${type}`);
+  if (values.before && previous[type]?.model !== model.id) {
+    throw Error(`Baseline must contain the current model ${model.id} for ${type}`);
+  }
   const box = { ...getEntityAABB({ wx: 0, wy: 0 }, collider), height: collider.physicalHeight };
   const { scene, animations, parts } = await sourceParts(model);
   const mixer = new AnimationMixer(scene);

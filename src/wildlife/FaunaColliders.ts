@@ -16,6 +16,16 @@ export const FAUNA_TORSO_FITS: Readonly<
   camel: [11, 19],
   horse: [9, 18], // Keep the established saddle and jump height.
   cat: [4, 7],
+  mule: [9, 16],
+  llama: [9.5, 18.5],
+  alpaca: [10, 15],
+  zebra: [8.5, 15],
+  impala: [7, 17],
+  gazelle: [7, 15.5],
+  springbok: [6.5, 15.5],
+  "saiga-antelope": [8.5, 15],
+  okapi: [9.5, 16],
+  warthog: [11, 10.5],
 };
 
 export function faunaCollider({ species, body }: FaunaProfile): ColliderComponent {
