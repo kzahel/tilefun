@@ -11995,7 +11995,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:277"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:278"
         },
         {
           "system": "Gameplay",
@@ -32377,7 +32377,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:277"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:278"
         },
         {
           "system": "Gameplay",
@@ -38129,7 +38129,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:190"
+          "source": "src/entities/EntityDefs.ts:191"
         },
         {
           "system": "Gameplay",
@@ -38379,7 +38379,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:230"
+          "source": "src/entities/EntityDefs.ts:231"
         },
         {
           "system": "Gameplay",
@@ -38537,15 +38537,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/Cow.ts:12"
+          "source": "src/entities/Cow.ts:28"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/Cow.ts:16"
+          "source": "src/entities/Cow.ts:32"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:259"
+          "source": "src/entities/EntityDefs.ts:260"
         },
         {
           "system": "World generation",
@@ -38566,6 +38566,14 @@
         {
           "system": "Gameplay",
           "source": "src/scenarios/NaturalLandscapeRecipe.ts:197"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/server/RealmRiding.ts:96"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/server/RealmRiding.ts:203"
         },
         {
           "system": "Gameplay",
@@ -38650,6 +38658,10 @@
         {
           "system": "Gameplay",
           "source": "src/wildlife/WildlifeModelReviewBank.ts:49"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/predatorAI.ts:98"
         }
       ]
     },
@@ -38683,7 +38695,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:289"
+          "source": "src/entities/EntityDefs.ts:284"
         },
         {
           "system": "Gameplay",
@@ -38761,7 +38773,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:314"
+          "source": "src/entities/EntityDefs.ts:309"
         },
         {
           "system": "Gameplay",
@@ -38803,7 +38815,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:339"
+          "source": "src/entities/EntityDefs.ts:334"
         },
         {
           "system": "Gameplay",
@@ -38849,7 +38861,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:361"
+          "source": "src/entities/EntityDefs.ts:356"
         },
         {
           "system": "Gameplay",
@@ -38895,7 +38907,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:383"
+          "source": "src/entities/EntityDefs.ts:378"
         },
         {
           "system": "Gameplay",
@@ -38957,7 +38969,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:405"
+          "source": "src/entities/EntityDefs.ts:400"
         },
         {
           "system": "Gameplay",
@@ -39003,11 +39015,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:502"
+          "source": "src/entities/EntityDefs.ts:497"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:504"
+          "source": "src/entities/EntityDefs.ts:499"
         },
         {
           "system": "Gameplay",
@@ -39053,7 +39065,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:517"
+          "source": "src/entities/EntityDefs.ts:512"
         },
         {
           "system": "Gameplay",
@@ -39187,7 +39199,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:542"
+          "source": "src/entities/EntityDefs.ts:537"
         },
         {
           "system": "Gameplay",
@@ -39365,7 +39377,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:210"
+          "source": "src/entities/EntityDefs.ts:211"
         },
         {
           "system": "Gameplay",
@@ -39453,7 +39465,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/WoodlandWork.ts:376"
+          "source": "src/wildlife/WoodlandWork.ts:378"
         },
         {
           "system": "Gameplay",
@@ -39487,11 +39499,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:443"
+          "source": "src/entities/EntityDefs.ts:438"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:445"
+          "source": "src/entities/EntityDefs.ts:440"
         },
         {
           "system": "Gameplay",
@@ -39545,11 +39557,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:472"
+          "source": "src/entities/EntityDefs.ts:467"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:474"
+          "source": "src/entities/EntityDefs.ts:469"
         },
         {
           "system": "Gameplay",

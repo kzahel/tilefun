@@ -4,7 +4,7 @@ A ground animal supports the player on one flat-topped, axis-aligned cuboid. Cen
 
 ![Sheep before and after the centered 10 px torso fit](wildlife-contact-fit/sheep.png)
 
-[View the before-and-after gallery for all 30 animals](wildlife-contact-fit/gallery.html).
+[View the before-and-after gallery for all 95 animals](wildlife-contact-fit/gallery.html).
 
 ## Run a batch
 
@@ -49,3 +49,23 @@ For each animal, height error is the largest absolute difference between the box
 All 30 centered drops settled within 0.02 px of the authored height. Players dropped just clear of either tested edge reached the ground. Every footprint’s 25 interior sample points projected onto the torso in all sampled poses, headings and cameras. Footprint sides span 82–99% of the smaller measured torso width; the base cat has the smallest absolute platform at 4 px. The elephant has the largest residual height difference at 4.3 px because its two cameras draw the back at different heights. The horse kept its existing 18 px saddle.
 
 Batch 1 established that a fitted height must also reach saved riders and the Workshop’s **Hop onto** control. Normal jumps reached the sheep from two directions in the game scenario with the sheep held stationary. Batch 2 exposed an off-edge checker failure that reproduced on bare terrain. Moving the targets to tile centers let the reviewer retain rounded fits and verify sustained support. Batch 3 used that revised prompt and fixture on both heavy herds and smaller mammals. Future batches can reuse this workflow for modeled ground quadrupeds. Human play feedback remains the check on feel.
+
+## Basic ground animals, 2026-11-26
+
+Seven more supervised batches covered the remaining 65 basic ground types on the default model roster. Each used a fresh Sol 6.2 high worker through Yep Anywhere v0 with bypass enabled. The supervisor compared an independent before/after geometry report, reviewed the overlays, verified center and edge landings and committed each batch.
+
+| Batch | Animals | Median error before (px) | Median error after (px) |
+| --- | --- | ---: | ---: |
+| 4 | Classic cow, white-tailed deer, black cat, ginger cat, base dog, golden retriever, shepherd, gemsbok, gerenuk, Malayan tapir | 10.55 | 1.10 |
+| 5 | Bobcat, cheetah, jaguar, leopard, lion, lynx, panther, tiger, brown bear, polar bear | 14.25 | 2.30 |
+| 6 | Aardvark, armadillo, giant anteater, echidna, pangolin, hedgehog, porcupine, meerkat, beaver, panda | 8.65 | 1.15 |
+| 7 | Coyote, dire wolf, grey wolf, spotted hyena, fossa, honey badger, mongoose, Tasmanian devil, white-nosed coati, red fox | 12.40 | 1.45 |
+| 8 | Chinchilla, guinea pig, hamster, mouse, rat, opossum, raccoon, skunk, quokka, binturong | 7.55 | 1.10 |
+| 9 | Alligator, crocodile, Komodo dragon, chameleon, frilled-neck lizard, gecko, iguana, land tortoise, Texas horned lizard, salamander | 8.50 | 2.80 |
+| 10 | Aye-aye, kinkajou, koala, sloth, newt | 7.70 | 2.00 |
+
+Across the 65 animals, the median worst-case back-height error fell from 9.9 to 1.6 px. All 65 centered drops reached the fitted back within 0.02 px. All 130 off-edge drops reached the ground. Every interior footprint sample fell on the torso across the tested headings, poses and cameras. The largest remaining height discrepancies are on the dire wolf (7 px) and land tortoise (5.5 px), whose two cameras draw the same back at substantially different heights.
+
+The classic cow keeps its nearby-jump mounting range and restores riders saved at its previous height. Fitted predators and prey retain their authored horizontal hunting reach. Actual body contact also allows a grounded catch when the centered box reaches the prey first, as verified with a naturally spawned Tasmanian devil and rabbit. The raccoon uses its body width to find cover after a cache raid. In the two food-chain demos the T. rex starts 8 px closer to the wolf so it can finish the chase inside its territory. Both demos exercise the ordinary simulation and retain their respective respawn behavior after reload. The final wildlife suite passed all 2,103 tests across 99 files.
+
+The original 30 fits and these 65 complete the basic ground pass. Eight ground-walking primates remain for a separate review of their hand and knuckle contact. They are the capuchin monkey, chimpanzee, gorilla, Japanese macaque, mandrill, orangutan, proboscis monkey and ring-tailed lemur. Swimmers, hoppers, winged creatures and upright companions need their own locomotion review.
