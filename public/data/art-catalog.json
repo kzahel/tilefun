@@ -9746,6 +9746,46 @@
       "source": "demos/wildlife-3d/pangolin-insect-eating-mammals-v1/model.blend"
     },
     {
+      "id": "wildlife-3d-cricket-hoppers-and-beetles-v1",
+      "name": "wildlife 3d cricket hoppers and beetles v1",
+      "image": "demos/wildlife-3d/cricket-hoppers-and-beetles-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "da4d95217b1996d5a083b6bd8cb834fea496d6f30e7ffd482447d860a1161d8b",
+      "source": "demos/wildlife-3d/cricket-hoppers-and-beetles-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-grasshopper-hoppers-and-beetles-v1",
+      "name": "wildlife 3d grasshopper hoppers and beetles v1",
+      "image": "demos/wildlife-3d/grasshopper-hoppers-and-beetles-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "52e39664b5b5b773dd0e2349214b1598683d6260ab7bb45b010390d2bf1dcf65",
+      "source": "demos/wildlife-3d/grasshopper-hoppers-and-beetles-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-ladybug-hoppers-and-beetles-v1",
+      "name": "wildlife 3d ladybug hoppers and beetles v1",
+      "image": "demos/wildlife-3d/ladybug-hoppers-and-beetles-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "9de8ad365d08bb0dce338812f6e703a7143c637bc666c5c680288a10bf0ae743",
+      "source": "demos/wildlife-3d/ladybug-hoppers-and-beetles-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-stag-beetle-hoppers-and-beetles-v1",
+      "name": "wildlife 3d stag beetle hoppers and beetles v1",
+      "image": "demos/wildlife-3d/stag-beetle-hoppers-and-beetles-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "6d06d9bd13259856a5507b50173ca785edbfe95ecadea4d3a8deecd9a1cc2b7c",
+      "source": "demos/wildlife-3d/stag-beetle-hoppers-and-beetles-v1/model.blend"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",

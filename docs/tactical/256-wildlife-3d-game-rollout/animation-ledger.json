@@ -2362,7 +2362,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-llama-plateau-herbivores-v1",
+        "sha256": "ae5581e0d848445fa136cce04341eac0ae1be546450943229af33927c57e8edc",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/plateau-herbivores-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-llama-plateau-herbivores-v1",
         "fingerprint": "e8af1d7952c795596e923bf8cabcfa97906165559c398047e4002809bef37c55",
@@ -2484,7 +2491,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-alpaca-plateau-herbivores-v1",
+        "sha256": "453734abca89ae91cd94098e79282174e9339258cb21350dae558e903d4efcc6",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/plateau-herbivores-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-alpaca-plateau-herbivores-v1",
         "fingerprint": "6aecc3d67ac7b08a0e02c54f663e66476d89840291d1a6e44a5d8cfcda5519fb",
@@ -3439,7 +3453,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-american-bison-heavy-herds-v1",
+        "sha256": "a6b486024779c8e224287b2a79dda40b609b2b864524a1cd9d8bb7e9e68f19ee",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/heavy-herds-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-american-bison-heavy-herds-v1",
         "fingerprint": "e6b858035a31045c96fd1ade96b3a1476f3785844d5509f9bccf5b1c7a1af407",
@@ -3704,7 +3725,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-gazelle-browsing-antelopes-v1",
+        "sha256": "3cf241e2bd27f92f4ddccc2cac0337824759f026af912e98d8042b87b2bdb2da",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/browsing-antelopes-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-gazelle-browsing-antelopes-v1",
         "fingerprint": "66fb486739dc3a6da2249d4b57d9c5893df948aa4c697598f6a8d62fb0195611",
@@ -3758,7 +3786,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-gemsbok-oryx-browsing-antelopes-v1",
+        "sha256": "df546a563e86d23d183c5604e203fa9b83531056fc3468c09396d634f7e4a57b",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/browsing-antelopes-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-gemsbok-oryx-browsing-antelopes-v1",
         "fingerprint": "7a9d72a2cdb9cd4cd3678f00e5bd05a5434920967d5d01edd18d5c896f9834df",
@@ -3812,7 +3847,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-gerenuk-browsing-antelopes-v1",
+        "sha256": "2d0a98c0db5cf9f21fbf09bd955bf1088270bda87b0d4da5f6db286cb97c9741",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/browsing-antelopes-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-gerenuk-browsing-antelopes-v1",
         "fingerprint": "7e633e2fea5c7f9846e0e3f0271045e495ae71d6f44c840c23a4fff9bd223fc7",
@@ -3995,7 +4037,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-impala-dryland-grazers-v1",
+        "sha256": "390090b11edd28dff6608536c010851246036a2fff89de28586444f6f7929a0e",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/dryland-grazers-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-impala-dryland-grazers-v1",
         "fingerprint": "a4ccadd31dd2686744ba42df2e955dede4595a2914f071f58f5ae81ef3e5a38e",
@@ -4164,7 +4213,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-musk-ox-heavy-herds-v1",
+        "sha256": "9c66d48ccdb6a5e521701ab5cece7e14c959a48994a27a1e53ab54c8ad266955",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/heavy-herds-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-musk-ox-heavy-herds-v1",
         "fingerprint": "372eea21d307d04d57efe68ca002f825ff2d21ec1be740050534fd77616973a7",
@@ -4272,7 +4328,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-saiga-antelope-dryland-grazers-v1",
+        "sha256": "259bdb0a8d7f1296f2f6273c035a8e239ac6cd09ba4405a071c46cc4eb65df70",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/dryland-grazers-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-saiga-antelope-dryland-grazers-v1",
         "fingerprint": "d8b2b37b91e6fa41aab3d9ff1d89cf5d8d6e18bb2cf4acefefb9e28d3caeb364",
@@ -4326,7 +4389,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-springbok-browsing-antelopes-v1",
+        "sha256": "71920e9c848e2b5b97cc37f43d1784d45d2ff5bd70cfeb62e3945564cea05403",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/browsing-antelopes-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-springbok-browsing-antelopes-v1",
         "fingerprint": "95fac1870d432403e55ade34fa49c3f25316c169520af46750b673679467d3e1",
@@ -4488,7 +4558,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-warthog-plateau-herbivores-v1",
+        "sha256": "c8da08a8715fbf7de5a6390499cf64adeac8448c55b2e1536e4c5fc34dc11cae",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/plateau-herbivores-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-warthog-plateau-herbivores-v1",
         "fingerprint": "3b635f8cf56d425d3ae0fed3df5252b13372a422e49eb9e8459e1c370ccff897",
@@ -4542,7 +4619,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-water-buffalo-heavy-herds-v1",
+        "sha256": "f9a1cecee2d8beae734e77555068e49892b3041cc1a7ac2e7915cf5933b1f936",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/heavy-herds-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-water-buffalo-heavy-herds-v1",
         "fingerprint": "a8f6f77bfc3e7578f349c871a1bef4abd36df21f7cefd5294847b00655315d32",
@@ -4596,7 +4680,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-rhinoceros-dryland-grazers-v1",
+        "sha256": "0340082e3911c5d3b4fec9270efc2136183e0f9e0dddc016061055a62775f779",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/dryland-grazers-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-rhinoceros-dryland-grazers-v1",
         "fingerprint": "4b55532fd7e83cb8510226bbced9250fa6f8617d0439f948bc7dca2d4d62df99",
@@ -4732,7 +4823,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-wildebeest-heavy-herds-v1",
+        "sha256": "0687d5e0cc85ec6a03aa233e2dadf25da433e22ba4f7f3d1853482de8e667086",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/heavy-herds-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-wildebeest-heavy-herds-v1",
         "fingerprint": "d470510bf69a0dbc36733ad7896eae90b0ffda70a2b75e5604c20d504b08a204",
@@ -4786,7 +4884,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "98176019b38a02b6d55cbe1feedb88d1a211b8a2",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-zebra-dryland-grazers-v1",
+        "sha256": "dfc45e47daa040f68bc93af1eb5be295bf2e587dd6f63f91cdd6d7022f3d4905",
+        "states": ["action", "flee", "idle", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/dryland-grazers-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-zebra-dryland-grazers-v1",
         "fingerprint": "a146767d70113a7b5b2a3b0579e389833200bbabb44605fd474b651de6100a96",
@@ -4875,9 +4980,43 @@
         "action": "action",
         "flee": "hop"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "aaf3eb712eedc006e444b7b279a99313436c15e8fbf0a7093d4f3f0f6eef679e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/hoppers-and-beetles-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/cricket-hoppers-and-beetles-v1/native.png"
+        },
+        "hop": {
+          "action": "hop",
+          "sha256": "aaf3eb712eedc006e444b7b279a99313436c15e8fbf0a7093d4f3f0f6eef679e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/hoppers-and-beetles-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/cricket-hoppers-and-beetles-v1/hop.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "aaf3eb712eedc006e444b7b279a99313436c15e8fbf0a7093d4f3f0f6eef679e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/hoppers-and-beetles-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/cricket-hoppers-and-beetles-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "aaf3eb712eedc006e444b7b279a99313436c15e8fbf0a7093d4f3f0f6eef679e",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/hoppers-and-beetles-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/cricket-hoppers-and-beetles-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-cricket-hoppers-and-beetles-v1",
+        "fingerprint": "f1f2428b502f9b00461a64bb966ebd92a0fa882edf088bc5b379d33ed29454e2",
+        "model": "public/demos/wildlife-3d/cricket-hoppers-and-beetles-v1/model.glb",
+        "source": "public/demos/wildlife-3d/cricket-hoppers-and-beetles-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/cricket-hoppers-and-beetles-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/hoppers-and-beetles-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-dragonfly-provisional-v1",
@@ -4955,9 +5094,43 @@
         "action": "action",
         "flee": "hop"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "1f48ac2eb6b3a0470fab2cf8f9ace9cda91dc221a6c96d497a9f6c48c3fc5786",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/hoppers-and-beetles-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/grasshopper-hoppers-and-beetles-v1/native.png"
+        },
+        "hop": {
+          "action": "hop",
+          "sha256": "1f48ac2eb6b3a0470fab2cf8f9ace9cda91dc221a6c96d497a9f6c48c3fc5786",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/hoppers-and-beetles-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/grasshopper-hoppers-and-beetles-v1/hop.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "1f48ac2eb6b3a0470fab2cf8f9ace9cda91dc221a6c96d497a9f6c48c3fc5786",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/hoppers-and-beetles-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/grasshopper-hoppers-and-beetles-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "1f48ac2eb6b3a0470fab2cf8f9ace9cda91dc221a6c96d497a9f6c48c3fc5786",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/hoppers-and-beetles-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/grasshopper-hoppers-and-beetles-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-grasshopper-hoppers-and-beetles-v1",
+        "fingerprint": "970c562d4fe6e1e93b233d84b9f3ac8db0227c24d20ab4478fb40da7d6281b6b",
+        "model": "public/demos/wildlife-3d/grasshopper-hoppers-and-beetles-v1/model.glb",
+        "source": "public/demos/wildlife-3d/grasshopper-hoppers-and-beetles-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/grasshopper-hoppers-and-beetles-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/hoppers-and-beetles-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-ladybug-provisional-v1",
@@ -4975,9 +5148,43 @@
         "action": "action",
         "flee": "fly"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "25f69470649c78c735d6e4ec08e0d078166ef04c5d8c3545f29c215926c2a7fb",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/hoppers-and-beetles-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/ladybug-hoppers-and-beetles-v1/native.png"
+        },
+        "fly": {
+          "action": "fly",
+          "sha256": "25f69470649c78c735d6e4ec08e0d078166ef04c5d8c3545f29c215926c2a7fb",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/hoppers-and-beetles-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/ladybug-hoppers-and-beetles-v1/fly.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "25f69470649c78c735d6e4ec08e0d078166ef04c5d8c3545f29c215926c2a7fb",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/hoppers-and-beetles-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/ladybug-hoppers-and-beetles-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "25f69470649c78c735d6e4ec08e0d078166ef04c5d8c3545f29c215926c2a7fb",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/hoppers-and-beetles-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/ladybug-hoppers-and-beetles-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-ladybug-hoppers-and-beetles-v1",
+        "fingerprint": "0e4e493ab09bdca9e45cb49be273f50bf7b7f04bdc88b7f730fdafdc9e7f3fe0",
+        "model": "public/demos/wildlife-3d/ladybug-hoppers-and-beetles-v1/model.glb",
+        "source": "public/demos/wildlife-3d/ladybug-hoppers-and-beetles-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/ladybug-hoppers-and-beetles-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/hoppers-and-beetles-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-leaf-insect-provisional-v1",
@@ -5117,9 +5324,43 @@
         "action": "action",
         "flee": "fly"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "f1088ac90d18c088b9b5c9868dd0f97df00109bc093327fd5f1e6c2b6c75831b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/hoppers-and-beetles-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/stag-beetle-hoppers-and-beetles-v1/native.png"
+        },
+        "fly": {
+          "action": "fly",
+          "sha256": "f1088ac90d18c088b9b5c9868dd0f97df00109bc093327fd5f1e6c2b6c75831b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/hoppers-and-beetles-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/stag-beetle-hoppers-and-beetles-v1/fly.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "f1088ac90d18c088b9b5c9868dd0f97df00109bc093327fd5f1e6c2b6c75831b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/hoppers-and-beetles-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/stag-beetle-hoppers-and-beetles-v1/action.png"
+        },
+        "flee": {
+          "action": "flee",
+          "sha256": "f1088ac90d18c088b9b5c9868dd0f97df00109bc093327fd5f1e6c2b6c75831b",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/hoppers-and-beetles-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/stag-beetle-hoppers-and-beetles-v1/flee.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-stag-beetle-hoppers-and-beetles-v1",
+        "fingerprint": "82671ffcc0b569c89f2d4de3562070623a1ea5d4be7c70c9ca014997d4aeef37",
+        "model": "public/demos/wildlife-3d/stag-beetle-hoppers-and-beetles-v1/model.glb",
+        "source": "public/demos/wildlife-3d/stag-beetle-hoppers-and-beetles-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/stag-beetle-hoppers-and-beetles-v1/comparison.mp4",
+        "review": "pending",
+        "servedEvidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/hoppers-and-beetles-v1-deployment.json"
+      }
     },
     {
       "type": "wildlife-spider-predator-v1",

@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-grasshopper-provisional-v1",
+  "fit": [
+    9.63,
+    4.58,
+    9
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "hop",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "The folded back and tall hind legs follow the sprite footprint. The hind legs load before a calm hop and extend farther in the separate escape.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-stag-beetle-provisional-v1",
+  "fit": [
+    10.15,
+    5.45,
+    9.33
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "fly",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "The mandibles open in the grounded action. The shell opens in flight, and the separate climb opens the wings wider while tucking the legs.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

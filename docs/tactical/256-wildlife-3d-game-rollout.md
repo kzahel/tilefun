@@ -107,6 +107,23 @@ runtime scope reconciliation in the execution notes.
 
 ## Delivery log
 
+### Hoppers and beetles, 2026-11-26
+
+The cricket and grasshopper load their bent hind legs before kicking. Their
+escape pushes farther and starts sooner. The ladybug and stag beetle open
+their shell halves during flight and tuck their feet during the wider,
+faster escape stroke. All 16 states played in Workshop and reopened game
+worlds through the exact preview links. [Renderer evidence](256-wildlife-3d-game-rollout/evidence/hoppers-and-beetles-v1-runtime.json) ·
+[Public preview evidence](256-wildlife-3d-game-rollout/evidence/hoppers-and-beetles-v1-deployment.json) ·
+[Workshop review](https://tilefun.graehlarts.com/tilefun/workshop.html#/review/pattern%3Awildlife-3d-cricket-hoppers-and-beetles-v1)
+
+Production playback also covered the four browsing antelopes, four heavy
+herd species, four dryland grazers, and three pasture and savanna species.
+[Browsing antelopes](256-wildlife-3d-game-rollout/evidence/browsing-antelopes-v1-default.json) ·
+[Heavy herds](256-wildlife-3d-game-rollout/evidence/heavy-herds-v1-default.json) ·
+[Dryland grazers](256-wildlife-3d-game-rollout/evidence/dryland-grazers-v1-default.json) ·
+[Pasture and savanna](256-wildlife-3d-game-rollout/evidence/plateau-herbivores-v1-default.json)
+
 ### Insect-eating mammals, 2026-11-26
 
 The aardvark scrapes with its forefeet and lowers its nose. The giant

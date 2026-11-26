@@ -1,0 +1,134 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-cricket-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "hop",
+          "action": "hop",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 320
+        }
+      ],
+      "candidateId": "cricket-hoppers-and-beetles-v1",
+      "modelSha256": "aaf3eb712eedc006e444b7b279a99313436c15e8fbf0a7093d4f3f0f6eef679e"
+    },
+    {
+      "type": "wildlife-grasshopper-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "hop",
+          "action": "hop",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 320
+        }
+      ],
+      "candidateId": "grasshopper-hoppers-and-beetles-v1",
+      "modelSha256": "1f48ac2eb6b3a0470fab2cf8f9ace9cda91dc221a6c96d497a9f6c48c3fc5786"
+    },
+    {
+      "type": "wildlife-ladybug-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "fly",
+          "action": "fly",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 400
+        }
+      ],
+      "candidateId": "ladybug-hoppers-and-beetles-v1",
+      "modelSha256": "25f69470649c78c735d6e4ec08e0d078166ef04c5d8c3545f29c215926c2a7fb"
+    },
+    {
+      "type": "wildlife-stag-beetle-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "fly",
+          "action": "fly",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 400
+        }
+      ],
+      "candidateId": "stag-beetle-hoppers-and-beetles-v1",
+      "modelSha256": "f1088ac90d18c088b9b5c9868dd0f97df00109bc093327fd5f1e6c2b6c75831b"
+    }
+  ],
+  "clipSamples": 448,
+  "testedDepth": false
+}

@@ -988,6 +988,12 @@
       "toolId": "animal-browser"
     },
     {
+      "id": "wildlife-3d-hoppers-and-beetles-v1",
+      "name": "3D wildlife · hoppers and beetles v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
       "id": "motion",
       "name": "Furniture movement sets",
       "description": "Default layouts and physics. Custom layouts remain individually reviewable in the tool.",
@@ -62815,7 +62821,175 @@
           "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-pangolin-insect-eating-mammals-v1"
         }
       }
+    },
+    {
+      "id": "pattern:wildlife-3d-cricket-hoppers-and-beetles-v1",
+      "batchId": "wildlife-3d-hoppers-and-beetles-v1",
+      "kind": "wildlife",
+      "name": "Cricket",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-cricket-hoppers-and-beetles-v1",
+      "fingerprint": "f1f2428b502f9b00461a64bb966ebd92a0fa882edf088bc5b379d33ed29454e2",
+      "sourceFingerprint": "da4d95217b1996d5a083b6bd8cb834fea496d6f30e7ffd482447d860a1161d8b",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-cricket-hoppers-and-beetles-v1",
+        "prefabIds": [],
+        "revision": "bd382f5f6efb619f285f96c7bb7ebdc8951c79b47382ff0f21cb340ab2ef1df8",
+        "renderFingerprint": "f1f2428b502f9b00461a64bb966ebd92a0fa882edf088bc5b379d33ed29454e2",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-cricket-hoppers-and-beetles-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-cricket-hoppers-and-beetles-v1",
+        "fingerprint": "da4d95217b1996d5a083b6bd8cb834fea496d6f30e7ffd482447d860a1161d8b",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-cricket-hoppers-and-beetles-v1",
+          "prefabIds": [],
+          "revision": "bd382f5f6efb619f285f96c7bb7ebdc8951c79b47382ff0f21cb340ab2ef1df8",
+          "renderFingerprint": "f1f2428b502f9b00461a64bb966ebd92a0fa882edf088bc5b379d33ed29454e2",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-cricket-hoppers-and-beetles-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-grasshopper-hoppers-and-beetles-v1",
+      "batchId": "wildlife-3d-hoppers-and-beetles-v1",
+      "kind": "wildlife",
+      "name": "Grasshopper",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-grasshopper-hoppers-and-beetles-v1",
+      "fingerprint": "970c562d4fe6e1e93b233d84b9f3ac8db0227c24d20ab4478fb40da7d6281b6b",
+      "sourceFingerprint": "52e39664b5b5b773dd0e2349214b1598683d6260ab7bb45b010390d2bf1dcf65",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-grasshopper-hoppers-and-beetles-v1",
+        "prefabIds": [],
+        "revision": "74fc66ff955cdc998c6f8a493973c1cef3564594969ac33c2e18e5b46bd50aa1",
+        "renderFingerprint": "970c562d4fe6e1e93b233d84b9f3ac8db0227c24d20ab4478fb40da7d6281b6b",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-grasshopper-hoppers-and-beetles-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-grasshopper-hoppers-and-beetles-v1",
+        "fingerprint": "52e39664b5b5b773dd0e2349214b1598683d6260ab7bb45b010390d2bf1dcf65",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-grasshopper-hoppers-and-beetles-v1",
+          "prefabIds": [],
+          "revision": "74fc66ff955cdc998c6f8a493973c1cef3564594969ac33c2e18e5b46bd50aa1",
+          "renderFingerprint": "970c562d4fe6e1e93b233d84b9f3ac8db0227c24d20ab4478fb40da7d6281b6b",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-grasshopper-hoppers-and-beetles-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-ladybug-hoppers-and-beetles-v1",
+      "batchId": "wildlife-3d-hoppers-and-beetles-v1",
+      "kind": "wildlife",
+      "name": "Ladybug",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-ladybug-hoppers-and-beetles-v1",
+      "fingerprint": "0e4e493ab09bdca9e45cb49be273f50bf7b7f04bdc88b7f730fdafdc9e7f3fe0",
+      "sourceFingerprint": "9de8ad365d08bb0dce338812f6e703a7143c637bc666c5c680288a10bf0ae743",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-ladybug-hoppers-and-beetles-v1",
+        "prefabIds": [],
+        "revision": "6eb4650c0f2589bb50e04a0e031eb07b02617862bdaf769768bee87ebfb27218",
+        "renderFingerprint": "0e4e493ab09bdca9e45cb49be273f50bf7b7f04bdc88b7f730fdafdc9e7f3fe0",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-ladybug-hoppers-and-beetles-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-ladybug-hoppers-and-beetles-v1",
+        "fingerprint": "9de8ad365d08bb0dce338812f6e703a7143c637bc666c5c680288a10bf0ae743",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-ladybug-hoppers-and-beetles-v1",
+          "prefabIds": [],
+          "revision": "6eb4650c0f2589bb50e04a0e031eb07b02617862bdaf769768bee87ebfb27218",
+          "renderFingerprint": "0e4e493ab09bdca9e45cb49be273f50bf7b7f04bdc88b7f730fdafdc9e7f3fe0",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-ladybug-hoppers-and-beetles-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-stag-beetle-hoppers-and-beetles-v1",
+      "batchId": "wildlife-3d-hoppers-and-beetles-v1",
+      "kind": "wildlife",
+      "name": "Stag beetle",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-stag-beetle-hoppers-and-beetles-v1",
+      "fingerprint": "82671ffcc0b569c89f2d4de3562070623a1ea5d4be7c70c9ca014997d4aeef37",
+      "sourceFingerprint": "6d06d9bd13259856a5507b50173ca785edbfe95ecadea4d3a8deecd9a1cc2b7c",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-stag-beetle-hoppers-and-beetles-v1",
+        "prefabIds": [],
+        "revision": "2fc2c3b0a054985ddbe243a6272a1839cc4d528a3079ea66500d8a60ad4c5099",
+        "renderFingerprint": "82671ffcc0b569c89f2d4de3562070623a1ea5d4be7c70c9ca014997d4aeef37",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-stag-beetle-hoppers-and-beetles-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-stag-beetle-hoppers-and-beetles-v1",
+        "fingerprint": "6d06d9bd13259856a5507b50173ca785edbfe95ecadea4d3a8deecd9a1cc2b7c",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-stag-beetle-hoppers-and-beetles-v1",
+          "prefabIds": [],
+          "revision": "2fc2c3b0a054985ddbe243a6272a1839cc4d528a3079ea66500d8a60ad4c5099",
+          "renderFingerprint": "82671ffcc0b569c89f2d4de3562070623a1ea5d4be7c70c9ca014997d4aeef37",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-stag-beetle-hoppers-and-beetles-v1"
+        }
+      }
     }
   ],
-  "inputDigest": "78b2a6a289d5acb7533fa4ec77dd45a71413ed08a5791bf57df8562613b79cb5"
+  "inputDigest": "7418475fb8c76fd8ead6af42b759f378875df6bf359ca583131913e1c128844d"
 }

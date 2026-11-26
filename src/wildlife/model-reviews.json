@@ -3485,5 +3485,97 @@
       "native.png": "214b76a69357c6e9b1d490fa284e76ddd3000e5af40730cab139456c6596cf03",
       "walk.png": "4205cac55807ebb14aff8b77c005000dd19d091d53c9674af0d18568d2fd791c"
     }
+  },
+  {
+    "id": "cricket-hoppers-and-beetles-v1",
+    "type": "wildlife-cricket-provisional-v1",
+    "name": "Cricket",
+    "batch": "wildlife-3d-hoppers-and-beetles-v1",
+    "lab": "cricket",
+    "scale": 9.76,
+    "topDown": {
+      "width": 1.0850409836065573,
+      "height": 0.5163934426229508
+    },
+    "files": {
+      "action.png": "9e7a6fc0d973d176677f74c5a0dacaa7886c7c97da1a6f84801f1c38a9caa869",
+      "appearance.png": "da4d95217b1996d5a083b6bd8cb834fea496d6f30e7ffd482447d860a1161d8b",
+      "capture-config.json": "5beb2266de2024b9cb5dc9cbb7306b5f5553630e5dc974fdb43d8734ae7f1fba",
+      "comparison.mp4": "6cd03abf68160df83958c5bec6cadb618efa162a5143f53ff9a101a219e6d3b4",
+      "flee.png": "354dc7a92a82cb0c9d46f2335dc33f02bc46de82a2c06fe990de401f9ca58be7",
+      "hop.png": "d24e06986cfbf36e079a3903353b26f57fe369f8a25affb14181461e2c87d148",
+      "model.blend": "c2425bd00f4e9012c385720d0783aafdea558b811c2cc67531e7f6c50a6955f0",
+      "model.glb": "aaf3eb712eedc006e444b7b279a99313436c15e8fbf0a7093d4f3f0f6eef679e",
+      "native.png": "b4f7378a6cff780d623ea0ac4a2b8fcd50dc3e63a4531c2f04a0a186af105813"
+    }
+  },
+  {
+    "id": "grasshopper-hoppers-and-beetles-v1",
+    "type": "wildlife-grasshopper-provisional-v1",
+    "name": "Grasshopper",
+    "batch": "wildlife-3d-hoppers-and-beetles-v1",
+    "lab": "grasshopper",
+    "scale": 9.26,
+    "topDown": {
+      "width": 1.1436285097192225,
+      "height": 0.4190064794816415
+    },
+    "files": {
+      "action.png": "c36edaa6578ed5651107a508659dfdde31a8c7b2def8a8a67731d51783fa3301",
+      "appearance.png": "52e39664b5b5b773dd0e2349214b1598683d6260ab7bb45b010390d2bf1dcf65",
+      "capture-config.json": "89d2da0b265e66464cdad4e64621bfdc83817b28568084bd8079adbe4991c6fa",
+      "comparison.mp4": "af83984b19c02a178a4718b4b2389504ab23e2a6d9efec8de0e89e902bfe243b",
+      "flee.png": "1d354bbf80b5edd75d61e7e95dbefe86927a0d75bb54f4de9614c80247524c6f",
+      "hop.png": "24f76ac6a0ca885621692f056eae3b433819b6829ec0093616dfedbc8cf4ee18",
+      "model.blend": "cfdaf076225d349733613cdc01b5abe3623be37b609c601425cf4bf89fbf1fed",
+      "model.glb": "1f48ac2eb6b3a0470fab2cf8f9ace9cda91dc221a6c96d497a9f6c48c3fc5786",
+      "native.png": "902620068373832b51e3429205ac4967b78cd255e1f12d395553d7aef0df714d"
+    }
+  },
+  {
+    "id": "ladybug-hoppers-and-beetles-v1",
+    "type": "wildlife-ladybug-provisional-v1",
+    "name": "Ladybug",
+    "batch": "wildlife-3d-hoppers-and-beetles-v1",
+    "lab": "ladybug",
+    "scale": 7.95,
+    "topDown": {
+      "width": 1.561006289308176,
+      "height": 0.44025157232704404
+    },
+    "files": {
+      "action.png": "5dbdad7ec66156b8d74a68f9088cfb32c9934b224388c033bfff054b52adc163",
+      "appearance.png": "9de8ad365d08bb0dce338812f6e703a7143c637bc666c5c680288a10bf0ae743",
+      "capture-config.json": "1a4909eb60e3cc8b5db14926564a28d3ad584a487f406040072ee5585bcb5d8a",
+      "comparison.mp4": "70fc0ff54d0262dabe3a054dc88cc9e82ffdf7e9133dd60ebfc1dda87c0cf1d3",
+      "flee.png": "e4733695dc617dd456d3aa54dcaf631d58659141853f8b68f21ea9e9a1fb4eda",
+      "fly.png": "e21d0104fbe4c573fe8181e3d8d0ec93c1ffbcf3cc2ee5513c9a80e47817f148",
+      "model.blend": "c90ea8dd129406213ab5eca65a6db23c8f620efd6857a77f2462fc4cccec1fce",
+      "model.glb": "25f69470649c78c735d6e4ec08e0d078166ef04c5d8c3545f29c215926c2a7fb",
+      "native.png": "db70a93e0c42854aacd3a0bf73979575fe8c2439de34a4ca5499b2124bf48f1a"
+    }
+  },
+  {
+    "id": "stag-beetle-hoppers-and-beetles-v1",
+    "type": "wildlife-stag-beetle-provisional-v1",
+    "name": "Stag beetle",
+    "batch": "wildlife-3d-hoppers-and-beetles-v1",
+    "lab": "stag-beetle",
+    "scale": 8.89,
+    "topDown": {
+      "width": 1.2564679415073114,
+      "height": 0.6130483689538807
+    },
+    "files": {
+      "action.png": "61daf1c5ccaba1a7e44cf9804e049d6fedb827c31084c9867016fb926f2b9f11",
+      "appearance.png": "6d06d9bd13259856a5507b50173ca785edbfe95ecadea4d3a8deecd9a1cc2b7c",
+      "capture-config.json": "6491487b5e6f524e741c3d6fc49c4f4f3ada7801ee9c28a2303981638faf060a",
+      "comparison.mp4": "45a7ed993155527b3b37107b8e0e66588feb2cc7f23fcb7c7cca0389d41eac0e",
+      "flee.png": "482b5bdae8886292c2e16419f033aef54595ae2c205f0d6458e1af4d3db2e9a6",
+      "fly.png": "e0ad77c7b3cc22ed1706d428a9c33df5f86b06c0fec8bf20b28360ddf6be1840",
+      "model.blend": "420c437b169fe3ff0996dd3b244b0beb7e5499dc62d186c19d10d72d21273426",
+      "model.glb": "f1088ac90d18c088b9b5c9868dd0f97df00109bc093327fd5f1e6c2b6c75831b",
+      "native.png": "7c461786e4820af8ec88fd0fcc92afa7d89922ffc6aeb97ac79af4f21c3d0f00"
+    }
   }
 ]

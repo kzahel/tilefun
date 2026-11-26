@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-ladybug-provisional-v1",
+  "fit": [
+    10.15,
+    4.55,
+    8.75
+  ],
+  "version": 3,
+  "clips": [
+    "idle",
+    "fly",
+    "action",
+    "flee"
+  ],
+  "reviewContext": "The red spotted shells hinge open above the independent flight wings. The escape climbs with wider, quicker strokes and tucked legs.",
+  "autoFit": true,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "rollout": true
+}

@@ -1,0 +1,130 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "7418475fb8c76fd8ead6af42b759f378875df6bf359ca583131913e1c128844d",
+  "results": [
+    {
+      "type": "wildlife-cricket-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "f1f2428b502f9b00461a64bb966ebd92a0fa882edf088bc5b379d33ed29454e2",
+      "modelSha256": "aaf3eb712eedc006e444b7b279a99313436c15e8fbf0a7093d4f3f0f6eef679e",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-cricket&wildlife3dStage=cricket-hoppers-and-beetles-v1&wildlife3dReview=cricket-hoppers-and-beetles-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "hop",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.00009679794311523438,
+        7.910453750610372
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "hop",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-grasshopper-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "970c562d4fe6e1e93b233d84b9f3ac8db0227c24d20ab4478fb40da7d6281b6b",
+      "modelSha256": "1f48ac2eb6b3a0470fab2cf8f9ace9cda91dc221a6c96d497a9f6c48c3fc5786",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-grasshopper&wildlife3dStage=grasshopper-hoppers-and-beetles-v1&wildlife3dReview=grasshopper-hoppers-and-beetles-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "hop",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.08395438003568556,
+        9.909966430664083
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "hop",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-ladybug-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "0e4e493ab09bdca9e45cb49be273f50bf7b7f04bdc88b7f730fdafdc9e7f3fe0",
+      "modelSha256": "25f69470649c78c735d6e4ec08e0d078166ef04c5d8c3545f29c215926c2a7fb",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-ladybug&wildlife3dStage=ladybug-hoppers-and-beetles-v1&wildlife3dReview=ladybug-hoppers-and-beetles-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0000014219284057620437,
+        3.913141139984135
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-stag-beetle-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "82671ffcc0b569c89f2d4de3562070623a1ea5d4be7c70c9ca014997d4aeef37",
+      "modelSha256": "f1088ac90d18c088b9b5c9868dd0f97df00109bc093327fd5f1e6c2b6c75831b",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-stag-beetle&wildlife3dStage=stag-beetle-hoppers-and-beetles-v1&wildlife3dReview=stag-beetle-hoppers-and-beetles-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.003733098983764274,
+        4.913094314575199
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "fly",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}
