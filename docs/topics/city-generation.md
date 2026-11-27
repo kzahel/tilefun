@@ -16,7 +16,7 @@ their northern boat landing. Some remote beaches have an overnight pitch.
 
 | Place | What to look for | Map example |
 | --- | --- | --- |
-| Play yard | A fort or climbing arch with a seesaw, or a basketball half-court with a loose ball | Seed 42, Ferngrove · Basketball green |
+| Play yard | A fort or climbing arch with a seesaw, or a basketball half-court with a loose ball | Seed 42, Ferngrove · Play yard (basketball) |
 | Woodland camp | Pitched tents, a fire circle and a climbable tree house, pond dock or picnic clearing | Seed 2026, Ferngrove · Woodland camp |
 | Garden park | Two approaches to a walking loop, a hedge arch, fountain, flower beds and picnic lawn | Seed 2026, Oakwick · Garden park |
 | Beach | A parasol, towels and sandcastle, with a volleyball court and ball, boat-shaped kiosk or picnic table | Seed 2026, Birchwick · Town beach, or the lakeside kiosk at tile (1234, −259) |
