@@ -16,6 +16,31 @@ export function settlementGreenProps(plan: DenseDistrictPlan): FeaturePlacement[
         px = (p.minX + p.maxX) / 2,
         py = (p.minY + p.maxY) / 2;
       const prefix = i === 0 ? `${plan.id}:green` : `${block.id}:green`;
+      if (i === 0 && plan.playYard !== undefined) {
+        const at = (suffix: string, propType: string, tx: number, ty: number) => ({
+          featureId: `${prefix}:play:${suffix}`,
+          propType,
+          wx: tx * 16,
+          wy: ty * 16,
+        });
+        const toy =
+          plan.playYard < 0.38
+            ? "prop-play-fort"
+            : plan.playYard < 0.72
+              ? "prop-climb-arch"
+              : "prop-basketball-hoop";
+        return [
+          at("main", toy, px - 7, py - 4),
+          at(
+            "friend",
+            toy === "prop-basketball-hoop" ? "prop-picnic-table" : "prop-seesaw",
+            px + 7,
+            py - 4,
+          ),
+          at("seat", "prop-bench", px + 7, py + 7),
+          at("shade", "prop-oak-tree", px - 8, py + 8),
+        ];
+      }
       return [
         {
           featureId: `${prefix}:tree`,

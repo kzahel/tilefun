@@ -20,6 +20,7 @@ export interface DenseDistrictPlan extends DistrictPlan {
     | "city-places-v10";
   readonly center: { x: number; y: number };
   /** Original street-grid reservation before adding outlying centers. */
+  readonly playYard?: number;
   readonly gridBounds?: Bounds;
   readonly actors: ActorPlacement[];
   readonly shoppingCenters?: readonly import("../../traffic/ShoppingCenter.js").ShoppingCenter[];
@@ -277,7 +278,9 @@ function connectDenseEntrances(plan: DenseDistrictPlan, settlement: Settlement):
 }
 /** Current composition only: frozen authoring recipes stay on the compact layout. */
 export function currentDenseDistrict(settlement: Settlement, seed: number): DenseDistrictPlan {
-  if (settlement.kind === "village") return connectedDenseDistrict(settlement, seed);
+  const playYard = edgeHash(settlement.owner.cx, settlement.owner.cy, seed + 44071);
+  if (settlement.kind === "village")
+    return { ...connectedDenseDistrict(settlement, seed), playYard };
   const columns = edgeHash(settlement.owner.cx, settlement.owner.cy, seed + 32303) < 0.55 ? 4 : 6;
   const plan = connectDenseEntrances(
     planDenseDistrict(settlement, seed, false, columns, 4),
@@ -298,6 +301,7 @@ export function currentDenseDistrict(settlement: Settlement, seed: number): Dens
   return {
     ...plan,
     bounds: { ...plan.bounds, minY: roadY / 16 - 64 },
+    playYard,
     gridBounds: plan.bounds,
     shoppingCenters,
     recipe: "current-dense-district-v1",
@@ -410,6 +414,15 @@ export function denseSurfaceAt(plan: DenseDistrictPlan, x: number, y: number): R
     const p = block.bounds,
       px = (p.minX + p.maxX) / 2,
       py = (p.minY + p.maxY) / 2;
+    if (
+      block.bounds === plan.park &&
+      (plan.playYard ?? 0) >= 0.72 &&
+      x >= px - 12 &&
+      x < px - 2 &&
+      y >= py - 10 &&
+      y < py - 1
+    )
+      return RoadType.CityPavement;
     if (insideDenseBounds(p, x, y) && (Math.abs(x + 0.5 - px) < 1 || Math.abs(y + 0.5 - py) < 1))
       return RoadType.CityPavement;
   }

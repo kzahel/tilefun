@@ -155,11 +155,25 @@ export class NaturalStrategy extends RailwayStrategy {
       .filter(
         (a) => Math.floor(a.wx / CHUNK_SIZE_PX) === cx && Math.floor(a.wy / CHUNK_SIZE_PX) === cy,
       );
+    const playBalls = this.districts
+      .query(bounds)
+      .filter((p) => (p.playYard ?? 0) >= 0.72)
+      .map((p) => ({
+        featureId: `${p.id}:play:ball`,
+        type: "ball",
+        wx: ((p.park.minX + p.park.maxX) / 2 - 6) * 16,
+        wy: ((p.park.minY + p.park.maxY) / 2 - 2) * 16,
+        route: [],
+      }))
+      .filter(
+        (a) => Math.floor(a.wx / CHUNK_SIZE_PX) === cx && Math.floor(a.wy / CHUNK_SIZE_PX) === cy,
+      );
     const wildlife = [...this.nature.wildlife(cx, cy), ...raccoonForagers(this.nature, cx, cy)];
     return [
       ...super.actors(cx, cy),
       ...residents,
       ...pets,
+      ...playBalls,
       ...this.spectators(cx, cy),
       ...this.constructionCargo(cx, cy),
       ...this.motocross

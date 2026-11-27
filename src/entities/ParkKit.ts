@@ -4,11 +4,20 @@ import type { Prop, PropCollider } from "./Prop.js";
 /**
  * Outskirts park kit: unedited Modern Exteriors camping, pier and fence crops
  * (all on the atlas's 16px grid) as ordinary props with gameplay colliders.
- * Lab experiments only until the crops pass art review.
+ * Shared by authored park scenes and generated outdoor destinations.
  */
 type Rect = readonly [x: number, y: number, w: number, h: number];
 
 const CROPS = {
+  hedgeArch: [320, 3504, 64, 64],
+  flowers: [976, 3808, 48, 48],
+  sunflower: [1312, 3808, 16, 32],
+  towel: [480, 5008, 32, 32],
+  towelBlue: [416, 5040, 32, 32],
+  bucket: [416, 4944, 16, 32],
+  boatBar: [240, 5072, 112, 80],
+  volleyNet: [512, 5024, 32, 48],
+  beachSign: [80, 5184, 48, 48],
   campSign: [1696, 96, 112, 64],
   tentBlue: [1696, 320, 64, 64],
   tentGreen: [1760, 320, 64, 64],
@@ -88,6 +97,30 @@ export function parkProp(kind: ParkPiece, wx: number, wy: number): Prop {
   const rect = CROPS[kind];
   const type = `prop-park-${kind}`;
   switch (kind) {
+    case "hedgeArch":
+      return atlasProp(type, wx, wy, rect, [solid(10, 12, 44, -23), solid(10, 12, 44, 23)]);
+    case "flowers":
+      return atlasProp(type, wx, wy, rect, [solid(40, 12, 16)]);
+    case "boatBar":
+      return atlasProp(type, wx, wy, rect, [solid(88, 34, 36)]);
+    case "towel":
+    case "towelBlue":
+      return atlasProp(type, wx, wy, rect, null, [piece(rect, 0, 0, { depthFloorZ: 0 })]);
+    case "volleyNet": {
+      const parts = [
+        piece(rect, -48),
+        ...[-24, -8, 8, 24].map((dx) => piece([560, 5024, 16, 32], dx, -16)),
+        piece([592, 5024, 32, 48], 48),
+      ];
+      return atlasProp(
+        type,
+        wx,
+        wy,
+        [0, 0, 128, 48],
+        [solid(4, 5, 36, -53), solid(4, 5, 36, 53)],
+        parts,
+      );
+    }
     case "campSign":
       // Walk beneath the board between its two posts.
       return atlasProp(type, wx, wy, rect, [solid(6, 4, 64, -32, -2), solid(6, 4, 64, 32, -2)]);
@@ -154,4 +187,10 @@ export function fenceRun(
     [wall],
     parts,
   );
+}
+
+export function regionalParkProp(type: string, wx: number, wy: number): Prop | null {
+  if (!type.startsWith("prop-park-")) return null;
+  const kind = type.slice("prop-park-".length);
+  return Object.hasOwn(CROPS, kind) ? parkProp(kind as ParkPiece, wx, wy) : null;
 }

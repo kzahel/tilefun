@@ -22,7 +22,9 @@ import { treeRunLength, treeRunProp } from "../patterns/FencedTrees.js";
 import { forestRowDefinition, forestRowProp, forestRowWalls } from "../patterns/ForestThicket.js";
 import { bridgePart, roadRailBridgeProp } from "../railway/RoadRailBridge.js";
 import { createFierceDen, FIERCE_DENS, fierceDenSpec } from "../wildlife/FierceDens.js";
+import { regionalParkProp } from "./ParkKit.js";
 import type { Prop, PropCollider } from "./Prop.js";
+import { treeHouseProp, treeHouseWalls } from "./TreeHouse.js";
 
 interface PropDef {
   sheetKey: string;
@@ -603,6 +605,9 @@ export function getMaterialForPropType(type: string): MaterialType | undefined {
 
 /** Look up static wall segments for a prop type (from the definition, not serialized). */
 export function getWallsForPropType(type: string): PropCollider[] | null {
+  if (type === "prop-tree-house") return treeHouseWalls();
+  const park = regionalParkProp(type, 0, 0);
+  if (park) return park.walls;
   const forest = forestRowWalls(type);
   if (forest) return forest;
   const outdoor = outdoorRuntimeAsset(type);
@@ -616,6 +621,9 @@ export function getWallsForPropType(type: string): PropCollider[] | null {
 }
 
 export function createProp(type: string, wx: number, wy: number): Prop {
+  if (type === "prop-tree-house") return treeHouseProp(wx, wy);
+  const park = regionalParkProp(type, wx, wy);
+  if (park) return park;
   const den = fierceDenSpec(type);
   if (den) return createFierceDen(den, wx, wy);
   const shopping = shoppingSceneryProp(type, wx, wy);
@@ -700,6 +708,7 @@ export function createProp(type: string, wx: number, wy: number): Prop {
 }
 
 export function isPropType(type: string): boolean {
+  if (type === "prop-tree-house" || regionalParkProp(type, 0, 0)) return true;
   if (shoppingScenery.some((p) => p.type === type)) return true;
   if (forestRowDefinition(type)) return true;
   if (bridgePart(type) || depotBridgeProp(type, 0, 0) || jumpSlabProp(type, 0, 0)) return true;
