@@ -295,6 +295,10 @@ export class WorldMap {
                     parkId: park.id,
                   }),
                 );
+              for (const place of this.result.outings ?? [])
+                this.tracks.append(
+                  this.place(place.name, place.arrival, true, { testid: "world-map-outing" }),
+                );
               this.depots.replaceChildren();
               for (const depot of this.result.vehicleDepots ?? [])
                 this.depots.append(

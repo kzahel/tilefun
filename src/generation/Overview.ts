@@ -12,6 +12,7 @@ import type { CountryPlan } from "./regional/CountrysidePlanner.js";
 import { DenseDistrictSource } from "./regional/DenseDistrictSource.js";
 import type { DistrictPlan } from "./regional/DistrictPlan.js";
 import { type FarmDestination, farmDestination } from "./regional/FarmsteadPlanner.js";
+import type { LeisureDestination } from "./regional/LeisurePlaces.js";
 import { type MotocrossPark, MotocrossSource } from "./regional/MotocrossPlanner.js";
 import {
   DEFAULT_LANDSCAPE_PROFILE,
@@ -22,6 +23,7 @@ import {
 } from "./regional/NaturalLandscape.js";
 import { type Racetrack, RacetrackSource } from "./regional/RacetrackPlanner.js";
 import {
+  intersects,
   LandCover,
   makeGrid,
   type RegionalRequest,
@@ -37,6 +39,7 @@ export type OverviewResult = Omit<RegionalResult, "world"> & {
   districts?: DistrictPlan[];
   countryside?: CountryPlan[];
   farms?: FarmDestination[];
+  outings?: LeisureDestination[];
   /** Current generated routes; station coordinates are tiles, optional paths are world pixels. */
   railways?: RailLine[];
   racetracks?: Pick<Racetrack, "id" | "name" | "center" | "bounds" | "access">[];
@@ -153,10 +156,48 @@ export function* overviewSteps(
     const countryside: CountryPlan[] = [];
     const ponds: NaturalPond[] = [];
     let farms: FarmDestination[] = [];
+    const outings: LeisureDestination[] = [];
     if (landscape) {
       const world = regionalWorld(descriptor.seed);
       const nature = new NaturalLandscape(world, landscape);
       if (result.detail === "region") {
+        const b = request.bounds;
+        for (const town of result.settlements) {
+          if (result.stats.features + outings.length >= request.limits.maxFeatures) break;
+          const plan = source.owner(town.owner.cx, town.owner.cy);
+          if (plan && intersects(plan.park, b))
+            outings.push({
+              id: `${town.id}:play`,
+              name: `${town.name} · Play yard`,
+              kind: "play",
+              arrival: {
+                x: (plan.park.minX + plan.park.maxX) / 2,
+                y: (plan.park.minY + plan.park.maxY) / 2,
+              },
+            });
+        }
+        const minX = Math.floor(b.minX / 512),
+          maxX = Math.floor(b.maxX / 512);
+        const minY = Math.floor(b.minY / 512),
+          maxY = Math.floor(b.maxY / 512);
+        if ((maxX - minX + 1) * (maxY - minY + 1) <= request.limits.maxOwners) {
+          for (let y = minY; y <= maxY; y++)
+            for (let x = minX; x <= maxX; x++) {
+              const cell = {
+                minX: Math.max(b.minX, x * 512),
+                minY: Math.max(b.minY, y * 512),
+                maxX: Math.min(b.maxX, (x + 1) * 512),
+                maxY: Math.min(b.maxY, (y + 1) * 512),
+              };
+              if (cell.maxX <= cell.minX || cell.maxY <= cell.minY) continue;
+              for (const { id, name, kind, arrival } of nature.leisure(cell)) {
+                if (result.stats.features + outings.length >= request.limits.maxFeatures) break;
+                if (!outings.some((p) => p.id === id)) outings.push({ id, name, kind, arrival });
+              }
+              yield;
+            }
+        }
+        result.stats.features += outings.length;
         const visible = nature.farms.query(request.bounds).map(farmDestination);
         if (result.stats.features + visible.length <= request.limits.maxFeatures) {
           farms = visible;
@@ -212,6 +253,7 @@ export function* overviewSteps(
       world: descriptor,
       districts,
       countryside,
+      outings,
       farms,
       railways,
       racetracks,

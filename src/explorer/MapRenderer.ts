@@ -406,6 +406,15 @@ export class MapRenderer {
         ctx.textBaseline = "middle";
         ctx.fillText(track.name, x, y);
       }
+    for (const place of result.outings ?? []) {
+      const x = sx(place.arrival.x),
+        y = sy(place.arrival.y);
+      if (x < -12 || y < -12 || x > width + 12 || y > height + 12) continue;
+      ctx.font = "16px system-ui";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText({ camp: "⛺", garden: "🌳", play: "🛝", beach: "⛱️" }[place.kind], x, y);
+    }
     // Depot markers remain visible independently of the road overlay. Their
     // data comes from the exact same admitted infield plan as real generation.
     for (const depot of [...(result.vehicleDepots ?? []), ...(result.constructionYards ?? [])]) {

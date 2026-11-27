@@ -34,6 +34,8 @@ import { fbm, valueNoise } from "../noise.js";
 import type { FeaturePlacement } from "../StructureGenerator.js";
 import { DenseDistrictSource } from "./DenseDistrictSource.js";
 import { FarmsteadSource } from "./FarmsteadPlanner.js";
+import { type LeisurePlace, leisurePlace } from "./LeisurePlaces.js";
+import { LeisureSource } from "./LeisureSource.js";
 import { MotocrossSource, motocrossReserved } from "./MotocrossPlanner.js";
 import { pathDistance } from "./PlanGeometry.js";
 import { RacetrackSource, racetrackReserved } from "./RacetrackPlanner.js";
@@ -130,6 +132,8 @@ export function naturalHabitat(
 
 /** Bounded cells own ponds and reservation caches; tree IDs use an independent 4-tile lattice. */
 export class NaturalLandscape {
+  readonly outings: LeisureSource;
+  private readonly beaches = new WeakMap<NaturalPond, LeisurePlace>();
   readonly railways: RailwayPlanner;
   readonly farms: FarmsteadSource;
   private readonly districts: DenseDistrictSource;
@@ -159,6 +163,14 @@ export class NaturalLandscape {
     this.districts = new DenseDistrictSource(world, true);
     this.racetracks = new RacetrackSource(world);
     this.motocross = new MotocrossSource(world, this.racetracks);
+    this.outings = new LeisureSource(
+      world,
+      this.districts,
+      this.farms,
+      this.railways,
+      this.racetracks,
+      this.motocross,
+    );
   }
   private buildReservations(cx: number, cy: number) {
     const bounds = {
@@ -175,6 +187,7 @@ export class NaturalLandscape {
     });
     return {
       region,
+      outings: this.outings.query(bounds),
       centers: this.districts
         .query(bounds)
         .flatMap((p) => p.shoppingCenters ?? [])
@@ -202,6 +215,7 @@ export class NaturalLandscape {
       if (this.reservations.size > 64)
         this.reservations.delete(this.reservations.keys().next().value ?? "");
     }
+    if (plans.outings.some((p) => near(p.bounds, x, y, r + 3))) return true;
     if (this.farms.reserved(plans.farms, x, y, r)) return true;
     if (plans.tracks.some((t) => racetrackReserved(t, x, y, r + 4))) return true;
     if (plans.parks.some((p) => motocrossReserved(p, x, y, r + 4))) return true;
@@ -279,6 +293,37 @@ export class NaturalLandscape {
     this.lakes.set(key, lake);
     if (this.lakes.size > 128) this.lakes.delete(this.lakes.keys().next().value ?? "");
     return lake;
+  }
+  /** The south shore is independent of the north-shore boat landing. Keep the
+   * shallow shelf intact and use the admitted lake's own dry bank. */
+  lakeBeach(lake: NaturalPond): LeisurePlace {
+    const cached = this.beaches.get(lake);
+    if (cached) return cached;
+    const x = Math.round(lake.x),
+      y = Math.ceil(lake.y + lake.ry) + 8;
+    const bounds = { minX: x - 12, minY: y - 5, maxX: x + 13, maxY: y + 12 };
+    const beach = leisurePlace(
+      "beach",
+      `${lake.id}:beach`,
+      "Lakeside beach",
+      { x, y },
+      bounds,
+      { x: x + 10, y: y + 8 },
+      valueNoise(x, y, this.world.seed + 7401),
+    );
+    this.beaches.set(lake, beach);
+    return beach;
+  }
+  leisure(bounds: Bounds): LeisurePlace[] {
+    const places = this.outings.query(bounds);
+    for (let cy = Math.floor(bounds.minY / 512); cy <= Math.floor(bounds.maxY / 512); cy++)
+      for (let cx = Math.floor(bounds.minX / 512); cx <= Math.floor(bounds.maxX / 512); cx++) {
+        const lake = this.lake(cx, cy);
+        if (!lake) continue;
+        const p = this.lakeBeach(lake);
+        if (intersects(bounds, p.bounds)) places.push(p);
+      }
+    return places;
   }
   lakeAt(x: number, y: number) {
     const pond = this.lake(Math.floor(x / 512), Math.floor(y / 512));
@@ -800,6 +845,7 @@ export class NaturalLandscape {
     const bay = this.lagoon(Math.floor(x / CHUNK_SIZE_PX), Math.floor(y / CHUNK_SIZE_PX));
     const lake = this.lake(Math.floor(x / 512), Math.floor(y / 512));
     return (
+      (!!lake && near(this.lakeBeach(lake).bounds, x, y, clearance + 2)) ||
       (!!lake &&
         Math.hypot(
           (x - lake.x) / (lake.rx * 1.3 + clearance),
