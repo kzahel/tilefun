@@ -12,6 +12,7 @@ import {
 import { DENSE_CITY_BUILDINGS } from "../generation/regional/DenseCityAssets.js";
 import { shoppingScenery } from "../generation/regional/ShoppingScenery.js";
 import { type BuildingSection, section } from "./BuildingSection.js";
+import { civicExterior } from "./CivicExteriors.js";
 import { farmhouse, japaneseHouse, shed, terracedHouse } from "./HouseExteriors.js";
 
 export interface BuildingTrim {
@@ -145,5 +146,5 @@ for (const prop of shoppingScenery) {
 }
 
 export function buildingExterior(type: string): BuildingExterior | undefined {
-  return exteriors.get(type);
+  return exteriors.get(type) ?? civicExterior(type);
 }
