@@ -29,8 +29,9 @@ export async function buildNaturalCandidate(
     batchId: id === "chicken-pen" ? "farm-chickens" : "natural-landscapes",
     kind: "geometry",
     name: `${c.name} · ${profile}`,
-    prompt:
-      id === "chicken-pen"
+    prompt: id.startsWith("outing-")
+      ? "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person."
+      : id === "chicken-pen"
         ? "Compare the rooster's comb and dark tail, the hen, the smaller yellow chick and the egg at game zoom."
         : id === "town-farm"
           ? "Inspect the farm arrival, four garden beds, chicken pen and small woodlot. Check whether the paths and crops are easy to read at game zoom."

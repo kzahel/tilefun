@@ -214,6 +214,23 @@ const PRESENTATION = {
     guide:
       "Large wildlife lake · E beside the motorboat to board; Arrows/WASD steer, R reverses. Return beside a clear shore to get out. Fish schools and varied water animals use the same AI as the game.",
   },
+  "outing-camp": {
+    zoom: 0.55,
+    guide: "Follow the trail through the camping arch to the fire and tents.",
+  },
+  "outing-garden": {
+    zoom: 0.45,
+    guide: "Walk through the hedge arch and follow the garden loop back to town.",
+  },
+  "outing-beach": {
+    zoom: 0.65,
+    guide:
+      "Walk past the parasol and boat-shaped kiosk to the water. The motorboat is on the opposite bank.",
+  },
+  "outing-play": {
+    zoom: 0.65,
+    guide: "Look for the ball by the basketball hoop. The town pets share this green.",
+  },
   motocross: {
     zoom: 0.25,
     guide:

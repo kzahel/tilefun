@@ -15141,6 +15141,166 @@
       "fingerprint": "53caa5139e21a3d8a62b04662abc86090a43863452b4421330d5c8b55dc6681a"
     },
     {
+      "id": "nature:outing-camp:sparse:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Ferngrove · Woodland camp · sparse",
+      "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
+      "url": "/tilefun/workshop.html?geometry=nature-outing-camp&landscape=sparse#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=184&y=427&landscape=sparse&zoom=0.8",
+      "fingerprint": "e8236ed78185999b4667f1307923eeb413ec919b348ec55fc03154b57412bb1b"
+    },
+    {
+      "id": "nature:outing-camp:balanced:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Ferngrove · Woodland camp · balanced",
+      "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
+      "url": "/tilefun/workshop.html?geometry=nature-outing-camp&landscape=balanced#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=184&y=427&landscape=balanced&zoom=0.8",
+      "fingerprint": "19c8870baf6a6e6ef9a7266c9d0f0b5cc3dfc3e664208cfb43d5dec4163a68e0"
+    },
+    {
+      "id": "nature:outing-camp:lush:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Ferngrove · Woodland camp · lush",
+      "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
+      "url": "/tilefun/workshop.html?geometry=nature-outing-camp&landscape=lush#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=184&y=427&landscape=lush&zoom=0.8",
+      "fingerprint": "f1c7745af2329ca588edbaf070a3366a22c63a6b9f4cf1a911c4a9484577945a"
+    },
+    {
+      "id": "nature:outing-camp:thicket:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Ferngrove · Woodland camp · thicket",
+      "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
+      "url": "/tilefun/workshop.html?geometry=nature-outing-camp&landscape=thicket#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=184&y=427&landscape=thicket&zoom=0.8",
+      "fingerprint": "f8524d9661be7ac039437532125c6b6c230f845d4c6112dc8df4e902223d8eb5"
+    },
+    {
+      "id": "nature:outing-garden:sparse:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Oakwick · Garden park · sparse",
+      "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
+      "url": "/tilefun/workshop.html?geometry=nature-outing-garden&landscape=sparse#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-1471&y=-2812&landscape=sparse&zoom=0.8",
+      "fingerprint": "806701c74c4ea9c692bc22e2fcae3a52f1d222906def2dc55f17dbbc0e0ef377"
+    },
+    {
+      "id": "nature:outing-garden:balanced:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Oakwick · Garden park · balanced",
+      "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
+      "url": "/tilefun/workshop.html?geometry=nature-outing-garden&landscape=balanced#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-1471&y=-2812&landscape=balanced&zoom=0.8",
+      "fingerprint": "1cc91b33150bcddd90054829af68e8391d0fe1a9126e665f856bbeb1b01441c3"
+    },
+    {
+      "id": "nature:outing-garden:lush:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Oakwick · Garden park · lush",
+      "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
+      "url": "/tilefun/workshop.html?geometry=nature-outing-garden&landscape=lush#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-1471&y=-2812&landscape=lush&zoom=0.8",
+      "fingerprint": "79b158a676d468dae0bb865cc2264ea30e12c134b6aac28ffb9457202a175b18"
+    },
+    {
+      "id": "nature:outing-garden:thicket:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Oakwick · Garden park · thicket",
+      "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
+      "url": "/tilefun/workshop.html?geometry=nature-outing-garden&landscape=thicket#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-1471&y=-2812&landscape=thicket&zoom=0.8",
+      "fingerprint": "890b1083a5b970d14d7ff385d1d44b13dd6e379d9d49160ecff4c44fe47af417"
+    },
+    {
+      "id": "nature:outing-play:sparse:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Ferngrove · Basketball green · sparse",
+      "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
+      "url": "/tilefun/workshop.html?geometry=nature-outing-play&landscape=sparse#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=42&x=-462&y=-609&landscape=sparse&zoom=0.8",
+      "fingerprint": "e6922a6d9b892f1887bf26b5f73e10ae943926b9e9d41eafa6e44b681c840523"
+    },
+    {
+      "id": "nature:outing-play:balanced:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Ferngrove · Basketball green · balanced",
+      "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
+      "url": "/tilefun/workshop.html?geometry=nature-outing-play&landscape=balanced#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=42&x=-462&y=-609&landscape=balanced&zoom=0.8",
+      "fingerprint": "f8af3ea5d5d6eff4e40f6d1c1f38b4ba95f0a098c75cb90d6522c0a711644fa1"
+    },
+    {
+      "id": "nature:outing-play:lush:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Ferngrove · Basketball green · lush",
+      "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
+      "url": "/tilefun/workshop.html?geometry=nature-outing-play&landscape=lush#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=42&x=-462&y=-609&landscape=lush&zoom=0.8",
+      "fingerprint": "1f77e5f3b62b2158681249860c7a6a03c893f787283f01feead9768b5a869f33"
+    },
+    {
+      "id": "nature:outing-play:thicket:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Ferngrove · Basketball green · thicket",
+      "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
+      "url": "/tilefun/workshop.html?geometry=nature-outing-play&landscape=thicket#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=42&x=-462&y=-609&landscape=thicket&zoom=0.8",
+      "fingerprint": "bc59fac15935e82e63dd25f80e5b87592b39c0ba70073fc1730147d92c63ac5a"
+    },
+    {
+      "id": "nature:outing-beach:sparse:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Lake · Beach kiosk · sparse",
+      "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
+      "url": "/tilefun/workshop.html?geometry=nature-outing-beach&landscape=sparse#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=1234&y=-259&landscape=sparse&zoom=0.8",
+      "fingerprint": "f7c32d1112a82a8adcaf0df4df84efedebb141a8cd387369dd41a3b398b22413"
+    },
+    {
+      "id": "nature:outing-beach:balanced:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Lake · Beach kiosk · balanced",
+      "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
+      "url": "/tilefun/workshop.html?geometry=nature-outing-beach&landscape=balanced#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=1234&y=-259&landscape=balanced&zoom=0.8",
+      "fingerprint": "21d72a86a09f4a9b75601a61d74b73fa71cb8ea536b03491d89e1405ef7288b8"
+    },
+    {
+      "id": "nature:outing-beach:lush:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Lake · Beach kiosk · lush",
+      "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
+      "url": "/tilefun/workshop.html?geometry=nature-outing-beach&landscape=lush#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=1234&y=-259&landscape=lush&zoom=0.8",
+      "fingerprint": "6e91b1424c789b80f392787deb40c140eb218200ffc6feb08caa6b0fb91d2677"
+    },
+    {
+      "id": "nature:outing-beach:thicket:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Lake · Beach kiosk · thicket",
+      "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
+      "url": "/tilefun/workshop.html?geometry=nature-outing-beach&landscape=thicket#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=1234&y=-259&landscape=thicket&zoom=0.8",
+      "fingerprint": "e039ea8e3bd9432f529054c69c06d4b8af1e07bff1e0c46ba05e07760c2caf03"
+    },
+    {
       "id": "nature:motocross:sparse:v1",
       "batchId": "natural-landscapes",
       "kind": "geometry",
@@ -66063,5 +66223,5 @@
       "fingerprint": "3fa16e7e77803dfef5ac25f25935cafb37efd05f19f3d1ed7e288b30ccdc8d67"
     }
   ],
-  "inputDigest": "0be950cd3c1a7ed88e01e4dcbf075c0f3d974939ed7c59e4b25aeeda1230d138"
+  "inputDigest": "7be7341d49afa6a635a9ab1668ade3bc95b2a9229886cd694ad35b4a72cf8b93"
 }

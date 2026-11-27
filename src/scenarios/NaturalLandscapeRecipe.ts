@@ -161,6 +161,10 @@ export const NATURAL_CASES = [
   { id: "village-pets", name: "Village · cats & dogs", seed: 2026, x: 672, y: -592 },
   { id: "city-center", name: "City · dense center & neighborhoods", seed: 2026, x: 300, y: 519 },
   { id: "racetrack", name: "City outskirts · oval speedway", seed: 2026, x: 462, y: 455 },
+  { id: "outing-camp", name: "Ferngrove · Woodland camp", seed: 2026, x: 184, y: 427 },
+  { id: "outing-garden", name: "Oakwick · Garden park", seed: 2026, x: -1471, y: -2812 },
+  { id: "outing-play", name: "Ferngrove · Basketball green", seed: 42, x: -462, y: -609 },
+  { id: "outing-beach", name: "Lake · Beach kiosk", seed: 2026, x: 1234, y: -259 },
   { id: "motocross", name: "City outskirts · motocross park", seed: 2026, x: 8, y: 454 },
   { id: "city-pets", name: "City · cats & dogs", seed: 2026, x: 306, y: 540 },
   { id: "meadow", name: "Meadow · lone trees", seed: 2026, x: 480, y: -512 },
@@ -283,6 +287,15 @@ export function naturalLandscapeRecipe(
   if (id === "train")
     return { ...cityTrainRecipe(), id: `nature-train-${profile}-v1`, landscape: profile };
   const point = at ?? naturalCase(id);
+  if (!at && id.startsWith("outing-"))
+    return {
+      version: 1,
+      id: `nature-${id}-${profile}-v1`,
+      generation: createDescriptor("regional", point.seed),
+      landscape: profile,
+      player: createPlayer(point.x * 16, point.y * 16),
+      props: [],
+    };
   if (!at && id === "racetrack") {
     const track = new RacetrackSource(regionalWorld(point.seed)).owner(0, 0);
     if (!track) throw Error("Missing generated racetrack inspection");

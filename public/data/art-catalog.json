@@ -11995,7 +11995,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:278"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:282"
         },
         {
           "system": "Gameplay",
@@ -12039,7 +12039,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:153"
+          "source": "src/entities/PropFactories.ts:155"
         },
         {
           "system": "Gameplay",
@@ -12061,7 +12061,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:161"
+          "source": "src/entities/PropFactories.ts:163"
         },
         {
           "system": "Gameplay",
@@ -12391,7 +12391,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:184"
+          "source": "src/entities/PropFactories.ts:186"
         },
         {
           "system": "World generation",
@@ -12413,7 +12413,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:192"
+          "source": "src/entities/PropFactories.ts:194"
         },
         {
           "system": "World generation",
@@ -12435,7 +12435,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:200"
+          "source": "src/entities/PropFactories.ts:202"
         }
       ]
     },
@@ -12453,7 +12453,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:208"
+          "source": "src/entities/PropFactories.ts:210"
         }
       ]
     },
@@ -12479,11 +12479,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:216"
+          "source": "src/entities/PropFactories.ts:218"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:763"
+          "source": "src/entities/PropFactories.ts:772"
         },
         {
           "system": "World generation",
@@ -12505,11 +12505,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:217"
+          "source": "src/entities/PropFactories.ts:219"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:764"
+          "source": "src/entities/PropFactories.ts:773"
         }
       ]
     },
@@ -12527,11 +12527,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:225"
+          "source": "src/entities/PropFactories.ts:227"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:765"
+          "source": "src/entities/PropFactories.ts:774"
         }
       ]
     },
@@ -12549,11 +12549,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:226"
+          "source": "src/entities/PropFactories.ts:228"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:768"
+          "source": "src/entities/PropFactories.ts:777"
         }
       ]
     },
@@ -12571,11 +12571,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:235"
+          "source": "src/entities/PropFactories.ts:237"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:770"
+          "source": "src/entities/PropFactories.ts:779"
         }
       ]
     },
@@ -12593,11 +12593,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:244"
+          "source": "src/entities/PropFactories.ts:246"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:769"
+          "source": "src/entities/PropFactories.ts:778"
         },
         {
           "system": "World generation",
@@ -12631,11 +12631,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:253"
+          "source": "src/entities/PropFactories.ts:255"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:766"
+          "source": "src/entities/PropFactories.ts:775"
         }
       ]
     },
@@ -12653,11 +12653,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:254"
+          "source": "src/entities/PropFactories.ts:256"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:767"
+          "source": "src/entities/PropFactories.ts:776"
         }
       ]
     },
@@ -12675,11 +12675,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:255"
+          "source": "src/entities/PropFactories.ts:257"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:771"
+          "source": "src/entities/PropFactories.ts:780"
         }
       ]
     },
@@ -12697,11 +12697,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:256"
+          "source": "src/entities/PropFactories.ts:258"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:772"
+          "source": "src/entities/PropFactories.ts:781"
         }
       ]
     },
@@ -12719,11 +12719,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:257"
+          "source": "src/entities/PropFactories.ts:259"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:773"
+          "source": "src/entities/PropFactories.ts:782"
         }
       ]
     },
@@ -12741,11 +12741,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:258"
+          "source": "src/entities/PropFactories.ts:260"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:774"
+          "source": "src/entities/PropFactories.ts:783"
         }
       ]
     },
@@ -12767,15 +12767,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:260"
+          "source": "src/entities/PropFactories.ts:262"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:261"
+          "source": "src/entities/PropFactories.ts:263"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:776"
+          "source": "src/entities/PropFactories.ts:785"
         },
         {
           "system": "Gameplay",
@@ -12790,8 +12790,16 @@
           "source": "src/generation/StructureGenerator.ts:163"
         },
         {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:90"
+        },
+        {
           "system": "Gameplay",
           "source": "src/persistence/StreamingConformance.ts:120"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/firstperson/LeisureModels.ts:380"
         }
       ]
     },
@@ -12813,15 +12821,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:269"
+          "source": "src/entities/PropFactories.ts:271"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:270"
+          "source": "src/entities/PropFactories.ts:272"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:777"
+          "source": "src/entities/PropFactories.ts:786"
         },
         {
           "system": "Gameplay",
@@ -12830,6 +12838,14 @@
         {
           "system": "World generation",
           "source": "src/generation/StructureGenerator.ts:173"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:91"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/firstperson/LeisureModels.ts:381"
         }
       ]
     },
@@ -12851,15 +12867,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:278"
+          "source": "src/entities/PropFactories.ts:280"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:279"
+          "source": "src/entities/PropFactories.ts:281"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:778"
+          "source": "src/entities/PropFactories.ts:787"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:138"
         }
       ]
     },
@@ -12881,15 +12901,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:286"
+          "source": "src/entities/PropFactories.ts:288"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:287"
+          "source": "src/entities/PropFactories.ts:289"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:779"
+          "source": "src/entities/PropFactories.ts:788"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:136"
         },
         {
           "system": "World generation",
@@ -12898,6 +12922,10 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/RacetrackPlanner.ts:187"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/firstperson/LeisureModels.ts:382"
         }
       ]
     },
@@ -12919,15 +12947,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:294"
+          "source": "src/entities/PropFactories.ts:296"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:295"
+          "source": "src/entities/PropFactories.ts:297"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:780"
+          "source": "src/entities/PropFactories.ts:789"
         },
         {
           "system": "Gameplay",
@@ -12973,15 +13001,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:318"
+          "source": "src/entities/PropFactories.ts:320"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:319"
+          "source": "src/entities/PropFactories.ts:321"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:781"
+          "source": "src/entities/PropFactories.ts:790"
         },
         {
           "system": "World generation",
@@ -13005,11 +13033,27 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1420"
+          "source": "src/generation/regional/LeisurePlaces.ts:104"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1614"
+          "source": "src/generation/regional/LeisurePlaces.ts:107"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:129"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:133"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/NaturalLandscape.ts:1466"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/NaturalLandscape.ts:1660"
         },
         {
           "system": "World generation",
@@ -13037,7 +13081,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/SettlementPets.ts:22"
+          "source": "src/generation/regional/SettlementPets.ts:41"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/SettlementPets.ts:47"
         },
         {
           "system": "Gameplay",
@@ -13105,7 +13153,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/NaturalLandscapeCandidate.ts:52"
+          "source": "src/workshop/NaturalLandscapeCandidate.ts:53"
         }
       ]
     },
@@ -13127,15 +13175,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:342"
+          "source": "src/entities/PropFactories.ts:344"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:343"
+          "source": "src/entities/PropFactories.ts:345"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:782"
+          "source": "src/entities/PropFactories.ts:791"
         }
       ]
     },
@@ -13157,15 +13205,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:351"
+          "source": "src/entities/PropFactories.ts:353"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:352"
+          "source": "src/entities/PropFactories.ts:354"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:783"
+          "source": "src/entities/PropFactories.ts:792"
         },
         {
           "system": "World generation",
@@ -13181,6 +13229,18 @@
         },
         {
           "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:97"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:130"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:145"
+        },
+        {
+          "system": "World generation",
           "source": "src/generation/regional/MotocrossPlanner.ts:253"
         },
         {
@@ -13190,6 +13250,14 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/RacetrackPlanner.ts:190"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/SettlementPets.ts:36"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/firstperson/LeisureModels.ts:383"
         },
         {
           "system": "Gameplay",
@@ -13231,15 +13299,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:360"
+          "source": "src/entities/PropFactories.ts:362"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:361"
+          "source": "src/entities/PropFactories.ts:363"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:784"
+          "source": "src/entities/PropFactories.ts:793"
         },
         {
           "system": "World generation",
@@ -13293,15 +13361,27 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:370"
+          "source": "src/entities/PropFactories.ts:372"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:371"
+          "source": "src/entities/PropFactories.ts:373"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:785"
+          "source": "src/entities/PropFactories.ts:794"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/SettlementPets.ts:30"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/firstperson/LeisureModels.ts:254"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/firstperson/LeisureModels.ts:385"
         }
       ]
     },
@@ -13323,15 +13403,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:381"
+          "source": "src/entities/PropFactories.ts:383"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:382"
+          "source": "src/entities/PropFactories.ts:384"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:786"
+          "source": "src/entities/PropFactories.ts:795"
         }
       ]
     },
@@ -13353,19 +13433,27 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:390"
+          "source": "src/entities/PropFactories.ts:392"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:391"
+          "source": "src/entities/PropFactories.ts:393"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:787"
+          "source": "src/entities/PropFactories.ts:796"
         },
         {
           "system": "World generation",
           "source": "src/generation/regional/PublicSpaceRecipes.ts:41"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/SettlementPets.ts:36"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/firstperson/LeisureModels.ts:386"
         }
       ]
     },
@@ -13387,15 +13475,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:400"
+          "source": "src/entities/PropFactories.ts:402"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:401"
+          "source": "src/entities/PropFactories.ts:403"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:788"
+          "source": "src/entities/PropFactories.ts:797"
         }
       ]
     },
@@ -13417,15 +13505,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:409"
+          "source": "src/entities/PropFactories.ts:411"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:410"
+          "source": "src/entities/PropFactories.ts:412"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:789"
+          "source": "src/entities/PropFactories.ts:798"
         }
       ]
     },
@@ -13447,15 +13535,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:418"
+          "source": "src/entities/PropFactories.ts:420"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:419"
+          "source": "src/entities/PropFactories.ts:421"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:790"
+          "source": "src/entities/PropFactories.ts:799"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/SettlementPets.ts:28"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/firstperson/LeisureModels.ts:384"
         }
       ]
     },
@@ -13477,15 +13573,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:432"
+          "source": "src/entities/PropFactories.ts:434"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:433"
+          "source": "src/entities/PropFactories.ts:435"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:791"
+          "source": "src/entities/PropFactories.ts:800"
         }
       ]
     },
@@ -13507,15 +13603,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:446"
+          "source": "src/entities/PropFactories.ts:448"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:447"
+          "source": "src/entities/PropFactories.ts:449"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:792"
+          "source": "src/entities/PropFactories.ts:801"
         }
       ]
     },
@@ -13537,15 +13633,27 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:461"
+          "source": "src/entities/PropFactories.ts:463"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:462"
+          "source": "src/entities/PropFactories.ts:464"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:793"
+          "source": "src/entities/PropFactories.ts:802"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/SettlementPets.ts:31"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/SettlementPets.ts:36"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/firstperson/LeisureModels.ts:387"
         }
       ]
     },
@@ -13567,15 +13675,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:470"
+          "source": "src/entities/PropFactories.ts:472"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:471"
+          "source": "src/entities/PropFactories.ts:473"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:794"
+          "source": "src/entities/PropFactories.ts:803"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:132"
         }
       ]
     },
@@ -13593,11 +13705,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:479"
+          "source": "src/entities/PropFactories.ts:481"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:796"
+          "source": "src/entities/PropFactories.ts:805"
         },
         {
           "system": "World generation",
@@ -13619,11 +13731,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:488"
+          "source": "src/entities/PropFactories.ts:490"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:797"
+          "source": "src/entities/PropFactories.ts:806"
         },
         {
           "system": "World generation",
@@ -13645,11 +13757,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:497"
+          "source": "src/entities/PropFactories.ts:499"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:798"
+          "source": "src/entities/PropFactories.ts:807"
         },
         {
           "system": "World generation",
@@ -13671,11 +13783,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:506"
+          "source": "src/entities/PropFactories.ts:508"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:799"
+          "source": "src/entities/PropFactories.ts:808"
         },
         {
           "system": "World generation",
@@ -13697,11 +13809,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:515"
+          "source": "src/entities/PropFactories.ts:517"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:800"
+          "source": "src/entities/PropFactories.ts:809"
         },
         {
           "system": "World generation",
@@ -13723,11 +13835,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:524"
+          "source": "src/entities/PropFactories.ts:526"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:801"
+          "source": "src/entities/PropFactories.ts:810"
         },
         {
           "system": "World generation",
@@ -13753,11 +13865,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:533"
+          "source": "src/entities/PropFactories.ts:535"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:802"
+          "source": "src/entities/PropFactories.ts:811"
         },
         {
           "system": "World generation",
@@ -13799,11 +13911,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:542"
+          "source": "src/entities/PropFactories.ts:544"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:803"
+          "source": "src/entities/PropFactories.ts:812"
         },
         {
           "system": "World generation",
@@ -13825,11 +13937,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:552"
+          "source": "src/entities/PropFactories.ts:554"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:804"
+          "source": "src/entities/PropFactories.ts:813"
         },
         {
           "system": "World generation",
@@ -13959,11 +14071,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:561"
+          "source": "src/entities/PropFactories.ts:563"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:805"
+          "source": "src/entities/PropFactories.ts:814"
         },
         {
           "system": "World generation",
@@ -14003,6 +14115,18 @@
         },
         {
           "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:105"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:126"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:131"
+        },
+        {
+          "system": "World generation",
           "source": "src/generation/regional/MotocrossPlanner.ts:240"
         },
         {
@@ -14031,7 +14155,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/SettlementPets.ts:28"
+          "source": "src/generation/regional/SettlementPets.ts:40"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/SettlementPets.ts:53"
         },
         {
           "system": "Street starter review (candidate)",
@@ -14073,11 +14201,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:570"
+          "source": "src/entities/PropFactories.ts:572"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:806"
+          "source": "src/entities/PropFactories.ts:815"
         },
         {
           "system": "World generation",
@@ -14111,11 +14239,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:579"
+          "source": "src/entities/PropFactories.ts:581"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:807"
+          "source": "src/entities/PropFactories.ts:816"
         },
         {
           "system": "World generation",
@@ -14123,7 +14251,15 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/SettlementPets.ts:34"
+          "source": "src/generation/regional/LeisurePlaces.ts:125"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/SettlementPets.ts:59"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/firstperson/LeisureModels.ts:395"
         }
       ]
     },
@@ -14141,11 +14277,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:588"
+          "source": "src/entities/PropFactories.ts:590"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:808"
+          "source": "src/entities/PropFactories.ts:817"
         },
         {
           "system": "World generation",
@@ -30462,6 +30598,10 @@
           "source": "src/interiors/FurnitureCatalog.ts"
         },
         {
+          "system": "Gameplay",
+          "source": "src/entities/ParkKit.ts:102"
+        },
+        {
           "system": "Interiors",
           "source": "src/interiors/FurnitureCatalog.ts:345"
         },
@@ -32389,7 +32529,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:278"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:282"
         },
         {
           "system": "Gameplay",
@@ -36365,11 +36505,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:154"
+          "source": "src/entities/PropFactories.ts:156"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:162"
+          "source": "src/entities/PropFactories.ts:164"
         },
         {
           "system": "Gameplay",
@@ -38419,7 +38559,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:201"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:205"
         },
         {
           "system": "Gameplay",
@@ -38577,7 +38717,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:197"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:201"
         },
         {
           "system": "Gameplay",
@@ -38990,6 +39130,10 @@
         {
           "system": "Gameplay",
           "source": "src/game/base-game.ts:240"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:95"
         }
       ]
     },
@@ -39093,7 +39237,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:211"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:215"
         },
         {
           "system": "Gameplay",
@@ -39390,6 +39534,18 @@
         {
           "system": "Gameplay",
           "source": "src/entities/EntityDefs.ts:211"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:143"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:143"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/NaturalStrategy.ts:181"
         },
         {
           "system": "Gameplay",
@@ -39735,7 +39891,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictPlanner.ts:194"
+          "source": "src/generation/regional/DenseDistrictPlanner.ts:195"
         }
       ]
     },
@@ -40123,15 +40279,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:260"
+          "source": "src/entities/PropFactories.ts:262"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:261"
+          "source": "src/entities/PropFactories.ts:263"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:776"
+          "source": "src/entities/PropFactories.ts:785"
         },
         {
           "system": "Gameplay",
@@ -40146,8 +40302,16 @@
           "source": "src/generation/StructureGenerator.ts:163"
         },
         {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:90"
+        },
+        {
           "system": "Gameplay",
           "source": "src/persistence/StreamingConformance.ts:120"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/firstperson/LeisureModels.ts:380"
         }
       ]
     },
@@ -40173,15 +40337,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:269"
+          "source": "src/entities/PropFactories.ts:271"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:270"
+          "source": "src/entities/PropFactories.ts:272"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:777"
+          "source": "src/entities/PropFactories.ts:786"
         },
         {
           "system": "Gameplay",
@@ -40190,6 +40354,14 @@
         {
           "system": "World generation",
           "source": "src/generation/StructureGenerator.ts:173"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:91"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/firstperson/LeisureModels.ts:381"
         }
       ]
     },
@@ -40215,15 +40387,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:278"
+          "source": "src/entities/PropFactories.ts:280"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:279"
+          "source": "src/entities/PropFactories.ts:281"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:778"
+          "source": "src/entities/PropFactories.ts:787"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:138"
         }
       ]
     },
@@ -40249,15 +40425,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:286"
+          "source": "src/entities/PropFactories.ts:288"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:287"
+          "source": "src/entities/PropFactories.ts:289"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:779"
+          "source": "src/entities/PropFactories.ts:788"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:136"
         },
         {
           "system": "World generation",
@@ -40266,6 +40446,10 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/RacetrackPlanner.ts:187"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/firstperson/LeisureModels.ts:382"
         }
       ]
     },
@@ -40291,15 +40475,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:294"
+          "source": "src/entities/PropFactories.ts:296"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:295"
+          "source": "src/entities/PropFactories.ts:297"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:780"
+          "source": "src/entities/PropFactories.ts:789"
         },
         {
           "system": "Gameplay",
@@ -40349,15 +40533,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:318"
+          "source": "src/entities/PropFactories.ts:320"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:319"
+          "source": "src/entities/PropFactories.ts:321"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:781"
+          "source": "src/entities/PropFactories.ts:790"
         },
         {
           "system": "World generation",
@@ -40381,11 +40565,27 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1420"
+          "source": "src/generation/regional/LeisurePlaces.ts:104"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1614"
+          "source": "src/generation/regional/LeisurePlaces.ts:107"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:129"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:133"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/NaturalLandscape.ts:1466"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/NaturalLandscape.ts:1660"
         },
         {
           "system": "World generation",
@@ -40413,7 +40613,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/SettlementPets.ts:22"
+          "source": "src/generation/regional/SettlementPets.ts:41"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/SettlementPets.ts:47"
         },
         {
           "system": "Gameplay",
@@ -40481,7 +40685,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/NaturalLandscapeCandidate.ts:52"
+          "source": "src/workshop/NaturalLandscapeCandidate.ts:53"
         }
       ]
     },
@@ -40507,15 +40711,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:342"
+          "source": "src/entities/PropFactories.ts:344"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:343"
+          "source": "src/entities/PropFactories.ts:345"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:782"
+          "source": "src/entities/PropFactories.ts:791"
         }
       ]
     },
@@ -40541,15 +40745,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:351"
+          "source": "src/entities/PropFactories.ts:353"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:352"
+          "source": "src/entities/PropFactories.ts:354"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:783"
+          "source": "src/entities/PropFactories.ts:792"
         },
         {
           "system": "World generation",
@@ -40565,6 +40769,18 @@
         },
         {
           "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:97"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:130"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:145"
+        },
+        {
+          "system": "World generation",
           "source": "src/generation/regional/MotocrossPlanner.ts:253"
         },
         {
@@ -40574,6 +40790,14 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/RacetrackPlanner.ts:190"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/SettlementPets.ts:36"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/firstperson/LeisureModels.ts:383"
         },
         {
           "system": "Gameplay",
@@ -40619,15 +40843,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:360"
+          "source": "src/entities/PropFactories.ts:362"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:361"
+          "source": "src/entities/PropFactories.ts:363"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:784"
+          "source": "src/entities/PropFactories.ts:793"
         },
         {
           "system": "World generation",
@@ -40685,15 +40909,27 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:370"
+          "source": "src/entities/PropFactories.ts:372"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:371"
+          "source": "src/entities/PropFactories.ts:373"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:785"
+          "source": "src/entities/PropFactories.ts:794"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/SettlementPets.ts:30"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/firstperson/LeisureModels.ts:254"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/firstperson/LeisureModels.ts:385"
         }
       ]
     },
@@ -40719,15 +40955,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:381"
+          "source": "src/entities/PropFactories.ts:383"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:382"
+          "source": "src/entities/PropFactories.ts:384"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:786"
+          "source": "src/entities/PropFactories.ts:795"
         }
       ]
     },
@@ -40753,19 +40989,27 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:390"
+          "source": "src/entities/PropFactories.ts:392"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:391"
+          "source": "src/entities/PropFactories.ts:393"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:787"
+          "source": "src/entities/PropFactories.ts:796"
         },
         {
           "system": "World generation",
           "source": "src/generation/regional/PublicSpaceRecipes.ts:41"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/SettlementPets.ts:36"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/firstperson/LeisureModels.ts:386"
         }
       ]
     },
@@ -40791,15 +41035,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:400"
+          "source": "src/entities/PropFactories.ts:402"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:401"
+          "source": "src/entities/PropFactories.ts:403"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:788"
+          "source": "src/entities/PropFactories.ts:797"
         }
       ]
     },
@@ -40825,15 +41069,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:409"
+          "source": "src/entities/PropFactories.ts:411"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:410"
+          "source": "src/entities/PropFactories.ts:412"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:789"
+          "source": "src/entities/PropFactories.ts:798"
         }
       ]
     },
@@ -40859,15 +41103,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:418"
+          "source": "src/entities/PropFactories.ts:420"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:419"
+          "source": "src/entities/PropFactories.ts:421"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:790"
+          "source": "src/entities/PropFactories.ts:799"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/SettlementPets.ts:28"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/firstperson/LeisureModels.ts:384"
         }
       ]
     },
@@ -40893,15 +41145,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:432"
+          "source": "src/entities/PropFactories.ts:434"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:433"
+          "source": "src/entities/PropFactories.ts:435"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:791"
+          "source": "src/entities/PropFactories.ts:800"
         }
       ]
     },
@@ -40927,15 +41179,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:446"
+          "source": "src/entities/PropFactories.ts:448"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:447"
+          "source": "src/entities/PropFactories.ts:449"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:792"
+          "source": "src/entities/PropFactories.ts:801"
         }
       ]
     },
@@ -40961,15 +41213,27 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:461"
+          "source": "src/entities/PropFactories.ts:463"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:462"
+          "source": "src/entities/PropFactories.ts:464"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:793"
+          "source": "src/entities/PropFactories.ts:802"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/SettlementPets.ts:31"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/SettlementPets.ts:36"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/firstperson/LeisureModels.ts:387"
         }
       ]
     },
@@ -40995,15 +41259,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:470"
+          "source": "src/entities/PropFactories.ts:472"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:471"
+          "source": "src/entities/PropFactories.ts:473"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:794"
+          "source": "src/entities/PropFactories.ts:803"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:132"
         }
       ]
     },
@@ -41045,7 +41313,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/NaturalLandscapeCandidate.ts:55"
+          "source": "src/workshop/NaturalLandscapeCandidate.ts:56"
         }
       ]
     },
