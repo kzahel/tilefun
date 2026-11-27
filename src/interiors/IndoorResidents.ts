@@ -15,7 +15,7 @@ const stop = (
 ): ResidentStop => ({ id, wx, wy, action, seconds, facing });
 
 export function indoorResidents(identity: InteriorIdentity): ActorPlacement[] {
-  if (!isLivedIn(identity)) return [];
+  if (!isLivedIn(identity) && identity.layout !== "civic-v1") return [];
   const door = buildingDoor(identity);
   const homeRealm = interiorRealmId(identity.parentWorldId, identity.featureId);
   const resident = (
@@ -56,6 +56,14 @@ export function indoorResidents(identity: InteriorIdentity): ActorPlacement[] {
       resident: behavior,
     };
   };
+  if (identity.layout === "civic-v1")
+    return [
+      resident("attendant", "indoor-reader", [
+        stop("counter", 244, 195, "rest", 7),
+        stop("back-room", 178, 80, "rest", 6),
+      ]),
+      resident("visitor", "indoor-reader", [stop("waiting", 156, 218, "read", 11)], true),
+    ];
   if (identity.layout === "home-v3")
     return [
       resident("reader", "indoor-reader", [

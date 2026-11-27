@@ -1,4 +1,5 @@
 import { type FarmChoice, farmChoice, farmGateChoice } from "../farming/FarmInteraction.js";
+import { postalChoice } from "../farming/PostalInteraction.js";
 import { cssRegion, pageInset } from "../input/ViewRect.js";
 import type { RenderRegion } from "../rendering/ViewLayout.js";
 import type { ClientSeat } from "../session/ClientSeat.js";
@@ -138,7 +139,8 @@ class GuestPlace {
       !host.storagePaused &&
       !view.editorEnabled &&
       !view.interior
-        ? (farmGateChoice(view.playerEntity, view.props) ??
+        ? (postalChoice(view.playerEntity, view.props, inventory) ??
+          farmGateChoice(view.playerEntity, view.props) ??
           farmChoice(view.playerEntity, view.entities, inventory))
         : undefined;
     const key = this.vehicle.key || JSON.stringify(this.door.request ?? this.farm?.request ?? null);

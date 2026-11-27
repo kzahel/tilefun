@@ -1,5 +1,6 @@
 import type { ClientStateView } from "../client/ClientStateView.js";
 import { buildingRecipe } from "../generation/regional/BuildingRecipes.js";
+import { civicBuilding } from "../generation/regional/CivicBuildings.js";
 import { buildingDoors, exteriorDoors } from "../interiors/BuildingDoors.js";
 import { DoorApproach, doorwayReached, towardDoor } from "../interiors/DoorTraversal.js";
 import { nearestStationBench } from "../railway/StationBench.js";
@@ -115,6 +116,8 @@ export interface DoorChoice {
 }
 
 function doorLabel(type: string): string {
+  const civic = civicBuilding(type);
+  if (civic) return `Enter ${civic.label.toLowerCase()}`;
   if (type === "prop-country-house") return "Enter home";
   if (type === "prop-shed") return "Enter outbuilding";
   return buildingRecipe(type)?.kind === "shop" ? "Enter shop" : "Enter apartment";

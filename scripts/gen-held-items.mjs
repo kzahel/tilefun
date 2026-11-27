@@ -148,7 +148,24 @@ const HAND = [
 ]
 
 const same = (frame) => [frame, frame, frame];
-const columns = [same(CORN), same(WOOD), same(BALL), STICK, AXE, same(HAND)];
+const columns = [
+  same(CORN),
+  same(WOOD),
+  same(BALL),
+  STICK,
+  AXE,
+  same(HAND),
+  same([
+    "........",
+    ".oooooo.",
+    ".aeeaea.",
+    ".aeWWea.",
+    ".aaaaaa.",
+    ".ammmma.",
+    ".oooooo.",
+    "........",
+  ]),
+];
 const ROWS = 3;
 const SIZE = 8;
 

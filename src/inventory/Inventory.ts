@@ -5,7 +5,15 @@ export const WOOD = 2;
 export const BALL = 3;
 export const STICK = 4;
 export const AXE = 5;
-export type ItemId = typeof CORN | typeof WOOD | typeof BALL | typeof STICK | typeof AXE;
+// Column 5 remains the empty-hand gesture on the shared attachment sheet.
+export const PARCEL = 7;
+export type ItemId =
+  | typeof PARCEL
+  | typeof CORN
+  | typeof WOOD
+  | typeof BALL
+  | typeof STICK
+  | typeof AXE;
 
 interface ItemInfo {
   readonly label: string;
@@ -16,6 +24,7 @@ interface ItemInfo {
   readonly tool?: true;
 }
 export const ITEMS: { readonly [K in ItemId]: ItemInfo } = {
+  [PARCEL]: { label: "Postal parcel", icon: "📦" },
   [CORN]: { label: "Corn", icon: "🌽", verb: "Scatter" },
   [WOOD]: { label: "Wood", icon: "🪵" },
   [BALL]: { label: "Ball", icon: "🔴", verb: "Throw", tool: true },

@@ -1,10 +1,17 @@
+import { civicRoom } from "./CivicRooms.js";
 import type { FurniturePlacement } from "./FurnitureCatalog.js";
 import type { InteriorIdentity } from "./GameplayInterior.js";
 import { isLivedIn, type LivedInLayout, livedInLayout } from "./LivedInLayouts.js";
 
 /** Saved identities pin these recipes. Changes require a new layout ID. */
-export type BuildingLayout = "shop-v2" | "apartment-v2" | "outbuilding-v1" | LivedInLayout;
+export type BuildingLayout =
+  | "shop-v2"
+  | "apartment-v2"
+  | "outbuilding-v1"
+  | LivedInLayout
+  | "civic-v1";
 export function buildingLayout(identity: InteriorIdentity) {
+  if (identity.layout === "civic-v1") return civicRoom(identity);
   if (isLivedIn(identity)) return livedInLayout(identity);
   if (identity.layout === "outbuilding-v1")
     return {

@@ -20,6 +20,7 @@ import {
 } from "./FarmActors.js";
 import { DOMESTIC_HEN } from "./FarmFowl.js";
 import { FARM_GATE, isFarmGate } from "./FarmGate.js";
+import type { PostalAction } from "./PostalInteraction.js";
 
 const FARM_REACH = 32;
 export const FEED_REACH = 96;
@@ -40,7 +41,7 @@ export type GateAction = "open-gate" | "close-gate";
 export type FarmAction = Exclude<keyof typeof FARM_LABELS, GateAction>;
 export type FarmRequest = { type: "farm-action" } & (
   | { action: FarmAction; entityId: number }
-  | { action: GateAction; propId: number }
+  | { action: GateAction | PostalAction; propId: number }
 );
 /** `use`: the verb belongs to the item in hand, so prompts name the use button
  * (Interact still performs it; a tap on the prompt sends the request directly). */

@@ -1,6 +1,7 @@
 import { TILE_SIZE } from "../config/constants.js";
 import type { Prop } from "../entities/Prop.js";
 import { buildingRecipe } from "../generation/regional/BuildingRecipes.js";
+import { civicBuilding } from "../generation/regional/CivicBuildings.js";
 import { denseDoorThresholds } from "../generation/regional/DenseDoorThresholds.js";
 import { shoppingBuilding } from "../generation/regional/ShoppingScenery.js";
 import {
@@ -127,10 +128,12 @@ export function withLivedInLayout(
     layout:
       buildingRecipe(base.buildingType)?.kind !== "shop"
         ? "home-v3"
-        : shoppingBuilding(base.buildingType) ||
-            /bakery|cafe|restaurant|diner/.test(base.buildingType)
-          ? "restaurant-v3"
-          : "market-v3",
+        : civicBuilding(base.buildingType)
+          ? "civic-v1"
+          : shoppingBuilding(base.buildingType) ||
+              /bakery|cafe|restaurant|diner/.test(base.buildingType)
+            ? "restaurant-v3"
+            : "market-v3",
     doors: (base.doors ?? []).map((door) => ({ ...door, inside: { ...door.inside, wy: 264 } })),
   };
 }

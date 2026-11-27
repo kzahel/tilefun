@@ -33,6 +33,7 @@ import { growFarmChick, updateChickenPen } from "./FarmPoultry.js";
 import { chopTree } from "./FarmWoodlot.js";
 import { setInventory } from "./PlayerInventory.js";
 import type { PlayerSession } from "./PlayerSession.js";
+import { deliverMail } from "./PostalPlay.js";
 import type { Realm } from "./Realm.js";
 
 type FarmRealm = Pick<
@@ -159,6 +160,8 @@ export function performFarmAction(
   )
     throw new Error(UNREACHABLE);
   if ("propId" in request) {
+    if (request.action === "collect-parcel" || request.action === "deliver-parcel")
+      return deliverMail(realm, session, { propId: request.propId, action: request.action });
     if (request.action !== "open-gate" && request.action !== "close-gate")
       throw new Error(UNREACHABLE);
     toggleGate(realm, player, request);

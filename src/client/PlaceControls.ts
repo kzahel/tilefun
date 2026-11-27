@@ -1,4 +1,5 @@
 import { type FarmRequest, farmChoice, farmGateChoice } from "../farming/FarmInteraction.js";
+import { postalChoice } from "../farming/PostalInteraction.js";
 import type { ActionManager } from "../input/ActionManager.js";
 import { actionHint, type KeyHint } from "../input/InputHints.js";
 import type { TouchMovementMode } from "../input/TapMovement.js";
@@ -148,7 +149,8 @@ export class PlaceControls {
         !doorPrompt &&
         !view.editorEnabled &&
         !view.interior
-        ? (farmGateChoice(view.playerEntity, view.props) ??
+        ? (postalChoice(view.playerEntity, view.props, view.inventory) ??
+            farmGateChoice(view.playerEntity, view.props) ??
             farmChoice(view.playerEntity, view.entities, view.inventory))
         : undefined,
     );
