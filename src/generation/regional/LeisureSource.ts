@@ -81,7 +81,8 @@ export class LeisureSource {
     if (site) {
       // Offset adjoining owner cells' preference, with small variation from the seed.
       const preferCamp = (cx + cy + this.world.seed) % 2 === 0;
-      const garden = preferCamp === hash(46019) < 0.25;
+      const swapPreference = hash(46019) < 0.25;
+      const garden = preferCamp === swapPreference;
       const kind = site.coast ? "beach" : garden ? "garden" : "camp";
       const label =
         kind === "garden" ? "Garden park" : kind === "camp" ? "Woodland camp" : "Town beach";
@@ -116,9 +117,11 @@ export class LeisureSource {
         : { x: along + across, y: edge + side * out };
     const gate = point(0, 18),
       second = point(0, -18);
-    for (const dist of [24, 64, 104]) {
+    // Follow each road approach to the actual sand band; fixed-distance sites
+    // commonly land either underwater or well short of the coast.
+    for (let dist = 24; dist <= 176; dist += 8) {
       const center = point(dist, 0),
-        water = point(dist + 18, 0);
+        water = point(dist + 24, 0);
       const coast =
         plannedElevation(this.world, water.x, water.y) < 0 &&
         plannedElevation(this.world, center.x, center.y) < 0.08;
@@ -155,6 +158,14 @@ export class LeisureSource {
       limits: QUERY_LIMITS,
       sampleStep: 128,
     });
+    if (
+      lines.some(
+        (l) =>
+          l.stations.some((s) => intersects(bounds, s.platform) || intersects(bounds, s.access)) ||
+          l.bridges.some((b) => intersects(b.bounds, bounds)),
+      )
+    )
+      return false;
     for (let y = bounds.minY; y <= bounds.maxY + 3; y += 3)
       for (let x = bounds.minX; x <= bounds.maxX + 3; x += 3) {
         if (
@@ -163,12 +174,7 @@ export class LeisureSource {
           tracks.some((t) => racetrackReserved(t, x, y, 3)) ||
           parks.some((p) => motocrossReserved(p, x, y, 3)) ||
           connections.some((c) => pathDistance(c.points, x, y) < c.width / 2 + 3) ||
-          lines.some(
-            (l) =>
-              nearestRail(l.path, x * 16, y * 16).distance < 10 * 16 ||
-              l.stations.some((s) => [s.platform, s.access].some((b) => intersects(bounds, b))) ||
-              l.bridges.some((b) => intersects(b.bounds, bounds)),
-          )
+          lines.some((l) => nearestRail(l.path, x * 16, y * 16).distance < 10 * 16)
         )
           return false;
       }

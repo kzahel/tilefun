@@ -1,7 +1,10 @@
 import { RoadType } from "../../road/RoadType.js";
-import { type DenseDistrictPlan, insideDenseBounds } from "./DenseDistrictPlanner.js";
+import type { DenseDistrictPlan } from "./DenseDistrictPlanner.js";
+import { insideDenseBounds } from "./PlanGeometry.js";
+
 export function greenSurfaceAt(plan: DenseDistrictPlan, x: number, y: number): RoadType {
-  for (const block of plan.blocks.filter((b) => b.kind === "park")) {
+  for (const block of plan.blocks) {
+    if (block.kind !== "park") continue;
     const p = block.bounds,
       px = (p.minX + p.maxX) / 2,
       py = (p.minY + p.maxY) / 2;

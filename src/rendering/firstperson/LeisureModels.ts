@@ -9,9 +9,12 @@ import { faces, Model, type Vertex } from "./SceneryMesh.js";
 
 type UV = readonly [number, number];
 function tent(m: Model) {
-  const blue = m.prop.type.endsWith("blue"),
-    light = blue ? 0x6592bc : 0x80a16e,
-    dark = blue ? 0x45658c : 0x526c4b;
+  const color = m.prop.type.toLowerCase();
+  const [light, dark] = color.endsWith("blue")
+    ? [0x6592bc, 0x45658c]
+    : color.endsWith("tan")
+      ? [0xc4a273, 0x96734e]
+      : [0x80a16e, 0x526c4b];
   const front = 0,
     back = -32,
     peak = 38;
@@ -267,6 +270,9 @@ function relief(m: Model, depth: number, heightScale: number) {
 const models: Record<string, (m: Model) => void> = {
   "prop-tent-blue": tent,
   "prop-tent-green": tent,
+  "prop-park-tentBlue": tent,
+  "prop-park-tentGreen": tent,
+  "prop-park-tentTan": tent,
   "prop-beach-umbrella": umbrella,
   "prop-picnic-table": table,
   "prop-play-fort": fort,

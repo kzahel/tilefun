@@ -6,6 +6,7 @@ import { edgeHash } from "../RoadGenerator.js";
 import { denseBuilding } from "./DenseCityAssets.js";
 import { denseDoorThresholds } from "./DenseDoorThresholds.js";
 import type { DistrictBlock, DistrictPlan, DistrictStreet } from "./DistrictPlan.js";
+import { insideDenseBounds } from "./PlanGeometry.js";
 import type { Bounds, Settlement } from "./RegionalPlanner.js";
 import { greenSurfaceAt } from "./SettlementGreen.js";
 
@@ -34,8 +35,8 @@ export interface DenseDistrictPlan extends DistrictPlan {
     sidewalk: { x: number; y: number };
   }[];
 }
-export const insideDenseBounds = (b: Bounds, x: number, y: number) =>
-  x >= b.minX && x < b.maxX && y >= b.minY && y < b.maxY;
+export { insideDenseBounds };
+
 function item<T>(values: readonly T[], index: number): T {
   const value = values[index];
   if (value === undefined) throw new Error("Incomplete dense district geometry");

@@ -1,4 +1,7 @@
-import type { Point } from "./RegionalPlanner.js";
+import type { Bounds, Point } from "./RegionalPlanner.js";
+
+export const insideDenseBounds = (b: Bounds, x: number, y: number) =>
+  x >= b.minX && x < b.maxX && y >= b.minY && y < b.maxY;
 
 /** Canonical distance to the orthogonal paths admitted by regional planners. */
 export function pathDistance(points: readonly Point[], x: number, y: number): number {
