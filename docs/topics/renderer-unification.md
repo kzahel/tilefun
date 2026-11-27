@@ -9,6 +9,15 @@ corrections and passing hosted Linux qualification are recorded in
 fixed-pass orchestration, enable gates, empty host hooks and GPU raster adapters.
 Interactive `RenderResources` expose terrain preparation/resources only;
 `ReviewRenderBackend` exposes the immutable native review pass protocol.
+
+Regional outings use the Modern Exteriors sprites overhead. First person and XR
+share chunk-batched pitched tents, picnic tables, playground frames and
+parasols. The tree house uses textured timber, a raised cabin and an open
+doorway aligned with its climbable ladder and porch. A dock has horizontal
+boards and standing piles. The boat kiosk, fountain and net retain the sprite
+silhouette with depth, while towels sit flat on the sand. Playable locations
+and map arrivals are listed under [parks, camps and beaches](city-generation.md#parks-camps-and-beaches).
+
 [255](../tactical/255-wildlife-3d-model-campaign/progress.md) exercises skinned
 animal GLBs in the same game and lab scene. A development catalog maps each
 GLB to the actor's existing clip, frame phase and facing. Sprite fallback and

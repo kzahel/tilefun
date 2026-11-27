@@ -6739,7 +6739,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-lake&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=812.9465317726135&y=-907.1952428035438&landscape=sparse&zoom=0.8",
-      "fingerprint": "eb21be28eff8542923a4e1a9c81da181c1ba1aac0ba48a948682049c8c5afc21"
+      "fingerprint": "f8839983debaeefe64514c32af61f225d4e0875cfae0b64049b01a47f62fae48"
     },
     {
       "id": "nature:lake:balanced:v1",
@@ -6749,7 +6749,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-lake&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=812.9465317726135&y=-907.1952428035438&landscape=balanced&zoom=0.8",
-      "fingerprint": "95309266f91df20f1d4dc0f069bc4ce0e1239c5773e77f1f632d024ee25e7f7e"
+      "fingerprint": "bb1b51958b31d0e121951c7b8484a7db69e7801b60b87defcefe1de5f3464bf7"
     },
     {
       "id": "nature:lake:lush:v1",
@@ -6759,7 +6759,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-lake&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=812.9465317726135&y=-907.1952428035438&landscape=lush&zoom=0.8",
-      "fingerprint": "8793d40e6f4813b9d9b5944a7eed7443a2325143a126160021c4c6f4f6f8a025"
+      "fingerprint": "09b819f99dc396f46bda5d43ca1915a8b90156385d497de8707307aab1935c05"
     },
     {
       "id": "nature:lake:thicket:v1",
@@ -6769,7 +6769,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-lake&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=812.9465317726135&y=-907.1952428035438&landscape=thicket&zoom=0.8",
-      "fingerprint": "8773686e83022aff99a25021e951c3a49a8b4d1628802ea18062f48e8f249d1c"
+      "fingerprint": "6ff3d35cea24d9fa39f1c5a4bc3def3ce0c7b6648230e2b6855ebff4f081aa7a"
     },
     {
       "id": "nature:wolf-pack:sparse:v1",
@@ -15028,7 +15028,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-village-pets&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=672&y=-592&landscape=sparse&zoom=0.8",
-      "fingerprint": "dba1cf8dcd0ce6681a88712cb6051368b56833beaf7de6d206e88924d4aea8e1"
+      "fingerprint": "7fe26e6b5c3aacb0a301ae960427e14b6695dff54817f7d85a058d76b9086a13"
     },
     {
       "id": "nature:village-pets:balanced:v1",
@@ -15038,7 +15038,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-village-pets&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=672&y=-592&landscape=balanced&zoom=0.8",
-      "fingerprint": "baa06ee2404c83f6012712ff33d9b40203656ec99bc397c475f0044fdafff30a"
+      "fingerprint": "814b993b96f8d506ec6b139a02a04182b9a034e3dd9451700be448df7f91046a"
     },
     {
       "id": "nature:village-pets:lush:v1",
@@ -15048,7 +15048,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-village-pets&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=672&y=-592&landscape=lush&zoom=0.8",
-      "fingerprint": "28f5aa0d6502bc01abf9e01a33193cf6940e55025837368331caa41a6544e8da"
+      "fingerprint": "e0fc1581ce746486322492985e7d94767f9341195e6ab6829caca293c2192f8b"
     },
     {
       "id": "nature:village-pets:thicket:v1",
@@ -15058,7 +15058,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-village-pets&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=672&y=-592&landscape=thicket&zoom=0.8",
-      "fingerprint": "d80c8c5e3158ba07408aa45b4d167932f75537ee1cff17cd766a70d8a973f0be"
+      "fingerprint": "3cf13ff034dc3c6b440facb04981bf83f73a38eacee7fb71eeee432dea48fc70"
     },
     {
       "id": "nature:city-center:sparse:v1",
@@ -15068,7 +15068,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-city-center&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=300&y=519&landscape=sparse&zoom=0.8",
-      "fingerprint": "7308452fa78fb177ae2fe99f94cacdf697f09a4726c245518be6e7bd441a89f2"
+      "fingerprint": "241ec493112c87f56111fb2f28be01b671c857b21a1f7fa5cd2532ae0d0b9b21"
     },
     {
       "id": "nature:city-center:balanced:v1",
@@ -15078,7 +15078,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-city-center&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=300&y=519&landscape=balanced&zoom=0.8",
-      "fingerprint": "080a7e740fc08a381a95cbcfb18f9495467d0dba5bee52f32ab134161b185ea9"
+      "fingerprint": "1bb07a70c7ee05ecbf1b95028bb35ef6a229f5c380e7fddceb9fa686fc98e47b"
     },
     {
       "id": "nature:city-center:lush:v1",
@@ -15088,7 +15088,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-city-center&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=300&y=519&landscape=lush&zoom=0.8",
-      "fingerprint": "88a7e89bc95e5955591fe43f8cf67ef248cc0ef4acfc469f6514d63fdbe5e587"
+      "fingerprint": "c1c37730064d6b133a6d9ea68425454bb2d7b5be6ce78f4674207cec9a7a56e2"
     },
     {
       "id": "nature:city-center:thicket:v1",
@@ -15098,7 +15098,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-city-center&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=300&y=519&landscape=thicket&zoom=0.8",
-      "fingerprint": "c38f6c808b5bffbe066537440e7980dd54a004b4b1f95c8550a66a56417401e0"
+      "fingerprint": "7afc5d23d9e1df859512d8df1a0545d63ad3a8ed38b04832fc6691a994660ca5"
     },
     {
       "id": "nature:racetrack:sparse:v1",
@@ -15148,7 +15148,7 @@
       "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
       "url": "/tilefun/workshop.html?geometry=nature-outing-camp&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=184&y=427&landscape=sparse&zoom=0.8",
-      "fingerprint": "e8236ed78185999b4667f1307923eeb413ec919b348ec55fc03154b57412bb1b"
+      "fingerprint": "463e5c354e8a378d6e867841ff12e27c97909277fc1fe073ec5742130990dcf7"
     },
     {
       "id": "nature:outing-camp:balanced:v1",
@@ -15158,7 +15158,7 @@
       "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
       "url": "/tilefun/workshop.html?geometry=nature-outing-camp&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=184&y=427&landscape=balanced&zoom=0.8",
-      "fingerprint": "19c8870baf6a6e6ef9a7266c9d0f0b5cc3dfc3e664208cfb43d5dec4163a68e0"
+      "fingerprint": "d73d698e5700ae82896d66802ecfdb8b26f0f0c2c92d0656f5ed2e47e1825e06"
     },
     {
       "id": "nature:outing-camp:lush:v1",
@@ -15168,7 +15168,7 @@
       "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
       "url": "/tilefun/workshop.html?geometry=nature-outing-camp&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=184&y=427&landscape=lush&zoom=0.8",
-      "fingerprint": "f1c7745af2329ca588edbaf070a3366a22c63a6b9f4cf1a911c4a9484577945a"
+      "fingerprint": "9a305478fcb4e0ad0e2145e912a66d9bb47fc0a459ffd7cdffb827c32dfa7639"
     },
     {
       "id": "nature:outing-camp:thicket:v1",
@@ -15178,7 +15178,7 @@
       "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
       "url": "/tilefun/workshop.html?geometry=nature-outing-camp&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=184&y=427&landscape=thicket&zoom=0.8",
-      "fingerprint": "f8524d9661be7ac039437532125c6b6c230f845d4c6112dc8df4e902223d8eb5"
+      "fingerprint": "a68f89558eac355f28f8c9f433e6aced1c3eb2a28aad0ff4ddaf6d392700fb75"
     },
     {
       "id": "nature:outing-garden:sparse:v1",
@@ -15188,7 +15188,7 @@
       "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
       "url": "/tilefun/workshop.html?geometry=nature-outing-garden&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-1471&y=-2812&landscape=sparse&zoom=0.8",
-      "fingerprint": "806701c74c4ea9c692bc22e2fcae3a52f1d222906def2dc55f17dbbc0e0ef377"
+      "fingerprint": "2687f9625f352a3d5c5cb023d76122d7f70a4526d276bded0ed4f960fefdad32"
     },
     {
       "id": "nature:outing-garden:balanced:v1",
@@ -15198,7 +15198,7 @@
       "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
       "url": "/tilefun/workshop.html?geometry=nature-outing-garden&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-1471&y=-2812&landscape=balanced&zoom=0.8",
-      "fingerprint": "1cc91b33150bcddd90054829af68e8391d0fe1a9126e665f856bbeb1b01441c3"
+      "fingerprint": "59812961dab290650a435b72ec6355141918a71cbd2f3c76d85d7c14c6d32f98"
     },
     {
       "id": "nature:outing-garden:lush:v1",
@@ -15208,7 +15208,7 @@
       "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
       "url": "/tilefun/workshop.html?geometry=nature-outing-garden&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-1471&y=-2812&landscape=lush&zoom=0.8",
-      "fingerprint": "79b158a676d468dae0bb865cc2264ea30e12c134b6aac28ffb9457202a175b18"
+      "fingerprint": "1cfad2be37402771c5b67cfba740a4e40ea118b93913702980135fae2a2a6892"
     },
     {
       "id": "nature:outing-garden:thicket:v1",
@@ -15218,7 +15218,7 @@
       "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
       "url": "/tilefun/workshop.html?geometry=nature-outing-garden&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-1471&y=-2812&landscape=thicket&zoom=0.8",
-      "fingerprint": "890b1083a5b970d14d7ff385d1d44b13dd6e379d9d49160ecff4c44fe47af417"
+      "fingerprint": "610db323347f9c2fbd0c3514f9a0789027a71755316a202ee00942219847b98b"
     },
     {
       "id": "nature:outing-play:sparse:v1",
@@ -15228,7 +15228,7 @@
       "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
       "url": "/tilefun/workshop.html?geometry=nature-outing-play&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=42&x=-462&y=-609&landscape=sparse&zoom=0.8",
-      "fingerprint": "e6922a6d9b892f1887bf26b5f73e10ae943926b9e9d41eafa6e44b681c840523"
+      "fingerprint": "fac30ead129763117ba6b18595cdc8c24660ad81e7c6f1c824a5c6328c827f32"
     },
     {
       "id": "nature:outing-play:balanced:v1",
@@ -15238,7 +15238,7 @@
       "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
       "url": "/tilefun/workshop.html?geometry=nature-outing-play&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=42&x=-462&y=-609&landscape=balanced&zoom=0.8",
-      "fingerprint": "f8af3ea5d5d6eff4e40f6d1c1f38b4ba95f0a098c75cb90d6522c0a711644fa1"
+      "fingerprint": "64840d4e3b25ee01b357d7988aa245d2524aca123fb592060e181e822d125936"
     },
     {
       "id": "nature:outing-play:lush:v1",
@@ -15248,7 +15248,7 @@
       "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
       "url": "/tilefun/workshop.html?geometry=nature-outing-play&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=42&x=-462&y=-609&landscape=lush&zoom=0.8",
-      "fingerprint": "1f77e5f3b62b2158681249860c7a6a03c893f787283f01feead9768b5a869f33"
+      "fingerprint": "c139629288371d8a55a5b466957b9fb291a304aaac81de003f6d3382d5545600"
     },
     {
       "id": "nature:outing-play:thicket:v1",
@@ -15258,7 +15258,7 @@
       "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
       "url": "/tilefun/workshop.html?geometry=nature-outing-play&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=42&x=-462&y=-609&landscape=thicket&zoom=0.8",
-      "fingerprint": "bc59fac15935e82e63dd25f80e5b87592b39c0ba70073fc1730147d92c63ac5a"
+      "fingerprint": "6e30d59e9897bd87390a208336ac2ce1b685ae5b220507db0a6f088914892038"
     },
     {
       "id": "nature:outing-beach:sparse:v1",
@@ -15268,7 +15268,7 @@
       "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
       "url": "/tilefun/workshop.html?geometry=nature-outing-beach&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=1234&y=-259&landscape=sparse&zoom=0.8",
-      "fingerprint": "f7c32d1112a82a8adcaf0df4df84efedebb141a8cd387369dd41a3b398b22413"
+      "fingerprint": "830a00ee8b25e80da509669635e15e9912c67c1499c69a1f518c77dc8ba8c6c6"
     },
     {
       "id": "nature:outing-beach:balanced:v1",
@@ -15278,7 +15278,7 @@
       "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
       "url": "/tilefun/workshop.html?geometry=nature-outing-beach&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=1234&y=-259&landscape=balanced&zoom=0.8",
-      "fingerprint": "21d72a86a09f4a9b75601a61d74b73fa71cb8ea536b03491d89e1405ef7288b8"
+      "fingerprint": "2ecff775d2035ea07482f40884bae99bb2e41541fa772309a6240d8acb6457ba"
     },
     {
       "id": "nature:outing-beach:lush:v1",
@@ -15288,7 +15288,7 @@
       "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
       "url": "/tilefun/workshop.html?geometry=nature-outing-beach&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=1234&y=-259&landscape=lush&zoom=0.8",
-      "fingerprint": "6e91b1424c789b80f392787deb40c140eb218200ffc6feb08caa6b0fb91d2677"
+      "fingerprint": "45b5ee5e2861ad28ba72b0e8743781a07b536e38d91aff0c5d1f790da1e1c32e"
     },
     {
       "id": "nature:outing-beach:thicket:v1",
@@ -15298,7 +15298,7 @@
       "prompt": "Inspect the generated entrance, scenery, walking space and silhouettes in both top-down and first person.",
       "url": "/tilefun/workshop.html?geometry=nature-outing-beach&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=1234&y=-259&landscape=thicket&zoom=0.8",
-      "fingerprint": "e039ea8e3bd9432f529054c69c06d4b8af1e07bff1e0c46ba05e07760c2caf03"
+      "fingerprint": "e05fdf74f967e5d212014a44ff75fcab56f03fee95842aea69e4ef534e639462"
     },
     {
       "id": "nature:motocross:sparse:v1",
@@ -15348,7 +15348,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-city-pets&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=306&y=540&landscape=sparse&zoom=0.8",
-      "fingerprint": "42679441047cb41ea3fa12058cd6dff489ce007d9b2e44db899647f45d561252"
+      "fingerprint": "1f7e390def4c00dba5f7623959fbff1d40ced442b73a4637f23d0c67d8e14d31"
     },
     {
       "id": "nature:city-pets:balanced:v1",
@@ -15358,7 +15358,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-city-pets&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=306&y=540&landscape=balanced&zoom=0.8",
-      "fingerprint": "d79f90220bf70c79e7e54a50e7c71a78bd865feacd8a84d7cbc0d406f56f08a6"
+      "fingerprint": "6610249cf9d4e38a8f00f13955bc19a33f90bc37aa36c188146cbe5c587aaaac"
     },
     {
       "id": "nature:city-pets:lush:v1",
@@ -15368,7 +15368,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-city-pets&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=306&y=540&landscape=lush&zoom=0.8",
-      "fingerprint": "15e164a1ffe1c0aab586bfab020ce4015b20aad2fd93be9265f1d70af19c52f6"
+      "fingerprint": "d90347a90d94d9bdaada07cdeda3672e267d884b9105b3042d58645a0e7ead07"
     },
     {
       "id": "nature:city-pets:thicket:v1",
@@ -15378,7 +15378,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-city-pets&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=306&y=540&landscape=thicket&zoom=0.8",
-      "fingerprint": "b9306f0525543980db1e5752c4e58259fa560936d2cad858fdec9d9475a831cd"
+      "fingerprint": "cd24827fc47d4fa86b7480c49b7a2d4ff0dc262e07f24ea92e3f1d1d578f7dd3"
     },
     {
       "id": "nature:meadow:sparse:v1",
@@ -17396,9 +17396,9 @@
       "batchId": "world-geometry",
       "kind": "geometry",
       "name": "Tree house: ladder climbing and an enterable cabin",
-      "prompt": "Climb the ladder, hang on, step onto the porch and walk into the cabin; judge climbing speed, the roof cutaway and getting back down. Shared physics; unedited Modern Exteriors crops placed for a lab experiment, not promoted art.",
+      "prompt": "Climb the ladder, step onto the porch and walk into the cabin. Check the overhead roof cutaway and the first-person view through the doorway, then climb back down.",
       "url": "/tilefun/workshop.html?geometry=tree-house#/tool/world-geometry",
-      "fingerprint": "b2e257e09fae7958dac33f5ae4cf9efeaa9b3362d6631caa0356d404c2bf0656",
+      "fingerprint": "3a3dc1c0fc69b66348b316c06eb82d717b27246a4e982e9a09e0cf4e38169ab1",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -17406,9 +17406,9 @@
       "batchId": "world-geometry",
       "kind": "geometry",
       "name": "Outskirts park: campground, fishing dock, tree house and wildlife meadow",
-      "prompt": "Explore the trails: campground with tents, campfire and log seats; pond dock with ducks and frogs; tree house ladder; fenced meadow with deer and rabbits. Judge layout, variety and what kids want to do here. Shared physics; unedited Modern Exteriors crops placed for a lab experiment, not promoted art.",
+      "prompt": "Follow the trails between the tents, pond dock, tree house and wildlife meadow. Try walking between camp furniture and climbing the ladder in first person.",
       "url": "/tilefun/workshop.html?geometry=outskirts-park#/tool/world-geometry",
-      "fingerprint": "2b38fda29c3886784d034b79f0b06fbcb490f151398f1605302a2f5ac6d1777d",
+      "fingerprint": "0b0ec6616e064091fdb1c53bcd17ad7a218038c4761e87170d89b15f3a7c02b6",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -66223,5 +66223,5 @@
       "fingerprint": "3fa16e7e77803dfef5ac25f25935cafb37efd05f19f3d1ed7e288b30ccdc8d67"
     }
   ],
-  "inputDigest": "7be7341d49afa6a635a9ab1668ade3bc95b2a9229886cd694ad35b4a72cf8b93"
+  "inputDigest": "f1e4352b9d7b3af57eecf6cb29a53fef14e44d3d8d2c68849c015a9cc6836254"
 }

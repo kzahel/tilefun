@@ -24,6 +24,8 @@ export async function buildNaturalCandidate(
   const hasThickets =
     recipe.generation.type === "regional" &&
     (recipe.landscape ?? DEFAULT_LANDSCAPE_PROFILE) === "thicket";
+  const showsOuting =
+    id.startsWith("outing-") || ["lake", "city-center", "city-pets", "village-pets"].includes(id);
   return {
     id: `nature:${id}:${profile}:v1`,
     batchId: id === "chicken-pen" ? "farm-chickens" : "natural-landscapes",
@@ -47,6 +49,7 @@ export async function buildNaturalCandidate(
         JSON.stringify({
           recipe,
           engine: ENGINE_REVIEW_REVISION,
+          leisurePresentation: showsOuting ? 1 : undefined,
           thicketPresentation: hasThickets ? 2 : undefined,
           sources: catalog.sheets.filter(
             (s) =>

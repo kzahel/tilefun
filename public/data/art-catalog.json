@@ -11995,7 +11995,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:282"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:278"
         },
         {
           "system": "Gameplay",
@@ -12791,7 +12791,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:90"
+          "source": "src/generation/regional/LeisurePlaces.ts:109"
         },
         {
           "system": "Gameplay",
@@ -12799,7 +12799,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/LeisureModels.ts:380"
+          "source": "src/rendering/firstperson/LeisureModels.ts:271"
         }
       ]
     },
@@ -12841,11 +12841,15 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:91"
+          "source": "src/generation/regional/LakeShore.ts:31"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:110"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/LeisureModels.ts:381"
+          "source": "src/rendering/firstperson/LeisureModels.ts:272"
         }
       ]
     },
@@ -12879,7 +12883,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:138"
+          "source": "src/generation/regional/LeisurePlaces.ts:151"
         }
       ]
     },
@@ -12913,7 +12917,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:136"
+          "source": "src/generation/regional/LeisurePlaces.ts:149"
         },
         {
           "system": "World generation",
@@ -12925,7 +12929,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/LeisureModels.ts:382"
+          "source": "src/rendering/firstperson/LeisureModels.ts:276"
         }
       ]
     },
@@ -13033,27 +13037,31 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:104"
+          "source": "src/generation/regional/LeisurePlaces.ts:123"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:107"
+          "source": "src/generation/regional/LeisurePlaces.ts:126"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:129"
+          "source": "src/generation/regional/LeisurePlaces.ts:138"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:133"
+          "source": "src/generation/regional/LeisurePlaces.ts:142"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1466"
+          "source": "src/generation/regional/LeisurePlaces.ts:145"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1660"
+          "source": "src/generation/regional/NaturalLandscape.ts:1418"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/NaturalLandscape.ts:1612"
         },
         {
           "system": "World generation",
@@ -13153,7 +13161,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/NaturalLandscapeCandidate.ts:53"
+          "source": "src/workshop/NaturalLandscapeCandidate.ts:56"
         }
       ]
     },
@@ -13229,15 +13237,19 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:97"
+          "source": "src/generation/regional/LeisurePlaces.ts:116"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:130"
+          "source": "src/generation/regional/LeisurePlaces.ts:139"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:145"
+          "source": "src/generation/regional/LeisurePlaces.ts:144"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:159"
         },
         {
           "system": "World generation",
@@ -13257,7 +13269,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/LeisureModels.ts:383"
+          "source": "src/rendering/firstperson/LeisureModels.ts:277"
         },
         {
           "system": "Gameplay",
@@ -13377,11 +13389,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/LeisureModels.ts:254"
+          "source": "src/rendering/firstperson/LeisureModels.ts:141"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/LeisureModels.ts:385"
+          "source": "src/rendering/firstperson/LeisureModels.ts:279"
         }
       ]
     },
@@ -13453,7 +13465,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/LeisureModels.ts:386"
+          "source": "src/rendering/firstperson/LeisureModels.ts:280"
         }
       ]
     },
@@ -13551,7 +13563,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/LeisureModels.ts:384"
+          "source": "src/rendering/firstperson/LeisureModels.ts:278"
         }
       ]
     },
@@ -13653,7 +13665,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/LeisureModels.ts:387"
+          "source": "src/rendering/firstperson/LeisureModels.ts:281"
         }
       ]
     },
@@ -13687,7 +13699,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:132"
+          "source": "src/generation/regional/LeisurePlaces.ts:141"
         }
       ]
     },
@@ -14115,15 +14127,15 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:105"
+          "source": "src/generation/regional/LeisurePlaces.ts:124"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:126"
+          "source": "src/generation/regional/LeisurePlaces.ts:135"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:131"
+          "source": "src/generation/regional/LeisurePlaces.ts:140"
         },
         {
           "system": "World generation",
@@ -14251,7 +14263,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:125"
+          "source": "src/generation/regional/LeisurePlaces.ts:134"
         },
         {
           "system": "World generation",
@@ -14259,7 +14271,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/LeisureModels.ts:395"
+          "source": "src/rendering/firstperson/LeisureModels.ts:289"
         }
       ]
     },
@@ -32529,7 +32541,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:282"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:278"
         },
         {
           "system": "Gameplay",
@@ -38559,7 +38571,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:205"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:201"
         },
         {
           "system": "Gameplay",
@@ -38717,7 +38729,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:201"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:197"
         },
         {
           "system": "Gameplay",
@@ -39133,7 +39145,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:95"
+          "source": "src/generation/regional/LakeShore.ts:37"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:114"
         }
       ]
     },
@@ -39237,7 +39253,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:215"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:211"
         },
         {
           "system": "Gameplay",
@@ -39537,15 +39553,15 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:143"
+          "source": "src/generation/regional/LeisurePlaces.ts:157"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:143"
+          "source": "src/generation/regional/LeisurePlaces.ts:157"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalStrategy.ts:181"
+          "source": "src/generation/regional/OutingRealization.ts:25"
         },
         {
           "system": "Gameplay",
@@ -39891,7 +39907,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictPlanner.ts:195"
+          "source": "src/generation/regional/DenseDistrictPlanner.ts:197"
         }
       ]
     },
@@ -40303,7 +40319,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:90"
+          "source": "src/generation/regional/LeisurePlaces.ts:109"
         },
         {
           "system": "Gameplay",
@@ -40311,7 +40327,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/LeisureModels.ts:380"
+          "source": "src/rendering/firstperson/LeisureModels.ts:271"
         }
       ]
     },
@@ -40357,11 +40373,15 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:91"
+          "source": "src/generation/regional/LakeShore.ts:31"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:110"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/LeisureModels.ts:381"
+          "source": "src/rendering/firstperson/LeisureModels.ts:272"
         }
       ]
     },
@@ -40399,7 +40419,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:138"
+          "source": "src/generation/regional/LeisurePlaces.ts:151"
         }
       ]
     },
@@ -40437,7 +40457,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:136"
+          "source": "src/generation/regional/LeisurePlaces.ts:149"
         },
         {
           "system": "World generation",
@@ -40449,7 +40469,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/LeisureModels.ts:382"
+          "source": "src/rendering/firstperson/LeisureModels.ts:276"
         }
       ]
     },
@@ -40565,27 +40585,31 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:104"
+          "source": "src/generation/regional/LeisurePlaces.ts:123"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:107"
+          "source": "src/generation/regional/LeisurePlaces.ts:126"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:129"
+          "source": "src/generation/regional/LeisurePlaces.ts:138"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:133"
+          "source": "src/generation/regional/LeisurePlaces.ts:142"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1466"
+          "source": "src/generation/regional/LeisurePlaces.ts:145"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1660"
+          "source": "src/generation/regional/NaturalLandscape.ts:1418"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/NaturalLandscape.ts:1612"
         },
         {
           "system": "World generation",
@@ -40685,7 +40709,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/NaturalLandscapeCandidate.ts:53"
+          "source": "src/workshop/NaturalLandscapeCandidate.ts:56"
         }
       ]
     },
@@ -40769,15 +40793,19 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:97"
+          "source": "src/generation/regional/LeisurePlaces.ts:116"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:130"
+          "source": "src/generation/regional/LeisurePlaces.ts:139"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:145"
+          "source": "src/generation/regional/LeisurePlaces.ts:144"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/LeisurePlaces.ts:159"
         },
         {
           "system": "World generation",
@@ -40797,7 +40825,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/LeisureModels.ts:383"
+          "source": "src/rendering/firstperson/LeisureModels.ts:277"
         },
         {
           "system": "Gameplay",
@@ -40925,11 +40953,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/LeisureModels.ts:254"
+          "source": "src/rendering/firstperson/LeisureModels.ts:141"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/LeisureModels.ts:385"
+          "source": "src/rendering/firstperson/LeisureModels.ts:279"
         }
       ]
     },
@@ -41009,7 +41037,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/LeisureModels.ts:386"
+          "source": "src/rendering/firstperson/LeisureModels.ts:280"
         }
       ]
     },
@@ -41119,7 +41147,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/LeisureModels.ts:384"
+          "source": "src/rendering/firstperson/LeisureModels.ts:278"
         }
       ]
     },
@@ -41233,7 +41261,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/LeisureModels.ts:387"
+          "source": "src/rendering/firstperson/LeisureModels.ts:281"
         }
       ]
     },
@@ -41271,7 +41299,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/LeisurePlaces.ts:132"
+          "source": "src/generation/regional/LeisurePlaces.ts:141"
         }
       ]
     },
@@ -41313,7 +41341,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/NaturalLandscapeCandidate.ts:56"
+          "source": "src/workshop/NaturalLandscapeCandidate.ts:59"
         }
       ]
     },

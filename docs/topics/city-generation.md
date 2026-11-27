@@ -1,5 +1,34 @@
 # City generation and promotion
 
+## Parks, camps and beaches
+
+On a fresh regional world, open the map, select a named outing and choose
+**Travel to selected point**. Each settlement’s first green has a play fort,
+climbing arch or paved basketball half-court. Seats, shade and nearby pets
+give the green a second use. Play-yard equipment varies with the seed.
+
+The regional planner also looks for one larger outing within walking distance
+of the town street grid. A dry route to the coast takes priority. Inland sites
+alternate between woodland camps and garden parks with a seeded variation.
+The planner leaves the outskirts open when water, a road, a railway, a farm or
+a race venue blocks the site. Lakes have separate south-bank beaches and keep
+their northern boat landing. Some remote beaches have an overnight pitch.
+
+| Place | What to look for | Map example |
+| --- | --- | --- |
+| Play yard | A fort or climbing arch with a seesaw, or a basketball half-court with a loose ball | Seed 42, Ferngrove · Basketball green |
+| Woodland camp | Pitched tents, a fire circle and a climbable tree house, pond dock or picnic clearing | Seed 2026, Ferngrove · Woodland camp |
+| Garden park | Two approaches to a walking loop, a hedge arch, fountain, flower beds and picnic lawn | Seed 2026, Oakwick · Garden park |
+| Beach | A parasol, towels and sandcastle, with a volleyball court and ball, boat-shaped kiosk or picnic table | Seed 2026, Birchwick · Town beach, or the lakeside kiosk at tile (1234, −259) |
+
+Across seeds 7, 42, 2026 and 9001 and settlement-owner coordinates −5 through
+5 on each axis, 246 settlements produced 107 woodland camps, 100 gardens and
+22 town beaches. The other 17 had their neighborhood green only. This count
+excludes lake beaches. Workshop’s World geometry tool has four **outing**
+views that open the actual generated locations in both cameras.
+
+## Construction and race venues
+
 [258](../tactical/258-construction-yards.md) adds a construction yard to the
 dry east infield of each admitted motocross park. The yard uses the normal
 terrain, prop, actor and parked-vehicle paths. Map travel lands beside the
@@ -328,7 +357,7 @@ current greenfield integration and three seeded previews. Regional-v13 remains
 the descriptor by explicit user direction. No promoted art bank changed.
 
 Continue reviewing the thirteen city-place views before promotion. Later city work
-includes farmers markets, connected parks, frontage variety and richer schedules.
+includes farmers markets, frontage variety and richer schedules.
 Performance evidence lives under [performance](performance.md); feedback rules live
 under [art review](art-review.md).
 

@@ -41,11 +41,10 @@ copying every item into multiple checklists.
   wild trees, solid patterned thickets and small ponds throughout eligible land,
   including inter-town train scenery; explorer/lab preview is ready for composition
   review, with cliffs and mesas later.
-- City follow-ons: farmers markets, connected large parks, more frontage
-  orientations and additional room layouts. Outskirts nature parks (tree houses,
-  camping, fishing, wildlife meadows) start from the tree house lab in
-  [227](tactical/227-tree-house-and-ladders.md). See the living-world ideas below and
-  [city generation](topics/city-generation.md) for dependencies and review gates.
+- Farmers markets, more frontage orientations, additional room layouts, fishing
+  activities and wildlife meadows remain open. Generated garden parks, play yards,
+  camps with tree houses or pond docks, and beach outings are available in the
+  [regional world](topics/city-generation.md#parks-camps-and-beaches).
 
 ## Living world and inhabitants
 

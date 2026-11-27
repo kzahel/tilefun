@@ -124,14 +124,14 @@ const GEOMETRY_FIXTURES = {
     name: "Tree house: ladder climbing and an enterable cabin",
     recipe: () => treeHouseRecipe(),
     prompt:
-      "Climb the ladder, hang on, step onto the porch and walk into the cabin; judge climbing speed, the roof cutaway and getting back down. Shared physics; unedited Modern Exteriors crops placed for a lab experiment, not promoted art.",
+      "Climb the ladder, step onto the porch and walk into the cabin. Check the overhead roof cutaway and the first-person view through the doorway, then climb back down.",
   },
   "outskirts-park": {
     id: "geometry:outskirts-park-v1",
     name: "Outskirts park: campground, fishing dock, tree house and wildlife meadow",
     recipe: () => outskirtsParkRecipe(),
     prompt:
-      "Explore the trails: campground with tents, campfire and log seats; pond dock with ducks and frogs; tree house ladder; fenced meadow with deer and rabbits. Judge layout, variety and what kids want to do here. Shared physics; unedited Modern Exteriors crops placed for a lab experiment, not promoted art.",
+      "Follow the trails between the tents, pond dock, tree house and wildlife meadow. Try walking between camp furniture and climbing the ladder in first person.",
   },
   traffic: {
     id: "geometry:road-traffic-v1",
@@ -155,15 +155,19 @@ export async function buildWorldGeometryCandidate(
     name: entry.name,
     prompt: entry.prompt ?? INSPECT_PROMPT,
     url,
-    fingerprint: await fingerprint(entry.recipe()),
+    fingerprint: await fingerprint(
+      entry.recipe(),
+      fixture === "outskirts-park" || fixture === "tree-house" ? 1 : undefined,
+    ),
     excluded: "Interactive engine experiment; not an immutable art approval snapshot.",
   };
 }
-async function fingerprint(recipe: unknown) {
+async function fingerprint(recipe: unknown, leisurePresentation?: number) {
   return sha256(
     new TextEncoder().encode(
       JSON.stringify({
         recipe,
+        leisurePresentation,
         engine: ENGINE_REVIEW_REVISION,
       }),
     ),
