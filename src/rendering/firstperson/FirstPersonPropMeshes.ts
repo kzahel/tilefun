@@ -30,8 +30,8 @@ import {
 } from "./FirstPersonProps.js";
 import type { FirstPersonRoomScene } from "./FirstPersonRoomScene.js";
 import { type ColoredTriangles, TriangleWriter } from "./FirstPersonTerrain.js";
-
-import { appendLeisureModel } from "./LeisureModels.js";
+import { appendLeisureModel, appendPierPiles } from "./LeisureModels.js";
+import { treeHouseMesh } from "./TreeHouseMesh.js";
 
 export type TexturedFaces = NonNullable<PropGeometry["textured"]>;
 type FacesFor = (image: Pick<PropImage, "texture"> | undefined) => TexturedFaces | undefined;
@@ -274,6 +274,8 @@ export class PropMeshes {
   ): void {
     if (prop.sprite.parts?.length && prop.sprite.parts.every((p) => p.depthFloorZ !== undefined)) {
       this.appendPlanes(prop, elevation + 0.4, facesFor, "outside");
+      if (prop.type === "prop-park-dock")
+        appendPierPiles(built.buildings, this.images, this.white, prop, elevation);
       return;
     }
     if (appendLeisureModel(built.buildings, this.images, this.white, prop, elevation)) {
@@ -298,9 +300,11 @@ export class PropMeshes {
       built.surfaces.push(...propSurfaces(prop));
       built.rooms.push({
         prop,
-        solid: this.roomView((flat, facesFor) =>
-          this.appendSolid(prop, elevation, flat, facesFor, built, "outside"),
-        ),
+        solid: this.roomView((flat, facesFor) => {
+          if (prop.type === "prop-tree-house")
+            treeHouseMesh(this.images, prop, elevation, this.white, facesFor);
+          else this.appendSolid(prop, elevation, flat, facesFor, built, "outside");
+        }),
         outside: this.roomView((_flat, facesFor) =>
           this.appendPlanes(prop, elevation, facesFor, "outside"),
         ),
