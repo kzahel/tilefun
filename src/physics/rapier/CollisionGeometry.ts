@@ -4,8 +4,8 @@ import { type AABB, aabbsOverlap, getEntityAABB } from "../../entities/collision
 import type { Prop } from "../../entities/Prop.js";
 import { CollisionFlag } from "../../world/TileRegistry.js";
 import { PHYSICS_PIXELS_PER_METRE as SCALE } from "../PhysicsDefaults.js";
-import { surfaceZAt } from "../SurfacePatch.js";
 import { clippedTerrainVertices } from "./ClippedTerrain.js";
+import { propHull } from "./PropHull.js";
 
 const MAX_COLLIDERS = 512;
 export interface CollisionGeometrySource {
@@ -143,7 +143,7 @@ export function compileCollisionGeometry(
     previousRow = nextRow;
   }
   for (const cell of ground) box(cell.bounds, -4096, cell.height);
-  for (const prop of props)
+  for (const prop of props) {
     for (const c of prop.walls ?? (prop.collider ? [prop.collider] : [])) {
       const authored = getEntityAABB(prop.position, c);
       const b = {
@@ -154,23 +154,9 @@ export function compileCollisionGeometry(
       };
       if (b.left >= b.right || b.top >= b.bottom) continue;
       if (c.passable && !c.surface && !c.walkableTop) continue;
-      if (c.surface) {
-        const vertices: number[] = [];
-        for (const down of [0, c.surface.thickness])
-          for (const [x, z] of [
-            [b.left, b.top],
-            [b.right, b.top],
-            [b.right, b.bottom],
-            [b.left, b.bottom],
-          ])
-            vertices.push(
-              (x ?? 0) / SCALE - origin.x,
-              (surfaceZAt(c.surface, authored, x ?? 0, z ?? 0) - down) / SCALE - origin.y,
-              (z ?? 0) / SCALE - origin.z,
-            );
-        const descriptor = RAPIER.ColliderDesc.convexHull(new Float32Array(vertices));
-        if (!descriptor) throw Error("Invalid authored surface hull");
-        parts.push(descriptor);
+      if (c.buildingSection || c.surface) {
+        const descriptor = propHull(c, prop.position, authored, b, source, origin);
+        if (descriptor) parts.push(descriptor);
       } else {
         box(
           b,
@@ -179,5 +165,6 @@ export function compileCollisionGeometry(
         );
       }
     }
+  }
   return parts;
 }

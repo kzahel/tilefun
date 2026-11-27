@@ -1,3 +1,8 @@
+import {
+  buildingElevation,
+  localFootprint,
+  sectionInterval,
+} from "../buildings/BuildingSection.js";
 import { ELEVATION_PX, STEP_UP_THRESHOLD, TILE_SIZE } from "../config/constants.js";
 import type { AABB } from "../entities/collision.js";
 import { aabbsOverlap, getEntityAABB } from "../entities/collision.js";
@@ -58,7 +63,7 @@ export function placementGroundZ(
   const groundFootprint = entity.collider ? getEntityAABB(entity.position, entity.collider) : null;
   let groundZ = getTerrainGroundZ(entity, getHeight, props);
   const propZ = groundFootprint
-    ? getWalkablePropSurfaceZ(groundFootprint, entity.wz ?? 0, props)
+    ? getWalkablePropSurfaceZ(groundFootprint, entity.wz ?? 0, props, getHeight)
     : undefined;
   if (propZ !== undefined && propZ > groundZ) groundZ = propZ;
   return groundZ;
@@ -112,40 +117,34 @@ export interface PropSurface {
   walls: PropCollider[] | null;
 }
 
-/**
- * Get the highest walkable prop surface Z under an entity's AABB footprint.
- * Only considers colliders/walls with `walkableTop: true` and finite `zHeight`.
- * Returns undefined if no walkable prop surfaces overlap.
- */
+function supportHeight(
+  c: PropCollider,
+  position: PropSurface["position"],
+  footprint: AABB,
+  getHeight?: (tx: number, ty: number) => number,
+) {
+  const bounds = getEntityAABB(position, c);
+  if (!aabbsOverlap(footprint, bounds)) return;
+  if (c.surface) return querySurfacePatch(c.surface, bounds, footprint)?.topMax;
+  if (!c.walkableTop || c.zHeight === undefined) return;
+  if (!c.buildingSection) return (c.zBase ?? 0) + c.zHeight;
+  const hit = sectionInterval(c.buildingSection, localFootprint(footprint, position));
+  return hit && hit.top + buildingElevation(position, getHeight);
+}
+
+/** Highest walkable top touching the footprint within a step of the body's height. */
 export function getWalkablePropSurfaceZ(
   aabb: AABB,
   entityWz: number,
   props: readonly PropSurface[],
+  getHeight?: (tx: number, ty: number) => number,
 ): number | undefined {
   let maxZ: number | undefined;
-  for (const prop of props) {
-    const colliders = prop.walls ?? (prop.collider ? [prop.collider] : []);
-    for (const c of colliders) {
-      if (c.surface) {
-        const hit = querySurfacePatch(c.surface, getEntityAABB(prop.position, c), aabb);
-        if (
-          hit &&
-          Math.abs(entityWz - hit.topMax) <= STEP_UP_THRESHOLD &&
-          (maxZ === undefined || hit.topMax > maxZ)
-        )
-          maxZ = hit.topMax;
-        continue;
-      }
-      if (!c.walkableTop || c.zHeight === undefined) continue;
-      const topZ = (c.zBase ?? 0) + c.zHeight;
-      // Only walk on top if entity is within step-up range of the surface
-      if (entityWz + STEP_UP_THRESHOLD < topZ) continue; // too far below
-      if (entityWz > topZ + STEP_UP_THRESHOLD) continue; // too far above
-      // Check XY overlap
-      if (aabbsOverlap(aabb, getEntityAABB(prop.position, c))) {
-        if (maxZ === undefined || topZ > maxZ) maxZ = topZ;
-      }
+  for (const prop of props)
+    for (const c of prop.walls ?? (prop.collider ? [prop.collider] : [])) {
+      const z = supportHeight(c, prop.position, aabb, getHeight);
+      if (z !== undefined && Math.abs(entityWz - z) <= STEP_UP_THRESHOLD)
+        maxZ = Math.max(maxZ ?? z, z);
     }
-  }
   return maxZ;
 }

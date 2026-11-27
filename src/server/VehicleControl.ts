@@ -313,7 +313,12 @@ export class VehicleControl {
           props,
         );
     const height = collider.physicalHeight ?? 16;
-    if (props.some((p) => aabbOverlapsPropWalls(box, p.position, p, z, height))) return;
+    if (
+      props.some((p) =>
+        aabbOverlapsPropWalls(box, p.position, p, z, height, (x, y) => r.world.getHeightAt(x, y)),
+      )
+    )
+      return;
     if (
       blockers.some(
         (e) =>

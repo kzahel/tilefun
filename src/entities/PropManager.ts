@@ -1,6 +1,6 @@
 import { CHUNK_SIZE_PX } from "../config/constants.js";
 import type { AABB } from "./collision.js";
-import { aabbsOverlap, getEntityAABB } from "./collision.js";
+import { aabbOverlapsPropWalls, aabbsOverlap, getEntityAABB } from "./collision.js";
 import type { Prop, PropCollider } from "./Prop.js";
 
 function chunkKey(cx: number, cy: number): string {
@@ -173,6 +173,11 @@ export class PropManager {
     const minCy = Math.floor(aabb.top / CHUNK_SIZE_PX);
     const maxCy = Math.floor(aabb.bottom / CHUNK_SIZE_PX);
     for (const prop of this.getPropsInChunkRange(minCx, minCy, maxCx, maxCy)) {
+      if (
+        prop.walls?.[0]?.buildingSection &&
+        aabbOverlapsPropWalls(aabb, prop.position, prop, 0, 1)
+      )
+        return true;
       if (prop.collider && aabbsOverlap(aabb, getEntityAABB(prop.position, prop.collider))) {
         return true;
       }

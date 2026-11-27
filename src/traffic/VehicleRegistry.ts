@@ -130,7 +130,9 @@ export class VehicleRegistry {
         model === BOAT_MODEL ? CollisionFlag.Solid : CollisionFlag.Solid | CollisionFlag.Water,
       ) ||
       this.props.props.some((p) =>
-        aabbOverlapsPropWalls(bounds, p.position, p, entity.wz, c.physicalHeight ?? 16),
+        aabbOverlapsPropWalls(bounds, p.position, p, entity.wz, c.physicalHeight ?? 16, (x, y) =>
+          this.world.getHeightAt(x, y),
+        ),
       ) ||
       this.entities.entities.some(
         (other) =>

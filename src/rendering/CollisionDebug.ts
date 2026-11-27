@@ -1,9 +1,12 @@
-import { type AABB, getEntityAABB } from "../entities/collision.js";
+import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import { rotateBodyVector, yawRotation } from "../physics/BodyRotation.js";
 import { physicsBodyDimensions, physicsBodyKind } from "../physics/PhysicsBodies.js";
-import { surfaceZAt } from "../physics/SurfacePatch.js";
+import { prism, propCollisionDebugShapes } from "./PropCollisionDebug.js";
+
+export { propCollisionDebugShapes } from "./PropCollisionDebug.js";
+
 import type { Camera } from "./Camera.js";
 import { interpolatePosition, interpolateWz } from "./EntityInterpolation.js";
 import type { OverlayFrame } from "./OverlayFrame.js";
@@ -74,17 +77,6 @@ export interface CollisionDebugShape {
   vertices: readonly CollisionPoint[];
   unlimitedHeight?: boolean;
 }
-const corners = (b: AABB) =>
-  [
-    [b.left, b.top],
-    [b.right, b.top],
-    [b.right, b.bottom],
-    [b.left, b.bottom],
-  ] as const;
-function prism(b: AABB, low: number, high: number): CollisionPoint[] {
-  return [low, high].flatMap((z) => corners(b).map(([x, y]) => ({ x, y, z })));
-}
-
 /** Outer body bounds from the same dimensions and yaw as the shared scene. */
 export function entityCollisionDebugShapes(e: Entity): CollisionDebugShape[] {
   if (
@@ -143,52 +135,6 @@ export function entityCollisionDebugShapes(e: Entity): CollisionDebugShape[] {
   return shapes;
 }
 
-export function propCollisionDebugShapes(p: Prop): CollisionDebugShape[] {
-  const shapes: CollisionDebugShape[] = [];
-  for (const [i, c] of (p.walls ?? (p.collider ? [p.collider] : [])).entries()) {
-    const bounds = getEntityAABB(p.position, c),
-      name = c.surface?.id ?? (p.walls ? `wall ${i + 1}` : "body");
-    const surface = c.surface;
-    const vertices = surface
-      ? [false, true].flatMap((top) =>
-          corners(bounds).map(([x, y]) => ({
-            x,
-            y,
-            z: surfaceZAt(surface, bounds, x, y) - (top ? 0 : surface.thickness),
-          })),
-        )
-      : prism(bounds, c.zBase ?? 0, (c.zBase ?? 0) + (c.zHeight ?? 48));
-    if (!c.passable)
-      shapes.push({
-        layer: "walking",
-        name: `${name}${!c.surface && c.zHeight === undefined ? " (height unlimited)" : ""}`,
-        vertices,
-        ...(!surface && c.zHeight === undefined ? { unlimitedHeight: true } : {}),
-      });
-    if (c.surface || (c.walkableTop && c.zHeight !== undefined))
-      shapes.push({ layer: "support", name: `${name} top`, vertices: vertices.slice(4) });
-  }
-  const colliders = [...(p.walls ?? []), ...(p.collider ? [p.collider] : [])];
-  if (colliders.length) {
-    const boxes = colliders.map((c) => getEntityAABB(p.position, c));
-    shapes.push({
-      layer: "bounds",
-      name: "search bounds",
-      vertices: prism(
-        {
-          left: Math.min(...boxes.map((b) => b.left)),
-          right: Math.max(...boxes.map((b) => b.right)),
-          top: Math.min(...boxes.map((b) => b.top)),
-          bottom: Math.max(...boxes.map((b) => b.bottom)),
-        },
-        0,
-        0,
-      ),
-    });
-  }
-  return shapes;
-}
-
 /** Match the scene's displayed XY/Z without changing authoritative objects. */
 export function collisionDebugPose(e: Entity, alpha: number): Entity {
   return {
@@ -206,6 +152,7 @@ export function drawCollisionDebug(
   observer: Entity,
   options: CollisionDebugOptions,
   alpha = 1,
+  getHeight?: (tx: number, ty: number) => number,
 ): void {
   const focus = collisionDebugPose(observer, alpha).position;
   const labels: { x: number; y: number; width: number }[] = [];
@@ -272,7 +219,7 @@ export function drawCollisionDebug(
     }
   }
   for (const e of entities) draw(e, entityCollisionDebugShapes(collisionDebugPose(e, alpha)));
-  for (const p of props) draw(p, propCollisionDebugShapes(p));
+  for (const p of props) draw(p, propCollisionDebugShapes(p, getHeight));
   if (
     options.layers.actors &&
     observer.parentId === undefined &&

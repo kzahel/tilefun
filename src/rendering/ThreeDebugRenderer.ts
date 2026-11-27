@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { buildingElevation, sectionCorners } from "../buildings/BuildingSection.js";
 import {
   CHUNK_SIZE,
   DEFAULT_PHYSICAL_HEIGHT,
@@ -196,7 +197,7 @@ export class ThreeDebugRenderer {
     // Update scene contents
     this.updateTerrain(world, visible);
     this.updateEntityColliders(entities);
-    this.updatePropColliders(props);
+    this.updatePropColliders(props, world);
 
     this.renderer.render(this.scene, this.camera);
   }
@@ -325,13 +326,30 @@ export class ThreeDebugRenderer {
 
   // ── Prop colliders ───────────────────────────────────────
 
-  private updatePropColliders(props: readonly Prop[]): void {
+  private updatePropColliders(props: readonly Prop[], world: World): void {
     this.clearGroup(this.propGroup);
 
     for (const p of props) {
       if (p.walls) {
         for (const w of p.walls) {
-          this.addPropColliderWireframe(p.position.wx, p.position.wy, w);
+          if (w.buildingSection) {
+            const zBase = buildingElevation(p.position, (x, y) => world.getHeightAt(x, y));
+            const pts = sectionCorners(w.buildingSection);
+            const edges = [
+              0, 1, 1, 2, 2, 3, 3, 0, 4, 5, 5, 6, 6, 7, 7, 4, 0, 4, 1, 5, 2, 6, 3, 7,
+            ] as const;
+            this.propGroup.add(
+              new THREE.LineSegments(
+                new THREE.BufferGeometry().setFromPoints(
+                  edges.map((i) => {
+                    const [x, y, z] = pts[i];
+                    return toThree(p.position.wx + x, p.position.wy + y, zBase + z);
+                  }),
+                ),
+                MAT_PROP_WALKABLE,
+              ),
+            );
+          } else this.addPropColliderWireframe(p.position.wx, p.position.wy, w);
         }
       } else if (p.collider) {
         this.addPropColliderWireframe(p.position.wx, p.position.wy, p.collider);

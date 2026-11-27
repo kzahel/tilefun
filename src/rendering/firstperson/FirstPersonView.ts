@@ -321,6 +321,7 @@ export class FirstPersonView {
     // on the right when looking north; Three flips face winding for det < 0.
     this.worldRoot.scale.set(1, -1, 1);
     this.worldRoot.add(this.groundRoot, this.solidRoot, this.cardRoot);
+    this.solidRoot.add(this.propMeshes.buildings.sprite, this.propMeshes.buildings.model);
     this.scene.add(this.worldRoot);
     this.scene.fog = this.fog;
     // Every card reads the page atlas, so each kind of card is one material and one draw.
@@ -478,6 +479,7 @@ export class FirstPersonView {
       this.stats.effects = this.effects.count;
       // Read after the frame's page requests: the atlas is replaced when it grows.
       this.atlas.value = pages.atlas;
+      if (this.propMeshes.buildings.show(!!topDown)) this.sun.invalidate();
       this.swapRoomViews(frame);
       this.sun.update(
         renderer,

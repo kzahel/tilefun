@@ -69,7 +69,9 @@ function raisedSupport(
   standingZ: number,
   props: readonly Prop[],
 ): number | undefined {
-  const top = getWalkablePropSurfaceZ(box, standingZ, props);
+  const top = getWalkablePropSurfaceZ(box, standingZ, props, (x, y) =>
+    realm.world.getHeightAt(x, y),
+  );
   return top !== undefined && top > terrainZ(realm, position) ? top : undefined;
 }
 
@@ -156,7 +158,18 @@ export async function safeArrival(
       wz === undefined ? CollisionFlag.Solid | CollisionFlag.Water : CollisionFlag.Solid;
     if (aabbOverlapsSolid(aabb, (tx, ty) => realm.world.getCollision(tx, ty), blocking))
       return null;
-    if (props.some((prop) => aabbOverlapsPropWalls(aabb, prop.position, prop, wz ?? 0, 12)))
+    if (
+      props.some((prop) =>
+        aabbOverlapsPropWalls(
+          aabb,
+          prop.position,
+          prop,
+          wz ?? terrainZ(realm, position),
+          12,
+          (x, y) => realm.world.getHeightAt(x, y),
+        ),
+      )
+    )
       return null;
     if (bodies.some((body) => aabbsOverlap(aabb, body))) return null;
     return wz === undefined ? position : { ...position, wz };

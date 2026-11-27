@@ -58,16 +58,16 @@ export class PhysicsViewport {
     const view = replica.view;
     view.beginPresentation(now, alpha, paused);
     const seen = new Set<number>();
-    const props = view.props;
-    if (props !== this.props) {
+    if (view.props !== this.props) {
       for (const mesh of this.surfaces) {
         this.scene.remove(mesh);
         mesh.geometry.dispose();
       }
       this.surfaces.length = 0;
-      this.props = props;
-      for (const prop of props)
-        for (const shape of propCollisionDebugShapes(prop)) {
+      this.props = view.props;
+      const height = view.world.getHeightAt.bind(view.world);
+      for (const prop of view.props)
+        for (const shape of propCollisionDebugShapes(prop, height)) {
           if (shape.layer !== "walking" || shape.vertices.length !== 8) continue;
           const geometry = new THREE.BufferGeometry();
           geometry.setAttribute(

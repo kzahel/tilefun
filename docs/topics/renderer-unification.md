@@ -40,6 +40,21 @@ Explicit sprite choices, including Classic 2D and the animal preference, take
 precedence. Top-down vehicle body images are drawn from the active posed 3D model.
 [Characters](characters.md) covers pedestrian sizing and distance-driven walk cycles.
 
+### Generated building exteriors
+
+The top-down camera draws each building’s original composed sprite at its feet.
+First person, vehicle cameras and XR draw textured solids from the same local
+sections used by Rapier. Roof pitches, eaves, recessed wings, porch clearance
+and beveled apartment bays follow the source projection. Unseen elevations use
+siding or window bays sampled from the same art family. Hotel signage sits on
+the building and the entrance mat lies on the ground.
+
+The farmhouse, shed, terraced and Japanese houses, modular city facades and
+shopping-center strips share this path in the game and embedded labs. A shopping
+roof and storefront keep their own saved anchors and meet at the 48-pixel cornice.
+Static meshes batch by texture and camera form. Door connections and interior
+identities still resolve from the original building type and anchor.
+
 ## Decision
 
 Owner, 2026-11-14: unify the renderers, accepting that it takes time. WebXR is

@@ -120,6 +120,7 @@ function checkArmClearance(
             { collider: p.collider, walls: p.walls ?? null },
             z - 2,
             4,
+            getHeight,
           ),
         )
       )

@@ -1,14 +1,12 @@
 import { ATLAS_PREFIX, getAtlasSprites, isAtlasLoaded } from "../assets/AtlasIndex.js";
 import { outdoorRuntimeAsset, outdoorRuntimeProp } from "../assets/outdoor/OutdoorRuntime.js";
 import { MaterialType } from "../audio/SurfaceType.js";
+import { buildingExterior } from "../buildings/BuildingExteriors.js";
+import { sectionBounds } from "../buildings/BuildingSection.js";
 import { STEP_UP_THRESHOLD } from "../config/constants.js";
 import { GARDEN_FENCE, GARDEN_FENCE_SIDE } from "../farming/FarmActors.js";
 import { FARM_GATE, FARM_GATE_SHEET, OPEN_FARM_GATE } from "../farming/FarmGate.js";
-import {
-  buildingBody,
-  buildingRecipe,
-  buildingVisualBounds,
-} from "../generation/regional/BuildingRecipes.js";
+import { buildingRecipe, buildingVisualBounds } from "../generation/regional/BuildingRecipes.js";
 import { COMMERCIAL_STREET_PROPS } from "../generation/regional/CommercialCityAssets.js";
 import { depotBridgeProp } from "../generation/regional/DepotBridge.js";
 import { jumpSlabProp } from "../generation/regional/JumpProfiles.js";
@@ -365,7 +363,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     row: 0,
     width: 48,
     height: 64,
-    collider: { offsetX: 0, offsetY: 0, width: 40, height: 32 },
+    collider: null,
     material: MaterialType.Wood,
   },
   // Playground equipment
@@ -485,7 +483,6 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 192,
     height: 240,
     collider: null,
-    walls: [{ offsetX: 0, offsetY: -5, width: 160, height: 64, zHeight: 48, walkableTop: true }],
     material: MaterialType.Stone,
   },
   "prop-terraced-house-2": {
@@ -495,7 +492,6 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 192,
     height: 240,
     collider: null,
-    walls: [{ offsetX: 0, offsetY: -5, width: 160, height: 64, zHeight: 48, walkableTop: true }],
     material: MaterialType.Stone,
   },
   "prop-terraced-house-3": {
@@ -505,7 +501,6 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 192,
     height: 256,
     collider: null,
-    walls: [{ offsetX: 0, offsetY: -8, width: 160, height: 72, zHeight: 52, walkableTop: true }],
     material: MaterialType.Stone,
   },
   "prop-terraced-house-4": {
@@ -515,7 +510,6 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 192,
     height: 240,
     collider: null,
-    walls: [{ offsetX: 0, offsetY: -5, width: 160, height: 64, zHeight: 48, walkableTop: true }],
     material: MaterialType.Stone,
   },
   "prop-terraced-house-5": {
@@ -525,7 +519,6 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 192,
     height: 240,
     collider: null,
-    walls: [{ offsetX: 0, offsetY: -5, width: 160, height: 64, zHeight: 48, walkableTop: true }],
     material: MaterialType.Stone,
   },
   "prop-terraced-house-6": {
@@ -535,7 +528,6 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 192,
     height: 240,
     collider: null,
-    walls: [{ offsetX: 0, offsetY: -5, width: 160, height: 64, zHeight: 48, walkableTop: true }],
     material: MaterialType.Stone,
   },
   "prop-country-house": {
@@ -545,7 +537,6 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 288,
     height: 256,
     collider: null,
-    walls: [{ offsetX: 0, offsetY: -5, width: 240, height: 80, zHeight: 40, walkableTop: true }],
     material: MaterialType.Stone,
   },
   "prop-japanese-house": {
@@ -555,7 +546,6 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 240,
     height: 224,
     collider: null,
-    walls: [{ offsetX: 0, offsetY: -5, width: 200, height: 64, zHeight: 36, walkableTop: true }],
     material: MaterialType.Wood,
   },
   // ── Street furniture (from ME atlas) ───────────────────────────────────
@@ -618,15 +608,8 @@ export function getWallsForPropType(type: string): PropCollider[] | null {
   const outdoor = outdoorRuntimeAsset(type);
   if (outdoor) return outdoor.metadata.colliders?.map((c) => ({ ...c })) ?? null;
   if (type === INTERIOR_WALL_TYPE) return interiorWalls();
-  const shopping = shoppingScenery.find((p) => p.type === type);
-  if (shopping) return shopping.walls;
-  const recipe = buildingRecipe(type);
-  if (recipe) {
-    const body = buildingBody(recipe);
-    return [
-      { offsetX: 0, offsetY: 0, width: recipe.width, height: body.depth, zHeight: body.height },
-    ];
-  }
+  const exterior = buildingExterior(type);
+  if (exterior) return exterior.sections.map(sectionBounds);
   const def = PROP_DEFS[type];
   if (!def?.walls) return null;
   return def.walls.map((w) => ({ ...w }));
@@ -636,7 +619,10 @@ export function createProp(type: string, wx: number, wy: number): Prop {
   const den = fierceDenSpec(type);
   if (den) return createFierceDen(den, wx, wy);
   const shopping = shoppingSceneryProp(type, wx, wy);
-  if (shopping) return shopping;
+  if (shopping)
+    return buildingExterior(type)
+      ? { ...shopping, collider: null, walls: getWallsForPropType(type) }
+      : shopping;
   const forest = forestRowProp(type, wx, wy);
   if (forest) return forest;
   const bridge =
@@ -692,7 +678,10 @@ export function createProp(type: string, wx: number, wy: number): Prop {
   }
   const def = PROP_DEFS[type];
   if (!def) throw new Error(`Unknown prop type: ${type}`);
-  const walls = def.walls ? def.walls.map((w) => ({ ...w })) : null;
+  const walls =
+    buildingExterior(type)?.sections.map(sectionBounds) ??
+    def.walls?.map((w) => ({ ...w })) ??
+    null;
   return {
     id: 0,
     type,

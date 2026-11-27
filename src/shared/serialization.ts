@@ -195,7 +195,6 @@ export function deserializeEntity(s: EntitySnapshot): Entity {
 }
 
 // ---- Prop ----
-
 export function serializeProp(p: Prop): PropSnapshot {
   return {
     ...(p.sortOffsetY === undefined ? {} : { sortOffsetY: p.sortOffsetY }),
@@ -212,6 +211,7 @@ export function serializeProp(p: Prop): PropSnapshot {
 }
 
 export function deserializeProp(s: PropSnapshot): Prop {
+  const walls = s.walls?.map((w) => ({ ...w })) ?? getWallsForPropType(s.type);
   return {
     ...(s.sortOffsetY === undefined ? {} : { sortOffsetY: s.sortOffsetY }),
     ...(s.proceduralId ? { proceduralId: s.proceduralId } : {}),
@@ -219,8 +219,8 @@ export function deserializeProp(s: PropSnapshot): Prop {
     type: s.type,
     position: { ...s.position },
     sprite: { ...s.sprite },
-    collider: s.collider ? { ...s.collider } : null,
-    walls: s.walls ? s.walls.map((w) => ({ ...w })) : getWallsForPropType(s.type),
+    collider: s.collider && !walls?.[0]?.buildingSection ? { ...s.collider } : null,
+    walls,
     isProp: true,
   };
 }

@@ -12039,7 +12039,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:155"
+          "source": "src/entities/PropFactories.ts:153"
         },
         {
           "system": "Gameplay",
@@ -12061,7 +12061,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:163"
+          "source": "src/entities/PropFactories.ts:161"
         },
         {
           "system": "Gameplay",
@@ -12391,7 +12391,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:186"
+          "source": "src/entities/PropFactories.ts:184"
         },
         {
           "system": "World generation",
@@ -12413,7 +12413,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:194"
+          "source": "src/entities/PropFactories.ts:192"
         },
         {
           "system": "World generation",
@@ -12435,7 +12435,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:202"
+          "source": "src/entities/PropFactories.ts:200"
         }
       ]
     },
@@ -12453,7 +12453,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:210"
+          "source": "src/entities/PropFactories.ts:208"
         }
       ]
     },
@@ -12479,11 +12479,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:218"
+          "source": "src/entities/PropFactories.ts:216"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:774"
+          "source": "src/entities/PropFactories.ts:763"
         },
         {
           "system": "World generation",
@@ -12505,11 +12505,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:219"
+          "source": "src/entities/PropFactories.ts:217"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:775"
+          "source": "src/entities/PropFactories.ts:764"
         }
       ]
     },
@@ -12527,11 +12527,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:227"
+          "source": "src/entities/PropFactories.ts:225"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:776"
+          "source": "src/entities/PropFactories.ts:765"
         }
       ]
     },
@@ -12549,11 +12549,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:228"
+          "source": "src/entities/PropFactories.ts:226"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:779"
+          "source": "src/entities/PropFactories.ts:768"
         }
       ]
     },
@@ -12571,11 +12571,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:237"
+          "source": "src/entities/PropFactories.ts:235"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:781"
+          "source": "src/entities/PropFactories.ts:770"
         }
       ]
     },
@@ -12593,11 +12593,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:246"
+          "source": "src/entities/PropFactories.ts:244"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:780"
+          "source": "src/entities/PropFactories.ts:769"
         },
         {
           "system": "World generation",
@@ -12631,11 +12631,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:255"
+          "source": "src/entities/PropFactories.ts:253"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:777"
+          "source": "src/entities/PropFactories.ts:766"
         }
       ]
     },
@@ -12653,11 +12653,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:256"
+          "source": "src/entities/PropFactories.ts:254"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:778"
+          "source": "src/entities/PropFactories.ts:767"
         }
       ]
     },
@@ -12675,11 +12675,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:257"
+          "source": "src/entities/PropFactories.ts:255"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:782"
+          "source": "src/entities/PropFactories.ts:771"
         }
       ]
     },
@@ -12697,11 +12697,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:258"
+          "source": "src/entities/PropFactories.ts:256"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:783"
+          "source": "src/entities/PropFactories.ts:772"
         }
       ]
     },
@@ -12719,11 +12719,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:259"
+          "source": "src/entities/PropFactories.ts:257"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:784"
+          "source": "src/entities/PropFactories.ts:773"
         }
       ]
     },
@@ -12741,11 +12741,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:260"
+          "source": "src/entities/PropFactories.ts:258"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:785"
+          "source": "src/entities/PropFactories.ts:774"
         }
       ]
     },
@@ -12767,15 +12767,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:262"
+          "source": "src/entities/PropFactories.ts:260"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:263"
+          "source": "src/entities/PropFactories.ts:261"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:787"
+          "source": "src/entities/PropFactories.ts:776"
         },
         {
           "system": "Gameplay",
@@ -12813,15 +12813,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:271"
+          "source": "src/entities/PropFactories.ts:269"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:272"
+          "source": "src/entities/PropFactories.ts:270"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:788"
+          "source": "src/entities/PropFactories.ts:777"
         },
         {
           "system": "Gameplay",
@@ -12851,15 +12851,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:280"
+          "source": "src/entities/PropFactories.ts:278"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:281"
+          "source": "src/entities/PropFactories.ts:279"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:789"
+          "source": "src/entities/PropFactories.ts:778"
         }
       ]
     },
@@ -12881,15 +12881,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:288"
+          "source": "src/entities/PropFactories.ts:286"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:289"
+          "source": "src/entities/PropFactories.ts:287"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:790"
+          "source": "src/entities/PropFactories.ts:779"
         },
         {
           "system": "World generation",
@@ -12919,15 +12919,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:296"
+          "source": "src/entities/PropFactories.ts:294"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:297"
+          "source": "src/entities/PropFactories.ts:295"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:791"
+          "source": "src/entities/PropFactories.ts:780"
         },
         {
           "system": "Gameplay",
@@ -12973,15 +12973,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:320"
+          "source": "src/entities/PropFactories.ts:318"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:321"
+          "source": "src/entities/PropFactories.ts:319"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:792"
+          "source": "src/entities/PropFactories.ts:781"
         },
         {
           "system": "World generation",
@@ -13127,15 +13127,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:344"
+          "source": "src/entities/PropFactories.ts:342"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:345"
+          "source": "src/entities/PropFactories.ts:343"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:793"
+          "source": "src/entities/PropFactories.ts:782"
         }
       ]
     },
@@ -13157,15 +13157,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:353"
+          "source": "src/entities/PropFactories.ts:351"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:354"
+          "source": "src/entities/PropFactories.ts:352"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:794"
+          "source": "src/entities/PropFactories.ts:783"
         },
         {
           "system": "World generation",
@@ -13227,15 +13227,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:362"
+          "source": "src/buildings/BuildingExteriors.ts:55"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:363"
+          "source": "src/entities/PropFactories.ts:360"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:795"
+          "source": "src/entities/PropFactories.ts:361"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:784"
         },
         {
           "system": "World generation",
@@ -13289,15 +13293,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:372"
+          "source": "src/entities/PropFactories.ts:370"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:373"
+          "source": "src/entities/PropFactories.ts:371"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:796"
+          "source": "src/entities/PropFactories.ts:785"
         }
       ]
     },
@@ -13319,15 +13323,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:383"
+          "source": "src/entities/PropFactories.ts:381"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:384"
+          "source": "src/entities/PropFactories.ts:382"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:797"
+          "source": "src/entities/PropFactories.ts:786"
         }
       ]
     },
@@ -13349,15 +13353,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:392"
+          "source": "src/entities/PropFactories.ts:390"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:393"
+          "source": "src/entities/PropFactories.ts:391"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:798"
+          "source": "src/entities/PropFactories.ts:787"
         },
         {
           "system": "World generation",
@@ -13383,15 +13387,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:402"
+          "source": "src/entities/PropFactories.ts:400"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:403"
+          "source": "src/entities/PropFactories.ts:401"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:799"
+          "source": "src/entities/PropFactories.ts:788"
         }
       ]
     },
@@ -13413,15 +13417,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:411"
+          "source": "src/entities/PropFactories.ts:409"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:412"
+          "source": "src/entities/PropFactories.ts:410"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:800"
+          "source": "src/entities/PropFactories.ts:789"
         }
       ]
     },
@@ -13443,15 +13447,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:420"
+          "source": "src/entities/PropFactories.ts:418"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:421"
+          "source": "src/entities/PropFactories.ts:419"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:801"
+          "source": "src/entities/PropFactories.ts:790"
         }
       ]
     },
@@ -13473,15 +13477,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:434"
+          "source": "src/entities/PropFactories.ts:432"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:435"
+          "source": "src/entities/PropFactories.ts:433"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:802"
+          "source": "src/entities/PropFactories.ts:791"
         }
       ]
     },
@@ -13503,15 +13507,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:448"
+          "source": "src/entities/PropFactories.ts:446"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:449"
+          "source": "src/entities/PropFactories.ts:447"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:803"
+          "source": "src/entities/PropFactories.ts:792"
         }
       ]
     },
@@ -13533,15 +13537,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:463"
+          "source": "src/entities/PropFactories.ts:461"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:464"
+          "source": "src/entities/PropFactories.ts:462"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:804"
+          "source": "src/entities/PropFactories.ts:793"
         }
       ]
     },
@@ -13563,15 +13567,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:472"
+          "source": "src/entities/PropFactories.ts:470"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:473"
+          "source": "src/entities/PropFactories.ts:471"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:805"
+          "source": "src/entities/PropFactories.ts:794"
         }
       ]
     },
@@ -13589,11 +13593,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:481"
+          "source": "src/entities/PropFactories.ts:479"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:807"
+          "source": "src/entities/PropFactories.ts:796"
         },
         {
           "system": "World generation",
@@ -13615,11 +13619,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:491"
+          "source": "src/entities/PropFactories.ts:488"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:808"
+          "source": "src/entities/PropFactories.ts:797"
         },
         {
           "system": "World generation",
@@ -13641,11 +13645,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:501"
+          "source": "src/entities/PropFactories.ts:497"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:809"
+          "source": "src/entities/PropFactories.ts:798"
         },
         {
           "system": "World generation",
@@ -13667,11 +13671,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:511"
+          "source": "src/entities/PropFactories.ts:506"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:810"
+          "source": "src/entities/PropFactories.ts:799"
         },
         {
           "system": "World generation",
@@ -13693,11 +13697,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:521"
+          "source": "src/entities/PropFactories.ts:515"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:811"
+          "source": "src/entities/PropFactories.ts:800"
         },
         {
           "system": "World generation",
@@ -13719,11 +13723,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:531"
+          "source": "src/entities/PropFactories.ts:524"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:812"
+          "source": "src/entities/PropFactories.ts:801"
         },
         {
           "system": "World generation",
@@ -13745,11 +13749,15 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:541"
+          "source": "src/buildings/BuildingExteriors.ts:45"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:813"
+          "source": "src/entities/PropFactories.ts:533"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:802"
         },
         {
           "system": "World generation",
@@ -13787,11 +13795,15 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:551"
+          "source": "src/buildings/BuildingExteriors.ts:51"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:814"
+          "source": "src/entities/PropFactories.ts:542"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:803"
         },
         {
           "system": "World generation",
@@ -13813,11 +13825,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:562"
+          "source": "src/entities/PropFactories.ts:552"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:815"
+          "source": "src/entities/PropFactories.ts:804"
         },
         {
           "system": "World generation",
@@ -13947,11 +13959,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:571"
+          "source": "src/entities/PropFactories.ts:561"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:816"
+          "source": "src/entities/PropFactories.ts:805"
         },
         {
           "system": "World generation",
@@ -14061,11 +14073,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:580"
+          "source": "src/entities/PropFactories.ts:570"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:817"
+          "source": "src/entities/PropFactories.ts:806"
         },
         {
           "system": "World generation",
@@ -14099,11 +14111,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:589"
+          "source": "src/entities/PropFactories.ts:579"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:818"
+          "source": "src/entities/PropFactories.ts:807"
         },
         {
           "system": "World generation",
@@ -14129,11 +14141,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:598"
+          "source": "src/entities/PropFactories.ts:588"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:819"
+          "source": "src/entities/PropFactories.ts:808"
         },
         {
           "system": "World generation",
@@ -36353,11 +36365,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:156"
+          "source": "src/entities/PropFactories.ts:154"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:164"
+          "source": "src/entities/PropFactories.ts:162"
         },
         {
           "system": "Gameplay",
@@ -39405,7 +39417,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/CollisionDebug.ts:117"
+          "source": "src/rendering/CollisionDebug.ts:109"
         },
         {
           "system": "Editor",
@@ -40111,15 +40123,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:262"
+          "source": "src/entities/PropFactories.ts:260"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:263"
+          "source": "src/entities/PropFactories.ts:261"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:787"
+          "source": "src/entities/PropFactories.ts:776"
         },
         {
           "system": "Gameplay",
@@ -40161,15 +40173,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:271"
+          "source": "src/entities/PropFactories.ts:269"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:272"
+          "source": "src/entities/PropFactories.ts:270"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:788"
+          "source": "src/entities/PropFactories.ts:777"
         },
         {
           "system": "Gameplay",
@@ -40203,15 +40215,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:280"
+          "source": "src/entities/PropFactories.ts:278"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:281"
+          "source": "src/entities/PropFactories.ts:279"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:789"
+          "source": "src/entities/PropFactories.ts:778"
         }
       ]
     },
@@ -40237,15 +40249,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:288"
+          "source": "src/entities/PropFactories.ts:286"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:289"
+          "source": "src/entities/PropFactories.ts:287"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:790"
+          "source": "src/entities/PropFactories.ts:779"
         },
         {
           "system": "World generation",
@@ -40279,15 +40291,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:296"
+          "source": "src/entities/PropFactories.ts:294"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:297"
+          "source": "src/entities/PropFactories.ts:295"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:791"
+          "source": "src/entities/PropFactories.ts:780"
         },
         {
           "system": "Gameplay",
@@ -40337,15 +40349,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:320"
+          "source": "src/entities/PropFactories.ts:318"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:321"
+          "source": "src/entities/PropFactories.ts:319"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:792"
+          "source": "src/entities/PropFactories.ts:781"
         },
         {
           "system": "World generation",
@@ -40495,15 +40507,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:344"
+          "source": "src/entities/PropFactories.ts:342"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:345"
+          "source": "src/entities/PropFactories.ts:343"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:793"
+          "source": "src/entities/PropFactories.ts:782"
         }
       ]
     },
@@ -40529,15 +40541,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:353"
+          "source": "src/entities/PropFactories.ts:351"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:354"
+          "source": "src/entities/PropFactories.ts:352"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:794"
+          "source": "src/entities/PropFactories.ts:783"
         },
         {
           "system": "World generation",
@@ -40603,15 +40615,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:362"
+          "source": "src/buildings/BuildingExteriors.ts:55"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:363"
+          "source": "src/entities/PropFactories.ts:360"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:795"
+          "source": "src/entities/PropFactories.ts:361"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:784"
         },
         {
           "system": "World generation",
@@ -40669,15 +40685,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:372"
+          "source": "src/entities/PropFactories.ts:370"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:373"
+          "source": "src/entities/PropFactories.ts:371"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:796"
+          "source": "src/entities/PropFactories.ts:785"
         }
       ]
     },
@@ -40703,15 +40719,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:383"
+          "source": "src/entities/PropFactories.ts:381"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:384"
+          "source": "src/entities/PropFactories.ts:382"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:797"
+          "source": "src/entities/PropFactories.ts:786"
         }
       ]
     },
@@ -40737,15 +40753,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:392"
+          "source": "src/entities/PropFactories.ts:390"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:393"
+          "source": "src/entities/PropFactories.ts:391"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:798"
+          "source": "src/entities/PropFactories.ts:787"
         },
         {
           "system": "World generation",
@@ -40775,15 +40791,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:402"
+          "source": "src/entities/PropFactories.ts:400"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:403"
+          "source": "src/entities/PropFactories.ts:401"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:799"
+          "source": "src/entities/PropFactories.ts:788"
         }
       ]
     },
@@ -40809,15 +40825,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:411"
+          "source": "src/entities/PropFactories.ts:409"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:412"
+          "source": "src/entities/PropFactories.ts:410"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:800"
+          "source": "src/entities/PropFactories.ts:789"
         }
       ]
     },
@@ -40843,15 +40859,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:420"
+          "source": "src/entities/PropFactories.ts:418"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:421"
+          "source": "src/entities/PropFactories.ts:419"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:801"
+          "source": "src/entities/PropFactories.ts:790"
         }
       ]
     },
@@ -40877,15 +40893,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:434"
+          "source": "src/entities/PropFactories.ts:432"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:435"
+          "source": "src/entities/PropFactories.ts:433"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:802"
+          "source": "src/entities/PropFactories.ts:791"
         }
       ]
     },
@@ -40911,15 +40927,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:448"
+          "source": "src/entities/PropFactories.ts:446"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:449"
+          "source": "src/entities/PropFactories.ts:447"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:803"
+          "source": "src/entities/PropFactories.ts:792"
         }
       ]
     },
@@ -40945,15 +40961,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:463"
+          "source": "src/entities/PropFactories.ts:461"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:464"
+          "source": "src/entities/PropFactories.ts:462"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:804"
+          "source": "src/entities/PropFactories.ts:793"
         }
       ]
     },
@@ -40979,15 +40995,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:472"
+          "source": "src/entities/PropFactories.ts:470"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:473"
+          "source": "src/entities/PropFactories.ts:471"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:805"
+          "source": "src/entities/PropFactories.ts:794"
         }
       ]
     },
@@ -41021,7 +41037,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/FirstPersonView.ts:473"
+          "source": "src/rendering/firstperson/FirstPersonView.ts:474"
         },
         {
           "system": "Editor",

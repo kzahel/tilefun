@@ -111,6 +111,7 @@ function drawDebug(
         observer,
         gc.debugPanel.collision,
         alpha,
+        (x, y) => stateView.world.getHeightAt(x, y),
       );
       drawOverlayGeometry(ctx, overlay.items, new Map());
     } finally {

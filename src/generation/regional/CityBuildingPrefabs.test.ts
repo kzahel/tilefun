@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
+import { getEntityAABB } from "../../entities/collision.js";
 import { createProp, getWallsForPropType } from "../../entities/PropFactories.js";
 import { exteriorEntrance } from "../../interiors/GameplayInterior.js";
 import {
@@ -66,7 +67,6 @@ describe("source-audited city prefab candidates", () => {
       expect(buildingRecipe(prefab.type)).toBe(prefab);
       const prop = createProp(prefab.type, 0, 0);
       expect(prop.sprite.parts).toBe(prefab.parts);
-      expect(getWallsForPropType(prefab.type)?.[0]?.width).toBe(prefab.width);
       expect(exteriorEntrance(prop)).toEqual({ wx: prefab.entrance.dx, wy: prefab.entrance.dy });
       expect(prefab.height).toBe(Math.max(...prefab.parts.map((p) => p.spriteHeight - p.dy)));
       const bounds = buildingVisualBounds(prefab);
@@ -77,7 +77,7 @@ describe("source-audited city prefab candidates", () => {
       expect(bounds.minY).toBe(-prefab.height);
     }
   });
-  it("gives each building the box its artwork depicts: the roof deck's depth under the wall's height", () => {
+  it("fits the compound exterior to the painted frontage, deck depth and cornice", () => {
     for (const recipe of [
       ...BUILDING_RECIPES,
       ...CITY_BUILDING_PREFABS,
@@ -85,9 +85,13 @@ describe("source-audited city prefab candidates", () => {
       ...CITY_ARCHITECTURE_BUILDINGS,
     ]) {
       const body = buildingBody(recipe);
-      expect(getWallsForPropType(recipe.type)).toEqual([
-        { offsetX: 0, offsetY: 0, width: recipe.width, height: body.depth, zHeight: body.height },
-      ]);
+      const walls = required(getWallsForPropType(recipe.type) ?? undefined);
+      const bounds = walls.map((c) => getEntityAABB({ wx: 0, wy: 0 }, c));
+      expect(Math.min(...bounds.map((b) => b.left))).toBe(-recipe.width / 2);
+      expect(Math.max(...bounds.map((b) => b.right))).toBe(recipe.width / 2);
+      expect(Math.min(...bounds.map((b) => b.top))).toBe(-body.depth);
+      expect(Math.max(...bounds.map((b) => b.bottom))).toBe(0);
+      expect(Math.max(...walls.map((c) => (c.zBase ?? 0) + (c.zHeight ?? 0)))).toBe(body.height);
       // From above the box covers the picture's rows; only a rooftop sign stands clear.
       const sign = recipe.type.endsWith("-roof-sign") ? 40 : 0;
       expect(body.depth + body.height, recipe.type).toBe(recipe.height - sign);

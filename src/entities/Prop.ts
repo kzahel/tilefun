@@ -1,6 +1,9 @@
+import type { BuildingSection } from "../buildings/BuildingSection.js";
 import type { FacadePiece } from "../generation/regional/BuildingRecipes.js";
 import type { SurfacePatch } from "../physics/SurfacePatch.js";
 export interface PropCollider {
+  /** Convex building solid above the terrain at the anchor. The rectangle indexes nearby props. */
+  buildingSection?: BuildingSection;
   /** Opt-in planar slab; replaces legacy zBase/zHeight semantics for this collider. */
   surface?: SurfacePatch;
   offsetX: number;

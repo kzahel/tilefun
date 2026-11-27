@@ -1,3 +1,8 @@
+import {
+  buildingElevation,
+  localFootprint,
+  sectionInterval,
+} from "../buildings/BuildingSection.js";
 import { TILE_SIZE } from "../config/constants.js";
 import { querySurfacePatch } from "../physics/SurfacePatch.js";
 import type { PropCollider } from "./Prop.js";
@@ -54,8 +59,16 @@ function propColliderBlocks(
   aabb: AABB,
   entityWz?: number,
   entityHeight?: number,
+  getHeight?: (tx: number, ty: number) => number,
 ): boolean {
   if (c.passable) return false;
+  if (c.buildingSection) {
+    const interval = sectionInterval(c.buildingSection, localFootprint(aabb, propPos));
+    if (!interval) return false;
+    if (entityWz === undefined || entityHeight === undefined) return true;
+    const z = entityWz - buildingElevation(propPos, getHeight);
+    return z < interval.top && z + entityHeight > interval.bottom;
+  }
   if (c.surface) {
     const hit = querySurfacePatch(c.surface, getEntityAABB(propPos, c), aabb);
     if (!hit) return false;
@@ -79,15 +92,16 @@ export function aabbOverlapsPropWalls(
   prop: { collider: PropCollider | null; walls: PropCollider[] | null },
   entityWz?: number,
   entityHeight?: number,
+  getHeight?: (tx: number, ty: number) => number,
 ): boolean {
   if (prop.walls) {
     for (const wall of prop.walls) {
-      if (propColliderBlocks(wall, propPos, aabb, entityWz, entityHeight)) return true;
+      if (propColliderBlocks(wall, propPos, aabb, entityWz, entityHeight, getHeight)) return true;
     }
     return false;
   }
   if (prop.collider) {
-    return propColliderBlocks(prop.collider, propPos, aabb, entityWz, entityHeight);
+    return propColliderBlocks(prop.collider, propPos, aabb, entityWz, entityHeight, getHeight);
   }
   return false;
 }

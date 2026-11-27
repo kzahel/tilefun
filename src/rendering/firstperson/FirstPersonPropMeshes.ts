@@ -1,10 +1,12 @@
 import * as THREE from "three";
+import { buildingExterior } from "../../buildings/BuildingExteriors.js";
 import { ELEVATION_PX, TILE_SIZE } from "../../config/constants.js";
 import type { AABB } from "../../entities/collision.js";
 import type { Prop } from "../../entities/Prop.js";
 import { forestRowDefinition } from "../../patterns/ForestThicket.js";
 import type { SurfacePatch } from "../../physics/SurfacePatch.js";
 import { SURFACE_GRID, surfaceColors } from "../SurfacePresentation.js";
+import { appendBuilding, type BuildingFaces, BuildingViews } from "./BuildingMeshes.js";
 import { artCard, type Billboard, sheetFrame } from "./FirstPersonBillboards.js";
 import type { DeckMaterials } from "./FirstPersonDecks.js";
 import type { FacePart } from "./FirstPersonFaces.js";
@@ -36,6 +38,7 @@ type FacesFor = (image: Pick<PropImage, "texture"> | undefined) => TexturedFaces
  * wearing artwork by its texture), standing cards and walkable surfaces. The
  * view merges the faces with other chunks' (`MergedFaces`, 251). */
 export interface ChunkProps {
+  buildings: BuildingFaces;
   flat: ColoredTriangles | undefined;
   /** Surface grid lines (`PropGeometry.lines`), in pairs of points. */
   lines: { positions: number[]; colors: number[] };
@@ -145,6 +148,7 @@ function propElevation(prop: Prop, heightAt: (tx: number, ty: number) => number)
  * face material.
  */
 export class PropMeshes {
+  readonly buildings = new BuildingViews();
   private readonly faceMaterials = new Map<THREE.Texture, THREE.MeshBasicMaterial>();
 
   constructor(
@@ -182,7 +186,7 @@ export class PropMeshes {
     gridMaterial: THREE.Material,
     decks: DeckMaterials,
   ): FacePart[] {
-    const parts: FacePart[] = [];
+    const parts = this.buildings.parts(built.buildings, (texture) => this.faceMaterial(texture));
     if (built.flat)
       parts.push({ bucket: `flat:${area}`, material: flatMaterial, parent, ...built.flat });
     parts.push({
@@ -225,6 +229,7 @@ export class PropMeshes {
     const flat = new TriangleWriter();
     const textured = new Map<THREE.Texture, TexturedFaces>();
     const built: ChunkProps = {
+      buildings: { sprite: new Map(), model: new Map() },
       flat: undefined,
       lines: { positions: [], colors: [] },
       textured,
@@ -245,7 +250,9 @@ export class PropMeshes {
     const ceilings = excavationCeilings(props);
     for (const prop of props) {
       const elevation = propElevation(prop, heightAt);
-      if (room) this.appendRoomProp(built, prop, elevation, room, flat, facesFor);
+      const building = buildingExterior(prop.type);
+      if (building) appendBuilding(built.buildings, this.images, prop, building, elevation);
+      else if (room) this.appendRoomProp(built, prop, elevation, room, flat, facesFor);
       else this.appendProp(built, prop, elevation, flat, facesFor, ceilings);
     }
     if (flat.vertexCount) built.flat = flat.finish();
