@@ -33,7 +33,7 @@ function register(
     kind: home ? "apartment" : "shop",
     facing: "south",
     width: w,
-    height: h,
+    height: Math.max(h, ...parts.map((p) => p.spriteHeight - p.dy)),
     groundDepth: 32,
     entrance: { dx: door - w / 2, dy: 8 },
     threshold,
@@ -78,3 +78,5 @@ register("school", "Clocktower school", 384, 352, 132, -18, [
 export function civicBuilding(type: string) {
   return recipes.get(type);
 }
+
+export const CIVIC_BUILDINGS = [...recipes.values()];

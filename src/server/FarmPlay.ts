@@ -160,8 +160,10 @@ export function performFarmAction(
   )
     throw new Error(UNREACHABLE);
   if ("propId" in request) {
-    if (request.action === "collect-parcel" || request.action === "deliver-parcel")
-      return deliverMail(realm, session, { propId: request.propId, action: request.action });
+    if (request.action === "collect-parcel" || request.action === "deliver-parcel") {
+      deliverMail(realm, session, { propId: request.propId, action: request.action });
+      return;
+    }
     if (request.action !== "open-gate" && request.action !== "close-gate")
       throw new Error(UNREACHABLE);
     toggleGate(realm, player, request);

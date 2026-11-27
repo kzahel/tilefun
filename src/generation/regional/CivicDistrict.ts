@@ -65,9 +65,17 @@ function addresses(plan: DenseDistrictPlan, town: Settlement, seed: number) {
       b.bounds.minX < plan.bounds.minX + 20 ||
       b.bounds.maxX > plan.bounds.maxX - 20 ||
       b.bounds.minY < plan.bounds.minY + 20;
-    const edges = sorted(homes.filter(nearEdge), 512);
+    const keep = new Set([
+      homes.find((b) => b.lots[0]?.buildingType.includes("hotel")),
+      homes.find((b) => b.lots[0]?.buildingType.includes("bay-5")),
+      plan.blocks.find((b) => b.kind === "shops"),
+    ]);
+    const edges = sorted(
+      homes.filter((b) => !keep.has(b) && nearEdge(b)),
+      512,
+    );
     const central = sorted(
-      plan.blocks.filter((b) => b.kind !== "park" && !edges.includes(b)),
+      plan.blocks.filter((b) => b.kind !== "park" && !keep.has(b) && !edges.includes(b)),
       752,
     );
     for (const [i, kind] of citySites.entries()) {

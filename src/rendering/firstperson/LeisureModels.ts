@@ -2,6 +2,7 @@ import type * as THREE from "three";
 import type { Prop } from "../../entities/Prop.js";
 import { required } from "../../shared/required.js";
 import type { BuildingFaces } from "./BuildingMeshes.js";
+import { dropOffCanopy, glasshouse } from "./CivicModels.js";
 import type { FirstPersonImages } from "./FirstPersonImages.js";
 import { appendLeftover } from "./FirstPersonProps.js";
 
@@ -268,6 +269,20 @@ function relief(m: Model, depth: number, heightScale: number) {
   }
 }
 const models: Record<string, (m: Model) => void> = {
+  "prop-civic-canopy": dropOffCanopy,
+  "prop-civic-railing": (m) => relief(m, 3, 0.87),
+  "prop-civic-greenhouse": glasshouse,
+  "prop-civic-wreck": (m) => relief(m, 24, 0.72),
+  "prop-civic-stack": (m) => relief(m, 26, 0.82),
+  "prop-civic-scrap": (m) => relief(m, 20, 0.62),
+  "prop-civic-gate": (m) => relief(m, 8, 0.88),
+  "prop-civic-stone": (m) => relief(m, 7, 0.87),
+  "prop-civic-marble": (m) => relief(m, 7, 0.9),
+  "prop-civic-stretcher": (m) => relief(m, 13, 0.83),
+  "prop-civic-goal": (m) => relief(m, 12, 0.82),
+  "prop-civic-mailbox": (m) => relief(m, 9, 0.95),
+  "prop-civic-dispatch": (m) => relief(m, 14, 0.8),
+  "prop-civic-parcels": (m) => relief(m, 14, 0.8),
   "prop-tent-blue": tent,
   "prop-tent-green": tent,
   "prop-park-tentBlue": tent,

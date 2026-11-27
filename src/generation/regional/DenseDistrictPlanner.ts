@@ -4,11 +4,10 @@ import { RoadType } from "../../road/RoadType.js";
 import type { ActorPlacement } from "../Generator.js";
 import { edgeHash } from "../RoadGenerator.js";
 import type { FeaturePlacement } from "../StructureGenerator.js";
-import { civicBuilding } from "./CivicBuildings.js";
 import { civicDistrict } from "./CivicDistrict.js";
 import { type CivicSite, civicPaving } from "./CivicSites.js";
 import { denseBuilding } from "./DenseCityAssets.js";
-import { denseDoorThresholds } from "./DenseDoorThresholds.js";
+import { connectDenseEntrances } from "./DistrictEntrances.js";
 import type { DistrictBlock, DistrictPlan, DistrictStreet } from "./DistrictPlan.js";
 import { insideDenseBounds } from "./PlanGeometry.js";
 import type { Bounds, Settlement } from "./RegionalPlanner.js";
@@ -232,61 +231,6 @@ export function connectedDenseDistrict(
   commercial = false,
 ): DenseDistrictPlan {
   return connectDenseEntrances(denseDistrict(settlement, seed, commercial), settlement);
-}
-function connectDenseEntrances(plan: DenseDistrictPlan, settlement: Settlement): DenseDistrictPlan {
-  const blocks = plan.blocks.map((block) => ({
-    ...block,
-    lots: block.lots.map((lot) => {
-      const primary = denseDoorThresholds(
-        civicBuilding(lot.buildingType) ?? denseBuilding(lot.buildingType),
-      ).find((d) => d.primary);
-      if (!primary) throw new Error(`Missing primary doorway for ${lot.id}`);
-      return { ...lot, entrance: { ...lot.entrance, x: lot.anchor.x + primary.dx / TILE_SIZE } };
-    }),
-  }));
-  const entrancePaths = blocks.flatMap((block) =>
-    block.lots.flatMap((lot) => {
-      const doors = denseDoorThresholds(
-        civicBuilding(lot.buildingType) ?? denseBuilding(lot.buildingType),
-      );
-      const street = plan.streets.find(
-        (s) =>
-          item(s.points, 0).y === item(s.points, 1).y &&
-          item(s.points, 0).y > lot.anchor.y &&
-          item(s.points, 0).y - s.width / 2 - s.sidewalk === block.bounds.maxY,
-      );
-      if (!street) throw new Error(`No sidewalk for ${lot.id}`);
-      return doors.map((door) => {
-        const threshold = {
-          x: lot.anchor.x + door.dx / TILE_SIZE,
-          y: lot.anchor.y + door.dy / TILE_SIZE,
-        };
-        const sidewalk = {
-          x: threshold.x,
-          y: item(street.points, 0).y - street.width / 2 - street.sidewalk,
-        };
-        return {
-          lotId: lot.id,
-          doorId: door.id,
-          threshold,
-          sidewalk,
-          bounds: {
-            minX: Math.floor(threshold.x - door.width / TILE_SIZE / 2),
-            maxX: Math.ceil(threshold.x + door.width / TILE_SIZE / 2),
-            minY: threshold.y - 1,
-            maxY: sidewalk.y + 1,
-          },
-        };
-      });
-    }),
-  );
-  return {
-    ...plan,
-    recipe: "dense-district-v2",
-    id: `${settlement.id}:dense-district-v2`,
-    blocks,
-    entrancePaths,
-  };
 }
 /** Current composition only: frozen authoring recipes stay on the compact layout. */
 export function currentDenseDistrict(settlement: Settlement, seed: number): DenseDistrictPlan {

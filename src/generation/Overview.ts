@@ -105,7 +105,8 @@ export function* overviewSteps(
           plan.blocks.reduce((n, block) => n + block.lots.length, 0) +
           (plan.actors?.length ?? 0);
         if (features + count > request.limits.maxFeatures) break;
-        districts.push(plan);
+        const { civicSites: _sites, neighborhoodProps: _props, ...district } = plan;
+        districts.push(district);
         features += count;
         yield;
       }

@@ -71,12 +71,14 @@ export class DenseDistrictStrategy extends RegionalStrategy {
     for (const plan of this.districts.query(search)) {
       for (const block of plan.blocks)
         for (const lot of block.lots) {
-          const art = buildingVisualBounds(this.building(lot.buildingType));
+          const recipe = this.building(lot.buildingType);
+          const art = buildingVisualBounds(recipe);
+          const halfWidth = Math.max(-art.minX, art.maxX) / 16;
           if (
             intersects(bounds, {
-              minX: lot.anchor.x + art.minX / 16,
-              minY: lot.anchor.y + art.minY / 16,
-              maxX: lot.anchor.x + art.maxX / 16,
+              minX: lot.anchor.x - halfWidth,
+              minY: lot.anchor.y - recipe.height / 16,
+              maxX: lot.anchor.x + halfWidth,
               maxY: lot.anchor.y + Math.max(2, art.maxY / 16),
             })
           )

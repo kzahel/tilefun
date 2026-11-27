@@ -83,15 +83,15 @@ export function furnishSite(
       art("scrap", "scrap", -8, 6);
       art("rear-stack", variant < 0.5 ? "wreck" : "stack", 2, -8);
       vehicle("forklift", -1, 4);
+      for (const dx of [-8, -6, -4, -2, 0, 2, 4, 6, 8]) art(`rear-fence-${dx}`, "railing", dx, -10);
       actor("salvage-pallet", CONSTRUCTION_PALLET, 3, 4);
       actor("spare-pallet", CONSTRUCTION_PALLET, 3, 7);
       break;
     case "cemetery":
       art("gate", "gate", 4, 8);
       site.arrival.x += 4;
-      for (const [i, dy] of [-6, -2, 2].entries())
-        for (const [j, dx] of [1, 7, 10].entries())
-          art(`marker-${i}-${j}`, (i + j) % 2 ? "stone" : "marble", dx, dy);
+      gravestones(art);
+      for (const dx of [-4, -2, 0, 8, 10]) art(`railing-${dx}`, "railing", dx, 8);
       art("flowers", "blossoms", 1, 0);
       art("lamp", "candle", 7, 7);
       art("tree", "autumn", 11, -8);
@@ -100,7 +100,8 @@ export function furnishSite(
       break;
     case "hospital":
     case "clinic":
-      vehicle("ambulance", kind === "clinic" ? 6 : -6, 6);
+      if (kind === "hospital") art("drop-off", "canopy", -6, 9);
+      vehicle("ambulance", kind === "clinic" ? 6 : -6, kind === "clinic" ? 6 : 7);
       art("bed", "stretcher", 5, 5);
       prop("seat", "prop-bench", 8, 8);
       break;
@@ -120,7 +121,8 @@ export function furnishSite(
     case "school":
       vehicle("school-bus", -6, 8);
       actor("football", "ball", 6, 5);
-      art("goal", "goal", 9, 1);
+      art("goal", "goal", 8, 1);
+      prop("player-bench", "prop-bench", 11, 7);
       prop("seat", "prop-bench", -9, 2);
       break;
     case "nursery":
@@ -146,4 +148,10 @@ export function civicPaving(s: CivicSite, tx: number, ty: number): RoadType {
       ? RoadType.CityPavement
       : RoadType.None;
   return dy >= -3 && (Math.abs(dx) < 11 || dy < 2) ? RoadType.CityPavement : RoadType.None;
+}
+
+function gravestones(art: (key: string, kind: CivicPiece, dx: number, dy: number) => unknown) {
+  for (const [i, dy] of [-6, -2, 2].entries())
+    for (const [j, dx] of [1, 7, 10].entries())
+      art(`marker-${i}-${j}`, (i + j) % 2 ? "stone" : "marble", dx, dy);
 }
