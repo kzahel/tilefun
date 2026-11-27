@@ -56,14 +56,17 @@ export function indoorResidents(identity: InteriorIdentity): ActorPlacement[] {
       resident: behavior,
     };
   };
-  if (identity.layout === "civic-v1")
+  if (identity.layout === "civic-v1") {
+    // The fire station's dining table occupies the usual attendant spot.
+    const attendantY = identity.buildingType === "prop-city-civic-fire" ? 212 : 195;
     return [
       resident("attendant", "indoor-reader", [
-        stop("counter", 244, 195, "rest", 7),
+        stop("counter", 244, attendantY, "rest", 7),
         stop("back-room", 178, 80, "rest", 6),
       ]),
       resident("visitor", "indoor-reader", [stop("waiting", 156, 218, "read", 11)], true),
     ];
+  }
   if (identity.layout === "home-v3")
     return [
       resident("reader", "indoor-reader", [

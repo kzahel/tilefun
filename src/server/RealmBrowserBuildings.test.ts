@@ -448,6 +448,59 @@ it("restaurant visitor walks out and returns with one durable identity while the
   }
 }, 30000);
 
+it.each(["fresh", "retry"])("opens a fire station crew room (%s)", async (visit) => {
+  const { server, transport, lot, meta, createStore } = await cityDoorSetup("prop-city-civic-fire");
+  const id = `resident:${lot.id}:attendant`;
+  try {
+    if (visit === "retry") {
+      const { ENTITY_FACTORIES } = await import("../entities/EntityFactories.js");
+      const { interiorRealmId } = await import("../interiors/GameplayInterior.js");
+      const { indoorResidents } = await import("../interiors/IndoorResidents.js");
+      const { encodeActor } = await import("../persistence/ActorRecords.js");
+      const realmId = interiorRealmId(meta.id, lot.id);
+      const placement = indoorResidents({
+        version: "interior-v1",
+        parentWorldId: meta.id,
+        featureId: lot.id,
+        buildingType: lot.buildingType,
+        layout: "civic-v1",
+        floor: 0,
+        returnX: lot.entrance.x,
+        returnY: lot.entrance.y,
+      }).find((actor) => actor.featureId === id);
+      const behavior = placement?.resident;
+      const counter = behavior?.inside[0];
+      const factory = placement && ENTITY_FACTORIES[placement.type];
+      if (!behavior || !counter || !factory) throw Error("Missing fire station attendant fixture");
+      counter.wy = 195;
+      const attendant = factory(counter.wx, counter.wy);
+      attendant.persistentId = attendant.proceduralId = id;
+      attendant.resident = behavior;
+      await createStore(meta.id).save([
+        {
+          collection: JSON.stringify([realmId, "entities"]),
+          key: id,
+          scope: "0,0",
+          value: encodeActor(attendant),
+        },
+      ]);
+    }
+    transport.clientSend("local", {
+      type: "enter-building",
+      requestId: 9299,
+      featureId: lot.id,
+    });
+    await server.settle();
+    expect(transport.messagesOfType("local", "request-error")).toEqual([]);
+    expect(server.worldInterior?.featureId).toBe(lot.id);
+    const attendant = server.entityManager.entities.find((e) => e.proceduralId === id);
+    expect(attendant?.position).toEqual({ wx: 244, wy: 212 });
+    expect(attendant?.resident?.inside[0]).toMatchObject({ wx: 244, wy: 212 });
+  } finally {
+    await server.destroy();
+  }
+});
+
 it.each(["roadside", "town"])("enters both %s farm doors and resumes inside", async (kind) => {
   const setup = await createTestSetup();
   const { server, transport, registry } = setup;

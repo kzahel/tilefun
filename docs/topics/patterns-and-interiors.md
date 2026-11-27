@@ -96,6 +96,11 @@ Focused identity, room-access and server save/return regressions pass, as does o
 real Worker/browser check of entering and leaving both farm buildings. Typechecks,
 changed-file lint, the production build and 1,981-candidate raster parity pass.
 
+The fire station uses a clear attendant position beside the crew-room dining
+table. The previous spawn overlapped the table, so the first visit failed room
+occupancy validation with “Saved interior geometry is invalid.” Reopening a
+room whose first visit failed also repairs a saved attendant at the blocked spot.
+
 The [world geometry direction](world-geometry.md#visibility-and-seamless-interiors)
 also targets seamless connected indoor levels with cutaways and level/sector
 visibility. Reconciliation with the current per-floor realm model remains a

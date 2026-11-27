@@ -1,7 +1,9 @@
 import { CHUNK_SIZE_PX } from "../config/constants.js";
+import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import { type InteriorIdentity, InvalidInteriorError } from "../interiors/GameplayInterior.js";
 import { initialRoom, parseGameplayRoom } from "../interiors/GameplayRoom.js";
+import { indoorResidents } from "../interiors/IndoorResidents.js";
 import { PERSISTENCE_BUDGET } from "../persistence/PersistenceBudget.js";
 import type { SavedMeta, SaveManager } from "../persistence/SaveManager.js";
 import {
@@ -118,4 +120,30 @@ export function asInvalidInterior<T>(build: () => T): T {
 /** The saved room plan, or the generated layout for a first visit. */
 export function savedRoomState(interior: InteriorIdentity, savedMeta: SavedMeta | null) {
   return savedMeta?.roomPlan ? parseGameplayRoom(savedMeta.roomPlan) : initialRoom(interior);
+}
+
+/** A failed first visit could persist the attendant before saving the room. */
+export function repairUnopenedFireStation(
+  interior: InteriorIdentity,
+  entities: readonly Entity[],
+): void {
+  if (interior.buildingType !== "prop-city-civic-fire" || interior.layout !== "civic-v1") return;
+  const id = `resident:${interior.featureId}:attendant`;
+  const attendant = entities.find((entity) => entity.proceduralId === id);
+  const behavior = attendant?.resident;
+  const oldStop = behavior?.inside[0];
+  if (
+    !attendant ||
+    !behavior ||
+    oldStop?.id !== "counter" ||
+    oldStop.wx !== 244 ||
+    oldStop.wy !== 195
+  )
+    return;
+  const placement = indoorResidents(interior).find((actor) => actor.featureId === id);
+  const stop = placement?.resident?.inside[0];
+  if (!stop) return;
+  behavior.inside[0] = stop;
+  if (attendant.position.wx === oldStop.wx && attendant.position.wy === oldStop.wy)
+    attendant.position = { wx: stop.wx, wy: stop.wy };
 }

@@ -88,6 +88,7 @@ import {
   installCapacityGuards,
   installTrafficGuard,
   loadWildlifeReturns,
+  repairUnopenedFireStation,
   savedRoomState,
 } from "./RealmComposition.js";
 import { decisionDts, partitionNaps } from "./RealmNaps.js";
@@ -1141,6 +1142,7 @@ export class Realm {
       placement.cameraY = placement.playerY;
       asInvalidInterior(() => {
         const state = savedRoomState(interior, savedMeta);
+        if (!savedMeta) repairUnopenedFireStation(interior, this.entityManager.entities);
         this.installRoom(state);
         this.roomEditor = new GameplayRoomEditor(state, (next) => this.installRoom(next));
       });

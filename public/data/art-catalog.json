@@ -14478,6 +14478,14 @@
         {
           "system": "Regional district facades",
           "source": "src/generation/regional/CivicBuildings.ts"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/IndoorResidents.ts:61"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/server/RealmComposition.ts:130"
         }
       ]
     },
@@ -31271,7 +31279,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/IndoorResidents.ts:91"
+          "source": "src/interiors/IndoorResidents.ts:94"
         },
         {
           "system": "Interiors",
@@ -31469,7 +31477,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/IndoorResidents.ts:110"
+          "source": "src/interiors/IndoorResidents.ts:113"
         },
         {
           "system": "Interiors",
@@ -31541,7 +31549,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/IndoorResidents.ts:116"
+          "source": "src/interiors/IndoorResidents.ts:119"
         },
         {
           "system": "Interiors",
@@ -34459,7 +34467,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/IndoorResidents.ts:77"
+          "source": "src/interiors/IndoorResidents.ts:80"
         }
       ]
     },
@@ -39405,7 +39413,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:308"
+          "source": "src/server/Realm.ts:309"
         },
         {
           "system": "Gameplay",
@@ -41155,23 +41163,23 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/IndoorResidents.ts:61"
+          "source": "src/interiors/IndoorResidents.ts:63"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/IndoorResidents.ts:65"
+          "source": "src/interiors/IndoorResidents.ts:67"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/IndoorResidents.ts:69"
+          "source": "src/interiors/IndoorResidents.ts:72"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/IndoorResidents.ts:95"
+          "source": "src/interiors/IndoorResidents.ts:98"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/IndoorResidents.ts:109"
+          "source": "src/interiors/IndoorResidents.ts:112"
         },
         {
           "system": "Interiors",
@@ -41197,19 +41205,19 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/IndoorResidents.ts:83"
+          "source": "src/interiors/IndoorResidents.ts:86"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/IndoorResidents.ts:94"
+          "source": "src/interiors/IndoorResidents.ts:97"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/IndoorResidents.ts:103"
+          "source": "src/interiors/IndoorResidents.ts:106"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/IndoorResidents.ts:115"
+          "source": "src/interiors/IndoorResidents.ts:118"
         },
         {
           "system": "Interiors",
@@ -41235,7 +41243,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/IndoorResidents.ts:73"
+          "source": "src/interiors/IndoorResidents.ts:76"
         },
         {
           "system": "Interiors",
@@ -41261,11 +41269,11 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/IndoorResidents.ts:90"
+          "source": "src/interiors/IndoorResidents.ts:93"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/IndoorResidents.ts:96"
+          "source": "src/interiors/IndoorResidents.ts:99"
         },
         {
           "system": "Interiors",
