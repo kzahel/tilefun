@@ -19,8 +19,14 @@ export interface WildlifeMeshDefinition {
   readonly prepare?: (scene: Group) => void;
   /** Authored fit maps Blender units directly to game pixels. */
   readonly unitScale?: number;
-  /** Asset-local width and height registration for the oblique gameplay view. */
-  readonly topDown?: { readonly width: number; readonly height: number };
+  /** Asset-local fit for the oblique gameplay view. */
+  readonly topDown?: {
+    readonly width: number;
+    readonly height: number;
+    readonly depth?: number;
+    /** Scale a skinned model along world Y, after it turns to face its heading. */
+    readonly worldY?: number;
+  };
   /** Local rotation relative to the part's GLB pose, driven by the existing sprite frame. */
   readonly pose?: (part: string, frame: number, rotation: Euler) => void;
   /** Embedded clips indexed by the existing runtime sprite clip slots. */

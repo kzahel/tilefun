@@ -1,5 +1,7 @@
-import { AnimationClip, Group, NumberKeyframeTrack } from "three";
+import { AnimationClip, Group, NumberKeyframeTrack, Vector3 } from "three";
 import { expect, it } from "vitest";
+import { Direction } from "../../entities/Entity.js";
+import type { SpriteItem } from "../SceneItem.js";
 import { SkinnedWildlifeBatch } from "./SkinnedWildlifeBatch.js";
 
 it("requires a distinct action for every sprite animation before drawing a model", () => {
@@ -29,4 +31,54 @@ it("requires a distinct action for every sprite animation before drawing a model
   expect(() => load([...base, action("flee", 1, 2)])).toThrow("Reused wildlife animation: flee");
   const batch = load([...base, action("flee", 2)]);
   batch.dispose();
+});
+
+it("applies the top-down ground-depth fit after turning the model", () => {
+  const root = new Group();
+  const source = new Group();
+  const marker = new Group();
+  marker.name = "Marker";
+  marker.position.set(1, 2, -3);
+  source.add(marker);
+
+  const clips = [{ name: "Idle", start: 0, count: 1, frameDuration: 100, loop: true }];
+  const action = new AnimationClip("Idle", 1, [
+    new NumberKeyframeTrack("Marker.rotation[y]", [0, 1], [0, 0.1]),
+  ]);
+  const batch = new SkinnedWildlifeBatch(
+    root,
+    source,
+    [action],
+    {
+      path: "character.glb",
+      height: 1,
+      topDown: { width: 1.5, height: 0.75, depth: 2, worldY: 0.25 },
+      animation: { clips },
+    },
+    2,
+  );
+  const item = {
+    wx: 10,
+    wy: 20,
+    zOffset: 5,
+    facing: Direction.Right,
+    frameCol: 0,
+    frameRow: 0,
+  } as SpriteItem;
+  const position = (topDown: boolean) => {
+    batch.begin();
+    batch.push(item, topDown);
+    batch.end();
+    const drawn = root.getObjectByName(marker.name);
+    if (!drawn) throw new Error("Missing model marker");
+    return drawn.getWorldPosition(new Vector3()).toArray();
+  };
+
+  try {
+    // The model's local depth now spans world X, while world Y takes the compression.
+    expect(position(true)).toEqual([expect.closeTo(22), expect.closeTo(19.25), expect.closeTo(8)]);
+    expect(position(false)).toEqual([expect.closeTo(16), expect.closeTo(18), expect.closeTo(9)]);
+  } finally {
+    batch.dispose();
+  }
 });

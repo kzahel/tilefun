@@ -69,7 +69,7 @@ class WildlifeMeshBatch {
     const fit = topDown ? this.definition.topDown : undefined;
     this.body.scale.set(
       this.scale * (fit?.width ?? 1),
-      this.scale,
+      this.scale * (fit?.depth ?? 1),
       this.scale * (fit?.height ?? 1),
     );
     this.body.updateMatrix();

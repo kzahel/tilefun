@@ -2,7 +2,7 @@
 
 Topic: characters
 Status: six approved characters in Entities, per-profile character selection, and default 3D models for the classic player and three town pedestrians.
-Updated: 2026-11-26.
+Updated: 2026-11-27.
 
 The owner requested investigating live 3D characters on 2026-10-20.
 [160](../tactical/160-live-3d-and-shared-depth-investigation.md) audits actual sources
@@ -32,6 +32,15 @@ the player’s movement frames, including sprinting. **Menu → Character → Cl
 persists the original sprite as a separate profile choice. Existing named appearances
 and their network indices retain their meanings.
 
+The top-down walk now fits the Classic 2D silhouette across all four headings.
+When the cat faces left or right, its narrow front-to-back dimension becomes
+screen width, and the oblique projection adds its broad head's ground width to
+screen height. The top-down fit widens the profile and compresses the model
+along world Y after turning it. In Chromium, sampling both side walks gave
+about 10 × 15–17 world pixels, compared with 7.4 × 22–24 before and 10 × 16 for
+the sprite. The authored GLB and its perspective presentation retain their
+original proportions.
+
 ## Standing town pedestrians (2026-11-26)
 
 The [town pedestrian comparison](https://tilefun.graehlarts.com/tilefun/demos/town-people-3d/v1/index.html)
@@ -47,6 +56,16 @@ Playback follows displayed ground travel, so a blocked walker holds its phase an
 a pedestrian waiting at a waypoint plays Idle. The standing character catalog
 selects models independently of the 3D animals preference. All three models and
 their advancing walk phases were observed on generated sidewalks in live regional seed 42.
+
+The top-down fit now uses each sprite's front and profile widths and reduces
+the oblique camera's vertical stretch. Chromium sampled 16 phases per
+heading. Side-walk bounds in world pixels, rounded to the nearest pixel:
+
+| Appearance | Original sprite | Previous 3D | Adjusted 3D |
+| --- | --- | --- | --- |
+| Person 4 | 15 × 24–25 | 11 × 28–30 | 15 × 23–26 |
+| Person 10 | 14 × 22–23 | 10–11 × 27–28 | 14 × 22–24 |
+| Person 20 | 13 × 22–23 | 10 × 26–28 | 13 × 22–24 |
 
 ## Current slice
 

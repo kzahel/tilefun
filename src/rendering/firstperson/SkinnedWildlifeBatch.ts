@@ -5,6 +5,7 @@ import type { WildlifeMeshDefinition } from "../WildlifeMeshCatalog.js";
 
 interface Instance {
   readonly pivot: THREE.Group;
+  readonly carrier: THREE.Group;
   readonly mixer: THREE.AnimationMixer;
   readonly skeletons: Set<THREE.Skeleton>;
 }
@@ -85,14 +86,11 @@ export class SkinnedWildlifeBatch {
     const instance = this.instances[this.count] ?? this.createInstance();
     this.count++;
     const fit = topDown ? this.definition.topDown : undefined;
-    instance.pivot.scale.set(
-      this.scale * (fit?.width ?? 1),
-      this.scale,
-      this.scale * (fit?.height ?? 1),
-    );
+    instance.pivot.scale.set(this.scale, this.scale * (fit?.worldY ?? 1), this.scale);
+    instance.carrier.scale.set(fit?.width ?? 1, fit?.height ?? 1, fit?.depth ?? 1);
     instance.pivot.position.set(item.wx, item.wy, item.zOffset);
     const pose = item.characterPose ?? item.wildlifePose;
-    instance.pivot.rotation.z =
+    instance.carrier.rotation.z =
       (HEADING[pose?.direction ?? item.facing ?? item.frameRow] ?? 0) +
       (this.definition.forwardYaw ?? 0);
     instance.pivot.visible = true;
@@ -150,7 +148,8 @@ export class SkinnedWildlifeBatch {
     const model = clone(this.source);
     const pivot = new THREE.Group();
     const carrier = new THREE.Group();
-    carrier.rotation.x = Math.PI / 2;
+    // Convert glTF Y-up to game Z-up before turning around the game Z axis.
+    carrier.rotation.set(Math.PI / 2, 0, 0, "ZYX");
     carrier.add(model);
     pivot.add(carrier);
     this.group.add(pivot);
@@ -162,7 +161,7 @@ export class SkinnedWildlifeBatch {
         skeletons.add(object.skeleton);
       }
     });
-    const result = { pivot, mixer: new THREE.AnimationMixer(model), skeletons };
+    const result = { pivot, carrier, mixer: new THREE.AnimationMixer(model), skeletons };
     this.instances.push(result);
     return result;
   }
