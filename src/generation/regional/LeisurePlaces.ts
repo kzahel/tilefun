@@ -18,25 +18,44 @@ export interface LeisurePlace extends LeisureDestination {
   props: FeaturePlacement[];
   actors: ActorPlacement[];
   pond?: Point;
+  volleyball?: Point;
 }
 
+function pondTerrain(pond: Point, x: number, y: number) {
+  const dx = x - pond.x,
+    dy = y - pond.y,
+    radius = Math.hypot(dx / 7, dy / 5);
+  if (radius >= 1.2) return;
+  if (Math.abs(dx) < 4.5 && dy >= 1) return TerrainId.Sand;
+  if (radius < 0.55) return TerrainId.DeepWater;
+  return radius < 1 ? TerrainId.ShallowWater : TerrainId.Sand;
+}
+function loopEntrance(gate: Point, center: Point): Point[] {
+  const horizontal = Math.abs(gate.x - center.x) > Math.abs(gate.y - center.y);
+  const corner = {
+    x: center.x + (gate.x < center.x ? -13 : 13),
+    y: center.y + (gate.y < center.y ? -10 : 8),
+  };
+  return [gate, horizontal ? { x: gate.x, y: corner.y } : { x: corner.x, y: gate.y }, corner];
+}
 export function leisureTerrain(place: LeisurePlace, x: number, y: number): TerrainId | undefined {
   const b = place.bounds;
   if (x < b.minX || x > b.maxX || y < b.minY || y > b.maxY) return;
   if (place.pond) {
-    const dx = x - place.pond.x,
-      dy = y - place.pond.y;
-    const radius = Math.hypot(dx / 7, dy / 5);
-    if (radius < 1.2) {
-      if (Math.abs(dx) < 4.5 && dy >= 1) return TerrainId.Sand;
-      return radius < 0.55
-        ? TerrainId.DeepWater
-        : radius < 1
-          ? TerrainId.ShallowWater
-          : TerrainId.Sand;
-    }
+    const water = pondTerrain(place.pond, x, y);
+    if (water !== undefined) return water;
+  }
+  if (place.volleyball) {
+    const dx = Math.abs(x - place.volleyball.x),
+      dy = Math.abs(y - place.volleyball.y);
+    if (dx <= 4.5 && dy <= 4 && (dx >= 4 || dy >= 3.5)) return TerrainId.SandLight;
   }
   if (place.paths.some((path) => pathDistance(path, x, y) < 1.5)) return TerrainId.DirtLight;
+  if (
+    place.kind === "camp" &&
+    Math.hypot((x - place.center.x + 2) / 9, (y - place.center.y + 1) / 7) < 1
+  )
+    return TerrainId.DirtWarm;
   if (place.kind === "beach") {
     const r = Math.hypot((x - place.center.x) / 11, (y - place.center.y) / 6);
     return r < 1 ? TerrainId.Sand : undefined;
@@ -109,17 +128,7 @@ export function leisurePlace(
     const north = at(0, -10);
     // Bring the two approaches onto opposite sides of the loop. They never
     // cut across the fountain court, picnic lawn or flower beds.
-    for (const gate of [entrance, second ?? entrance]) {
-      const horizontal = Math.abs(gate.x - center.x) > Math.abs(gate.y - center.y);
-      const side = gate.x < center.x ? -13 : 13;
-      const y = gate.y < center.y ? -10 : 8;
-      const corner = at(side, y);
-      paths.push([
-        gate,
-        horizontal ? { x: gate.x, y: corner.y } : { x: corner.x, y: gate.y },
-        corner,
-      ]);
-    }
+    paths.push(loopEntrance(entrance, center), loopEntrance(second ?? entrance, center));
     paths.push([south, at(-13, 8), at(-13, -10), north], [south, at(13, 8), at(13, -10), north]);
     prop("gate", "prop-park-hedgeArch", -13, 3);
     prop("fountain", "prop-garden-fountain", 0, -5);
@@ -130,8 +139,12 @@ export function leisurePlace(
     prop("lawn", "prop-picnic-table", 7, 2);
     prop("seat", "prop-bench", 3, 5);
     prop("topiary", "prop-dino-topiary", -6, -8);
+    prop("back-oak", "prop-oak-tree", -16, -12);
+    prop("flower-border", "prop-park-flowers", -9, -5);
+    prop("second-table", "prop-picnic-table", 8, 5);
     prop("gate-tree", "prop-oak-tree", 16, 6);
   } else {
+    paths.push([south, at(0, 4)]);
     prop("sign", "prop-park-beachSign", -8, 5);
     prop("shade", "prop-beach-umbrella", -6, 0);
     prop("towel", "prop-park-towel", -5, 2);
@@ -139,7 +152,8 @@ export function leisurePlace(
     prop("bucket", "prop-park-bucket", -1, 1);
     prop("towel-blue", "prop-park-towelBlue", 6, 3);
     if (variant < 0.4) {
-      prop("volleyball", "prop-park-volleyNet", 4, -2);
+      place.volleyball = at(4, -1);
+      prop("volleyball", "prop-park-volleyNet", 4, -1);
       actor("ball", "ball", 4, 1);
     } else if (variant < 0.8) prop("kiosk", "prop-park-boatBar", 4, -2);
     else prop("picnic", "prop-picnic-table", 5, -2);

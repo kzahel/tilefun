@@ -3,12 +3,10 @@ import { createPlayer } from "../entities/Player.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
 import { DenseDistrictSource } from "../generation/regional/DenseDistrictSource.js";
 import { FarmsteadSource } from "../generation/regional/FarmsteadPlanner.js";
-import { MotocrossSource } from "../generation/regional/MotocrossPlanner.js";
 import {
   type LandscapeProfile,
   NaturalLandscape,
 } from "../generation/regional/NaturalLandscape.js";
-import { RacetrackSource } from "../generation/regional/RacetrackPlanner.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { createDeer } from "../wildlife/Deer.js";
 import { createFauna, FAUNA_PROFILES } from "../wildlife/Fauna.js";
@@ -23,6 +21,7 @@ import { herdWorkRecipe } from "./HerdWorkRecipe.js";
 import { meadowWorkRecipe } from "./MeadowWorkRecipe.js";
 import { pastureWorkRecipe } from "./PastureWorkRecipe.js";
 import { rangeWorkRecipe } from "./RangeWorkRecipe.js";
+import { OUTING_CASES, venueRecipe } from "./RegionalVenueRecipe.js";
 import type { ScenarioRecipe } from "./ScenarioRecipe.js";
 import { FLAT_SCENARIO } from "./ScenarioRecipe.js";
 import { threatWorkRecipe } from "./ThreatWorkRecipe.js";
@@ -161,10 +160,7 @@ export const NATURAL_CASES = [
   { id: "village-pets", name: "Village · cats & dogs", seed: 2026, x: 672, y: -592 },
   { id: "city-center", name: "City · dense center & neighborhoods", seed: 2026, x: 300, y: 519 },
   { id: "racetrack", name: "City outskirts · oval speedway", seed: 2026, x: 462, y: 455 },
-  { id: "outing-camp", name: "Ferngrove · Woodland camp", seed: 2026, x: 184, y: 427 },
-  { id: "outing-garden", name: "Oakwick · Garden park", seed: 2026, x: -1471, y: -2812 },
-  { id: "outing-play", name: "Ferngrove · Basketball green", seed: 42, x: -462, y: -609 },
-  { id: "outing-beach", name: "Lake · Beach kiosk", seed: 2026, x: 1234, y: -259 },
+  ...OUTING_CASES,
   { id: "motocross", name: "City outskirts · motocross park", seed: 2026, x: 8, y: 454 },
   { id: "city-pets", name: "City · cats & dogs", seed: 2026, x: 306, y: 540 },
   { id: "meadow", name: "Meadow · lone trees", seed: 2026, x: 480, y: -512 },
@@ -287,39 +283,8 @@ export function naturalLandscapeRecipe(
   if (id === "train")
     return { ...cityTrainRecipe(), id: `nature-train-${profile}-v1`, landscape: profile };
   const point = at ?? naturalCase(id);
-  if (!at && id.startsWith("outing-"))
-    return {
-      version: 1,
-      id: `nature-${id}-${profile}-v1`,
-      generation: createDescriptor("regional", point.seed),
-      landscape: profile,
-      player: createPlayer(point.x * 16, point.y * 16),
-      props: [],
-    };
-  if (!at && id === "racetrack") {
-    const track = new RacetrackSource(regionalWorld(point.seed)).owner(0, 0);
-    if (!track) throw Error("Missing generated racetrack inspection");
-    return {
-      version: 1,
-      id: `nature-${id}-${profile}-v1`,
-      generation: createDescriptor("regional", point.seed),
-      landscape: profile,
-      player: createPlayer(track.center.x * 16, (track.center.y + 37) * 16),
-      props: [],
-    };
-  }
-  if (!at && id === "motocross") {
-    const park = new MotocrossSource(regionalWorld(point.seed)).owner(0, 0);
-    if (!park) throw Error("Missing generated motocross inspection");
-    return {
-      version: 1,
-      id: `nature-${id}-${profile}-v1`,
-      generation: createDescriptor("regional", point.seed),
-      landscape: profile,
-      player: createPlayer(park.start.x * 16, park.start.y * 16),
-      props: [],
-    };
-  }
+  const venue = at ? undefined : venueRecipe(id, profile, point);
+  if (venue) return venue;
   // Pet-coat arrivals inspect real seeded settlement individuals, whose greens
   // are intentionally excluded by the countryside-only dry-arrival search.
   if (!at && FAUNA_PROFILES.find((p) => p.species === id)?.variantOf) {

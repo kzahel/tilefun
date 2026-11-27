@@ -1,5 +1,5 @@
 import { TerrainId } from "../../autotile/TerrainId.js";
-import { BOAT_MOORING_RADIUS, type BoatPlacement } from "../../boats/Boat.js";
+
 import { CHUNK_SIZE_PX } from "../../config/constants.js";
 import { FOREST_KITS, FOREST_ROW_STEP, forestRowType } from "../../patterns/ForestThicket.js";
 import { nearestRail } from "../../railway/RailPath.js";
@@ -34,7 +34,7 @@ import { fbm, valueNoise } from "../noise.js";
 import type { FeaturePlacement } from "../StructureGenerator.js";
 import { DenseDistrictSource } from "./DenseDistrictSource.js";
 import { FarmsteadSource } from "./FarmsteadPlanner.js";
-import { type LeisurePlace, leisurePlace } from "./LeisurePlaces.js";
+import { lakeBeach, lakeBoats, lakeOutings, waterline } from "./LakeShore.js";
 import { LeisureSource } from "./LeisureSource.js";
 import { MotocrossSource, motocrossReserved } from "./MotocrossPlanner.js";
 import { pathDistance } from "./PlanGeometry.js";
@@ -133,7 +133,6 @@ export function naturalHabitat(
 /** Bounded cells own ponds and reservation caches; tree IDs use an independent 4-tile lattice. */
 export class NaturalLandscape {
   readonly outings: LeisureSource;
-  private readonly beaches = new WeakMap<NaturalPond, LeisurePlace>();
   readonly railways: RailwayPlanner;
   readonly farms: FarmsteadSource;
   private readonly districts: DenseDistrictSource;
@@ -294,64 +293,17 @@ export class NaturalLandscape {
     if (this.lakes.size > 128) this.lakes.delete(this.lakes.keys().next().value ?? "");
     return lake;
   }
-  /** The south shore is independent of the north-shore boat landing. Keep the
-   * shallow shelf intact and use the admitted lake's own dry bank. */
-  lakeBeach(lake: NaturalPond): LeisurePlace {
-    const cached = this.beaches.get(lake);
-    if (cached) return cached;
-    const x = Math.round(lake.x),
-      y = Math.ceil(lake.y + lake.ry) + 8;
-    const bounds = { minX: x - 12, minY: y - 5, maxX: x + 13, maxY: y + 12 };
-    const beach = leisurePlace(
-      "beach",
-      `${lake.id}:beach`,
-      "Lakeside beach",
-      { x, y },
-      bounds,
-      { x: x + 10, y: y + 8 },
-      valueNoise(x, y, this.world.seed + 7401),
-    );
-    this.beaches.set(lake, beach);
-    return beach;
-  }
-  leisure(bounds: Bounds): LeisurePlace[] {
-    const places = this.outings.query(bounds);
-    for (let cy = Math.floor(bounds.minY / 512); cy <= Math.floor(bounds.maxY / 512); cy++)
-      for (let cx = Math.floor(bounds.minX / 512); cx <= Math.floor(bounds.maxX / 512); cx++) {
-        const lake = this.lake(cx, cy);
-        if (!lake) continue;
-        const p = this.lakeBeach(lake);
-        if (intersects(bounds, p.bounds)) places.push(p);
-      }
-    return places;
+  leisure(bounds: Bounds) {
+    return [...this.outings.query(bounds), ...lakeOutings(this, bounds)];
   }
   lakeAt(x: number, y: number) {
-    const pond = this.lake(Math.floor(x / 512), Math.floor(y / 512));
-    if (!pond || !near(pond.bounds, x, y, 0.01)) return undefined;
-    // Quiet straight northern boarding beach; the rest keeps an organic shoreline.
-    const beach = Math.abs(x - pond.x) < 8 && y < pond.y - pond.ry * 0.75;
-    const radius = beach
-      ? Math.abs(y - pond.y) / pond.ry
-      : Math.hypot((x - pond.x) / pond.rx, (y - pond.y) / pond.ry);
-    const edge = beach ? 1 : 1 + fbm(x / 24, y / 24, this.world.seed + 9127, 2) * 0.04;
-    return { pond, distance: radius / edge };
+    const lake = this.lake(Math.floor(x / 512), Math.floor(y / 512));
+    return lake && near(lake.bounds, x, y, 0.01)
+      ? waterline(lake, this.world.seed, x, y)
+      : undefined;
   }
-  boats(cx: number, cy: number): BoatPlacement[] {
-    const lake = this.lake(Math.floor(cx / 32), Math.floor(cy / 32));
-    if (!lake) return [];
-    const wx = lake.x * 16,
-      // Terrain collision samples tile centers. Snap the entire northern hull
-      // edge inside the first water row, including fractional/negative shores.
-      wy = Math.floor(lake.y - lake.ry + 0.5) * 16 + 1 + BOAT_MOORING_RADIUS;
-    return Math.floor(wx / CHUNK_SIZE_PX) === cx && Math.floor(wy / CHUNK_SIZE_PX) === cy
-      ? [
-          {
-            identity: `lake-boat:${this.world.seed}:${Math.floor(cx / 32)}:${Math.floor(cy / 32)}`,
-            wx,
-            wy,
-          },
-        ]
-      : [];
+  boats(cx: number, cy: number) {
+    return lakeBoats(this.lake(Math.floor(cx / 32), Math.floor(cy / 32)), this.world.seed, cx, cy);
   }
   private lakeWildlife(cx: number, cy: number): ActorPlacement[] {
     const lake = this.lake(Math.floor(cx / 32), Math.floor(cy / 32));
@@ -845,7 +797,7 @@ export class NaturalLandscape {
     const bay = this.lagoon(Math.floor(x / CHUNK_SIZE_PX), Math.floor(y / CHUNK_SIZE_PX));
     const lake = this.lake(Math.floor(x / 512), Math.floor(y / 512));
     return (
-      (!!lake && near(this.lakeBeach(lake).bounds, x, y, clearance + 2)) ||
+      (!!lake && near(lakeBeach(lake, this.world.seed).bounds, x, y, clearance + 2)) ||
       (!!lake &&
         Math.hypot(
           (x - lake.x) / (lake.rx * 1.3 + clearance),

@@ -7,13 +7,13 @@ import {
   resolveDescriptor,
 } from "./GenerationDescriptor.js";
 import { OnionStrategy } from "./OnionStrategy.js";
-import { constructionYard } from "./regional/ConstructionYard.js";
+import { overviewOutings, overviewVenues } from "./OverviewVenues.js";
 import type { CountryPlan } from "./regional/CountrysidePlanner.js";
 import { DenseDistrictSource } from "./regional/DenseDistrictSource.js";
 import type { DistrictPlan } from "./regional/DistrictPlan.js";
 import { type FarmDestination, farmDestination } from "./regional/FarmsteadPlanner.js";
 import type { LeisureDestination } from "./regional/LeisurePlaces.js";
-import { type MotocrossPark, MotocrossSource } from "./regional/MotocrossPlanner.js";
+import type { MotocrossPark } from "./regional/MotocrossPlanner.js";
 import {
   DEFAULT_LANDSCAPE_PROFILE,
   type LandscapeProfile,
@@ -21,9 +21,8 @@ import {
   type NaturalPond,
   naturalHabitat,
 } from "./regional/NaturalLandscape.js";
-import { type Racetrack, RacetrackSource } from "./regional/RacetrackPlanner.js";
+import type { Racetrack } from "./regional/RacetrackPlanner.js";
 import {
-  intersects,
   LandCover,
   makeGrid,
   type RegionalRequest,
@@ -31,7 +30,7 @@ import {
   regionalQuerySteps,
   validateRequest,
 } from "./regional/RegionalPlanner.js";
-import { type VehicleDepot, vehicleDepot } from "./regional/VehicleDepotPlanner.js";
+import type { VehicleDepot } from "./regional/VehicleDepotPlanner.js";
 import { type RegionalWorld, regionalWorld, validateWorld } from "./regional/WorldDescriptor.js";
 
 export type OverviewResult = Omit<RegionalResult, "world"> & {
@@ -83,49 +82,11 @@ export function* overviewSteps(
         result.stats.features += count;
       }
     }
-    const racetracks: NonNullable<OverviewResult["racetracks"]> = [];
-    const vehicleDepots: NonNullable<OverviewResult["vehicleDepots"]> = [];
-    if (result.detail === "region") {
-      const tracks = yield* new RacetrackSource(regionalWorld(descriptor.seed)).querySteps(
-        request.bounds,
-        request.limits.maxOwners,
-      );
-      if (result.stats.features + tracks.length * 2 <= request.limits.maxFeatures) {
-        for (const track of tracks) {
-          const { id, name, center, bounds, access } = track;
-          racetracks.push({ id, name, center, bounds, access });
-          const depot = vehicleDepot(track);
-          vehicleDepots.push({
-            id: depot.id,
-            name: depot.name,
-            center: depot.center,
-            arrival: depot.arrival,
-            bounds: depot.bounds,
-          });
-        }
-        result.stats.features += tracks.length * 2;
-      }
-    }
-    const constructionYards: NonNullable<OverviewResult["constructionYards"]> = [];
-    const motocross: NonNullable<OverviewResult["motocross"]> = [];
-    if (result.detail === "region") {
-      const parks = yield* new MotocrossSource(regionalWorld(descriptor.seed)).querySteps(
-        request.bounds,
-        request.limits.maxOwners,
-      );
-      if (result.stats.features + parks.length <= request.limits.maxFeatures) {
-        for (const { id, name, center, arrival, bounds, access, straight } of parks)
-          motocross.push({ id, name, center, arrival, bounds, access, straight });
-        result.stats.features += parks.length;
-      }
-      if (motocross.length && result.stats.features + parks.length <= request.limits.maxFeatures) {
-        for (const park of parks) {
-          const { id, name, center, arrival, bounds } = constructionYard(park);
-          constructionYards.push({ id, name, center, arrival, bounds });
-        }
-        result.stats.features += parks.length;
-      }
-    }
+    const { racetracks, vehicleDepots, motocross, constructionYards } = yield* overviewVenues(
+      regionalWorld(descriptor.seed),
+      result,
+      request,
+    );
     const source = new DenseDistrictSource(regionalWorld(descriptor.seed), true);
     const districts: DistrictPlan[] = [];
     if (result.detail === "region" && result.grid.step <= 16) {
@@ -161,42 +122,7 @@ export function* overviewSteps(
       const world = regionalWorld(descriptor.seed);
       const nature = new NaturalLandscape(world, landscape);
       if (result.detail === "region") {
-        const b = request.bounds;
-        for (const town of result.settlements) {
-          if (result.stats.features + outings.length >= request.limits.maxFeatures) break;
-          const plan = source.owner(town.owner.cx, town.owner.cy);
-          if (plan && intersects(plan.park, b))
-            outings.push({
-              id: `${town.id}:play`,
-              name: `${town.name} · Play yard`,
-              kind: "play",
-              arrival: {
-                x: (plan.park.minX + plan.park.maxX) / 2,
-                y: (plan.park.minY + plan.park.maxY) / 2,
-              },
-            });
-        }
-        const minX = Math.floor(b.minX / 512),
-          maxX = Math.floor(b.maxX / 512);
-        const minY = Math.floor(b.minY / 512),
-          maxY = Math.floor(b.maxY / 512);
-        if ((maxX - minX + 1) * (maxY - minY + 1) <= request.limits.maxOwners) {
-          for (let y = minY; y <= maxY; y++)
-            for (let x = minX; x <= maxX; x++) {
-              const cell = {
-                minX: Math.max(b.minX, x * 512),
-                minY: Math.max(b.minY, y * 512),
-                maxX: Math.min(b.maxX, (x + 1) * 512),
-                maxY: Math.min(b.maxY, (y + 1) * 512),
-              };
-              if (cell.maxX <= cell.minX || cell.maxY <= cell.minY) continue;
-              for (const { id, name, kind, arrival } of nature.leisure(cell)) {
-                if (result.stats.features + outings.length >= request.limits.maxFeatures) break;
-                if (!outings.some((p) => p.id === id)) outings.push({ id, name, kind, arrival });
-              }
-              yield;
-            }
-        }
+        outings.push(...(yield* overviewOutings(request, result, nature, source)));
         result.stats.features += outings.length;
         const visible = nature.farms.query(request.bounds).map(farmDestination);
         if (result.stats.features + visible.length <= request.limits.maxFeatures) {

@@ -7,6 +7,7 @@ import { denseBuilding } from "./DenseCityAssets.js";
 import { denseDoorThresholds } from "./DenseDoorThresholds.js";
 import type { DistrictBlock, DistrictPlan, DistrictStreet } from "./DistrictPlan.js";
 import type { Bounds, Settlement } from "./RegionalPlanner.js";
+import { greenSurfaceAt } from "./SettlementGreen.js";
 
 export interface DenseDistrictPlan extends DistrictPlan {
   readonly recipe:
@@ -19,8 +20,8 @@ export interface DenseDistrictPlan extends DistrictPlan {
     | "city-places-v9"
     | "city-places-v10";
   readonly center: { x: number; y: number };
-  /** Original street-grid reservation before adding outlying centers. */
   readonly playYard?: number;
+  /** Original street-grid reservation before adding outlying centers. */
   readonly gridBounds?: Bounds;
   readonly actors: ActorPlacement[];
   readonly shoppingCenters?: readonly import("../../traffic/ShoppingCenter.js").ShoppingCenter[];
@@ -410,21 +411,5 @@ export function denseSurfaceAt(plan: DenseDistrictPlan, x: number, y: number): R
         )
           return RoadType.CityPavement;
   }
-  for (const block of plan.blocks.filter((b) => b.kind === "park")) {
-    const p = block.bounds,
-      px = (p.minX + p.maxX) / 2,
-      py = (p.minY + p.maxY) / 2;
-    if (
-      block.bounds === plan.park &&
-      (plan.playYard ?? 0) >= 0.72 &&
-      x >= px - 12 &&
-      x < px - 2 &&
-      y >= py - 10 &&
-      y < py - 1
-    )
-      return RoadType.CityPavement;
-    if (insideDenseBounds(p, x, y) && (Math.abs(x + 0.5 - px) < 1 || Math.abs(y + 0.5 - py) < 1))
-      return RoadType.CityPavement;
-  }
-  return RoadType.None;
+  return greenSurfaceAt(plan, x, y);
 }

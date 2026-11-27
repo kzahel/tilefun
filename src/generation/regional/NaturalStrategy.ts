@@ -10,10 +10,8 @@ import {
 import { pastureHabitatProps } from "../../wildlife/PastureHabitat.js";
 import { rangeHabitatProps } from "../../wildlife/RangeHabitat.js";
 import type { Chunk } from "../../world/Chunk.js";
-import { deriveTerrain } from "../deriveTerrain.js";
 import { constructionYard, yardRoad } from "./ConstructionYard.js";
 import { insideDenseBounds } from "./DenseDistrictPlanner.js";
-import { leisureTerrain } from "./LeisurePlaces.js";
 import {
   motocrossPlacements,
   motocrossReserved,
@@ -21,15 +19,16 @@ import {
   motocrossTerrain,
 } from "./MotocrossPlanner.js";
 import { type LandscapeProfile, NaturalLandscape } from "./NaturalLandscape.js";
+import {
+  finishOutingTerrain,
+  inActorChunk,
+  outingActors,
+  outingProps,
+} from "./OutingRealization.js";
 import { racetrackReserved, racetrackSurface } from "./RacetrackPlanner.js";
 import { intersects } from "./RegionalPlanner.js";
 import { settlementPets } from "./SettlementPets.js";
-import {
-  depotPlacements,
-  depotSurface,
-  intersectingPlacements,
-  vehicleDepot,
-} from "./VehicleDepotPlanner.js";
+import { depotPlacements, depotSurface, vehicleDepot } from "./VehicleDepotPlanner.js";
 import type { RegionalWorld } from "./WorldDescriptor.js";
 
 /** Regional natural cover composed with production rail/traffic route sources. */
@@ -52,16 +51,6 @@ export class NaturalStrategy extends RailwayStrategy {
       for (let sx = 0; sx < 33; sx++) {
         const x = cx * 16 + sx / 2,
           y = cy * 16 + sy / 2;
-        let outingTerrain: TerrainId | undefined;
-        for (const place of outings) {
-          outingTerrain = leisureTerrain(place, x, y);
-          if (outingTerrain !== undefined) break;
-        }
-        if (outingTerrain !== undefined) {
-          chunk.setSubgrid(sx, sy, outingTerrain);
-          changed = true;
-          continue;
-        }
         if (tracks.some((t) => racetrackReserved(t, x, y))) {
           chunk.setSubgrid(sx, sy, TerrainId.Grass);
           changed = true;
@@ -96,12 +85,11 @@ export class NaturalStrategy extends RailwayStrategy {
           changed = true;
         }
       }
-    if (changed) deriveTerrain(chunk);
+    finishOutingTerrain(chunk, cx, cy, outings, changed);
     for (let ly = 0; ly < 16; ly++)
       for (let lx = 0; lx < 16; lx++) {
         const x = cx * 16 + lx,
           y = cy * 16 + ly;
-        if (outings.some((p) => insideDenseBounds(p.bounds, x, y))) chunk.setHeight(lx, ly, 0);
         for (const track of tracks)
           if (racetrackReserved(track, x + 0.5, y + 0.5)) {
             const surface =
@@ -140,9 +128,7 @@ export class NaturalStrategy extends RailwayStrategy {
       ...this.motocross
         .query(bounds)
         .flatMap((p) => [...p.vehicles, ...constructionYard(p).vehicles]),
-    ].filter(
-      (p) => Math.floor(p.wx / CHUNK_SIZE_PX) === cx && Math.floor(p.wy / CHUNK_SIZE_PX) === cy,
-    );
+    ].filter(inActorChunk(cx, cy));
   }
   boats(cx: number, cy: number) {
     return this.nature.boats(cx, cy);
@@ -164,48 +150,23 @@ export class NaturalStrategy extends RailwayStrategy {
     const residents = this.nature.farms
       .query(bounds)
       .flatMap((p) => p.actors)
-      .filter(
-        (a) => Math.floor(a.wx / CHUNK_SIZE_PX) === cx && Math.floor(a.wy / CHUNK_SIZE_PX) === cy,
-      );
+      .filter(inActorChunk(cx, cy));
     const pets = this.districts
       .query(bounds)
       .flatMap((p) => settlementPets(p, this.world.seed))
-      .filter(
-        (a) => Math.floor(a.wx / CHUNK_SIZE_PX) === cx && Math.floor(a.wy / CHUNK_SIZE_PX) === cy,
-      );
-    const playBalls = this.districts
-      .query(bounds)
-      .filter((p) => (p.playYard ?? 0) >= 0.72)
-      .map((p) => ({
-        featureId: `${p.id}:play:ball`,
-        type: "ball",
-        wx: ((p.park.minX + p.park.maxX) / 2 - 6) * 16,
-        wy: ((p.park.minY + p.park.maxY) / 2 - 2) * 16,
-        route: [],
-      }))
-      .filter(
-        (a) => Math.floor(a.wx / CHUNK_SIZE_PX) === cx && Math.floor(a.wy / CHUNK_SIZE_PX) === cy,
-      );
+      .filter(inActorChunk(cx, cy));
     const wildlife = [...this.nature.wildlife(cx, cy), ...raccoonForagers(this.nature, cx, cy)];
     return [
       ...super.actors(cx, cy),
       ...residents,
       ...pets,
-      ...playBalls,
-      ...this.nature
-        .leisure(bounds)
-        .flatMap((p) => p.actors)
-        .filter(
-          (a) => Math.floor(a.wx / CHUNK_SIZE_PX) === cx && Math.floor(a.wy / CHUNK_SIZE_PX) === cy,
-        ),
+      ...outingActors(this.nature, this.districts, cx, cy, bounds),
       ...this.spectators(cx, cy),
       ...this.constructionCargo(cx, cy),
       ...this.motocross
         .query(bounds)
         .flatMap((p) => constructionYard(p).rubble)
-        .filter(
-          (a) => Math.floor(a.wx / CHUNK_SIZE_PX) === cx && Math.floor(a.wy / CHUNK_SIZE_PX) === cy,
-        ),
+        .filter(inActorChunk(cx, cy)),
       ...wildlife,
       ...foragePlacements(
         [
@@ -230,22 +191,13 @@ export class NaturalStrategy extends RailwayStrategy {
     return [
       ...this.racetracks.query(bounds).flatMap((t) => t.actors),
       ...this.motocross.query(bounds).flatMap((p) => p.actors),
-    ].filter(
-      (a) => Math.floor(a.wx / CHUNK_SIZE_PX) === cx && Math.floor(a.wy / CHUNK_SIZE_PX) === cy,
-    );
+    ].filter(inActorChunk(cx, cy));
   }
   override placements(cx: number, cy: number) {
     const bounds = { minX: cx * 16, minY: cy * 16, maxX: (cx + 1) * 16, maxY: (cy + 1) * 16 };
     return [
       ...super.placements(cx, cy),
-      ...this.nature
-        .leisure({
-          minX: bounds.minX - 8,
-          minY: bounds.minY - 12,
-          maxX: bounds.maxX + 8,
-          maxY: bounds.maxY + 12,
-        })
-        .flatMap((p) => intersectingPlacements(p.props, bounds)),
+      ...outingProps(this.nature, bounds),
       ...this.nature.farms.placements(this.nature.farms.query(bounds), bounds),
       ...this.nature.placements(cx, cy),
       ...crowNestTrees(this.nature, cx, cy),

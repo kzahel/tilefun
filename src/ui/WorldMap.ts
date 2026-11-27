@@ -14,6 +14,7 @@ import { type Point, QUERY_LIMITS } from "../generation/regional/RegionalPlanner
 import { townStops } from "../railway/RailwayPlanner.js";
 import type { WorldMapMessage, WorldMapPlayer } from "../shared/protocol.js";
 import { activateMenu, deactivateMenu } from "./MenuNavigation.js";
+import { venueButtons } from "./WorldMapVenues.js";
 import "./WorldMap.css";
 
 interface MapActions {
@@ -280,25 +281,11 @@ export class WorldMap {
                     stationId: s.id,
                   }),
                 );
-              this.tracks.replaceChildren();
-              for (const track of this.result.racetracks ?? [])
-                this.tracks.append(
-                  this.place(track.name, track.center, false, {
-                    testid: "world-map-racetrack",
-                    trackId: track.id,
-                  }),
-                );
-              for (const park of this.result.motocross ?? [])
-                this.tracks.append(
-                  this.place(park.name, park.arrival, true, {
-                    testid: "world-map-motocross",
-                    parkId: park.id,
-                  }),
-                );
-              for (const place of this.result.outings ?? [])
-                this.tracks.append(
-                  this.place(place.name, place.arrival, true, { testid: "world-map-outing" }),
-                );
+              this.tracks.replaceChildren(
+                ...venueButtons(this.result, (name, point, travel, data) =>
+                  this.place(name, point, travel, data),
+                ),
+              );
               this.depots.replaceChildren();
               for (const depot of this.result.vehicleDepots ?? [])
                 this.depots.append(
