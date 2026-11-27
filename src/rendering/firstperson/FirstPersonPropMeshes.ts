@@ -31,6 +31,8 @@ import {
 import type { FirstPersonRoomScene } from "./FirstPersonRoomScene.js";
 import { type ColoredTriangles, TriangleWriter } from "./FirstPersonTerrain.js";
 
+import { appendLeisureModel } from "./LeisureModels.js";
+
 export type TexturedFaces = NonNullable<PropGeometry["textured"]>;
 type FacesFor = (image: Pick<PropImage, "texture"> | undefined) => TexturedFaces | undefined;
 
@@ -148,13 +150,16 @@ function propElevation(prop: Prop, heightAt: (tx: number, ty: number) => number)
  * face material.
  */
 export class PropMeshes {
+  private readonly white = new THREE.DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1);
   readonly buildings = new BuildingViews();
   private readonly faceMaterials = new Map<THREE.Texture, THREE.MeshBasicMaterial>();
 
   constructor(
     private readonly images: FirstPersonImages,
     private readonly shade: (material: THREE.MeshBasicMaterial) => THREE.MeshBasicMaterial,
-  ) {}
+  ) {
+    this.white.needsUpdate = true;
+  }
 
   faceMaterial(texture: THREE.Texture): THREE.MeshBasicMaterial {
     let material = this.faceMaterials.get(texture);
@@ -267,6 +272,14 @@ export class PropMeshes {
     facesFor: FacesFor,
     ceilings?: ReadonlySet<string>,
   ): void {
+    if (prop.sprite.parts?.length && prop.sprite.parts.every((p) => p.depthFloorZ !== undefined)) {
+      this.appendPlanes(prop, elevation + 0.4, facesFor, "outside");
+      return;
+    }
+    if (appendLeisureModel(built.buildings, this.images, this.white, prop, elevation)) {
+      built.surfaces.push(...propSurfaces(prop));
+      return;
+    }
     const forest = forestRowDefinition(prop.type);
     if (forest) {
       const sheet = this.images.sheet(prop.sprite.sheetKey);
@@ -462,5 +475,6 @@ export class PropMeshes {
   dispose(): void {
     for (const material of this.faceMaterials.values()) material.dispose();
     this.faceMaterials.clear();
+    this.white.dispose();
   }
 }
