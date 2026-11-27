@@ -11,7 +11,7 @@ import {
 } from "../inventory/Inventory.js";
 import type { SpriteItem } from "./SceneItem.js";
 
-/** Seconds one use pose lasts (a swing, throw, scatter or wave). */
+/** Seconds one use pose lasts (a swing, scatter or wave). */
 export const USE_POSE_SECONDS = 0.32;
 
 /** One frame of an avatar's hand: the held-items sheet cell and its offset. */
@@ -90,7 +90,8 @@ function forward(direction: Direction): { x: number; y: number } {
 
 /**
  * What the hand shows now: the carried item, a use pose for it, or a waving
- * glove when an empty hand was used. Undefined for an empty, resting hand.
+ * glove when an empty hand was used. Undefined for a selected ball or an empty,
+ * resting hand.
  */
 export function handFrame(
   body: HandBody,
@@ -99,6 +100,7 @@ export function handFrame(
 ): HandFrame | undefined {
   const item = handItem(body);
   const elapsed = elapsedSinceUse(body, now);
+  if (item === BALL) return undefined;
   const t = elapsed === undefined ? undefined : elapsed / USE_POSE_SECONDS;
   const ahead = forward(direction);
   // Tools point the way the avatar faces; corn and wood keep their carried art.
@@ -132,7 +134,7 @@ export function handFrame(
       flipX,
     };
   }
-  // Throws and scatters: a quick push forward and back.
+  // Scatter with a quick push forward and back.
   const push = Math.sin(t * Math.PI) * 5;
   return {
     column,
@@ -146,7 +148,7 @@ export function handFrame(
 
 /**
  * The scene sprite for an avatar's hand (the carried item, its use pose or a
- * waving glove), beside the body at `pos`; undefined while riding or empty-handed.
+ * waving glove), beside the body at `pos`. Riders have no hand sprite.
  */
 export function heldItemSprite(
   body: HandBody & { readonly parentId?: number | undefined },

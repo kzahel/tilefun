@@ -11,10 +11,11 @@ what is in front of you.** X (Q/B on the left keys, `.` on the right, the touch
 paddle) uses the held item: hold to charge, release to throw the ball, swing the
 stick (bats balls, shoos animals), chop with the axe, scatter corn or wave with
 empty hands. The touch paddle names the verb. Every player carries the ball,
-stick and axe in an eight-slot hotbar. D-pad ←/→ steps (hold to keep stepping)
-and a picker strip names the item and its verb; D-pad ↑ swaps back to the last
-item. The game is never paused to choose. Prompts for held-item verbs (chop,
-scatter) show the Use button; Interact still performs them.
+stick and axe in an eight-slot hotbar. The ball stays in the hotbar display
+when selected and appears in the world when thrown. D-pad ←/→ steps (hold to
+keep stepping) and a picker strip names the item and its verb. D-pad ↑ swaps
+back to the last item. The game is never paused to choose. Chop and Scatter
+prompts show the Use button. Interact still performs those actions.
 
 ## Contextual gameplay actions
 

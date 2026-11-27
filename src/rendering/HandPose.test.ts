@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
 import { Direction } from "../entities/Entity.js";
-import { AXE, CORN, countHandUse, HAND_FRAME, setHandItem } from "../inventory/Inventory.js";
+import { AXE, BALL, CORN, countHandUse, HAND_FRAME, setHandItem } from "../inventory/Inventory.js";
 import { handFrame, USE_POSE_SECONDS } from "./HandPose.js";
 
 it("starts a use pose only when the replicated counter changes after the body was seen", () => {
@@ -26,4 +26,13 @@ it("waves a glove for an empty hand and keeps corn's carried art unflipped", () 
   expect(handFrame(body, Direction.Down, 1 + USE_POSE_SECONDS)).toBeUndefined();
   setHandItem(body, CORN);
   expect(handFrame(body, Direction.Left, 2)).toMatchObject({ column: CORN - 1, flipX: false });
+});
+
+it("hides the selected ball at rest and during a throw", () => {
+  const body: { id: number; hand?: number } = { id: 3 };
+  setHandItem(body, BALL);
+  expect(handFrame(body, Direction.Right, 0)).toBeUndefined();
+  countHandUse(body);
+  expect(handFrame(body, Direction.Right, 1)).toBeUndefined();
+  expect(handFrame(body, Direction.Right, 1.1)).toBeUndefined();
 });
