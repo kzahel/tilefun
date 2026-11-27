@@ -8,6 +8,13 @@ import { required } from "../shared/required.js";
 import type { ScenarioRecipe } from "./ScenarioRecipe.js";
 
 export const OUTING_CASES = [
+  { id: "outing-salvage", name: "Ferngrove · Salvage yard", seed: 2026, x: 365.5, y: 474 },
+  { id: "outing-cemetery", name: "Ferngrove · Memorial garden", seed: 2026, x: 238.5, y: 434 },
+  { id: "outing-hospital", name: "Ferngrove · City hospital", seed: 2026, x: 277.5, y: 513 },
+  { id: "outing-fire", name: "Ferngrove · Fire station", seed: 2026, x: 277.5, y: 474 },
+  { id: "outing-school", name: "Ferngrove · Clocktower school", seed: 2026, x: 365.5, y: 513 },
+  { id: "outing-mail", name: "Ferngrove · Parcel depot", seed: 2026, x: 322.5, y: 513 },
+  { id: "outing-nursery", name: "Ferngrove · Plant nursery", seed: 2026, x: 322.5, y: 434 },
   { id: "outing-camp", name: "Ferngrove · Woodland camp", seed: 2026, x: 184, y: 427 },
   { id: "outing-garden", name: "Oakwick · Garden park", seed: 2026, x: -1471, y: -2812 },
   { id: "outing-play", name: "Ferngrove · Basketball green", seed: 42, x: -462, y: -609 },

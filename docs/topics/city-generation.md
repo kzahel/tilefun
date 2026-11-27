@@ -1,5 +1,31 @@
 # City generation and promotion
 
+## Civic buildings and neighborhood streets
+
+In a fresh regional world with seed **2026**, open the map over **Ferngrove**
+and choose a named destination. The houses, institutions, interiors, vehicles
+and equipment are part of the ordinary streamed world. The World geometry
+tool also opens each of the seven addresses at its street entrance.
+
+| Map destination | What to try | Arrival in tiles |
+| --- | --- | --- |
+| Memorial garden | Walk under the stone gate, past marble markers and flowers, and visit the Victorian caretaker’s house | 238.5, 434 |
+| Plant nursery | Walk inside the framed greenhouse and browse the plant displays and shop | 322.5, 434 |
+| Fire station | Back the ladder engine into the open bay or enter the crew room through the side office | 277.5, 474 |
+| Salvage yard | Drive the forklift between wreck stacks and carry a pallet to the sorting apron | 365.5, 474 |
+| City hospital | Drive beneath the covered drop-off, then enter the waiting room and treatment area | 277.5, 513 |
+| Parcel depot | Interact with the parcels by the van, carry one to a blue neighborhood or village mailbox, and interact again for one gem | 322.5, 513 |
+| Clocktower school | Visit the classroom, drive the school bus and play with the ball by the goal | 365.5, 513 |
+
+Cities reserve existing blocks for these institutions. The selection keeps a
+downtown shopping block and core housing. Village main streets get a post office,
+clinic, school or fire station, with a salvage yard, cemetery or nursery on a
+second block. Other residential blocks can have detached porch houses with
+driveway sales, pairs of terraced homes, or a Victorian corner house. Addresses
+and equipment use stable settlement and block identities across chunk visits.
+Postal parcels travel in the player's saved inventory and use the same contextual
+interaction on keyboard, controller and touch.
+
 ## Parks, camps and beaches
 
 On a fresh regional world, open the map, select a named outing and choose

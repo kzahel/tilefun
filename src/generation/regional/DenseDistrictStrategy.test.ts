@@ -121,7 +121,10 @@ describe("current dense districts and approved art", () => {
         expect(["dense-district-v2", "current-dense-district-v1"]).toContain(plan.recipe);
         const lots = plan.blocks.flatMap((b) => b.lots);
         expect(plan.entrancePaths).toHaveLength(
-          lots.reduce((n, l) => n + denseDoorThresholds(denseBuilding(l.buildingType)).length, 0),
+          lots.reduce(
+            (n, l) => n + denseDoorThresholds(required(buildingRecipe(l.buildingType))).length,
+            0,
+          ),
         );
         for (const path of plan.entrancePaths ?? []) {
           const lot = required(lots.find((l) => l.id === path.lotId));

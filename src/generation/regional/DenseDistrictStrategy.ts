@@ -1,4 +1,3 @@
-import { TerrainId } from "../../autotile/TerrainId.js";
 import { CHUNK_SIZE, TILE_SIZE } from "../../config/constants.js";
 import { createProp } from "../../entities/PropFactories.js";
 import { Chunk } from "../../world/Chunk.js";
@@ -7,6 +6,7 @@ import type { ActorPlacement } from "../Generator.js";
 import type { FeaturePlacement } from "../StructureGenerator.js";
 import { buildingVisualBounds } from "./BuildingRecipes.js";
 import { civicBuilding } from "./CivicBuildings.js";
+import { civicGround } from "./CivicGround.js";
 import { denseBuilding } from "./DenseCityAssets.js";
 import { type DenseDistrictPlan, denseSurfaceAt } from "./DenseDistrictPlanner.js";
 import { DenseDistrictSource } from "./DenseDistrictSource.js";
@@ -29,10 +29,19 @@ export class DenseDistrictStrategy extends RegionalStrategy {
     super.generate(chunk, cx, cy);
     const baseX = cx * CHUNK_SIZE,
       baseY = cy * CHUNK_SIZE;
+    const bounds = {
+      minX: baseX,
+      minY: baseY,
+      maxX: baseX + CHUNK_SIZE + 1,
+      maxY: baseY + CHUNK_SIZE + 1,
+    };
+    const civic = this.districts
+      .query(bounds)
+      .flatMap((p) => p.civicSites?.filter((s) => intersects(bounds, s.bounds)) ?? []);
     for (let sy = 0; sy < Chunk.SUBGRID_SIZE; sy++)
       for (let sx = 0; sx < Chunk.SUBGRID_SIZE; sx++)
         if (this.districts.at(baseX + sx / 2, baseY + sy / 2))
-          chunk.setSubgrid(sx, sy, TerrainId.Grass);
+          chunk.setSubgrid(sx, sy, civicGround(civic, baseX + sx / 2, baseY + sy / 2));
     deriveTerrain(chunk);
     for (let ly = 0; ly < CHUNK_SIZE; ly++)
       for (let lx = 0; lx < CHUNK_SIZE; lx++) {

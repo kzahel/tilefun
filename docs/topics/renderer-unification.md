@@ -10,6 +10,14 @@ fixed-pass orchestration, enable gates, empty host hooks and GPU raster adapters
 Interactive `RenderResources` expose terrain preparation/resources only;
 `ReviewRenderBackend` exposes the immutable native review pass protocol.
 
+Civic buildings keep their Modern Exteriors artwork overhead. In first person
+the same collision sections shape the stepped school clock tower, Victorian
+gables, recessed porch, hospital wings and open engine bay. The nursery
+glasshouse has paired side rails, roof framing and a walk-in aisle. The
+ambulance canopy has four physical posts and an elevated roof. The scrapyard
+stacks, cemetery gate and markers have textured sides. See the
+[seed 2026 street guide](city-generation.md#civic-buildings-and-neighborhood-streets).
+
 Regional outings use the Modern Exteriors sprites overhead. First person and XR
 share chunk-batched pitched tents, picnic tables, playground frames and
 parasols. The tree house uses textured timber, a raised cabin and an open

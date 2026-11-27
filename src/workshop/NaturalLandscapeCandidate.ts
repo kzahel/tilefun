@@ -49,7 +49,7 @@ export async function buildNaturalCandidate(
         JSON.stringify({
           recipe,
           engine: ENGINE_REVIEW_REVISION,
-          leisurePresentation: showsOuting ? 1 : undefined,
+          leisurePresentation: showsOuting ? 2 : undefined,
           thicketPresentation: hasThickets ? 2 : undefined,
           sources: catalog.sheets.filter(
             (s) =>

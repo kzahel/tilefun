@@ -275,3 +275,22 @@ it("changes a gate's saved identity in place and refuses to close over a body", 
   expect(gate.type).toBe(FARM_GATE);
   expect(gate.collider).not.toBeNull();
 });
+
+it("delivers a saved postal parcel once through the ordinary contextual action", () => {
+  const { realm, seat } = fixture(),
+    courier = seat("courier");
+  const dispatch = realm.propManager.add(createProp("prop-civic-dispatch", 96, 96));
+  const box = realm.propManager.add(createProp("prop-civic-mailbox", 208, 96));
+  const collect = { type: "farm-action", action: "collect-parcel", propId: dispatch.id } as const;
+  const deliver = { type: "farm-action", action: "deliver-parcel", propId: box.id } as const;
+  performFarmAction(realm, courier, collect);
+  expect(() => performFarmAction(realm, courier, collect)).toThrow();
+  expect(() => performFarmAction(realm, courier, deliver)).toThrow();
+  courier.gameplaySession.inventory = inventoryFromSave(courier.gameplaySession.inventory);
+  courier.player.position.wx = 208;
+  performFarmAction(realm, courier, deliver);
+  expect(courier.gameplaySession.gemsCollected).toBe(1);
+  expect(() => performFarmAction(realm, courier, deliver)).toThrow();
+  expect(courier.gameplaySession.gemsCollected).toBe(1);
+  expect(realm.savePlayerData).toHaveBeenCalledTimes(2);
+});

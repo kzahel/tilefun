@@ -317,7 +317,9 @@ it("keeps villages compact while seeded cities gain dense cores, edges and two s
         expect(plan.blocks.filter((b) => b.kind === "park")).toHaveLength(2);
         expect(settlementPets(plan, seed)).toHaveLength(4);
         const lots = plan.blocks.flatMap((b) => b.lots);
-        expect(lots.length).toBeGreaterThanOrEqual(36);
+        expect(plan.civicSites).toHaveLength(7);
+        expect(lots.length).toBeGreaterThanOrEqual(plan.blocks.length);
+        expect(lots.some((l) => l.buildingType.startsWith("prop-city-civic-"))).toBe(true);
         expect(lots.some((l) => l.buildingType.endsWith("condo-bay-5"))).toBe(true);
         expect(lots.some((l) => l.buildingType.endsWith("condo-bay-3"))).toBe(true);
         expect(plan.actors).toHaveLength(plan.blocks.length + 1);

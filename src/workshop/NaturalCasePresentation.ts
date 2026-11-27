@@ -214,6 +214,32 @@ const PRESENTATION = {
     guide:
       "Large wildlife lake · E beside the motorboat to board; Arrows/WASD steer, R reverses. Return beside a clear shore to get out. Fish schools and varied water animals use the same AI as the game.",
   },
+  "outing-salvage": {
+    zoom: 0.48,
+    guide: "Take the forklift from the sorting lane and lift the loose wooden pallets.",
+  },
+  "outing-cemetery": {
+    zoom: 0.45,
+    guide: "Walk under the stone gate and follow the graves back to the caretaker’s house.",
+  },
+  "outing-hospital": {
+    zoom: 0.45,
+    guide: "Drive through the covered drop-off or enter the hospital waiting room.",
+  },
+  "outing-fire": { zoom: 0.5, guide: "Try reversing the engine into its open bay." },
+  "outing-school": {
+    zoom: 0.45,
+    guide: "Visit the classroom, find the school bus and kick the loose ball toward the net.",
+  },
+  "outing-mail": {
+    zoom: 0.5,
+    guide:
+      "Collect a parcel beside the loading van and deliver it to a blue residential or town mailbox.",
+  },
+  "outing-nursery": {
+    zoom: 0.6,
+    guide: "Walk between the potted displays and into the open glasshouse.",
+  },
   "outing-camp": {
     zoom: 0.55,
     guide: "Follow the trail through the camping arch to the fire and tents.",

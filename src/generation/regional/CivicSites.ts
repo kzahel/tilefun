@@ -91,7 +91,6 @@ export function furnishSite(
       art("gate", "gate", 4, 8);
       site.arrival.x += 4;
       gravestones(art);
-      for (const dx of [-4, -2, 0, 8, 10]) art(`railing-${dx}`, "railing", dx, 8);
       art("flowers", "blossoms", 1, 0);
       art("lamp", "candle", 7, 7);
       art("tree", "autumn", 11, -8);
@@ -151,6 +150,7 @@ export function civicPaving(s: CivicSite, tx: number, ty: number): RoadType {
 }
 
 function gravestones(art: (key: string, kind: CivicPiece, dx: number, dy: number) => unknown) {
+  for (const dx of [-4, -2, 0, 8, 10]) art(`railing-${dx}`, "railing", dx, 8);
   for (const [i, dy] of [-6, -2, 2].entries())
     for (const [j, dx] of [1, 7, 10].entries())
       art(`marker-${i}-${j}`, (i + j) % 2 ? "stone" : "marble", dx, dy);

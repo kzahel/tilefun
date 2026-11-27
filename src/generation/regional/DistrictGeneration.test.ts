@@ -38,11 +38,9 @@ describe("district realization", () => {
     if (!plan) throw new Error("Missing review district");
     const lot = plan.blocks.flatMap((b) => b.lots)[0];
     if (!lot) throw new Error("Missing lot");
-    const cx = Math.floor(lot.anchor.x / 16),
-      cy = Math.floor(lot.anchor.y / 16),
-      keys = plan.blocks.flatMap((b) =>
-        b.lots.map((l) => `${Math.floor(l.anchor.x / 16)},${Math.floor(l.anchor.y / 16)}`),
-      );
+    const keys = plan.blocks.flatMap((b) =>
+      b.lots.map((l) => `${Math.floor(l.anchor.x / 16)},${Math.floor(l.anchor.y / 16)}`),
+    );
     const manager = new PropManager(),
       overlay = new ProceduralProps(manager, () => {});
     overlay.reconcile(gen, keys);
@@ -68,7 +66,10 @@ describe("district realization", () => {
       nextEntityId: 1,
       ...overlay.save(),
     });
-    state.reconcile(gen, [...keys, `${cx + 20},${cy}`]);
+    state.reconcile(gen, [
+      ...keys,
+      `${Math.floor(moved.position.wx / 256)},${Math.floor(moved.position.wy / 256)}`,
+    ]);
     expect(restored.props.some((p) => p.proceduralId === lot.id)).toBe(false);
     expect(restored.props.find((p) => p.proceduralId === moved.proceduralId)?.position.wx).toBe(
       moved.position.wx,
