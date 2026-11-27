@@ -1,8 +1,7 @@
-import type { OverviewResult } from "./Overview.js";
+import type { MapDestination, OverviewResult } from "./Overview.js";
 import { constructionYard } from "./regional/ConstructionYard.js";
 import type { DenseDistrictSource } from "./regional/DenseDistrictSource.js";
 import { leisureCells } from "./regional/LeisureCells.js";
-import type { LeisureDestination } from "./regional/LeisurePlaces.js";
 import { MotocrossSource } from "./regional/MotocrossPlanner.js";
 import type { NaturalLandscape } from "./regional/NaturalLandscape.js";
 import { RacetrackSource } from "./regional/RacetrackPlanner.js";
@@ -71,13 +70,18 @@ export function* overviewOutings(
   nature: NaturalLandscape,
   districts: DenseDistrictSource,
 ) {
-  const places = new Map<string, LeisureDestination>();
+  const places = new Map<string, MapDestination>();
   const limit = request.limits.maxFeatures - result.stats.features;
   const b = request.bounds;
   for (const town of result.settlements) {
     if (places.size >= limit) break;
     const plan = districts.owner(town.owner.cx, town.owner.cy);
-    if (!plan || !intersects(b, plan.park)) continue;
+    for (const s of plan?.civicSites ?? []) {
+      if (places.size >= limit) break;
+      if (intersects(b, s.bounds))
+        places.set(s.id, { id: s.id, kind: s.kind, name: s.name, arrival: s.arrival });
+    }
+    if (!plan || places.size >= limit || !intersects(b, plan.park)) continue;
     const id = `${town.id}:play`;
     places.set(id, {
       id,

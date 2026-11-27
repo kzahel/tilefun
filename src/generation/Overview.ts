@@ -8,6 +8,7 @@ import {
 } from "./GenerationDescriptor.js";
 import { OnionStrategy } from "./OnionStrategy.js";
 import { overviewOutings, overviewVenues } from "./OverviewVenues.js";
+import type { CivicKind } from "./regional/CivicSites.js";
 import type { CountryPlan } from "./regional/CountrysidePlanner.js";
 import { DenseDistrictSource } from "./regional/DenseDistrictSource.js";
 import type { DistrictPlan } from "./regional/DistrictPlan.js";
@@ -33,12 +34,16 @@ import {
 import type { VehicleDepot } from "./regional/VehicleDepotPlanner.js";
 import { type RegionalWorld, regionalWorld, validateWorld } from "./regional/WorldDescriptor.js";
 
+export type MapDestination = Omit<LeisureDestination, "kind"> & {
+  kind: LeisureDestination["kind"] | CivicKind;
+};
+
 export type OverviewResult = Omit<RegionalResult, "world"> & {
   world: GenerationDescriptor | RegionalWorld;
   districts?: DistrictPlan[];
   countryside?: CountryPlan[];
   farms?: FarmDestination[];
-  outings?: LeisureDestination[];
+  outings?: MapDestination[];
   /** Current generated routes; station coordinates are tiles, optional paths are world pixels. */
   railways?: RailLine[];
   racetracks?: Pick<Racetrack, "id" | "name" | "center" | "bounds" | "access">[];
@@ -117,7 +122,7 @@ export function* overviewSteps(
     const countryside: CountryPlan[] = [];
     const ponds: NaturalPond[] = [];
     let farms: FarmDestination[] = [];
-    const outings: LeisureDestination[] = [];
+    const outings: MapDestination[] = [];
     if (landscape) {
       const world = regionalWorld(descriptor.seed);
       const nature = new NaturalLandscape(world, landscape);

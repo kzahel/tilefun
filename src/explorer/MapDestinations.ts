@@ -16,7 +16,25 @@ export function drawDestinations(
     ctx.font = "16px system-ui";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText({ camp: "⛺", garden: "🌳", play: "🛝", beach: "⛱️" }[place.kind], x, y);
+    ctx.fillText(
+      {
+        salvage: "⚙️",
+        cemetery: "🪦",
+        hospital: "🏥",
+        clinic: "⚕️",
+        post: "✉️",
+        "postal-depot": "📦",
+        fire: "🚒",
+        school: "🏫",
+        nursery: "🌷",
+        camp: "⛺",
+        garden: "🌳",
+        play: "🛝",
+        beach: "⛱️",
+      }[place.kind],
+      x,
+      y,
+    );
   }
   // Depot markers remain visible independently of the road overlay. Their
   // data comes from the exact same admitted infield plan as real generation.

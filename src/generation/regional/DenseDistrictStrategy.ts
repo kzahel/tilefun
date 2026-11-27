@@ -6,6 +6,7 @@ import { deriveTerrain } from "../deriveTerrain.js";
 import type { ActorPlacement } from "../Generator.js";
 import type { FeaturePlacement } from "../StructureGenerator.js";
 import { buildingVisualBounds } from "./BuildingRecipes.js";
+import { civicBuilding } from "./CivicBuildings.js";
 import { denseBuilding } from "./DenseCityAssets.js";
 import { type DenseDistrictPlan, denseSurfaceAt } from "./DenseDistrictPlanner.js";
 import { DenseDistrictSource } from "./DenseDistrictSource.js";
@@ -91,7 +92,7 @@ export class DenseDistrictStrategy extends RegionalStrategy {
     return props;
   }
   protected building(type: string) {
-    return denseBuilding(type);
+    return civicBuilding(type) ?? denseBuilding(type);
   }
   protected surface(plan: DenseDistrictPlan, x: number, y: number): number {
     return denseSurfaceAt(plan, x, y);
@@ -104,7 +105,8 @@ export class DenseDistrictStrategy extends RegionalStrategy {
     for (const dx of [-14, 14])
       for (const dy of [-4.5, 4.5])
         add(`${plan.id}:lamp:${dx}:${dy}`, "prop-street-lamp", x + dx, y + dy);
-    props.push(...settlementGreenProps(plan));
+    props.push(...settlementGreenProps(plan), ...(plan.neighborhoodProps ?? []));
+    for (const site of plan.civicSites ?? []) props.push(...site.props);
     for (const c of plan.shoppingCenters ?? []) props.push(...shoppingSceneryPlacements(c));
     return props;
   }

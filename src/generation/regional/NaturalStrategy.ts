@@ -124,6 +124,9 @@ export class NaturalStrategy extends RailwayStrategy {
   depotVehicles(cx: number, cy: number) {
     const bounds = { minX: cx * 16, minY: cy * 16, maxX: (cx + 1) * 16, maxY: (cy + 1) * 16 };
     return [
+      ...this.districts
+        .query(bounds)
+        .flatMap((p) => p.civicSites?.flatMap((s) => s.vehicles) ?? []),
       ...this.racetracks.query(bounds).flatMap((t) => vehicleDepot(t).vehicles),
       ...this.motocross
         .query(bounds)
@@ -135,14 +138,13 @@ export class NaturalStrategy extends RailwayStrategy {
   }
   constructionCargo(cx: number, cy: number) {
     const bounds = { minX: cx * 16, minY: cy * 16, maxX: (cx + 1) * 16, maxY: (cy + 1) * 16 };
-    return this.motocross
-      .query(bounds)
-      .flatMap((park) => constructionYard(park).cargo)
-      .filter(
-        (actor) =>
-          Math.floor(actor.wx / CHUNK_SIZE_PX) === cx &&
-          Math.floor(actor.wy / CHUNK_SIZE_PX) === cy,
-      );
+    return [
+      ...this.districts.query(bounds).flatMap((p) => p.civicSites?.flatMap((s) => s.actors) ?? []),
+      ...this.motocross.query(bounds).flatMap((park) => constructionYard(park).cargo),
+    ].filter(
+      (actor) =>
+        Math.floor(actor.wx / CHUNK_SIZE_PX) === cx && Math.floor(actor.wy / CHUNK_SIZE_PX) === cy,
+    );
   }
 
   override actors(cx: number, cy: number) {

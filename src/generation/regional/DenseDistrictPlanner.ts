@@ -3,6 +3,10 @@ import { parkingSurfaceAt } from "../../road/ParkingSurface.js";
 import { RoadType } from "../../road/RoadType.js";
 import type { ActorPlacement } from "../Generator.js";
 import { edgeHash } from "../RoadGenerator.js";
+import type { FeaturePlacement } from "../StructureGenerator.js";
+import { civicBuilding } from "./CivicBuildings.js";
+import { civicDistrict } from "./CivicDistrict.js";
+import { type CivicSite, civicPaving } from "./CivicSites.js";
 import { denseBuilding } from "./DenseCityAssets.js";
 import { denseDoorThresholds } from "./DenseDoorThresholds.js";
 import type { DistrictBlock, DistrictPlan, DistrictStreet } from "./DistrictPlan.js";
@@ -22,6 +26,8 @@ export interface DenseDistrictPlan extends DistrictPlan {
     | "city-places-v10";
   readonly center: { x: number; y: number };
   readonly playYard?: number;
+  readonly civicSites?: CivicSite[];
+  readonly neighborhoodProps?: FeaturePlacement[];
   /** Original street-grid reservation before adding outlying centers. */
   readonly gridBounds?: Bounds;
   readonly actors: ActorPlacement[];
@@ -231,14 +237,18 @@ function connectDenseEntrances(plan: DenseDistrictPlan, settlement: Settlement):
   const blocks = plan.blocks.map((block) => ({
     ...block,
     lots: block.lots.map((lot) => {
-      const primary = denseDoorThresholds(denseBuilding(lot.buildingType)).find((d) => d.primary);
+      const primary = denseDoorThresholds(
+        civicBuilding(lot.buildingType) ?? denseBuilding(lot.buildingType),
+      ).find((d) => d.primary);
       if (!primary) throw new Error(`Missing primary doorway for ${lot.id}`);
       return { ...lot, entrance: { ...lot.entrance, x: lot.anchor.x + primary.dx / TILE_SIZE } };
     }),
   }));
   const entrancePaths = blocks.flatMap((block) =>
     block.lots.flatMap((lot) => {
-      const doors = denseDoorThresholds(denseBuilding(lot.buildingType));
+      const doors = denseDoorThresholds(
+        civicBuilding(lot.buildingType) ?? denseBuilding(lot.buildingType),
+      );
       const street = plan.streets.find(
         (s) =>
           item(s.points, 0).y === item(s.points, 1).y &&
@@ -282,10 +292,16 @@ function connectDenseEntrances(plan: DenseDistrictPlan, settlement: Settlement):
 export function currentDenseDistrict(settlement: Settlement, seed: number): DenseDistrictPlan {
   const playYard = edgeHash(settlement.owner.cx, settlement.owner.cy, seed + 44071);
   if (settlement.kind === "village")
-    return { ...connectedDenseDistrict(settlement, seed), playYard };
+    return {
+      ...connectDenseEntrances(
+        civicDistrict(denseDistrict(settlement, seed), settlement, seed),
+        settlement,
+      ),
+      playYard,
+    };
   const columns = edgeHash(settlement.owner.cx, settlement.owner.cy, seed + 32303) < 0.55 ? 4 : 6;
   const plan = connectDenseEntrances(
-    planDenseDistrict(settlement, seed, false, columns, 4),
+    civicDistrict(planDenseDistrict(settlement, seed, false, columns, 4), settlement, seed),
     settlement,
   );
   const roadY =
@@ -412,5 +428,6 @@ export function denseSurfaceAt(plan: DenseDistrictPlan, x: number, y: number): R
         )
           return RoadType.CityPavement;
   }
-  return greenSurfaceAt(plan, x, y);
+  const site = plan.civicSites?.find((s) => insideDenseBounds(s.bounds, x, y));
+  return site ? civicPaving(site, x, y) : greenSurfaceAt(plan, x, y);
 }
