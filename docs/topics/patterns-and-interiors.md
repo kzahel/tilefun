@@ -85,8 +85,9 @@ Older regional/country-house recipes retain their original compact interiors.
 Upper floors and per-building authored variants remain future work.
 
 Generated farmhouses and their small `prop-shed` outbuildings now resolve through
-the actual farm owner's plan as well as the interior identity validator. This
-fixes “Invalid building identity” on farmhouse entry, including existing worlds.
+the actual farm owner's plan for both roadside and town farms. The interior
+identity validator accepts both ID prefixes. This fixes “Invalid building identity”
+on town farmhouse and outbuilding entry in existing worlds.
 The outbuilding has its own saved `outbuilding-v1` room: one narrow space with a
 wooden seat and a clear doorway. Enter/return controls and location restoration
 use the ordinary shared building connections. Its new, unapproved composition is

@@ -7,10 +7,10 @@ import { exteriorDoors } from "../src/interiors/BuildingDoors.js";
 import { stopLocalWorld } from "./helpers/local-world.js";
 
 test.use({ channel: "chromium" });
-test("farmhouse and tiny outbuilding enter and return through the normal door controls", async ({
+test("town farmhouse and outbuilding enter and return through the normal door controls", async ({
   page,
 }) => {
-  const farm = new FarmsteadSource(regionalWorld(2026)).owner(0, 0, "south");
+  const farm = new FarmsteadSource(regionalWorld(2026)).townOwner(0, 0);
   if (!farm) throw Error("Missing farm");
   const buildings = farm.props.filter(
     (p) => p.propType === "prop-country-house" || p.propType === "prop-shed",

@@ -11,6 +11,7 @@ import {
   type InteriorIdentity,
   parseInteriorId,
 } from "../interiors/GameplayInterior.js";
+import { farmBuildingOwner } from "../interiors/InteriorIdentity.js";
 import type { IWorldRegistry, WorldMeta } from "../persistence/IWorldRegistry.js";
 import type { PersistenceStore } from "../persistence/PersistenceStore.js";
 import { worldCompatibility } from "../persistence/WorldCompatibility.js";
@@ -31,13 +32,16 @@ export interface RealmDirectoryDeps {
   reportStorageFailure: (error: unknown) => void;
 }
 
-/** A farmstead house/shed owner from its feature id, located on the generated plan. */
-function farmsteadLot(terrain: DenseDistrictStrategy, featureId: string, farm: RegExpExecArray) {
-  const plan = new FarmsteadSource(terrain.world).owner(
-    Number(farm[1]),
-    Number(farm[2]),
-    farm[3] as "east" | "south",
-  );
+/** A farm house or shed located on its actual generated plan. */
+function farmBuildingLot(
+  terrain: DenseDistrictStrategy,
+  featureId: string,
+  farm: NonNullable<ReturnType<typeof farmBuildingOwner>>,
+) {
+  const farms = new FarmsteadSource(terrain.world);
+  const plan = farm.nearTown
+    ? farms.townOwner(farm.cx, farm.cy)
+    : farms.owner(farm.cx, farm.cy, farm.axis);
   const prop = plan?.props.find((p) => p.featureId === featureId);
   const entrance =
     prop &&
@@ -55,8 +59,8 @@ function farmsteadLot(terrain: DenseDistrictStrategy, featureId: string, farm: R
 }
 
 function buildingLot(terrain: DenseDistrictStrategy, featureId: string) {
-  const farm = /^farmstead:(-?\d+):(-?\d+):(east|south):(?:house|shed)$/.exec(featureId);
-  if (farm) return farmsteadLot(terrain, featureId, farm);
+  const farm = farmBuildingOwner(featureId);
+  if (farm) return farmBuildingLot(terrain, featureId, farm);
   const match = /^settlement:(-?\d+):(-?\d+):/.exec(featureId);
   if (!match) throw new Error("Invalid building owner.");
   return districtBuilding(terrain.districts.owner(Number(match[1]), Number(match[2])), featureId);

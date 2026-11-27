@@ -27,12 +27,28 @@ export function exteriorEntrance(
     wy: prop.position.wy + (recipe?.entrance.dy ?? 8),
   };
 }
+
+/** Both farm planners use the same building suffixes, with distinct owner prefixes. */
+export function farmBuildingOwner(featureId: string) {
+  const match = /^(farmstead|town-farm):(-?\d+):(-?\d+):(east|south):(?:house|shed)$/.exec(
+    featureId,
+  );
+  if (!match) return undefined;
+  return {
+    nearTown: match[1] === "town-farm",
+    cx: Number(match[2]),
+    cy: Number(match[3]),
+    axis: match[4] === "east" ? "east" : "south",
+  } as const;
+}
+
 export function interiorRealmId(parentWorldId: string, featureId: string): string {
   if (
     !/^[a-zA-Z0-9-]{1,100}$/.test(parentWorldId) ||
-    !/^(?:settlement:-?\d+:-?\d+:(?:block:\d+:\d+:lot:\d+|shopping:\d+:prop-shopping-v1-(?:1|3|5|7|9|11|13))|farmstead:-?\d+:-?\d+:(?:east|south):(?:house|shed))$/.test(
+    (!/^settlement:-?\d+:-?\d+:(?:block:\d+:\d+:lot:\d+|shopping:\d+:prop-shopping-v1-(?:1|3|5|7|9|11|13))$/.test(
       featureId,
-    )
+    ) &&
+      !farmBuildingOwner(featureId))
   )
     throw new Error("Invalid building identity.");
   return `interior~${parentWorldId}~${encodeURIComponent(featureId)}~0`;

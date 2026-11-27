@@ -448,7 +448,7 @@ it("restaurant visitor walks out and returns with one durable identity while the
   }
 }, 30000);
 
-it("enters the generated farmhouse and tiny outbuilding, exits and restores the saved farm interior", async () => {
+it.each(["roadside", "town"])("enters both %s farm doors and resumes inside", async (kind) => {
   const setup = await createTestSetup();
   const { server, transport, registry } = setup;
   const { FarmsteadSource } = await import("../generation/regional/FarmsteadPlanner.js");
@@ -456,7 +456,8 @@ it("enters the generated farmhouse and tiny outbuilding, exits and restores the 
   const { buildingDoor, exteriorDoors } = await import("../interiors/BuildingDoors.js");
   const { interiorRealmId } = await import("../interiors/GameplayInterior.js");
   const generation = createDescriptor("regional", 2026);
-  const farm = new FarmsteadSource(regionalWorld(2026)).owner(0, 0, "south");
+  const farms = new FarmsteadSource(regionalWorld(2026));
+  const farm = kind === "town" ? farms.townOwner(0, 0) : farms.owner(0, 0, "south");
   if (!farm) throw Error("Missing farm fixture");
   transport.connect("local", restoreProfile);
   await server.settle();
@@ -487,6 +488,7 @@ it("enters the generated farmhouse and tiny outbuilding, exits and restores the 
         featureId: prop.featureId,
       });
       await server.settle();
+      expect(transport.messagesOfType("local", "request-error").at(-1)?.message).toBeUndefined();
       const interior = server.worldInterior;
       expect(interior?.featureId).toBe(prop.featureId);
       expect(interior?.buildingType).toBe(prop.propType);
@@ -509,7 +511,10 @@ it("enters the generated farmhouse and tiny outbuilding, exits and restores the 
     await server.flushAsync();
     await server.destroy();
     const resumedTransport = new TestTransport();
-    const resumed = new GameServer(resumedTransport, { registry, createStore: setup.createStore });
+    const resumed = new GameServer(resumedTransport, {
+      registry,
+      createStore: setup.createStore,
+    });
     try {
       await resumed.init();
       resumedTransport.connect("local", restoreProfile);
@@ -522,9 +527,10 @@ it("enters the generated farmhouse and tiny outbuilding, exits and restores the 
       await resumed.settle();
       expect(resumed.worldInterior).toBeNull();
       expect(resumed.getLocalSession().player.position).toEqual(door.outside);
-      // A syntactically valid farm ID still has to name a real generated owner.
+      // A syntactically valid ID for the wrong road must not resolve to this farm.
+      const prefix = kind === "town" ? "town-farm" : "farmstead";
       await expect(
-        resumed.loadWorld(interiorRealmId(meta.id, "farmstead:0:0:east:house")),
+        resumed.loadWorld(interiorRealmId(meta.id, `${prefix}:0:0:east:house`)),
       ).rejects.toThrow("absent from the generated plan");
     } finally {
       await resumed.destroy();
